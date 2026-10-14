@@ -117,7 +117,7 @@ Throughout the Survey:
 - **PRIMARY_PAPER** — primary preprint or peer-reviewed paper;
 - **OFFICIAL_PROJECT** — official project/model page;
 - **OPEN_SOURCE** — public implementation/checkpoint;
-- **OFFICIAL_REPORTED_RESULT** — official company/lab claim without independent reproduction;
+- **OFFICIAL_REPORTED_RESULT** — company/lab result without independent reproduction;
 - **SURVEY_SIGNAL** — useful trend, not a scientific result by itself;
 - **INTERNAL_HYPOTHESIS** — Clover candidate;
 - **OPEN** — unresolved;
