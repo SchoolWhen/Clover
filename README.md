@@ -28,11 +28,12 @@ For a new agent, researcher or contributor:
 12. [`research/RESEARCH_OPEN_WORLD_EPISTEMICS.md`](research/RESEARCH_OPEN_WORLD_EPISTEMICS.md)
 13. [`research/RESEARCH_MODEL_DISCOVERY.md`](research/RESEARCH_MODEL_DISCOVERY.md)
 14. [`research/RESEARCH_FOUNDATION_MODEL_SYSTEMS.md`](research/RESEARCH_FOUNDATION_MODEL_SYSTEMS.md)
-15. [`research/RESEARCH_ENGINEERING_VALIDATION.md`](research/RESEARCH_ENGINEERING_VALIDATION.md)
-16. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
-17. [`AGENTS.md`](AGENTS.md)
-18. [`STATUS.md`](STATUS.md)
-19. [`research/README.md`](research/README.md)
+15. [`research/RESEARCH_TRAINING_POSTTRAINING.md`](research/RESEARCH_TRAINING_POSTTRAINING.md)
+16. [`research/RESEARCH_ENGINEERING_VALIDATION.md`](research/RESEARCH_ENGINEERING_VALIDATION.md)
+17. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
+18. [`AGENTS.md`](AGENTS.md)
+19. [`STATUS.md`](STATUS.md)
+20. [`research/README.md`](research/README.md)
 
 ## Current stage — 1 Research
 
@@ -76,6 +77,8 @@ How should hypotheses, mechanisms, experiments, falsification and provenance be 
 ↓
 How do foundation-model architecture, multimodal tokenization, data, context/cache, kernels and harness affect the result?
 ↓
+How did pretraining / co-training / SFT / BC / RL / distillation / deployment learning create the observed capability?
+↓
 Can the candidate run under realistic edge/closed-loop constraints, and how strong is its simulation-to-real evidence?
 ↓
 Which current methods and benchmarks discriminate competing answers?
@@ -97,6 +100,11 @@ base model ≠ model + harness ≠ model + harness + tools/memory
 hosted product ≠ open-weight checkpoint unless exact artifact is verified
 total parameters ≠ active parameters ≠ runtime memory ≠ communication cost
 architecture efficiency on paper ≠ realized efficiency on available kernels/hardware
+architecture ≠ training recipe ≠ data mixture ≠ post-training objective
+supervised task success ≠ on-policy robustness
+LLM post-training ≠ robot post-training
+more heterogeneous robot data ≠ better transfer without alignment
+reasoning improvement ≠ perception preservation
 minimum state ≠ best state at every timescale
 maximum information gain ≠ best safe / permitted experiment
 uncertainty over known hypotheses ≠ correct hypothesis missing entirely
@@ -130,18 +138,21 @@ The inventory is intentionally wider than “world models” or “VLA.” It in
 - sufficient state, aliasing, abstraction and multi-timescale state;
 - open-world hypothesis generation, mechanism discovery and falsification;
 - self/body schema, social hidden state, help-seeking and permission constraints;
-- **foundation-model systems:** dense/MoE, sparse/linear/full attention, multimodal fusion, visual/video tokenization, long context, KV/cache hierarchy, data mixture/alignment, post-training, quantization, kernels, distributed runtime and agent harness;
+- foundation-model systems: dense/MoE, sparse/linear/full attention, multimodal fusion, visual/video tokenization, long context, KV/cache hierarchy, kernels, distributed runtime and agent harness;
+- **training / post-training:** continued pretraining, instruction SFT, behavior cloning, VLM/VLA co-training, preference/offline alignment, RL, on-policy distillation, strong-to-weak distillation, simulation/world-model post-training, deployment self-improvement and continual adaptation;
+- robot-data alignment across embodiments, human videos, synthetic data, real demonstrations and failure/recovery trajectories;
 - edge inference, memory/latency/power constraints and hardware-aware profiling;
 - simulation fidelity, domain randomization, sim2sim, sim2real, real2sim and digital twins;
 - hardware-in-the-loop / proxy-hardware validation, runtime monitoring, regression and rollback;
 - datasets, benchmarks, reproducibility and systems integration.
 
-## DeepSeek / Qwen watch
+## DeepSeek / Qwen and training-system watch
 
-Stage 1 now explicitly tracks DeepSeek and Qwen as **foundation-model systems references**, not default Clover dependencies.
+Stage 1 tracks DeepSeek and Qwen as **foundation-model systems references**, not default Clover dependencies.
 
 - [`research/RESEARCH_FOUNDATION_MODEL_SYSTEMS.md`](research/RESEARCH_FOUNDATION_MODEL_SYSTEMS.md)
 - [`research/foundation_models/DEEPSEEK_QWEN.md`](research/foundation_models/DEEPSEEK_QWEN.md)
+- [`research/RESEARCH_TRAINING_POSTTRAINING.md`](research/RESEARCH_TRAINING_POSTTRAINING.md)
 
 Current questions include:
 
@@ -151,11 +162,33 @@ long raw context vs explicit grounded memory under equal bytes/latency
 MoE active compute vs storage/communication
 FP4/FP8/INT quantization vs uncertainty and long-horizon state
 streaming visual encoding vs repeated long-context prefill
-frozen backbone vs adapters vs backbone adaptation
+frozen backbone vs adapters vs partial/full adaptation
 training-data alignment vs architecture gain
+SFT/BC vs RL vs distillation vs deployment learning
 base model vs harness/tool/memory contribution
 small proxy model vs frontier-scale mechanism validity
 ```
+
+## Why robot training is not just LLM post-training
+
+Robot policies act on the world. Their outputs change future observations and reachable states.
+
+Therefore robot adaptation must additionally handle:
+
+```text
+covariate shift
+continuous / multimodal actions
+control frequency / latency
+embodiment-specific action semantics
+costly real-world resets
+sparse / delayed rewards
+contact and hardware dynamics
+safety / irreversible actions
+sim2real mismatch
+operator / demonstration quality
+```
+
+The high-level pattern `pretrain → specialize → feedback` is shared; the optimization problem is not.
 
 ## Current practical environment
 
@@ -165,11 +198,15 @@ Use it for:
 
 ```text
 small/medium open multimodal baselines
+frozen-backbone + state/action heads
+LoRA / adapter experiments
 MLX / Core AI / Core ML experiments
 visual-token/context/memory ablations
+behavior cloning / flow-diffusion heads
+small MuJoCo RL
+teacher distillation
 quantization / compression
 streaming state prototypes
-local MuJoCo
 runtime profiling
 ```
 
@@ -195,7 +232,7 @@ Do not describe EV0–EV6 as demonstrated sim2real success.
 
 The thin current-edge index is [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md), freshness checked through **2026-10-15**. Recent high-value additions include WorldOracle, RoboSimStudio, LIBERO-RIG, LoopWAM, ForceWAM, RoboFQE, LADDER, GreenWAM, DR-WM, SpecWM and other sources that materially change the comparison space.
 
-The foundation-model watch additionally tracks current DeepSeek V4.1/V4 systems and Qwen3.8/Qwen3.5/Qwen3-VL/Physical-AI systems with exact official/open artifacts.
+The training surface additionally tracks DeepSeek-R1/V4.1, Qwen3/Qwen3-VL, π0/π0.5, OpenVLA-OFT, Qwen-RobotManip, GR00T N1.7, VLAFlow, VLA-OPD, TEMPO, RehearseVLA and deployment-learning approaches.
 
 ## Later stages
 
@@ -236,7 +273,7 @@ Learning provenance:
 
 ## What we do not assume
 
-Clover does **not** assume that DeepSeek/Qwen/another foundation model is the answer, that CPU/GPU/NPU choice determines the science, that the Mac mini M4 is the final target hardware, that long context equals memory, that one simulator is reality, that sim-only success proves transfer, that explicit state must beat distributed latent state, that hierarchy is automatically superior, or that one benchmark defines understanding.
+Clover does **not** assume that DeepSeek/Qwen/another foundation model is the answer, that one training recipe is universally best, that CPU/GPU/NPU choice determines the science, that the Mac mini M4 is the final target hardware, that long context equals memory, that one simulator is reality, that sim-only success proves transfer, that explicit state must beat distributed latent state, that hierarchy is automatically superior, or that one benchmark defines understanding.
 
 Historical Clover mechanisms remain ideas until the research process supports or rejects them.
 
