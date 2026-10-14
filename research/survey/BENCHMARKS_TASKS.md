@@ -1,6 +1,6 @@
 # Benchmarks and Tasks
 
-Last updated: 2026-10-14
+Last updated: 2026-10-15
 
 Clover does not use a single benchmark as the definition of “understanding.” Benchmarks are instruments for discriminating representation hypotheses.
 
@@ -15,6 +15,9 @@ controlled capability diagnostic
 + active perception
 + embodied long-horizon task
 + action usefulness
++ real-execution world-model fidelity
++ hardware/setup robustness
++ offline policy-evaluation sanity checks
 ```
 
 ---
@@ -23,44 +26,33 @@ controlled capability diagnostic
 
 ### Level 1 — Cognitive / world-understanding diagnostics
 
-Does the representation contain the structure needed to answer controlled questions about:
-
-```text
-existence
-identity
-permanence
-space
-time
-observability
-physics
-causality
-counterfactuals
-```
+Does the representation contain the structure needed to answer controlled questions about existence, identity, permanence, space, time, observability, physics, causality and counterfactuals?
 
 ### Level 2 — Persistent world-model capability
 
 Can the model maintain, predict, reconstruct, revise or retrieve world state across time?
 
-Examples:
-
-- long occlusion;
-- object leaving/re-entering field of view;
-- streaming episodic retrieval;
-- novel viewpoint;
-- world change;
-- contradiction/revision;
-- intervention twins;
-- future-state prediction.
-
 ### Level 3 — Active evidence acquisition
 
-Can the system recognize that current evidence is insufficient and deliberately obtain a better view?
+Can the system recognize that current evidence is insufficient and deliberately obtain a better view or discriminating interaction?
 
 ### Level 4 — Embodied brain capability
 
 Can a robot use its world understanding to complete unfamiliar physical tasks over long horizons, recover when the world changes and avoid unjustified action?
 
-A final Clover result must eventually span all four levels.
+### Level 5 — Deployment / evidence robustness
+
+Does the result survive:
+
+```text
+real-world execution comparison
+hardware/calibration/control-loop changes
+cross-simulator variation
+offline-vs-rollout evaluation differences
+latency / memory / runtime constraints
+```
+
+A final Clover result must eventually span all five levels.
 
 ---
 
@@ -73,11 +65,7 @@ A final Clover result must eventually span all four levels.
 - **V2:** calibrated multi-camera RGB.
 - **V3:** embodied active vision; action changes future visual evidence.
 
-Do not compare protocols as if they have the same information budget.
-
 ### Learning-evidence provenance
-
-When material, annotate whether the model was trained with:
 
 - `L0` visual self-supervision only;
 - `L1` visual labels/annotations;
@@ -85,7 +73,7 @@ When material, annotate whether the model was trained with:
 - `L3` action-conditioned demonstrations/experience;
 - `L4` non-visual or privileged physical evidence.
 
-A deployment-time RGB model trained using large text/action/privileged datasets is not equivalent to a `V0/L0` model.
+Do not compare protocols as if they have the same information budget.
 
 ---
 
@@ -94,11 +82,7 @@ A deployment-time RGB model trained using large text/action/privileged datasets 
 - Official: https://ai.meta.com/research/publications/intphys-2-benchmarking-intuitive-physics-understanding-in-complex-synthetic-environments/
 - Code: https://github.com/facebookresearch/IntPhys2
 
-Controlled permanence, immutability, spatiotemporal continuity and solidity diagnostics using violation-of-expectation tests.
-
-Use for: **conceptual intuitive physics under controlled visual conditions**.
-
-Do not use as sole evidence for: real-world memory, quantitative physics, causality or robot autonomy.
+Use for controlled permanence, immutability, continuity and solidity diagnostics.
 
 ---
 
@@ -106,11 +90,7 @@ Do not use as sole evidence for: real-world memory, quantitative physics, causal
 
 - Official: https://ai.meta.com/research/publications/a-shortcut-aware-video-qa-benchmark-for-physical-understanding-via-minimal-video-pairs/
 
-Each sample has a minimally changed paired video with the same question and opposite answer. Pair scoring directly attacks visual/textual shortcuts.
-
-Use for: **whether a claimed physical-understanding gain survives minimal counterexamples**.
-
-The experimental-design principle should also be copied into Clover custom tasks.
+Use minimal-change paired videos to test whether physical-understanding gains survive counterexamples.
 
 ---
 
@@ -118,19 +98,7 @@ The experimental-design principle should also be copied into Clover custom tasks
 
 - Official: https://ai.meta.com/research/publications/causalvqa-a-physically-grounded-causal-reasoning-benchmark-for-video-models/
 
-Question families include:
-
-```text
-counterfactual
-hypothetical
-anticipation
-planning
-descriptive
-```
-
-Use for: broad real-video causal/counterfactual diagnostic.
-
-Caution: natural-language QA can mix visual understanding with language priors. Record language-only/question-only controls.
+Use language-only/question-only controls because language priors are a confound.
 
 ---
 
@@ -138,17 +106,7 @@ Caution: natural-language QA can mix visual understanding with language priors. 
 
 - Code/data: https://github.com/google-deepmind/perception_test
 
-Contains real-world tracking, point tracking, action localization, video QA and grounded video QA tasks.
-
-For Clover, prefer visual subsets that can isolate:
-
-- object/point tracking;
-- memory;
-- physics;
-- temporal relations;
-- grounded evidence.
-
-Do not silently use audio when reporting a vision-only protocol.
+Prefer visual subsets for tracking, memory, physics, temporal relations and grounded evidence.
 
 ---
 
@@ -157,25 +115,7 @@ Do not silently use audio when reporting a vision-only protocol.
 - Paper: https://arxiv.org/abs/2609.20819
 - Project/code: https://guangzhaohe.com/persistbench
 
-PersistBench uses 360° video as an omniscient reference to evaluate models after objects leave the ordinary field of view.
-
-Measures:
-
-```text
-object permanence
-motion continuity
-appearance preservation
-```
-
-This is a critical addition because:
-
-```text
-visible tracking / reconstruction
-≠
-persistent memory
-```
-
-Use it to test long-context, recurrent latent, explicit-state and replay-style memory systems under matched observation histories.
+Use for object permanence, motion continuity and appearance preservation after objects leave the field of view.
 
 ---
 
@@ -184,18 +124,7 @@ Use it to test long-context, recurrent latent, explicit-state and replay-style m
 - Official: https://ai.meta.com/research/publications/s-ember-a-large-scale-benchmark-for-streaming-egocentric-memory-retrieval/
 - Paper: https://arxiv.org/abs/2607.02689
 
-S-EMBER evaluates causal streaming recall rather than offline search over an entire video file.
-
-Important dimensions:
-
-```text
-answer correctness
-temporal evidence localization
-grounded recall
-streaming/causal access
-```
-
-Use for: long-horizon visual memory where the system must remember what it actually saw and locate the supporting evidence.
+Use for grounded streaming recall and temporal evidence localization.
 
 ---
 
@@ -203,22 +132,7 @@ Use for: long-horizon visual memory where the system must remember what it actua
 
 - Paper: https://arxiv.org/abs/2609.04200
 
-Principia evaluates Newtonian consistency through relations between paired objects, avoiding dependence on absolute scale/frame-rate/camera calibration.
-
-Phenomena include:
-
-```text
-gravity
-restitution
-friction
-rotational inertia
-projectile motion
-momentum
-pendulum
-mass-spring oscillation
-```
-
-Use for: whether a visual/world model preserves relational physical laws beyond video appearance quality.
+Use for relational physical-law consistency beyond video appearance quality.
 
 ---
 
@@ -226,235 +140,230 @@ Use for: whether a visual/world model preserves relational physical laws beyond 
 
 - Paper: https://arxiv.org/abs/2608.28718
 
-RoboPhys-3D evaluates generated/world-model rollouts at four levels:
-
-```text
-pixel fidelity
-3D geometry consistency
-state-level understanding
-task-level completeness
-```
-
-Use for: testing the claim that plausible generated video corresponds to correct state and executable consequence.
-
-Key principle:
+Keep distinct:
 
 ```text
 plausible video
-≠
-correct 3D/state
-≠
-correct executable consequence
+≠ correct 3D/state
+≠ correct executable consequence
 ```
 
 ---
 
 ## 11. U9 — custom object permanence / occlusion battery
 
-Required custom tasks should isolate:
+Test visible→occluded→visible, leave/re-enter FOV, similar-object swaps, camera motion, hidden external movement/removal.
 
-```text
-visible → occluded → visible
-visible → leaves FOV → reappears
-multiple similar objects swap/cross
-camera moves while object is hidden
-object moved by external agent while hidden
-object removed while hidden
-```
-
-Measure:
-
-- identity continuity;
-- false persistence;
-- false absence;
-- uncertainty during occlusion;
-- re-identification latency;
-- correction when expectation fails;
-- memory bytes / compute.
+Measure identity continuity, false persistence/absence, uncertainty, correction latency and memory cost.
 
 ---
 
 ## 12. U10 — unknown vs unobserved
 
-Construct scenes where the correct answer requires refusing to treat missing evidence as a negative fact.
+Require the system not to treat missing evidence as absence.
 
-```text
-unobserved ≠ free
-unobserved ≠ absent
-unknown type ≠ nonexistent
-occluded ≠ removed
-```
-
-Measure:
-
-- unjustified assertion rate;
-- refusal/coverage;
-- calibration;
-- downstream action consequences.
+Measure unjustified assertion, refusal/coverage, calibration and downstream action consequences.
 
 ---
 
 ## 13. U11 — world change and belief revision
-
-Protocol:
 
 ```text
 world hypothesis
 → hidden/external change
 → partial new evidence
 → stale-state detection
-→ local/global revision
+→ revision
 → downstream query/replan
 ```
 
-Measure:
-
-- stale detection latency;
-- incorrect persistence;
-- update locality;
-- dependent-query correctness;
-- recovery time;
-- memory/recompute cost.
-
-This task is representation-neutral: explicit state, recurrent latent, long-context policy and replay systems should all be evaluated.
+Measure stale detection, incorrect persistence, update locality, recovery and recompute cost.
 
 ---
 
 ## 14. U12 — intervention twins
 
-Create pairs with:
+Use same/near-same visual prefixes with controlled different interventions and different valid consequences.
 
-```text
-same or near-same visual prefix
-different controlled intervention
-→ different valid consequence
-```
-
-Examples:
-
-- support removed vs retained;
-- object pushed vs untouched;
-- container opened vs not opened;
-- barrier moved vs fixed;
-- tool applied vs merely present.
-
-Measure:
-
-- consequence accuracy;
-- affected-variable localization when available;
-- false causal attribution;
-- counterfactual consistency;
-- recovery latency.
-
-This operationalizes intervention-sensitive world sufficiency without assuming a specific Clover causal representation.
+Measure consequence accuracy, affected-variable localization, false causal attribution and counterfactual consistency.
 
 ---
 
 ## 15. U13 — active perception
 
-Current observation is deliberately insufficient. The agent must decide whether and where to look/move/inspect.
-
 Relevant sources:
 
-- Bajcsy Active Perception: https://ieeexplore.ieee.org/abstract/document/5968
-- Vantage: https://arxiv.org/abs/2610.11810 · https://github.com/q1xiangchen/Vantage
+- Bajcsy Active Perception — https://ieeexplore.ieee.org/abstract/document/5968
+- Vantage — https://arxiv.org/abs/2610.11810 · https://github.com/q1xiangchen/Vantage
 
-Measure:
-
-```text
-task/query correctness
-actions/views requested
-information gain
-avoidable motion
-latency
-failure to seek evidence
-unnecessary evidence collection
-```
+Measure correctness, views/actions requested, information gain, avoidable motion, latency and unnecessary evidence collection.
 
 ---
 
 ## 16. U14 — novel object dynamics
 
-Use objects/types absent from training labels or semantic categories where possible.
-
-The system should infer behavior from visual history and interaction rather than category lookup.
-
-Measure:
-
-- dynamic prediction;
-- adaptation speed;
-- transfer to new shapes/material appearance;
-- language-prior sensitivity;
-- action usefulness.
+Use objects/types absent from training labels where possible. Measure dynamic prediction, adaptation, transfer and language-prior sensitivity.
 
 ---
 
 ## 17. U15 — long-horizon household task
 
-Canonical structure:
+Use multi-step find→inspect→retrieve→transport→place tasks with hidden change/recovery. Record per-step world state, decision premise, action, execution effect, memory, recovery and latency.
 
-```text
-find target
-→ navigate / move camera
-→ inspect/open
-→ retrieve
-→ transport
-→ place
-→ target moved or path blocked
-→ re-observe
-→ revise/replan
-→ completion
-```
-
-Do not score only final success.
-
-Record per step:
-
-```text
-world-state correctness
-decision premise correctness
-action/tool choice
-execution effect
-memory state
-recovery
-latency
-```
-
-Relevant future suites:
+Relevant suites:
 
 - LIBERO — https://libero-project.github.io/main.html · https://github.com/Lifelong-Robot-Learning/LIBERO
 - CALVIN — https://github.com/mees/calvin
-- RoboCasa — https://robocasa.ai/ · https://robocasa.ai/leaderboard.html
+- RoboCasa — https://robocasa.ai/
 - ManiSkill — https://github.com/haosulab/ManiSkill
 
 ---
 
-## 18. Geometry / spatial diagnostics
+## 18. U16 — real-execution world-model fidelity: WorldOracle
 
-Geometry methods should report, where applicable:
+- Paper — https://arxiv.org/abs/2610.18826
+
+WorldOracle gives an action-conditioned world model the **same initial observation and low-level action sequence** as a real execution, then compares predicted and actual outcomes.
+
+It evaluates:
 
 ```text
-pose error
-depth error
-point-map consistency
-track consistency
-relocalization
-dynamic-scene robustness
-camera-shift robustness
+physical state correctness
+interaction spatial alignment
+key interaction area fidelity
+multi-view action coherence
 ```
 
-Relevant sources:
+The evaluation suite includes long multi-segment successful and failed real executions across multiple dynamics/embodiments.
 
-- ORB-SLAM3: https://arxiv.org/abs/2007.11898
-- RAFT: https://arxiv.org/abs/2003.12039
-- VGGT: https://arxiv.org/abs/2503.11651
-- VGGT-Ω: https://arxiv.org/abs/2605.15195
+Use for:
 
-Geometry scores do not automatically establish semantics, causality, persistence or action usefulness.
+> whether a predicted world rollout matches what actually happened, not merely whether it looks plausible.
+
+Do not infer policy quality or complete world understanding from this benchmark alone.
 
 ---
 
-## 19. Required reporting dimensions
+## 19. U17 — hardware/setup robustness: LIBERO-RIG
+
+- Paper — https://arxiv.org/abs/2610.18843
+
+LIBERO-RIG holds tasks fixed while perturbing eleven hardware/setup axes, including camera mounting/optics, camera-arm calibration, actuation gain, control rate, proprioceptive noise, base pose, table height and gripper pads. Each axis has five severity levels, totaling 210 conditions across four LIBERO suites.
+
+Reported pooled VLA success:
+
+```text
+nominal       0.932
+mid severity  0.767
+highest       0.509
+```
+
+Use for distinguishing:
+
+```text
+scene/task generalization
+≠ hardware/calibration/control-loop robustness
+```
+
+---
+
+## 20. U18 — long-horizon scaling: LADDER
+
+- Paper — https://arxiv.org/abs/2610.18053
+- Project — https://ladder.insait.ai
+
+LADDER scales from 1 to 10 subgoals within controlled task families: 145 tasks, eight categories, two embodiments and 2,024 simulated episodes per evaluated system.
+
+Reported signal:
+
+```text
+low-level policy: 85.4% at one subgoal
+→ near zero on extended tasks
+```
+
+Orchestration improves performance but remains bounded by physical execution errors; a GPT-6 Astra tool-selection setup is reported around 62% with substantial time/cost.
+
+Use for separating planning/orchestration failures from low-level execution compounding.
+
+---
+
+## 21. U19 — rollout-free offline policy evaluation: RoboFQE
+
+- Paper — https://arxiv.org/abs/2610.18699
+
+RoboFQE estimates target-policy return from offline robot trajectories without running new simulator, learned-world-model or real-world rollouts.
+
+Use as an **EV4/offline sanity-check instrument** for policy ranking when real robot rollouts are unavailable or expensive.
+
+Important boundary:
+
+```text
+offline policy evaluation
+≠ closed-loop deployment validation
+```
+
+Its value is especially relevant when autoregressive video evaluators accumulate long-horizon prediction error.
+
+---
+
+## 22. U20 — partial-observability memory representation: Grid or Nodes?
+
+- Paper — https://arxiv.org/abs/2610.18637
+
+This controlled FloWM study compares a dense grid memory to an oracle-fed node/Kalman representation under partial observability.
+
+Reported diagnostic signals include:
+
+```text
+out-of-view node memory: 14 KB
+FloWM grid:             5.6 MB
+
+diagonal OOD motion:
+FloWM detection         11%
+unchanged tracker       93%
+```
+
+The oracle node memory is not a deployable learned baseline. Use this study to motivate measurements of:
+
+```text
+memory bytes
+representation inductive bias
+out-of-distribution motion
+probe/readout dependence
+```
+
+---
+
+## 23. Supporting validation resources — not standalone “understanding” benchmarks
+
+### RoboSimStudio
+
+- Paper — https://arxiv.org/abs/2610.18835
+- Project — https://robosimstudio.github.io
+
+Use for explicit Real2Sim experiments where solver/contact model/physical parameters are editable and simulator hypotheses can be compared against observed behavior.
+
+### RoboWM-Bench
+
+- Paper — https://arxiv.org/abs/2604.19092
+
+Use for visual-plausibility vs executable-behavior distinction.
+
+### RoboTrustBench
+
+- Paper — https://arxiv.org/abs/2606.01600
+
+Use for constraint-sensitive, counterfactual and adversarial world-model evaluation.
+
+### Video2World
+
+- Paper — https://arxiv.org/abs/2610.04432
+
+Use for geometric/dynamic/functional correctness of reconstructed simulation worlds.
+
+---
+
+## 24. Required reporting dimensions
 
 Every serious architecture/baseline comparison should report a vector rather than one scalar.
 
@@ -466,36 +375,29 @@ held-out scene
 held-out object/composition
 held-out dynamics
 camera shift
+hardware/setup shift
 real-world transfer
+real-execution rollout fidelity
 task/query correctness
 coverage / answer rate
 unjustified assertion rate
 unknown/refusal quality
 memory/persistence
 recovery
-latency
+latency p50/p95/p99
 memory bytes
 energy when measurable
 ```
 
-Where relevant also include:
-
-- identity continuity;
-- spatial error;
-- physical consistency;
-- intervention accuracy;
-- temporal evidence localization;
-- update locality;
-- planning/search cost;
-- task success.
+Where relevant also include physical consistency, intervention accuracy, temporal evidence localization, update locality, planning/search cost, offline-evaluation uncertainty and task success.
 
 Use Pareto analysis rather than hiding trade-offs inside one weighted score.
 
 ---
 
-## 20. Anti-shortcut audit
+## 25. Anti-shortcut / robustness audit
 
-Challenge world-understanding results with:
+Challenge results with:
 
 ```text
 background-only
@@ -510,27 +412,17 @@ duplicate / near-duplicate
 language-only
 question-only
 minimal-change paired video
+camera calibration perturbation
+control-rate perturbation
+latency / frame-drop injection
+cross-simulator replay
 ```
 
 If a shortcut reproduces the score, the original result is weak evidence for world understanding.
 
 ---
 
-## 21. Strong external robot capability references
-
-These are capability references, not Clover-reproduced baselines:
-
-- Gemini Robotics ER 2 — https://deepmind.google/models/gemini-robotics/embodied-reasoning/
-- Gemini Robotics 2 — https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots/
-- Figure Helix 2.5 — https://www.figure.ai/news/helix-2-5-zero-shot-30-home-generalization
-- Skild S1 — https://www.skild.ai/blogs/s1
-- π0.5 — https://arxiv.org/abs/2504.16054
-
-For company-reported systems, preserve `OFFICIAL_REPORTED_RESULT` status unless independently reproduced.
-
----
-
-## 22. First Understanding Battery candidate
+## 26. First Understanding Battery candidate — expanded
 
 ```text
 U1  IntPhys 2                         intuitive physics
@@ -548,9 +440,14 @@ U12 custom intervention twins         intervention sensitivity
 U13 custom active perception          information-seeking vision
 U14 custom novel dynamics             open-world physical transfer
 U15 long-horizon embodied task        action usefulness/recovery
+U16 WorldOracle                       predicted-vs-real action-conditioned futures
+U17 LIBERO-RIG                        hardware/setup robustness
+U18 LADDER                            horizon scaling / compounding execution
+U19 RoboFQE                           rollout-free offline policy evaluation
+U20 Grid-or-Nodes diagnostic          memory efficiency / inductive bias
 ```
 
-This battery is intentionally heterogeneous. The objective is to find cross-family failure structure, not declare a winner from one number.
+This battery is intentionally heterogeneous. U19 and U20 are supporting diagnostics, not replacements for real closed-loop evaluation.
 
 ---
 
@@ -565,6 +462,9 @@ benchmark battery
 + active evidence gathering
 + embodied long-horizon tasks
 + action usefulness
++ real-execution grounding
++ hardware/setup perturbation
++ validation-evidence tier
 ```
 
 not:
