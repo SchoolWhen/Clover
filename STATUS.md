@@ -12,77 +12,115 @@ Last updated: 2026-10-14
 
 ## Current Phase
 
-**Survey / Research Foundation — ACTIVE.**
+**Background Research / Problem Reconstruction — ACTIVE.**
 
-The immediate priority is not model reproduction, benchmark optimization or new architecture implementation. It is to establish a sufficiently deep account of what prior work already solves, what it fails to solve, what evidence is trustworthy, and what technical questions remain before the next Clover architecture is selected.
+The immediate priority is to build a sufficiently complete, primary-source-backed understanding of the problem before freezing a new Clover representation or architecture.
 
-Start with [`SSOT.md`](SSOT.md) and [`research/survey/README.md`](research/survey/README.md).
+Current order:
 
-## Public Research Foundation — IMPLEMENTED / EXPANDING
+```text
+Background Research / Research Map
+→ Baseline Setup
+→ Understanding Battery
+→ Failure Matrix
+→ Representation Hypothesis
+```
 
-The repository now contains:
+Start with [`SSOT.md`](SSOT.md), then [`research/survey/BACKGROUND_RESEARCH.md`](research/survey/BACKGROUND_RESEARCH.md) and [`research/survey/SOURCE_MAP.md`](research/survey/SOURCE_MAP.md).
 
-- root SSOT and agent rules;
-- research principles and public status;
-- a flat Survey layer with detailed frontier methods;
-- a curated primary-paper/source catalogue;
-- benchmark and real-task maps;
-- datasets and code resources;
-- cross-cutting research questions;
-- screened post-reset Clover hypotheses;
-- filtered frontier/news signals;
-- older map-style literature, evaluation and architecture references;
-- research decision records.
+## Background Research Foundation — ACTIVE / EXPANDING
+
+The repository now organizes the problem into explicit research domains:
+
+- partial observability, uncertainty and active perception;
+- classical geometry and state estimation;
+- static self-supervised visual representation;
+- predictive video representation;
+- learned geometry and spatial reconstruction;
+- object-centric representation and visible tracking;
+- persistent visual/episodic memory;
+- intuitive physics and quantitative physical reasoning;
+- causality and intervention;
+- generative world models;
+- embodied VLM/VLA/world-action models;
+- robot foundation models and real-world generalization;
+- state/action-grounded evaluation.
+
+Every durable external claim should map to a primary paper, official technical source or open repository, plus a statement of what the source does **not** establish.
+
+## Current Research Baseline Updates
+
+The Survey now treats these as important current references:
+
+- DINOv3 for static self-supervised visual representation;
+- V-JEPA 2 / 2.1 for predictive video representation;
+- VGGT / VGGT-Ω for learned geometry;
+- SAM 3 / 3.1 for visible open-vocabulary entity detection/segmentation/tracking;
+- PersistBench and S-EMBER for persistent/streaming visual memory;
+- IntPhys 2, MVP, Principia and CausalVQA for physical/causal diagnostics;
+- OpenVLA / π0.5 / Gemini Robotics / Helix 2.5 / Skild S1 as embodied policy/reasoning counter-hypotheses;
+- Atlas and Cosmos 3 as generative/general world-model counter-hypotheses.
+
+These are **comparators and evidence**, not components automatically adopted into Clover.
 
 ## Existing Clover Prototype — RESEARCH_PROTOTYPE
 
 A substantial pre-reset Research Prototype 1 exists outside the current public codebase, exploring field-based visual evidence, persistent entities/spacetime support, typed world queries, epistemic licences, decision, tool-use and execution loops.
 
-Those mechanisms are **candidate hypotheses**, not architectural commitments. Public code migration and the naming/versioning scheme for future code generations will be handled separately after the survey foundation is mature enough to inform the next architecture.
+Those mechanisms are **candidate hypotheses**, not architectural commitments. Public code migration and the naming/versioning scheme for future code generations remain downstream of the background research and representation decision process.
 
 ## Active Research Questions — OPEN
 
 The current Survey explicitly investigates, among others:
 
 - what a world representation must contain;
-- explicit vs distributed state;
+- explicit vs distributed vs hybrid state;
 - geometry vs learned representation;
 - prediction vs reconstruction vs generation;
-- what vision alone can and cannot identify;
+- what vision can directly observe vs only infer;
 - passive observation vs interaction;
-- object-, field- and geometry-centric representations;
-- persistent memory and belief revision;
-- intuitive physics and causal understanding;
-- uncertainty, observability and refusal;
-- language as knowledge and as a confound;
+- object-centric vs dense/field representation;
+- persistent memory and evidence retention;
+- belief revision and contradiction handling;
+- intuitive physics and quantitative physical state;
+- causal identifiability and counterfactual reasoning;
+- language/world-knowledge confounds;
 - active perception;
 - whether a persistent worldview measurably improves action;
 - embodiment-invariant abstractions;
-- hardware/software co-design after the scientific mechanism is known.
+- hardware/software co-design only after scientific structure is known.
 
-## Evaluation — MAPPED, NOT YET THE OBJECTIVE
+## Evaluation — BEING REFRAMED AS A BATTERY
 
-Public benchmarks and robot tasks are catalogued as measurement instruments. Current work is not a leaderboard campaign.
+Public benchmarks and robot tasks remain measurement instruments rather than project goals.
 
-The eventual evidence hierarchy is:
+The evidence hierarchy is:
 
 1. controlled cognitive/physical diagnostics;
-2. world-model / representation diagnostics;
-3. embodied tasks in unfamiliar physical environments;
-4. real-world generalization and recovery;
-5. efficiency and hardware co-design once scientific capability is established.
+2. shortcut-resistant paired tests;
+3. persistent/streaming memory diagnostics;
+4. causal/interventional tests;
+5. geometry/world-state diagnostics;
+6. real-video transfer;
+7. active-perception tasks;
+8. long-horizon embodied tasks in unfamiliar environments;
+9. action usefulness and recovery;
+10. efficiency and hardware co-design once capability is established.
 
 ## Not Yet Demonstrated
 
 Clover has not yet publicly demonstrated:
 
 - general real-world visual world understanding;
+- a final world representation;
+- superiority of explicit state over distributed latent state;
+- superiority of historical Clover field/CSP/licence mechanisms;
 - comprehensive positive-result SOTA;
 - robust open-world generalization;
 - persistent long-horizon real-robot world state;
 - general causal understanding;
 - long-horizon autonomous robot-brain capability;
-- an empirically established final representation;
+- an empirically established memory architecture;
 - a final CPU/GPU/Metal allocation.
 
-These are research targets. They do not justify lowering the research question.
+These are research targets or open hypotheses. They do not justify lowering the research question.
