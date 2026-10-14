@@ -7,6 +7,8 @@ Freshness cutoff checked through: **2026-10-15**
 
 This file is **not** a Clover training recipe. It records variables that must be controlled before attributing a capability gain to architecture or representation.
 
+High-risk cross-boundary questions live in [`HIGH_RISK_BOUNDARIES.md`](HIGH_RISK_BOUNDARIES.md), including partial-success rewards, epistemic calibration, failure/recovery ratios, simulator trust, module adaptation timescales, uncertainty regression, distillation, scaling, fleet-update contamination and model/memory rollback consistency.
+
 ---
 
 ## 1. Training variables that must be separated
@@ -458,13 +460,15 @@ Do not change all axes at once.
 
 ## 13. Remaining training-specific gaps
 
+See [`HIGH_RISK_BOUNDARIES.md`](HIGH_RISK_BOUNDARIES.md) for the expanded evidence matrix. Remaining open questions include:
+
 ```text
 robot post-training scaling laws under matched architecture/data quality
 reward models that encode partial success + safety + epistemic correctness
 human intervention / takeover as training signal
-how much failure data is optimal before it destabilizes nominal skills
-how to weight synthetic samples by simulator/world-model trust
-pretraining objective effects on later physical identifiability
+failure/recovery sampling without destabilizing nominal skills
+weighting synthetic samples by simulator/world-model trust
+pretraining-objective effects on later physical identifiability
 continual fleet learning without propagating one robot's sensor/hardware fault
 personalized embodiment adaptation vs global shared policy
 rollback semantics when model weights and persistent memory co-evolve
