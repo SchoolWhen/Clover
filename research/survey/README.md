@@ -1,75 +1,144 @@
 # Clover Survey
 
 Last updated: 2026-10-14  
-Phase: **Survey / Research Foundation**
+Phase: **Background Research / Problem Reconstruction**
 
-This is Clover's compact, high-density research entry point.
+This is Clover's primary research entry point.
 
 > **Research question:** How can a machine understand the real world through vision alone?
 >
-> **Product target:** Build a general-purpose robotic brain that forms an understanding of the real world through vision alone, then uses that understanding to decide and act.
+> **Long-term goal:** Build a general-purpose robotic brain that forms an understanding of the real world through vision alone, then uses that understanding to decide and act.
+
+The current task is **not** to freeze a new Clover architecture. It is to make the background research deep enough that future representation choices are constrained by prior art, strong baselines, discriminating evaluations and known failure modes.
 
 ## Read in this order
+
 1. [`../../SSOT.md`](../../SSOT.md)
-2. [`FRONTIER_METHODS.md`](FRONTIER_METHODS.md)
-3. [`RESEARCH_QUESTIONS.md`](RESEARCH_QUESTIONS.md)
-4. [`PAPERS.md`](PAPERS.md)
-5. [`BENCHMARKS_TASKS.md`](BENCHMARKS_TASKS.md)
-6. [`DATASETS_CODE.md`](DATASETS_CODE.md)
-7. [`CLOVER_HYPOTHESES.md`](CLOVER_HYPOTHESES.md)
-8. [`FRONTIER_SIGNALS.md`](FRONTIER_SIGNALS.md)
+2. [`BACKGROUND_RESEARCH.md`](BACKGROUND_RESEARCH.md) — problem formulation and full research-domain synthesis
+3. [`SOURCE_MAP.md`](SOURCE_MAP.md) — one-to-one evidence/URL/claim/landing map
+4. [`FRONTIER_METHODS.md`](FRONTIER_METHODS.md) — method-family comparison
+5. [`RESEARCH_QUESTIONS.md`](RESEARCH_QUESTIONS.md) — unresolved contradictions
+6. [`PAPERS.md`](PAPERS.md) — curated primary papers, official pages and code
+7. [`BENCHMARKS_TASKS.md`](BENCHMARKS_TASKS.md) — capability/evaluation map
+8. [`DATASETS_CODE.md`](DATASETS_CODE.md) — datasets, repositories and implementation resources
+9. [`CLOVER_HYPOTHESES.md`](CLOVER_HYPOTHESES.md) — screened historical/internal hypotheses, not commitments
+10. [`FRONTIER_SIGNALS.md`](FRONTIER_SIGNALS.md) — filtered frontier/news signals
 
 ## Research order
 
 ```text
-research question
-→ prior art
-→ capability map
-→ unresolved contradiction
+fixed research question
+→ background research / research map
+→ baseline setup
+→ Understanding Battery
+→ Failure Matrix
 → representation hypothesis
-→ implementation
-→ evaluation
+→ world formation / learning
+→ robot brain
+→ real-world evaluation
+→ hardware co-design
 ```
+
+Do not invert this sequence by choosing a preferred representation first and then searching for evidence to justify it.
 
 ## Source screening
 
-**Research Reset:** SSOT/product goal, benchmark-as-instrument, V0–V3 protocol, research/evaluation map and hardware-as-design-variable are current. CPU-first and old mechanisms are not axioms.
+### Research Reset
 
-**`news_answers.md`:** durable candidate ideas were retained as hypotheses, including Evidence Replay, temporal persistence, epistemic/verification separation, auditability, counter-witness causality, sparse IR, compute scheduling, state-transition affordance and active perception.
+Current and controlling:
 
-**`news(5).md`:** used as a signal archive; durable entries require primary/official technical sources. Funding and secondary reporting remain signals.
+- research question and long-term goal;
+- benchmark-as-instrument principle;
+- V0–V3 vision protocols;
+- research/evaluation map;
+- hardware as a design variable;
+- strong baseline + capability map + benchmark battery before a new representation hypothesis.
+
+Not axioms:
+
+- CPU-first;
+- field crystallization;
+- CSP / SEP / licence;
+- LCPS / GCPS;
+- explicit state;
+- latent state;
+- Transformer / non-Transformer choice.
+
+### `news_answers.md`
+
+Use as a screened hypothesis/experiment ledger. Durable ideas such as Evidence Replay, query-conditioned temporal support, epistemic/verification separation, auditability, counter-witness causality, sparse visual IR, compute scheduling and active perception remain **candidate hypotheses or diagnostics** unless the post-reset research process promotes them.
+
+### `news(5).md`
+
+Use as a signal/archive layer. News reports and secondary summaries do not become project truth. Graduate durable entries to the Survey only after locating primary papers, official technical reports, official project pages or open code.
 
 ## Evidence labels
-`PRIMARY_PAPER` · `OFFICIAL_PROJECT` · `OPEN_SOURCE` · `OFFICIAL_REPORTED_RESULT` · `SURVEY_SIGNAL` · `INTERNAL_HYPOTHESIS` · `OPEN` · `SUPERSEDED`
 
-## Landscape
+`PRIMARY_PAPER` · `OFFICIAL_PROJECT` · `OPEN_SOURCE` · `OFFICIAL_REPORTED_RESULT` · `BACKGROUND_REFERENCE` · `SURVEY_SIGNAL` · `INTERNAL_HYPOTHESIS` · `OPEN` · `SUPERSEDED`
 
-| Route | State | Strength | Open issue |
+## Two-axis “vision alone” annotation
+
+The Survey keeps the established **observation protocol**:
+
+- `V0` monocular RGB + temporal order;
+- `V1` V0 + camera intrinsics;
+- `V2` calibrated multi-camera RGB;
+- `V3` embodied active vision where action changes future visual evidence.
+
+Background research additionally annotates **learning-evidence provenance** when material:
+
+- `L0` visual self-supervision only;
+- `L1` visual labels/annotations;
+- `L2` language/world-knowledge supervision;
+- `L3` action-conditioned robot/human experience;
+- `L4` non-visual or privileged physical evidence.
+
+This prevents “visual at deployment” from being confused with “learned only from vision.” See [`BACKGROUND_RESEARCH.md`](BACKGROUND_RESEARCH.md).
+
+## Current landscape
+
+| Route | Typical state | Demonstrated strength | Core open issue |
 |---|---|---|---|
-| Classical geometry | pose/map/geometry | precision/observability | semantics/abstraction |
-| Static SSL vision | distributed features | invariance | dynamics/memory |
-| Predictive video | temporal latent | anticipation | persistent state |
-| Learned geometry | 3D state | spatial reconstruction | physics/causality |
-| Object-centric | slots/entities | composition/identity | ontology/scaling |
-| Generative world model | simulator latent | rollout/completion | plausibility vs truth |
-| Embodied VLM | multimodal context | flexible reasoning | language priors |
-| VLA/WAM | action-conditioned latent | task performance | world semantics |
-| Robot foundation policy | broad policy | transfer | internal state unclear |
-| Model-based robotics | belief/dynamics | uncertainty/planning | representation acquisition |
-| Historical Clover | explicit candidate world | queryability hypothesis | not established as best |
+| Classical geometry | explicit pose/map/geometry | metric structure, localization, observability | semantics/abstraction/physics |
+| Static SSL vision | distributed image features | invariance, dense features, depth/parts | persistent time/world state |
+| Predictive video | temporal predictive latent | anticipation, temporal consistency, planning demos | persistent state/causal identifiability |
+| Learned geometry | learned 3D/spatiotemporal state | reconstruction, cameras, depth, tracks | memory/physics/action sufficiency |
+| Object-centric | slots/entities/tracks | composition, identity bias | scaling/open-world discovery |
+| Persistent memory | evidence/world/episodic memory | long-horizon recall/permanence | retention/revision architecture |
+| Generative world model | generative spatial/temporal latent | completion, reconstruction, simulation | plausible ≠ evidence-grounded truth |
+| Embodied VLM | multimodal context | broad physical/spatial reasoning | language-prior confound, persistent state unclear |
+| VLA/WAM | action-conditioned latent/policy | direct task behavior, future-aware control | world semantics and factorization unclear |
+| Robot foundation policy | broad implicit policy | real-world transfer and long-horizon behavior | internal world state often opaque |
+| POMDP / active perception | belief + dynamics + action | uncertainty-aware information gathering/planning | representation acquisition at scale |
+| Historical Clover | explicit candidate world | queryability/auditability hypotheses | no evidence it is the best representation |
 
-## Current tensions
-- explicit vs distributed representation;
-- prediction vs reconstruction vs generation;
-- passive observation vs interaction;
-- persistent world state vs strong direct policy;
-- evidence-supported truth vs plausible generated completion.
+## Current primary contradictions
 
-## Phase boundary
+```text
+explicit state vs distributed latent vs hybrid
+reconstruction vs prediction vs generation
+object-centric vs dense scene representation
+passive observation vs interaction
+persistent world state vs long context/direct policy
+evidence-grounded belief vs plausible completion
+```
 
-We are **not** freezing a final representation, explicit-vs-latent decision, Transformer choice, object-vs-field ontology, CPU/GPU allocation or final authority mechanism yet.
+These contradictions are more fundamental than historical Clover module names.
 
-The next Clover architecture should be a result of this Survey.
+## Current phase exit condition
+
+Background research is mature enough to begin systematic baseline reconstruction when we can answer, with primary evidence:
+
+1. what major research families represent internally;
+2. what each family has actually demonstrated;
+3. what information each training regime uses;
+4. which capabilities remain unresolved across families;
+5. which claims are vulnerable to shortcut, language, simulator or sensor confounds;
+6. which baselines can discriminate the major contradictions;
+7. what the Understanding Battery must measure;
+8. which failure dimensions must be recorded before proposing a new representation.
+
+Systematic representation design remains downstream of **baseline setup → Understanding Battery → Failure Matrix**.
 
 ---
 
