@@ -61,23 +61,27 @@ open questions
 
 `RESEARCH.md` currently tracks dozens of directions including epistemology, classical geometry, static/video SSL, 3D/4D reconstruction, neural scene representations, object-centric models, scene graphs, persistent memory, physical reasoning, causal learning, active perception, system identification, generative world models, world-action models, VLA, robot foundation models, egocentric video, affordance learning, model-based control, uncertainty/OOD, continual learning and simulation/data engines.
 
-`RESEARCH_FRONTIER.md` tracks newly important primary/official work such as execution-grounded world-model evaluation, trustworthiness/counterfactual evaluation, contact/deformable dynamics, video-to-simulation functional correctness, persistent semantic maps, amodal tracking, behavior-grounded physical parameter inference, general multimodal robotics reasoning and current open VLA/WAM baselines.
+`RESEARCH_FRONTIER.md` tracks newly important primary/official work such as execution-grounded world-model evaluation, trustworthiness/counterfactual evaluation, contact/deformable dynamics, behavior-grounded physical parameters, articulated physical assets, video-to-simulation functional correctness, persistent semantic maps, amodal tracking, general multimodal robotics reasoning, current open VLA baselines and competing world-action-model state strategies.
 
 ## 2026-10-14 frontier snapshot
 
-The latest Stage-1 refresh adds or promotes these research references:
+The latest Stage-1 refresh includes these research references:
 
 | Source | Type | Why Stage 1 should track it |
 |---|---|---|
 | Gemini 4 Argon for Robotics — https://developers.googleblog.com/gemini-4-argon-for-robotics/ | `OFFICIAL_REPORTED_RESULT` | current general multimodal physical reasoner spanning Real2Sim, closed-loop robot control, world-model steering and self-improvement; strong counter-hypothesis to robot-specific reasoning stacks |
-| ERQA — https://github.com/embodiedreasoning/ERQA | `OPEN_SOURCE` | reproducible 400-example embodied/spatial reasoning diagnostic used by current frontier models |
+| ERQA — https://github.com/embodiedreasoning/ERQA | `OPEN_SOURCE` | reproducible embodied/spatial reasoning diagnostic used by current frontier models |
 | DR-WM / From Pixels to Executable Physics — https://arxiv.org/abs/2610.17630 | `PRIMARY_PAPER` | separates RGB geometry from physical parameters learned through action-response; directly relevant to the identifiability boundary of “vision alone” |
 | GR00T N1.7 — https://github.com/NVIDIA/Isaac-GR00T | `OPEN_SOURCE` | current strong open VLA/direct-policy baseline with human-video pretraining and cross-embodiment action representation |
-| Being-M0.7 — https://arxiv.org/abs/2610.11283 | `PRIMARY_PAPER` | current latent world-action route transferring large-scale human visual-motion priors to humanoid control |
-| HWAM — https://arxiv.org/abs/2610.12026 | `PRIMARY_PAPER` | current WAM route that explicitly predicts realized post-execution body state to model the action-execution gap |
-| Identifiable World Models — https://arxiv.org/abs/2610.07028 | `PRIMARY_PAPER` | strengthens a hybrid alternative between opaque latent state and hand-designed explicit state |
-| Vantage / Seek-and-View — https://arxiv.org/abs/2610.11810 | `PRIMARY_PAPER` | active question-conditioned evidence/view acquisition for multi-view spatial reasoning |
-| Agentic Video Understanding — https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-agentic-video-in-gemini/ | `OFFICIAL_REPORTED_RESULT` | shows evidence-acquisition policy can change long-video accuracy/efficiency independently of base representation |
+| Riemann-1.0 — https://arxiv.org/abs/2608.27033 | `PRIMARY_PAPER` | unified causal WAM jointly modeling multi-view observations, robot state and action across large heterogeneous experience |
+| Qwen-RobotWorld — https://arxiv.org/abs/2606.17030 | `PRIMARY_PAPER` | language-conditioned future-world modeling across multiple embodied domains; language as an action abstraction is itself a research hypothesis |
+| Xiaomi-Robotics-U0 — https://arxiv.org/abs/2607.11643 | `PRIMARY_PAPER` | world foundation model used as embodied generator/transfer model/data engine; separates data-generation utility from epistemic world-state fidelity |
+| Being-M0.7 — https://arxiv.org/abs/2610.11283 | `PRIMARY_PAPER` | latent visual-motion world-action route transferring large-scale human experience to humanoid control |
+| HWAM — https://arxiv.org/abs/2610.12026 | `PRIMARY_PAPER` | explicitly predicts realized post-execution body state to model the action-execution gap |
+| Identifiable World Models — https://arxiv.org/abs/2610.07028 | `PRIMARY_PAPER` | hybrid alternative between opaque latent state and hand-designed explicit state |
+| Artisan — https://arxiv.org/abs/2610.13947 | `PRIMARY_PAPER` | adds articulation, collision, gravity stability, mass/material properties and downstream function to physical 3D-asset evaluation |
+| Vantage / Seek-and-View — https://arxiv.org/abs/2610.11810 | `PRIMARY_PAPER` | question-conditioned viewpoint/evidence acquisition for multi-view spatial reasoning |
+| Agentic Video Understanding — https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-agentic-video-in-gemini/ | `OFFICIAL_REPORTED_RESULT` | evidence-acquisition policy can change long-video accuracy/efficiency independently of base representation |
 | RobotWorld — https://arxiv.org/abs/2610.10409 | `PRIMARY_PAPER` | exposes composition, persistent task-state, recovery and completion-verification failures across diverse robot-use tasks |
 | Video2World — https://arxiv.org/abs/2610.04432 | `PRIMARY_PAPER` | separates visual/geometric similarity from dynamic and functional correctness in reconstructed worlds |
 
@@ -100,6 +104,10 @@ reference action
 ≠
 realized robot state
 
+appearance / geometry
+≠
+articulation / mass / material / function
+
 strong general reasoner + tools
 ≠
 proof of vision-only world understanding
@@ -107,6 +115,12 @@ proof of vision-only world understanding
 long context / static sampling
 ≠
 active evidence acquisition
+
+world model for belief
+≠
+world simulator
+≠
+world data engine
 
 opaque distributed latent
 vs
