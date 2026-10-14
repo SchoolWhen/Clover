@@ -2,260 +2,242 @@
 
 Last updated: 2026-10-14
 
-The roadmap is organized around the fixed research question rather than version numbers:
+> **Research question:** How can a machine understand the real world through vision alone?
+>
+> **Long-term goal:** Build a general-purpose robotic brain that forms an understanding of the real world through vision alone, then uses that understanding to decide and act.
 
-> **How can a machine understand the real world through vision alone?**
-
-The long-term goal is:
-
-> **Build a general-purpose robotic brain that forms an understanding of the real world through vision alone, then uses that understanding to decide and act.**
-
-The roadmap is evidence-driven and intentionally places **background research, baselines, evaluation battery and failure mapping before the next representation hypothesis**.
+The roadmap follows one flat scientific lifecycle:
 
 ```text
-Background Research / Research Map
-→ Baseline Setup
-→ Understanding Battery
-→ Failure Matrix
-→ Representation Hypothesis
-→ World Formation / Learning
-→ Robot Brain
-→ Real-world Evaluation
-→ Hardware Co-design
+1 Research
+→ 2 Analysis
+→ 3 Synthesis
+→ 4 Innovation
+→ 5 Implementation
+→ 6 Evaluation
+→ 7 Reflection
+↺ next cycle
 ```
 
-## Phase R0 — Public Research Foundation
+The ordering matters. Clover should not invent first and search for justification later.
 
-**Implemented / maintained**
+---
 
-- define the research question and product goal;
-- establish public research principles;
-- separate current facts, hypotheses and history;
-- define evidence labels and source policy;
-- document the V0–V3 vision protocols;
-- initialize the public GitHub research record.
+## Stage 1 — Research
 
-## Phase R1 — Background Research / Problem Reconstruction
+**CURRENT / ACTIVE**
 
-**CURRENT**
+Goal: collect the full problem space before narrowing.
 
-Build a deep, source-backed account of the strongest existing answers to the research question.
+Collect:
 
-Research domains include:
+- research directions;
+- canonical foundations;
+- latest strong methods;
+- primary papers;
+- official project pages;
+- official code/checkpoints;
+- datasets;
+- benchmarks;
+- laboratories/projects to monitor;
+- visual protocols and learning provenance;
+- known limitations;
+- open questions.
 
-- partial observability, uncertainty and active perception;
-- classical computer vision and geometry;
-- self-supervised image/video representation;
-- spatial intelligence and learned reconstruction;
-- object-centric representation;
-- persistent visual memory;
-- intuitive physics and physical-state inference;
-- causal representation and intervention;
-- generative world models;
-- embodied VLM/VLA/world-action models;
-- robot foundation models;
-- model-based robotics and POMDPs;
-- real-world generalization and recovery.
+Primary files:
 
-Required outputs:
+- `research/PIPELINE.md`
+- `research/RESEARCH.md`
+- `research/survey/SOURCE_MAP.md`
+- supporting Survey and dossier material.
 
-```text
-BACKGROUND_RESEARCH.md
-SOURCE_MAP.md
-FRONTIER_METHODS.md
-PAPERS.md
-BENCHMARKS_TASKS.md
-DATASETS_CODE.md
-RESEARCH_QUESTIONS.md
-```
+Research is broad by design. A direction does not need to fit an existing Clover mechanism to be included.
 
-**Exit condition:** we can explain, with primary/official evidence, what major approaches represent, what evidence they use, what they demonstrably achieve, where they fail, and which contradictions require direct experiments.
+### Stage-1 exit condition
 
-## Phase R2 — Baseline Reconstruction
+A new agent should be able to identify the major relevant fields, strongest current methods, sources, code, datasets, benchmarks and missing areas without relying on historical Clover assumptions.
 
-Establish minimal but strong baselines across qualitatively different representation families.
+---
 
-Initial families:
+## Stage 2 — Analysis
 
-```text
-A classical geometry/state estimation
-B static self-supervised visual representation
-C predictive video representation
-D learned geometry/spatial reconstruction
-E visible entity tracking/object-centric baseline
-F embodied reasoning / VLA baseline
-```
+Goal: understand important methods one by one.
 
-Current candidate references:
-
-- ORB-SLAM3 / RAFT;
-- DINOv3;
-- V-JEPA 2 / 2.1;
-- VGGT / VGGT-Ω;
-- SAM 3.1 / object-centric methods;
-- OpenVLA and, where access permits, Gemini Robotics ER 2 or comparable strong embodied reasoning systems.
-
-The purpose is not leaderboard optimization. It is to measure what each representation actually contains and which failure modes are structural.
-
-## Phase R3 — Understanding Battery
-
-Create a unified evaluation protocol spanning at least:
-
-```text
-existence / identity
-object permanence
-spatial relation
-temporal relation
-observability / unknown
-world change / revision
-physical plausibility
-quantitative/relational physics
-causality / intervention
-counterfactuals
-streaming memory
-active perception
-long-horizon action usefulness
-```
-
-The battery should combine public benchmarks with custom machine-computable queries and real visual tasks.
-
-Candidate public instruments include:
-
-- IntPhys 2;
-- MVP / Minimal Video Pairs;
-- CausalVQA;
-- Perception Test visual subsets;
-- PersistBench;
-- S-EMBER;
-- Principia;
-- RoboPhys-3D;
-- robot task suites when embodied evaluation becomes active.
-
-## Phase R4 — Failure Matrix
-
-For each baseline and method family, record failures across:
-
-```text
-geometry
-identity
-object permanence
-temporal consistency
-observability / uncertainty
-memory / retrieval
-physics
-causality
-counterfactuals
-OOD/generalization
-camera shift
-world change / revision
-long horizon
-action utility
-compute/latency/memory
-```
-
-Do not collapse the matrix into one scalar score.
-
-**Exit condition:** we can state which failures are common across strong existing approaches and which are specific to one representation family.
-
-## Phase R5 — Representation Hypothesis
-
-Only now compare candidate answers to the central representation question:
-
-- explicit geometry/state;
-- distributed predictive latent;
-- object-centric representation;
-- continuous fields / machine-native primitives;
-- persistent episodic/world state;
-- identifiable/hybrid representations;
-- generative simulator-style state;
-- structures not yet identified.
-
-A candidate must state:
+For each method, analyze:
 
 ```text
 problem
-prior art
+inputs / supervision
 representation
-learning signal
-prediction
-falsifier
-evaluation
-action relevance
-compute implications
+mechanism
+objective
+memory / time
+geometry
+objects / relations
+physics
+causality
+action interface
+datasets
+benchmarks
+results
+strengths
+weaknesses
+confounds
+reproducibility
 ```
 
-Historical Clover mechanisms may be retained, transformed, merged or rejected.
+Output: small method reports following `research/ANALYSIS.md`.
 
-## Phase R6 — World Formation / Learning
+Baseline reconstruction may occur here when implementation/probing is necessary to understand a method rather than merely trust its paper.
 
-Study how the selected representation is acquired and maintained from visual experience:
+---
 
-- self-supervision;
-- prediction and reconstruction;
-- temporal persistence;
-- memory and selective retention;
-- contradiction and belief revision;
-- physical reasoning;
-- causal/interventional learning;
-- active perception and interaction.
+## Stage 3 — Synthesis
 
-## Phase R7 — Robot Brain
+Goal: understand the field comparatively.
 
-Connect validated world understanding to:
+Outputs:
 
-- Decision;
-- Tool / capability selection;
-- planning;
-- Execution;
-- replanning and recovery;
-- active information gathering.
+- capability matrix;
+- method-family comparison;
+- pros / cons summary;
+- trade-off map;
+- Failure Matrix;
+- recurring bottlenecks;
+- evidence gaps;
+- unresolved contradictions;
+- candidate discriminating experiments.
 
-The decisive comparison is not architectural elegance. It is whether the world representation measurably improves unfamiliar-environment behavior over a matched strong direct policy.
+This stage summarizes what existing approaches collectively teach us.
 
-## Phase R8 — Real-world Evaluation
+Output framework: `research/SYNTHESIS.md`.
 
-Use controlled and real tasks as instruments:
+---
 
-- world/physical understanding;
-- causality and counterfactuals;
-- open-world generalization;
-- long-horizon embodied tasks;
-- moved-object / blocked-path recovery;
+## Stage 4 — Innovation
+
+Goal: formulate Clover-original hypotheses and algorithms from well-supported gaps.
+
+Innovation may include:
+
+- representation hypotheses;
+- mathematical variables;
+- learning objectives;
+- memory/update rules;
+- causal mechanisms;
+- active perception mechanisms;
+- machine-native algorithms;
+- new evaluation hypotheses.
+
+Every serious idea must state:
+
+```text
+observed gap
+existing methods considered
+why they appear insufficient
+original hypothesis
+mathematical / algorithmic statement
+prediction
+falsifier
+minimal experiment
+```
+
+Historical Clover concepts are ideas here, not protected answers.
+
+Output framework: `research/INNOVATION.md`.
+
+---
+
+## Stage 5 — Implementation
+
+Goal: build reproducible baselines, diagnostics and selected Clover hypotheses.
+
+Outputs:
+
+- code;
+- data loaders;
+- baseline adapters;
+- training/inference pipelines;
+- experiment configs;
+- instrumentation;
+- deployment experiments.
+
+Implementation does not validate a scientific claim by itself.
+
+Output framework: `research/IMPLEMENTATION.md`.
+
+---
+
+## Stage 6 — Evaluation
+
+Goal: test claims and produce Results.
+
+Evaluation may include:
+
+- controlled diagnostics;
+- public benchmarks;
+- shortcut-resistant pairs;
+- memory tests;
+- causal/interventional tests;
+- generalization;
 - active perception;
-- real-world transfer;
-- baseline comparison and ablation.
+- real-world tasks;
+- long-horizon action;
+- ablations;
+- failure cases;
+- latency/memory/energy when relevant.
 
-Evidence should progress from:
+What earlier documents called baseline comparison and the Understanding Battery are evaluation assets within this lifecycle, not separate top-level project phases.
+
+Evidence should progress where relevant from:
 
 ```text
 controlled synthetic
 → controlled real
-→ unseen real environments
+→ unfamiliar real environments
 ```
 
-## Phase R9 — Hardware Co-design
+Output framework: `research/EVALUATION.md`.
 
-Only after the scientific mechanism is established, map the computation to the best substrate:
+---
 
-- CPU;
-- GPU;
-- Metal / Apple Silicon unified memory;
-- Neural Engine / Core ML where appropriate;
-- other accelerators where scientifically justified.
+## Stage 7 — Reflection
 
-Measure:
+Goal: interpret the evidence and decide the next cycle.
+
+Reflection records:
+
+- what survived;
+- what failed;
+- what remained ambiguous;
+- which assumptions were wrong;
+- which mechanisms should be removed;
+- which benchmarks were insufficient;
+- what new research questions appeared;
+- whether a hypothesis should be kept, modified, rejected or superseded.
+
+Output framework: `research/REFLECTION.md`.
+
+Reflection feeds the next Research / Analysis / Innovation cycle.
+
+---
+
+## Long-term product integration
+
+Across later cycles, validated work should converge toward the product loop:
 
 ```text
-latency
-memory
-energy
-bandwidth
-throughput
-synchronization/dispatch cost
+vision
+→ world understanding
+→ decision
+→ capability / tool selection
+→ execution
+→ new visual evidence
+→ updated understanding
 ```
 
-Hardware is optimized around the validated algorithm. It does not select the representation in advance.
+Robot-brain integration, real-world evaluation and hardware co-design occur inside the Implementation/Evaluation/Reflection loop rather than being treated as reasons to skip Research, Analysis or Synthesis.
 
 ## Final rule
 
-> **Research Map first. Representation hypothesis later. Protect the question, not the current answer.**
+> **Research broadly. Analyze deeply. Synthesize comparatively. Innovate from demonstrated gaps. Implement reproducibly. Evaluate honestly. Reflect before the next cycle.**
