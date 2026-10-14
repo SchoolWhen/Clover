@@ -1,16 +1,15 @@
 # Stage 1 — Research Frontier Watch
-## Current Primary / Official Sources Worth Deeper Analysis
 
-Last updated: 2026-10-14  
+Last updated: **2026-10-14**  
 Freshness cutoff checked through: **2026-10-14**
 
-This file is a thin companion to [`RESEARCH.md`](RESEARCH.md).
+> **Research question:** How can a machine understand the real world through vision alone?
 
-`RESEARCH.md` is the stable broad inventory. This file tracks current primary or official sources that materially expand, challenge, or refresh that inventory and should later receive Stage 2 method reports.
+This file is a **thin current-edge index**. It is not a second survey and it does not make Clover design decisions.
 
-A frontier entry is **not** a Clover design decision.
+Stable concepts belong in the Stage-1 topic files and source maps. Add a source here only when it materially changes what a new agent should know **now**.
 
-Evidence labels used here:
+## Evidence labels
 
 - `PRIMARY_PAPER`
 - `OFFICIAL_PROJECT`
@@ -19,545 +18,146 @@ Evidence labels used here:
 
 ---
 
-## 1. Executability is a separate world-model capability
+## 1. Current frontier snapshot
 
-### RoboWM-Bench
-
-Primary paper: https://arxiv.org/abs/2604.19092  
-Evidence: `PRIMARY_PAPER`
-
-Research role:
-
-```text
-video-world-model realism
-vs
-physical plausibility
-vs
-robot-executable behavior
-```
-
-RoboWM-Bench converts generated human/robot manipulation behavior into embodied action sequences and tests whether execution actually completes the task. It reports recurring failures in spatial reasoning, contact prediction and deformation even when generated videos appear plausible.
-
-What it does **not** establish:
-
-- that video generation is the right world representation;
-- that one particular explicit/latent state solves executability;
-- generality beyond the evaluated manipulation settings.
-
-Stage-2 question:
-
-> What information is missing when visual prediction is perceptually strong but action extraction remains physically invalid?
-
-### RoboTrustBench
-
-Primary paper: https://arxiv.org/abs/2606.01600  
-Evidence: `PRIMARY_PAPER`
-
-Tests video world models under normal, constraint-sensitive, counterfactual and adversarial/unsafe instructions.
-
-Stage-2 question:
-
-> Should world-model evaluation include refusal, impossibility and constraint awareness rather than only next-video quality?
-
----
-
-## 2. Contact and deformable-object dynamics may require their own state
-
-### WorldContact
-
-Primary paper: https://arxiv.org/abs/2609.19600  
-Evidence: `PRIMARY_PAPER`
-
-Contact-centric world modeling for deformable-object manipulation.
-
-Rigid-object geometry is not enough for bags, cloth and other deformables. Contact topology, deformation and action-response dynamics can dominate task success.
-
-What it does **not** establish:
-
-- that contact-centric state is a universal world representation;
-- that RGB alone uniquely identifies contact force/material parameters;
-- that simulator-trained contact dynamics generalize without qualification to arbitrary real materials.
-
-Stage-2 question:
-
-> Which contact/deformation state is visually identifiable, which must be inferred through action, and which requires non-visual evidence?
+| Date | Source | Evidence | Why it matters now | Does **not** prove | Stage-1 landing |
+|---|---|---|---|---|---|
+| 2026-10-13 | DR-WM / From Pixels to Executable Physics — https://arxiv.org/abs/2610.17630 | `PRIMARY_PAPER` | separates RGB geometry from contact/friction properties calibrated by action-response; predicts executable physical consequences | passive RGB identifies friction/contact generally | physical properties · identifiability · model discovery |
+| 2026-10-13 | Gemini 4 Argon for Robotics — https://developers.googleblog.com/gemini-4-argon-for-robotics/ | `OFFICIAL_REPORTED_RESULT` | strong general multimodal reasoner/tool-user spanning physical reasoning, Real2Sim and robot workflows | vision-only learning or persistent world state is sufficient/necessary | frontier comparator · general reasoner counter-hypothesis |
+| 2026-10-13 | Mobility-Budget-Constrained Semantic Exploration — https://arxiv.org/abs/2610.17562 | `PRIMARY_PAPER` | explicit uncertainty/information gain remains a strong structured active-perception baseline | large learned world models are unnecessary in general | value of information |
+| 2026-10-12 | Artisan — https://arxiv.org/abs/2610.13947 | `PRIMARY_PAPER` | evaluates articulation, collision, gravity stability, mass/material and function, not only appearance | passive RGB recovers physical parameters | physical properties · functional correctness |
+| 2026-10-11 | SpecWM / World Modeling through Spectral Alignment — https://arxiv.org/abs/2610.15429 | `PRIMARY_PAPER` | explicitly controls what a latent representation preserves; kernel choice changes recoverable physical variables and planning behavior | one kernel/representation is universally sufficient | sufficient state · adaptive abstraction · aliasing |
+| 2026-10-08 | Mental-Models for Multi-Agent Systems — https://arxiv.org/abs/2610.12453 · code https://github.com/hananshafi/Mental-Models | `PRIMARY_PAPER` / `OPEN_SOURCE` | explicit first/second-order partner-state representations improve multi-agent reasoning | mental state is visually identifiable or infinite recursive belief is needed | open-world epistemics · model discovery |
+| 2026-10-08 | HWAM — https://arxiv.org/abs/2610.12026 | `PRIMARY_PAPER` | explicitly predicts realized post-execution body state, exposing commanded-action vs realized-state gap | explicit state is generally superior to latent state | embodiment · WAM · sufficient state |
+| 2026-10-08 | Being-M0.7 — https://arxiv.org/abs/2610.11283 | `PRIMARY_PAPER` | strong latent visual-motion world-action route transferring human experience to humanoid control | latent future representations are open-world sufficient | WAM comparator |
+| 2026-10-07 | RobotWorld — https://arxiv.org/abs/2610.10409 | `PRIMARY_PAPER` | exposes composition, retained task-state, recovery and completion-verification failures even when useful subroutines exist | one missing module explains system failure | systems integration · persistent state |
+| 2026-10-04 | Identifiable World Models — https://arxiv.org/abs/2610.07028 | `PRIMARY_PAPER` | hybrid route: strong distributed representation + identifiable dynamical coordinates | assumptions hold for arbitrary real video or identified coordinates are planning-sufficient | identifiability · representation |
+| 2026-10-03 | Video2World — https://arxiv.org/abs/2610.04432 | `PRIMARY_PAPER` | separates geometric/dynamic/functional correctness from visual similarity in reconstructed worlds | simulator reconstruction equals internal world understanding | functional equivalence · executability |
+| 2026-09 | PointCast — https://arxiv.org/abs/2609.28393 | `PRIMARY_PAPER` | identity-bearing point state spans rigid, articulated, cloth and rope regimes | one representation already solves cross-material physics | world-state variables · deformables |
+| 2026-09 | WROP — https://arxiv.org/abs/2609.28654 | `PRIMARY_PAPER` | directly trains object permanence/solidity priors | synthetic cognitive curriculum guarantees real-world permanence | persistence · memory |
+| 2026-09 | Splat-CBF — https://arxiv.org/abs/2609.23100 | `PRIMARY_PAPER` | makes information gain compete with hard safety constraints during next-best-view control | maximum information gain is a safe policy | value of information · epistemic safety |
+| 2026-09 | HEARTH — https://arxiv.org/abs/2609.23418 | `PRIMARY_PAPER` | temperature-aware RGB/thermal/3D manipulation exposes visible-spectrum hidden-state boundary | RGB determines temperature | physical properties · hidden state |
+| 2026-09 | WorldContact — https://arxiv.org/abs/2609.19600 | `PRIMARY_PAPER` | contact-centric dynamics for deformable manipulation | RGB uniquely identifies contact/material parameters | contact · deformables |
+| 2026-09 | PersistBench — https://arxiv.org/abs/2609.20819 | `PRIMARY_PAPER` | distinguishes current visibility from object permanence outside FOV | persistence alone yields general world understanding | memory · belief |
+| 2026-09 | Riemann-1.0 — https://arxiv.org/abs/2608.27033 | `PRIMARY_PAPER` | unified causal sequence modeling observations, robot state and actions at large data scale | causal autoregression equals explicit causal identification | WAM counter-hypothesis |
+| 2026-08 | ViTacPhys — https://arxiv.org/abs/2608.21355 | `PRIMARY_PAPER` | mass/friction/stiffness estimates help action, while relying on visual+tactile demonstrations | those properties came from vision alone | provenance · physical properties |
+| 2026-08 | Embodiment Gap survey — https://arxiv.org/abs/2608.18433 | `PRIMARY_PAPER` | clarifies what still requires embodiment-specific adaptation | one universal action/state interface already exists | self/embodiment model |
+| 2026-08 | Active Perception for Embodied Disambiguation — https://arxiv.org/abs/2608.13605 | `PRIMARY_PAPER` | ambiguity resolution through evidence-seeking interaction is becoming explicit | active perception alone solves persistent world modeling | value of information |
+| 2026-08 | Unknown Unknowns: Model Misspecification in ML for Physics — https://arxiv.org/abs/2608.13633 | `PRIMARY_PAPER` | makes model-class misspecification / unknown-unknown detection a first-class scientific issue | one uncertainty score can certify model correctness | open-world epistemics · model discovery |
+| 2026-08 | R4DSG — https://arxiv.org/abs/2608.11017 | `PRIMARY_PAPER` | RGB-only relative 4D scene-graph memory for persistent objects and long-term changes | relative scene graphs are a universal memory solution | memory · dynamic-world revision |
+| 2026-07 | HUME — https://arxiv.org/abs/2607.06501 · code https://github.com/threefruits/HUME | `PRIMARY_PAPER` / `OPEN_SOURCE` | operationalizes hypothesis generation, verification, rejection and model expansion in open-world robot planning | its language-generated symbolic ontology is machine-ground truth | open-world epistemics · model discovery |
+| 2026-07 | CG-World — https://arxiv.org/abs/2607.26452 | `PRIMARY_PAPER` | structured world-state/intervention/counterfactual branches with explicit physics/contact metadata | privileged synthetic state is available from real RGB | causal evaluation · intervention data |
+| 2026-07 | OASIS-Map — https://arxiv.org/abs/2607.14899 | `PRIMARY_PAPER` | multi-session appeared/disappeared/moved/replaced-object revision | remembering old state is enough when world changes | belief revision |
+| 2026-07 | Xiaomi-Robotics-U0 — https://arxiv.org/abs/2607.11643 | `PRIMARY_PAPER` | world foundation model used as generator, transfer mechanism and data engine | data-generation utility equals epistemic fidelity | world-model role taxonomy |
+| 2026-06 | Qwen-RobotWorld — https://arxiv.org/abs/2606.17030 | `PRIMARY_PAPER` | language can serve as shared action abstraction for future-world generation across embodiments | language is a sufficient physical action representation | WAM / interface comparator |
+| 2026-06 | CausalPhys — https://arxiv.org/abs/2606.05966 | `PRIMARY_PAPER` | physical reasoning benchmark includes intervention and explicit causal graphs | VQA success equals embodied causal competence | causal evaluation |
+| 2026-06 | ATOM-CBF — https://proceedings.mlr.press/v331/yun26a.html | `PRIMARY_PAPER` | learned perception uncertainty changes safe-control conservatism under OOD input | uncertainty calibration alone solves open-world model mismatch | epistemic safety |
+| 2026-06 | Learning Task-Sufficient World Models — https://proceedings.mlr.press/v306/feng26aa.html | `PRIMARY_PAPER` | closes active probing ↔ task-relevant latent-factor discovery ↔ compact state loop | task-sufficient representation is general-purpose/open-world sufficient | sufficient state · value of information |
+| 2026-06 | SAGE — https://arxiv.org/abs/2606.31478 · code https://github.com/JieMaMagic/SAGE | `PRIMARY_PAPER` / `OPEN_SOURCE` | multiple working hypotheses + evidence-grounded failure attribution + grounded reporting | research-agent architecture transfers directly to robotic world models | model discovery · refutation memory |
+| 2026-06 | Socratic autonomous scientific discovery — https://arxiv.org/abs/2606.26722 | `PRIMARY_PAPER` | real physical closed-loop hypothesis criticism, falsification criteria and experiment revision | same mechanism solves open-world robot vision | model discovery |
+| 2026-06 | Intervention-only causal discovery — https://proceedings.mlr.press/v337/mazaheri26b.html | `PRIMARY_PAPER` | interventions can identify structure even when observational faithfulness fails, under stated assumptions | unrestricted real-world causal structure is identifiable | causal/mechanism discovery |
+| 2026-06 | Recursive ToM — https://arxiv.org/abs/2606.11724 | `PRIMARY_PAPER` | explicit nested perspectives help higher-order belief reasoning | deep recursive beliefs are always needed in robotics | social hidden state |
+| 2026-05 | What-If World — https://arxiv.org/abs/2605.27589 | `PRIMARY_PAPER` | paired physical interventions test whether generated futures change causally, not merely plausibly | generated counterfactual correctness implies executable world model | intervention evaluation |
+| 2026-05 | CRONOS — https://arxiv.org/abs/2605.23699 | `PRIMARY_PAPER` | tests physical invariance under controlled viewpoint/scene/category/appearance changes | nuisance invariance alone implies causal understanding | anti-shortcut physics |
+| 2026-05 | Constrained Bayesian Experimental Design — https://proceedings.mlr.press/v306/guo26g.html | `PRIMARY_PAPER` | sequential experiment design under changing costs/physical constraints | expected information gain alone is enough | model discovery · value of information |
+| 2026-05 | Robust BOED under misspecification — https://proceedings.mlr.press/v300/tang26d.html | `PRIMARY_PAPER` | informative experiments can amplify errors when the model is wrong; representativeness/de-amplification matter | maximally informative probe is always best | model discovery · epistemic safety |
+| 2026-04 | RoboWM-Bench — https://arxiv.org/abs/2604.19092 | `PRIMARY_PAPER` | generated video plausibility can fail when converted to embodied execution | video realism equals executable physics | world-model evaluation |
+| current open baseline | GR00T N1.7 — https://github.com/NVIDIA/Isaac-GR00T | `OPEN_SOURCE` | strong reproducible direct-policy/VLA comparator | direct policy removes need to study world state | baseline comparator |
 
 ---
 
-## 3. Functional correctness can diverge from visual fidelity
+## 2. What changed in the comparison space
 
-### Video2World
-
-Primary paper: https://arxiv.org/abs/2610.04432  
-Submitted: 2026-10-03; revised through 2026-10-09  
-Evidence: `PRIMARY_PAPER`
-
-Autonomous video-to-simulation reconstruction from embodied videos, evaluated by geometric fidelity, dynamic fidelity and functional correctness.
-
-Central distinction:
+The current frontier strengthens these distinctions:
 
 ```text
-visual resemblance
+pixels
 ≠
-correct physical state
+world state
+
+visual plausibility
 ≠
-executable world model
-```
-
-Stage-2 question:
-
-> What representation makes a reconstructed world functionally equivalent rather than merely visually similar?
-
----
-
-## 4. Individual capabilities do not automatically compose into a working robot
-
-### RobotWorld
-
-Primary paper: https://arxiv.org/abs/2610.10409  
-Submitted: 2026-10-07  
-Evidence: `PRIMARY_PAPER`
-
-Benchmarks multimodal agents across 84 physical tasks spanning manipulation, mobile manipulation, locomotion, driving and aerial control. Reported failures include loss of task-relevant object state, ineffective recovery and incorrect completion judgments even when useful perception/control subroutines can be constructed.
-
-Stage-2 question:
-
-> Is the missing capability a better component, a persistent task/world state, a better interface contract, or closed-loop verification?
-
----
-
-## 5. Persistent semantic maps are a world-memory baseline
-
-### PerSeM
-
-Primary paper: https://arxiv.org/abs/2609.19542  
-Evidence: `PRIMARY_PAPER`
-
-Associates frame-wise semantics with persistent world-space voxels and uses history-preserving refinement, replay and verification.
-
-Research contrast:
-
-```text
-frame-wise semantics
-vs
-persistent semantic world memory
-```
-
-What it does **not** establish:
-
-- general object permanence under arbitrary world change;
-- causal or physical understanding;
-- that voxel memory is the best general-purpose representation.
-
----
-
-## 6. Amodal perception must be separated from ordinary tracking
-
-### TAO-Amodal
-
-Primary paper: https://arxiv.org/abs/2312.12433  
-Evidence: `PRIMARY_PAPER`
-
-A benchmark for tracking objects through partial/full occlusion and out-of-frame states with amodal annotations.
-
-Required distinction:
-
-```text
-visible detection
-→ visible tracking
-→ amodal completion
-→ re-identification
-→ object permanence
-→ persistent world entity
-```
-
-These are different capabilities.
-
----
-
-## 7. Video-to-control should be studied as an interface problem
-
-### From Video to Control: A Survey of Learning Manipulation Interfaces from Temporal Visual Data
-
-Primary paper: https://arxiv.org/abs/2604.04974  
-Evidence: `PRIMARY_PAPER`
-
-Organizes video-to-control approaches into direct video→action policies, latent-action interfaces and explicit visual interfaces.
-
-Stage-2 question:
-
-> Which world information must be exposed to control for verification, correction and safe execution?
-
----
-
-## 8. Social/multi-agent reasoning is another real-world dimension
-
-### SocialGrid
-
-Primary paper: https://arxiv.org/abs/2604.16022  
-Evidence: `PRIMARY_PAPER`
-
-Embodied multi-agent planning and social reasoning benchmark.
-
-Stage-1 implication:
-
-Keep **multi-agent / social world modeling** visible so the project does not silently equate “real world” with only rigid objects and static environments.
-
----
-
-## 9. 2026-10-13: behavior-grounded physical parameters enter the world-model loop
-
-### DR-WM — From Pixels to Executable Physics
-
-Primary paper: https://arxiv.org/abs/2610.17630  
-Submitted: **2026-10-13**  
-Evidence: `PRIMARY_PAPER`
-
-Research role:
-
-```text
-RGB scene geometry
-+ real action-response evidence
-+ inferred spatial contact properties
-→ executable consequence prediction
-```
-
-DR-WM reconstructs geometry from an initial RGB image and augments it with spatially varying terrain/contact priors calibrated from real action-response data. Candidate robot actions are then simulated to predict future embodied consequences.
-
-Why it matters:
-
-It makes a hard distinction between **what pixels reveal geometrically** and **what physical parameters become learnable from interaction**. Friction/contact behavior is not assumed to be visually obvious.
-
-What it does **not** establish:
-
-- that its terrain representation is a general world representation;
-- that passive RGB can identify friction or contact properties;
-- a pure `V0/L0` route: it explicitly uses action/state experience;
-- general manipulation/contact reasoning beyond the evaluated terrain setting.
-
-Stage-2 questions:
-
-> Which hidden physical variables are identifiable from passive video, which become identifiable from action-response, and which remain impossible without non-visual evidence?
-
-> Can a learned representation discover action-relevant physical variables without imposing the simulator's parameterization?
-
----
-
-## 10. 2026-10-13: a general multimodal reasoner is becoming a robotics baseline
-
-### Gemini 4 Argon for Robotics
-
-Official report: https://developers.googleblog.com/gemini-4-argon-for-robotics/  
-Published: **2026-10-13**  
-Evidence: `OFFICIAL_REPORTED_RESULT`
-
-Associated ERQA benchmark/code: https://github.com/embodiedreasoning/ERQA  
-Evidence: `OPEN_SOURCE`
-
-Google reports Argon across embodied/physical reasoning, zero-shot closed-loop robot control through tools/primitives, Real2Sim reconstruction/calibration, video-world-model steering, hindsight labeling/progress estimation, simulation-generated robot training data and iterative self-improvement.
-
-The official report states an **87%** pure-reasoning score on ERQA. Treat it as an official reported result until independently reproduced.
-
-Important provenance boundary:
-
-The robotics workflows mix RGB/video with calibrated geometry, code/tools, simulation, robot state/proprioception and in some examples tactile/contact telemetry. They are therefore **not** evidence that the demonstrated capabilities were learned from vision alone.
-
-Stage-2 questions:
-
-> Which Argon capabilities come from visual evidence, which from language/world priors, and which from tools/simulation/state access?
-
-> Does persistent world state add measurable value beyond a strong general reasoner with an external visual/tool harness?
-
----
-
-## 11. ERQA enters the embodied-reasoning benchmark inventory
-
-### Embodied Reasoning Question Answer (ERQA)
-
-Official repository/data/eval harness: https://github.com/embodiedreasoning/ERQA  
-Evidence: `OPEN_SOURCE`
-
-The repository exposes a 400-example multimodal benchmark of interleaved images and text focused on real-world spatial/world-knowledge reasoning in robotics contexts.
-
-Useful for cheap comparison of public models before real-robot evaluation.
-
-Does **not** measure by itself:
-
-- persistent visual memory;
-- world change / belief revision;
-- causal intervention;
-- long-horizon execution;
-- whether an answer came from visual evidence versus pretrained language/world knowledge.
-
----
-
-## 12. Current open VLA baseline refresh: GR00T N1.7
-
-Official code: https://github.com/NVIDIA/Isaac-GR00T  
-Model: https://huggingface.co/nvidia/GR00T-N1.7-3B  
-Official technical overview: https://developer.nvidia.com/blog/develop-humanoid-robot-policies-end-to-end-with-nvidia-isaac-gr00t/  
-Evidence: `OPEN_SOURCE` / `OFFICIAL_PROJECT`
-
-GR00T N1.7 is a current NVIDIA open VLA release for generalized humanoid skills, with a Cosmos-Reason2-2B / Qwen3-VL-based VLM backbone, relative end-effector action representation, robot demonstrations and large-scale human egocentric-video pretraining.
-
-For Clover, it is a **reproducible direct-policy baseline**, not a proposed component.
-
-Stage-2 question:
-
-> What task-relevant state can be decoded from GR00T's internal representations, and which world-understanding failures persist despite human-video/cross-embodiment pretraining?
-
----
-
-## 13. Current world-action frontier splits into different state strategies
-
-### Being-M0.7
-
-Primary paper: https://arxiv.org/abs/2610.11283  
-Submitted: 2026-10-08  
-Evidence: `PRIMARY_PAPER`
-
-Transfers large-scale human visual-motion priors into humanoid control through a latent world-action model.
-
-### HWAM
-
-Primary paper: https://arxiv.org/abs/2610.12026  
-Submitted: 2026-10-08  
-Evidence: `PRIMARY_PAPER`
-
-Explicitly predicts post-execution body state together with reference actions to model the gap between commanded and physically realized motion.
-
-Research split:
-
-```text
-large latent visual-motion prior
-vs
-explicit post-execution state target
-```
-
-Stage-2 questions:
-
-> When does explicit realized-state prediction improve control over a latent future model?
-
-> Which benefits come from representation choice versus data scale, embodiment-specific supervision or training objective?
-
----
-
-## 14. Identifiable world coordinates are now a serious hybrid alternative
-
-### Identifiable World Models from Pretrained Diffusion Representations
-
-Primary paper: https://arxiv.org/abs/2610.07028  
-Submitted: 2026-10-04  
-Evidence: `PRIMARY_PAPER`
-
-Studies whether frozen pretrained diffusion representations can be aligned to coordinates that recover latent dynamical states under explicit identifiability assumptions.
-
-Hybrid hypothesis:
-
-```text
-powerful distributed representation
-+
-partially identifiable / intervention-relevant coordinates
-```
-
-What it does **not** establish:
-
-- open-world real-video identifiability;
-- that theoretical assumptions hold for arbitrary real scenes;
-- that identified variables are sufficient for planning or persistent memory.
-
----
-
-## 15. Evidence acquisition is becoming agentic even inside video understanding
-
-### Agentic Video Understanding with Gemini
-
-Official report: https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-agentic-video-in-gemini/  
-Published: 2026-09-01  
-Evidence: `OFFICIAL_REPORTED_RESULT`
-
-The system dynamically searches, scans, re-watches and changes sampling density over long videos instead of ingesting all frames at one fixed rate.
-
-Why it matters:
-
-It makes **evidence-acquisition policy** a separate research variable from base representation quality.
-
-Important limitation:
-
-The public mode can use frames, audio and transcripts; it is not automatically a vision-only protocol and does not create a persistent physical world model.
-
----
-
-## 16. 2026-10-13: active semantic exploration remains a strong structured alternative
-
-### Mobility-Budget-Constrained Submodular Maximization for Distributed Semantic Multi-Robot Exploration
-
-Primary paper: https://arxiv.org/abs/2610.17562  
-Submitted: **2026-10-13**  
-Evidence: `PRIMARY_PAPER`
-
-Combines semantic mapping, Dirichlet uncertainty, information-gain objectives and mobility-aware trajectory selection under communication constraints.
-
-Why it matters:
-
-Active perception need not start from a large learned world model. Explicit uncertainty and information gain remain structured baselines for deciding **where to look next**.
-
----
-
-## 17. 2026-10-12: articulated assets expose mass/material/function as first-class evaluation targets
-
-### Artisan — Towards Physically Grounded Articulated 3D Assets
-
-Primary paper: https://arxiv.org/abs/2610.13947  
-Project: https://physicalvision.github.io  
-Submitted: 2026-10-09; revised **2026-10-12**  
-Evidence: `PRIMARY_PAPER`
-
-Artisan moves articulated 3D generation from reproducing appearance toward reproducing how objects **move and function**. Its pipeline uses physical-simulation feedback and evaluates more than geometry/appearance/articulation, including collision-free motion, stability under gravity, mass/material properties and downstream task behavior.
-
-Its benchmark includes 100 reference assets, 50 stability prompts and 50 objects with reference masses, and evaluates more than 10 representative models.
-
-Why it matters:
-
-This adds a missing Stage-1 dimension:
-
-```text
-visual/spatial asset quality
+physical correctness
 ≠
-articulation correctness
+functional correctness
 ≠
-physical stability
+executability
+
+statistical predictability
 ≠
-material/mass correctness
+physical identifiability
+
+state uncertainty
 ≠
-functional usability
+parameter uncertainty
+≠
+model-structure uncertainty
+≠
+hypothesis-set incompleteness
+
+prediction error
+≠
+automatically bad state estimate;
+it may indicate observation corruption,
+representation failure,
+regime change,
+or model-class misspecification
+
+active exploration
+≠
+scientific experiment design
+
+maximum information gain
+≠
+best probe under misspecification / risk / cost / irreversibility
+
+current best hypothesis
+≠
+permanent truth
+
+reflection
+≠
+falsification
+
+compact task-sufficient state
+≠
+open-world sufficient state
+
+strong general reasoner + tools
+≠
+proof of vision-only world understanding
+
+world model for belief
+≠
+world simulator
+≠
+world data engine
 ```
-
-What it does **not** establish:
-
-- that mass/material properties can be inferred correctly from passive RGB;
-- that simulation feedback matches arbitrary real materials;
-- a universal world representation for robotics.
-
-Stage-2 question:
-
-> Which functional/physical object properties can be inferred visually, which require interaction, and which should remain uncertain rather than hallucinated?
 
 ---
 
-## 18. Unified causal World-Action Modeling is scaling rapidly
+## 3. Immediate Stage-2 analysis queue
 
-### Riemann-1.0
-
-Primary paper: https://arxiv.org/abs/2608.27033  
-Evidence: `PRIMARY_PAPER`
-
-Riemann-1.0 jointly models multi-view visual observations, robot states and embodiment-specific actions as one causal autoregressive sequence. The paper reports progressive embodied pretraining over more than 200K hours of heterogeneous interaction experience spanning human egocentric video, handheld-gripper demonstrations and robot trajectories.
-
-Why it matters:
-
-It is a strong counter-hypothesis to a separate explicit world-model architecture:
+When Stage 2 begins, prioritize methods that discriminate **different scientific hypotheses**, not simply the newest models:
 
 ```text
-world evolution + robot state + action
-inside one causal sequence model
-```
-
-What it does **not** establish:
-
-- that one autoregressive sequence is the best representation of real-world belief;
-- vision-only learning provenance;
-- explicit uncertainty/object permanence/causal identifiability outside the trained objective.
-
-Stage-2 question:
-
-> What world state emerges inside a unified causal WAM, and what failures remain when representation boundaries are removed rather than made explicit?
-
----
-
-## 19. Language can itself become the action/world-model interface
-
-### Qwen-RobotWorld
-
-Primary technical report: https://arxiv.org/abs/2606.17030  
-Evidence: `PRIMARY_PAPER`
-
-Qwen-RobotWorld uses natural language as a unified action interface and predicts future visual trajectories across manipulation, autonomous driving, navigation and human-to-robot transfer. Its training corpus combines millions of video-text examples across many embodiments/action categories.
-
-Why it matters:
-
-It offers a different hypothesis from action tokens or robot-state-conditioned dynamics:
-
-```text
-language action abstraction
-→ future visual trajectory
-→ data / evaluation / planning signal
-```
-
-What it does **not** establish:
-
-- that language is a sufficient machine-native action representation;
-- that physical state is identifiable from generated pixels;
-- that language-conditioned prediction avoids language-prior shortcuts.
-
-Stage-2 question:
-
-> What physical precision is lost or gained when language becomes the shared action interface across embodiments?
-
----
-
-## 20. Foundation world models are becoming data engines, not only simulators
-
-### Xiaomi-Robotics-U0
-
-Primary paper: https://arxiv.org/abs/2607.11643  
-Official project/code/checkpoints: https://robotics.xiaomi.com/xiaomi-robotics-u0.html  
-Evidence: `PRIMARY_PAPER` / `OPEN_SOURCE`
-
-Xiaomi-Robotics-U0 is a 38B multimodal autoregressive world foundation model that unifies image/video generation, embodied scene generation, multi-view transfer and embodied video generation. The paper reports using the generated/edited embodied data to improve downstream manipulation generalization.
-
-Why it matters:
-
-Stage 1 should distinguish at least three world-model roles:
-
-```text
-world representation for belief
-world simulator for prediction/evaluation
-world data engine for policy training
-```
-
-A model can be useful in the third role without being a faithful internal world representation.
-
-Stage-2 question:
-
-> How should Clover separately evaluate a world model's epistemic fidelity, simulator fidelity and usefulness as a data generator?
-
----
-
-## 21. Immediate frontier-analysis queue
-
-Highest-priority future Stage-2 reports after the 2026-10-14 refresh:
-
-```text
-Gemini 4 Argon for Robotics + ERQA
-DR-WM / From Pixels to Executable Physics
-GR00T N1.7
-Riemann-1.0
-Qwen-RobotWorld
-Xiaomi-Robotics-U0
-Being-M0.7
-HWAM
+SpecWM
+Learning Task-Sufficient World Models
 Identifiable World Models
-Artisan
-Vantage / Seek-and-View
-Agentic Video Understanding
-Video2World
-RobotWorld
-RoboWM-Bench
-RoboTrustBench
-WorldContact
-PerSeM
-TAO-Amodal
+HUME
+DR-WM
+V-JEPA 2 / 2.1
+VGGT / VGGT-Ω
+PersistBench + WROP
+PointCast
+Riemann-1.0
+Being-M0.7 vs HWAM
+Gemini 4 Argon vs explicit/persistent-state systems
+GR00T N1.7 / OpenVLA / π0.5 direct-policy baselines
+Video2World + RoboWM-Bench
+What-If World / CRONOS / CausalPhys / CG-World
+Splat-CBF / active-perception baselines
+Mental-Models / recursive-ToM references for social hidden state
 ```
 
 Suggested comparison axes:
@@ -565,47 +165,45 @@ Suggested comparison axes:
 ```text
 visual protocol
 learning provenance
+observation/image-formation assumptions
 representation/state type
-visual fidelity
-geometry fidelity
-state identifiability
-dynamics fidelity
-contact / friction / deformation correctness
-mass / material / articulation correctness
-persistent state
-memory / evidence retrieval
-functional correctness
-executability
-action-execution gap
-constraint awareness
-counterfactual behavior
+sufficiency target
+what information is deliberately preserved
+what information is deliberately discarded
+state aliasing risk
+identifiability assumptions
+persistent memory / belief revision
+physical-property provenance
+causal/intervention semantics
 active evidence acquisition
-recovery
-uncertainty / refusal
-open-world generalization
-world-model role: belief / simulator / data engine
+experiment-selection criterion
+model misspecification handling
+hypothesis provenance/refutation memory
+safety / cost / irreversibility / permission
+self/embodiment modeling
+world-model role: belief / simulator / data engine / direct policy
 reproducibility
 ```
 
 ---
 
-## 22. Frontier-watch rule
+## 4. Frontier-watch rule
 
-Add a source here when it is current and materially changes what Stage 1 should know.
+Add a source here only when it materially changes the Stage-1 map.
 
-For every frontier source, record at least:
+For every frontier source, preserve:
 
 ```text
 date
-exact URL
+exact primary/official/code URL
 evidence level
 what it demonstrates
-what it does not demonstrate
-visual / training provenance when material
-why it changes the Stage-1 map
-Stage-2 question
+what it does NOT demonstrate
+input / training provenance
+why it changes the current comparison space
+which Stage-1 file owns the stable concept
 ```
 
-Promote stable concepts into [`RESEARCH.md`](RESEARCH.md) and deeper source maps once their role is clear.
+Detailed notes belong in the relevant Stage-1 file, `survey/SOURCE_MAP.md`, or later Stage-2 method reports.
 
-Do not promote a frontier mechanism directly into Clover Innovation.
+**Do not promote a frontier mechanism directly into Clover Innovation.**
