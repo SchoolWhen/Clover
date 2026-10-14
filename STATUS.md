@@ -42,12 +42,14 @@ Immediate objective: **coverage before commitment**. No Clover core representati
 11. [`research/RESEARCH_VALUE_OF_INFORMATION.md`](research/RESEARCH_VALUE_OF_INFORMATION.md)
 12. [`research/RESEARCH_OPEN_WORLD_EPISTEMICS.md`](research/RESEARCH_OPEN_WORLD_EPISTEMICS.md)
 13. [`research/RESEARCH_MODEL_DISCOVERY.md`](research/RESEARCH_MODEL_DISCOVERY.md)
-14. [`research/RESEARCH_ENGINEERING_VALIDATION.md`](research/RESEARCH_ENGINEERING_VALIDATION.md)
-15. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
-16. [`research/README.md`](research/README.md)
+14. [`research/RESEARCH_FOUNDATION_MODEL_SYSTEMS.md`](research/RESEARCH_FOUNDATION_MODEL_SYSTEMS.md)
+15. [`research/RESEARCH_ENGINEERING_VALIDATION.md`](research/RESEARCH_ENGINEERING_VALIDATION.md)
+16. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
+17. [`research/README.md`](research/README.md)
 
-Engineering support:
+Supporting watches:
 
+- [`research/foundation_models/DEEPSEEK_QWEN.md`](research/foundation_models/DEEPSEEK_QWEN.md)
 - [`research/engineering/DEPLOYMENT_LIFECYCLE.md`](research/engineering/DEPLOYMENT_LIFECYCLE.md)
 - [`research/engineering/VALIDATION_RESOURCES.md`](research/engineering/VALIDATION_RESOURCES.md)
 
@@ -65,130 +67,152 @@ Engineering support:
 9  value of information / probing actions
 10 open-world epistemics / model mismatch / epistemic safety
 11 model discovery / experiment design / falsification / provenance
-12 engineering / edge deployment / simulation / validation
-13 current frontier
+12 foundation-model architecture / multimodal / data / inference systems
+13 engineering / edge deployment / simulation / validation
+14 current frontier
 ```
 
-## 2026-10-15 final freshness sweep
+## Newly added surface: foundation-model systems
 
-The latest high-value additions now tracked in Stage 1 include:
+[`research/RESEARCH_FOUNDATION_MODEL_SYSTEMS.md`](research/RESEARCH_FOUNDATION_MODEL_SYSTEMS.md) closes a major Stage-1 gap exposed by the DeepSeek/Qwen review.
 
-### Real-execution world-model evaluation
-
-- **WorldOracle** — https://arxiv.org/abs/2610.18826
-  - same initial observation + same low-level action sequence;
-  - compare predicted rollout against paired real-world execution;
-  - evaluates physical-state correctness, interaction alignment, key interaction regions and multi-view action coherence.
-
-Central distinction:
+It studies:
 
 ```text
-predicted plausible future
-≠
-actual executed consequence
+dense vs MoE / total vs active parameters
+full / sparse / linear / hybrid attention
+multimodal fusion
+visual/video tokenization
+long context and KV/cache hierarchy
+streaming perception
+training-data mixture / alignment / curriculum
+synthetic-data provenance
+SFT / RL / distillation / deployment learning
+precision / quantization
+kernel/compiler/runtime co-design
+parallelism and expert communication
+agent harness / tools / external memory
+backbone reuse vs training from scratch
+small-proxy → frontier scaling validity
 ```
 
-### Real2Sim / simulation-model revision
-
-- **RoboSimStudio** — https://arxiv.org/abs/2610.18835 · https://robosimstudio.github.io
-  - exposes solver, contact model and physical parameters as editable hypotheses;
-  - studies visual, force-feedback and agentic Real2Sim2Real refinement.
-
-Central distinction:
+Critical distinctions:
 
 ```text
-simulator calibration
-≠
-unique identification of real physics
+scientific world-state hypothesis
+≠ foundation-model backbone
+≠ training recipe
+≠ inference runtime
+≠ agent harness
+
+long context
+≠ persistent grounded world memory
+
+serving KV cache
+≠ epistemic world memory
+
+base model
+≠ model + harness
+≠ model + harness + external tools
+
+hosted product
+≠ open-weight checkpoint
+unless the exact artifact is verified
+
+total parameters
+≠ active parameters
+≠ runtime memory
+≠ communication cost
 ```
 
-### Hardware/setup robustness
+## DeepSeek / Qwen watch — 2026-10-15
 
-- **LIBERO-RIG** — https://arxiv.org/abs/2610.18843
-  - 11 hardware/setup perturbation axes;
-  - 5 severity levels;
-  - 210 conditions across four LIBERO suites;
-  - nine evaluated VLAs;
-  - reported pooled success: `0.932 → 0.767 → 0.509` from nominal to middle to highest severity.
+Detailed record: [`research/foundation_models/DEEPSEEK_QWEN.md`](research/foundation_models/DEEPSEEK_QWEN.md).
 
-Central distinction:
+### DeepSeek signals
+
+Current tracked items include:
+
+- **DeepSeek-V4.1-Flash** — native multimodal 552B MoE, asymmetric Causal Encoder–Decoder with 8B active input / 16B active output, 1M context and large KV-cache reduction;
+- sparse/compressed attention and cache design;
+- FlashMLA / DeepSelect / DeepGEMM / DeepEP / TileKernels;
+- speculative decoding / conditional sparse memory;
+- DeepSeek Harness and model-vs-harness attribution;
+- Janus as a historical decoupled visual-understanding/generation reference.
+
+Research lesson:
 
 ```text
-scene/task generalization
-≠
-hardware/calibration/control-loop robustness
+model architecture
++
+cache
++
+kernels
++
+communication
++
+post-training data
++
+harness
 ```
 
-### Long-horizon reliability
+must be disentangled when attributing capability.
 
-- **LADDER** — https://arxiv.org/abs/2610.18053 · https://ladder.insait.ai
-  - 1–10 subgoals;
-  - 145 tasks;
-  - 8 categories;
-  - 2 embodiments;
-  - 2,024 simulated episodes per system;
-  - reported low-level-policy success drops from 85.4% at one subgoal to near zero on extended tasks.
+### Qwen signals
 
-Central distinction:
+Current tracked items include:
+
+- **Qwen3.8-Max** — 2.4T total / 95B active long-horizon agent reference;
+- **Qwen3.8-Omni / Realtime** — continuous multimodal agent/runtime reference;
+- **Qwen3.5** — native multimodal hybrid linear/full-attention sparse-MoE family, including small open models useful for proxy experiments;
+- **Qwen3-VL** — modern dense/MoE multimodal family for local and remote probing;
+- **FlashQLA**, Qwen-MM-Plugins and Qwen-Live-Harness;
+- **Qwen-RobotWorld**, **Qwen-RobotManip**, **Qwen-VLA** and **Qwen-Drive** as competing Physical-AI designs.
+
+Especially important data lesson from Qwen-RobotManip:
 
 ```text
-local skill competence
-≠
-long-horizon physical reliability
+heterogeneous robot-data scale
+without representation / motion / behavior alignment
+can create conflict rather than useful scaling.
 ```
 
-### Offline evaluation without new rollouts
-
-- **RoboFQE** — https://arxiv.org/abs/2610.18699
-  - estimates policy return from offline trajectories;
-  - reported to preserve policy rankings on simulated/real manipulation, including long horizons where autoregressive video evaluators degrade.
-
-Central distinction:
+## Current practical development reference
 
 ```text
-offline policy evaluation
-≠
-closed-loop robot validation
+Mac mini with Apple M4
 ```
 
-### Deployment-rollout learning
-
-- **LoopWAM** — https://arxiv.org/abs/2610.18873 · https://loop-wam.github.io
-  - learns from successes, suboptimal behavior and failures;
-  - reports RoboChallenge Table30-V2 success `23.67% → 43.33%` after three deployment/training rounds;
-  - reports shirt-folding `13.20% → 55.56%` after two deployment-driven rounds.
-
-Keep deployment self-training separate from claims of safe or monotonic improvement.
-
-### Contact-rich future / response learning
-
-- **ForceWAM** — https://arxiv.org/abs/2610.18852 · https://force-wam.github.io
-  - predicts future video + six-axis wrench trajectories;
-  - uses task-agnostic play to learn action/contact response;
-  - reports 85–95% mean success on evaluated real tasks and +15–45 percentage points from play data.
-
-This is strong evidence for the utility of contact evidence, not evidence that contact force is available from RGB alone.
-
-### Memory representation / edge cost
-
-- **Grid or Nodes?** — https://arxiv.org/abs/2610.18637
-  - reported out-of-view comparison: `14 KB` oracle node memory vs `5.6 MB` FloWM grid;
-  - diagonal-motion diagnostic: `93%` tracker vs `11%` FloWM.
-
-Use as a controlled representation/memory-cost diagnostic; the oracle tracker is not a deployable solution.
-
-### Joint world-model / policy / real-time adaptation
-
-- **GreenWAM** — https://arxiv.org/abs/2610.18774 · https://greenvla.github.io
-  - shared anatomical action representation across 20 robot families;
-  - joint world-model/world-action/policy training;
-  - reports real-humanoid adaptation and single-step policy distillation for real-time control.
-
-Central question for later Analysis:
+Use it for measured proxy work:
 
 ```text
-what world-model capability survives policy distillation?
+small/medium open multimodal models
+MLX / MLX-VLM
+Core AI / Core ML
+visual-token / frame-rate ablations
+context vs explicit-memory experiments
+quantization / cache experiments
+streaming state prototypes
+MuJoCo integration
 ```
+
+Do **not** treat a 552B DeepSeek or 2.4T Qwen model as a local-M4 target. Use remote/cloud/API comparisons only when they answer a concrete research question.
+
+## 2026-10-15 latest validation sweep
+
+Stage 1 also tracks:
+
+- WorldOracle — https://arxiv.org/abs/2610.18826
+- RoboSimStudio — https://arxiv.org/abs/2610.18835
+- LIBERO-RIG — https://arxiv.org/abs/2610.18843
+- LoopWAM — https://arxiv.org/abs/2610.18873
+- ForceWAM — https://arxiv.org/abs/2610.18852
+- RoboFQE — https://arxiv.org/abs/2610.18699
+- Grid or Nodes? — https://arxiv.org/abs/2610.18637
+- LADDER — https://arxiv.org/abs/2610.18053
+- GreenWAM — https://arxiv.org/abs/2610.18774
+
+These extend the evidence map toward real execution, Real2Sim, hardware perturbation, offline evaluation, long-horizon failure, deployment learning and edge-memory trade-offs.
 
 ## Validation evidence ladder while no target robot exists
 
@@ -204,144 +228,83 @@ EV7 proxy physical hardware
 EV8 target real robot
 ```
 
-The absence of a current target robot limits claim strength but does not justify weak testing.
-
-## Current local development reference
-
-```text
-Mac mini with Apple M4
-```
-
-Treat it as a measured development/deployment reference, **not** the final robot computer and not a scientific constraint.
-
-Current practical local paths:
-
-- MLX — https://github.com/ml-explore/mlx
-- Apple Core AI / Core ML — https://developer.apple.com/core-ai/ · https://developer.apple.com/documentation/coreml
-- ExecuTorch Core ML / MLX backends — https://docs.pytorch.org/executorch/stable/backends/coreml/coreml-overview.html · https://docs.pytorch.org/executorch/stable/backends/mlx/mlx-overview.html
-- MuJoCo — https://github.com/google-deepmind/mujoco
-
-Optional remote Linux/NVIDIA path when specifically required:
-
-- Isaac Sim / Isaac Lab;
-- large-scale GPU simulation;
-- photorealistic sensor generation;
-- NVIDIA-specific system-identification workflows.
-
-Do not make Isaac Sim/NVIDIA a mandatory local dependency.
-
 ## Current benchmark expansion
 
-[`research/survey/BENCHMARKS_TASKS.md`](research/survey/BENCHMARKS_TASKS.md) now extends the candidate battery through `U20`, adding:
+[`research/survey/BENCHMARKS_TASKS.md`](research/survey/BENCHMARKS_TASKS.md) currently extends the candidate Understanding Battery through `U20`, including:
 
 ```text
 U16 WorldOracle      real-execution world-model fidelity
 U17 LIBERO-RIG       hardware/setup robustness
 U18 LADDER           long-horizon compounding failure
 U19 RoboFQE          rollout-free offline policy evaluation
-U20 Grid-or-Nodes    memory efficiency / inductive bias diagnostic
-```
-
-U19/U20 are supporting diagnostics; they do not replace real closed-loop evaluation.
-
-## Current engineering distinctions
-
-```text
-current development machine
-≠ final edge computer
-≠ scientific hypothesis
-
-model inference latency
-≠ closed-loop latency
-
-peak throughput
-≠ sustained real-time performance
-
-quantized benchmark accuracy
-≠ preserved uncertainty / memory / persistence
-
-same-simulator robustness
-≠ cross-simulator robustness
-≠ sim2real transfer
-
-fitted simulator trajectory
-≠ validated digital twin
-
-predicted world rollout
-≠ real executed consequence
-
-offline policy ranking
-≠ closed-loop deployment validation
-
-short-horizon competence
-≠ long-horizon reliability
-
-successful deployment self-training
-≠ guaranteed safe / monotonic improvement
+U20 Grid-or-Nodes    memory efficiency / inductive-bias diagnostic
 ```
 
 ## Current non-goals
 
 We are not currently:
 
-- freezing a final representation;
-- implementing a new Clover core architecture;
-- choosing explicit vs latent vs hybrid state;
-- treating compact state or hierarchy as automatically superior;
-- treating information gain as the final control objective;
-- treating world-model prediction as ground truth;
-- assuming the correct hypothesis/model class is always known;
+- freezing a final representation or foundation-model backbone;
+- choosing DeepSeek or Qwen as Clover architecture by default;
+- implementing a new Clover core algorithm;
+- assuming long context replaces explicit/persistent memory;
+- assuming MoE/sparse/linear attention is intrinsically superior for world modeling;
+- attributing hosted-agent performance entirely to the base model;
+- treating synthetic data as observed physical evidence;
 - designing the science around Mac mini M4;
 - claiming sim2real success without real hardware;
-- making Isaac Sim/NVIDIA mandatory;
+- making NVIDIA/Isaac mandatory;
 - treating one benchmark as the definition of understanding.
 
-## Remaining collection gaps after the 2026-10-15 sweep
+## Remaining collection gaps after the DeepSeek/Qwen audit
 
-Stage 1 is now broad. The remaining gaps are narrower and should be filled only with strong evidence:
+The remaining gaps are now narrower:
 
 ```text
-unknown-unknown diagnostics in real embodied environments
-nonparametric / open-set mechanism discovery
-persistent hypothesis provenance / refutation-memory benchmarks
+visual-token budget vs physical-state retention
+video frame-rate / token sampling vs fast dynamics
+byte-matched long-context vs explicit-memory comparison
+KV-cache precision vs uncertainty / epistemic calibration
+MoE expert specialization for spatial / physical variables
+small-proxy → frontier-model scaling validity
+frozen-backbone vs adapter vs partial/full adaptation
+language-prior contamination in physical reasoning
+streaming multimodal prefill / incremental visual encoding
+fast controller + slow reasoner synchronization
+harness / tool / external-memory contribution to benchmark scores
+runtime/kernel version drift
+cross-hardware numerical divergence for stateful models
+API/hosted vs open-weight artifact equivalence
+training-data alignment vs architecture gains
+synthetic-data error amplification
 representation reversibility after compression
-self-model ↔ external-world-model coupling
-safe exploration under irreversible actions
-social permission / consent for probing
-correlated uncertainty / model-ensemble collapse
-world-model-specific edge benchmarks on NPU/ANE-class hardware
-quantization effects on uncertainty / permanence / memory
-standardized sim2sim → sim2real predictive correlation
-formal persistent-state rollback after model rollback
-world-state / memory poisoning benchmarks
-robot-world-model shadow/canary deployment protocols
-standardized manipulation fault injection across sensor + compute + actuation
-energy-aware active perception under edge power budgets
-numerical divergence of stateful models across hardware backends
+safe irreversible exploration / social permission
+sim2sim → sim2real predictive correlation
+formal persistent-state rollback / world-state poisoning benchmarks
 ```
 
 ## Stage-1 exit condition
 
-Stage 2 Analysis becomes primary only when a new agent can identify:
+Stage 2 Analysis becomes primary when a new agent can identify:
 
-1. major competing directions and strongest representatives;
-2. source/evidence provenance;
-3. observation assumptions;
-4. world variables represented;
-5. identifiability assumptions;
-6. sufficiency target;
-7. likely state-aliasing failure;
-8. abstraction/granularity/timescale assumptions;
-9. information-gathering strategy and cost;
-10. open-world epistemic failure mode (`E1–E8`) where relevant;
-11. hypothesis/model class and falsification assumptions where relevant;
-12. deployment/runtime assumptions and hardware constraints;
-13. validation evidence level (`EV0–EV8`) and simulator/hardware provenance;
+1. major competing scientific directions and strongest representatives;
+2. source/evidence and learning provenance;
+3. observation assumptions and world variables represented;
+4. identifiability and sufficiency assumptions;
+5. likely state-aliasing and abstraction failures;
+6. information-gathering / open-world epistemic behavior;
+7. hypothesis/model-class and falsification assumptions;
+8. exact foundation backbone/artifact when used;
+9. total/active parameters, attention, visual-token and context/cache assumptions where material;
+10. training-data / post-training provenance;
+11. runtime/kernel/harness/tool assumptions;
+12. deployment/runtime hardware constraints;
+13. validation evidence level (`EV0–EV8`);
 14. datasets/benchmarks that discriminate claims;
 15. methods deserving one-method-one-report Analysis.
 
 ## Not yet demonstrated
 
-Clover has not yet publicly demonstrated a validated general real-world visual world model, final representation, robust open-world generalization, general causal understanding, persistent long-horizon real-robot world state, validated sim2real transfer, validated original algorithm, or final hardware mapping.
+Clover has not yet publicly demonstrated a validated general real-world visual world model, final representation, final foundation-model backbone, robust open-world generalization, general causal understanding, persistent long-horizon real-robot world state, validated sim2real transfer, validated original algorithm, or final hardware mapping.
 
 These remain research targets.
