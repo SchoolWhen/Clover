@@ -26,6 +26,7 @@ Stage-1 freshness checked through: **2026-10-14**.
 |---|---|---|---|
 | 0 | [`PIPELINE.md`](PIPELINE.md) | explains the complete lifecycle | canonical |
 | 1 | [`RESEARCH.md`](RESEARCH.md) | stable broad source/method/dataset/benchmark inventory | **ACTIVE** |
+| 1 | [`RESEARCH_STATE_VARIABLES.md`](RESEARCH_STATE_VARIABLES.md) | world-state variables, evidence routes and current observability/identifiability map | **ACTIVE — added 2026-10-14** |
 | 1 | [`RESEARCH_FRONTIER.md`](RESEARCH_FRONTIER.md) | current primary/official sources that materially expand/challenge the inventory | **ACTIVE — refreshed 2026-10-14** |
 | 2 | [`ANALYSIS.md`](ANALYSIS.md) | one-method-one-report mechanism analysis | template ready |
 | 3 | [`SYNTHESIS.md`](SYNTHESIS.md) | compare strengths, weaknesses, trade-offs and gaps | future |
@@ -34,7 +35,7 @@ Stage-1 freshness checked through: **2026-10-14**.
 | 6 | [`EVALUATION.md`](EVALUATION.md) | experiments and Results | framework ready |
 | 7 | [`REFLECTION.md`](REFLECTION.md) | interpret failures and start the next cycle | future |
 
-A new agent should start with `PIPELINE.md`, read the stable `RESEARCH.md` inventory, then scan `RESEARCH_FRONTIER.md` for the current research edge before opening deeper survey material.
+A new agent should start with `PIPELINE.md`, read the stable `RESEARCH.md` inventory, inspect `RESEARCH_STATE_VARIABLES.md` to understand what “world state” may actually contain and what evidence constrains it, then scan `RESEARCH_FRONTIER.md` for the current research edge before opening deeper survey material.
 
 ## Current Stage 1 goal
 
@@ -61,6 +62,8 @@ open questions
 
 `RESEARCH.md` currently tracks dozens of directions including epistemology, classical geometry, static/video SSL, 3D/4D reconstruction, neural scene representations, object-centric models, scene graphs, persistent memory, physical reasoning, causal learning, active perception, system identification, generative world models, world-action models, VLA, robot foundation models, egocentric video, affordance learning, model-based control, uncertainty/OOD, continual learning and simulation/data engines.
 
+`RESEARCH_STATE_VARIABLES.md` makes the mother question more concrete by separating observable/geometric/entity/physical/latent-physical/functional/causal/epistemic state and recording whether current evidence comes from static RGB, passive video, active viewpoints, action-response or non-visual/privileged sensing.
+
 `RESEARCH_FRONTIER.md` tracks newly important primary/official work such as execution-grounded world-model evaluation, trustworthiness/counterfactual evaluation, contact/deformable dynamics, behavior-grounded physical parameters, articulated physical assets, video-to-simulation functional correctness, persistent semantic maps, amodal tracking, general multimodal robotics reasoning, current open VLA baselines and competing world-action-model state strategies.
 
 ## 2026-10-14 frontier snapshot
@@ -72,6 +75,15 @@ The latest Stage-1 refresh includes these research references:
 | Gemini 4 Argon for Robotics — https://developers.googleblog.com/gemini-4-argon-for-robotics/ | `OFFICIAL_REPORTED_RESULT` | current general multimodal physical reasoner spanning Real2Sim, closed-loop robot control, world-model steering and self-improvement; strong counter-hypothesis to robot-specific reasoning stacks |
 | ERQA — https://github.com/embodiedreasoning/ERQA | `OPEN_SOURCE` | reproducible embodied/spatial reasoning diagnostic used by current frontier models |
 | DR-WM / From Pixels to Executable Physics — https://arxiv.org/abs/2610.17630 | `PRIMARY_PAPER` | separates RGB geometry from physical parameters learned through action-response; directly relevant to the identifiability boundary of “vision alone” |
+| Physically Guided Visual Mass Estimation — https://arxiv.org/abs/2601.20303 | `PRIMARY_PAPER` | explicitly formulates single-RGB mass inference as ill-posed and factorizes the problem through geometry/volume and material/density priors |
+| PhysQuantAgent / VisPhysQuant — https://arxiv.org/abs/2603.16958 | `PRIMARY_PAPER` | real-object physical-quantity benchmark for mass estimation; useful but RGB-D, so not a strict V0/V1 comparator |
+| PointCast — https://arxiv.org/abs/2609.28393 | `PRIMARY_PAPER` | identity-bearing point-set world state spanning rigid, articulated, cloth and rope regimes; strong test of representation sharing across material classes |
+| PointWorld — https://arxiv.org/abs/2601.03782 | `PRIMARY_PAPER` | 3D point-flow state/action representation for cross-embodiment manipulation; RGB-D rather than strict monocular RGB |
+| SyncWorld — https://arxiv.org/abs/2609.09155 | `PRIMARY_PAPER` | shows that numerical robot actions need visual calibration to acquire setup-specific pixel/world meaning across embodiment and viewpoint changes |
+| Robot-Factored World Models — https://arxiv.org/abs/2607.22535 | `PRIMARY_PAPER` | factors action realization and rendered robot geometry away from scene-response prediction; useful interface alternative to raw action conditioning |
+| WROP — https://arxiv.org/abs/2609.28654 | `PRIMARY_PAPER` | trains object permanence/solidity directly with cognitive-science-inspired synthetic curricula; complementary to realistic persistence benchmarks |
+| ManiSoft — https://arxiv.org/abs/2605.18617 | `PRIMARY_PAPER` | makes the robot body's own deformable physical state part of visual manipulation, not only the external object's state |
+| Decision-Aware Uncertainty Evaluation — https://arxiv.org/abs/2603.10061 | `PRIMARY_PAPER` | evaluates calibration/selective prediction under partial visual evidence; relevant to “know when you do not know” |
 | GR00T N1.7 — https://github.com/NVIDIA/Isaac-GR00T | `OPEN_SOURCE` | current strong open VLA/direct-policy baseline with human-video pretraining and cross-embodiment action representation |
 | Riemann-1.0 — https://arxiv.org/abs/2608.27033 | `PRIMARY_PAPER` | unified causal WAM jointly modeling multi-view observations, robot state and action across large heterogeneous experience |
 | Qwen-RobotWorld — https://arxiv.org/abs/2606.17030 | `PRIMARY_PAPER` | language-conditioned future-world modeling across multiple embodied domains; language as an action abstraction is itself a research hypothesis |
@@ -92,9 +104,21 @@ These entries are **research objects and comparators**, not Clover components.
 The current frontier strengthens several Stage-1 distinctions that should remain visible before Analysis begins:
 
 ```text
+statistically predictable from pixels
+≠
+physically identifiable from pixels
+
 visual geometry
 ≠
 hidden physical parameters
+
+shape / material appearance
+≠
+mass / density / friction / stiffness
+
+passive observation
+≠
+action-response system identification
 
 plausible future video
 ≠
@@ -107,6 +131,10 @@ realized robot state
 appearance / geometry
 ≠
 articulation / mass / material / function
+
+rigid world state
+≠
+deformable / contact / fluid state
 
 strong general reasoner + tools
 ≠
@@ -133,6 +161,7 @@ hybrid identifiable coordinates are now a serious alternative
 
 The flat stage files are the primary navigation. Existing deeper material remains available as supporting evidence:
 
+- [`RESEARCH_STATE_VARIABLES.md`](RESEARCH_STATE_VARIABLES.md) — physical/world variables and current evidence/identifiability map.
 - [`survey/RESEARCH_OVERVIEW.md`](survey/RESEARCH_OVERVIEW.md) — visual research map.
 - [`survey/BACKGROUND_RESEARCH.md`](survey/BACKGROUND_RESEARCH.md) — broad background synthesis.
 - [`survey/SOURCE_MAP.md`](survey/SOURCE_MAP.md) — source → evidence → claim → limitation map.
