@@ -331,6 +331,24 @@ Why Clover cares:
 
 World and action should be studied jointly without assuming they must be represented by the same state or network.
 
+### Being-M0.7
+
+- Paper: https://arxiv.org/abs/2610.11283
+- Evidence: `PRIMARY_PAPER`
+
+Signal:
+
+Being-M0.7 pretrains on more than 10,000 hours of mixed human video/motion data and jointly predicts future latent visual state and motion before adapting to humanoid control. This is a concrete example of learning future-aware visual-motion priors from non-robot experience, then grounding them in robot actions.
+
+### Being-H0.7
+
+- Paper: https://arxiv.org/abs/2605.00078
+- Evidence: `PRIMARY_PAPER`
+
+Signal:
+
+Future-aware reasoning can be trained in latent space with a training-only future branch while avoiding pixel rollout at inference. This strengthens the case that “world modeling” for control may be a compact predictive interface rather than a video generator.
+
 ---
 
 ## S16 — Physical consistency needs process/state supervision, not only pretty rollouts
