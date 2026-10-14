@@ -6,74 +6,193 @@
 >
 > **Long-term goal:** Build a general-purpose robotic brain that forms an understanding of the real world through vision alone, then uses that understanding to decide and act.
 
-Clover is a long-term open research project. **The question is fixed; the answer is open.** The repository is a public research record: evidence, hypotheses, decisions, architecture and eventual implementations are kept distinct so the project can change its answer without changing its question.
+Clover is a long-term open research project. **The question is fixed; the answer is open.**
 
 [中文说明](README.zh-CN.md)
 
 ## Start here
 
-If you are an agent, contributor or researcher entering the repository for the first time, read in this order:
+For a new agent, researcher or contributor:
 
-1. [`AGENTS.md`](AGENTS.md) — mandatory repository rules for research agents.
-2. [`SSOT.md`](SSOT.md) — the highest research question, product goal and scientific stance.
-3. [`PRINCIPLES.md`](PRINCIPLES.md) — research principles.
-4. [`STATUS.md`](STATUS.md) — current phase and what has not been demonstrated.
-5. [`research/survey/RESEARCH_OVERVIEW.md`](research/survey/RESEARCH_OVERVIEW.md) — visual map of research domains, contradictions and evidence flow.
-6. [`research/survey/BACKGROUND_RESEARCH.md`](research/survey/BACKGROUND_RESEARCH.md) — full problem-space background.
-7. [`research/dossiers/README.md`](research/dossiers/README.md) — eight deep domain research dossiers.
-8. [`research/survey/SOURCE_MAP.md`](research/survey/SOURCE_MAP.md) — source → evidence → claim → limitation → Clover landing.
-9. [`research/survey/README.md`](research/survey/README.md) — survey navigation.
+1. [`SSOT.md`](SSOT.md) — fixed research question, product goal and scientific stance.
+2. [`research/PIPELINE.md`](research/PIPELINE.md) — the seven-stage research lifecycle.
+3. [`research/RESEARCH.md`](research/RESEARCH.md) — the active broad research inventory.
+4. [`AGENTS.md`](AGENTS.md) — operating rules for research and coding agents.
+5. [`STATUS.md`](STATUS.md) — current stage and non-goals.
+6. [`research/README.md`](research/README.md) — flat research navigation.
 
-## Current phase — Background Research / Problem Reconstruction
+## Current stage — 1 Research
 
-The 2026-10-14 Research Reset moved Clover from architecture-first development to problem-first research.
-
-The current order is:
+Clover uses:
 
 ```text
-Background Research / Research Map
-→ Baseline Setup
-→ Understanding Battery
-→ Failure Matrix
-→ Representation Hypothesis
-→ World Formation / Learning
-→ Robot Brain
-→ Real-world Evaluation
-→ Hardware Co-design
+1 Research
+→ 2 Analysis
+→ 3 Synthesis
+→ 4 Innovation
+→ 5 Implementation
+→ 6 Evaluation
+→ 7 Reflection
+↺ next cycle
 ```
 
-We are **not** currently freezing a new Clover representation. The immediate objective is to make the background research deep and source-backed enough that later baselines and experiments can identify the failures shared by strong existing approaches.
+**Stage 1 Research is active.**
 
-## Primary research surfaces
+The current job is to collect the problem space broadly before deciding what Clover itself should invent.
 
-- [Research Overview Map](research/survey/RESEARCH_OVERVIEW.md)
-- [Background Research](research/survey/BACKGROUND_RESEARCH.md)
-- [Research Dossiers](research/dossiers/README.md)
+We are collecting:
+
+- research directions;
+- foundational theories;
+- latest strong methods;
+- primary papers;
+- official project pages;
+- open code and checkpoints;
+- datasets;
+- benchmarks;
+- labs/projects worth monitoring;
+- training/evidence provenance;
+- known limitations;
+- open questions.
+
+The active inventory is [`research/RESEARCH.md`](research/RESEARCH.md).
+
+## What Stage 1 currently covers
+
+The inventory is intentionally wider than “world models” or “VLA.” It includes:
+
+- inverse problems, observability, uncertainty and POMDPs;
+- human/developmental visual cognition;
+- classical geometry, SfM, VO and SLAM;
+- optical flow and tracking;
+- static self-supervised visual representation;
+- predictive video representation;
+- learned geometry;
+- neural scene representations, NeRF, 3DGS and 4D reconstruction;
+- object-centric representation;
+- scene graphs and semantic mapping;
+- persistent and episodic memory;
+- belief revision and forgetting;
+- intuitive, relational and quantitative physics;
+- structured / physics-informed world models;
+- causal representation learning and counterfactual reasoning;
+- active perception and system identification;
+- generative world models;
+- world-action models;
+- VLA and direct policies;
+- embodied reasoning and robot foundation models;
+- human / egocentric video learning;
+- affordance learning;
+- model-based control;
+- semantic memory;
+- uncertainty calibration and OOD;
+- continual learning;
+- simulation / synthetic data;
+- robot datasets;
+- benchmark methodology;
+- systems integration and compounded failure.
+
+If another direction materially constrains the mother question, it should be added even if it does not fit an existing category.
+
+## What happens later
+
+### 2 Analysis
+
+One important method → one small mechanism report:
+
+```text
+problem
+inputs / supervision
+representation
+mechanism
+objective
+memory / time
+geometry / physics / causality assumptions
+datasets / benchmarks
+results
+strengths / weaknesses
+confounds / failure modes
+```
+
+### 3 Synthesis
+
+Compare methods across common dimensions and summarize:
+
+```text
+advantages
+limitations
+trade-offs
+common failures
+capability matrix
+Failure Matrix
+research gaps
+```
+
+### 4 Innovation
+
+Only after the gap is well supported do Clover-original ideas become serious hypotheses:
+
+```text
+gap
+→ original hypothesis
+→ mathematical / algorithmic form
+→ prediction
+→ falsifier
+```
+
+### 5 Implementation
+
+Build reproducible code.
+
+### 6 Evaluation
+
+Run experiments and record Results.
+
+### 7 Reflection
+
+Interpret failures, reject bad assumptions and begin the next research cycle.
+
+## Detailed Stage-1 material
+
+The flat stage files are the main navigation. Deeper research assets remain available:
+
 - [Source Map](research/survey/SOURCE_MAP.md)
+- [Background Research](research/survey/BACKGROUND_RESEARCH.md)
+- [Research Overview](research/survey/RESEARCH_OVERVIEW.md)
 - [Frontier Methods](research/survey/FRONTIER_METHODS.md)
-- [Research Questions](research/survey/RESEARCH_QUESTIONS.md)
 - [Papers & Primary Sources](research/survey/PAPERS.md)
-- [Benchmarks & Embodied Tasks](research/survey/BENCHMARKS_TASKS.md)
+- [Benchmarks & Tasks](research/survey/BENCHMARKS_TASKS.md)
 - [Datasets & Code](research/survey/DATASETS_CODE.md)
-- [Clover Hypotheses](research/survey/CLOVER_HYPOTHESES.md)
-- [Frontier Signals](research/survey/FRONTIER_SIGNALS.md)
+- [Deep dossiers](research/dossiers/README.md)
 
-### Eight deep research domains
+These are supporting research records, not separate top-level project stages.
 
-- [R-A — Observability / Epistemology](research/dossiers/R-A-observability-epistemology.md)
-- [R-B — Geometry](research/dossiers/R-B-geometry.md)
-- [R-C — Representation](research/dossiers/R-C-representation.md)
-- [R-D — Memory / Persistence](research/dossiers/R-D-memory-persistence.md)
-- [R-E — Physics](research/dossiers/R-E-physics.md)
-- [R-F — Causality / Interaction](research/dossiers/R-F-causality-interaction.md)
-- [R-G — World Model ↔ Action](research/dossiers/R-G-world-action.md)
-- [R-H — Active Perception / Lifelong Learning](research/dossiers/R-H-active-perception-lifelong.md)
+## “Vision alone” protocol
 
-Older `docs/research-map/`, `docs/research-questions/` and `research/literature/` structures remain as secondary reference and research history.
+Observation protocol:
 
-## What we want to build
+- `V0` — monocular RGB + temporal order;
+- `V1` — V0 + camera intrinsics;
+- `V2` — calibrated multi-camera RGB;
+- `V3` — active embodied vision where action changes future visual evidence.
 
-The eventual product-level target is a general-purpose robotic brain:
+Learning provenance:
+
+- `L0` — visual self-supervision;
+- `L1` — visual labels/annotations;
+- `L2` — language/world-knowledge supervision;
+- `L3` — action-conditioned demonstrations/experience;
+- `L4` — non-visual or privileged physical evidence.
+
+This prevents “RGB at deployment” from being confused with “learned only from vision.”
+
+## What we do not assume
+
+Clover does **not** assume that CPU or GPU is scientifically superior, that explicit state must beat distributed latent state, that field/object/geometry/token must be the final primitive, that Transformer or non-Transformer is the answer, that prediction/reconstruction/generation is necessarily sufficient, or that one benchmark defines understanding.
+
+Historical Clover mechanisms remain ideas until the research process supports or rejects them.
+
+## Long-term product loop
 
 ```text
 Vision
@@ -86,126 +205,19 @@ Tool / capability selection
   ↓
 Execution
   ↓
-new visual observation
-  └──────────────→ updated world understanding
+new visual evidence
+  └──────────────→ updated understanding
 ```
 
-This is a product-level objective, not a commitment to a particular internal representation, neural architecture or module boundary.
-
-## What we mean by understanding
-
-The working research target includes the ability to form, maintain, use and revise world knowledge supporting:
-
-- existence and observability;
-- identity and object permanence;
-- spatial and temporal structure;
-- dynamics and physically plausible change;
-- uncertainty, unknown and unobserved state;
-- causal and counterfactual reasoning;
-- memory and belief revision;
-- generalization to unfamiliar objects, scenes, cameras and dynamics;
-- active acquisition of missing visual evidence;
-- measurable usefulness for decision, planning, execution and recovery.
-
-See [`SSOT.md`](SSOT.md) and [What is Understanding?](docs/what-is-understanding.md).
-
-## What we do not assume
-
-Clover does **not** assume that:
-
-- CPU computation is inherently superior to GPU computation;
-- explicit world state is inherently superior to distributed latent representation;
-- field crystallization is necessarily the final representation;
-- objects, fields, geometry or tokens must be the primitive ontology;
-- Transformers are inherently unsuitable for world understanding;
-- prediction, reconstruction or generation is necessarily the correct learning objective;
-- persistent explicit world state is necessarily required for strong robot behavior;
-- a single benchmark can define world understanding;
-- the current Clover prototype is the final architecture.
-
-Hardware, representation, learning objective, memory model and software architecture are research variables.
-
-## “Vision alone” protocol
-
-Clover distinguishes the visual observation budget:
-
-- `V0` — monocular RGB + temporal order;
-- `V1` — V0 + camera intrinsics;
-- `V2` — calibrated multi-camera RGB;
-- `V3` — active embodied vision where action changes future visual evidence.
-
-Background research also records training-data provenance when relevant (`L0` visual self-supervision through `L4` non-visual/privileged physical evidence). This prevents deployment-time RGB input from being confused with knowledge learned only from vision.
-
-## Evaluation stance
-
-Benchmarks are **measurement instruments**, not the SSOT.
-
-The evidence standard must combine:
-
-1. controlled visual/physical diagnostics;
-2. shortcut-resistant paired tests;
-3. persistent and streaming memory tests;
-4. causal/interventional tests;
-5. real-video/open-world generalization;
-6. active perception;
-7. world change and belief revision;
-8. long-horizon embodied tasks in unfamiliar environments;
-9. downstream action/recovery value;
-10. efficiency after scientific capability is established.
-
-See [Benchmarks & Embodied Tasks](research/survey/BENCHMARKS_TASKS.md).
-
-## Existing Clover work
-
-A substantial pre-reset Research Prototype 1 explored field-based visual evidence, persistent entities/spacetime support, typed world queries, epistemic licences, decision, tool-use and execution loops.
-
-Those ideas remain research history and candidate hypotheses. They are **not frozen answers**. The current background research re-evaluates them against classical vision, modern self-supervised image/video models, learned geometry, object-centric learning, memory benchmarks, generative world models, VLA/robot foundation models, POMDP/active perception and causal-representation research.
-
-## Repository navigation
-
-### Current research
-
-- [Research Overview](research/survey/RESEARCH_OVERVIEW.md)
-- [Survey](research/survey/README.md)
-- [Background Research](research/survey/BACKGROUND_RESEARCH.md)
-- [Research Dossiers](research/dossiers/README.md)
-- [Source Map](research/survey/SOURCE_MAP.md)
-- [Research decisions](research/decisions/)
-- [Open questions](docs/open-questions.md)
-- [Active hypotheses](docs/hypotheses/README.md)
-
-### Secondary research references
-
-- [Research map](docs/research-map/README.md)
-- [Question synthesis](docs/research-questions/README.md)
-- [Primary source index](research/literature/primary-sources.md)
-- [2026 frontier watch](research/literature/2026-frontier.md)
-
-### Project definition
+## Project definition
 
 - [SSOT](SSOT.md)
 - [Principles](PRINCIPLES.md)
 - [Status](STATUS.md)
 - [Roadmap](ROADMAP.md)
-- [Glossary](docs/glossary.md)
-
-## Status vocabulary
-
-- `IMPLEMENTED` — exists in code;
-- `TESTED` — has direct test coverage;
-- `RESEARCH_PROTOTYPE` — implemented as a research mechanism, not scientifically established;
-- `SCIENTIFICALLY_VALIDATED` — supported by an explicit scientific protocol;
-- `OPEN` — unresolved;
-- `SUPERSEDED` — retained for history but no longer current.
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md). A new method or paper should enter the repository through the contradiction it helps answer, not as a framework to stack onto Clover.
-
-## License
-
-Apache License 2.0. See [LICENSE](LICENSE).
+- [Research lifecycle](research/PIPELINE.md)
+- [Active research inventory](research/RESEARCH.md)
 
 ---
 
-**The question is fixed. The answer is open.**
+**Research broadly. Analyze deeply. Synthesize comparatively. Innovate only from demonstrated gaps.**
