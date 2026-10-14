@@ -27,12 +27,13 @@ Before proposing architecture, code, experiments or conclusions, read:
 11. [`research/RESEARCH_VALUE_OF_INFORMATION.md`](research/RESEARCH_VALUE_OF_INFORMATION.md)
 12. [`research/RESEARCH_OPEN_WORLD_EPISTEMICS.md`](research/RESEARCH_OPEN_WORLD_EPISTEMICS.md)
 13. [`research/RESEARCH_MODEL_DISCOVERY.md`](research/RESEARCH_MODEL_DISCOVERY.md)
-14. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
-15. [`PRINCIPLES.md`](PRINCIPLES.md)
-16. [`STATUS.md`](STATUS.md)
-17. [`research/README.md`](research/README.md)
-18. [`research/survey/SOURCE_MAP.md`](research/survey/SOURCE_MAP.md)
-19. deeper survey/dossier files only as needed.
+14. [`research/RESEARCH_ENGINEERING_VALIDATION.md`](research/RESEARCH_ENGINEERING_VALIDATION.md)
+15. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
+16. [`PRINCIPLES.md`](PRINCIPLES.md)
+17. [`STATUS.md`](STATUS.md)
+18. [`research/README.md`](research/README.md)
+19. [`research/survey/SOURCE_MAP.md`](research/survey/SOURCE_MAP.md)
+20. deeper survey/dossier files only as needed.
 
 Historical/news files are evidence signals, not SSOT.
 
@@ -267,40 +268,19 @@ falsification
 model expansion
 ```
 
-When a source claims discovery, record:
+When a source claims discovery, record candidate hypothesis class, identifiability assumptions, discriminating evidence/interventions, remaining equivalence classes, refutation handling and whether new hypotheses can be introduced.
 
-```text
-candidate hypothesis class
-assumptions that make identification possible
-which intervention/evidence discriminates hypotheses
-what remains observationally equivalent
-how rejected hypotheses are recorded
-whether new hypotheses can be introduced
-```
-
-Reflection is not falsification. A new explanation is not established until it survives evidence that could have rejected it.
+Reflection is not falsification.
 
 ## 14. Experiment design must account for misspecification
 
 Expected information gain alone is not automatically a correct probing objective when the model class is wrong.
 
-When relevant record:
-
-```text
-informativeness
-representativeness
-model-misspecification sensitivity
-safety / physical constraints
-cost / budget
-irreversibility
-social permission
-```
-
-An experiment can be highly informative under the assumed model and still make the system confidently more wrong.
+Record informativeness, representativeness, misspecification sensitivity, safety/physical constraints, cost/budget, irreversibility and social permission.
 
 ## 15. Preserve hypothesis provenance and refutation history
 
-For scientific/model-discovery claims, record when possible:
+For scientific/model-discovery claims, preserve when possible:
 
 ```text
 hypothesis statement
@@ -324,21 +304,116 @@ Distinguish external-world change from body/controller/camera/action-semantics c
 
 ## 17. Social hidden state is not directly observed
 
+Keep distinct visible action, short-term intention, goal, belief, recursive belief, preference, permission/ownership and social norm.
+
+Do not turn a Theory-of-Mind inference into an observed fact.
+
+## 18. Engineering feasibility is part of the evidence chain
+
+Current local development reference:
+
+```text
+Mac mini with Apple M4
+```
+
+Treat it as a measured reference environment, not a scientific constraint and not the assumed final robot computer.
+
 Keep distinct:
 
 ```text
-visible action
-short-term intention
-goal
-belief
-belief about another belief
-preference
-permission / ownership / social norm
+current development machine
+≠ final edge computer
+≠ scientific representation hypothesis
 ```
 
-Do not turn a Theory-of-Mind inference into an observed fact. Recursive belief depth is a modeling cost/necessity question, not something to maximize automatically.
+For performance claims record:
 
-## 18. Plausible generation is not world truth
+```text
+hardware + RAM
+OS/runtime/backend
+precision / quantization
+input resolution / context
+cold load
+first inference
+warm p50 / p95 / p99 latency
+peak memory
+sustained latency / thermal behavior
+```
+
+When relevant measure full camera→state→decision→action latency, not only isolated model inference.
+
+## 19. Simulation evidence must be tiered
+
+Use this validation ladder when applicable:
+
+```text
+EV0 mathematical / synthetic diagnostic
+EV1 controlled single-simulator test
+EV2 randomized in-simulator robustness
+EV3 sim-to-sim transfer
+EV4 offline real-data validation
+EV5 real-to-sim / digital-twin validation
+EV6 deployment-runtime / compute hardware in the loop
+EV7 proxy physical hardware
+EV8 target real robot
+```
+
+Do not call EV0–EV6 “sim2real success.”
+
+Current absence of a target real robot is a constraint on claim strength, not a reason to postpone validation.
+
+### Simulation-specific provenance
+
+Record:
+
+```text
+simulator / version
+physics engine / solver
+physics timestep
+renderer
+assets / hashes
+camera settings
+control frequency
+latency/noise models
+collision/contact/friction parameters
+domain-randomization distributions
+privileged simulator state used
+```
+
+### Failure attribution
+
+Distinguish:
+
+```text
+scenario/configuration bug
+simulator/solver artifact
+synthetic visual shortcut
+actuator/controller mismatch
+simulator overfitting
+genuine algorithmic failure
+reality-gap failure
+```
+
+A failure in one simulator is not automatically a failure of the scientific hypothesis; success in one simulator is not proof of real-world validity.
+
+## 20. Hardware-aware optimization must preserve capability
+
+Quantization, pruning, state compression, lower resolution, shorter context, batching and asynchronous execution may change scientific behavior.
+
+Later ablations should ask:
+
+```text
+Does quantization damage uncertainty calibration?
+Does memory pruning damage object permanence or revision?
+Does lower resolution damage physical identifiability?
+Does shorter history introduce state aliasing?
+Does batching or remote execution violate control deadlines?
+Does asynchronous execution make the maintained belief stale?
+```
+
+Speed alone is not a sufficient optimization metric.
+
+## 21. Plausible generation is not world truth
 
 Keep distinct:
 
@@ -354,7 +429,7 @@ refuted
 model-incomplete
 ```
 
-## 19. Stage-1 contribution template
+## 22. Stage-1 contribution template
 
 Record as much as known:
 
@@ -375,16 +450,19 @@ Record as much as known:
 - hypothesis class / identifiability assumptions when relevant;
 - experiment/falsification mechanism when relevant;
 - hypothesis provenance/refutation handling when relevant;
+- deployment/runtime assumptions when relevant;
+- validation-evidence level (`EV0–EV8`) when relevant;
+- simulator/runtime/hardware provenance when relevant;
 - demonstrated capability;
 - limitation/open question.
 
 Do not turn a collection record into an architecture decision.
 
-## 20. Coding agents
+## 23. Coding agents
 
 Do not rewrite research claims to match current code. Small diagnostic code is allowed before Stage 5 only when genuinely needed to answer a research question. Core algorithm implementation belongs downstream of Innovation.
 
-## 21. Research agents
+## 24. Research agents
 
 During Stage 1:
 
@@ -403,8 +481,10 @@ During Stage 1:
 13. record the assumptions required for causal/mechanism identification;
 14. preserve hypothesis/refutation provenance when available;
 15. keep self/embodiment and social hidden state visible;
-16. record missing research areas explicitly;
-17. do not import external mechanisms into Clover by default.
+16. record hardware/runtime assumptions where they affect feasibility;
+17. classify simulation/real-world validation evidence conservatively;
+18. record missing research areas explicitly;
+19. do not import external mechanisms into Clover by default.
 
 ## Final rule
 
