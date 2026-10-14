@@ -9,24 +9,6 @@ This directory is the compact, high-density research entry point for Clover.
 >
 > **Product target:** Build a general-purpose robotic brain that forms an understanding of the real world through vision alone, then uses that understanding to decide and act.
 
-## Why this Survey exists
-
-The 2026-10-14 Research Reset changed the order of work:
-
-```text
-research question
-→ prior art
-→ capability map
-→ unresolved contradiction
-→ representation hypothesis
-→ implementation
-→ evaluation
-```
-
-rather than building a mechanism first and then searching for evidence to defend it.
-
-The Survey is intentionally flat: a small number of larger Markdown files should let a reader understand the research landscape quickly.
-
 ## Reading order
 
 1. [`../../SSOT.md`](../../SSOT.md)
@@ -38,63 +20,65 @@ The Survey is intentionally flat: a small number of larger Markdown files should
 7. [`CLOVER_HYPOTHESES.md`](CLOVER_HYPOTHESES.md)
 8. [`FRONTIER_SIGNALS.md`](FRONTIER_SIGNALS.md)
 
-## Source screening
+## Research order
 
-This Survey incorporates screened material from three internal sources.
+The 2026-10-14 Research Reset established:
 
-### Research Reset 2026-10-14
-Kept: SSOT/product goal, benchmark-as-instrument, V0–V3 vision protocol, research/evaluation map, hardware-as-design-variable and representation questions. CPU-first and pre-reset mechanisms are not current scientific commitments.
+```text
+research question
+→ prior art
+→ capability map
+→ unresolved contradiction
+→ representation hypothesis
+→ implementation
+→ evaluation
+```
 
-### `news_answers.md`
-Kept as candidate hypotheses: Evidence Replay, query-conditioned temporal persistence, epistemic/verification separation, auditability/provenance, counter-witness causality, sparse visual IR, compute scheduling, state-transition affordance and active perception. Old implementation-priority labels are not SSOT.
+rather than building a mechanism first and searching for evidence afterward.
 
-### `news(5).md`
-Used as a signal archive only. Durable research entries require a primary paper, official project/model card or official code. Funding/secondary/vendor reports remain signals unless stronger evidence is available.
+## Screened source policy
+
+This Survey synthesizes three internal source documents rather than uploading them raw.
+
+**Research Reset:** kept the SSOT/product goal, benchmark-as-instrument principle, V0–V3 protocol, research/evaluation map and hardware-as-design-variable stance. CPU-first and old mechanisms are not current axioms.
+
+**`news_answers.md`:** retained durable candidate hypotheses such as Evidence Replay, temporal persistence, epistemic/verification separation, auditability/provenance, counter-witness causality, sparse IR, compute scheduling, state-transition affordance and active perception. Historical implementation-priority labels are not SSOT.
+
+**`news(5).md`:** used as a signal archive. A durable research entry should have a primary paper, official model card/project page or official code. Funding/secondary reports remain signals, not scientific facts.
 
 ## Evidence labels
 
-- `PRIMARY_PAPER`
-- `OFFICIAL_PROJECT`
-- `OPEN_SOURCE`
-- `OFFICIAL_REPORTED_RESULT`
-- `SURVEY_SIGNAL`
-- `INTERNAL_HYPOTHESIS`
-- `OPEN`
-- `SUPERSEDED`
+`PRIMARY_PAPER` · `OFFICIAL_PROJECT` · `OPEN_SOURCE` · `OFFICIAL_REPORTED_RESULT` · `SURVEY_SIGNAL` · `INTERNAL_HYPOTHESIS` · `OPEN` · `SUPERSEDED`
 
-## Research landscape at a glance
+## Landscape at a glance
 
-| Route | Typical internal state | Strength | Unresolved issue |
+| Route | Typical state | Strength | Open issue |
 |---|---|---|---|
-| Classical geometry / SLAM | explicit pose/map/geometry | precision, observability | semantics, abstraction |
-| Static SSL vision | distributed features | broad invariance | weak dynamics/memory |
-| Predictive video representation | temporal latent | motion, anticipation | persistent state/interpretability |
-| Geometry foundation model | learned 3D state | spatial reconstruction | semantics, physics, causality |
-| Object-centric model | slots/entities | composition, identity | object assumptions/scaling |
-| Generative world model | latent simulator | rollout/world completion | plausibility vs truth |
-| Embodied VLM | multimodal context | flexible reasoning | language priors, persistence |
-| VLA / WAM | action-conditioned latent | direct task performance | world semantics, failure attribution |
-| Robot foundation policy | broad learned policy | transfer / real behavior | internal representation unclear |
+| Classical geometry | explicit pose/map | precision/observability | semantics/abstraction |
+| Static SSL vision | distributed features | broad invariance | time/memory |
+| Predictive video | temporal latent | motion/anticipation | persistent state |
+| Learned geometry | depth/pose/point maps | scalable spatial state | physics/causality |
+| Object-centric | slots/entities | composition/identity | ontology/scaling |
+| Generative world model | latent simulator | rollout/completion | plausibility vs truth |
+| Embodied VLM | multimodal context | flexible reasoning | language priors/persistence |
+| VLA/WAM | action-conditioned latent | task performance | state semantics/failure attribution |
+| Robot foundation policy | broad policy | transfer/real behavior | internal world structure unclear |
 | Model-based robotics | explicit belief/dynamics | uncertainty/planning | representation acquisition |
-| Historical Clover | explicit candidate world/authority | queryability hypothesis | not established as best representation |
+| Historical Clover | explicit candidate world | queryability hypothesis | not established as best representation |
 
 ## Strongest current tensions
 
-- **Explicit vs distributed:** physical variables can emerge in distributed/hierarchical representation: https://arxiv.org/abs/2602.07050
-- **Prediction vs reconstruction vs generation:** V-JEPA, VGGT/Ω, Atlas and Cosmos optimize different forms of world structure.
-- **Observation vs interaction:** passive video learns substantial dynamics; robot interaction adds controllability/action consequences.
-- **World state vs direct policy:** explicit world representations must prove measurable value beyond strong VLA/foundation policies.
-- **Visual truth vs plausible generation:** underdetermined hidden completion must not be confused with observed state.
-
-## Survey maturity criteria
-
-For every major route, we should know its representation, learning signal, space/time treatment, identity/persistence, observability, physics/causality, memory, action interface, demonstrated capability, unresolved failures, public resources and meaningful falsifiers.
+- **Explicit vs distributed:** https://arxiv.org/abs/2602.07050
+- **Prediction vs reconstruction vs generation:** V-JEPA vs VGGT/Ω vs Atlas/Cosmos.
+- **Observation vs interaction:** what causal/controllability information requires acting?
+- **World state vs direct policy:** what measurable value does a persistent worldview add?
+- **Visual truth vs plausible generation:** what is evidence-supported vs imagined?
 
 ## Current phase boundary
 
-We are **not** yet freezing a final world representation, explicit-vs-latent decision, Transformer-vs-non-Transformer choice, object-vs-field ontology, CPU-vs-GPU allocation or final authority mechanism.
+We are **not** yet freezing a final representation, explicit-vs-latent decision, Transformer choice, object-vs-field ontology, CPU/GPU allocation or final verification/authority mechanism.
 
-The next Clover architecture should be a result of the Survey.
+The next Clover architecture should be a result of this Survey.
 
 ---
 
