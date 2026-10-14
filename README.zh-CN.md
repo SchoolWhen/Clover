@@ -4,168 +4,219 @@
 
 > **最高研究问题：** How can a machine understand the real world through vision alone?
 >
-> **长期成果目标：** 构造一个仅通过视觉形成真实世界理解，并能据此决策和行动的通用机器人大脑。
+> **长期目标：** 构造一个仅通过视觉形成真实世界理解，并能据此决策和行动的通用机器人大脑。
 
-Clover 是一个长期公开研究项目。**问题保持稳定，答案保持开放。** 仓库会分别记录事实、外部证据、研究假设、研究决策、评测与未来实现，使项目能够随着证据更新而改变答案，而不改变最高问题。
+Clover 是一个长期公开研究项目。**问题固定，答案开放。**
 
-## 当前阶段：背景研究 / 问题重建
+## 当前最重要的事情
 
-2026-10-14 的 Research Reset 将 Clover 从“证明既有架构”转为“先把问题和已有答案研究清楚，再决定下一代表示”。
+目前只激活第一阶段：**Research / 调研**。
 
-当前严格顺序是：
-
-```text
-Background Research / Research Map
-→ Baseline Setup
-→ Understanding Battery
-→ Failure Matrix
-→ Representation Hypothesis
-→ World Formation / Learning
-→ Robot Brain
-→ Real-world Evaluation
-→ Hardware Co-design
-```
-
-因此当前**不冻结新的 Clover 核心表示，也不默认 field、CSP、SEP、licence、Evidence Replay、显式 state、latent state 或某一种神经网络架构是答案**。
-
-## 推荐阅读顺序
-
-1. [SSOT.md](SSOT.md) — 最高研究问题、长期目标和当前科学立场。
-2. [RESEARCH_OVERVIEW.md](research/survey/RESEARCH_OVERVIEW.md) — 研究问题 → 8 大领域 → 6 个核心矛盾 → baseline → battery → Failure Matrix 的总览图。
-3. [BACKGROUND_RESEARCH.md](research/survey/BACKGROUND_RESEARCH.md) — 对整个问题空间的系统背景研究。
-4. [Research Dossiers](research/dossiers/README.md) — 8 个领域的纵向深度调研。
-5. [SOURCE_MAP.md](research/survey/SOURCE_MAP.md) — 每一项外部证据对应的准确网址、证据等级、已证明能力、未证明边界与 Clover 落点。
-6. [Survey README](research/survey/README.md) — 当前研究导航。
-7. [FRONTIER_METHODS.md](research/survey/FRONTIER_METHODS.md) — 主要路线的竞争性比较。
-8. [RESEARCH_QUESTIONS.md](research/survey/RESEARCH_QUESTIONS.md) — 下一代架构冻结前必须回答的问题。
-9. [PAPERS.md](research/survey/PAPERS.md) — 论文、官方页面、代码索引。
-10. [BENCHMARKS_TASKS.md](research/survey/BENCHMARKS_TASKS.md) — Understanding Battery 与任务地图。
-11. [DATASETS_CODE.md](research/survey/DATASETS_CODE.md) — 数据、代码、checkpoint 与复现资源。
-
-## 八个纵向研究领域
-
-当前背景研究已经拆成 8 个可独立持续扩展的 dossier：
-
-- [R-A — Observability / Epistemology](research/dossiers/R-A-observability-epistemology.md)：partial observability、未知/不可观测、belief state、视觉可辨识性。
-- [R-B — Geometry](research/dossiers/R-B-geometry.md)：经典几何、optical flow、SLAM、learned geometry，明确“几何已经解决了什么”。
-- [R-C — Representation](research/dossiers/R-C-representation.md)：explicit / latent / object-centric / dense / hybrid representation 的竞争。
-- [R-D — Memory / Persistence](research/dossiers/R-D-memory-persistence.md)：object permanence、episodic memory、evidence retention、belief revision、forgetting。
-- [R-E — Physics](research/dossiers/R-E-physics.md)：intuitive / quantitative / relational / intervention / execution-grounded physics。
-- [R-F — Causality / Interaction](research/dossiers/R-F-causality-interaction.md)：causal identifiability、intervention、counterfactual、interaction data。
-- [R-G — World Model ↔ Action](research/dossiers/R-G-world-action.md)：VLA、WAM、planner，以及 persistent worldview 是否真的比 direct policy 有价值。
-- [R-H — Active Perception / Lifelong](research/dossiers/R-H-active-perception-lifelong.md)：主动获取视觉证据、continual learning、self-play、长期世界形成。
-
-每个 dossier 都按同一模板组织：
+完整科研流程统一为：
 
 ```text
-fundamental question
-→ canonical foundations
-→ current frontier
-→ exact URL
-→ demonstrated capability
-→ limitation / confound
-→ unresolved contradiction
-→ baseline
-→ discriminating experiment
-→ kill condition
-→ Clover implication
+1 Research 调研
+→ 2 Analysis 分析
+→ 3 Synthesis 总结 / 综合
+→ 4 Innovation 创新 / 原创算法假设
+→ 5 Implementation 实现
+→ 6 Evaluation 实验与 Results
+→ 7 Reflection 反思 / 复盘
+↺ 下一轮研究
 ```
 
-## 我们真正研究什么
+这套顺序描述的是“我们对问题了解到了什么程度”，不是软件版本号。
 
-Clover 不以某一个 benchmark、CPU 路线、Transformer 对立面或某一种既有架构为目标。
+## 新 Agent 推荐阅读顺序
 
-真正的问题是：
+1. [SSOT.md](SSOT.md) — 最高问题、长期目标、科学边界。
+2. [research/PIPELINE.md](research/PIPELINE.md) — 七阶段科研流程。
+3. [research/RESEARCH.md](research/RESEARCH.md) — 当前最重要的全量调研目录。
+4. [AGENTS.md](AGENTS.md) — agent 工作规则。
+5. [STATUS.md](STATUS.md) — 当前状态与非目标。
+6. [research/README.md](research/README.md) — 扁平化研究导航。
 
-> **机器仅凭视觉经验，需要形成什么内部结构，才能对真实世界产生稳定、可迁移、可预测、能处理未知与变化、并真正帮助决策和行动的理解？**
+## Stage 1 — Research / 调研
 
-核心能力至少包括：
+当前阶段优先做“材料覆盖”，暂时不急着提出下一代 Clover 算法。
 
-- existence / observability；
-- identity / object permanence；
-- 空间与时间结构；
-- dynamics / intuitive physics；
-- uncertainty / unknown / unobserved；
-- causality / intervention / counterfactual；
-- persistent memory / belief revision；
+需要尽可能收集：
+
+```text
+涉及哪些研究方向
+经典理论是什么
+最新强方法是什么
+primary paper 在哪里
+official project 在哪里
+代码 / checkpoint 在哪里
+dataset 在哪里
+benchmark 在哪里
+哪些团队正在持续做
+方法真正证明了什么
+方法还没有证明什么
+训练时到底用了什么信息
+还有哪些明显缺口没有调查
+```
+
+当前主入口：[research/RESEARCH.md](research/RESEARCH.md)。
+
+它已经把问题扩展到 30+ 个相关方向，包括但不限于：
+
+- inverse problem / observability / uncertainty / POMDP；
+- 人类视觉与 developmental cognition；
+- classical geometry / SfM / VO / SLAM；
+- optical flow / correspondence / tracking；
+- static SSL；
+- predictive video representation；
+- learned geometry；
+- NeRF / 3DGS / 4D reconstruction；
+- object-centric representation；
+- scene graph / semantic mapping；
+- persistent / episodic memory；
+- belief revision / forgetting；
+- intuitive / quantitative / relational physics；
+- physics-informed / structured world model；
+- causal representation learning；
+- counterfactual reasoning；
 - active perception；
-- open-world generalization；
-- 对 planning / action / recovery 的实际价值。
+- system identification；
+- generative world model；
+- world-action model；
+- VLA / direct policy；
+- embodied reasoning；
+- robot foundation model；
+- human / egocentric video learning；
+- affordance learning；
+- model-based control；
+- semantic memory；
+- uncertainty calibration / OOD；
+- continual learning；
+- simulation / synthetic data；
+- robot datasets；
+- benchmark / anti-shortcut methodology；
+- systems integration / compounded failure。
 
-## 当前六个核心竞争性矛盾
+如果以后发现任何新方向会实质影响母问题，即使它不属于现有分类，也应该直接加入 Research。
+
+## Stage 2 — Analysis / 分析
+
+调研材料足够广以后，再对真正重要的方法逐个做小报告。
+
+每个方法至少分析：
 
 ```text
-C1 explicit state vs distributed latent vs hybrid / identifiable state
-C2 reconstruction vs prediction vs generation
-C3 object-centric vs dense scene representation
-C4 passive observation vs interaction
-C5 persistent world state vs long context / direct policy
-C6 evidence-grounded belief vs plausible generative completion
+它解决什么问题
+输入是什么
+训练监督是什么
+内部 representation 是什么
+核心机制是什么
+objective 是什么
+如何处理时间 / memory
+如何处理 geometry / object / physics / causality
+如何接 action
+dataset / benchmark 是什么
+reported result 是什么
+优点是什么
+缺点是什么
+confound 是什么
+failure mode 是什么
+能不能复现
 ```
 
-这些问题比旧 Clover 的模块名称更基础。下一代 Clover 应当由这些矛盾的实验结果推导出来，而不是从旧机制出发寻找支持材料。
+模板见 [research/ANALYSIS.md](research/ANALYSIS.md)。
 
-## “Vision alone”需要双轴描述
+## Stage 3 — Synthesis / 总结综合
+
+把逐方法分析放在同一坐标系里比较：
+
+```text
+优点
+缺点
+trade-off
+capability matrix
+Failure Matrix
+共同瓶颈
+哪些问题已经基本解决
+哪些问题一直解决不了
+哪里值得提出新算法
+```
+
+模板见 [research/SYNTHESIS.md](research/SYNTHESIS.md)。
+
+## Stage 4 — Innovation / 创新
+
+这才是“我们自己的东西”正式出现的阶段。
+
+Innovation 可以包含：
+
+- 原创 representation hypothesis；
+- 新变量 / 新数学形式；
+- 新 learning principle；
+- 新 memory / update mechanism；
+- 新 causal / active perception mechanism；
+- 新 algorithm。
+
+但必须从已经确认的 gap 出发：
+
+```text
+field gap
+→ 为什么现有方法不够
+→ Clover-original hypothesis
+→ 数学 / 算法定义
+→ prediction
+→ falsifier
+→ experiment
+```
+
+模板见 [research/INNOVATION.md](research/INNOVATION.md)。
+
+## Stage 5–7
+
+- [Implementation](research/IMPLEMENTATION.md) — 具体代码和可复现实验实现。
+- [Evaluation](research/EVALUATION.md) — experiments / Results / ablation / real-world tests。
+- [Reflection](research/REFLECTION.md) — 解释结果、复盘失败、删除错误假设、开始下一轮。
+
+## 深度材料仍然保留
+
+扁平 stage 文件是第一入口；详细资料继续作为支撑层：
+
+- [Source Map](research/survey/SOURCE_MAP.md)
+- [Background Research](research/survey/BACKGROUND_RESEARCH.md)
+- [Research Overview](research/survey/RESEARCH_OVERVIEW.md)
+- [Frontier Methods](research/survey/FRONTIER_METHODS.md)
+- [Papers](research/survey/PAPERS.md)
+- [Benchmarks & Tasks](research/survey/BENCHMARKS_TASKS.md)
+- [Datasets & Code](research/survey/DATASETS_CODE.md)
+- [Deep Dossiers](research/dossiers/README.md)
+
+它们是 Research / Analysis 的材料库，不是另外一套阶段体系。
+
+## Vision alone 的双轴说明
 
 ### 观测协议
 
 - `V0`：单目 RGB + 时间顺序；
 - `V1`：V0 + 相机内参；
-- `V2`：标定后的多相机 RGB；
-- `V3`：机器人可以主动移动来获得新的视觉证据。
+- `V2`：标定多相机 RGB；
+- `V3`：机器人主动移动来取得新的视觉证据。
 
 ### 学习证据来源
 
-背景研究进一步记录：
+- `L0`：视觉自监督；
+- `L1`：视觉标签 / annotation；
+- `L2`：语言 / world knowledge；
+- `L3`：带动作的 demonstration / interaction；
+- `L4`：非视觉或 privileged physical evidence。
 
-- `L0`：纯视觉自监督；
-- `L1`：视觉标签/标注；
-- `L2`：语言/世界知识监督；
-- `L3`：带动作的演示/交互经验；
-- `L4`：非视觉或 privileged physical evidence，例如 proprioception、force/tactile、IMU、depth/LiDAR、simulator state。
+这可以避免把“部署只输入 RGB”误认为“所有世界知识都来自视觉”。
 
-这能避免把“部署时只输入 RGB”误写成“这个系统只从视觉学到了知识”。
+## 当前不做什么
 
-## 外部资料如何进入仓库
+现在不冻结 field、CSP、licence、explicit state、latent state、Transformer 或任何新 Clover core algorithm。
 
-新的论文、技术报告或产业信号必须经过：
+旧 Clover 机制统一作为未来 Innovation 阶段的候选 idea；是否保留要由后续 Analysis、Synthesis 和 Evaluation 决定。
 
-```text
-外部来源
-→ 精确网址
-→ 证据等级
-→ 它真正证明了什么
-→ 它没有证明什么
-→ 它解决了哪个研究矛盾
-→ 对应的 Clover 研究落点
-```
-
-优先级：
-
-```text
-primary paper / preprint
-→ official technical/model page
-→ official open-source repository
-→ official reported result
-→ secondary news / signal
-```
-
-新闻归档只用于发现线索；能进入核心 Survey 的长期结论必须尽量回到 primary / official source。
-
-## 我们不预设
-
-Clover 不预设：
-
-- CPU 一定优于 GPU；
-- 显式表示一定优于 latent；
-- field / object / geometry / token 中某一个一定是最终 primitive；
-- Transformer 天然不适合理解世界；
-- reconstruction、prediction 或 generation 中某一个一定正确；
-- persistent explicit worldview 一定比 direct policy 强；
-- 一个 benchmark 可以定义“理解”；
-- 当前 Clover Research Prototype 就是最终答案。
-
-## 最终落点
+## 长期产品闭环
 
 ```text
 视觉经验
@@ -182,17 +233,6 @@ Clover 不预设：
  └──────────────→ 更新世界理解
 ```
 
-这只是长期产品目标，不代表内部表示已经冻结。
+---
 
-更多内容见：
-
-- [RESEARCH_OVERVIEW.md](research/survey/RESEARCH_OVERVIEW.md)
-- [research/dossiers/README.md](research/dossiers/README.md)
-- [PRINCIPLES.md](PRINCIPLES.md)
-- [STATUS.md](STATUS.md)
-- [ROADMAP.md](ROADMAP.md)
-- [BACKGROUND_RESEARCH.md](research/survey/BACKGROUND_RESEARCH.md)
-- [SOURCE_MAP.md](research/survey/SOURCE_MAP.md)
-- [Survey README](research/survey/README.md)
-
-**保护问题，不保护当前答案。**
+**先把世界调研完整，再分析；先把分析总结清楚，再创新。**
