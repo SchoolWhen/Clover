@@ -262,6 +262,30 @@ changed transition law
 
 can require adaptation even when observations remain visually similar.
 
+### Changepoint-Aware World Models
+
+**Changepoint-Aware World Models: Detecting Dynamics Shifts and Recovering by Forgetting Stale Replay in Model-Based RL**  
+Primary paper: https://arxiv.org/abs/2609.18950  
+Evidence: `PRIMARY_PAPER`
+
+CAWM detects abrupt dynamics shifts from internal prediction error using an online changepoint test and then discards stale replay while retaining the learned representation.
+
+Why it matters:
+
+It separates two questions:
+
+```text
+What is uncertain under the current model?
+```
+
+from:
+
+```text
+Has the current model itself become stale because the dynamics changed?
+```
+
+This is a form of **world-model falsification / regime-change detection**, not ordinary state estimation.
+
 ### ROAM
 
 **Adapt On-the-Go: Behavior Modulation for Single-Life Robot Deployment**  
@@ -280,12 +304,33 @@ Evidence: `PRIMARY_PAPER`
 
 WorMI retrieves and composes domain-specific world models at test time for unseen domains.
 
+### Sirius-Fleet
+
+**Multi-Task Interactive Robot Fleet Learning with Visual World Models**  
+PMLR/CoRL 2025: https://proceedings.mlr.press/v270/liu25g.html  
+Project: https://ut-austin-rpl.github.io/sirius-fleet  
+Evidence: `PRIMARY_PAPER`
+
+Sirius-Fleet uses a visual world model and anomaly predictors to monitor deployment and trigger human correction when future outcomes are predicted to be anomalous.
+
+Stage-1 relevance:
+
+A robot world model may need not only prediction but a **failure-monitoring contract**:
+
+```text
+prediction
+→ compare against realized evidence
+→ detect anomaly / mismatch
+→ decide whether to adapt, ask for help, or revise the model.
+```
+
 Research question:
 
 ```text
 when should one world model be adapted,
 when should another model be selected,
-and when should the system conclude that no existing model is adequate?
+when should the system request external correction,
+and when should it conclude that no existing model is adequate?
 ```
 
 ---
@@ -319,6 +364,14 @@ Primary paper: https://arxiv.org/abs/2606.04463
 Evidence: `PRIMARY_PAPER`
 
 OSCAR uses a 2D kinematic skeleton rendering as a common conditioning representation across robot arms and human hands. This is another candidate answer to cross-embodiment action semantics.
+
+### Embodiment Gap survey
+
+**The Embodiment Gap in Robot Foundation Models**  
+Primary survey: https://arxiv.org/abs/2608.18433  
+Evidence: `SURVEY_SIGNAL`
+
+The survey distinguishes what can be shared across robots from the adaptation work still required on a new body. It is useful as a reporting framework for separating reusable world knowledge from embodiment-specific execution machinery.
 
 Neither result proves a universal embodiment representation; together they show that action/world abstraction depends strongly on how the robot body is represented.
 
@@ -476,6 +529,10 @@ recovery of calibrated prediction/control
 
 Keep task/environment fixed while changing robot morphology/action interface; test whether the state/action abstraction still preserves equivalent physical meaning.
 
+### D-G8 — model falsification
+
+Inject a regime outside the current model/hypothesis family and measure whether the system reports model inadequacy rather than forcing the evidence into the nearest known explanation.
+
 ---
 
 ## 16. Adjacent gaps discovered
@@ -489,6 +546,7 @@ non-stationarity and test-time adaptation
 task-semantic / functional-role state
 self / embodiment model
 representation reversibility
+world-model falsification / changepoint detection
 open-world model inadequacy detection
 ```
 
@@ -510,6 +568,7 @@ When does hierarchy genuinely improve sufficiency rather than merely add modules
 How should the system detect that its current dynamics/embodiment abstraction is stale?
 Should action semantics be represented in robot-specific coordinates or a shared embodiment-invariant space?
 When should a model be adapted, replaced, composed with another model, or rejected as inadequate?
+How can a robot tell the difference between ordinary prediction error and evidence that its model class is wrong?
 ```
 
 ---
@@ -520,4 +579,4 @@ Do not equate minimal state with general understanding.
 
 Do not equate maximal-detail state with better intelligence.
 
-The research target is **appropriate sufficiency at appropriate granularity, with explicit knowledge of what was discarded, whether it can be recovered, and whether the abstraction remains valid when the world or embodiment changes**.
+The research target is **appropriate sufficiency at appropriate granularity, with explicit knowledge of what was discarded, whether it can be recovered, and whether the abstraction/model remains valid when the world or embodiment changes**.
