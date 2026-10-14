@@ -36,8 +36,6 @@ vs
 robot-executable behavior
 ```
 
-Why it matters:
-
 RoboWM-Bench converts generated human/robot manipulation behavior into embodied action sequences and tests whether execution actually completes the task. It reports recurring failures in spatial reasoning, contact prediction and deformation even when generated videos appear plausible.
 
 What it does **not** establish:
@@ -50,25 +48,12 @@ Stage-2 question:
 
 > What information is missing when visual prediction is perceptually strong but action extraction remains physically invalid?
 
----
-
 ### RoboTrustBench
 
 Primary paper: https://arxiv.org/abs/2606.01600  
 Evidence: `PRIMARY_PAPER`
 
-Research role:
-
-Tests video world models under:
-
-- normal instructions;
-- constraint-sensitive cases;
-- counterfactual cases;
-- adversarial/unsafe instructions.
-
-Why it matters:
-
-It separates ordinary visual coherence from constraint reasoning, counterfactual grounding, physical interaction and safe refusal.
+Tests video world models under normal, constraint-sensitive, counterfactual and adversarial/unsafe instructions.
 
 Stage-2 question:
 
@@ -83,15 +68,9 @@ Stage-2 question:
 Primary paper: https://arxiv.org/abs/2609.19600  
 Evidence: `PRIMARY_PAPER`
 
-Research role:
-
 Contact-centric world modeling for deformable-object manipulation.
 
-Why it matters:
-
 Rigid-object geometry is not enough for bags, cloth and other deformables. Contact topology, deformation and action-response dynamics can dominate task success.
-
-The reported system predicts deformable-object dynamics at larger time steps than its source numerical simulator and uses generated trajectories to expand policy-training data.
 
 What it does **not** establish:
 
@@ -113,19 +92,9 @@ Primary paper: https://arxiv.org/abs/2610.04432
 Submitted: 2026-10-03; revised through 2026-10-09  
 Evidence: `PRIMARY_PAPER`
 
-Research role:
+Autonomous video-to-simulation reconstruction from embodied videos, evaluated by geometric fidelity, dynamic fidelity and functional correctness.
 
-Autonomous video-to-simulation reconstruction from embodied videos.
-
-Evaluation dimensions include:
-
-- geometric fidelity;
-- dynamic fidelity;
-- functional correctness.
-
-Why it matters:
-
-The benchmark reports that worlds which look better can function worse. This reinforces a central distinction for Clover:
+Central distinction:
 
 ```text
 visual resemblance
@@ -149,19 +118,11 @@ Primary paper: https://arxiv.org/abs/2610.10409
 Submitted: 2026-10-07  
 Evidence: `PRIMARY_PAPER`
 
-Research role:
-
-Benchmarking multimodal agents across 84 physical tasks spanning manipulation, mobile manipulation, locomotion, driving and aerial control.
-
-Why it matters:
-
-The reported agents can construct useful perception/control subroutines such as segmentation, camera calibration, spatial estimation and dynamics computation, but still fail to compose them reliably into successful behavior. Reported failures include losing task-relevant object state, ineffective recovery and incorrect completion judgments.
+Benchmarks multimodal agents across 84 physical tasks spanning manipulation, mobile manipulation, locomotion, driving and aerial control. Reported failures include loss of task-relevant object state, ineffective recovery and incorrect completion judgments even when useful perception/control subroutines can be constructed.
 
 Stage-2 question:
 
 > Is the missing capability a better component, a persistent task/world state, a better interface contract, or closed-loop verification?
-
-This source is particularly relevant to Stage 3 systems-level Synthesis because it warns that strong isolated capabilities can fail through composition.
 
 ---
 
@@ -172,13 +133,9 @@ This source is particularly relevant to Stage 3 systems-level Synthesis because 
 Primary paper: https://arxiv.org/abs/2609.19542  
 Evidence: `PRIMARY_PAPER`
 
-Research role:
+Associates frame-wise semantics with persistent world-space voxels and uses history-preserving refinement, replay and verification.
 
-Training-free persistent semantic memory for long-horizon open-vocabulary mapping.
-
-Why it matters:
-
-It associates frame-wise semantics with persistent world-space voxels and uses history-preserving refinement, replay and verification. This makes it a useful comparator for the question:
+Research contrast:
 
 ```text
 frame-wise semantics
@@ -192,10 +149,6 @@ What it does **not** establish:
 - causal or physical understanding;
 - that voxel memory is the best general-purpose representation.
 
-Stage-2 question:
-
-> How much long-horizon stability can be obtained by persistent aggregation alone before a richer world model is needed?
-
 ---
 
 ## 6. Amodal perception must be separated from ordinary tracking
@@ -205,19 +158,20 @@ Stage-2 question:
 Primary paper: https://arxiv.org/abs/2312.12433  
 Evidence: `PRIMARY_PAPER`
 
-Research role:
-
 A benchmark for tracking objects through partial/full occlusion and out-of-frame states with amodal annotations.
 
-Why it remains relevant:
+Required distinction:
 
-Modern video segmentation/tracking can maintain visible masks, but world understanding requires reasoning about entities when the visible support disappears.
+```text
+visible detection
+→ visible tracking
+→ amodal completion
+→ re-identification
+→ object permanence
+→ persistent world entity
+```
 
-Stage-2 question:
-
-> How should we distinguish visible tracking, amodal completion, re-identification and true object permanence?
-
-TAO-Amodal is older than the current 2026 frontier but remains a useful diagnostic anchor.
+These are different capabilities.
 
 ---
 
@@ -228,17 +182,7 @@ TAO-Amodal is older than the current 2026 frontier but remains a useful diagnost
 Primary paper: https://arxiv.org/abs/2604.04974  
 Evidence: `PRIMARY_PAPER`
 
-Research role:
-
-Organizes video-to-control approaches into:
-
-- direct video→action policies;
-- latent-action interfaces;
-- explicit visual interfaces.
-
-Why it matters:
-
-The difficult problem may not be “video representation” alone but the interface between video-derived world information and closed-loop robot control.
+Organizes video-to-control approaches into direct video→action policies, latent-action interfaces and explicit visual interfaces.
 
 Stage-2 question:
 
@@ -253,22 +197,11 @@ Stage-2 question:
 Primary paper: https://arxiv.org/abs/2604.16022  
 Evidence: `PRIMARY_PAPER`
 
-Research role:
-
 Embodied multi-agent planning and social reasoning benchmark.
-
-Why it matters:
-
-The physical world contains other agents whose future behavior may depend on hidden goals, communication, deception and interaction history. World understanding may eventually require maintaining beliefs about agent state in addition to object/geometry state.
-
-What it does **not** establish:
-
-- that social reasoning must be part of Clover's first visual-world algorithm;
-- that language-agent game environments directly transfer to real robotics.
 
 Stage-1 implication:
 
-Keep **multi-agent / social world modeling** visible in the inventory so the project does not silently equate “real world” with only rigid objects and static environments.
+Keep **multi-agent / social world modeling** visible so the project does not silently equate “real world” with only rigid objects and static environments.
 
 ---
 
@@ -293,20 +226,20 @@ DR-WM reconstructs geometry from an initial RGB image and augments it with spati
 
 Why it matters:
 
-This is unusually relevant to the central Clover question because it makes a hard distinction between **what pixels reveal geometrically** and **what physical parameters become learnable from interaction**. Friction/contact behavior is not treated as something that must be visually obvious.
+It makes a hard distinction between **what pixels reveal geometrically** and **what physical parameters become learnable from interaction**. Friction/contact behavior is not assumed to be visually obvious.
 
 What it does **not** establish:
 
 - that its terrain representation is a general world representation;
 - that passive RGB can identify friction or contact properties;
-- a pure `V0/L0` route: the method explicitly uses action/state experience to calibrate physical behavior;
-- general manipulation/contact reasoning beyond the evaluated quadruped-terrain setting.
+- a pure `V0/L0` route: it explicitly uses action/state experience;
+- general manipulation/contact reasoning beyond the evaluated terrain setting.
 
 Stage-2 questions:
 
 > Which hidden physical variables are identifiable from passive video, which become identifiable from action-response, and which remain impossible without non-visual evidence?
 
-> Can a learned representation discover the same action-relevant parameters without imposing the simulator's physical parameterization?
+> Can a learned representation discover action-relevant physical variables without imposing the simulator's parameterization?
 
 ---
 
@@ -321,42 +254,23 @@ Evidence: `OFFICIAL_REPORTED_RESULT`
 Associated ERQA benchmark/code: https://github.com/embodiedreasoning/ERQA  
 Evidence: `OPEN_SOURCE`
 
-Google reports Gemini 4 Argon as a general-purpose model used across:
+Google reports Argon across embodied/physical reasoning, zero-shot closed-loop robot control through tools/primitives, Real2Sim reconstruction/calibration, video-world-model steering, hindsight labeling/progress estimation, simulation-generated robot training data and iterative self-improvement.
 
-- embodied/physical reasoning;
-- zero-shot closed-loop robot control through tools/primitives;
-- Real2Sim reconstruction and calibration;
-- video-world-model steering;
-- hindsight labeling / progress estimation;
-- simulation-generated robot training data;
-- iterative robot self-improvement.
-
-The official report states an **87%** pure-reasoning score on ERQA. Treat that score as an official reported result until independently reproduced.
-
-Why it matters:
-
-Argon is a strong counter-hypothesis to a narrow view that robotic world understanding must live inside a purpose-built robot architecture. A powerful general multimodal model plus visual/geometry/simulation/tool harnesses can already perform substantial physical workflows.
+The official report states an **87%** pure-reasoning score on ERQA. Treat it as an official reported result until independently reproduced.
 
 Important provenance boundary:
 
-Argon's robotics workflows use mixtures of RGB/video, calibrated geometry, code/tools, simulation, robot state/proprioception and in some examples tactile/contact telemetry. It is therefore **not** evidence that the demonstrated robotics capabilities were learned from vision alone.
-
-What it does **not** establish:
-
-- a persistent evidence-grounded world state;
-- that its internal representation is physically identifiable;
-- that general reasoning eliminates the need for robot-specific state/memory;
-- independent scientific reproduction of the reported robotics demonstrations.
+The robotics workflows mix RGB/video with calibrated geometry, code/tools, simulation, robot state/proprioception and in some examples tactile/contact telemetry. They are therefore **not** evidence that the demonstrated capabilities were learned from vision alone.
 
 Stage-2 questions:
 
 > Which Argon capabilities come from visual evidence, which from language/world priors, and which from tools/simulation/state access?
 
-> Does an explicit persistent world representation add measurable value beyond a strong general reasoner with an external visual/tool harness?
+> Does persistent world state add measurable value beyond a strong general reasoner with an external visual/tool harness?
 
 ---
 
-## 11. ERQA should enter the embodied-reasoning benchmark inventory
+## 11. ERQA enters the embodied-reasoning benchmark inventory
 
 ### Embodied Reasoning Question Answer (ERQA)
 
@@ -365,21 +279,15 @@ Evidence: `OPEN_SOURCE`
 
 The repository exposes a 400-example multimodal benchmark of interleaved images and text focused on real-world spatial/world-knowledge reasoning in robotics contexts.
 
-Why it matters:
+Useful for cheap comparison of public models before real-robot evaluation.
 
-ERQA provides a reproducible reference point for the rapidly improving class of general multimodal physical reasoners. It is especially useful for comparing public APIs/models before expensive real-robot evaluation.
-
-What it does **not** measure by itself:
+Does **not** measure by itself:
 
 - persistent visual memory;
 - world change / belief revision;
 - causal intervention;
-- long-horizon action execution;
-- whether an answer was derived from visual evidence rather than pretrained language/world knowledge.
-
-Stage-1 action:
-
-Add ERQA to the benchmark inventory with a warning that it is an **embodied-reasoning diagnostic**, not a definition of real-world understanding.
+- long-horizon execution;
+- whether an answer came from visual evidence versus pretrained language/world knowledge.
 
 ---
 
@@ -390,25 +298,17 @@ Model: https://huggingface.co/nvidia/GR00T-N1.7-3B
 Official technical overview: https://developer.nvidia.com/blog/develop-humanoid-robot-policies-end-to-end-with-nvidia-isaac-gr00t/  
 Evidence: `OPEN_SOURCE` / `OFFICIAL_PROJECT`
 
-GR00T N1.7 is the current NVIDIA open VLA release for generalized humanoid skills. The public repository describes a Cosmos-Reason2-2B / Qwen3-VL-based VLM backbone, relative end-effector action representation, robot demonstrations and large-scale human egocentric-video pretraining.
+GR00T N1.7 is a current NVIDIA open VLA release for generalized humanoid skills, with a Cosmos-Reason2-2B / Qwen3-VL-based VLM backbone, relative end-effector action representation, robot demonstrations and large-scale human egocentric-video pretraining.
 
-Why it matters:
-
-For Clover, GR00T N1.7 is important less as a proposed component than as a **reproducible direct-policy baseline**. Any claim that a persistent/world-state representation is necessary for general robot behavior should eventually survive comparison against strong open end-to-end policies of this class.
-
-What it does **not** establish:
-
-- that direct VLA policies have a stable persistent world model;
-- that human-video pretraining isolates visual knowledge from language/action priors;
-- that good manipulation performance answers the observability, permanence, causality or epistemic-state questions.
+For Clover, it is a **reproducible direct-policy baseline**, not a proposed component.
 
 Stage-2 question:
 
-> What task-relevant state can be decoded from GR00T's internal representations, and which failure modes persist despite cross-embodiment human-video pretraining?
+> What task-relevant state can be decoded from GR00T's internal representations, and which world-understanding failures persist despite human-video/cross-embodiment pretraining?
 
 ---
 
-## 13. Current world-action frontier splits into two different state strategies
+## 13. Current world-action frontier splits into different state strategies
 
 ### Being-M0.7
 
@@ -416,7 +316,7 @@ Primary paper: https://arxiv.org/abs/2610.11283
 Submitted: 2026-10-08  
 Evidence: `PRIMARY_PAPER`
 
-Being-M0.7 transfers visual-motion priors from a large mixture of human video/motion data into humanoid control through a latent world-action model.
+Transfers large-scale human visual-motion priors into humanoid control through a latent world-action model.
 
 ### HWAM
 
@@ -424,11 +324,9 @@ Primary paper: https://arxiv.org/abs/2610.12026
 Submitted: 2026-10-08  
 Evidence: `PRIMARY_PAPER`
 
-HWAM explicitly predicts the robot's post-execution body state together with reference actions to address the gap between commanded and physically realized motion.
+Explicitly predicts post-execution body state together with reference actions to model the gap between commanded and physically realized motion.
 
-Why the pair matters:
-
-These two contemporary WAMs expose an important split:
+Research split:
 
 ```text
 large latent visual-motion prior
@@ -436,13 +334,11 @@ vs
 explicit post-execution state target
 ```
 
-Neither result settles the general representation question, but together they create a useful Stage-2 comparison for **what action-relevant state must be represented explicitly**.
-
 Stage-2 questions:
 
 > When does explicit realized-state prediction improve control over a latent future model?
 
-> Which benefits come from representation choice versus data scale, humanoid-specific supervision or training objective?
+> Which benefits come from representation choice versus data scale, embodiment-specific supervision or training objective?
 
 ---
 
@@ -454,11 +350,9 @@ Primary paper: https://arxiv.org/abs/2610.07028
 Submitted: 2026-10-04  
 Evidence: `PRIMARY_PAPER`
 
-The paper studies whether frozen pretrained diffusion representations can be aligned to coordinates that recover latent dynamical states under explicit identifiability assumptions, rather than forcing a choice between fully opaque distributed latents and fully hand-designed symbolic state.
+Studies whether frozen pretrained diffusion representations can be aligned to coordinates that recover latent dynamical states under explicit identifiability assumptions.
 
-Why it matters:
-
-This strengthens the hybrid hypothesis:
+Hybrid hypothesis:
 
 ```text
 powerful distributed representation
@@ -469,12 +363,8 @@ partially identifiable / intervention-relevant coordinates
 What it does **not** establish:
 
 - open-world real-video identifiability;
-- that the required theoretical assumptions hold for arbitrary real scenes;
-- that identified variables are sufficient for robot planning or persistent memory.
-
-Stage-2 question:
-
-> Can useful world coordinates be discovered on top of large visual representations while retaining the representation's open-world capacity?
+- that theoretical assumptions hold for arbitrary real scenes;
+- that identified variables are sufficient for planning or persistent memory.
 
 ---
 
@@ -490,19 +380,15 @@ The system dynamically searches, scans, re-watches and changes sampling density 
 
 Why it matters:
 
-This is a useful non-robot counterexample showing that **active evidence selection** can improve both efficiency and answer quality without changing the base model. It supports treating evidence acquisition policy as a separate research variable from representation quality.
+It makes **evidence-acquisition policy** a separate research variable from base representation quality.
 
 Important limitation:
 
-The public product mode can use frames, audio and transcripts; it is not automatically a vision-only protocol. It also does not create a persistent physical world model.
-
-Stage-2 question:
-
-> How much of apparent long-video understanding comes from better evidence acquisition rather than a better internal world representation?
+The public mode can use frames, audio and transcripts; it is not automatically a vision-only protocol and does not create a persistent physical world model.
 
 ---
 
-## 16. 2026-10-13: active semantic exploration is still a live classical/structured alternative
+## 16. 2026-10-13: active semantic exploration remains a strong structured alternative
 
 ### Mobility-Budget-Constrained Submodular Maximization for Distributed Semantic Multi-Robot Exploration
 
@@ -510,25 +396,145 @@ Primary paper: https://arxiv.org/abs/2610.17562
 Submitted: **2026-10-13**  
 Evidence: `PRIMARY_PAPER`
 
-The method combines semantic mapping, Dirichlet uncertainty, information-gain objectives and mobility-aware trajectory selection under communication constraints.
+Combines semantic mapping, Dirichlet uncertainty, information-gain objectives and mobility-aware trajectory selection under communication constraints.
 
 Why it matters:
 
-It is a reminder that active perception need not start from a large learned world model. Explicit uncertainty and information gain remain strong structured baselines for deciding **where to look next**.
-
-What it does **not** establish:
-
-- general open-world semantic understanding;
-- learned active perception from raw RGB alone;
-- real-world performance beyond the reported simulation settings.
-
-Stage-2 question:
-
-> When does an explicit uncertainty/information-gain controller outperform learned active-view selection, and can the two be compared under the same observation budget?
+Active perception need not start from a large learned world model. Explicit uncertainty and information gain remain structured baselines for deciding **where to look next**.
 
 ---
 
-## 17. Immediate frontier-analysis queue
+## 17. 2026-10-12: articulated assets expose mass/material/function as first-class evaluation targets
+
+### Artisan — Towards Physically Grounded Articulated 3D Assets
+
+Primary paper: https://arxiv.org/abs/2610.13947  
+Project: https://physicalvision.github.io  
+Submitted: 2026-10-09; revised **2026-10-12**  
+Evidence: `PRIMARY_PAPER`
+
+Artisan moves articulated 3D generation from reproducing appearance toward reproducing how objects **move and function**. Its pipeline uses physical-simulation feedback and evaluates more than geometry/appearance/articulation, including collision-free motion, stability under gravity, mass/material properties and downstream task behavior.
+
+Its benchmark includes 100 reference assets, 50 stability prompts and 50 objects with reference masses, and evaluates more than 10 representative models.
+
+Why it matters:
+
+This adds a missing Stage-1 dimension:
+
+```text
+visual/spatial asset quality
+≠
+articulation correctness
+≠
+physical stability
+≠
+material/mass correctness
+≠
+functional usability
+```
+
+What it does **not** establish:
+
+- that mass/material properties can be inferred correctly from passive RGB;
+- that simulation feedback matches arbitrary real materials;
+- a universal world representation for robotics.
+
+Stage-2 question:
+
+> Which functional/physical object properties can be inferred visually, which require interaction, and which should remain uncertain rather than hallucinated?
+
+---
+
+## 18. Unified causal World-Action Modeling is scaling rapidly
+
+### Riemann-1.0
+
+Primary paper: https://arxiv.org/abs/2608.27033  
+Evidence: `PRIMARY_PAPER`
+
+Riemann-1.0 jointly models multi-view visual observations, robot states and embodiment-specific actions as one causal autoregressive sequence. The paper reports progressive embodied pretraining over more than 200K hours of heterogeneous interaction experience spanning human egocentric video, handheld-gripper demonstrations and robot trajectories.
+
+Why it matters:
+
+It is a strong counter-hypothesis to a separate explicit world-model architecture:
+
+```text
+world evolution + robot state + action
+inside one causal sequence model
+```
+
+What it does **not** establish:
+
+- that one autoregressive sequence is the best representation of real-world belief;
+- vision-only learning provenance;
+- explicit uncertainty/object permanence/causal identifiability outside the trained objective.
+
+Stage-2 question:
+
+> What world state emerges inside a unified causal WAM, and what failures remain when representation boundaries are removed rather than made explicit?
+
+---
+
+## 19. Language can itself become the action/world-model interface
+
+### Qwen-RobotWorld
+
+Primary technical report: https://arxiv.org/abs/2606.17030  
+Evidence: `PRIMARY_PAPER`
+
+Qwen-RobotWorld uses natural language as a unified action interface and predicts future visual trajectories across manipulation, autonomous driving, navigation and human-to-robot transfer. Its training corpus combines millions of video-text examples across many embodiments/action categories.
+
+Why it matters:
+
+It offers a different hypothesis from action tokens or robot-state-conditioned dynamics:
+
+```text
+language action abstraction
+→ future visual trajectory
+→ data / evaluation / planning signal
+```
+
+What it does **not** establish:
+
+- that language is a sufficient machine-native action representation;
+- that physical state is identifiable from generated pixels;
+- that language-conditioned prediction avoids language-prior shortcuts.
+
+Stage-2 question:
+
+> What physical precision is lost or gained when language becomes the shared action interface across embodiments?
+
+---
+
+## 20. Foundation world models are becoming data engines, not only simulators
+
+### Xiaomi-Robotics-U0
+
+Primary paper: https://arxiv.org/abs/2607.11643  
+Official project/code/checkpoints: https://robotics.xiaomi.com/xiaomi-robotics-u0.html  
+Evidence: `PRIMARY_PAPER` / `OPEN_SOURCE`
+
+Xiaomi-Robotics-U0 is a 38B multimodal autoregressive world foundation model that unifies image/video generation, embodied scene generation, multi-view transfer and embodied video generation. The paper reports using the generated/edited embodied data to improve downstream manipulation generalization.
+
+Why it matters:
+
+Stage 1 should distinguish at least three world-model roles:
+
+```text
+world representation for belief
+world simulator for prediction/evaluation
+world data engine for policy training
+```
+
+A model can be useful in the third role without being a faithful internal world representation.
+
+Stage-2 question:
+
+> How should Clover separately evaluate a world model's epistemic fidelity, simulator fidelity and usefulness as a data generator?
+
+---
+
+## 21. Immediate frontier-analysis queue
 
 Highest-priority future Stage-2 reports after the 2026-10-14 refresh:
 
@@ -536,9 +542,13 @@ Highest-priority future Stage-2 reports after the 2026-10-14 refresh:
 Gemini 4 Argon for Robotics + ERQA
 DR-WM / From Pixels to Executable Physics
 GR00T N1.7
+Riemann-1.0
+Qwen-RobotWorld
+Xiaomi-Robotics-U0
 Being-M0.7
 HWAM
 Identifiable World Models
+Artisan
 Vantage / Seek-and-View
 Agentic Video Understanding
 Video2World
@@ -555,11 +565,13 @@ Suggested comparison axes:
 ```text
 visual protocol
 learning provenance
+representation/state type
 visual fidelity
 geometry fidelity
 state identifiability
 dynamics fidelity
 contact / friction / deformation correctness
+mass / material / articulation correctness
 persistent state
 memory / evidence retrieval
 functional correctness
@@ -571,12 +583,13 @@ active evidence acquisition
 recovery
 uncertainty / refusal
 open-world generalization
+world-model role: belief / simulator / data engine
 reproducibility
 ```
 
 ---
 
-## 18. Frontier-watch rule
+## 22. Frontier-watch rule
 
 Add a source here when it is current and materially changes what Stage 1 should know.
 
