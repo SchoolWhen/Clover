@@ -26,7 +26,8 @@ Stage-1 freshness checked through: **2026-10-14**.
 |---|---|---|---|
 | 0 | [`PIPELINE.md`](PIPELINE.md) | explains the complete lifecycle | canonical |
 | 1 | [`RESEARCH.md`](RESEARCH.md) | stable broad source/method/dataset/benchmark inventory | **ACTIVE** |
-| 1 | [`RESEARCH_STATE_VARIABLES.md`](RESEARCH_STATE_VARIABLES.md) | world-state variables, evidence routes and current observability/identifiability map | **ACTIVE — added 2026-10-14** |
+| 1 | [`RESEARCH_STATE_VARIABLES.md`](RESEARCH_STATE_VARIABLES.md) | world-state variables, evidence routes and current observability map | **ACTIVE — added 2026-10-14** |
+| 1 | [`RESEARCH_IDENTIFIABILITY.md`](RESEARCH_IDENTIFIABILITY.md) | predictability vs observability vs identifiability; partial observability, interventions and information limits | **ACTIVE — added 2026-10-14** |
 | 1 | [`RESEARCH_FRONTIER.md`](RESEARCH_FRONTIER.md) | current primary/official sources that materially expand/challenge the inventory | **ACTIVE — refreshed 2026-10-14** |
 | 2 | [`ANALYSIS.md`](ANALYSIS.md) | one-method-one-report mechanism analysis | template ready |
 | 3 | [`SYNTHESIS.md`](SYNTHESIS.md) | compare strengths, weaknesses, trade-offs and gaps | future |
@@ -35,7 +36,7 @@ Stage-1 freshness checked through: **2026-10-14**.
 | 6 | [`EVALUATION.md`](EVALUATION.md) | experiments and Results | framework ready |
 | 7 | [`REFLECTION.md`](REFLECTION.md) | interpret failures and start the next cycle | future |
 
-A new agent should start with `PIPELINE.md`, read the stable `RESEARCH.md` inventory, inspect `RESEARCH_STATE_VARIABLES.md` to understand what “world state” may actually contain and what evidence constrains it, then scan `RESEARCH_FRONTIER.md` for the current research edge before opening deeper survey material.
+A new agent should start with `PIPELINE.md`, read the stable `RESEARCH.md` inventory, inspect `RESEARCH_STATE_VARIABLES.md` to understand what “world state” may contain, then read `RESEARCH_IDENTIFIABILITY.md` to understand which variables are actually constrained by which evidence. `RESEARCH_FRONTIER.md` is the current research edge.
 
 ## Current Stage 1 goal
 
@@ -64,6 +65,8 @@ open questions
 
 `RESEARCH_STATE_VARIABLES.md` makes the mother question more concrete by separating observable/geometric/entity/physical/latent-physical/functional/causal/epistemic state and recording whether current evidence comes from static RGB, passive video, active viewpoints, action-response or non-visual/privileged sensing.
 
+`RESEARCH_IDENTIFIABILITY.md` establishes a theory vocabulary for Stage 1: a variable can be statistically predictable without being physically identifiable; more frames do not automatically remove ambiguity; actions can act as interventions that reveal otherwise hidden dynamics; and uncertainty may be the correct answer when multiple worlds remain compatible with the visual evidence.
+
 `RESEARCH_FRONTIER.md` tracks newly important primary/official work such as execution-grounded world-model evaluation, trustworthiness/counterfactual evaluation, contact/deformable dynamics, behavior-grounded physical parameters, articulated physical assets, video-to-simulation functional correctness, persistent semantic maps, amodal tracking, general multimodal robotics reasoning, current open VLA baselines and competing world-action-model state strategies.
 
 ## 2026-10-14 frontier snapshot
@@ -82,6 +85,8 @@ The latest Stage-1 refresh includes these research references:
 | SyncWorld — https://arxiv.org/abs/2609.09155 | `PRIMARY_PAPER` | shows that numerical robot actions need visual calibration to acquire setup-specific pixel/world meaning across embodiment and viewpoint changes |
 | Robot-Factored World Models — https://arxiv.org/abs/2607.22535 | `PRIMARY_PAPER` | factors action realization and rendered robot geometry away from scene-response prediction; useful interface alternative to raw action conditioning |
 | WROP — https://arxiv.org/abs/2609.28654 | `PRIMARY_PAPER` | trains object permanence/solidity directly with cognitive-science-inspired synthetic curricula; complementary to realistic persistence benchmarks |
+| OASIS-Map — https://arxiv.org/abs/2607.14899 | `PRIMARY_PAPER` | multi-session mapping for appeared/disappeared/moved/replaced objects; important for belief revision when the real world changes between observations |
+| R4DSG — https://arxiv.org/abs/2608.11017 | `PRIMARY_PAPER` | RGB-only persistent object/change memory using relative 4D scene graphs for long egocentric video |
 | ManiSoft — https://arxiv.org/abs/2605.18617 | `PRIMARY_PAPER` | makes the robot body's own deformable physical state part of visual manipulation, not only the external object's state |
 | Decision-Aware Uncertainty Evaluation — https://arxiv.org/abs/2603.10061 | `PRIMARY_PAPER` | evaluates calibration/selective prediction under partial visual evidence; relevant to “know when you do not know” |
 | GR00T N1.7 — https://github.com/NVIDIA/Isaac-GR00T | `OPEN_SOURCE` | current strong open VLA/direct-policy baseline with human-video pretraining and cross-embodiment action representation |
@@ -120,6 +125,12 @@ passive observation
 ≠
 action-response system identification
 
+observation
+≠
+belief
+≠
+identified latent state
+
 plausible future video
 ≠
 executable action consequence
@@ -135,6 +146,10 @@ articulation / mass / material / function
 rigid world state
 ≠
 deformable / contact / fluid state
+
+remembering the old world
+≠
+recognizing that the world changed
 
 strong general reasoner + tools
 ≠
@@ -161,7 +176,8 @@ hybrid identifiable coordinates are now a serious alternative
 
 The flat stage files are the primary navigation. Existing deeper material remains available as supporting evidence:
 
-- [`RESEARCH_STATE_VARIABLES.md`](RESEARCH_STATE_VARIABLES.md) — physical/world variables and current evidence/identifiability map.
+- [`RESEARCH_STATE_VARIABLES.md`](RESEARCH_STATE_VARIABLES.md) — physical/world variables and current evidence/observability map.
+- [`RESEARCH_IDENTIFIABILITY.md`](RESEARCH_IDENTIFIABILITY.md) — information limits, partial observability, interventions and identifiability assumptions.
 - [`survey/RESEARCH_OVERVIEW.md`](survey/RESEARCH_OVERVIEW.md) — visual research map.
 - [`survey/BACKGROUND_RESEARCH.md`](survey/BACKGROUND_RESEARCH.md) — broad background synthesis.
 - [`survey/SOURCE_MAP.md`](survey/SOURCE_MAP.md) — source → evidence → claim → limitation map.
