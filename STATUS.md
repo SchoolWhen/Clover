@@ -37,8 +37,9 @@ Start with:
 3. [`research/RESEARCH.md`](research/RESEARCH.md)
 4. [`research/RESEARCH_STATE_VARIABLES.md`](research/RESEARCH_STATE_VARIABLES.md)
 5. [`research/RESEARCH_IDENTIFIABILITY.md`](research/RESEARCH_IDENTIFIABILITY.md)
-6. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
-7. [`research/README.md`](research/README.md)
+6. [`research/RESEARCH_PHYSICAL_PROPERTIES.md`](research/RESEARCH_PHYSICAL_PROPERTIES.md)
+7. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
+8. [`research/README.md`](research/README.md)
 
 ## Stage-1 foundation — active / expanding
 
@@ -59,10 +60,15 @@ The current inventory explicitly tracks directions including:
 - intuitive, relational and quantitative physics;
 - physics-structured / differentiable world models;
 - contact, friction, articulation and deformable-object dynamics;
-- mass, density, inertia, material and function grounding;
+- mass, density, center of mass, inertia, material and function grounding;
+- stiffness / compliance and tactile-grounded physical state;
 - liquids / viscosity and other weakly visible physical properties;
+- granular packing / cohesion and preparation-dependent material state;
+- cutting, splitting, merging, breakage and irreversible topology change;
+- thermal / temperature-aware manipulation as a visible-spectrum boundary case;
 - causal representation learning;
 - counterfactual visual reasoning;
+- explicit intervention / counterfactual datasets and benchmarks;
 - active perception and next-best-view;
 - system identification and action consequences;
 - generative world models;
@@ -89,7 +95,7 @@ This list is intentionally expandable. If a direction materially constrains the 
 
 ## World-state / observability map
 
-[`research/RESEARCH_STATE_VARIABLES.md`](research/RESEARCH_STATE_VARIABLES.md) now provides a variable-level Stage-1 map spanning:
+[`research/RESEARCH_STATE_VARIABLES.md`](research/RESEARCH_STATE_VARIABLES.md) provides a variable-level Stage-1 map spanning:
 
 ```text
 observation state
@@ -125,7 +131,7 @@ This is now a first-class Stage-1 research question.
 
 ## Identifiability / information-limit foundation
 
-[`research/RESEARCH_IDENTIFIABILITY.md`](research/RESEARCH_IDENTIFIABILITY.md) now separates:
+[`research/RESEARCH_IDENTIFIABILITY.md`](research/RESEARCH_IDENTIFIABILITY.md) separates:
 
 ```text
 predictability
@@ -152,34 +158,97 @@ What alternative worlds remain compatible with the same visual evidence?
 When should the correct answer be uncertainty or another information-gathering action?
 ```
 
+## Hidden physical properties / irreversible change
+
+[`research/RESEARCH_PHYSICAL_PROPERTIES.md`](research/RESEARCH_PHYSICAL_PROPERTIES.md) now deepens the Stage-1 map for:
+
+```text
+mass / density
+center of mass / inertia
+friction
+stiffness / compliance
+temperature
+liquids / viscosity
+granular packing / cohesion
+contact / deformable state
+cutting / splitting / merging / breakage
+counterfactual and intervention datasets
+```
+
+The key distinctions are:
+
+```text
+property useful for action
+≠
+property learned from vision alone
+
+statistical prediction from appearance
+≠
+physical identification from evidence
+
+same entity, new pose
+≠
+entity split / merge / topology change
+
+future looks plausible
+≠
+future responds correctly to an intervention
+```
+
+Important current references include:
+
+- visual mass estimation — https://arxiv.org/abs/2601.20303
+- VisPhysQuant — https://arxiv.org/abs/2603.16958
+- ViTacPhys — https://arxiv.org/abs/2608.21355
+- HEARTH temperature dataset — https://arxiv.org/abs/2609.23418
+- friction via visual/haptic evidence — https://arxiv.org/abs/2010.08277
+- friction via proxy interactions — https://arxiv.org/abs/2604.24188
+- DR-WM — https://arxiv.org/abs/2610.17630
+- PointCast — https://arxiv.org/abs/2609.28393
+- WorldContact — https://arxiv.org/abs/2609.19600
+- ManiSoft — https://arxiv.org/abs/2605.18617
+- DoughNet — https://arxiv.org/abs/2404.12524
+- CulinaryCut-VLAP — https://arxiv.org/abs/2601.06451
+- Sashimi-Bot — https://www.nature.com/articles/s44182-026-00098-9
+- What-If World — https://arxiv.org/abs/2605.27589
+- CRONOS — https://arxiv.org/abs/2605.23699
+- CausalPhys — https://arxiv.org/abs/2606.05966
+- CG-World — https://arxiv.org/abs/2607.26452
+- CHAIN — https://arxiv.org/abs/2602.21015
+
+These sources collectively make physical-property provenance and intervention sensitivity explicit Stage-1 concerns.
+
 ## 2026-10-14 frontier refresh
 
 The current edge includes several references that materially change the comparison space:
 
 - **Gemini 4 Argon for Robotics** — https://developers.googleblog.com/gemini-4-argon-for-robotics/ — `OFFICIAL_REPORTED_RESULT`; general multimodal physical-reasoning / Real2Sim / robot-tool-use counter-hypothesis.
 - **ERQA** — https://github.com/embodiedreasoning/ERQA — `OPEN_SOURCE`; embodied/spatial reasoning benchmark and evaluation harness.
-- **DR-WM / From Pixels to Executable Physics** — https://arxiv.org/abs/2610.17630 — `PRIMARY_PAPER`, submitted 2026-10-13; separates visual geometry from contact/friction properties calibrated through action-response evidence.
-- **Physically Guided Visual Mass Estimation** — https://arxiv.org/abs/2601.20303 — `PRIMARY_PAPER`; explicitly treats mass from one RGB image as ill-posed and factorizes inference through volume/density-related priors.
-- **PhysQuantAgent / VisPhysQuant** — https://arxiv.org/abs/2603.16958 — `PRIMARY_PAPER`; real-object mass-estimation benchmark using multi-view RGB-D and measured ground truth.
+- **DR-WM / From Pixels to Executable Physics** — https://arxiv.org/abs/2610.17630 — `PRIMARY_PAPER`; separates visual geometry from contact/friction properties calibrated through action-response evidence.
+- **HEARTH** — https://arxiv.org/abs/2609.23418 — `PRIMARY_PAPER`; RGB-thermal-3D dataset demonstrating temperature as task-relevant hidden physical state.
+- **ViTacPhys** — https://arxiv.org/abs/2608.21355 — `PRIMARY_PAPER`; mass/friction/stiffness inference grounded in visual+tactile demonstrations.
+- **What-If World** — https://arxiv.org/abs/2605.27589 — `PRIMARY_PAPER`; paired intervention benchmark for embodied world models.
+- **CRONOS** — https://arxiv.org/abs/2605.23699 — `PRIMARY_PAPER`; counterfactual physical-consistency benchmark under controlled visual interventions.
+- **CG-World** — https://arxiv.org/abs/2607.26452 — `PRIMARY_PAPER`; large structured world-state data with action/mechanism intervention branches and explicit physics/contact metadata.
+- **CHAIN** — https://arxiv.org/abs/2602.21015 — `PRIMARY_PAPER`; interactive physics-driven benchmark for causal action sequences under geometric/contact/support constraints.
+- **Physically Guided Visual Mass Estimation** — https://arxiv.org/abs/2601.20303 — `PRIMARY_PAPER`; treats single-RGB mass inference as ill-posed and factorizes through volume/density-related priors.
 - **PointCast** — https://arxiv.org/abs/2609.28393 — `PRIMARY_PAPER`; persistent point-state model across rigid, articulated, cloth and rope regimes.
-- **PointWorld** — https://arxiv.org/abs/2601.03782 — `PRIMARY_PAPER`; 3D point-flow state/action model spanning multiple manipulation regimes, with RGB-D input.
-- **SyncWorld** — https://arxiv.org/abs/2609.09155 — `PRIMARY_PAPER`; visual calibration of action→visual mapping across new cameras, environments and embodiments.
-- **Robot-Factored World Models** — https://arxiv.org/abs/2607.22535 — `PRIMARY_PAPER`; factors action realization/robot rendering from the environment-response world model.
+- **SyncWorld** — https://arxiv.org/abs/2609.09155 — `PRIMARY_PAPER`; visual calibration of action→visual mapping across cameras/environments/embodiments.
+- **Robot-Factored World Models** — https://arxiv.org/abs/2607.22535 — `PRIMARY_PAPER`; factors action realization/robot rendering from environment response.
 - **WROP** — https://arxiv.org/abs/2609.28654 — `PRIMARY_PAPER`; trains object permanence/solidity with controlled cognitive-science-inspired curricula.
-- **OASIS-Map** — https://arxiv.org/abs/2607.14899 — `PRIMARY_PAPER`; multi-session object-level map change detection for moved, disappeared, appeared and replaced objects.
-- **R4DSG** — https://arxiv.org/abs/2608.11017 — `PRIMARY_PAPER`; RGB-only relative 4D scene-graph memory for persistent objects and anchor-relative changes in long egocentric video.
-- **GR00T N1.7** — https://github.com/NVIDIA/Isaac-GR00T — `OPEN_SOURCE`; current strong open VLA/direct-policy reference with human-video pretraining and cross-embodiment action representation.
-- **Riemann-1.0** — https://arxiv.org/abs/2608.27033 — `PRIMARY_PAPER`; unified causal WAM jointly modeling observations, robot state and action over large heterogeneous embodied experience.
-- **Qwen-RobotWorld** — https://arxiv.org/abs/2606.17030 — `PRIMARY_PAPER`; language-conditioned video world modeling across multiple embodied domains.
-- **Xiaomi-Robotics-U0** — https://arxiv.org/abs/2607.11643 — `PRIMARY_PAPER`; world foundation model functioning as embodied generator, transfer mechanism and data engine.
-- **Being-M0.7** — https://arxiv.org/abs/2610.11283 — `PRIMARY_PAPER`; latent visual-motion world-action route for humanoid control.
-- **HWAM** — https://arxiv.org/abs/2610.12026 — `PRIMARY_PAPER`; explicitly predicts post-execution body state to model the action-execution gap.
-- **Identifiable World Models** — https://arxiv.org/abs/2610.07028 — `PRIMARY_PAPER`; hybrid route combining distributed pretrained representations with identifiable dynamical coordinates under explicit assumptions.
-- **Artisan** — https://arxiv.org/abs/2610.13947 — `PRIMARY_PAPER`; adds collision, gravity stability, mass/material properties and functional task behavior to articulated-asset evaluation.
-- **Vantage / Seek-and-View** — https://arxiv.org/abs/2610.11810 — `PRIMARY_PAPER`; question-conditioned viewpoint/evidence acquisition for multi-view spatial reasoning.
-- **Agentic Video Understanding** — https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-agentic-video-in-gemini/ — `OFFICIAL_REPORTED_RESULT`; evidence-acquisition policy as a variable separate from base representation.
-- **RobotWorld** — https://arxiv.org/abs/2610.10409 — `PRIMARY_PAPER`; exposes composition, retained task-state, recovery and completion-verification failures across diverse physical tasks.
-- **Video2World** — https://arxiv.org/abs/2610.04432 — `PRIMARY_PAPER`; evaluates reconstructed worlds by geometry, dynamics and functional correctness rather than visual similarity alone.
+- **OASIS-Map** — https://arxiv.org/abs/2607.14899 — `PRIMARY_PAPER`; multi-session object-level map change detection.
+- **R4DSG** — https://arxiv.org/abs/2608.11017 — `PRIMARY_PAPER`; RGB-only relative 4D scene-graph memory for persistent objects and environmental change.
+- **GR00T N1.7** — https://github.com/NVIDIA/Isaac-GR00T — `OPEN_SOURCE`; current strong open VLA/direct-policy reference.
+- **Riemann-1.0** — https://arxiv.org/abs/2608.27033 — `PRIMARY_PAPER`; unified causal WAM jointly modeling observations, robot state and action.
+- **Qwen-RobotWorld** — https://arxiv.org/abs/2606.17030 — `PRIMARY_PAPER`; language-conditioned video world modeling across embodied domains.
+- **Xiaomi-Robotics-U0** — https://arxiv.org/abs/2607.11643 — `PRIMARY_PAPER`; world foundation model used as generator, transfer mechanism and data engine.
+- **Being-M0.7** — https://arxiv.org/abs/2610.11283 — `PRIMARY_PAPER`; latent visual-motion world-action route.
+- **HWAM** — https://arxiv.org/abs/2610.12026 — `PRIMARY_PAPER`; explicit post-execution body-state prediction.
+- **Identifiable World Models** — https://arxiv.org/abs/2610.07028 — `PRIMARY_PAPER`; hybrid distributed + identifiable-state route.
+- **Artisan** — https://arxiv.org/abs/2610.13947 — `PRIMARY_PAPER`; physical/function-aware articulated asset evaluation.
+- **Vantage / Seek-and-View** — https://arxiv.org/abs/2610.11810 — `PRIMARY_PAPER`; active viewpoint/evidence acquisition.
+- **RobotWorld** — https://arxiv.org/abs/2610.10409 — `PRIMARY_PAPER`; exposes composition, task-state, recovery and completion-verification failures.
+- **Video2World** — https://arxiv.org/abs/2610.04432 — `PRIMARY_PAPER`; separates visual similarity from dynamics and functional correctness.
 
 These are **research materials and comparators**, not Clover components.
 
@@ -200,11 +269,11 @@ DUSt3R · VGGT / VGGT-Ω · NeRF / 3DGS · 4DVGGT-D · DP-DeGauss
 entities / memory / dynamic-world revision
 SAM 3.1 · Slot Attention · PLATO · PersistBench · WROP · S-EMBER · VISTA · PerSeM · TAO-Amodal · OASIS-Map · R4DSG
 
-physical property / dynamics
-Physically Guided Visual Mass Estimation · PhysQuantAgent · DR-WM · PointCast · PointWorld · WorldContact · ManiSoft · Artisan
+physical property / hidden physics
+visual mass estimation · VisPhysQuant · ViTacPhys · HEARTH · friction interaction models · DR-WM · PointCast · WorldContact · ManiSoft · DoughNet · CulinaryCut-VLAP · Sashimi-Bot
 
 physical / causal understanding
-IntPhys 2 · Minimal Video Pairs · Principia · RoboPhys-3D · CausalVQA · causal representation learning
+IntPhys 2 · Minimal Video Pairs · Principia · RoboPhys-3D · CausalVQA · What-If World · CRONOS · CausalPhys · CG-World · CHAIN · causal representation learning
 
 active evidence / calibration
 Vantage · SyncWorld · agentic video understanding
@@ -242,6 +311,12 @@ Tracked resources include:
 - TAO-Amodal;
 - WROP;
 - VisPhysQuant;
+- HEARTH;
+- What-If World;
+- CRONOS;
+- CausalPhys;
+- CG-World;
+- CHAIN;
 - IntPhys 2;
 - Minimal Video Pairs;
 - CausalVQA;
@@ -274,13 +349,19 @@ hidden physical parameters
 
 shape / category / material appearance
 ≠
-mass / density / friction / stiffness
+mass / density / friction / stiffness / temperature
 
 passive observation
 ≠
 action-response system identification
 
+reversible rigid motion
+≠
+cutting / splitting / merging / breakage
+
 plausible prediction
+≠
+intervention-sensitive prediction
 ≠
 physically executable consequence
 
