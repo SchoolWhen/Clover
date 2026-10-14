@@ -4,10 +4,11 @@ This directory supports [`../RESEARCH_FOUNDATION_MODEL_SYSTEMS.md`](../RESEARCH_
 
 It is **not** a vendor-selection layer and does not make DeepSeek, Qwen, or any other model family a Clover dependency.
 
-## Current watch
+## Current watches
 
 - [`DEEPSEEK_QWEN.md`](DEEPSEEK_QWEN.md) — current DeepSeek/Qwen architecture, multimodal, data, inference-kernel, harness and Physical-AI signals checked through 2026-10-15.
 - [`../RESEARCH_TRAINING_POSTTRAINING.md`](../RESEARCH_TRAINING_POSTTRAINING.md) — pretraining, SFT/behavior cloning, co-training, distillation, RL, simulated post-training, deployment learning and continual adaptation across LLM/VLM/VLA/world-model systems.
+- [`../training/README.md`](../training/README.md) — controlled training-variable matrix covering data diversity/quality, alignment, action representation, horizon, update scope, reward/teacher, failure data, simulator trust and checkpoint selection.
 
 ## Why it exists
 
