@@ -26,27 +26,44 @@ Background Research / Research Map
 → Representation Hypothesis
 ```
 
-Start with [`SSOT.md`](SSOT.md), then [`research/survey/BACKGROUND_RESEARCH.md`](research/survey/BACKGROUND_RESEARCH.md) and [`research/survey/SOURCE_MAP.md`](research/survey/SOURCE_MAP.md).
+Start with [`SSOT.md`](SSOT.md), then [`research/survey/RESEARCH_OVERVIEW.md`](research/survey/RESEARCH_OVERVIEW.md), [`research/survey/BACKGROUND_RESEARCH.md`](research/survey/BACKGROUND_RESEARCH.md), [`research/dossiers/README.md`](research/dossiers/README.md) and [`research/survey/SOURCE_MAP.md`](research/survey/SOURCE_MAP.md).
 
 ## Background Research Foundation — ACTIVE / EXPANDING
 
-The repository now organizes the problem into explicit research domains:
+The repository now has two complementary research layers:
 
-- partial observability, uncertainty and active perception;
-- classical geometry and state estimation;
-- static self-supervised visual representation;
-- predictive video representation;
-- learned geometry and spatial reconstruction;
-- object-centric representation and visible tracking;
-- persistent visual/episodic memory;
-- intuitive physics and quantitative physical reasoning;
-- causality and intervention;
-- generative world models;
-- embodied VLM/VLA/world-action models;
-- robot foundation models and real-world generalization;
-- state/action-grounded evaluation.
+1. a broad Survey that maps the full problem, sources, methods, benchmarks and unresolved questions;
+2. eight deep research dossiers that push each domain from literature summary toward explicit baselines, discriminating experiments and kill conditions.
+
+Current dossiers:
+
+- `R-A` observability / epistemology;
+- `R-B` geometry;
+- `R-C` representation;
+- `R-D` memory / persistence;
+- `R-E` physics;
+- `R-F` causality / interaction;
+- `R-G` world model ↔ action;
+- `R-H` active perception / lifelong learning.
+
+The compact visual map is [`research/survey/RESEARCH_OVERVIEW.md`](research/survey/RESEARCH_OVERVIEW.md).
 
 Every durable external claim should map to a primary paper, official technical source or open repository, plus a statement of what the source does **not** establish.
+
+## Current Primary Contradictions
+
+The current research map is organized around six competing questions rather than historical Clover module names:
+
+```text
+C1 explicit state vs distributed latent vs hybrid / identifiable state
+C2 reconstruction vs prediction vs generation
+C3 object-centric vs dense scene representation
+C4 passive observation vs interaction
+C5 persistent world state vs long context / direct policy
+C6 evidence-grounded belief vs plausible generative completion
+```
+
+These contradictions will determine which baselines and diagnostic experiments are needed before a representation hypothesis is promoted.
 
 ## Current Research Baseline Updates
 
@@ -56,10 +73,13 @@ The Survey now treats these as important current references:
 - V-JEPA 2 / 2.1 for predictive video representation;
 - VGGT / VGGT-Ω for learned geometry;
 - SAM 3 / 3.1 for visible open-vocabulary entity detection/segmentation/tracking;
-- PersistBench and S-EMBER for persistent/streaming visual memory;
-- IntPhys 2, MVP, Principia and CausalVQA for physical/causal diagnostics;
+- PersistBench, S-EMBER and VISTA-style comparisons for persistent/streaming visual memory;
+- IntPhys 2, Minimal Video Pairs, QuantiPhy, Principia and CausalVQA for physical/causal diagnostics;
+- RoboPhys-3D for state/action-grounded world-model evaluation;
 - OpenVLA / π0.5 / Gemini Robotics / Helix 2.5 / Skild S1 as embodied policy/reasoning counter-hypotheses;
-- Atlas and Cosmos 3 as generative/general world-model counter-hypotheses.
+- WAM / ReWAM / Being-M0.7-class systems as world-action comparators;
+- Atlas and Cosmos 3 as generative/general world-model counter-hypotheses;
+- causal representation learning and active-perception literature as theoretical constraints on what passive observation can identify.
 
 These are **comparators and evidence**, not components automatically adopted into Clover.
 
@@ -82,10 +102,11 @@ The current Survey explicitly investigates, among others:
 - object-centric vs dense/field representation;
 - persistent memory and evidence retention;
 - belief revision and contradiction handling;
-- intuitive physics and quantitative physical state;
+- intuitive, quantitative and relational physics;
 - causal identifiability and counterfactual reasoning;
 - language/world-knowledge confounds;
 - active perception;
+- continual visual learning and forgetting;
 - whether a persistent worldview measurably improves action;
 - embodiment-invariant abstractions;
 - hardware/software co-design only after scientific structure is known.
@@ -99,13 +120,14 @@ The evidence hierarchy is:
 1. controlled cognitive/physical diagnostics;
 2. shortcut-resistant paired tests;
 3. persistent/streaming memory diagnostics;
-4. causal/interventional tests;
-5. geometry/world-state diagnostics;
-6. real-video transfer;
-7. active-perception tasks;
-8. long-horizon embodied tasks in unfamiliar environments;
-9. action usefulness and recovery;
-10. efficiency and hardware co-design once capability is established.
+4. quantitative and relational physics tests;
+5. causal/interventional tests;
+6. geometry/world-state diagnostics;
+7. real-video transfer;
+8. active-perception tasks;
+9. long-horizon embodied tasks in unfamiliar environments;
+10. action usefulness and recovery;
+11. efficiency and hardware co-design once capability is established.
 
 ## Not Yet Demonstrated
 

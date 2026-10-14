@@ -14,9 +14,11 @@ The long-term target is:
 
 Start here:
 
-1. [`survey/BACKGROUND_RESEARCH.md`](survey/BACKGROUND_RESEARCH.md) — full problem-space synthesis.
-2. [`survey/SOURCE_MAP.md`](survey/SOURCE_MAP.md) — exact source URLs, evidence levels, demonstrated capabilities, limitations and Clover landing points.
-3. [`survey/README.md`](survey/README.md) — Survey navigation and current research posture.
+1. [`survey/RESEARCH_OVERVIEW.md`](survey/RESEARCH_OVERVIEW.md) — compact visual map of domains, contradictions, baseline flow and evaluation flow.
+2. [`survey/BACKGROUND_RESEARCH.md`](survey/BACKGROUND_RESEARCH.md) — full problem-space synthesis.
+3. [`dossiers/README.md`](dossiers/README.md) — eight domain-specific research dossiers.
+4. [`survey/SOURCE_MAP.md`](survey/SOURCE_MAP.md) — exact source URLs, evidence levels, demonstrated capabilities, limitations and Clover landing points.
+5. [`survey/README.md`](survey/README.md) — Survey navigation and current research posture.
 
 Then use:
 
@@ -27,6 +29,33 @@ Then use:
 - [`survey/DATASETS_CODE.md`](survey/DATASETS_CODE.md) — datasets, repositories, checkpoints and reproducibility resources.
 - [`survey/CLOVER_HYPOTHESES.md`](survey/CLOVER_HYPOTHESES.md) — screened historical/internal hypotheses, not commitments.
 - [`survey/FRONTIER_SIGNALS.md`](survey/FRONTIER_SIGNALS.md) — filtered frontier/news signals that are not automatically project truth.
+
+## Deep domain dossiers
+
+```text
+R-A Observability / Epistemology
+R-B Geometry
+R-C Representation
+R-D Memory / Persistence
+R-E Physics
+R-F Causality / Interaction
+R-G World Model ↔ Action
+R-H Active Perception / Lifelong Learning
+```
+
+Each dossier is expected to preserve:
+
+```text
+fundamental question
+→ primary / official evidence
+→ demonstrated capability
+→ limitation / confound
+→ unresolved contradiction
+→ best comparator
+→ discriminating experiment
+→ kill condition
+→ Clover implication
+```
 
 ## Current research order
 
