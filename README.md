@@ -6,13 +6,13 @@
 >
 > **Long-term goal:** Build a general-purpose robotic brain that forms an understanding of the real world through vision alone, then uses that understanding to decide and act.
 
-Clover is a long-term open research project. The research question is fixed; the answer is open. The repository is being developed as a public research record: current evidence, active hypotheses, architecture, open questions, and future experiments are kept separate so that the project can change direction without rewriting its history.
+Clover is a long-term open research project. The research question is fixed; the answer is open. The repository is a public research record: current evidence, active hypotheses, architecture, open questions, and decisions are kept separate so the project can change direction without rewriting its history.
 
 [中文说明](README.zh-CN.md)
 
 ## Why this problem matters
 
-A robot that only maps pixels directly to actions can be effective without necessarily maintaining a durable model of the world. Clover asks a different question: what internal structure is sufficient for a machine to recognize persistence, identity, space, time, dynamics, causality, uncertainty, and change from visual experience, and to use that structure for decision and action?
+A robot can sometimes map pixels directly to actions without maintaining a durable model of the world. Clover asks the deeper question: what internal structure is sufficient for a machine to recognize persistence, identity, space, time, dynamics, causality, uncertainty and change from visual experience — and to use that structure for decision and action?
 
 The target is not a single benchmark score. Benchmarks are instruments. The eventual standard is real capability in unfamiliar physical environments.
 
@@ -66,32 +66,44 @@ Clover does **not** assume that:
 
 Hardware, representation and learning method are design variables. They should be selected by evidence.
 
-## Current research direction
+## Current phase
 
-The 2026-10-14 research reset moved Clover from architecture-first development to problem-first research. Current investigation spans:
+The 2026-10-14 Research Reset moved Clover from architecture-first development to problem-first research.
+
+We are now prioritizing **research before reproduction**: mapping what classical vision, modern representation learning, world models, spatial intelligence and real robot systems already solve before freezing the next Clover representation.
+
+See [STATUS.md](STATUS.md) and [research decision 0005](research/decisions/0005-research-before-reproduction.md).
+
+## Research map
+
+The current map covers:
 
 - classical computer vision and geometry;
-- self-supervised visual and video representation learning;
-- video and action-conditioned world models;
+- learned visual representations;
+- self-supervised video/world models;
 - spatial intelligence and learned geometry;
 - object-centric representation;
-- embodied reasoning, VLA and robot foundation models;
-- active perception and model-based robotics;
-- causality, counterfactual reasoning and lifelong world growth.
+- embodied reasoning and VLA systems;
+- robot foundation models;
+- model-based robotics and active perception;
+- causality and lifelong learning;
+- data, experience and interaction.
 
-See the [Research Map](docs/research-map/README.md).
+Start with the [Research Map](docs/research-map/README.md), then use the [Model & Literature Index](research/literature/model-index.md) for specific systems.
 
 ## Current prototype
 
-A substantial Clover research prototype has been developed outside this newly initialized public repository, exploring field-based visual evidence, persistent entities, typed world queries, epistemic licences, decision, tool-use and execution loops. That implementation is being treated as **Research Prototype 1**, not as a frozen answer. Public code migration will follow a repository safety and documentation audit.
-
-The public status is tracked in [STATUS.md](STATUS.md).
+A substantial Clover research prototype was developed before this public repository was initialized, exploring field-based visual evidence, persistent entities, typed world queries, epistemic licences, decision, tool-use and execution loops. That implementation is **Research Prototype 1**, not a frozen answer. Public code migration will follow a dedicated safety, build and documentation audit.
 
 ## Research hypotheses
 
-Existing Clover mechanisms are now tracked as hypotheses rather than project axioms. These include field crystallization, machine-native primitives, explicit world state, spacetime structure, epistemic licences and world growth.
+Existing Clover mechanisms are tracked as hypotheses rather than project axioms, including field crystallization, machine-native primitives, explicit world state, spacetime structure, epistemic licences and world growth.
 
-See [docs/hypotheses](docs/hypotheses/README.md).
+See [Active Hypotheses](docs/hypotheses/README.md).
+
+## Evaluation
+
+We maintain an [Evaluation Map](docs/evaluation/benchmark-map.md) and a working [Understanding Battery](docs/evaluation/understanding-battery.md). These are measurement plans, not immediate leaderboard objectives.
 
 ## Research principles
 
@@ -101,16 +113,12 @@ The central rules are in [PRINCIPLES.md](PRINCIPLES.md). In short:
 2. Evidence comes before architectural commitment.
 3. Benchmarks are instruments, not the objective.
 4. Real embodied capability matters.
-5. Facts, hypotheses and plans must remain separate.
+5. Facts, hypotheses and plans remain separate.
 6. External methods are studied for the contradiction they solve, not stacked as modules.
 7. Hardware is a design variable.
 8. Important mechanisms must be falsifiable.
 9. Code must remain inspectable.
 10. World understanding must eventually improve action.
-
-## Roadmap
-
-The project is currently in **Phase 0 — Public Research Foundation** and **Phase 1 — Understanding the Problem**. See [ROADMAP.md](ROADMAP.md).
 
 ## Documentation
 
@@ -118,19 +126,19 @@ The project is currently in **Phase 0 — Public Research Foundation** and **Pha
 - [Product goal](docs/product-goal.md)
 - [What is understanding?](docs/what-is-understanding.md)
 - [Research map](docs/research-map/README.md)
+- [Model & literature index](research/literature/model-index.md)
+- [Datasets & benchmarks index](research/literature/datasets-and-benchmarks.md)
 - [Open questions](docs/open-questions.md)
 - [Current architecture notes](docs/architecture/README.md)
-- [Evaluation map](docs/evaluation/README.md)
+- [Evaluation principles](docs/evaluation/evaluation-principles.md)
 - [Glossary](docs/glossary.md)
 - [Research decisions](research/decisions/)
 
 ## Status vocabulary
 
-Public documentation uses the following states:
-
 - `IMPLEMENTED` — exists in code;
 - `TESTED` — has direct test coverage;
-- `RESEARCH_PROTOTYPE` — implemented as a research mechanism, not yet established scientifically;
+- `RESEARCH_PROTOTYPE` — implemented as a research mechanism, not scientifically established;
 - `SCIENTIFICALLY_VALIDATED` — supported by an explicit scientific protocol;
 - `OPEN` — unresolved;
 - `SUPERSEDED` — retained for history but no longer current.
