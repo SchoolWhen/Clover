@@ -4,252 +4,157 @@ Last updated: 2026-10-14
 
 This document surveys method families that materially constrain the Clover research question.
 
-The goal is not to collect every new model. The goal is to understand the strongest competing answers to:
-
 > **What internal machinery is sufficient for a machine to understand the real world through vision and use that understanding for action?**
 
-## 1. Classical geometry, estimation and persistent state
+## Classical geometry and state estimation
 
-### ORB-SLAM3
-- Paper: https://arxiv.org/abs/2007.11898
-- Code: https://github.com/UZ-SLAMLab/ORB_SLAM3
+**ORB-SLAM3** — https://arxiv.org/abs/2007.11898 · https://github.com/UZ-SLAMLab/ORB_SLAM3  
+Explicit pose/map/trajectory state shows that some world variables are already well formalized. It gives observability, map reuse and localization but not open-world semantics or causality.
 
-Explicit pose/map/trajectory state shows that some parts of “world state” are already well formalized. It gives observability, map reuse and localization but not open-world semantics, physical causality or broad learned abstraction.
+**RAFT** — https://arxiv.org/abs/2003.12039 · https://github.com/princeton-vl/RAFT  
+Dense temporal correspondence baseline; flow is not identity, permanence or causality.
 
-### RAFT
-- Paper: https://arxiv.org/abs/2003.12039
-- Code: https://github.com/princeton-vl/RAFT
+Research question: which geometric variables should remain explicit invariants, and which should be learned?
 
-Dense correspondence is useful, but flow is not identity, permanence or causality.
+## Static self-supervised representation
 
-**Clover question:** which geometric variables should remain explicit invariants, and which should be learned?
+**DINOv2** — https://arxiv.org/abs/2304.07193 · https://github.com/facebookresearch/dinov2  
+Scalable label-free visual features and emergent object/part structure. Static features alone do not solve persistent identity, dynamics or long-horizon memory.
 
-## 2. Static self-supervised representation
+## Predictive video representation
 
-### DINOv2
-- Paper: https://arxiv.org/abs/2304.07193
-- Code: https://github.com/facebookresearch/dinov2
+**V-JEPA 2** — https://arxiv.org/abs/2506.09985 · https://ai.meta.com/vjepa/ · https://github.com/facebookresearch/vjepa2  
+Connects large-scale action-free video learning to motion/anticipation and action-conditioned robot planning. Major competitor to explicit factorized world state.
 
-Demonstrates scalable label-free visual representation and emergent object/part structure. Static features alone do not provide persistent identity, dynamics or long-horizon world memory.
+**V-JEPA 2.1** — https://arxiv.org/abs/2603.14482  
+Dense predictive learning and deep self-supervision strengthen the possibility of one distributed representation covering semantics, dense space and time.
 
-## 3. Predictive video representation
+**Interpreting Physics in Video World Models** — https://arxiv.org/abs/2602.07050 · https://ai.meta.com/research/publications/interpreting-physics-in-video-world-models/  
+Reports distributed/high-dimensional physical representations. Direct counter-evidence to assuming all useful physical variables must be compact explicit state.
 
-### V-JEPA 2
-- Paper: https://arxiv.org/abs/2506.09985
-- Official: https://ai.meta.com/vjepa/
-- Code: https://github.com/facebookresearch/vjepa2
+## Learned geometry / spatial intelligence
 
-Connects large-scale action-free video learning to motion/anticipation and then to action-conditioned robot planning. It is a major competing answer to the idea that world variables must first be explicitly factorized.
+**DUSt3R** — https://arxiv.org/abs/2312.14132  
+Learned point-map geometry bridges classical pipelines and foundation models.
 
-Open questions: persistent identity, long occlusion, distributed vs explicit physics, and what robot interaction adds beyond passive video.
+**VGGT** — https://arxiv.org/abs/2503.11651 · https://github.com/facebookresearch/vggt  
+Predicts cameras, depth, point maps and tracks from one or more images.
 
-### V-JEPA 2.1
-- Paper: https://arxiv.org/abs/2603.14482
-- Code: https://github.com/facebookresearch/vjepa2
+**VGGT-Ω** — https://arxiv.org/abs/2605.15195 · https://vggt-omega.github.io/ · https://github.com/facebookresearch/vggt-omega  
+Extends learned geometry toward larger-scale and dynamic reconstruction.
 
-Adds dense predictive learning and deeper self-supervision, strengthening the possibility that semantics, dense space and time can coexist in one learned representation.
+**World Labs Atlas** — https://www.worldlabs.ai/blog/atlas  
+Combines reconstruction, generation, simulation and robotics workflows. Critical distinction: plausible hidden completion is not evidence-supported truth.
 
-### Interpreting Physics in Video World Models
-- Paper: https://arxiv.org/abs/2602.07050
-- Official: https://ai.meta.com/research/publications/interpreting-physics-in-video-world-models/
+## Object-centric / entity representation
 
-Reports a “Physics Emergence Zone” and distributed/high-dimensional encoding of some physical variables. This is direct counter-evidence to assuming that useful physical state must always be a compact explicit vector.
+**Slot Attention** — https://arxiv.org/abs/2006.15055  
+Formalizes object-like slots and compositional entity representation.
 
-## 4. Learned geometry / spatial intelligence
+**SAM 2** — https://arxiv.org/abs/2408.00714 · https://github.com/facebookresearch/sam2  
+Strong visible video entity/segmentation baseline. Clover should not call ordinary mask persistence “world understanding” if perception models already provide it.
 
-### DUSt3R
-- Paper: https://arxiv.org/abs/2312.14132
+## Memory and evidence organization
 
-Learned point-map geometry collapses parts of a classical multi-stage reconstruction pipeline into a trainable system.
+**VISTA** — https://arxiv.org/abs/2610.02200  
+Separates base-model weights from lossless visual memory, active retrieval and evidence organization. Makes memory architecture itself a first-class research variable.
 
-### VGGT
-- Paper: https://arxiv.org/abs/2503.11651
-- Code: https://github.com/facebookresearch/vggt
+## Active evidence / spatial reasoning
 
-Predicts camera parameters, depth, point maps and tracks from one or more images. It is a strong learned explicit-spatial substrate.
+**Vantage** — https://arxiv.org/abs/2610.11810 · https://github.com/q1xiangchen/Vantage  
+View planning + geometry-grounded evidence gathering + VLM reasoning. Shows evidence selection can be a bottleneck independent of model size.
 
-### VGGT-Ω
-- Paper: https://arxiv.org/abs/2605.15195
-- Project: https://vggt-omega.github.io/
-- Code: https://github.com/facebookresearch/vggt-omega
+**SpatialCORE** — https://arxiv.org/abs/2609.38716 · https://github.com/rafiibnsultan/SpatialCORE  
+Uses spatial-grounding confidence in post-training. Lesson: confidence can guide learning/compute; it is not automatically truth.
 
-Pushes learned geometry toward larger-scale and dynamic reconstruction.
+## Vision-language-action / world-action models
 
-### World Labs Atlas
-- Official: https://www.worldlabs.ai/blog/atlas
+**RT-2** — https://arxiv.org/abs/2307.15818  
+Action-first alternative: transfer web vision/language knowledge into robot actions.
 
-Combines reconstruction, generation, simulation and robotics workflows in a spatial world model. Crucial Clover distinction: plausible hidden completion is not the same thing as observed/justified world state.
+**OpenVLA** — https://arxiv.org/abs/2406.09246 · https://github.com/openvla/openvla  
+Important open VLA comparator.
 
-## 5. Object-centric / persistent entities
+**π0.5** — https://arxiv.org/abs/2504.16054 · https://www.pi.website/blog/pi05  
+Open-world robot generalization with heterogeneous multimodal/robot training. Serious falsifier for “explicit persistent world state is obviously necessary.”
 
-### Slot Attention
-- Paper: https://arxiv.org/abs/2006.15055
+**ReWAM** — https://arxiv.org/abs/2609.38163  
+Reconstruction fidelity and generic perceptual features alone do not guarantee policy-useful state; action-grounded representation shaping matters.
 
-Formalizes object-like slots and the hypothesis that entity decomposition supports compositional reasoning.
+**HWAM** — https://arxiv.org/abs/2610.12026  
+Reference action, executed motion and realized state must be distinguished.
 
-### SAM 2
-- Paper: https://arxiv.org/abs/2408.00714
-- Code: https://github.com/facebookresearch/sam2
+**Being-H0.7** — https://arxiv.org/abs/2605.00078  
+Latent future-aware reasoning with a training-only future branch; no future-pixel rollout at inference.
 
-Strong video segmentation/mask tracking baseline. Clover should not attribute ordinary visible entity continuity to a world model if a perception foundation model already provides it.
+**Being-M0.7** — https://arxiv.org/abs/2610.11283  
+Uses large mixed human video/motion data to learn future-aware visual-motion priors before humanoid adaptation.
 
-## 6. Visual memory / evidence organization
+**H-WM** — https://arxiv.org/abs/2602.11291  
+Combines high-level logical transitions and low-level visual transitions for long-horizon planning/grounding.
 
-### VISTA
-- Paper: https://arxiv.org/abs/2610.02200
+**World-Action Models survey** — https://arxiv.org/abs/2609.16074 · https://rcl-robotics.github.io/Awesome-World-Action-Models  
+Current taxonomy for representation, transitions, action interfaces, data and evaluation.
 
-Separates base model from lossless visual memory, active retrieval and evidence reorganization. This makes “memory architecture vs learned world state” a first-class research question.
+## Embodied reasoning / robot-brain systems
 
-## 7. Active evidence selection / spatial reasoning
+**Gemini Robotics ER 2** — https://deepmind.google/models/model-cards/gemini-robotics-er-2/ · https://deepmind.google/models/gemini-robotics/embodied-reasoning/  
+High-level robot reasoning route built on a large multimodal VLM. Key confound: physical reasoning may combine visual evidence with extensive language/world priors.
 
-### Vantage
-- Paper: https://arxiv.org/abs/2610.11810
-- Code: https://github.com/q1xiangchen/Vantage
+## Robot foundation models / experience scaling
 
-Training-free view planning + geometry-grounded evidence gathering + VLM reasoning. Shows that evidence/view selection can be a bottleneck independent of base-model capacity.
+**Figure Helix 2.5** — https://www.figure.ai/news/helix-2-5-zero-shot-30-home-generalization — `OFFICIAL_REPORTED_RESULT`  
+Reported whole-body long-horizon behavior in unseen homes with large gains from human-experience pretraining.
 
-### SpatialCORE
-- Paper: https://arxiv.org/abs/2609.38716
-- Code: https://github.com/rafiibnsultan/SpatialCORE
+**Skild S1** — https://skild.ai/blogs/s1 — `OFFICIAL_REPORTED_RESULT`  
+Reported in-context robot task learning from video demonstrations and long-horizon unseen behavior.
 
-Uses confidence in generated spatial grounding as a training signal. Clover lesson: confidence can guide learning/compute, but confidence is not truth.
+**Physical Self-Play** — https://skild.ai/blogs/physical-self-play  
+Suggests physical intelligence may require passive observation + imitation + interaction + self-generated experience.
 
-## 8. Vision-language-action / world-action models
+## Generative physical world models
 
-### RT-2
-- Paper: https://arxiv.org/abs/2307.15818
-- PMLR: https://proceedings.mlr.press/v229/zitkovich23a.html
+**Cosmos 3** — https://arxiv.org/abs/2606.02800 · https://github.com/nvidia/cosmos  
+World-foundation-model direction where reasoning, generation and action interfaces converge.
 
-Action-first route: web-scale vision/language knowledge transferred into action tokens.
+**EVEWorld** — https://arxiv.org/abs/2610.03374  
+Targets “model laziness”: visually plausible rollouts with weak instance/evolution consistency. Evidence that visual fidelity and physical process correctness differ.
 
-### OpenVLA
-- Paper: https://arxiv.org/abs/2406.09246
-- Code: https://github.com/openvla/openvla
+**DR-WM / From Pixels to Executable Physics** — https://arxiv.org/abs/2610.17630  
+Combines visual geometry with terrain/contact priors calibrated from action-response data. Suggests some action-relevant physical state requires interaction, not appearance alone.
 
-Important open VLA baseline and eventual comparator.
+## Identifiable / hybrid state
 
-### π0.5
-- Paper: https://arxiv.org/abs/2504.16054
-- Official: https://www.pi.website/blog/pi05
+**Identifiable World Models** — https://arxiv.org/abs/2610.07028  
+Promising middle route: powerful distributed representation + identifiable explicit coordinates.
 
-Open-world robot generalization from heterogeneous multimodal/robot supervision. Strong falsifier for claims that explicit persistent world state is obviously necessary.
+## Sparse / event-like computation
 
-### ReWAM
-- Paper: https://arxiv.org/abs/2609.38163
+**Motion-aware Event Suppression** — https://arxiv.org/abs/2602.23204  
+Shows high-rate sparse visual processing and downstream compute reduction. Clover lesson: exploit informative visual change, without necessarily requiring event-camera hardware.
 
-Argues that neither reconstruction fidelity nor generic perceptual features alone guarantee a policy-useful representation. Introduces action-grounded representation shaping.
+## Model-based control
 
-### HWAM
-- Paper: https://arxiv.org/abs/2610.12026
+**DreamerV3** — https://arxiv.org/abs/2301.04104  
+**TD-MPC2** — https://arxiv.org/abs/2310.16828
 
-Separates reference action from realized physical state by jointly modeling state/action. Critical lesson: intended action, executed action and observed consequence are distinct.
+Important counterexamples to the belief that a world state must be human-interpretable to be useful for control.
 
-### Being-H0.7
-- Paper: https://arxiv.org/abs/2605.00078
+## Provisional constraints from the frontier
 
-Uses latent future-aware reasoning with a training-only future branch and no future-pixel rollout at inference.
-
-### Being-M0.7
-- Paper: https://arxiv.org/abs/2610.11283
-
-Uses >10,000 hours of mixed human video/motion data to learn visual-motion priors before robot adaptation. Shows a route from non-robot experience to humanoid world-action priors.
-
-### H-WM
-- Paper: https://arxiv.org/abs/2602.11291
-
-Combines high-level logical transitions and low-level visual transitions to address long-horizon drift vs perceptual grounding.
-
-### World-Action Models survey
-- Paper: https://arxiv.org/abs/2609.16074
-- Project: https://rcl-robotics.github.io/Awesome-World-Action-Models
-
-Useful current taxonomy for representations, transitions, action interfaces, data modalities and long-horizon challenges.
-
-## 9. Embodied reasoning / high-level robot brain
-
-### Gemini Robotics ER 2
-- Model card: https://deepmind.google/models/model-cards/gemini-robotics-er-2/
-- Product: https://deepmind.google/models/gemini-robotics/embodied-reasoning/
-
-Official high-level robot reasoning route built on a large multimodal VLM. Central confound: physical behavior may combine visual evidence with extensive language/world priors.
-
-## 10. Robot foundation models / experience scaling
-
-### Figure Helix 2.5
-- Official: https://www.figure.ai/news/helix-2-5-zero-shot-30-home-generalization
-- Evidence: `OFFICIAL_REPORTED_RESULT`
-
-Reported whole-body long-horizon behavior in 30 unseen homes, with substantial gain from human-experience pretraining.
-
-### Skild S1
-- Official: https://skild.ai/blogs/s1
-- Evidence: `OFFICIAL_REPORTED_RESULT`
-
-Reported in-context robot task learning from video demonstration and unseen long-horizon tasks.
-
-### Physical Self-Play
-- Official: https://skild.ai/blogs/physical-self-play
-
-Suggests physical intelligence may need observation + imitation + interaction + self-generated experience.
-
-## 11. Generative physical world models
-
-### Cosmos 3
-- Paper: https://arxiv.org/abs/2606.02800
-- Code: https://github.com/nvidia/cosmos
-- Official: https://www.nvidia.com/en-us/ai/cosmos/
-
-Represents the world-foundation-model direction where reasoning, generation and action interfaces increasingly converge.
-
-### EVEWorld
-- Paper: https://arxiv.org/abs/2610.03374
-
-Targets “model laziness”: visually plausible world-model rollouts that fail to model consistent object evolution. This is important evidence that video fidelity and physical process correctness differ.
-
-### DR-WM / From Pixels to Executable Physics
-- Paper: https://arxiv.org/abs/2610.17630
-
-Combines visual geometry with terrain/contact priors calibrated from action-response data to predict robot consequences. Strong evidence that some action-relevant physical state may require interaction, not appearance alone.
-
-## 12. Identifiable / hybrid representation
-
-### Identifiable World Models
-- Paper: https://arxiv.org/abs/2610.07028
-
-Suggests a middle route: powerful distributed world representation + small identifiable coordinate layer, rather than fully explicit vs fully latent.
-
-## 13. Sparse / event-based computation
-
-### Motion-aware Event Suppression
-- Paper: https://arxiv.org/abs/2602.23204
-
-Useful lesson: physical visual change is sparse and computation may exploit that. This does not imply Clover must depend on event-camera hardware.
-
-## 14. Model-based control
-
-### DreamerV3
-- Paper: https://arxiv.org/abs/2301.04104
-
-### TD-MPC2
-- Paper: https://arxiv.org/abs/2310.16828
-
-These are important counterexamples to the belief that a world representation must be human-interpretable to be useful for control.
-
-## 15. Provisional constraints from the frontier
-
-The current evidence supports constraints, not a final architecture:
+Current evidence supports constraints, not a final architecture:
 
 1. scalable open-world abstraction needs learned representation;
 2. explicit geometry remains valuable where variables/invariants are well-defined;
-3. predictive video representations can learn substantial physical structure;
-4. reconstruction is powerful for space but not automatically for causality/action;
+3. predictive video representations learn substantial physical structure;
+4. reconstruction gives strong spatial state but not automatically causality/action;
 5. plausible generation is not authoritative truth;
-6. direct policies/robot foundation models can be strong without exposed explicit state;
-7. interaction contributes controllability/action-consequence information;
+6. strong policies can act without exposed explicit state;
+7. interaction adds controllability/action-consequence information;
 8. memory/evidence organization can change capability without changing weights;
 9. physical variables can be distributed rather than compactly factorized;
-10. future-world prediction for control is increasingly moving into compact latent state rather than pixel rollout;
-11. process/state consistency and execution consequences matter more than visual quality alone;
-12. any explicit Clover worldview must prove measurable benefit for action, recovery, generalization or efficiency.
+10. control-oriented future prediction is increasingly moving into compact latent state rather than pixel rollout;
+11. state/process consistency and execution consequences matter more than video quality alone;
+12. any explicit Clover worldview must prove measurable value for action, recovery, generalization or efficiency.
 
-The next Clover architecture should be derived from these contradictions rather than attachment to an older mechanism.
+The next Clover architecture should be derived from these contradictions, not attachment to an older mechanism.
