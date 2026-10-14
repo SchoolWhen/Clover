@@ -68,6 +68,8 @@ RESEARCH_FRONTIER.md
 | [`RESEARCH_ENGINEERING_VALIDATION.md`](RESEARCH_ENGINEERING_VALIDATION.md) | Can candidate models run under realistic edge constraints, and how should evidence graduate from simulation toward real-robot validation? |
 | [`RESEARCH_FRONTIER.md`](RESEARCH_FRONTIER.md) | Which current primary/official sources materially change the comparison space? |
 
+Engineering/deployment details live under [`engineering/`](engineering/) and remain supporting Stage-1 material, not a separate project stage.
+
 ## Stage-1 logic
 
 ```text
@@ -150,6 +152,12 @@ same-simulator success
 ≠ sim2sim robustness
 ≠ sim2real transfer
 ≠ real-world validation
+
+benchmark success
+≠ runtime reliability
+
+model accuracy
+≠ hardware-setup robustness
 
 reflection
 ≠ falsification
@@ -301,13 +309,24 @@ Model discovery / scientific reasoning:
 - Robust BOED under misspecification — https://proceedings.mlr.press/v300/tang26d.html
 - SAGE — https://arxiv.org/abs/2606.31478 · https://github.com/JieMaMagic/SAGE
 
-Engineering / simulation / transfer:
+Engineering / simulation / deployment:
 
+- Engineering/validation main surface — [`RESEARCH_ENGINEERING_VALIDATION.md`](RESEARCH_ENGINEERING_VALIDATION.md)
+- Deployment lifecycle / fault injection / runtime reliability — [`engineering/DEPLOYMENT_LIFECYCLE.md`](engineering/DEPLOYMENT_LIFECYCLE.md)
 - Reality-gap survey — https://arxiv.org/abs/2510.20808
 - Real-is-Sim — https://arxiv.org/abs/2504.03597
 - Isaac Sim sim-to-sim SysID recovery — https://docs.isaacsim.omniverse.nvidia.com/latest/robot_setup_tutorials/tutorial_system_identification_simsim.html
 - Isaac Sim system identification — https://docs.isaacsim.omniverse.nvidia.com/latest/robot_setup/ext_isaacsim_robot_setup_sysid.html
 - Isaac→Gazebo→real ROS 2 transfer example — https://arxiv.org/abs/2501.02902
+- LIBERO-RIG hardware/setup robustness — https://arxiv.org/abs/2610.18843
+- Bench2Drive-Robust deployment perturbations — https://arxiv.org/abs/2605.18059 · https://github.com/Thinklab-SJTU/Bench2Drive-Robust
+- Deployment-Time Reliability of Learned Robot Policies — https://arxiv.org/abs/2603.11400
+- LiteVLA-Edge — https://arxiv.org/abs/2603.03380
+- When Sensors Fail — https://arxiv.org/abs/2603.04648
+- SO-101 failure/recovery benchmark — https://arxiv.org/abs/2606.08881
+- LeRobot no-hardware / low-cost robot path — https://huggingface.co/docs/lerobot/index
+- Embodied-agent security — https://arxiv.org/abs/2608.16843
+- World-model embodied security lifecycle — https://arxiv.org/abs/2607.28226
 
 These are research materials and comparators, not Clover components.
 
@@ -327,12 +346,14 @@ social permission / consent for probing
 human-query / escalation cost models
 multi-agent recursive belief with embodied observations
 correlated uncertainty / model-ensemble collapse
-robot-edge runtime benchmarks for streaming world models
+world-model-specific edge benchmarks
 quantization effects on uncertainty / memory / persistence
 cross-simulator benchmark standardization
 reality-gap metrics for world models, not only policies
 hardware-in-the-loop validation for learned world models
-low-cost proxy-robot validation protocols
+standardized fault injection beyond driving/manipulation
+formal rollback semantics for stateful learned world models
+persistent-memory/world-state security benchmarks
 ```
 
 Do not create a new project stage for each gap.
@@ -347,6 +368,7 @@ Do not create a new project stage for each gap.
 - [`survey/BENCHMARKS_TASKS.md`](survey/BENCHMARKS_TASKS.md)
 - [`survey/DATASETS_CODE.md`](survey/DATASETS_CODE.md)
 - [`dossiers/`](dossiers/)
+- [`engineering/`](engineering/) — deployment lifecycle, fault injection, runtime reliability, provenance and security support material.
 
 ## Current rule
 
