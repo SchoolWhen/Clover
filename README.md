@@ -18,9 +18,11 @@ If you are an agent, contributor or researcher entering the repository for the f
 2. [`SSOT.md`](SSOT.md) — the highest research question, product goal and scientific stance.
 3. [`PRINCIPLES.md`](PRINCIPLES.md) — research principles.
 4. [`STATUS.md`](STATUS.md) — current phase and what has not been demonstrated.
-5. [`research/survey/BACKGROUND_RESEARCH.md`](research/survey/BACKGROUND_RESEARCH.md) — full problem-space background.
-6. [`research/survey/SOURCE_MAP.md`](research/survey/SOURCE_MAP.md) — source → evidence → claim → limitation → Clover landing.
-7. [`research/survey/README.md`](research/survey/README.md) — survey navigation.
+5. [`research/survey/RESEARCH_OVERVIEW.md`](research/survey/RESEARCH_OVERVIEW.md) — visual map of research domains, contradictions and evidence flow.
+6. [`research/survey/BACKGROUND_RESEARCH.md`](research/survey/BACKGROUND_RESEARCH.md) — full problem-space background.
+7. [`research/dossiers/README.md`](research/dossiers/README.md) — eight deep domain research dossiers.
+8. [`research/survey/SOURCE_MAP.md`](research/survey/SOURCE_MAP.md) — source → evidence → claim → limitation → Clover landing.
+9. [`research/survey/README.md`](research/survey/README.md) — survey navigation.
 
 ## Current phase — Background Research / Problem Reconstruction
 
@@ -44,7 +46,9 @@ We are **not** currently freezing a new Clover representation. The immediate obj
 
 ## Primary research surfaces
 
+- [Research Overview Map](research/survey/RESEARCH_OVERVIEW.md)
 - [Background Research](research/survey/BACKGROUND_RESEARCH.md)
+- [Research Dossiers](research/dossiers/README.md)
 - [Source Map](research/survey/SOURCE_MAP.md)
 - [Frontier Methods](research/survey/FRONTIER_METHODS.md)
 - [Research Questions](research/survey/RESEARCH_QUESTIONS.md)
@@ -53,6 +57,17 @@ We are **not** currently freezing a new Clover representation. The immediate obj
 - [Datasets & Code](research/survey/DATASETS_CODE.md)
 - [Clover Hypotheses](research/survey/CLOVER_HYPOTHESES.md)
 - [Frontier Signals](research/survey/FRONTIER_SIGNALS.md)
+
+### Eight deep research domains
+
+- [R-A — Observability / Epistemology](research/dossiers/R-A-observability-epistemology.md)
+- [R-B — Geometry](research/dossiers/R-B-geometry.md)
+- [R-C — Representation](research/dossiers/R-C-representation.md)
+- [R-D — Memory / Persistence](research/dossiers/R-D-memory-persistence.md)
+- [R-E — Physics](research/dossiers/R-E-physics.md)
+- [R-F — Causality / Interaction](research/dossiers/R-F-causality-interaction.md)
+- [R-G — World Model ↔ Action](research/dossiers/R-G-world-action.md)
+- [R-H — Active Perception / Lifelong Learning](research/dossiers/R-H-active-perception-lifelong.md)
 
 Older `docs/research-map/`, `docs/research-questions/` and `research/literature/` structures remain as secondary reference and research history.
 
@@ -150,8 +165,10 @@ Those ideas remain research history and candidate hypotheses. They are **not fro
 
 ### Current research
 
+- [Research Overview](research/survey/RESEARCH_OVERVIEW.md)
 - [Survey](research/survey/README.md)
 - [Background Research](research/survey/BACKGROUND_RESEARCH.md)
+- [Research Dossiers](research/dossiers/README.md)
 - [Source Map](research/survey/SOURCE_MAP.md)
 - [Research decisions](research/decisions/)
 - [Open questions](docs/open-questions.md)
