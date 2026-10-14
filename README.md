@@ -26,10 +26,11 @@ For a new agent, researcher or contributor:
 10. [`research/RESEARCH_ADAPTIVE_ABSTRACTION.md`](research/RESEARCH_ADAPTIVE_ABSTRACTION.md)
 11. [`research/RESEARCH_VALUE_OF_INFORMATION.md`](research/RESEARCH_VALUE_OF_INFORMATION.md)
 12. [`research/RESEARCH_OPEN_WORLD_EPISTEMICS.md`](research/RESEARCH_OPEN_WORLD_EPISTEMICS.md)
-13. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
-14. [`AGENTS.md`](AGENTS.md)
-15. [`STATUS.md`](STATUS.md)
-16. [`research/README.md`](research/README.md)
+13. [`research/RESEARCH_MODEL_DISCOVERY.md`](research/RESEARCH_MODEL_DISCOVERY.md)
+14. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
+15. [`AGENTS.md`](AGENTS.md)
+16. [`STATUS.md`](STATUS.md)
+17. [`research/README.md`](research/README.md)
 
 ## Current stage — 1 Research
 
@@ -67,7 +68,9 @@ At what granularity / timescale should state be represented?
 ↓
 What view / probe / action is worth acquiring next?
 ↓
-What if the current hypothesis set is incomplete, the model is stale/wrong, the probe is unsafe, or another agent has hidden goals?
+What if the current hypothesis set is incomplete, stale, unsafe to test, or socially constrained?
+↓
+How should hypotheses, mechanisms, experiments, falsification and provenance be managed?
 ↓
 Which current methods and benchmarks discriminate competing answers?
 ```
@@ -92,7 +95,7 @@ complete physical description
 
 minimum state ≠ best state at every timescale
 
-maximum information gain ≠ best safe action
+maximum information gain ≠ best safe / permitted experiment
 
 uncertainty over known hypotheses
 ≠ correct hypothesis missing entirely
@@ -100,8 +103,16 @@ uncertainty over known hypotheses
 uncertain state
 ≠ stale / wrong world model
 
-external-world state
-≠ self / embodiment state
+parameter estimation
+≠ model selection
+≠ mechanism discovery
+≠ open-world model expansion
+
+reflection ≠ falsification
+
+current best hypothesis ≠ permanent truth
+
+external-world state ≠ self / embodiment state
 
 visible behavior of another agent
 ≠ its hidden goal / belief
@@ -132,14 +143,33 @@ The inventory is intentionally wider than “world models” or “VLA.” It in
 - structured/equivariant memory;
 - value of information, epistemic actions and safe probing;
 - open-world hypothesis generation and verification;
-- world-model falsification, changepoints and non-stationarity;
+- mechanism/causal-structure discovery and Bayesian experiment design;
+- hypothesis provenance, falsification and refutation memory;
+- world-model changepoints, slow drift and model misspecification;
 - self/body schema and embodiment mismatch;
 - help-seeking, abstention and human escalation;
-- social/intentional hidden state and hidden goals;
+- social/intentional hidden state, recursive belief and permission constraints;
 - uncertainty calibration, OOD and continual/test-time adaptation;
 - simulation/data engines, datasets, benchmarks and systems integration.
 
 If another direction materially constrains the mother question, it should be added even if it does not fit an existing category.
+
+## Current frontier highlights
+
+The thin current-edge index is [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md). As of **2026-10-14**, important additions include:
+
+- SpecWM — https://arxiv.org/abs/2610.15429
+- DR-WM — https://arxiv.org/abs/2610.17630
+- Gemini 4 Argon for Robotics — https://developers.googleblog.com/gemini-4-argon-for-robotics/
+- Mental-Models — https://arxiv.org/abs/2610.12453
+- Identifiable World Models — https://arxiv.org/abs/2610.07028
+- RobotWorld — https://arxiv.org/abs/2610.10409
+- Video2World — https://arxiv.org/abs/2610.04432
+- HUME — https://arxiv.org/abs/2607.06501
+- Learning Task-Sufficient World Models — https://proceedings.mlr.press/v306/feng26aa.html
+- robust / constrained Bayesian experimental design — https://proceedings.mlr.press/v300/tang26d.html and https://proceedings.mlr.press/v306/guo26g.html
+
+These are research objects and comparators, not Clover components.
 
 ## Later stages
 
