@@ -2,7 +2,7 @@
 
 Last updated: 2026-10-14
 
-Curated reading index for the Clover Survey. A source is included because it constrains the central question:
+Curated reading index for the Clover Survey. A source is included because it constrains:
 
 > **How can a machine understand the real world through vision alone?**
 
@@ -19,8 +19,8 @@ Curated reading index for the Clover Survey. A source is included because it con
 - DINOv2 — https://arxiv.org/abs/2304.07193 · https://github.com/facebookresearch/dinov2
 - V-JEPA — https://arxiv.org/abs/2404.08471
 - V-JEPA 2 — https://arxiv.org/abs/2506.09985 · https://ai.meta.com/vjepa/ · https://github.com/facebookresearch/vjepa2
-- V-JEPA 2.1 — https://arxiv.org/abs/2603.14482 · https://github.com/facebookresearch/vjepa2
-- Interpreting Physics in Video World Models — https://arxiv.org/abs/2602.07050 · https://ai.meta.com/research/publications/interpreting-physics-in-video-world-models/
+- V-JEPA 2.1 — https://arxiv.org/abs/2603.14482
+- Interpreting Physics in Video World Models — https://arxiv.org/abs/2602.07050
 
 ## Geometry and spatial intelligence
 - ORB-SLAM3 — https://arxiv.org/abs/2007.11898 · https://github.com/UZ-SLAMLab/ORB_SLAM3
@@ -32,7 +32,7 @@ Curated reading index for the Clover Survey. A source is included because it con
 - Slot Attention — https://arxiv.org/abs/2006.15055
 - SAM 2 — https://arxiv.org/abs/2408.00714 · https://github.com/facebookresearch/sam2
 
-## Memory and evidence organization
+## Memory / evidence / spatial reasoning
 - VISTA — https://arxiv.org/abs/2610.02200
 - Vantage — https://arxiv.org/abs/2610.11810 · https://github.com/q1xiangchen/Vantage
 - SpatialCORE — https://arxiv.org/abs/2609.38716 · https://github.com/rafiibnsultan/SpatialCORE
@@ -43,7 +43,7 @@ Curated reading index for the Clover Survey. A source is included because it con
 - H-WM — https://arxiv.org/abs/2602.11291
 - Identifiable World Models — https://arxiv.org/abs/2610.07028
 
-## VLA and world-action models
+## VLA / world-action models
 - RT-2 — https://arxiv.org/abs/2307.15818
 - OpenVLA — https://arxiv.org/abs/2406.09246 · https://github.com/openvla/openvla
 - π0.5 — https://arxiv.org/abs/2504.16054 · https://www.pi.website/blog/pi05
@@ -51,15 +51,15 @@ Curated reading index for the Clover Survey. A source is included because it con
 - HWAM — https://arxiv.org/abs/2610.12026
 - Being-H0.7 — https://arxiv.org/abs/2605.00078
 - Being-M0.7 — https://arxiv.org/abs/2610.11283
-- World-Action Models survey — https://arxiv.org/abs/2609.16074 · https://rcl-robotics.github.io/Awesome-World-Action-Models
+- WAM survey — https://arxiv.org/abs/2609.16074 · https://rcl-robotics.github.io/Awesome-World-Action-Models
 
-## Embodied reasoning / robot-brain systems
+## Robot-brain systems
 - Gemini Robotics ER 2 — https://deepmind.google/models/model-cards/gemini-robotics-er-2/ · https://deepmind.google/models/gemini-robotics/embodied-reasoning/
 - Figure Helix 2.5 — https://www.figure.ai/news/helix-2-5-zero-shot-30-home-generalization
 - Skild S1 — https://skild.ai/blogs/s1
 - Skild Physical Self-Play — https://skild.ai/blogs/physical-self-play
 
-## Generative / physical world foundation models
+## Generative / physical world models
 - World Labs Atlas — https://www.worldlabs.ai/blog/atlas
 - Cosmos 3 — https://arxiv.org/abs/2606.02800 · https://github.com/nvidia/cosmos
 - EVEWorld — https://arxiv.org/abs/2610.03374
@@ -71,19 +71,15 @@ Curated reading index for the Clover Survey. A source is included because it con
 - CausalVQA — https://ai.meta.com/research/publications/causalvqa-a-physically-grounded-causal-reasoning-benchmark-for-video-models/
 - RoboPhys-3D — https://arxiv.org/abs/2608.28718
 
-## Sparse/event-based computation
+## Sparse computation
 - Motion-aware Event Suppression — https://arxiv.org/abs/2602.23204
 
-## Broad surveys
-- Physical AI survey — https://arxiv.org/abs/2510.04978 · https://github.com/AI4Phys/Awesome-AI-for-Physics
+## Surveys
+- Physical AI survey — https://arxiv.org/abs/2510.04978
 - World-Action Models survey — https://arxiv.org/abs/2609.16074
 
 ## Reading priority
-
-**Tier 1 — representation:** V-JEPA 2/2.1 → Interpreting Physics → VGGT/VGGT-Ω → ReWAM → VISTA → Identifiable World Models.
-
-**Tier 2 — robot-brain alternatives:** Gemini Robotics ER 2 → π0.5/OpenVLA → Being-H/M0.7 → Helix 2.5 → Skild S1 → H-WM/HWAM.
-
-**Tier 3 — foundations:** ORB-SLAM3/RAFT → Slot Attention → DreamerV3/TD-MPC2 → active perception/POMDP literature.
-
-**Tier 4 — evaluation:** IntPhys 2 → MVPBench → CausalVQA → RoboPhys-3D → real long-horizon unseen-environment robot tasks.
+- **Tier 1 representation:** V-JEPA 2/2.1 → Interpreting Physics → VGGT/Ω → ReWAM → VISTA → Identifiable World Models.
+- **Tier 2 robot-brain:** Gemini ER 2 → π0.5/OpenVLA → Being-H/M0.7 → Helix 2.5 → Skild S1 → H-WM/HWAM.
+- **Tier 3 foundations:** ORB-SLAM3/RAFT → Slot Attention → DreamerV3/TD-MPC2 → active perception/POMDP.
+- **Tier 4 evaluation:** IntPhys 2 → MVPBench → CausalVQA → RoboPhys-3D → real long-horizon unseen-environment tasks.
