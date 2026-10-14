@@ -14,7 +14,7 @@ Last updated: 2026-10-14
 
 > **Stage 1 — Research / Survey & Evidence Collection — ACTIVE**
 
-The repository now follows:
+The repository follows:
 
 ```text
 1 Research
@@ -40,7 +40,7 @@ Start with:
 
 ## Stage-1 foundation — active / expanding
 
-The current inventory covers more than the original eight deep domains. It now explicitly tracks directions including:
+The current inventory explicitly tracks directions including:
 
 - epistemology, inverse problems and partial observability;
 - human/developmental visual cognition;
@@ -56,13 +56,15 @@ The current inventory covers more than the original eight deep domains. It now e
 - belief revision and forgetting;
 - intuitive, relational and quantitative physics;
 - physics-structured / differentiable world models;
-- contact, friction and deformable-object dynamics;
+- contact, friction, articulation and deformable-object dynamics;
+- mass/material/function grounding;
 - causal representation learning;
 - counterfactual visual reasoning;
 - active perception and next-best-view;
 - system identification and action consequences;
 - generative world models;
 - world-action models;
+- world models as belief state, simulator and data engine;
 - VLA and direct policy;
 - hierarchical embodied reasoning;
 - robot foundation models;
@@ -84,25 +86,61 @@ This list is intentionally expandable. If a direction materially constrains the 
 
 ## 2026-10-14 frontier refresh
 
-The current edge now includes several references that materially change the comparison space:
+The current edge includes several references that materially change the comparison space:
 
 - **Gemini 4 Argon for Robotics** — https://developers.googleblog.com/gemini-4-argon-for-robotics/ — `OFFICIAL_REPORTED_RESULT`; current general multimodal physical-reasoning / Real2Sim / robot-tool-use counter-hypothesis.
 - **ERQA** — https://github.com/embodiedreasoning/ERQA — `OPEN_SOURCE`; embodied/spatial reasoning benchmark and evaluation harness.
 - **DR-WM / From Pixels to Executable Physics** — https://arxiv.org/abs/2610.17630 — `PRIMARY_PAPER`, submitted 2026-10-13; separates visual geometry from contact/friction properties calibrated through action-response evidence.
-- **GR00T N1.7** — https://github.com/NVIDIA/Isaac-GR00T — `OPEN_SOURCE`; current strong open VLA/direct-policy baseline with human-video pretraining and cross-embodiment action representation.
+- **GR00T N1.7** — https://github.com/NVIDIA/Isaac-GR00T — `OPEN_SOURCE`; current strong open VLA/direct-policy reference with human-video pretraining and cross-embodiment action representation.
+- **Riemann-1.0** — https://arxiv.org/abs/2608.27033 — `PRIMARY_PAPER`; unified causal WAM jointly modeling observations, robot state and action over large heterogeneous embodied experience.
+- **Qwen-RobotWorld** — https://arxiv.org/abs/2606.17030 — `PRIMARY_PAPER`; language-conditioned video world modeling across multiple embodied domains.
+- **Xiaomi-Robotics-U0** — https://arxiv.org/abs/2607.11643 — `PRIMARY_PAPER`; world foundation model functioning as embodied generator, transfer mechanism and data engine.
 - **Being-M0.7** — https://arxiv.org/abs/2610.11283 — `PRIMARY_PAPER`; latent visual-motion world-action route for humanoid control.
 - **HWAM** — https://arxiv.org/abs/2610.12026 — `PRIMARY_PAPER`; explicitly predicts post-execution body state to model the action-execution gap.
 - **Identifiable World Models** — https://arxiv.org/abs/2610.07028 — `PRIMARY_PAPER`; hybrid route combining distributed pretrained representations with identifiable dynamical coordinates under explicit assumptions.
+- **Artisan** — https://arxiv.org/abs/2610.13947 — `PRIMARY_PAPER`; adds collision, gravity stability, mass/material properties and functional task behavior to articulated-asset evaluation.
 - **Vantage / Seek-and-View** — https://arxiv.org/abs/2610.11810 — `PRIMARY_PAPER`; question-conditioned viewpoint/evidence acquisition for multi-view spatial reasoning.
-- **Agentic Video Understanding** — https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-agentic-video-in-gemini/ — `OFFICIAL_REPORTED_RESULT`; evidence-acquisition policy as a variable separate from the base representation.
-- **RobotWorld** — https://arxiv.org/abs/2610.10409 — `PRIMARY_PAPER`; exposes composition, task-state retention, recovery and completion-verification failures across diverse robot-use tasks.
+- **Agentic Video Understanding** — https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-agentic-video-in-gemini/ — `OFFICIAL_REPORTED_RESULT`; evidence-acquisition policy as a variable separate from base representation.
+- **RobotWorld** — https://arxiv.org/abs/2610.10409 — `PRIMARY_PAPER`; exposes composition, retained task-state, recovery and completion-verification failures across diverse physical tasks.
 - **Video2World** — https://arxiv.org/abs/2610.04432 — `PRIMARY_PAPER`; evaluates reconstructed worlds by geometry, dynamics and functional correctness rather than visual similarity alone.
 
 These are **research materials and comparators**, not Clover components.
 
 ## Current method references
 
-Important references already tracked include ORB-SLAM3, RAFT, DINOv3, V-JEPA 2 / 2.1, DUSt3R, VGGT / VGGT-Ω, SAM 3 / 3.1, Slot Attention, PLATO, NeRF / 3DGS / 4D reconstruction, PersistBench, S-EMBER, VISTA, IntPhys 2, Minimal Video Pairs, Principia, RoboPhys-3D, CausalVQA, causal representation learning, Vantage, Atlas, Cosmos 3, OpenVLA, π0.5, GR00T N1.7, Gemini Robotics, Gemini 4 Argon, Helix, Skild, ReWAM, Being-M0.7, HWAM, HumanEgo, DreamerV3, TD-MPC2, DR-WM and related work.
+Important tracked references now span:
+
+```text
+classical geometry / tracking
+ORB-SLAM3 · RAFT
+
+static / video representation
+DINOv3 · V-JEPA 2 / 2.1
+
+learned 3D / 4D world structure
+DUSt3R · VGGT / VGGT-Ω · NeRF / 3DGS / 4D reconstruction
+
+entities / memory
+SAM 3.1 · Slot Attention · PLATO · PersistBench · S-EMBER · VISTA · PerSeM · TAO-Amodal
+
+physical / causal understanding
+IntPhys 2 · Minimal Video Pairs · Principia · RoboPhys-3D · CausalVQA · DR-WM · Artisan · WorldContact
+
+active evidence
+Vantage · agentic video understanding · semantic information-gain exploration
+
+generative / world models
+Atlas · Cosmos 3 · Video2World · Qwen-RobotWorld · Xiaomi-Robotics-U0
+
+VLA / direct policy / robot foundation systems
+OpenVLA · π0.5 · GR00T N1.7 · Gemini Robotics · Gemini 4 Argon · Helix · Skild
+
+world-action models
+ReWAM · Riemann-1.0 · Being-M0.7 · HWAM · related WAMs
+
+hybrid state
+Identifiable World Models
+```
 
 ## Dataset / benchmark collection
 
@@ -119,6 +157,9 @@ Tracked resources include:
 - ERQA;
 - RobotWorld;
 - Video2World;
+- RoboWM-Bench;
+- RoboTrustBench;
+- TAO-Amodal;
 - IntPhys 2;
 - Minimal Video Pairs;
 - CausalVQA;
@@ -126,14 +167,12 @@ Tracked resources include:
 - S-EMBER;
 - Principia;
 - RoboPhys-3D;
-- TAO-Amodal;
-- EmbodimentSemantic.
+- EmbodimentSemantic;
+- Artisan physical/articulated-asset benchmark resources.
 
 Stage 1 records what each dataset/benchmark actually measures, its inputs, hidden ground truth, shortcuts, licensing and reproducibility.
 
-## New boundary distinctions strengthened by current evidence
-
-The latest material makes these distinctions increasingly important:
+## Boundary distinctions strengthened by current evidence
 
 ```text
 visual geometry
@@ -154,6 +193,10 @@ amodal completion
 ≠
 object permanence
 
+appearance / reconstruction quality
+≠
+articulation / mass / material / function
+
 long context
 ≠
 active evidence acquisition
@@ -161,6 +204,12 @@ active evidence acquisition
 strong multimodal reasoner + tools
 ≠
 proof of vision-only world understanding
+
+world model for belief
+≠
+world simulator
+≠
+world data engine
 ```
 
 ## Existing Clover prototype
