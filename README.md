@@ -27,10 +27,11 @@ For a new agent, researcher or contributor:
 11. [`research/RESEARCH_VALUE_OF_INFORMATION.md`](research/RESEARCH_VALUE_OF_INFORMATION.md)
 12. [`research/RESEARCH_OPEN_WORLD_EPISTEMICS.md`](research/RESEARCH_OPEN_WORLD_EPISTEMICS.md)
 13. [`research/RESEARCH_MODEL_DISCOVERY.md`](research/RESEARCH_MODEL_DISCOVERY.md)
-14. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
-15. [`AGENTS.md`](AGENTS.md)
-16. [`STATUS.md`](STATUS.md)
-17. [`research/README.md`](research/README.md)
+14. [`research/RESEARCH_ENGINEERING_VALIDATION.md`](research/RESEARCH_ENGINEERING_VALIDATION.md)
+15. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
+16. [`AGENTS.md`](AGENTS.md)
+17. [`STATUS.md`](STATUS.md)
+18. [`research/README.md`](research/README.md)
 
 ## Current stage — 1 Research
 
@@ -72,6 +73,8 @@ What if the current hypothesis set is incomplete, stale, unsafe to test, or soci
 ↓
 How should hypotheses, mechanisms, experiments, falsification and provenance be managed?
 ↓
+Can the candidate run under realistic edge/closed-loop constraints, and how strong is its simulation-to-real validation evidence?
+↓
 Which current methods and benchmarks discriminate competing answers?
 ```
 
@@ -107,6 +110,18 @@ parameter estimation
 ≠ model selection
 ≠ mechanism discovery
 ≠ open-world model expansion
+
+current development machine
+≠ final edge computer
+≠ scientific hypothesis
+
+model inference latency
+≠ camera-to-action closed-loop latency
+
+single-simulator success
+≠ sim2sim robustness
+≠ sim2real transfer
+≠ target-robot validation
 
 reflection ≠ falsification
 
@@ -150,9 +165,53 @@ The inventory is intentionally wider than “world models” or “VLA.” It in
 - help-seeking, abstention and human escalation;
 - social/intentional hidden state, recursive belief and permission constraints;
 - uncertainty calibration, OOD and continual/test-time adaptation;
-- simulation/data engines, datasets, benchmarks and systems integration.
+- edge inference, quantization, memory/latency/power constraints and hardware-aware profiling;
+- simulation fidelity, domain randomization, sim2sim, sim2real, real2sim and digital-twin/system-identification workflows;
+- hardware-in-the-loop / proxy-hardware validation and reality-gap measurement;
+- simulation/data engines, datasets, benchmarks, reproducibility and systems integration.
 
 If another direction materially constrains the mother question, it should be added even if it does not fit an existing category.
+
+## Current practical environment
+
+The current local development reference is a **Mac mini with Apple M4**.
+
+This is useful for:
+
+```text
+model development
+Apple-Silicon profiling
+MLX / Core AI / Core ML experiments
+quantization / compression studies
+local MuJoCo and controlled simulation
+end-to-end software/runtime measurements
+```
+
+It is **not** assumed to be the final robot computer and does not determine the scientific representation.
+
+Current Isaac Sim standard requirements do not support macOS/non-NVIDIA hardware, so GPU-heavy Isaac/Isaac-Lab work should be treated as an optional remote/Linux-NVIDIA validation path rather than a local prerequisite.
+
+See [`research/RESEARCH_ENGINEERING_VALIDATION.md`](research/RESEARCH_ENGINEERING_VALIDATION.md).
+
+## No-real-robot validation policy
+
+Clover currently has no target physical robot. Therefore validation claims should be tiered:
+
+```text
+EV0 mathematical / synthetic diagnostic
+EV1 controlled single simulator
+EV2 randomized simulator robustness
+EV3 sim-to-sim transfer
+EV4 offline real-data validation
+EV5 real-to-sim / digital-twin validation
+EV6 real deployment runtime / compute hardware in the loop
+EV7 proxy physical hardware
+EV8 target real robot
+```
+
+Do not describe EV0–EV6 as demonstrated sim2real success.
+
+The absence of a robot limits claim strength; it does not justify postponing validation.
 
 ## Current frontier highlights
 
@@ -186,7 +245,7 @@ Only after a gap is well supported do Clover-original hypotheses become serious 
 Build reproducible code.
 
 ### 6 Evaluation
-Run experiments, ablations and real-world tests.
+Run experiments, ablations, cross-simulator tests and eventual real-world tests.
 
 ### 7 Reflection
 Interpret failures, reject bad assumptions and begin the next research cycle.
@@ -212,7 +271,7 @@ This prevents “RGB at deployment” from being confused with “learned only f
 
 ## What we do not assume
 
-Clover does **not** assume that CPU/GPU choice determines the science, that explicit state must beat distributed latent state, that field/object/geometry/token must be the final primitive, that hierarchy is automatically superior to flat state, that information gain is itself the final algorithm, that the correct hypothesis set is always known, that prediction/reconstruction/generation is necessarily sufficient, or that one benchmark defines understanding.
+Clover does **not** assume that CPU/GPU/NPU choice determines the science, that the Mac mini M4 is the final target hardware, that one simulator is reality, that sim-only success proves transfer, that explicit state must beat distributed latent state, that field/object/geometry/token must be the final primitive, that hierarchy is automatically superior to flat state, that information gain is itself the final algorithm, that the correct hypothesis set is always known, that prediction/reconstruction/generation is necessarily sufficient, or that one benchmark defines understanding.
 
 Historical Clover mechanisms remain ideas until the research process supports or rejects them.
 
