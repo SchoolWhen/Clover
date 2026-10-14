@@ -1,44 +1,90 @@
 # Contributing to Clover
 
-Clover is a research project, so a contribution can be code, an experiment, a literature synthesis, a falsifier, a benchmark analysis or a correction to the project model.
+Clover is a research project. A contribution should clearly belong to one stage of the canonical lifecycle:
 
-## Before proposing a mechanism
+```text
+Research → Analysis → Synthesis → Innovation → Implementation → Evaluation → Reflection
+```
 
-Please state:
+The current primary stage is **Research**.
 
-1. **Research contradiction** — what problem prevents progress on the central question?
-2. **Existing work** — what has already been tried?
-3. **Hypothesis** — what new claim are you making?
-4. **Operational definition** — what exactly changes in the system?
-5. **Falsifier** — what result would make us reject the mechanism?
-6. **Expected capability impact** — which world-understanding ability should improve?
-7. **Complexity / hardware impact** — what computation and memory does it introduce?
+## Research contributions
 
-## Scientific claims
+Useful current contributions include:
 
-Do not turn implementation status into scientific status. Use the vocabulary in `STATUS.md` and provide evidence for claims such as SOTA, real-world generalization, physical consistency or causal understanding.
+- a missing research direction;
+- a primary paper or official project page;
+- official code / checkpoint;
+- dataset or benchmark;
+- a correction to an existing source record;
+- a newly relevant 2026 method;
+- a missing lab/project worth monitoring;
+- evidence that a method’s claimed capability is narrower than currently described.
 
-## External frameworks
+Please preserve:
 
-Do not propose `Clover + framework X` as the contribution. Explain what contradiction X solves and whether a simpler Clover-native formulation is possible.
+```text
+exact source URL
+research direction
+evidence level
+what is demonstrated
+what is not demonstrated
+code / dataset / benchmark links when available
+V0–V3 / L0–L4 provenance when material
+```
 
-## Experiments
+## Analysis contributions
+
+When deeper method study becomes appropriate, use the method-report structure in `research/ANALYSIS.md`.
+
+Do not summarize only the abstract. Explain representation, objective, memory/time treatment, geometry/physics/causal assumptions, action interface, datasets, benchmarks, strengths, weaknesses and confounds.
+
+## Synthesis contributions
+
+Compare multiple analyzed methods on the same dimensions. Useful outputs include capability matrices, pros/cons, trade-offs, recurring failure modes and research gaps.
+
+## Innovation contributions
+
+Do not propose `Clover + framework X` as the contribution.
+
+A serious original hypothesis should state:
+
+1. observed gap;
+2. evidence for the gap;
+3. existing methods considered;
+4. why they appear insufficient;
+5. original mathematical / algorithmic hypothesis;
+6. prediction;
+7. falsifier;
+8. minimal discriminating experiment.
+
+## Implementation contributions
+
+Prefer inspectable, testable and reproducible code. Record configuration, dependencies, data/model versions and hardware when relevant.
+
+Implementation status is not scientific validation.
+
+## Evaluation contributions
 
 An experiment should record:
 
 - research question;
-- frozen protocol;
-- baselines;
-- success criterion;
-- kill criterion;
+- protocol;
+- model / code version;
+- dataset / split;
+- baseline;
+- metric;
+- success and kill criteria;
 - result;
-- interpretation;
+- failures;
 - limitations of the measurement.
 
-## Code
+Negative results are valid contributions.
 
-Prefer inspectable, testable code. Avoid duplicated semantic authority, hidden side channels and unnecessary abstraction in hot paths.
+## Reflection contributions
 
-## Documentation
+State what survived, what failed, what remained ambiguous, which assumptions should change and what the next research question should be.
 
-Update relevant research, architecture and status documents when a change alters a claim or project direction.
+## Final rule
+
+Contributions should make the project know more, not merely make the repository contain more code or more paper names.
