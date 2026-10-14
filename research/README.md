@@ -18,7 +18,7 @@
 ```
 
 **Current stage: 1 — Research.**  
-Freshness checked through: **2026-10-14**.
+Freshness checked through: **2026-10-15**.
 
 ## Stage-1 reading order
 
@@ -47,6 +47,8 @@ RESEARCH_OPEN_WORLD_EPISTEMICS.md
 ↓
 RESEARCH_MODEL_DISCOVERY.md
 ↓
+RESEARCH_FOUNDATION_MODEL_SYSTEMS.md
+↓
 RESEARCH_ENGINEERING_VALIDATION.md
 ↓
 RESEARCH_FRONTIER.md
@@ -65,10 +67,15 @@ RESEARCH_FRONTIER.md
 | [`RESEARCH_VALUE_OF_INFORMATION.md`](RESEARCH_VALUE_OF_INFORMATION.md) | Which view, probe or intervention is worth acquiring next? |
 | [`RESEARCH_OPEN_WORLD_EPISTEMICS.md`](RESEARCH_OPEN_WORLD_EPISTEMICS.md) | What if the hypothesis set is incomplete, the model is wrong/outdated, probing is unsafe, or another agent has hidden state? |
 | [`RESEARCH_MODEL_DISCOVERY.md`](RESEARCH_MODEL_DISCOVERY.md) | How should hypotheses, mechanisms, experiments, falsification and provenance be managed when the model class itself may be wrong? |
+| [`RESEARCH_FOUNDATION_MODEL_SYSTEMS.md`](RESEARCH_FOUNDATION_MODEL_SYSTEMS.md) | How do backbone architecture, multimodal tokenization, data, MoE/attention, context/cache, kernels, post-training and agent harness alter what is scientifically and operationally possible? |
 | [`RESEARCH_ENGINEERING_VALIDATION.md`](RESEARCH_ENGINEERING_VALIDATION.md) | Can candidate models run under realistic edge constraints, and how should evidence graduate from simulation toward real-robot validation? |
 | [`RESEARCH_FRONTIER.md`](RESEARCH_FRONTIER.md) | Which current primary/official sources materially change the comparison space? |
 
-Engineering/deployment details live under [`engineering/`](engineering/) and remain supporting Stage-1 material, not a separate project stage.
+Supporting material:
+
+- [`foundation_models/`](foundation_models/) — DeepSeek/Qwen and future foundation-model systems watches;
+- [`engineering/`](engineering/) — deployment lifecycle, fault injection, runtime reliability and validation resources;
+- [`survey/`](survey/) / [`dossiers/`](dossiers/) — source maps, datasets, benchmarks and deeper topic notes.
 
 ## Stage-1 logic
 
@@ -95,6 +102,8 @@ open-world uncertainty / model mismatch
 ↓
 model discovery / experiment / falsification
 ↓
+foundation-model architecture / data / runtime / harness
+↓
 engineering feasibility / simulation / validation ladder
 ↓
 current frontier
@@ -104,66 +113,28 @@ current frontier
 
 ```text
 pixels ≠ world state
-
-world-state ambiguity
-≠ image-formation ambiguity
-≠ sensor/acquisition corruption
-
-statistical predictability
-≠ physical identifiability
-
-passive observation
-≠ active visual evidence
-≠ physical intervention
-
-complete physical description
-≠ minimal predictive state
-≠ minimal control-sufficient state
-≠ general-purpose world state
-
-observational indistinguishability
-≠ representation failure
-
-minimum state
-≠ best state at every timescale
-
-maximum information gain
-≠ best safe / permitted experiment
-
-uncertainty inside a known hypothesis set
-≠ correct hypothesis missing from the set
-
-uncertain current state
-≠ current world model has become invalid
-
-parameter estimation
-≠ model selection
-≠ mechanism discovery
-≠ open-world model expansion
-
-current development machine
-≠ final robot edge computer
-≠ scientific hypothesis
-
-model latency
-≠ end-to-end closed-loop latency
-
-same-simulator success
-≠ sim2sim robustness
-≠ sim2real transfer
-≠ real-world validation
-
-benchmark success
-≠ runtime reliability
-
-model accuracy
-≠ hardware-setup robustness
-
-reflection
-≠ falsification
-
-current best hypothesis
-≠ permanent truth
+statistical predictability ≠ physical identifiability
+passive observation ≠ active visual evidence ≠ physical intervention
+observational indistinguishability ≠ representation failure
+complete physical description ≠ predictive/control/general-purpose sufficient state
+long context ≠ persistent grounded world memory
+serving KV cache ≠ epistemic world memory
+base model ≠ model + harness ≠ model + harness + external tools
+hosted product ≠ open-weight checkpoint unless exact artifact is verified
+total parameters ≠ active parameters ≠ memory footprint ≠ communication cost
+architecture efficiency on paper ≠ realized efficiency on available kernels/hardware
+minimum state ≠ best state at every timescale
+maximum information gain ≠ best safe / permitted experiment
+uncertainty inside a known hypothesis set ≠ correct hypothesis missing from the set
+uncertain current state ≠ current world model has become invalid
+parameter estimation ≠ model selection ≠ mechanism discovery ≠ open-world model expansion
+current development machine ≠ final robot edge computer ≠ scientific hypothesis
+model latency ≠ end-to-end closed-loop latency
+same-simulator success ≠ sim2sim robustness ≠ sim2real transfer ≠ real-world validation
+benchmark success ≠ runtime reliability
+model accuracy ≠ hardware-setup robustness
+reflection ≠ falsification
+current best hypothesis ≠ permanent truth
 ```
 
 ## Protocol discipline
@@ -183,192 +154,97 @@ Learning provenance:
 - `L3` — action-conditioned demonstrations/experience;
 - `L4` — non-visual or privileged physical evidence.
 
-Evidence labels:
-
-```text
-PRIMARY_PAPER
-OFFICIAL_PROJECT
-OPEN_SOURCE
-OFFICIAL_REPORTED_RESULT
-BACKGROUND_REFERENCE
-SURVEY_SIGNAL
-INTERNAL_HYPOTHESIS
-OPEN
-SUPERSEDED
-```
-
 Do not call a system vision-only merely because deployment input is RGB.
 
 ## Research bookkeeping labels
 
 ### Sufficiency
-
-```text
-S-PRED prediction
-S-CTRL control
-S-PLAN planning
-S-MEM memory / revision
-S-CAUSE intervention / counterfactuals
-S-EPI uncertainty / belief
-S-OPEN open-world / future-task optionality
-```
+`S-PRED` prediction · `S-CTRL` control · `S-PLAN` planning · `S-MEM` memory/revision · `S-CAUSE` intervention/counterfactual · `S-EPI` uncertainty/belief · `S-OPEN` future-task/open-world optionality.
 
 ### Aliasing
-
-```text
-A1 perceptual
-A2 history
-A3 representation
-A4 action / embodiment
-A5 causal
-A6 task-conditioned
-```
+`A1` perceptual · `A2` history · `A3` representation · `A4` action/embodiment · `A5` causal · `A6` task-conditioned.
 
 ### Granularity
-
-```text
-G1 task-conditioned
-G2 temporal / multi-timescale
-G3 event-conditioned
-G4 spatial coarse-to-fine
-G5 entity / relation / role
-G6 uncertainty-conditioned
-G7 embodiment-conditioned
-G8 open-world reserve / recoverability
-G9 regime-conditioned
-```
+`G1` task · `G2` temporal · `G3` event · `G4` spatial · `G5` entity/relation/role · `G6` uncertainty · `G7` embodiment · `G8` recoverability · `G9` regime.
 
 ### Information target
-
-```text
-V1 latent-state information
-V2 parameter information
-V3 mechanism information
-V4 causal-structure information
-V5 task-interpretation information
-```
+`V1` latent state · `V2` parameters · `V3` mechanism · `V4` causal structure · `V5` task interpretation.
 
 ### Open-world epistemic failure
-
-```text
-E1 observation uncertainty
-E2 state uncertainty
-E3 parameter uncertainty
-E4 model-structure uncertainty
-E5 hypothesis-set incompleteness
-E6 regime change / model invalidation
-E7 social / intentional uncertainty
-E8 epistemic-action safety
-```
+`E1` observation · `E2` state · `E3` parameter · `E4` model structure · `E5` hypothesis-set incompleteness · `E6` regime/model invalidation · `E7` social/intentional · `E8` epistemic-action safety.
 
 ### Validation evidence ladder
+`EV0` synthetic/math · `EV1` controlled sim · `EV2` randomized sim · `EV3` sim2sim · `EV4` offline real data · `EV5` real2sim/digital twin · `EV6` deployment-runtime HIL · `EV7` proxy hardware · `EV8` target robot.
+
+These are Research/Analysis labels, not Clover architecture primitives.
+
+## Foundation-model systems fields
+
+For methods built on frontier LLM/VLM backbones, record when relevant:
 
 ```text
-EV0 mathematical / synthetic diagnostic
-EV1 controlled single-simulator test
-EV2 randomized in-simulator robustness
-EV3 sim-to-sim transfer
-EV4 offline real-data validation
-EV5 real-to-sim / digital-twin validation
-EV6 deployment-runtime / compute hardware in the loop
-EV7 proxy physical hardware
-EV8 target real robot
+backbone + exact version / artifact
+open weights vs API/hosted only
+license
+modalities
+total params / active params
+attention / sequence architecture
+visual/video tokenizer + token budget
+context length + KV/cache cost
+multimodal fusion
+training-data provenance / mixture / alignment
+post-training method
+precision / quantization
+runtime / kernels / parallelism
+harness / tools / external memory
+reasoning-effort setting
+local Mac-M4 feasibility
 ```
 
-These are Research/Analysis bookkeeping labels, not Clover architecture primitives.
+DeepSeek/Qwen current watch: [`foundation_models/DEEPSEEK_QWEN.md`](foundation_models/DEEPSEEK_QWEN.md).
 
 ## Current practical development constraint
 
 The present local reference machine is a **Mac mini with Apple M4**. Treat it as a measured development/deployment reference, not a scientific constraint.
 
-Current relevant paths include:
+Useful local paths:
 
 - MLX — https://github.com/ml-explore/mlx
 - Apple Core AI / Core ML — https://developer.apple.com/core-ai/ · https://developer.apple.com/documentation/coreml
-- ExecuTorch Core ML / MLX backends — https://docs.pytorch.org/executorch/stable/backends/coreml/coreml-overview.html · https://docs.pytorch.org/executorch/stable/backends/mlx/mlx-overview.html
-- MuJoCo local simulation — https://github.com/google-deepmind/mujoco
-- Isaac Sim system identification / remote NVIDIA path — https://docs.isaacsim.omniverse.nvidia.com/latest/robot_setup/ext_isaacsim_robot_setup_sysid.html
+- ExecuTorch Core ML / MLX backends
+- MuJoCo — https://github.com/google-deepmind/mujoco
+- small/medium open multimodal backbones for proxy studies
 
-Do not make Isaac Sim or any NVIDIA-only stack a local prerequisite; current Isaac Sim standard requirements do not support macOS/non-NVIDIA hardware.
-
-## Current high-value new references
-
-Representation / sufficient state:
-
-- SpecWM — https://arxiv.org/abs/2610.15429
-- Learning Task-Sufficient World Models — https://proceedings.mlr.press/v306/feng26aa.html
-- Identifiable World Models — https://arxiv.org/abs/2610.07028
-- DELE-w0.5 — https://arxiv.org/abs/2608.22067
-- Representation World Model — https://arxiv.org/abs/2609.29171
-
-Model discovery / scientific reasoning:
-
-- HUME — https://arxiv.org/abs/2607.06501 · https://github.com/threefruits/HUME
-- Unknown Unknowns / Model Misspecification — https://arxiv.org/abs/2608.13633
-- Intervention-only causal discovery — https://proceedings.mlr.press/v337/mazaheri26b.html
-- Robust BOED under misspecification — https://proceedings.mlr.press/v300/tang26d.html
-- SAGE — https://arxiv.org/abs/2606.31478 · https://github.com/JieMaMagic/SAGE
-
-Engineering / simulation / deployment:
-
-- Engineering/validation main surface — [`RESEARCH_ENGINEERING_VALIDATION.md`](RESEARCH_ENGINEERING_VALIDATION.md)
-- Deployment lifecycle / fault injection / runtime reliability — [`engineering/DEPLOYMENT_LIFECYCLE.md`](engineering/DEPLOYMENT_LIFECYCLE.md)
-- Reality-gap survey — https://arxiv.org/abs/2510.20808
-- Real-is-Sim — https://arxiv.org/abs/2504.03597
-- Isaac Sim sim-to-sim SysID recovery — https://docs.isaacsim.omniverse.nvidia.com/latest/robot_setup_tutorials/tutorial_system_identification_simsim.html
-- Isaac Sim system identification — https://docs.isaacsim.omniverse.nvidia.com/latest/robot_setup/ext_isaacsim_robot_setup_sysid.html
-- Isaac→Gazebo→real ROS 2 transfer example — https://arxiv.org/abs/2501.02902
-- LIBERO-RIG hardware/setup robustness — https://arxiv.org/abs/2610.18843
-- Bench2Drive-Robust deployment perturbations — https://arxiv.org/abs/2605.18059 · https://github.com/Thinklab-SJTU/Bench2Drive-Robust
-- Deployment-Time Reliability of Learned Robot Policies — https://arxiv.org/abs/2603.11400
-- LiteVLA-Edge — https://arxiv.org/abs/2603.03380
-- When Sensors Fail — https://arxiv.org/abs/2603.04648
-- SO-101 failure/recovery benchmark — https://arxiv.org/abs/2606.08881
-- LeRobot no-hardware / low-cost robot path — https://huggingface.co/docs/lerobot/index
-- Embodied-agent security — https://arxiv.org/abs/2608.16843
-- World-model embodied security lifecycle — https://arxiv.org/abs/2607.28226
-
-These are research materials and comparators, not Clover components.
+Use remote/cloud/API comparators when the research question genuinely requires frontier-scale DeepSeek/Qwen or Linux/NVIDIA-only infrastructure. Do not make those stacks local prerequisites.
 
 ## Remaining Stage-1 collection gaps
 
-Continue collecting primary evidence for:
+The map is now broad. Remaining gaps should be filled only when strong primary evidence appears:
 
 ```text
 unknown-unknown diagnostics with real embodied evidence
-nonparametric / open-set mechanism discovery
-hypothesis provenance and refutation-memory benchmarks
-slow drift versus abrupt changepoint detection
 representation reversibility after compression
 self-model ↔ external-world-model coupling
-safe exploration under irreversible actions
-social permission / consent for probing
-human-query / escalation cost models
-multi-agent recursive belief with embodied observations
-correlated uncertainty / model-ensemble collapse
-world-model-specific edge benchmarks
-quantization effects on uncertainty / memory / persistence
-cross-simulator benchmark standardization
-reality-gap metrics for world models, not only policies
-hardware-in-the-loop validation for learned world models
-standardized fault injection beyond driving/manipulation
-formal rollback semantics for stateful learned world models
-persistent-memory/world-state security benchmarks
+safe irreversible exploration / social permission
+correlated uncertainty / ensemble collapse
+visual-token budget vs physical-state retention
+video frame-rate/token sampling vs fast dynamics
+byte-matched long-context vs explicit-memory comparison
+KV precision vs epistemic calibration
+MoE expert specialization for spatial/physical variables
+small-proxy → frontier scaling validity
+frozen-backbone vs adaptation trade-offs
+language-prior contamination in physical reasoning
+streaming multimodal prefill / incremental visual encoding
+fast controller + slow reasoner synchronization
+harness contribution to benchmark scores
+runtime/kernel version drift and cross-hardware numerical divergence
+API/hosted vs open-weight artifact equivalence
+training-data alignment vs architecture gains
+quantization effects on uncertainty / permanence / memory
+sim2sim → sim2real predictive correlation
+formal persistent-state rollback and world-state poisoning benchmarks
 ```
-
-Do not create a new project stage for each gap.
-
-## Supporting material
-
-- [`survey/SOURCE_MAP.md`](survey/SOURCE_MAP.md)
-- [`survey/BACKGROUND_RESEARCH.md`](survey/BACKGROUND_RESEARCH.md)
-- [`survey/RESEARCH_OVERVIEW.md`](survey/RESEARCH_OVERVIEW.md)
-- [`survey/FRONTIER_METHODS.md`](survey/FRONTIER_METHODS.md)
-- [`survey/PAPERS.md`](survey/PAPERS.md)
-- [`survey/BENCHMARKS_TASKS.md`](survey/BENCHMARKS_TASKS.md)
-- [`survey/DATASETS_CODE.md`](survey/DATASETS_CODE.md)
-- [`dossiers/`](dossiers/)
-- [`engineering/`](engineering/) — deployment lifecycle, fault injection, runtime reliability, provenance and security support material.
 
 ## Current rule
 
