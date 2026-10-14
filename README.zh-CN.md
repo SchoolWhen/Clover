@@ -8,199 +8,221 @@
 
 Clover 是一个长期公开研究项目。**问题固定，答案开放。**
 
-## 当前最重要的事情
+## 当前阶段
 
-目前只激活第一阶段：**Research / 调研**。
-
-完整科研流程统一为：
+目前只激活：**Stage 1 — Research / 调研**。
 
 ```text
 1 Research 调研
 → 2 Analysis 分析
-→ 3 Synthesis 总结 / 综合
-→ 4 Innovation 创新 / 原创算法假设
+→ 3 Synthesis 综合总结
+→ 4 Innovation 原创假设 / 算法
 → 5 Implementation 实现
-→ 6 Evaluation 实验与 Results
+→ 6 Evaluation 实验与结果
 → 7 Reflection 反思 / 复盘
-↺ 下一轮研究
+↺ 下一轮
 ```
 
-这套顺序描述的是“我们对问题了解到了什么程度”，不是软件版本号。
+当前原则是：**coverage before commitment**。先把问题空间调查完整，再决定 Clover 自己应该发明什么。
 
 ## 新 Agent 推荐阅读顺序
 
-1. [SSOT.md](SSOT.md) — 最高问题、长期目标、科学边界。
-2. [research/PIPELINE.md](research/PIPELINE.md) — 七阶段科研流程。
-3. [research/RESEARCH.md](research/RESEARCH.md) — 当前最重要的全量调研目录。
-4. [AGENTS.md](AGENTS.md) — agent 工作规则。
-5. [STATUS.md](STATUS.md) — 当前状态与非目标。
-6. [research/README.md](research/README.md) — 扁平化研究导航。
+1. [SSOT.md](SSOT.md)
+2. [research/PIPELINE.md](research/PIPELINE.md)
+3. [research/RESEARCH.md](research/RESEARCH.md)
+4. [research/RESEARCH_STATE_VARIABLES.md](research/RESEARCH_STATE_VARIABLES.md)
+5. [research/RESEARCH_IDENTIFIABILITY.md](research/RESEARCH_IDENTIFIABILITY.md)
+6. [research/RESEARCH_OBSERVATION_PHYSICS.md](research/RESEARCH_OBSERVATION_PHYSICS.md)
+7. [research/RESEARCH_PHYSICAL_PROPERTIES.md](research/RESEARCH_PHYSICAL_PROPERTIES.md)
+8. [research/RESEARCH_SUFFICIENT_STATE.md](research/RESEARCH_SUFFICIENT_STATE.md)
+9. [research/RESEARCH_STATE_ALIASING.md](research/RESEARCH_STATE_ALIASING.md)
+10. [research/RESEARCH_ADAPTIVE_ABSTRACTION.md](research/RESEARCH_ADAPTIVE_ABSTRACTION.md)
+11. [research/RESEARCH_VALUE_OF_INFORMATION.md](research/RESEARCH_VALUE_OF_INFORMATION.md)
+12. [research/RESEARCH_FRONTIER.md](research/RESEARCH_FRONTIER.md)
+13. [AGENTS.md](AGENTS.md)
+14. [STATUS.md](STATUS.md)
+15. [research/README.md](research/README.md)
 
-## Stage 1 — Research / 调研
+## Stage 1 当前问题链
 
-当前阶段优先做“材料覆盖”，暂时不急着提出下一代 Clover 算法。
-
-需要尽可能收集：
-
-```text
-涉及哪些研究方向
-经典理论是什么
-最新强方法是什么
-primary paper 在哪里
-official project 在哪里
-代码 / checkpoint 在哪里
-dataset 在哪里
-benchmark 在哪里
-哪些团队正在持续做
-方法真正证明了什么
-方法还没有证明什么
-训练时到底用了什么信息
-还有哪些明显缺口没有调查
-```
-
-当前主入口：[research/RESEARCH.md](research/RESEARCH.md)。
-
-它已经把问题扩展到 30+ 个相关方向，包括但不限于：
-
-- inverse problem / observability / uncertainty / POMDP；
-- 人类视觉与 developmental cognition；
-- classical geometry / SfM / VO / SLAM；
-- optical flow / correspondence / tracking；
-- static SSL；
-- predictive video representation；
-- learned geometry；
-- NeRF / 3DGS / 4D reconstruction；
-- object-centric representation；
-- scene graph / semantic mapping；
-- persistent / episodic memory；
-- belief revision / forgetting；
-- intuitive / quantitative / relational physics；
-- physics-informed / structured world model；
-- causal representation learning；
-- counterfactual reasoning；
-- active perception；
-- system identification；
-- generative world model；
-- world-action model；
-- VLA / direct policy；
-- embodied reasoning；
-- robot foundation model；
-- human / egocentric video learning；
-- affordance learning；
-- model-based control；
-- semantic memory；
-- uncertainty calibration / OOD；
-- continual learning；
-- simulation / synthetic data；
-- robot datasets；
-- benchmark / anti-shortcut methodology；
-- systems integration / compounded failure。
-
-如果以后发现任何新方向会实质影响母问题，即使它不属于现有分类，也应该直接加入 Research。
-
-## Stage 2 — Analysis / 分析
-
-调研材料足够广以后，再对真正重要的方法逐个做小报告。
-
-每个方法至少分析：
+现在不是直接问“下一代 Clover 架构长什么样”，而是依次回答：
 
 ```text
-它解决什么问题
-输入是什么
-训练监督是什么
-内部 representation 是什么
-核心机制是什么
-objective 是什么
-如何处理时间 / memory
-如何处理 geometry / object / physics / causality
-如何接 action
-dataset / benchmark 是什么
-reported result 是什么
-优点是什么
-缺点是什么
-confound 是什么
-failure mode 是什么
-能不能复现
+有哪些相关研究？
+        ↓
+真实世界里到底有哪些状态？
+        ↓
+这些状态怎样经过光学 / 材料 / 相机变成 RGB？
+        ↓
+哪些隐藏状态能由当前证据辨识？
+        ↓
+哪些物理属性需要时间、主动视角、交互或非视觉证据？
+        ↓
+内部 world state 至少需要保留什么信息？
+        ↓
+什么时候不同真实世界被压成了同一个 latent / state？
+        ↓
+状态应该以什么粒度、什么时间尺度表示？
+        ↓
+当前证据不足时，下一眼 / 下一次 probing action 应该选什么？
+        ↓
+哪些方法 / dataset / benchmark 能真正区分这些答案？
 ```
 
-模板见 [research/ANALYSIS.md](research/ANALYSIS.md)。
-
-## Stage 3 — Synthesis / 总结综合
-
-把逐方法分析放在同一坐标系里比较：
+## Stage 1 的几个核心区分
 
 ```text
-优点
-缺点
-trade-off
-capability matrix
-Failure Matrix
-共同瓶颈
-哪些问题已经基本解决
-哪些问题一直解决不了
-哪里值得提出新算法
+pixels
+≠
+world state
+
+从像素统计上能猜对
+≠
+物理上由像素唯一可辨识
+
+vision alone
+≠
+passive vision only
+
+当前证据本来就无法区分两个世界
+≠
+representation failure
+
+证据里有信息但 encoder 丢掉了
+=
+潜在 representation failure
+
+完整物理描述
+≠
+最小 predictive state
+≠
+最小 control-sufficient state
+≠
+通用 world state
+
+当前任务 sufficient
+≠
+未来未知任务 sufficient
+
+最小 state
+≠
+所有时间尺度上都最好的 state
+
+最 informative 的动作
+≠
+考虑风险 / 成本 / 不可逆性后最值得执行的动作
 ```
 
-模板见 [research/SYNTHESIS.md](research/SYNTHESIS.md)。
+## 新增的三个 Stage-1 研究面
 
-## Stage 4 — Innovation / 创新
+### 1. State Aliasing / Representation Failure
 
-这才是“我们自己的东西”正式出现的阶段。
+[research/RESEARCH_STATE_ALIASING.md](research/RESEARCH_STATE_ALIASING.md)
 
-Innovation 可以包含：
+研究：不同真实世界或历史什么时候会被压成同一个内部状态。
 
-- 原创 representation hypothesis；
-- 新变量 / 新数学形式；
-- 新 learning principle；
-- 新 memory / update mechanism；
-- 新 causal / active perception mechanism；
-- 新 algorithm。
-
-但必须从已经确认的 gap 出发：
+包括：
 
 ```text
-field gap
-→ 为什么现有方法不够
-→ Clover-original hypothesis
-→ 数学 / 算法定义
-→ prediction
-→ falsifier
-→ experiment
+perceptual aliasing
+history aliasing
+representation aliasing
+action / embodiment aliasing
+causal aliasing
+task-conditioned aliasing
 ```
 
-模板见 [research/INNOVATION.md](research/INNOVATION.md)。
+重要参考包括 λ-discrepancy、PO-PDDL、observable quotient world models、bisimulation/state abstraction。
 
-## Stage 5–7
+### 2. Adaptive Abstraction / State Granularity
 
-- [Implementation](research/IMPLEMENTATION.md) — 具体代码和可复现实验实现。
-- [Evaluation](research/EVALUATION.md) — experiments / Results / ablation / real-world tests。
-- [Reflection](research/REFLECTION.md) — 解释结果、复盘失败、删除错误假设、开始下一轮。
+[research/RESEARCH_ADAPTIVE_ABSTRACTION.md](research/RESEARCH_ADAPTIVE_ABSTRACTION.md)
 
-## 深度材料仍然保留
+研究：world state 是否应该根据任务、时间尺度、事件、空间、uncertainty 和 embodiment 动态改变表示粒度。
 
-扁平 stage 文件是第一入口；详细资料继续作为支撑层：
+目前明确保留：
 
-- [Source Map](research/survey/SOURCE_MAP.md)
-- [Background Research](research/survey/BACKGROUND_RESEARCH.md)
-- [Research Overview](research/survey/RESEARCH_OVERVIEW.md)
-- [Frontier Methods](research/survey/FRONTIER_METHODS.md)
-- [Papers](research/survey/PAPERS.md)
-- [Benchmarks & Tasks](research/survey/BENCHMARKS_TASKS.md)
-- [Datasets & Code](research/survey/DATASETS_CODE.md)
-- [Deep Dossiers](research/dossiers/README.md)
+```text
+task-conditioned abstraction
+multi-timescale state
+event-driven state
+coarse-to-fine state
+entity / relation / functional-role state
+uncertainty-conditioned detail
+embodiment-conditioned state
+open-world recoverability
+```
 
-它们是 Research / Analysis 的材料库，不是另外一套阶段体系。
+### 3. Value of Information / Probing Actions
 
-## Vision alone 的双轴说明
+[research/RESEARCH_VALUE_OF_INFORMATION.md](research/RESEARCH_VALUE_OF_INFORMATION.md)
 
-### 观测协议
+研究：当证据不足时，机器人应该怎样选择下一次观察或交互来最快减少关键 uncertainty。
+
+需要区分：
+
+```text
+state information
+parameter information
+mechanism information
+causal-structure information
+task-interpretation information
+```
+
+以及 probing action 的：
+
+```text
+time
+energy
+risk
+irreversibility
+world disturbance
+safety
+```
+
+## 这轮新增发现的其他缺口
+
+暂时不再拆更多顶层文件，但 Stage 1 会继续追踪：
+
+```text
+open-world hypothesis generation
+— 当前所有 hypothesis 都解释不了新证据时怎么办？
+
+non-stationarity / change-point detection
+— 世界动力学、任务规则、embodiment 发生变化时怎样发现？
+
+self / embodiment model
+— 怎样区分机器人自身、controller、camera 的变化和外部世界变化？
+
+representation reversibility
+— 之前为了压缩而丢掉的信息，未来任务需要时还能否从保留的 evidence/provenance 恢复？
+
+multi-timescale / event-time state
+— 高频物理过程与低频语义事件是否应该用不同更新频率？
+
+structured / equivariant memory
+— 是否能利用 self-motion / world-motion 结构维护 out-of-view state，而不是暴力保存全部历史？
+
+epistemic-action safety
+— 为了获得信息而做的实验本身可能危险、不可逆或改变世界。
+
+model-structure uncertainty
+— 不只是“不知道 state”，还可能“不知道应该用哪个动力学 / 因果模型”。
+
+meta-reasoning
+— 什么时候应该继续思考、再看一眼、移动、probe、询问、等待，还是直接行动？
+```
+
+## Vision alone 双轴协议
+
+### Observation protocol
 
 - `V0`：单目 RGB + 时间顺序；
 - `V1`：V0 + 相机内参；
 - `V2`：标定多相机 RGB；
-- `V3`：机器人主动移动来取得新的视觉证据。
+- `V3`：机器人主动行动，从而改变未来视觉证据。
 
-### 学习证据来源
+### Learning evidence provenance
 
 - `L0`：视觉自监督；
 - `L1`：视觉标签 / annotation；
@@ -208,30 +230,37 @@ field gap
 - `L3`：带动作的 demonstration / interaction；
 - `L4`：非视觉或 privileged physical evidence。
 
-这可以避免把“部署只输入 RGB”误认为“所有世界知识都来自视觉”。
+所以：
+
+```text
+部署时只有 RGB
+≠
+知识只来自视觉
+```
+
+## 后续阶段
+
+### Stage 2 — Analysis
+
+对真正重要的方法逐个做 one-method-one-report 机制分析。
+
+### Stage 3 — Synthesis
+
+统一比较优点、缺点、trade-off、capability matrix、Failure Matrix 和共同 gap。
+
+### Stage 4 — Innovation
+
+只有当 gap 已被充分证明后，才正式提出 Clover-original hypothesis / algorithm。
+
+### Stage 5–7
+
+实现 → 实验 → 反思。
 
 ## 当前不做什么
 
-现在不冻结 field、CSP、licence、explicit state、latent state、Transformer 或任何新 Clover core algorithm。
+目前不冻结 explicit/latent/object/field/token、hierarchy、information-gain objective、Transformer/non-Transformer 或任何新 Clover core algorithm。
 
-旧 Clover 机制统一作为未来 Innovation 阶段的候选 idea；是否保留要由后续 Analysis、Synthesis 和 Evaluation 决定。
-
-## 长期产品闭环
-
-```text
-视觉经验
- ↓
-世界理解
- ↓
-决策
- ↓
-工具 / capability 选择
- ↓
-执行
- ↓
-新的视觉经验
- └──────────────→ 更新世界理解
-```
+旧 Clover 机制仍然只是未来 Innovation 阶段的候选 idea，是否保留必须由 Research → Analysis → Synthesis → Evaluation 决定。
 
 ---
 
