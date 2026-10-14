@@ -1,43 +1,57 @@
-# Embodied Reasoning and VLA
+# Embodied Reasoning
 
-## What problem does this area solve?
+## Core question
 
-Connect visual understanding and language/knowledge to robot decisions and actions.
+> **Can a large multimodal reasoning model function as the high-level brain of a robot, and if it can, what is left for a dedicated worldview model to contribute?**
 
-## Embodied reasoning
+## Gemini Robotics ER 2
 
-### Gemini Robotics ER 2
+Google DeepMind describes Gemini Robotics ER 2 as an embodied reasoning VLM and a 'high-level brain for robots'. Its official model card states that it is based on Gemini 3.5 Flash and accepts text, image, video and audio inputs. The product page describes physical-world understanding, multi-step planning and handoff of motor execution to a lower-level VLA.
 
-Google DeepMind positions ER 2 as a high-level embodied reasoning brain for physical understanding and multi-step planning.
+Primary sources:
 
-- Overview: https://deepmind.google/models/gemini-robotics/embodied-reasoning/
-- Model card: https://deepmind.google/models/model-cards/gemini-robotics-er-2/
+- https://deepmind.google/models/gemini-robotics/embodied-reasoning/
+- https://deepmind.google/models/model-cards/gemini-robotics-er-2/
 
-Clover should investigate whether this kind of embodied reasoning maintains a persistent independent world model or primarily reasons within a multimodal language context.
+## Why this matters to Clover
 
-## Vision-Language-Action
+At the system level, this resembles part of Clover's high-level decomposition:
 
-### RT-2
+```text
+perception / reasoning
+        ↓
+high-level plan
+        ↓
+lower-level action model
+```
 
-A landmark vision-language-to-action formulation.
+But the scientific basis is different. ER 2 is a multimodal VLM, so its physical reasoning can potentially draw on language and large-scale multimodal pretraining rather than only visual evidence.
 
-- https://deepmind.google/blog/rt-2-new-model-translates-vision-and-language-into-action/
+## The crucial confound: visual evidence vs language knowledge
 
-### OpenVLA
+For Clover's SSOT, we must distinguish:
 
-An important open baseline for modern VLA systems.
+```text
+world knowledge inferred from the current visual stream
+```
 
-- https://github.com/openvla/openvla
+from:
 
-### π0.5
+```text
+prior semantic/physical knowledge imported by text-language pretraining
+```
 
-An important open-world robot policy/generalization result.
+A model can answer a physical question correctly without constructing a persistent world state from current evidence.
 
-- https://www.pi.website/blog/pi05
+## Questions to investigate later
 
-## Clover questions
+1. Does the system maintain persistent identity when an object leaves view?
+2. Can it distinguish unobserved from absent without language priors filling gaps?
+3. How does it update after unexpected physical change?
+4. Can it expose or query a stable world state across a long task?
+5. How much of its physical reasoning remains under a strict vision-only protocol?
+6. Does high-level reasoning reduce failures compared with the same lower-level VLA alone?
 
-- When does direct action mapping outperform a persistent world state?
-- Which failures require explicit memory, intervention tracking or belief revision?
-- Does language provide world understanding or external semantic prior knowledge?
-- Can a world model improve recovery and long-horizon planning beyond a strong VLA?
+## Implication
+
+Clover should not compete by claiming that language reasoning is 'not real understanding'. It should define a stricter visual-evidence protocol and demonstrate which world capabilities require persistent visual grounding beyond generic multimodal reasoning.

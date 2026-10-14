@@ -1,32 +1,52 @@
 # Active Perception
 
-## Core idea
+## Core question
 
-Vision alone does not imply passive vision. An embodied agent can change its viewpoint to obtain missing evidence.
+> **If a visual system knows that its evidence is insufficient, can it decide what to look at next?**
 
-A central loop is:
+Vision alone does not imply passive vision. A robot can move its camera or body, change viewpoint, approach an object, inspect an occluded region and create new evidence.
+
+## Why this is central to Clover
+
+A passive model can only refuse when a necessary fact is unobserved. A robot brain can instead turn epistemic uncertainty into an information-seeking action.
 
 ```text
-world uncertainty
-→ information-seeking visual action
-→ new observation
-→ belief update
+unresolved world question
+        ↓
+which observation could resolve it?
+        ↓
+viewpoint / inspection action
+        ↓
+new visual evidence
+        ↓
+world update
 ```
 
-## Connections to prior fields
+This may become one of the strongest bridges between Worldview and Decision.
+
+## Prior theoretical roots
 
 - active vision;
-- POMDP and belief-space planning;
+- POMDPs;
+- belief-space planning;
 - next-best-view planning;
-- embodied exploration;
-- active SLAM.
+- information gain / entropy reduction;
+- visual exploration.
 
-## Why it matters to Clover
+These fields already formalize the idea that sensing itself can be controlled.
 
-A system that can represent `unknown` but cannot act to resolve relevant unknowns is incomplete as a robotic brain. Active perception may be the bridge from Worldview uncertainty to Decision.
+## Clover-specific questions
 
-## Open questions
+1. What form of uncertainty is actionable rather than merely low confidence?
+2. Can the system identify a **minimal missing observation** needed to answer a world query?
+3. How should the value of information trade off against task progress and motion cost?
+4. Can active perception distinguish genuine ambiguity from model weakness?
+5. Can the robot learn visual inquiry policies without language labels?
 
-- Which uncertainty belongs to Worldview and which to Decision?
-- Can information gain be computed from a learned representation?
-- How should active perception be evaluated without rewarding unnecessary motion?
+## Important distinction
+
+Active perception is not an excuse to weaken the vision-only claim. The sensory evidence remains visual. The action only changes which visual evidence becomes available.
+
+## Future strong test
+
+Construct tasks where two hidden world hypotheses are visually indistinguishable from the current viewpoint, but one deliberate camera/body movement reveals the difference. A world-understanding system should know that it does not yet know, choose a revealing observation, update, and then act.
