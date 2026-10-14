@@ -17,11 +17,17 @@ Before proposing architecture, code, experiments or research conclusions, read:
 1. [`SSOT.md`](SSOT.md)
 2. [`research/PIPELINE.md`](research/PIPELINE.md)
 3. [`research/RESEARCH.md`](research/RESEARCH.md)
-4. [`PRINCIPLES.md`](PRINCIPLES.md)
-5. [`STATUS.md`](STATUS.md)
-6. [`research/README.md`](research/README.md)
-7. [`research/survey/SOURCE_MAP.md`](research/survey/SOURCE_MAP.md)
-8. deeper survey/dossier files only as needed.
+4. [`research/RESEARCH_STATE_VARIABLES.md`](research/RESEARCH_STATE_VARIABLES.md)
+5. [`research/RESEARCH_IDENTIFIABILITY.md`](research/RESEARCH_IDENTIFIABILITY.md)
+6. [`research/RESEARCH_OBSERVATION_PHYSICS.md`](research/RESEARCH_OBSERVATION_PHYSICS.md)
+7. [`research/RESEARCH_PHYSICAL_PROPERTIES.md`](research/RESEARCH_PHYSICAL_PROPERTIES.md)
+8. [`research/RESEARCH_SUFFICIENT_STATE.md`](research/RESEARCH_SUFFICIENT_STATE.md)
+9. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
+10. [`PRINCIPLES.md`](PRINCIPLES.md)
+11. [`STATUS.md`](STATUS.md)
+12. [`research/README.md`](research/README.md)
+13. [`research/survey/SOURCE_MAP.md`](research/survey/SOURCE_MAP.md)
+14. deeper survey/dossier files only as needed.
 
 Historical documents and news notes are evidence/signal sources, not SSOT.
 
@@ -231,6 +237,75 @@ The algorithm determines the hardware mapping. Hardware does not determine the s
 
 The long-term standard is not a QA score. Clover must ultimately support real behavior in unfamiliar environments, including memory, recovery, world change, active perception and long-horizon decision-making.
 
+### 5.14 The camera is not a transparent window onto state
+
+When a result depends on RGB, record the relevant observation assumptions where material:
+
+```text
+camera model
+viewpoint / calibration
+illumination
+reflectance / material
+transparency / refraction
+specular reflection
+occlusion
+motion blur
+rolling shutter
+exposure / dynamic range
+sensor noise / compression
+```
+
+Keep distinct:
+
+```text
+world-state ambiguity
+≠
+image-formation ambiguity
+≠
+sensor/acquisition corruption.
+```
+
+Photometric or pixel reconstruction does not by itself prove recovery of the true physical decomposition.
+
+### 5.15 Predictability is not identifiability
+
+A model predicting mass, material, friction, temperature or another hidden variable accurately on a dataset does not prove that the variable is uniquely determined by the visual evidence.
+
+Record whether success depends on:
+
+```text
+category/world priors
+metric scale
+multiple frames
+active viewpoint changes
+known interventions / action-response
+language knowledge
+non-visual sensing
+privileged simulator state.
+```
+
+When multiple worlds remain compatible with the evidence, uncertainty can be the scientifically correct output.
+
+### 5.16 Task sufficiency is not general world understanding
+
+When a representation is called compact, sufficient, Markov, predictive or action-relevant, record **what it is sufficient for**.
+
+Use these research labels when helpful:
+
+```text
+S-PRED   prediction
+S-CTRL   control
+S-PLAN   planning
+S-MEM    memory / revision
+S-CAUSE  intervention / counterfactuals
+S-EPI    uncertainty / belief
+S-OPEN   open-world / future-task optionality
+```
+
+A representation sufficient for one fixed manipulation task is not automatically sufficient for future unknown tasks, persistent memory, causal reasoning or general robotic intelligence.
+
+Do not reward compression merely for being small. Evaluate what information was discarded and whether another history/query/action can expose state aliasing.
+
 ## 6. Stage-1 research contribution template
 
 When adding a method or source during the current stage, record as much of the following as is known:
@@ -243,6 +318,8 @@ When adding a method or source during the current stage, record as much of the f
 - **Dataset / benchmark URL**
 - **Evidence level**
 - **Input / training provenance**
+- **Observation / image-formation assumptions when material**
+- **Sufficiency target when the method claims a state representation**
 - **One-sentence demonstrated capability**
 - **One-sentence limitation / open question**
 
@@ -264,8 +341,10 @@ During the current Research stage:
 4. classify evidence level;
 5. collect code/datasets/benchmarks where available;
 6. summarize claims conservatively;
-7. record missing areas explicitly;
-8. do not import external mechanisms into Clover by default.
+7. record observation assumptions and evidence provenance;
+8. state whether a claimed representation is sufficient for prediction, control, planning, memory, causality or some other target;
+9. record missing areas explicitly;
+10. do not import external mechanisms into Clover by default.
 
 News archives are discovery feeds. Durable material should graduate to primary/official evidence before becoming a core research record.
 
