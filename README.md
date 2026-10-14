@@ -15,28 +15,46 @@ Clover is a long-term open research project. **The question is fixed; the answer
 If you are an agent, contributor or researcher entering the repository for the first time, read in this order:
 
 1. [`AGENTS.md`](AGENTS.md) — mandatory repository rules for research agents.
-2. [`SSOT.md`](SSOT.md) — the highest research question, product goal and current scientific stance.
+2. [`SSOT.md`](SSOT.md) — the highest research question, product goal and scientific stance.
 3. [`PRINCIPLES.md`](PRINCIPLES.md) — research principles.
-4. [`STATUS.md`](STATUS.md) — what is current, what is open, and what has not been demonstrated.
-5. [`research/survey/README.md`](research/survey/README.md) — the primary research survey and navigation layer.
+4. [`STATUS.md`](STATUS.md) — current phase and what has not been demonstrated.
+5. [`research/survey/BACKGROUND_RESEARCH.md`](research/survey/BACKGROUND_RESEARCH.md) — full problem-space background.
+6. [`research/survey/SOURCE_MAP.md`](research/survey/SOURCE_MAP.md) — source → evidence → claim → limitation → Clover landing.
+7. [`research/survey/README.md`](research/survey/README.md) — survey navigation.
 
-## Current phase — Survey / Research Foundation
+## Current phase — Background Research / Problem Reconstruction
 
 The 2026-10-14 Research Reset moved Clover from architecture-first development to problem-first research.
 
-The immediate objective is to understand the strongest prior and current answers before freezing the next Clover representation. We are therefore prioritizing **survey and synthesis before reproduction or benchmark optimization**.
+The current order is:
 
-The primary research surface is intentionally flat:
+```text
+Background Research / Research Map
+→ Baseline Setup
+→ Understanding Battery
+→ Failure Matrix
+→ Representation Hypothesis
+→ World Formation / Learning
+→ Robot Brain
+→ Real-world Evaluation
+→ Hardware Co-design
+```
 
+We are **not** currently freezing a new Clover representation. The immediate objective is to make the background research deep and source-backed enough that later baselines and experiments can identify the failures shared by strong existing approaches.
+
+## Primary research surfaces
+
+- [Background Research](research/survey/BACKGROUND_RESEARCH.md)
+- [Source Map](research/survey/SOURCE_MAP.md)
 - [Frontier Methods](research/survey/FRONTIER_METHODS.md)
+- [Research Questions](research/survey/RESEARCH_QUESTIONS.md)
 - [Papers & Primary Sources](research/survey/PAPERS.md)
 - [Benchmarks & Embodied Tasks](research/survey/BENCHMARKS_TASKS.md)
 - [Datasets & Code](research/survey/DATASETS_CODE.md)
-- [Research Questions](research/survey/RESEARCH_QUESTIONS.md)
 - [Clover Hypotheses](research/survey/CLOVER_HYPOTHESES.md)
 - [Frontier Signals](research/survey/FRONTIER_SIGNALS.md)
 
-Older `docs/research-map/` and `research/literature/` structures remain as secondary reference and research history.
+Older `docs/research-map/`, `docs/research-questions/` and `research/literature/` structures remain as secondary reference and research history.
 
 ## What we want to build
 
@@ -70,9 +88,9 @@ The working research target includes the ability to form, maintain, use and revi
 - uncertainty, unknown and unobserved state;
 - causal and counterfactual reasoning;
 - memory and belief revision;
-- generalization to unfamiliar objects, scenes and compositions;
-- active perception;
-- measurable usefulness for decision and action.
+- generalization to unfamiliar objects, scenes, cameras and dynamics;
+- active acquisition of missing visual evidence;
+- measurable usefulness for decision, planning, execution and recovery.
 
 See [`SSOT.md`](SSOT.md) and [What is Understanding?](docs/what-is-understanding.md).
 
@@ -86,25 +104,39 @@ Clover does **not** assume that:
 - objects, fields, geometry or tokens must be the primitive ontology;
 - Transformers are inherently unsuitable for world understanding;
 - prediction, reconstruction or generation is necessarily the correct learning objective;
+- persistent explicit world state is necessarily required for strong robot behavior;
 - a single benchmark can define world understanding;
 - the current Clover prototype is the final architecture.
 
-Hardware, representation, learning objective and software architecture are research variables.
+Hardware, representation, learning objective, memory model and software architecture are research variables.
+
+## “Vision alone” protocol
+
+Clover distinguishes the visual observation budget:
+
+- `V0` — monocular RGB + temporal order;
+- `V1` — V0 + camera intrinsics;
+- `V2` — calibrated multi-camera RGB;
+- `V3` — active embodied vision where action changes future visual evidence.
+
+Background research also records training-data provenance when relevant (`L0` visual self-supervision through `L4` non-visual/privileged physical evidence). This prevents deployment-time RGB input from being confused with knowledge learned only from vision.
 
 ## Evaluation stance
 
 Benchmarks are **measurement instruments**, not the SSOT.
 
-The eventual evidence standard must combine:
+The evidence standard must combine:
 
 1. controlled visual/physical diagnostics;
-2. real video and open-world generalization;
-3. persistent world-state and revision tests;
-4. intervention / causal tests;
-5. active perception;
-6. long-horizon embodied tasks in unfamiliar environments;
-7. downstream decision and recovery value;
-8. efficiency after scientific capability is established.
+2. shortcut-resistant paired tests;
+3. persistent and streaming memory tests;
+4. causal/interventional tests;
+5. real-video/open-world generalization;
+6. active perception;
+7. world change and belief revision;
+8. long-horizon embodied tasks in unfamiliar environments;
+9. downstream action/recovery value;
+10. efficiency after scientific capability is established.
 
 See [Benchmarks & Embodied Tasks](research/survey/BENCHMARKS_TASKS.md).
 
@@ -112,15 +144,17 @@ See [Benchmarks & Embodied Tasks](research/survey/BENCHMARKS_TASKS.md).
 
 A substantial pre-reset Research Prototype 1 explored field-based visual evidence, persistent entities/spacetime support, typed world queries, epistemic licences, decision, tool-use and execution loops.
 
-Those ideas remain valuable research history and hypotheses. They are **not frozen answers**. The current Survey re-evaluates them against classical vision, modern video/self-supervised models, spatial intelligence, VLA/robot foundation models, model-based robotics and 2026 frontier work.
+Those ideas remain research history and candidate hypotheses. They are **not frozen answers**. The current background research re-evaluates them against classical vision, modern self-supervised image/video models, learned geometry, object-centric learning, memory benchmarks, generative world models, VLA/robot foundation models, POMDP/active perception and causal-representation research.
 
 ## Repository navigation
 
 ### Current research
 
 - [Survey](research/survey/README.md)
-- [Open questions](docs/open-questions.md)
+- [Background Research](research/survey/BACKGROUND_RESEARCH.md)
+- [Source Map](research/survey/SOURCE_MAP.md)
 - [Research decisions](research/decisions/)
+- [Open questions](docs/open-questions.md)
 - [Active hypotheses](docs/hypotheses/README.md)
 
 ### Secondary research references
