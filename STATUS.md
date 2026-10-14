@@ -36,8 +36,9 @@ Start with:
 2. [`research/PIPELINE.md`](research/PIPELINE.md)
 3. [`research/RESEARCH.md`](research/RESEARCH.md)
 4. [`research/RESEARCH_STATE_VARIABLES.md`](research/RESEARCH_STATE_VARIABLES.md)
-5. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
-6. [`research/README.md`](research/README.md)
+5. [`research/RESEARCH_IDENTIFIABILITY.md`](research/RESEARCH_IDENTIFIABILITY.md)
+6. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
+7. [`research/README.md`](research/README.md)
 
 ## Stage-1 foundation — active / expanding
 
@@ -122,6 +123,35 @@ physically identifiable from pixels
 
 This is now a first-class Stage-1 research question.
 
+## Identifiability / information-limit foundation
+
+[`research/RESEARCH_IDENTIFIABILITY.md`](research/RESEARCH_IDENTIFIABILITY.md) now separates:
+
+```text
+predictability
+observability
+identifiability
+calibration / epistemic correctness
+action sufficiency
+```
+
+It connects classical visual ambiguity, POMDP belief state, active perception, system identification, causal-representation identifiability and modern identifiable world-model research.
+
+The controlling question is no longer merely:
+
+```text
+Can the model guess the hidden variable?
+```
+
+but:
+
+```text
+What evidence makes that variable identifiable?
+Under what assumptions?
+What alternative worlds remain compatible with the same visual evidence?
+When should the correct answer be uncertainty or another information-gathering action?
+```
+
 ## 2026-10-14 frontier refresh
 
 The current edge includes several references that materially change the comparison space:
@@ -188,8 +218,8 @@ OpenVLA · π0.5 · GR00T N1.7 · Gemini Robotics · Gemini 4 Argon · Helix · 
 world-action models
 ReWAM · Riemann-1.0 · Being-M0.7 · HWAM · related WAMs
 
-hybrid state
-Identifiable World Models
+hybrid / identifiable state
+Identifiable World Models · causal representation identifiability literature
 ```
 
 ## Dataset / benchmark collection
@@ -231,6 +261,12 @@ Stage 1 records what each dataset/benchmark actually measures, its inputs, hidde
 statistically predictable from pixels
 ≠
 physically identifiable from pixels
+
+observation
+≠
+true hidden state
+≠
+belief over possible states
 
 visual geometry
 ≠
