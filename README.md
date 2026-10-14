@@ -6,138 +6,137 @@
 >
 > **Long-term goal:** Build a general-purpose robotic brain that forms an understanding of the real world through vision alone, then uses that understanding to decide and act.
 
-Clover is a long-term open research project. The research question is fixed; the answer is open. The repository is a public research record: current evidence, active hypotheses, architecture, open questions, and decisions are kept separate so the project can change direction without rewriting its history.
+Clover is a long-term open research project. **The question is fixed; the answer is open.** The repository is a public research record: evidence, hypotheses, decisions, architecture and eventual implementations are kept distinct so the project can change its answer without changing its question.
 
 [中文说明](README.zh-CN.md)
 
-## Why this problem matters
+## Start here
 
-A robot can sometimes map pixels directly to actions without maintaining a durable model of the world. Clover asks the deeper question: what internal structure is sufficient for a machine to recognize persistence, identity, space, time, dynamics, causality, uncertainty and change from visual experience — and to use that structure for decision and action?
+If you are an agent, contributor or researcher entering the repository for the first time, read in this order:
 
-The target is not a single benchmark score. Benchmarks are instruments. The eventual standard is real capability in unfamiliar physical environments.
+1. [`AGENTS.md`](AGENTS.md) — mandatory repository rules for research agents.
+2. [`SSOT.md`](SSOT.md) — the highest research question, product goal and current scientific stance.
+3. [`PRINCIPLES.md`](PRINCIPLES.md) — research principles.
+4. [`STATUS.md`](STATUS.md) — what is current, what is open, and what has not been demonstrated.
+5. [`research/survey/README.md`](research/survey/README.md) — the primary research survey and navigation layer.
+
+## Current phase — Survey / Research Foundation
+
+The 2026-10-14 Research Reset moved Clover from architecture-first development to problem-first research.
+
+The immediate objective is to understand the strongest prior and current answers before freezing the next Clover representation. We are therefore prioritizing **survey and synthesis before reproduction or benchmark optimization**.
+
+The primary research surface is intentionally flat:
+
+- [Frontier Methods](research/survey/FRONTIER_METHODS.md)
+- [Papers & Primary Sources](research/survey/PAPERS.md)
+- [Benchmarks & Embodied Tasks](research/survey/BENCHMARKS_TASKS.md)
+- [Datasets & Code](research/survey/DATASETS_CODE.md)
+- [Research Questions](research/survey/RESEARCH_QUESTIONS.md)
+- [Clover Hypotheses](research/survey/CLOVER_HYPOTHESES.md)
+- [Frontier Signals](research/survey/FRONTIER_SIGNALS.md)
+
+Older `docs/research-map/` and `research/literature/` structures remain as secondary reference and research history.
 
 ## What we want to build
 
-At the system level, the current decomposition is:
+The eventual product-level target is a general-purpose robotic brain:
 
 ```text
 Vision
   ↓
-Worldview
+World understanding
   ↓
 Decision
   ↓
-Tool Use
+Tool / capability selection
   ↓
 Execution
   ↓
 new visual observation
-  └──────────────→ Worldview
+  └──────────────→ updated world understanding
 ```
 
-This is a system-level decomposition, not a commitment to one internal representation or one learning architecture.
+This is a product-level objective, not a commitment to a particular internal representation, neural architecture or module boundary.
 
 ## What we mean by understanding
 
-Our working definition includes the ability to maintain and revise a world model that supports:
+The working research target includes the ability to form, maintain, use and revise world knowledge supporting:
 
-- persistent world state and object permanence;
-- identity through time and occlusion;
+- existence and observability;
+- identity and object permanence;
 - spatial and temporal structure;
-- observability, unknown and unobserved state;
 - dynamics and physically plausible change;
+- uncertainty, unknown and unobserved state;
 - causal and counterfactual reasoning;
 - memory and belief revision;
-- generalization to unfamiliar scenes and objects;
+- generalization to unfamiliar objects, scenes and compositions;
+- active perception;
 - measurable usefulness for decision and action.
 
-The definition itself remains a research object. See [What is Understanding?](docs/what-is-understanding.md).
+See [`SSOT.md`](SSOT.md) and [What is Understanding?](docs/what-is-understanding.md).
 
 ## What we do not assume
 
 Clover does **not** assume that:
 
 - CPU computation is inherently superior to GPU computation;
-- explicit representations are always superior to learned latent representations;
-- field crystallization is necessarily the final world representation;
+- explicit world state is inherently superior to distributed latent representation;
+- field crystallization is necessarily the final representation;
+- objects, fields, geometry or tokens must be the primitive ontology;
 - Transformers are inherently unsuitable for world understanding;
-- one benchmark can define whether a machine understands the world;
-- the current Clover architecture is the final architecture.
+- prediction, reconstruction or generation is necessarily the correct learning objective;
+- a single benchmark can define world understanding;
+- the current Clover prototype is the final architecture.
 
-Hardware, representation and learning method are design variables. They should be selected by evidence.
+Hardware, representation, learning objective and software architecture are research variables.
 
-## Current phase
+## Evaluation stance
 
-The 2026-10-14 Research Reset moved Clover from architecture-first development to problem-first research.
+Benchmarks are **measurement instruments**, not the SSOT.
 
-We are now prioritizing **research before reproduction**: mapping what classical vision, modern representation learning, world models, spatial intelligence and real robot systems already solve before freezing the next Clover representation.
+The eventual evidence standard must combine:
 
-See [STATUS.md](STATUS.md) and [research decision 0005](research/decisions/0005-research-before-reproduction.md).
+1. controlled visual/physical diagnostics;
+2. real video and open-world generalization;
+3. persistent world-state and revision tests;
+4. intervention / causal tests;
+5. active perception;
+6. long-horizon embodied tasks in unfamiliar environments;
+7. downstream decision and recovery value;
+8. efficiency after scientific capability is established.
 
-## Research map
+See [Benchmarks & Embodied Tasks](research/survey/BENCHMARKS_TASKS.md).
 
-The current map covers:
+## Existing Clover work
 
-- classical computer vision and geometry;
-- learned visual representations;
-- self-supervised video/world models;
-- spatial intelligence and learned geometry;
-- object-centric representation;
-- embodied reasoning and VLA systems;
-- robot foundation models;
-- model-based robotics and active perception;
-- causality and lifelong learning;
-- data, experience and interaction.
+A substantial pre-reset Research Prototype 1 explored field-based visual evidence, persistent entities/spacetime support, typed world queries, epistemic licences, decision, tool-use and execution loops.
 
-Start with the [Research Map](docs/research-map/README.md), then move to the cross-cutting [Research Questions / Synthesis](docs/research-questions/README.md).
+Those ideas remain valuable research history and hypotheses. They are **not frozen answers**. The current Survey re-evaluates them against classical vision, modern video/self-supervised models, spatial intelligence, VLA/robot foundation models, model-based robotics and 2026 frontier work.
 
-For concrete sources, use the [Primary Source Index](research/literature/primary-sources.md). For newly relevant 2026 work, see [2026 Frontier Watch](research/literature/2026-frontier.md).
+## Repository navigation
 
-## Current prototype
+### Current research
 
-A substantial Clover research prototype was developed before this public repository was initialized, exploring field-based visual evidence, persistent entities, typed world queries, epistemic licences, decision, tool-use and execution loops. That implementation is **Research Prototype 1**, not a frozen answer. Public code migration will follow a dedicated safety, build and documentation audit.
+- [Survey](research/survey/README.md)
+- [Open questions](docs/open-questions.md)
+- [Research decisions](research/decisions/)
+- [Active hypotheses](docs/hypotheses/README.md)
 
-## Research hypotheses
+### Secondary research references
 
-Existing Clover mechanisms are tracked as hypotheses rather than project axioms, including field crystallization, machine-native primitives, explicit world state, spacetime structure, epistemic licences and world growth.
-
-See [Active Hypotheses](docs/hypotheses/README.md).
-
-## Evaluation
-
-We maintain an [Evaluation Map](docs/evaluation/benchmark-map.md) and a working [Understanding Battery](docs/evaluation/understanding-battery.md). These are measurement plans, not immediate leaderboard objectives.
-
-## Research principles
-
-The central rules are in [PRINCIPLES.md](PRINCIPLES.md). In short:
-
-1. The question comes first.
-2. Evidence comes before architectural commitment.
-3. Benchmarks are instruments, not the objective.
-4. Real embodied capability matters.
-5. Facts, hypotheses and plans remain separate.
-6. External methods are studied for the contradiction they solve, not stacked as modules.
-7. Hardware is a design variable.
-8. Important mechanisms must be falsifiable.
-9. Code must remain inspectable.
-10. World understanding must eventually improve action.
-
-## Documentation
-
-- [Research question](docs/research-question.md)
-- [Product goal](docs/product-goal.md)
-- [What is understanding?](docs/what-is-understanding.md)
 - [Research map](docs/research-map/README.md)
-- [Research questions / synthesis](docs/research-questions/README.md)
+- [Question synthesis](docs/research-questions/README.md)
 - [Primary source index](research/literature/primary-sources.md)
 - [2026 frontier watch](research/literature/2026-frontier.md)
-- [Model & literature index](research/literature/model-index.md)
-- [Datasets & benchmarks index](research/literature/datasets-and-benchmarks.md)
-- [Open questions](docs/open-questions.md)
-- [Current architecture notes](docs/architecture/README.md)
-- [Evaluation principles](docs/evaluation/evaluation-principles.md)
+
+### Project definition
+
+- [SSOT](SSOT.md)
+- [Principles](PRINCIPLES.md)
+- [Status](STATUS.md)
+- [Roadmap](ROADMAP.md)
 - [Glossary](docs/glossary.md)
-- [Research decisions](research/decisions/)
 
 ## Status vocabulary
 
@@ -150,7 +149,7 @@ The central rules are in [PRINCIPLES.md](PRINCIPLES.md). In short:
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). Research proposals should identify the contradiction they solve, relevant prior work, a falsifier, and expected impact on the central question.
+See [CONTRIBUTING.md](CONTRIBUTING.md). A new method or paper should enter the repository through the contradiction it helps answer, not as a framework to stack onto Clover.
 
 ## License
 
