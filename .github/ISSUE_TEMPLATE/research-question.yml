@@ -1,0 +1,32 @@
+name: Research question
+description: Propose or sharpen a Clover research question.
+title: "[Research] "
+labels: []
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: What exactly should Clover answer?
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it matters
+    validations:
+      required: true
+  - type: textarea
+    id: prior
+    attributes:
+      label: Existing work / evidence
+      description: What do we already know?
+  - type: textarea
+    id: hypothesis
+    attributes:
+      label: Current hypothesis
+  - type: textarea
+    id: falsifier
+    attributes:
+      label: Possible falsifier
+      description: What result would reject the hypothesis?
