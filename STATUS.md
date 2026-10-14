@@ -28,12 +28,15 @@ The repository now follows:
 
 The immediate priority is breadth, traceability and coverage. We are collecting the full research landscape before making a new Clover algorithmic commitment.
 
+Stage-1 freshness has been checked through **2026-10-14**.
+
 Start with:
 
 1. [`SSOT.md`](SSOT.md)
 2. [`research/PIPELINE.md`](research/PIPELINE.md)
 3. [`research/RESEARCH.md`](research/RESEARCH.md)
-4. [`research/README.md`](research/README.md)
+4. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
+5. [`research/README.md`](research/README.md)
 
 ## Stage-1 foundation — active / expanding
 
@@ -53,9 +56,10 @@ The current inventory covers more than the original eight deep domains. It now e
 - belief revision and forgetting;
 - intuitive, relational and quantitative physics;
 - physics-structured / differentiable world models;
+- contact, friction and deformable-object dynamics;
 - causal representation learning;
 - counterfactual visual reasoning;
-- active perception;
+- active perception and next-best-view;
 - system identification and action consequences;
 - generative world models;
 - world-action models;
@@ -69,19 +73,36 @@ The current inventory covers more than the original eight deep domains. It now e
 - uncertainty and calibration;
 - open-world / OOD recognition;
 - continual / lifelong learning;
-- simulation and synthetic data;
+- simulation, Real2Sim and synthetic data;
 - large robot datasets;
 - benchmark design and shortcut auditing;
 - systems integration and compounded failure;
+- multi-agent / social world modeling;
 - unified physical-AI surveys.
 
 This list is intentionally expandable. If a direction materially constrains the mother question, Stage 1 should collect it.
 
-## Current method references
+## 2026-10-14 frontier refresh
 
-Important references already tracked include ORB-SLAM3, RAFT, DINOv3, V-JEPA 2 / 2.1, DUSt3R, VGGT / VGGT-Ω, SAM 3 / 3.1, Slot Attention, PLATO, NeRF / 3DGS / 4D reconstruction, PersistBench, S-EMBER, VISTA, IntPhys 2, Minimal Video Pairs, Principia, RoboPhys-3D, CausalVQA, causal representation learning, Vantage, Atlas, Cosmos 3, OpenVLA, π0.5, Gemini Robotics, Helix, Skild, ReWAM, Being-M0.7, HWAM, HumanEgo, DreamerV3, TD-MPC2 and related work.
+The current edge now includes several references that materially change the comparison space:
+
+- **Gemini 4 Argon for Robotics** — https://developers.googleblog.com/gemini-4-argon-for-robotics/ — `OFFICIAL_REPORTED_RESULT`; current general multimodal physical-reasoning / Real2Sim / robot-tool-use counter-hypothesis.
+- **ERQA** — https://github.com/embodiedreasoning/ERQA — `OPEN_SOURCE`; embodied/spatial reasoning benchmark and evaluation harness.
+- **DR-WM / From Pixels to Executable Physics** — https://arxiv.org/abs/2610.17630 — `PRIMARY_PAPER`, submitted 2026-10-13; separates visual geometry from contact/friction properties calibrated through action-response evidence.
+- **GR00T N1.7** — https://github.com/NVIDIA/Isaac-GR00T — `OPEN_SOURCE`; current strong open VLA/direct-policy baseline with human-video pretraining and cross-embodiment action representation.
+- **Being-M0.7** — https://arxiv.org/abs/2610.11283 — `PRIMARY_PAPER`; latent visual-motion world-action route for humanoid control.
+- **HWAM** — https://arxiv.org/abs/2610.12026 — `PRIMARY_PAPER`; explicitly predicts post-execution body state to model the action-execution gap.
+- **Identifiable World Models** — https://arxiv.org/abs/2610.07028 — `PRIMARY_PAPER`; hybrid route combining distributed pretrained representations with identifiable dynamical coordinates under explicit assumptions.
+- **Vantage / Seek-and-View** — https://arxiv.org/abs/2610.11810 — `PRIMARY_PAPER`; question-conditioned viewpoint/evidence acquisition for multi-view spatial reasoning.
+- **Agentic Video Understanding** — https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-agentic-video-in-gemini/ — `OFFICIAL_REPORTED_RESULT`; evidence-acquisition policy as a variable separate from the base representation.
+- **RobotWorld** — https://arxiv.org/abs/2610.10409 — `PRIMARY_PAPER`; exposes composition, task-state retention, recovery and completion-verification failures across diverse robot-use tasks.
+- **Video2World** — https://arxiv.org/abs/2610.04432 — `PRIMARY_PAPER`; evaluates reconstructed worlds by geometry, dynamics and functional correctness rather than visual similarity alone.
 
 These are **research materials and comparators**, not Clover components.
+
+## Current method references
+
+Important references already tracked include ORB-SLAM3, RAFT, DINOv3, V-JEPA 2 / 2.1, DUSt3R, VGGT / VGGT-Ω, SAM 3 / 3.1, Slot Attention, PLATO, NeRF / 3DGS / 4D reconstruction, PersistBench, S-EMBER, VISTA, IntPhys 2, Minimal Video Pairs, Principia, RoboPhys-3D, CausalVQA, causal representation learning, Vantage, Atlas, Cosmos 3, OpenVLA, π0.5, GR00T N1.7, Gemini Robotics, Gemini 4 Argon, Helix, Skild, ReWAM, Being-M0.7, HWAM, HumanEgo, DreamerV3, TD-MPC2, DR-WM and related work.
 
 ## Dataset / benchmark collection
 
@@ -95,6 +116,9 @@ Tracked resources include:
 - CALVIN;
 - RoboCasa;
 - ManiSkill;
+- ERQA;
+- RobotWorld;
+- Video2World;
 - IntPhys 2;
 - Minimal Video Pairs;
 - CausalVQA;
@@ -102,9 +126,42 @@ Tracked resources include:
 - S-EMBER;
 - Principia;
 - RoboPhys-3D;
+- TAO-Amodal;
 - EmbodimentSemantic.
 
 Stage 1 records what each dataset/benchmark actually measures, its inputs, hidden ground truth, shortcuts, licensing and reproducibility.
+
+## New boundary distinctions strengthened by current evidence
+
+The latest material makes these distinctions increasingly important:
+
+```text
+visual geometry
+≠
+hidden physical parameters
+
+plausible prediction
+≠
+physically executable consequence
+
+reference action
+≠
+realized robot state
+
+visible tracking
+≠
+amodal completion
+≠
+object permanence
+
+long context
+≠
+active evidence acquisition
+
+strong multimodal reasoner + tools
+≠
+proof of vision-only world understanding
+```
 
 ## Existing Clover prototype
 
