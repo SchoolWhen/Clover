@@ -25,15 +25,21 @@ This index collects primary papers, official project pages and official code use
 - V-JEPA 2.1 — paper: https://arxiv.org/abs/2603.14482
 - Slot Attention — paper: https://arxiv.org/abs/2006.15055
 - SAM 2 — paper: https://arxiv.org/abs/2408.00714
+- Meta — Interpreting Physics in Video World Models: https://ai.meta.com/research/publications/interpreting-physics-in-video-world-models/
 
-## Generative / control world models
+## Generative / predictive / control world models
 
 - NeRF — paper: https://arxiv.org/abs/2003.08934
 - DreamerV3 — paper: https://arxiv.org/abs/2301.04104
 - TD-MPC2 — paper: https://arxiv.org/abs/2310.16828
 - World Labs Atlas — official report: https://www.worldlabs.ai/blog/atlas
 - Cosmos 3 — paper: https://arxiv.org/abs/2606.02800
+- Cosmos 3 — project: https://research.nvidia.com/labs/cosmos-lab/cosmos3
 - Cosmos — code: https://github.com/nvidia/cosmos
+- RBench / RoVid-X — paper: https://arxiv.org/abs/2601.15282
+- ABot-PhysWorld — paper: https://arxiv.org/abs/2603.23376
+- Xiaomi-Robotics-U0 — paper: https://arxiv.org/abs/2607.11643
+- Xiaomi-Robotics-U0 — project/code: https://robotics.xiaomi.com/xiaomi-robotics-u0.html
 
 ## Embodied reasoning / VLA / robot foundation models
 
@@ -44,6 +50,8 @@ This index collects primary papers, official project pages and official code use
 - π0.5 — paper: https://arxiv.org/abs/2504.16054
 - π0.5 — official project: https://www.pi.website/blog/pi05
 - Gemini Robotics ER 2 — model card: https://deepmind.google/models/model-cards/gemini-robotics-er-2/
+- Gemini Robotics On-Device 2 — model card: https://deepmind.google/models/model-cards/gemini-robotics-on-device-2/
+- Hy-Embodied-VLM-1.0 — paper: https://arxiv.org/abs/2607.12894
 - Figure Helix 2.5 — official reported result: https://www.figure.ai/news/helix-2-5-zero-shot-30-home-generalization
 - Skild S1 — official reported result: https://www.skild.ai/blogs/s1
 - Skild Physical Self-Play — official report: https://skild.ai/blogs/physical-self-play
@@ -54,3 +62,8 @@ This index collects primary papers, official project pages and official code use
 - MVPBench — official page: https://ai.meta.com/research/publications/a-shortcut-aware-video-qa-benchmark-for-physical-understanding-via-minimal-video-pairs/
 - CausalVQA — official page: https://ai.meta.com/research/publications/causalvqa-a-physically-grounded-causal-reasoning-benchmark-for-video-models/
 - RoboPhys-3D — paper: https://arxiv.org/abs/2608.28718
+
+## Surveys / landscape references
+
+- A Comprehensive Survey on World Models for Embodied AI: https://arxiv.org/abs/2510.16732
+- Aligning Perception, Reasoning, Modeling and Interaction: A Survey on Physical AI: https://arxiv.org/abs/2510.04978
