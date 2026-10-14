@@ -47,6 +47,8 @@ RESEARCH_OPEN_WORLD_EPISTEMICS.md
 ↓
 RESEARCH_MODEL_DISCOVERY.md
 ↓
+RESEARCH_ENGINEERING_VALIDATION.md
+↓
 RESEARCH_FRONTIER.md
 ```
 
@@ -63,6 +65,7 @@ RESEARCH_FRONTIER.md
 | [`RESEARCH_VALUE_OF_INFORMATION.md`](RESEARCH_VALUE_OF_INFORMATION.md) | Which view, probe or intervention is worth acquiring next? |
 | [`RESEARCH_OPEN_WORLD_EPISTEMICS.md`](RESEARCH_OPEN_WORLD_EPISTEMICS.md) | What if the hypothesis set is incomplete, the model is wrong/outdated, probing is unsafe, or another agent has hidden state? |
 | [`RESEARCH_MODEL_DISCOVERY.md`](RESEARCH_MODEL_DISCOVERY.md) | How should hypotheses, mechanisms, experiments, falsification and provenance be managed when the model class itself may be wrong? |
+| [`RESEARCH_ENGINEERING_VALIDATION.md`](RESEARCH_ENGINEERING_VALIDATION.md) | Can candidate models run under realistic edge constraints, and how should evidence graduate from simulation toward real-robot validation? |
 | [`RESEARCH_FRONTIER.md`](RESEARCH_FRONTIER.md) | Which current primary/official sources materially change the comparison space? |
 
 ## Stage-1 logic
@@ -89,6 +92,8 @@ value of information
 open-world uncertainty / model mismatch
 ↓
 model discovery / experiment / falsification
+↓
+engineering feasibility / simulation / validation ladder
 ↓
 current frontier
 ```
@@ -133,6 +138,18 @@ parameter estimation
 ≠ model selection
 ≠ mechanism discovery
 ≠ open-world model expansion
+
+current development machine
+≠ final robot edge computer
+≠ scientific hypothesis
+
+model latency
+≠ end-to-end closed-loop latency
+
+same-simulator success
+≠ sim2sim robustness
+≠ sim2real transfer
+≠ real-world validation
 
 reflection
 ≠ falsification
@@ -236,7 +253,35 @@ E7 social / intentional uncertainty
 E8 epistemic-action safety
 ```
 
-These are Research/Analysis labels, not Clover architecture primitives.
+### Validation evidence ladder
+
+```text
+EV0 mathematical / synthetic diagnostic
+EV1 controlled single-simulator test
+EV2 randomized in-simulator robustness
+EV3 sim-to-sim transfer
+EV4 offline real-data validation
+EV5 real-to-sim / digital-twin validation
+EV6 deployment-runtime / compute hardware in the loop
+EV7 proxy physical hardware
+EV8 target real robot
+```
+
+These are Research/Analysis bookkeeping labels, not Clover architecture primitives.
+
+## Current practical development constraint
+
+The present local reference machine is a **Mac mini with Apple M4**. Treat it as a measured development/deployment reference, not a scientific constraint.
+
+Current relevant paths include:
+
+- MLX — https://github.com/ml-explore/mlx
+- Apple Core AI / Core ML — https://developer.apple.com/core-ai/ · https://developer.apple.com/documentation/coreml
+- ExecuTorch Core ML / MLX backends — https://docs.pytorch.org/executorch/stable/backends/coreml/coreml-overview.html · https://docs.pytorch.org/executorch/stable/backends/mlx/mlx-overview.html
+- MuJoCo local simulation — https://github.com/google-deepmind/mujoco
+- Isaac Sim system identification / remote NVIDIA path — https://docs.isaacsim.omniverse.nvidia.com/latest/robot_setup/ext_isaacsim_robot_setup_sysid.html
+
+Do not make Isaac Sim or any NVIDIA-only stack a local prerequisite; current Isaac Sim standard requirements do not support macOS/non-NVIDIA hardware.
 
 ## Current high-value new references
 
@@ -253,20 +298,16 @@ Model discovery / scientific reasoning:
 - HUME — https://arxiv.org/abs/2607.06501 · https://github.com/threefruits/HUME
 - Unknown Unknowns / Model Misspecification — https://arxiv.org/abs/2608.13633
 - Intervention-only causal discovery — https://proceedings.mlr.press/v337/mazaheri26b.html
-- Causal Discovery in Action — https://proceedings.mlr.press/v323/panayiotou26a.html
-- Bayesian Experimental Design via Score Matching — https://proceedings.mlr.press/v337/phillips26a.html
 - Robust BOED under misspecification — https://proceedings.mlr.press/v300/tang26d.html
-- Constrained Bayesian Experimental Design — https://proceedings.mlr.press/v306/guo26g.html
 - SAGE — https://arxiv.org/abs/2606.31478 · https://github.com/JieMaMagic/SAGE
-- Socratic autonomous scientific discovery — https://arxiv.org/abs/2606.26722
 
-Open-world / social / safety:
+Engineering / simulation / transfer:
 
-- Changepoint-Aware World Models — https://arxiv.org/abs/2609.18950
-- Splat-CBF — https://arxiv.org/abs/2609.23100
-- ATOM-CBF — https://proceedings.mlr.press/v331/yun26a.html
-- Mental-Models — https://arxiv.org/abs/2610.12453 · https://github.com/hananshafi/Mental-Models
-- Recursive ToM — https://arxiv.org/abs/2606.11724
+- Reality-gap survey — https://arxiv.org/abs/2510.20808
+- Real-is-Sim — https://arxiv.org/abs/2504.03597
+- Isaac Sim sim-to-sim SysID recovery — https://docs.isaacsim.omniverse.nvidia.com/latest/robot_setup_tutorials/tutorial_system_identification_simsim.html
+- Isaac Sim system identification — https://docs.isaacsim.omniverse.nvidia.com/latest/robot_setup/ext_isaacsim_robot_setup_sysid.html
+- Isaac→Gazebo→real ROS 2 transfer example — https://arxiv.org/abs/2501.02902
 
 These are research materials and comparators, not Clover components.
 
@@ -286,6 +327,12 @@ social permission / consent for probing
 human-query / escalation cost models
 multi-agent recursive belief with embodied observations
 correlated uncertainty / model-ensemble collapse
+robot-edge runtime benchmarks for streaming world models
+quantization effects on uncertainty / memory / persistence
+cross-simulator benchmark standardization
+reality-gap metrics for world models, not only policies
+hardware-in-the-loop validation for learned world models
+low-cost proxy-robot validation protocols
 ```
 
 Do not create a new project stage for each gap.
