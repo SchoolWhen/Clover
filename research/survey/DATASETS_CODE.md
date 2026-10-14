@@ -89,21 +89,26 @@ object permanence
 
 ---
 
-## Geometry / spatial reconstruction
+## Geometry / spatial / dynamic-4D reconstruction
 
 - ORB-SLAM3 — https://arxiv.org/abs/2007.11898 · https://github.com/UZ-SLAMLab/ORB_SLAM3
 - RAFT — https://arxiv.org/abs/2003.12039 · https://github.com/princeton-vl/RAFT
 - DUSt3R — https://arxiv.org/abs/2312.14132
 - VGGT — https://arxiv.org/abs/2503.11651 · https://github.com/facebookresearch/vggt
 - VGGT-Ω — https://arxiv.org/abs/2605.15195 · https://vggt-omega.github.io/ · https://github.com/facebookresearch/vggt-omega
+- 4DVGGT-D — https://arxiv.org/abs/2605.12027
+- DP-DeGauss — https://arxiv.org/abs/2604.07986
+- 4D reconstruction survey/resources — https://arxiv.org/abs/2609.39960 · https://github.com/ZiyangYan/Awesome-4D-Scene-Reconstruction
 - Vantage — https://arxiv.org/abs/2610.11810 · https://github.com/q1xiangchen/Vantage
 - SpatialCORE — https://arxiv.org/abs/2609.38716 · https://github.com/rafiibnsultan/SpatialCORE
+
+Use 4DVGGT-D and DP-DeGauss specifically when studying camera ego-motion vs object-motion separation in dynamic scenes.
 
 VGGT-family official examples may be CUDA-oriented. Small-sequence pretrained inference/probing should be attempted before any expensive adaptation.
 
 ---
 
-## Persistent visual / episodic / semantic memory
+## Persistent visual / episodic / semantic / dynamic-world memory
 
 ### PersistBench
 
@@ -111,6 +116,20 @@ VGGT-family official examples may be CUDA-oriented. Small-sequence pretrained in
 - Project/code/data — https://guangzhaohe.com/persistbench
 
 Use for object permanence, motion continuity and appearance preservation after objects leave the field of view.
+
+### WROP — object-permanence training/exam infrastructure
+
+- Paper — https://arxiv.org/abs/2609.28654
+
+WROP provides cognitive-science-inspired object-permanence/solidity tasks, a large synthetic training corpus and a held-out exam for video world models.
+
+Use it to distinguish:
+
+```text
+training a permanence prior
+vs
+testing persistent memory in realistic scenes
+```
 
 ### S-EMBER
 
@@ -130,6 +149,157 @@ Relevant to memory/retrieval-harness comparisons. Reproduce only when the exact 
 - Paper — https://arxiv.org/abs/2609.19542
 
 Training-free persistent semantic memory baseline for long-horizon open-vocabulary mapping. Useful as a comparator for frame-wise semantics vs persistent world-space aggregation.
+
+### OASIS-Map
+
+- Paper — https://arxiv.org/abs/2607.14899
+- Project — https://dynamic.robots.ox.ac.uk/projects/oasis-map/
+
+Use for multi-session object-level world change:
+
+```text
+appeared
+disappeared
+moved
+replaced
+re-associated across revisits
+```
+
+This is a strong baseline for the distinction between **memory** and **belief revision after the real world changed**.
+
+### R4DSG
+
+- Paper — https://arxiv.org/abs/2608.11017
+- Project — https://dualtransparency.github.io/R4DSG/
+
+RGB-only relative 4D scene-graph memory for long egocentric video. Useful for persistent identity, anchor-relative object change and long-horizon object-centric retrieval without assuming a globally aligned metric reconstruction.
+
+---
+
+## Physical quantities, material properties and system identification
+
+### Physically Guided Visual Mass Estimation
+
+- Paper — https://arxiv.org/abs/2601.20303
+
+Single-RGB mass estimator that explicitly treats mass inference as ill-posed and uses geometry/volume and material/density-related priors.
+
+Use for studying:
+
+```text
+statistical mass prediction
+vs
+physical identifiability
+```
+
+### PhysQuantAgent / VisPhysQuant
+
+- Paper — https://arxiv.org/abs/2603.16958
+
+Real-object mass-estimation benchmark with multi-view RGB-D videos and measured mass ground truth.
+
+Protocol caution: RGB-D is not a strict V0/V1 RGB-only condition.
+
+### Visual + haptic friction mapping
+
+- Paper — https://arxiv.org/abs/2010.08277
+
+Important foundational evidence that friction is often poorly constrained by appearance alone and benefits from physical exploration.
+
+### Generalizable Friction Coefficient Estimation
+
+- Paper — https://arxiv.org/abs/2604.24188
+
+Uses material embeddings learned from measured proxy interactions rather than assuming friction is directly visible.
+
+### DR-WM / From Pixels to Executable Physics
+
+- Paper — https://arxiv.org/abs/2610.17630
+
+Separates RGB geometry from terrain/contact properties calibrated through action-response experience.
+
+Use as a key Stage-1 system-identification reference.
+
+---
+
+## Deformable, articulated and cross-regime world models
+
+### PointCast
+
+- Paper — https://arxiv.org/abs/2609.28393
+- Project — https://pointcast-wm.github.io/
+
+Identity-bearing 3D point-set world model evaluated across rigid objects, cloth, rope and multi-joint cabinets.
+
+Use to probe whether a common representation can span qualitatively different physical regimes.
+
+### PointWorld
+
+- Paper — https://arxiv.org/abs/2601.03782
+- Project — https://point-world.github.io/
+
+3D point-flow action/world representation spanning rigid pushing, deformable/articulated manipulation and tool use.
+
+Protocol caution: uses RGB-D rather than strict monocular RGB.
+
+### WorldContact
+
+- Paper — https://arxiv.org/abs/2609.19600
+
+Contact-centric world modeling for deformable-object manipulation. Relevant to bags, cloth and other tasks where geometry alone is insufficient.
+
+### Learning to Unfold Cloth
+
+- Paper — https://arxiv.org/abs/2602.16675
+
+Dreamer-style deformable-object world model with surface-normal input and real-robot transfer.
+
+Protocol caution: surface normals provide stronger geometric evidence than raw monocular RGB.
+
+### ManiSoft
+
+- Paper — https://arxiv.org/abs/2605.18617
+- Project/code/data — https://buaa-colalab.github.io/ManiSoft
+
+Benchmark for visual-language manipulation with soft continuum robot arms. Important because the robot body itself can be deformable and visually uncertain.
+
+### DexSim2Real²
+
+- Paper — https://arxiv.org/abs/2409.08750
+
+Uses active one-step interaction to construct an explicit world model/digital twin of unseen articulated objects.
+
+---
+
+## Liquid / weakly visible physical properties
+
+### VLM-based Physical Reasoning for Robot Liquid Perception
+
+- Paper — https://arxiv.org/abs/2404.06904
+
+Useful as a boundary example: vision-only liquid reasoning was weaker than a setup that incorporated interaction-derived force/torque information encoded visually.
+
+Do not classify viscosity estimation from this work as passive-RGB evidence.
+
+---
+
+## Uncertainty / selective prediction under partial visual evidence
+
+### Decision-Aware Uncertainty Evaluation of VLM Early Action Anticipation
+
+- Paper — https://arxiv.org/abs/2603.10061
+
+Use for calibration/selective-prediction protocols under temporally partial egocentric observations.
+
+Relevant measurements:
+
+```text
+calibration
+coverage
+selective risk
+confidence vs evidence amount
+abstention quality
+```
 
 ---
 
@@ -304,6 +474,22 @@ DR-WM is especially useful for Stage 1 because it explicitly separates geometry 
 - Identifiable World Models — https://arxiv.org/abs/2610.07028
 - WAM survey — https://arxiv.org/abs/2609.16074
 - WAM resource page — https://rcl-robotics.github.io/Awesome-World-Action-Models
+
+---
+
+## Action/world interface and visual calibration
+
+### SyncWorld
+
+- Paper — https://arxiv.org/abs/2609.09155
+
+Uses visual calibration episodes to specify environment/embodiment-specific action→visual mappings, highlighting that identical numerical actions need not have identical pixel/world meaning.
+
+### Robot-Factored World Models via Robot Rendering
+
+- Paper — https://arxiv.org/abs/2607.22535
+
+Factors robot action realization and rendered robot geometry away from environment-response prediction. Useful for cross-view/cross-embodiment interface studies.
 
 ---
 
