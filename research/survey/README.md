@@ -54,40 +54,17 @@ This Survey is the prior-art and synthesis layer. It is intentionally flatter th
 This Survey incorporates screened material from three internal documents.
 
 ### Clover Research Reset — 2026-10-14
+Kept: highest SSOT/product goal, benchmark-as-instrument, V0–V3 vision protocol, research map, benchmark/task map, hardware-as-design-variable, representation questions and primary links.
 
-Kept:
-- highest SSOT and product goal;
-- benchmark-as-instrument principle;
-- V0–V3 vision protocol;
-- research map and benchmark/task map;
-- hardware-as-design-variable principle;
-- representation questions and primary links.
-
-Not kept as current commitments:
-- immediate reproduction schedule;
-- CPU-first as a scientific prior;
-- any pre-reset mechanism as a final answer.
+Not kept as current commitments: immediate reproduction schedule, CPU-first as scientific prior, or any pre-reset mechanism as a final answer.
 
 ### `news_answers.md`
-
-Kept as candidate research hypotheses:
-- Evidence Replay;
-- query-conditioned temporal support;
-- separation of epistemic state and verification lifecycle;
-- proof/auditability ideas;
-- counter-witness causality;
-- sparse/event-like visual IR;
-- epistemic compute scheduling;
-- static/dynamic verification compilation;
-- geometry as a proposal heuristic;
-- state-transition affordance;
-- active perception and long-horizon world-change evaluation.
+Kept as candidate hypotheses: Evidence Replay, query-conditioned temporal support, epistemic/verification separation, auditability, counter-witness causality, event-like IR, epistemic compute scheduling, static/dynamic verification, geometry heuristic, state-transition affordance, active perception and long-horizon revision.
 
 Old implementation priority labels are not SSOT.
 
 ### `news(5).md`
-
-Used only as a signal archive. A news item enters the Survey as durable evidence only when primary/official material is available. Funding, secondary summaries and vendor claims remain signals, not scientific facts.
+Used only as a signal archive. A news item becomes durable evidence only when primary/official material is available. Funding, secondary summaries and vendor claims remain signals.
 
 ## Evidence labels
 
@@ -121,54 +98,46 @@ No row is declared the winner.
 ## Current strongest tensions
 
 ### Explicit vs distributed
-Physical variables can emerge in distributed/hierarchical video representations rather than only compact classical state. This is direct counter-pressure against assuming that explicit state is always the correct answer.
-
+Physical variables can emerge in distributed/hierarchical video representations rather than only compact classical state.
 - Paper: https://arxiv.org/abs/2602.07050
 - Official: https://ai.meta.com/research/publications/interpreting-physics-in-video-world-models/
 
 ### Prediction vs reconstruction vs generation
 - V-JEPA 2/2.1: predictive latent representation.
-- VGGT/VGGT-Ω: learned geometry and reconstruction.
+- VGGT/VGGT-Ω: learned geometry/reconstruction.
 - Atlas: reconstruction + generation + simulation.
 - Cosmos 3: reasoning + world generation + action generation.
 
-Open question: **which learning objective produces the state most useful for persistent understanding and action?**
+Open question: **which learning objective produces state most useful for persistent understanding and action?**
 
 ### Observation vs interaction
-V-JEPA 2 shows broad passive-video learning before a smaller action-conditioned stage; robot foundation models increasingly mix human video, robot data, simulation and self-play. Open question: **what information about causality, controllability and affordance is unavailable from passive observation alone?**
+Passive video can learn substantial dynamics; robot experience adds intervention/controllability information. Open question: **what causal/action knowledge cannot be identified from passive observation alone?**
 
 ### World state vs direct policy
-Gemini Robotics ER 2 explicitly separates high-level embodied reasoning from lower-level execution, while π0.5, Helix and Skild represent stronger policy/foundation routes. Open question: **what measurable capability is gained by a persistent worldview that a sufficiently strong policy cannot obtain implicitly?**
+Strong robot foundation/VLA systems are serious competing routes. Open question: **what measurable capability is gained by a persistent worldview that a sufficiently strong policy cannot obtain implicitly?**
 
 ### Visual truth vs plausible generation
-A generative model can produce coherent rollouts while inventing underdetermined hidden details. Clover must preserve the difference between plausible completion and evidence-supported world state.
+A generative model can produce coherent rollouts while inventing underdetermined hidden details. Clover must preserve the distinction between plausible completion and evidence-supported state.
 
 ## Survey maturity criteria
 
-For every major route we should eventually answer:
-1. What representation does it assume?
-2. What is learned vs engineered?
-3. How does it treat space and time?
-4. How does it maintain identity?
-5. How does it distinguish unknown from false?
-6. How does it treat physical law?
-7. Does it support interventions/counterfactuals?
-8. What memory persists?
-9. How does it connect to action?
-10. What real capability has been demonstrated?
-11. What remains unresolved?
-12. What code/data is public?
-13. What would falsify its relevance to Clover?
+For every major route we should answer:
+1. representation;
+2. learned vs engineered structure;
+3. space/time treatment;
+4. identity/persistence;
+5. unknown/observability;
+6. physics/causality;
+7. memory;
+8. action interface;
+9. demonstrated real capability;
+10. unresolved failures;
+11. public code/data;
+12. falsifiers relevant to Clover.
 
 ## Current phase boundary
 
-We are **not** yet freezing:
-- a final world representation;
-- an explicit-vs-latent decision;
-- a Transformer-vs-non-Transformer decision;
-- an object-vs-field decision;
-- a CPU-vs-GPU decision;
-- a final licence/authority mechanism.
+We are **not** yet freezing a final world representation, explicit-vs-latent decision, Transformer-vs-non-Transformer choice, object-vs-field ontology, CPU-vs-GPU allocation, or final licence/authority mechanism.
 
 The next Clover architecture should be a result of this Survey, not a prerequisite for it.
 
