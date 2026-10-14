@@ -89,7 +89,9 @@ The current map covers:
 - causality and lifelong learning;
 - data, experience and interaction.
 
-Start with the [Research Map](docs/research-map/README.md), then use the [Model & Literature Index](research/literature/model-index.md) for specific systems.
+Start with the [Research Map](docs/research-map/README.md), then move to the cross-cutting [Research Questions / Synthesis](docs/research-questions/README.md).
+
+For concrete sources, use the [Primary Source Index](research/literature/primary-sources.md). For newly relevant 2026 work, see [2026 Frontier Watch](research/literature/2026-frontier.md).
 
 ## Current prototype
 
@@ -126,6 +128,9 @@ The central rules are in [PRINCIPLES.md](PRINCIPLES.md). In short:
 - [Product goal](docs/product-goal.md)
 - [What is understanding?](docs/what-is-understanding.md)
 - [Research map](docs/research-map/README.md)
+- [Research questions / synthesis](docs/research-questions/README.md)
+- [Primary source index](research/literature/primary-sources.md)
+- [2026 frontier watch](research/literature/2026-frontier.md)
 - [Model & literature index](research/literature/model-index.md)
 - [Datasets & benchmarks index](research/literature/datasets-and-benchmarks.md)
 - [Open questions](docs/open-questions.md)
