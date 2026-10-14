@@ -15,8 +15,6 @@ Stage-1 freshness checked through: **2026-10-14**
 
 > **Stage 1 — Research / Survey & Evidence Collection — ACTIVE**
 
-Lifecycle:
-
 ```text
 1 Research
 → 2 Analysis
@@ -27,7 +25,7 @@ Lifecycle:
 → 7 Reflection
 ```
 
-The immediate objective is **coverage before commitment**. No new Clover core representation or algorithm is currently frozen.
+Immediate objective: **coverage before commitment**. No new Clover core representation or algorithm is frozen.
 
 ## Read first
 
@@ -42,197 +40,75 @@ The immediate objective is **coverage before commitment**. No new Clover core re
 9. [`research/RESEARCH_STATE_ALIASING.md`](research/RESEARCH_STATE_ALIASING.md)
 10. [`research/RESEARCH_ADAPTIVE_ABSTRACTION.md`](research/RESEARCH_ADAPTIVE_ABSTRACTION.md)
 11. [`research/RESEARCH_VALUE_OF_INFORMATION.md`](research/RESEARCH_VALUE_OF_INFORMATION.md)
-12. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
-13. [`research/README.md`](research/README.md)
+12. [`research/RESEARCH_OPEN_WORLD_EPISTEMICS.md`](research/RESEARCH_OPEN_WORLD_EPISTEMICS.md)
+13. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
+14. [`research/README.md`](research/README.md)
 
-## Current Stage-1 research surfaces
-
-### 1. Broad research inventory
-
-[`research/RESEARCH.md`](research/RESEARCH.md)
-
-Collects methods, theories, datasets, benchmarks, projects and open directions across geometry, video representation, memory, physics, causality, active perception, world models, WAM/VLA, robot learning, uncertainty, continual learning and related areas.
-
-### 2. World-state variables
-
-[`research/RESEARCH_STATE_VARIABLES.md`](research/RESEARCH_STATE_VARIABLES.md)
-
-Tracks candidate world-state dimensions such as geometry, identity/permanence, articulation, inertial/material/contact state, function, causal/controllability state and epistemic state, together with the evidence route used to constrain them.
-
-### 3. Identifiability and information limits
-
-[`research/RESEARCH_IDENTIFIABILITY.md`](research/RESEARCH_IDENTIFIABILITY.md)
-
-Separates predictability, observability, identifiability, calibration and action sufficiency.
-
-Central rule:
+## Current Stage-1 surfaces
 
 ```text
-statistically predictable from pixels
-≠
-physically identifiable from pixels
+1  broad research inventory
+2  world-state variables
+3  identifiability / information limits
+4  observation physics
+5  hidden physical properties / irreversible change
+6  minimum sufficient world state
+7  state aliasing / representation failure
+8  adaptive abstraction / state granularity
+9  value of information / probing actions
+10 open-world epistemics / model mismatch / epistemic safety
+11 current frontier
 ```
 
-### 4. Observation physics
+### Open-world epistemics now explicitly includes
 
-[`research/RESEARCH_OBSERVATION_PHYSICS.md`](research/RESEARCH_OBSERVATION_PHYSICS.md)
-
-Studies how geometry/material/light/motion/camera acquisition create RGB evidence and ambiguity.
-
-Central rule:
+[`research/RESEARCH_OPEN_WORLD_EPISTEMICS.md`](research/RESEARCH_OPEN_WORLD_EPISTEMICS.md)
 
 ```text
-world-state ambiguity
-≠
-image-formation ambiguity
-≠
-sensor/acquisition corruption
+E1 observation uncertainty
+E2 state uncertainty
+E3 parameter uncertainty
+E4 model-structure uncertainty
+E5 hypothesis-set incompleteness
+E6 regime change / model invalidation
+E7 social / intentional uncertainty
+E8 epistemic-action safety
 ```
 
-### 5. Hidden physical properties and irreversible change
+Current primary/reference anchors include:
 
-[`research/RESEARCH_PHYSICAL_PROPERTIES.md`](research/RESEARCH_PHYSICAL_PROPERTIES.md)
+- HUME open-world model expansion — https://arxiv.org/abs/2607.06501 · https://open-world-planning.github.io/
+- Changepoint-Aware World Models — https://arxiv.org/abs/2609.18950
+- Feedback World Model — https://arxiv.org/abs/2605.15705
+- Sirius-Fleet deployment monitoring — https://proceedings.mlr.press/v270/liu25g.html
+- Diffusion-Based Body Schema — https://arxiv.org/abs/2608.01029
+- Embodiment Gap survey — https://arxiv.org/abs/2608.18433
+- Splat-CBF safe next-best-view — https://arxiv.org/abs/2609.23100
+- ATOM-CBF — https://proceedings.mlr.press/v331/yun26a.html
+- hidden-goal human–robot coordination — https://arxiv.org/abs/2608.04309
 
-Covers mass/inertia, friction, stiffness, temperature, fluids, granular media, contact/deformation, cutting/splitting/merging/breakage and intervention/counterfactual datasets.
-
-Central rule:
-
-```text
-property useful for action
-≠
-property learned from vision alone
-```
-
-### 6. Minimum sufficient world state
-
-[`research/RESEARCH_SUFFICIENT_STATE.md`](research/RESEARCH_SUFFICIENT_STATE.md)
-
-Compares belief state, predictive state, information state, state abstraction/bisimulation and modern compact future-state/world-model representations.
-
-Central rule:
+Central new distinctions:
 
 ```text
-complete physical description
+uncertainty over known hypotheses
 ≠
-minimal predictive state
+correct hypothesis missing entirely
+
+uncertain current state
 ≠
-minimal control-sufficient state
+world model itself is wrong / stale
+
+information-seeking action
 ≠
-general-purpose world state
-```
+safe information-seeking action
 
-### 7. State aliasing and representation failure
-
-[`research/RESEARCH_STATE_ALIASING.md`](research/RESEARCH_STATE_ALIASING.md)
-
-Studies when different worlds or histories collapse into the same internal state even though they require different prediction, belief or action.
-
-Important references include:
-
-- perceptual aliasing / active perception — https://doi.org/10.1023/A:1022619109594
-- λ-discrepancy — https://papers.nips.cc/paper_files/paper/2024/hash/73073ccb3bc559fd001e66b9079d6d5e-Abstract-Conference.html
-- PO-PDDL — https://arxiv.org/abs/2606.15654
-- Observable quotient world models — https://doi.org/10.1016/j.knosys.2026.116768
-- Compositional Behavioral Semantics — https://proceedings.mlr.press/v306/zhang26dy.html
-
-Central distinction:
-
-```text
-states indistinguishable from available evidence
+external world state
 ≠
-representation failure
+self / embodiment state
 
-necessary evidence existed but encoder discarded it
-=
-potential representation failure
-```
-
-### 8. Adaptive abstraction and state granularity
-
-[`research/RESEARCH_ADAPTIVE_ABSTRACTION.md`](research/RESEARCH_ADAPTIVE_ABSTRACTION.md)
-
-Studies task-conditioned, temporal, event-conditioned, spatial, entity/relation, uncertainty-conditioned and embodiment-conditioned abstraction.
-
-Current references include:
-
-- Causal Bisimulation Modeling — https://ojs.aaai.org/index.php/AAAI/article/view/29507
-- Compositional Behavioral Semantics — https://proceedings.mlr.press/v306/zhang26dy.html
-- H-WM — https://arxiv.org/abs/2602.11291
-- S2-HWM — https://arxiv.org/abs/2608.13103
-- HiMe — https://proceedings.mlr.press/v306/ji26k.html
-- Flow Equivariant World Models — https://proceedings.mlr.press/v306/lillemark26a.html
-- ViGAR — https://arxiv.org/abs/2610.02368
-
-Central question:
-
-```text
-what should be represented
-at what granularity
-at what timescale
-for which capability?
-```
-
-### 9. Value of information and probing actions
-
-[`research/RESEARCH_VALUE_OF_INFORMATION.md`](research/RESEARCH_VALUE_OF_INFORMATION.md)
-
-Studies information-seeking actions, active perception, Bayesian/epistemic experiment design, active system identification and safe probing.
-
-Current references include:
-
-- Active inference and artificial reasoning — https://www.nature.com/articles/s41467-026-77209-5
-- Active Perception for Embodied Disambiguation — https://arxiv.org/abs/2608.13605
-- Vantage — https://arxiv.org/abs/2610.11810
-- Sampling-based SysID with Active Exploration — https://proceedings.mlr.press/v305/sobanbabu25a.html
-- DR-WM — https://arxiv.org/abs/2610.17630
-
-Central distinction:
-
-```text
-best task action
+visible behavior of another agent
 ≠
-most informative action
-≠
-best action after information value, cost, risk and irreversibility are combined
-```
-
-### 10. Current frontier
-
-[`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
-
-Tracks current primary/official work that materially changes the comparison space.
-
-## Newly explicit Stage-1 coverage gaps
-
-The current scan also keeps the following adjacent problems visible without creating new top-level phases:
-
-```text
-open-world hypothesis generation
-— detect when none of the current hypotheses explain the evidence
-
-non-stationarity / change-point detection
-— detect changed dynamics, environment rules, embodiment or task distribution
-
-self / embodiment model
-— separate robot-body/controller/camera dynamics from external-world dynamics
-
-representation reversibility
-— recover previously omitted distinctions from retained evidence/provenance when a new task demands them
-
-multi-timescale / event-time state
-— distinguish continuous fast dynamics from sparse meaningful state transitions
-
-structured / equivariant memory
-— preserve state under self-motion/world motion without brute-force history
-
-epistemic-action safety
-— information-gathering actions may be costly, destructive or unsafe
-
-model-structure uncertainty
-— uncertainty over which model/causal mechanism applies, not only state uncertainty inside one model
-
-meta-reasoning
-— choose whether to think, look, move, probe, ask, wait or act
+that agent's hidden goal / belief
 ```
 
 ## Current non-goals
@@ -241,34 +117,50 @@ We are not currently:
 
 - freezing a final representation;
 - implementing a new Clover core architecture;
-- optimizing leaderboard scores;
-- claiming explicit state is superior to latent state;
-- claiming compact state is automatically better than rich state;
-- claiming hierarchy is automatically better than a flat state;
-- claiming an information-gain objective is itself the Clover solution;
-- claiming a direct policy is sufficient;
-- claiming a generative world model is sufficient;
-- treating photometric reconstruction as proof of physical-state recovery;
-- treating dataset predictability as proof of physical identifiability;
-- choosing hardware before the scientific mechanism;
-- treating one benchmark as the definition of understanding.
+- choosing explicit vs latent vs hybrid state;
+- treating compact state as automatically superior;
+- treating hierarchy as automatically superior;
+- treating information gain as the final control objective;
+- treating a world-model prediction as ground truth;
+- assuming the correct hypothesis/model class is always known;
+- assuming the robot body/controller/camera is permanently fixed;
+- treating one benchmark as the definition of understanding;
+- optimizing hardware before the scientific mechanism.
+
+## Remaining collection gaps
+
+Stage 1 still needs stronger primary evidence for:
+
+```text
+unknown-unknown detection
+open-set mechanism discovery
+model-class selection / nonparametric world models
+persistent provenance for hypotheses and refutations
+scientific experiment design / falsification
+slow long-horizon model drift
+representation reversibility after compression
+human-query / escalation cost models
+social permission / consent for probing actions
+multi-agent belief recursion
+correlated uncertainty / model-ensemble collapse
+```
 
 ## Stage-1 exit condition
 
-Stage 2 Analysis becomes primary only when the research inventory is broad enough that a new agent can identify:
+Stage 2 Analysis becomes primary only when a new agent can identify:
 
-1. major competing research directions;
-2. strongest representative methods and primary sources;
-3. what evidence each method actually uses;
-4. what its observation/image-formation assumptions are;
-5. what world variables it attempts to represent;
-6. what its representation is sufficient for;
-7. how state aliasing could expose missing information;
-8. what abstraction/granularity/timescale assumptions it makes;
-9. whether it actively acquires information and what uncertainty that targets;
-10. what datasets/benchmarks can discriminate its claims;
-11. which capabilities remain unmeasured or under-specified;
-12. which methods deserve one-method-one-report analysis.
+1. major competing directions and strongest representatives;
+2. source/evidence provenance;
+3. observation assumptions;
+4. world variables represented;
+5. identifiability assumptions;
+6. sufficiency target;
+7. likely state-aliasing failure;
+8. abstraction/granularity/timescale assumptions;
+9. information-gathering strategy and cost;
+10. open-world epistemic failure mode (`E1–E8`) where relevant;
+11. datasets/benchmarks that discriminate claims;
+12. methods deserving one-method-one-report Analysis.
 
 ## Not yet demonstrated
 
