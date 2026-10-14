@@ -2,476 +2,180 @@
 
 Last updated: 2026-10-14
 
-This file is the screened successor to the internal `news(5).md` archive.
+This is the screened successor to the internal `news(5).md` archive. A signal is kept when it changes how the central problem should be framed, reveals a competing approach, exposes an evaluation failure, or points to primary material worth deeper study.
 
-A frontier signal is **not automatically a scientific result or a Clover design decision**. We keep a signal when it changes how the central problem should be framed, reveals a new competing approach, exposes an evaluation failure, or points to a primary paper/project worth deeper study.
+A frontier signal is **not automatically a scientific result or a Clover design decision**.
 
-Evidence labels:
-
-- `PRIMARY_PAPER`
-- `OFFICIAL_PROJECT`
-- `OPEN_SOURCE`
-- `OFFICIAL_REPORTED_RESULT`
-- `SURVEY_SIGNAL`
-
----
+Evidence labels: `PRIMARY_PAPER`, `OFFICIAL_PROJECT`, `OPEN_SOURCE`, `OFFICIAL_REPORTED_RESULT`, `SURVEY_SIGNAL`.
 
 ## S1 — World models are moving from visual fidelity toward task-relevant state
 
-### ReWAM
+**ReWAM** — https://arxiv.org/abs/2609.38163 — `PRIMARY_PAPER`
 
-- Paper: https://arxiv.org/abs/2609.38163
-- Evidence: `PRIMARY_PAPER`
+Reconstruction fidelity and generic perceptual features do not necessarily produce policy-useful representation. Clover therefore cannot use “accurate reconstruction” as the sole world-state objective.
 
-Signal:
+## S2 — Intended action and realized consequence are different
 
-Reconstruction fidelity and generic perceptual features are not guaranteed to produce the representation most useful for policy learning.
+**HWAM** — https://arxiv.org/abs/2610.12026 — `PRIMARY_PAPER`
 
-Why Clover cares:
+Reference action, executed motion and observed consequence should be modeled separately. This is a general robot-brain state-transition issue, not only a VLA detail.
 
-The scientific objective cannot simply be “reconstruct the world accurately.” The relevant state may be a task-/action-sensitive subset of the world's structure.
+## S3 — Passive video is a serious physical-representation route
 
----
+**V-JEPA 2** — https://arxiv.org/abs/2506.09985 · https://ai.meta.com/vjepa/ · https://github.com/facebookresearch/vjepa2
 
-## S2 — Intended action and realized physical consequence must be separated
+**V-JEPA 2.1** — https://arxiv.org/abs/2603.14482
 
-### HWAM
+Large-scale action-free video can learn motion/anticipation structure and dense temporal features before robot interaction is introduced. Open question: what does interaction add that passive observation cannot?
 
-- Paper: https://arxiv.org/abs/2610.12026
-- Evidence: `PRIMARY_PAPER`
+## S4 — Physical variables may be distributed
 
-Signal:
+**Interpreting Physics in Video World Models** — https://arxiv.org/abs/2602.07050 · https://ai.meta.com/research/publications/interpreting-physics-in-video-world-models/
 
-Humanoid control exposes a reference–execution gap: a command and the state actually reached are different objects.
+Physical quantities need not appear as a small hand-designed state vector. This is direct counter-pressure against historical explicit-state assumptions.
 
-Why Clover cares:
+## S5 — Memory architecture can unlock capability without changing weights
 
-A robot brain must model:
+**VISTA** — https://arxiv.org/abs/2610.02200
 
-```text
-intention
-→ execution
-→ observed consequence
-```
+Lossless visual memory + active retrieval/reorganization makes evidence memory itself a research variable distinct from model weights/world state.
 
-rather than treating action tokens as ground-truth world transition.
+## S6 — Evidence/view selection is a reasoning variable
 
----
+**Vantage** — https://arxiv.org/abs/2610.11810 · https://github.com/q1xiangchen/Vantage
 
-## S3 — Large passive-video learning is now a serious answer to physical representation
+View planning can improve spatial reasoning without changing the base VLM. This strengthens active-perception/evidence-scheduling research.
 
-### V-JEPA 2
+## S7 — Confidence is useful but is not truth
 
-- Paper: https://arxiv.org/abs/2506.09985
-- Official: https://ai.meta.com/vjepa/
-- Code: https://github.com/facebookresearch/vjepa2
-- Evidence: `PRIMARY_PAPER + OPEN_SOURCE`
+**SpatialCORE** — https://arxiv.org/abs/2609.38716 · https://github.com/rafiibnsultan/SpatialCORE
 
-Signal:
-
-Web-scale action-free video can learn representations useful for motion, anticipation and, after action-conditioned adaptation, robot planning.
-
-Open question:
-
-What information is still missing until the system interacts?
-
-### V-JEPA 2.1
-
-- Paper: https://arxiv.org/abs/2603.14482
-- Evidence: `PRIMARY_PAPER`
-
-Signal:
-
-Dense, temporally consistent self-supervised features strengthen the case that a single learned representation may cover semantics, space and time more effectively than older modular pipelines.
-
----
-
-## S4 — Physical variables may emerge in distributed representations
-
-### Interpreting Physics in Video World Models
-
-- Paper: https://arxiv.org/abs/2602.07050
-- Official: https://ai.meta.com/research/publications/interpreting-physics-in-video-world-models/
-- Evidence: `PRIMARY_PAPER`
-
-Signal:
-
-Physical quantities need not appear as a small human-designed state vector. Distributed population codes are a serious representation candidate.
-
-Why Clover cares:
-
-This is one of the strongest direct challenges to historical explicit-state assumptions.
-
----
-
-## S5 — Memory architecture can unlock capability without changing model weights
-
-### VISTA
-
-- Paper: https://arxiv.org/abs/2610.02200
-- Evidence: `PRIMARY_PAPER`
-
-Signal:
-
-Lossless visual memory, active retrieval and reorganization can dramatically alter long-horizon visual reasoning while keeping the underlying model fixed.
-
-Why Clover cares:
-
-The world representation and the evidence-memory system may need to be distinct.
-
----
-
-## S6 — Evidence selection and viewpoint planning are first-class reasoning variables
-
-### Vantage
-
-- Paper: https://arxiv.org/abs/2610.11810
-- Code: https://github.com/q1xiangchen/Vantage
-- Evidence: `PRIMARY_PAPER + OPEN_SOURCE`
-
-Signal:
-
-Spatial reasoning can improve by choosing and organizing the right views rather than modifying the base reasoning model.
-
-Why Clover cares:
-
-Active perception and evidence scheduling may be core to world understanding, especially under occlusion/partial observability.
-
----
-
-## S7 — Confidence is useful, but confidence is not truth
-
-### SpatialCORE
-
-- Paper: https://arxiv.org/abs/2609.38716
-- Code: https://github.com/rafiibnsultan/SpatialCORE
-- Evidence: `PRIMARY_PAPER + OPEN_SOURCE`
-
-Signal:
-
-A model's own grounding confidence can become a training signal.
-
-Clover boundary:
-
-```text
-confidence can guide learning / compute
-≠
-confidence is world authority
-```
-
----
+Grounding confidence can be a training/compute signal. It should not automatically become world authority.
 
 ## S8 — Hierarchical world representations remain a live response to long horizons
 
-### H-WM
+**H-WM** — https://arxiv.org/abs/2602.11291
 
-- Paper: https://arxiv.org/abs/2602.11291
-- Evidence: `PRIMARY_PAPER`
+High-level logical and low-level visual transitions directly target the tradeoff between long-horizon robustness and perceptual grounding.
 
-Signal:
+## S9 — Identifiability may bridge latent and explicit state
 
-Combining high-level logical transition with low-level visual transition directly attacks the long-horizon tradeoff between symbolic robustness and visual grounding.
+**Identifiable World Models** — https://arxiv.org/abs/2610.07028
 
-Why Clover cares:
+A small identifiable/interpretable coordinate layer may sit on top of a powerful distributed representation. Explicit-vs-latent need not be binary.
 
-Any future hierarchy must explain why one representation scale cannot cover both demands.
+## S10 — Learned geometry is becoming foundation representation
 
----
+**VGGT** — https://arxiv.org/abs/2503.11651 · https://github.com/facebookresearch/vggt
 
-## S9 — Identifiability may provide a bridge between latent and explicit state
+**VGGT-Ω** — https://arxiv.org/abs/2605.15195 · https://vggt-omega.github.io/ · https://github.com/facebookresearch/vggt-omega
 
-### Identifiable World Models from Pretrained Diffusion Representations
+Any future Clover spatial primitive must justify what it contributes beyond modern learned camera/depth/point-map/track reconstruction.
 
-- Paper: https://arxiv.org/abs/2610.07028
-- Evidence: `PRIMARY_PAPER`
+## S11 — Spatial world models merge reconstruction, generation and simulation
 
-Signal:
+**Atlas** — https://www.worldlabs.ai/blog/atlas — `OFFICIAL_PROJECT`
 
-An explicit/interpretable coordinate system may be recoverable on top of a powerful frozen distributed representation.
+A single learned spatial model can serve reconstruction, generation, simulation and robotics workflows. Important boundary: plausible hidden completion is not observed/justified truth.
 
-Why Clover cares:
+## S12 — World foundation models merge reasoning, generation and action
 
-The choice may not be binary:
+**Cosmos 3** — https://arxiv.org/abs/2606.02800 · https://github.com/nvidia/cosmos
 
-```text
-explicit state
-vs
-latent state
-```
+The boundaries between world model, reasoner, generator and action model are becoming less clean. Clover's modular decomposition must earn its value empirically.
 
-A hybrid interface may be more powerful.
+## S13 — Robot foundation models are serious falsifiers for explicit-worldview claims
 
----
+**Figure Helix 2.5** — https://www.figure.ai/news/helix-2-5-zero-shot-30-home-generalization — `OFFICIAL_REPORTED_RESULT`
 
-## S10 — Learned geometry is increasingly a foundation representation
+**Skild S1** — https://skild.ai/blogs/s1 — `OFFICIAL_REPORTED_RESULT`
 
-### VGGT
+**Physical Self-Play** — https://skild.ai/blogs/physical-self-play
 
-- Paper: https://arxiv.org/abs/2503.11651
-- Code: https://github.com/facebookresearch/vggt
+If broad learned policies can generalize/recover without exposed persistent state, Clover must prove exactly what a worldview adds.
 
-### VGGT-Ω
-
-- Paper: https://arxiv.org/abs/2605.15195
-- Project: https://vggt-omega.github.io/
-- Code: https://github.com/facebookresearch/vggt-omega
-
-Evidence: `PRIMARY_PAPER + OPEN_SOURCE`
-
-Signal:
-
-Camera, depth, point maps, tracks and increasingly dynamic reconstruction can be recovered through learned geometry models at foundation-model scale.
-
-Why Clover cares:
-
-Any new spatial primitive must justify what it contributes beyond modern learned reconstruction.
-
----
-
-## S11 — Spatial world models are merging reconstruction, generation and simulation
-
-### World Labs Atlas
-
-- Official: https://www.worldlabs.ai/blog/atlas
-- Evidence: `OFFICIAL_PROJECT`
-
-Signal:
-
-A single spatial model can be framed as reconstruction engine, generator, simulator and robotics real-to-sim tool.
-
-Clover caution:
-
-When hidden space is underdetermined, generated completion is a hypothesis about the world, not observed truth.
-
----
-
-## S12 — World foundation models increasingly merge reasoning, generation and action
-
-### Cosmos 3
-
-- Paper: https://arxiv.org/abs/2606.02800
-- Code/ecosystem: https://github.com/nvidia/cosmos
-- Evidence: `PRIMARY_PAPER + OPEN_SOURCE`
-
-Signal:
-
-The boundaries between “world model”, “reasoner”, “video generator” and “action model” are becoming less clean.
-
-Why Clover cares:
-
-The traditional modular decomposition must earn its value empirically rather than being protected philosophically.
-
----
-
-## S13 — Direct robot foundation models are a serious falsifier for explicit worldview claims
-
-### Figure Helix 2.5
-
-- Official: https://www.figure.ai/news/helix-2-5-zero-shot-30-home-generalization
-- Evidence: `OFFICIAL_REPORTED_RESULT`
-
-Signal:
-
-Figure reports substantial zero-shot improvement in unseen homes from broad human-experience pretraining.
-
-### Skild S1
-
-- Official: https://skild.ai/blogs/s1
-- Evidence: `OFFICIAL_REPORTED_RESULT`
-
-Signal:
-
-Skild reports in-context task learning from video demonstrations and long-horizon unseen tasks.
-
-### Physical Self-Play
-
-- Official: https://skild.ai/blogs/physical-self-play
-
-Signal:
-
-Self-generated physical interaction may extend beyond imitation data.
-
-Why Clover cares:
-
-If these systems can generalize/recover without explicit persistent world state, Clover must prove exactly what a worldview adds.
-
----
-
-## S14 — VLA remains a real competing route, not a straw man
-
-Primary references:
+## S14 — VLA remains a real competing route
 
 - RT-2: https://arxiv.org/abs/2307.15818
-- OpenVLA: https://arxiv.org/abs/2406.09246
-- OpenVLA code: https://github.com/openvla/openvla
+- OpenVLA: https://arxiv.org/abs/2406.09246 · https://github.com/openvla/openvla
 - π0.5: https://arxiv.org/abs/2504.16054
 
-Signal:
+The Clover question is not “how to avoid VLA?” It is whether a world representation gives measurable benefits that strong direct/hierarchical policies do not obtain as reliably, generally or efficiently.
 
-Large vision-language-action systems increasingly transfer web knowledge, task semantics and action priors directly into control.
+## S15 — World-Action Models are becoming a distinct category
 
-Research consequence:
+**WAM survey** — https://arxiv.org/abs/2609.16074 · https://rcl-robotics.github.io/Awesome-World-Action-Models
 
-The Clover question is not “how to avoid VLA?” It is whether a world representation gives measurable benefits VLA cannot obtain as reliably or efficiently.
+Open challenges include world-action factorization, alignment, long-horizon memory and efficient inference.
 
----
+**Being-M0.7** — https://arxiv.org/abs/2610.11283
 
-## S15 — World-Action Models are becoming their own research category
+Uses >10,000 hours of mixed human video/motion data to learn future-aware visual-motion priors before humanoid adaptation.
 
-### 2026 WAM survey
+**Being-H0.7** — https://arxiv.org/abs/2605.00078
 
-- Paper: https://arxiv.org/abs/2609.16074
-- Evidence: `PRIMARY_PAPER`
+Uses latent future-aware reasoning with a training-only future branch, avoiding future-pixel rollout at inference.
 
-Signal:
+## S16 — Physical consistency needs state/process supervision, not pretty rollouts
 
-Recent robotics work increasingly couples future-world prediction and executable action generation, with open challenges in world-action factorization, action alignment, long-horizon memory and efficient inference.
+**EVEWorld** — https://arxiv.org/abs/2610.03374
 
-Why Clover cares:
+Targets “model laziness”: visually plausible rollouts with poor object/evolution consistency.
 
-World and action should be studied jointly without assuming they must be represented by the same state or network.
+**RoboPhys-3D** — https://arxiv.org/abs/2608.28718
 
-### Being-M0.7
-
-- Paper: https://arxiv.org/abs/2610.11283
-- Evidence: `PRIMARY_PAPER`
-
-Signal:
-
-Being-M0.7 pretrains on more than 10,000 hours of mixed human video/motion data and jointly predicts future latent visual state and motion before adapting to humanoid control. This is a concrete example of learning future-aware visual-motion priors from non-robot experience, then grounding them in robot actions.
-
-### Being-H0.7
-
-- Paper: https://arxiv.org/abs/2605.00078
-- Evidence: `PRIMARY_PAPER`
-
-Signal:
-
-Future-aware reasoning can be trained in latent space with a training-only future branch while avoiding pixel rollout at inference. This strengthens the case that “world modeling” for control may be a compact predictive interface rather than a video generator.
-
----
-
-## S16 — Physical consistency needs process/state supervision, not only pretty rollouts
-
-### EVEWorld
-
-- Paper: https://arxiv.org/abs/2610.03374
-- Evidence: `PRIMARY_PAPER`
-
-Signal:
-
-Embodied video world models can exhibit “model laziness”: visually plausible trajectories with poor instance/evolution consistency. Process-level supervision can target this failure.
-
-### RoboPhys-3D
-
-- Paper: https://arxiv.org/abs/2608.28718
-- Evidence: `PRIMARY_PAPER`
-
-Signal:
-
-Evaluation is moving toward state reconstruction and execution-grounded physics rather than visual quality alone.
-
-Clover implication:
+Evaluation is moving toward reconstructed state and execution-grounded physics.
 
 ```text
 plausible video ≠ correct world state ≠ useful action consequence
 ```
 
----
+## S17 — Pixels-to-physics systems explicitly add interaction-grounded physical state
 
-## S17 — Pixels-to-physics systems are explicitly adding physical latent structure
+**DR-WM / From Pixels to Executable Physics** — https://arxiv.org/abs/2610.17630
 
-### DR-WM / From Pixels to Executable Physics
+Visual geometry is combined with terrain/contact priors and action-response calibration so the same command can produce terrain-dependent outcomes. This supports the hypothesis that some action-relevant physical variables require interaction rather than appearance alone.
 
-- Paper: https://arxiv.org/abs/2610.17630
-- Evidence: `PRIMARY_PAPER`
+## S18 — Sparse visual change can support high-rate computation
 
-Signal:
+**Motion-aware Event Suppression** — https://arxiv.org/abs/2602.23204
 
-A recent quadruped world-model line reconstructs geometry and integrates terrain contact priors/action-response data so identical action commands can yield different predicted physical outcomes on different terrain.
+The useful abstraction for Clover is “compute on informative change,” not necessarily “depend on event-camera hardware.”
 
-Why Clover cares:
+## S19 — Tactile/force work defines a boundary condition for “vision alone”
 
-Visual world understanding for action may require state variables that are not fully identifiable from appearance alone and must be calibrated through interaction.
-
----
-
-## S18 — Active/sparse perception remains important for efficiency
-
-### Motion-aware Event Suppression
-
-- Paper: https://arxiv.org/abs/2602.23204
-- Evidence: `PRIMARY_PAPER`
-
-Signal:
-
-Sparse event processing can produce high-rate motion representations and reduce downstream token cost.
-
-Clover implication:
-
-The useful abstraction is “compute on informative change”, not necessarily “use event cameras”.
-
----
-
-## S19 — Tactile/force sensing defines a boundary condition for “vision alone”
-
-The news archive repeatedly surfaced tactile hands, tactile world models and contact-rich manipulation. These are important **boundary signals**, but they do not invalidate the research question.
-
-The correct distinction is:
+The raw news archive repeatedly surfaced tactile hands/world models/contact-rich manipulation. The durable research distinction is:
 
 ```text
-Can vision infer a useful hypothesis about hidden physical properties?
+Can vision infer a useful hidden-property hypothesis?
 vs
 Can vision uniquely measure force/friction/internal contact state?
 ```
 
-Clover should not silently treat non-identifiable quantities as observed facts. Future product systems may use additional sensors, while the scientific vision-only protocol remains explicit.
+Clover must not silently turn non-identifiable quantities into observed facts. A future product can use more sensors while the scientific vision-only protocol remains explicit.
 
----
+## S20 — The capability frontier is unfamiliar, long-horizon, closed-loop behavior
 
-## S20 — The capability frontier is long-horizon, unfamiliar, closed-loop behavior
+Across Figure, Skild, Google and other robotics programs, the durable signal is movement toward unseen environments, longer tasks, mobile/whole-body manipulation, active perception, world change/recovery and broad experience pretraining.
 
-The durable industrial signal across Figure, Skild, Google and other robotics programs is not one benchmark number. It is movement toward:
+This supports Clover's evaluation hierarchy: diagnostics are necessary, but eventual validation is embodied capability.
 
-- unseen environments;
-- longer tasks;
-- whole-body / mobile manipulation;
-- active perception;
-- world change and recovery;
-- broad experience pretraining.
+## Not promoted to current conclusions
 
-This supports the current Clover evaluation hierarchy: diagnostic benchmarks first, but eventual validation through real embodied capability.
+The raw news archive also contains funding/valuation reports, supply-chain announcements, secondary summaries, single demos, unclear benchmark numbers and old “this proves Clover is right” interpretations. These remain historical signals unless primary/official technical evidence becomes available.
 
----
+## Future signal template
 
-# Signals not promoted to current research conclusions
-
-The raw news archive contains many items that remain useful historically but are **not** promoted into the current Survey as evidence, including:
-
-- funding/valuation news;
-- supply-chain announcements;
-- secondary media claims without primary technical material;
-- single-demo success claims;
-- benchmark numbers without clear protocol;
-- pre-reset interpretations phrased as “this proves Clover is right”;
-- claims whose primary paper/project could not yet be verified.
-
-These may be revisited when primary material becomes available.
-
----
-
-# How to add a future signal
-
-A durable entry should contain:
+A durable signal should contain:
 
 ```text
 name
 primary/official URL
 evidence class
 what changed
-what it does NOT prove
-why the Clover SSOT cares
+what it does not prove
+why the SSOT cares
 research question affected
 ```
 
-A frontier signal is a reason to investigate, not a reason to stack a new framework into Clover.
+A frontier signal is a reason to investigate, not a reason to stack another framework into Clover.
