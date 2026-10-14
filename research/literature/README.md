@@ -10,6 +10,7 @@ The goal is not to collect every paper. It is to understand the strongest compet
 
 - [Model & Literature Index](model-index.md) — navigation across representative systems and papers.
 - [Datasets & Benchmarks](datasets-and-benchmarks.md) — visual, robot and evaluation resources relevant to the question.
+- [Primary Source Index](primary-sources.md) — concrete paper, official project, model-card and code URLs used across the Research Map and synthesis pages.
 
 ## Reading template
 
@@ -29,6 +30,19 @@ For each important work, record:
 12. known limitations;
 13. evidence type;
 14. contradiction or opportunity for Clover.
+
+## Evidence labels
+
+Use explicit provenance:
+
+- **peer-reviewed / primary paper**;
+- **arXiv technical report**;
+- **official model card**;
+- **official code / benchmark**;
+- **official company-reported real-robot result**;
+- **third-party analysis**.
+
+Company-reported results are useful capability evidence, but they are not recorded as independently reproduced facts.
 
 ## Policy
 
