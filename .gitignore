@@ -1,0 +1,33 @@
+# macOS
+.DS_Store
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Rust / native builds
+target/
+build/
+dist/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Caches / temporary data
+.cache/
+.tmp/
+tmp/
+*.log
+
+# IDE-local state
+.idea/
+.vscode/settings.json
+
+# Generated benchmark outputs
+artifacts/
+outputs/
+results/local/
