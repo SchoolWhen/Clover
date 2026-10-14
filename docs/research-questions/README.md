@@ -21,6 +21,7 @@ The current set is:
 9. [What is causal understanding?](09-causal-understanding.md)
 10. [Why should a worldview help action?](10-world-model-to-action.md)
 11. [Language and the vision-only question](11-language-and-vision-only.md)
+12. [Why classical CV did not naturally scale into world understanding](12-why-classical-cv-did-not-scale-to-world-understanding.md)
 
 ## Reading rule
 
