@@ -2,7 +2,7 @@
 
 Last updated: 2026-10-14
 
-Practical resource map for the Clover background-research and baseline phases. Listing a resource does **not** mean it should be reproduced immediately.
+Practical resource map for the Clover Stage-1 research and later baseline/evaluation phases. Listing a resource does **not** mean it should be reproduced immediately.
 
 Before running anything substantial, record:
 
@@ -71,6 +71,22 @@ Use as a strong comparator for visible identity/tracking. Do not interpret succe
 - Paper — https://arxiv.org/abs/2408.00714
 - Code — https://github.com/facebookresearch/sam2
 
+### TAO-Amodal — amodal/occlusion diagnostic
+
+- Paper — https://arxiv.org/abs/2312.12433
+
+Use to keep the distinctions explicit:
+
+```text
+visible tracking
+≠
+amodal completion
+≠
+re-identification
+≠
+object permanence
+```
+
 ---
 
 ## Geometry / spatial reconstruction
@@ -87,7 +103,7 @@ VGGT-family official examples may be CUDA-oriented. Small-sequence pretrained in
 
 ---
 
-## Persistent visual / episodic memory
+## Persistent visual / episodic / semantic memory
 
 ### PersistBench
 
@@ -109,9 +125,15 @@ Use for streaming grounded episodic retrieval and temporal evidence localization
 
 Relevant to memory/retrieval-harness comparisons. Reproduce only when the exact harness question becomes active.
 
+### PerSeM
+
+- Paper — https://arxiv.org/abs/2609.19542
+
+Training-free persistent semantic memory baseline for long-horizon open-vocabulary mapping. Useful as a comparator for frame-wise semantics vs persistent world-space aggregation.
+
 ---
 
-## Physical / causal evaluation
+## Physical / causal / embodied-reasoning evaluation
 
 ### IntPhys 2
 
@@ -140,18 +162,77 @@ Relevant to memory/retrieval-harness comparisons. Reproduce only when the exact 
 
 Use visual-only subsets where the experiment claims a V0–V3 vision protocol.
 
+### ERQA — Embodied Reasoning Question Answer
+
+- Code/data/evaluation harness — https://github.com/embodiedreasoning/ERQA
+
+Open 400-example multimodal embodied/spatial reasoning diagnostic. Useful for low-cost model comparison before real-robot evaluation, but do not interpret ERQA accuracy as persistent world understanding; language/world-knowledge priors are a major confound.
+
+### RobotWorld
+
+- Paper — https://arxiv.org/abs/2610.10409
+
+Useful for system-level physical-agent capability across heterogeneous tasks and for studying composition, retained task/world state, recovery and completion verification.
+
+### RoboWM-Bench
+
+- Paper — https://arxiv.org/abs/2604.19092
+
+Use for the distinction between visually plausible generated behavior and robot-executable behavior.
+
+### RoboTrustBench
+
+- Paper — https://arxiv.org/abs/2606.01600
+
+Use for constraint-sensitive, counterfactual and adversarial world-model evaluation.
+
+### Video2World
+
+- Paper — https://arxiv.org/abs/2610.04432
+
+Use for geometry/dynamics/functional correctness of reconstructed simulation worlds rather than render similarity alone.
+
 ---
 
-## Open robot/VLA
+## Physically grounded articulated / functional 3D assets
+
+### Artisan
+
+- Paper — https://arxiv.org/abs/2610.13947
+- Project link is exposed from the arXiv record: https://physicalvision.github.io
+
+Artisan and its benchmark expand 3D evaluation beyond geometry/appearance/articulation to collision-free motion, stability under gravity, mass/material properties and downstream functional behavior.
+
+Important boundary:
+
+```text
+physically grounded generated asset
+≠
+proof that real mass/material properties are identifiable from passive RGB
+```
+
+Use as a Stage-1 reference for articulated-object function, physical asset quality and simulation-grounded evaluation.
+
+---
+
+## Open robot / VLA baselines
 
 ### OpenVLA
 
 - Paper — https://arxiv.org/abs/2406.09246
 - Code — https://github.com/openvla/openvla
 
-OpenVLA-7B is the primary open VLA comparator once embodied task evaluation is ready.
+OpenVLA remains a useful established open VLA comparator.
 
 Do not start with full training. First document architecture, action representation, input history, BridgeData/Open X data assumptions, LIBERO evaluation and whether persistent world state is externally represented.
+
+### NVIDIA Isaac GR00T N1.7 — current open humanoid VLA reference
+
+- Code — https://github.com/NVIDIA/Isaac-GR00T
+- Model — https://huggingface.co/nvidia/GR00T-N1.7-3B
+- Official technical overview — https://developer.nvidia.com/blog/develop-humanoid-robot-policies-end-to-end-with-nvidia-isaac-gr00t/
+
+Use as a strong reproducible direct-policy counter-hypothesis when embodied evaluation becomes active. Its training uses robot demonstrations plus large-scale human/egocentric data, so do not classify it as `L0` visual-only learning.
 
 ---
 
@@ -173,6 +254,8 @@ These datasets often include action/robot-state information and therefore are no
 - Something-Something — https://developer.qualcomm.com/software/ai-datasets/something-something
 
 Useful for motion, interaction, anticipation and long-horizon visual history.
+
+Current robot-policy systems increasingly use large human/egocentric-video corpora. Stage 1 should always distinguish raw visual pretraining from paired motion/action supervision.
 
 ---
 
@@ -204,27 +287,37 @@ When simulator state is used for labels/evaluation, keep privileged GT outside t
 
 Atlas is early-access/closed for full reproduction; study through official technical material, published evaluations, demonstrations and any available access.
 
+### Behavior-grounded / executable physics
+
+- DR-WM / From Pixels to Executable Physics — https://arxiv.org/abs/2610.17630
+
+DR-WM is especially useful for Stage 1 because it explicitly separates geometry available from RGB from contact/friction properties calibrated through real action-response experience.
+
 ### Other world/action model references
 
 - EVEWorld — https://arxiv.org/abs/2610.03374
-- DR-WM / From Pixels to Executable Physics — https://arxiv.org/abs/2610.17630
 - ReWAM — https://arxiv.org/abs/2609.38163
 - HWAM — https://arxiv.org/abs/2610.12026
 - Being-H0.7 — https://arxiv.org/abs/2605.00078
 - Being-M0.7 — https://arxiv.org/abs/2610.11283
 - H-WM — https://arxiv.org/abs/2602.11291
+- Identifiable World Models — https://arxiv.org/abs/2610.07028
 - WAM survey — https://arxiv.org/abs/2609.16074
 - WAM resource page — https://rcl-robotics.github.io/Awesome-World-Action-Models
 
 ---
 
-## Closed / partially closed robot-brain references
+## Closed / partially closed robot-brain and reasoning references
 
-### Gemini Robotics
+### Gemini Robotics / Gemini 4 Argon
 
-- ER 2 overview — https://deepmind.google/models/gemini-robotics/embodied-reasoning/
+- Gemini Robotics ER 2 overview — https://deepmind.google/models/gemini-robotics/embodied-reasoning/
 - ER 2 model card — https://deepmind.google/models/model-cards/gemini-robotics-er-2/
-- Robotics 2 — https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots/
+- Gemini Robotics 2 — https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots/
+- Gemini 4 Argon for Robotics — https://developers.googleblog.com/gemini-4-argon-for-robotics/
+- ERQA open evaluation resource — https://github.com/embodiedreasoning/ERQA
+
+Argon is a general multimodal reasoning/tool-use reference rather than evidence for a vision-only learned robot world model. Its published robotics workflows mix visual input with tools, geometry, simulation and robot-state information.
 
 ### Figure
 
@@ -253,6 +346,16 @@ task reconstruction when scientifically useful
 ```
 
 Do not convert company claims into independently reproduced facts.
+
+---
+
+## Active perception / evidence acquisition
+
+- Vantage / Seek-and-View — https://arxiv.org/abs/2610.11810 · https://github.com/q1xiangchen/Vantage
+- Agentic Video Understanding with Gemini — https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-agentic-video-in-gemini/
+- Mobility-budget-constrained semantic exploration — https://arxiv.org/abs/2610.17562
+
+Use these to compare learned or agentic evidence selection against explicit uncertainty/information-gain planning. Do not conflate better evidence acquisition with better internal world representation.
 
 ---
 
