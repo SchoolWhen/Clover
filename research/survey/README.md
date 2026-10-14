@@ -14,15 +14,46 @@ The current task is **not** to freeze a new Clover architecture. It is to make t
 ## Read in this order
 
 1. [`../../SSOT.md`](../../SSOT.md)
-2. [`BACKGROUND_RESEARCH.md`](BACKGROUND_RESEARCH.md) — problem formulation and full research-domain synthesis
-3. [`SOURCE_MAP.md`](SOURCE_MAP.md) — one-to-one evidence/URL/claim/landing map
-4. [`FRONTIER_METHODS.md`](FRONTIER_METHODS.md) — method-family comparison
-5. [`RESEARCH_QUESTIONS.md`](RESEARCH_QUESTIONS.md) — unresolved contradictions
-6. [`PAPERS.md`](PAPERS.md) — curated primary papers, official pages and code
-7. [`BENCHMARKS_TASKS.md`](BENCHMARKS_TASKS.md) — capability/evaluation map
-8. [`DATASETS_CODE.md`](DATASETS_CODE.md) — datasets, repositories and implementation resources
-9. [`CLOVER_HYPOTHESES.md`](CLOVER_HYPOTHESES.md) — screened historical/internal hypotheses, not commitments
-10. [`FRONTIER_SIGNALS.md`](FRONTIER_SIGNALS.md) — filtered frontier/news signals
+2. [`RESEARCH_OVERVIEW.md`](RESEARCH_OVERVIEW.md) — visual map from research question → domains → contradictions → baselines → battery → Failure Matrix
+3. [`BACKGROUND_RESEARCH.md`](BACKGROUND_RESEARCH.md) — problem formulation and full research-domain synthesis
+4. [`../dossiers/README.md`](../dossiers/README.md) — eight deep domain research dossiers
+5. [`SOURCE_MAP.md`](SOURCE_MAP.md) — one-to-one evidence/URL/claim/landing map
+6. [`FRONTIER_METHODS.md`](FRONTIER_METHODS.md) — method-family comparison
+7. [`RESEARCH_QUESTIONS.md`](RESEARCH_QUESTIONS.md) — unresolved contradictions
+8. [`PAPERS.md`](PAPERS.md) — curated primary papers, official pages and code
+9. [`BENCHMARKS_TASKS.md`](BENCHMARKS_TASKS.md) — capability/evaluation map
+10. [`DATASETS_CODE.md`](DATASETS_CODE.md) — datasets, repositories and implementation resources
+11. [`CLOVER_HYPOTHESES.md`](CLOVER_HYPOTHESES.md) — screened historical/internal hypotheses, not commitments
+12. [`FRONTIER_SIGNALS.md`](FRONTIER_SIGNALS.md) — filtered frontier/news signals
+
+## Deep research dossiers
+
+The broad Survey is now decomposed into eight domain-level dossiers:
+
+- [`R-A Observability / Epistemology`](../dossiers/R-A-observability-epistemology.md)
+- [`R-B Geometry`](../dossiers/R-B-geometry.md)
+- [`R-C Representation`](../dossiers/R-C-representation.md)
+- [`R-D Memory / Persistence`](../dossiers/R-D-memory-persistence.md)
+- [`R-E Physics`](../dossiers/R-E-physics.md)
+- [`R-F Causality / Interaction`](../dossiers/R-F-causality-interaction.md)
+- [`R-G World Model ↔ Action`](../dossiers/R-G-world-action.md)
+- [`R-H Active Perception / Lifelong`](../dossiers/R-H-active-perception-lifelong.md)
+
+Each dossier uses the same discipline:
+
+```text
+fundamental question
+→ canonical foundations
+→ current frontier
+→ exact URLs
+→ demonstrated capability
+→ limitation / confound
+→ unresolved contradiction
+→ baseline
+→ discriminating experiment
+→ kill condition
+→ Clover implication
+```
 
 ## Research order
 
