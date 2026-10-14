@@ -1,0 +1,34 @@
+name: Experiment
+description: Register a discriminatory experiment.
+title: "[Experiment] "
+labels: []
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Research question
+    validations:
+      required: true
+  - type: textarea
+    id: protocol
+    attributes:
+      label: Protocol
+      description: Inputs, baselines, metrics and frozen conditions.
+    validations:
+      required: true
+  - type: textarea
+    id: prediction
+    attributes:
+      label: Discriminatory prediction
+      description: What different outcomes distinguish the competing explanations?
+    validations:
+      required: true
+  - type: textarea
+    id: pass
+    attributes:
+      label: Pass / kill criteria
+  - type: textarea
+    id: result
+    attributes:
+      label: Result
+      description: Leave empty until executed if this is a preregistration.
