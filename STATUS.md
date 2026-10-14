@@ -35,8 +35,9 @@ Start with:
 1. [`SSOT.md`](SSOT.md)
 2. [`research/PIPELINE.md`](research/PIPELINE.md)
 3. [`research/RESEARCH.md`](research/RESEARCH.md)
-4. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
-5. [`research/README.md`](research/README.md)
+4. [`research/RESEARCH_STATE_VARIABLES.md`](research/RESEARCH_STATE_VARIABLES.md)
+5. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
+6. [`research/README.md`](research/README.md)
 
 ## Stage-1 foundation — active / expanding
 
@@ -57,7 +58,8 @@ The current inventory explicitly tracks directions including:
 - intuitive, relational and quantitative physics;
 - physics-structured / differentiable world models;
 - contact, friction, articulation and deformable-object dynamics;
-- mass/material/function grounding;
+- mass, density, inertia, material and function grounding;
+- liquids / viscosity and other weakly visible physical properties;
 - causal representation learning;
 - counterfactual visual reasoning;
 - active perception and next-best-view;
@@ -71,7 +73,7 @@ The current inventory explicitly tracks directions including:
 - human / egocentric video transfer;
 - affordance learning;
 - model-based control and belief-space planning;
-- semantic memory;
+- semantic memory and multi-session map revision;
 - uncertainty and calibration;
 - open-world / OOD recognition;
 - continual / lifelong learning;
@@ -84,13 +86,58 @@ The current inventory explicitly tracks directions including:
 
 This list is intentionally expandable. If a direction materially constrains the mother question, Stage 1 should collect it.
 
+## World-state / observability map
+
+[`research/RESEARCH_STATE_VARIABLES.md`](research/RESEARCH_STATE_VARIABLES.md) now provides a variable-level Stage-1 map spanning:
+
+```text
+observation state
+geometric state
+entity / hidden-object state
+physical state
+latent physical parameters
+functional / affordance state
+causal / controllability state
+epistemic state
+social / intentional state
+```
+
+It separately records whether current evidence comes from:
+
+```text
+static RGB
+passive temporal video
+active visual viewpoint changes
+action-response interaction
+non-visual / privileged sensing
+```
+
+The most important distinction introduced by this map is:
+
+```text
+statistically predictable from pixels
+≠
+physically identifiable from pixels
+```
+
+This is now a first-class Stage-1 research question.
+
 ## 2026-10-14 frontier refresh
 
 The current edge includes several references that materially change the comparison space:
 
-- **Gemini 4 Argon for Robotics** — https://developers.googleblog.com/gemini-4-argon-for-robotics/ — `OFFICIAL_REPORTED_RESULT`; current general multimodal physical-reasoning / Real2Sim / robot-tool-use counter-hypothesis.
+- **Gemini 4 Argon for Robotics** — https://developers.googleblog.com/gemini-4-argon-for-robotics/ — `OFFICIAL_REPORTED_RESULT`; general multimodal physical-reasoning / Real2Sim / robot-tool-use counter-hypothesis.
 - **ERQA** — https://github.com/embodiedreasoning/ERQA — `OPEN_SOURCE`; embodied/spatial reasoning benchmark and evaluation harness.
 - **DR-WM / From Pixels to Executable Physics** — https://arxiv.org/abs/2610.17630 — `PRIMARY_PAPER`, submitted 2026-10-13; separates visual geometry from contact/friction properties calibrated through action-response evidence.
+- **Physically Guided Visual Mass Estimation** — https://arxiv.org/abs/2601.20303 — `PRIMARY_PAPER`; explicitly treats mass from one RGB image as ill-posed and factorizes inference through volume/density-related priors.
+- **PhysQuantAgent / VisPhysQuant** — https://arxiv.org/abs/2603.16958 — `PRIMARY_PAPER`; real-object mass-estimation benchmark using multi-view RGB-D and measured ground truth.
+- **PointCast** — https://arxiv.org/abs/2609.28393 — `PRIMARY_PAPER`; persistent point-state model across rigid, articulated, cloth and rope regimes.
+- **PointWorld** — https://arxiv.org/abs/2601.03782 — `PRIMARY_PAPER`; 3D point-flow state/action model spanning multiple manipulation regimes, with RGB-D input.
+- **SyncWorld** — https://arxiv.org/abs/2609.09155 — `PRIMARY_PAPER`; visual calibration of action→visual mapping across new cameras, environments and embodiments.
+- **Robot-Factored World Models** — https://arxiv.org/abs/2607.22535 — `PRIMARY_PAPER`; factors action realization/robot rendering from the environment-response world model.
+- **WROP** — https://arxiv.org/abs/2609.28654 — `PRIMARY_PAPER`; trains object permanence/solidity with controlled cognitive-science-inspired curricula.
+- **OASIS-Map** — https://arxiv.org/abs/2607.14899 — `PRIMARY_PAPER`; multi-session object-level map change detection for moved, disappeared, appeared and replaced objects.
+- **R4DSG** — https://arxiv.org/abs/2608.11017 — `PRIMARY_PAPER`; RGB-only relative 4D scene-graph memory for persistent objects and anchor-relative changes in long egocentric video.
 - **GR00T N1.7** — https://github.com/NVIDIA/Isaac-GR00T — `OPEN_SOURCE`; current strong open VLA/direct-policy reference with human-video pretraining and cross-embodiment action representation.
 - **Riemann-1.0** — https://arxiv.org/abs/2608.27033 — `PRIMARY_PAPER`; unified causal WAM jointly modeling observations, robot state and action over large heterogeneous embodied experience.
 - **Qwen-RobotWorld** — https://arxiv.org/abs/2606.17030 — `PRIMARY_PAPER`; language-conditioned video world modeling across multiple embodied domains.
@@ -118,16 +165,19 @@ static / video representation
 DINOv3 · V-JEPA 2 / 2.1
 
 learned 3D / 4D world structure
-DUSt3R · VGGT / VGGT-Ω · NeRF / 3DGS / 4D reconstruction
+DUSt3R · VGGT / VGGT-Ω · NeRF / 3DGS · 4DVGGT-D · DP-DeGauss
 
-entities / memory
-SAM 3.1 · Slot Attention · PLATO · PersistBench · S-EMBER · VISTA · PerSeM · TAO-Amodal
+entities / memory / dynamic-world revision
+SAM 3.1 · Slot Attention · PLATO · PersistBench · WROP · S-EMBER · VISTA · PerSeM · TAO-Amodal · OASIS-Map · R4DSG
+
+physical property / dynamics
+Physically Guided Visual Mass Estimation · PhysQuantAgent · DR-WM · PointCast · PointWorld · WorldContact · ManiSoft · Artisan
 
 physical / causal understanding
-IntPhys 2 · Minimal Video Pairs · Principia · RoboPhys-3D · CausalVQA · DR-WM · Artisan · WorldContact
+IntPhys 2 · Minimal Video Pairs · Principia · RoboPhys-3D · CausalVQA · causal representation learning
 
-active evidence
-Vantage · agentic video understanding · semantic information-gain exploration
+active evidence / calibration
+Vantage · SyncWorld · agentic video understanding
 
 generative / world models
 Atlas · Cosmos 3 · Video2World · Qwen-RobotWorld · Xiaomi-Robotics-U0
@@ -160,6 +210,8 @@ Tracked resources include:
 - RoboWM-Bench;
 - RoboTrustBench;
 - TAO-Amodal;
+- WROP;
+- VisPhysQuant;
 - IntPhys 2;
 - Minimal Video Pairs;
 - CausalVQA;
@@ -168,16 +220,29 @@ Tracked resources include:
 - Principia;
 - RoboPhys-3D;
 - EmbodimentSemantic;
-- Artisan physical/articulated-asset benchmark resources.
+- Artisan physical/articulated-asset benchmark resources;
+- ManiSoft soft-robot manipulation resources.
 
 Stage 1 records what each dataset/benchmark actually measures, its inputs, hidden ground truth, shortcuts, licensing and reproducibility.
 
 ## Boundary distinctions strengthened by current evidence
 
 ```text
+statistically predictable from pixels
+≠
+physically identifiable from pixels
+
 visual geometry
 ≠
 hidden physical parameters
+
+shape / category / material appearance
+≠
+mass / density / friction / stiffness
+
+passive observation
+≠
+action-response system identification
 
 plausible prediction
 ≠
@@ -192,6 +257,10 @@ visible tracking
 amodal completion
 ≠
 object permanence
+
+remembering the old world
+≠
+recognizing that the world changed
 
 appearance / reconstruction quality
 ≠
