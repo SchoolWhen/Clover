@@ -1,5 +1,7 @@
 # Engineering / Deployment / Validation — Supporting Stage-1 Index
 
+Last updated: **2026-10-15**
+
 This directory is supporting material for [`../RESEARCH_ENGINEERING_VALIDATION.md`](../RESEARCH_ENGINEERING_VALIDATION.md).
 
 It is **not** a new project stage and it does not constrain Clover to one hardware platform, runtime, simulator or robot.
@@ -22,6 +24,7 @@ scientific model
 
 1. [`../RESEARCH_ENGINEERING_VALIDATION.md`](../RESEARCH_ENGINEERING_VALIDATION.md) — hardware, edge inference, EV0–EV8 validation ladder, sim2sim/sim2real/real2sim2real, simulator failure taxonomy.
 2. [`DEPLOYMENT_LIFECYCLE.md`](DEPLOYMENT_LIFECYCLE.md) — deployment profiles, fault injection, runtime monitoring, model/data provenance, regression/rollback, security and low-cost proxy-hardware path.
+3. [`VALIDATION_RESOURCES.md`](VALIDATION_RESOURCES.md) — current 2026-10-15 evidence snapshot covering WorldOracle, RoboSimStudio, LIBERO-RIG, RoboFQE, LADDER, LoopWAM, ForceWAM, Grid-or-Nodes, GreenWAM and real-time execution comparators.
 
 ## Current local reference
 
