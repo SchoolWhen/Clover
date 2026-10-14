@@ -41,11 +41,12 @@ Clover 是一个长期公开研究项目。**问题固定，答案开放。**
 12. [research/RESEARCH_OPEN_WORLD_EPISTEMICS.md](research/RESEARCH_OPEN_WORLD_EPISTEMICS.md)
 13. [research/RESEARCH_MODEL_DISCOVERY.md](research/RESEARCH_MODEL_DISCOVERY.md)
 14. [research/RESEARCH_FOUNDATION_MODEL_SYSTEMS.md](research/RESEARCH_FOUNDATION_MODEL_SYSTEMS.md)
-15. [research/RESEARCH_ENGINEERING_VALIDATION.md](research/RESEARCH_ENGINEERING_VALIDATION.md)
-16. [research/RESEARCH_FRONTIER.md](research/RESEARCH_FRONTIER.md)
-17. [AGENTS.md](AGENTS.md)
-18. [STATUS.md](STATUS.md)
-19. [research/README.md](research/README.md)
+15. [research/RESEARCH_TRAINING_POSTTRAINING.md](research/RESEARCH_TRAINING_POSTTRAINING.md)
+16. [research/RESEARCH_ENGINEERING_VALIDATION.md](research/RESEARCH_ENGINEERING_VALIDATION.md)
+17. [research/RESEARCH_FRONTIER.md](research/RESEARCH_FRONTIER.md)
+18. [AGENTS.md](AGENTS.md)
+19. [STATUS.md](STATUS.md)
+20. [research/README.md](research/README.md)
 
 ## Stage 1 当前问题链
 
@@ -74,19 +75,21 @@ Clover 是一个长期公开研究项目。**问题固定，答案开放。**
 ↓
 Foundation Model 的 backbone / data / token / context / cache / kernel / harness 会怎样改变能力与成本？
 ↓
+模型经过什么 pretraining / SFT / BC / co-training / RL / distillation / deployment learning 才变成现在这样？
+↓
 模型能不能在真实 edge 约束下运行？没有真机时怎样逐级验证？
 ↓
 哪些方法 / dataset / benchmark 真正能区分这些答案？
 ```
 
-## 新增：Foundation Model Systems
+## Foundation Model Systems
 
 [research/RESEARCH_FOUNDATION_MODEL_SYSTEMS.md](research/RESEARCH_FOUNDATION_MODEL_SYSTEMS.md)
 
 DeepSeek / Qwen 专门 watch：
 [research/foundation_models/DEEPSEEK_QWEN.md](research/foundation_models/DEEPSEEK_QWEN.md)
 
-这次审计发现，Stage 1 之前对现代大模型系统层覆盖不足。现在正式调研：
+Stage 1 正式调研：
 
 ```text
 Dense vs MoE
@@ -98,8 +101,6 @@ long context
 KV/cache hierarchy
 streaming perception
 data mixture / alignment / curriculum
-synthetic data provenance
-SFT / RL / distillation
 FP16 / FP8 / FP4 / INT8 / INT4
 kernel / compiler / runtime
 expert / tensor / context parallelism
@@ -117,67 +118,146 @@ small proxy → frontier scaling validity
 ≠ inference runtime
 ≠ agent harness
 
-long context
-≠ persistent grounded world memory
-
-serving KV cache
-≠ epistemic world memory
-
-base model
-≠ model + harness
-≠ model + harness + tools / memory
-
-hosted product
-≠ open-weight checkpoint
-除非确认是同一个 artifact
-
-总参数
-≠ 激活参数
-≠ 实际内存
-≠ 通信开销
+long context ≠ persistent grounded world memory
+serving KV cache ≠ epistemic world memory
+base model ≠ model + harness ≠ model + tools / memory
+hosted product ≠ open-weight checkpoint
+总参数 ≠ 激活参数 ≠ 实际内存 ≠ 通信开销
 ```
 
-### DeepSeek 当前重点
+## 新增：Training / Post-Training / Embodied Learning
 
-截至 2026-10-15，重点跟踪：
+[research/RESEARCH_TRAINING_POSTTRAINING.md](research/RESEARCH_TRAINING_POSTTRAINING.md)
 
-- DeepSeek-V4.1-Flash：552B MoE，输入 8B active、输出 16B active，原生视觉理解，1M context；
-- Causal Encoder–Decoder、压缩/稀疏 attention、KV 压缩；
-- FlashMLA / DeepSelect / DeepGEMM / DeepEP / TileKernels；
-- speculative decoding / conditional sparse memory；
-- DeepSeek Harness；
-- Janus 作为“理解与生成视觉编码解耦”的历史对照。
-
-这里真正重要的是：
+这次补充后，训练过程不再被当成“实现细节”，而是正式研究变量：
 
 ```text
-model architecture
-+
-cache
-+
-kernels
-+
-communication
-+
-post-training data
-+
-harness
+TR0  base pretraining
+TR1  continued/domain pretraining
+TR2  SFT / behavior cloning
+TR3  co-training / auxiliary objective
+TR4  preference / conservative offline alignment
+TR5  verifier/reward RL
+TR6  online embodied RL
+TR7  on-policy distillation
+TR8  strong-to-weak distillation
+TR9  simulator/world-model post-training
+TR10 deployment-rollout / self-improvement
+TR11 continual / test-time adaptation
 ```
 
-共同决定最终系统表现。
+最重要的规则是：
 
-### Qwen 当前重点
+```text
+architecture
+× data
+× objective
+× update scope
+× interaction regime
+× runtime
+→ observed capability
+```
 
-截至 2026-10-15，重点跟踪：
+所以两个模型分数不同，不能先假设是 backbone / representation 导致的。
 
-- Qwen3.8-Max：2.4T total / 95B active 的长时程 agent reference；
-- Qwen3.8-Omni / Realtime：连续 multimodal runtime / agent reference；
-- Qwen3.5：native multimodal + hybrid linear/full attention + sparse MoE；
-- Qwen3-VL：dense / MoE 多尺度多模态 family；
-- FlashQLA、Qwen-MM-Plugins、Qwen-Live-Harness；
-- Qwen-RobotWorld、Qwen-RobotManip、Qwen-VLA、Qwen-Drive。
+### DeepSeek / Qwen 的后训练启示
 
-Qwen-RobotManip 给出的重要工程信号是：
+DeepSeek-R1 说明：纯 RL 可以激发 reasoning，但也可能带来 repetition / readability / language mixing 等问题；加入 cold-start 和多阶段训练会改变最终行为。
+
+DeepSeek-V4.1-Flash 的公开说明则采用：
+
+```text
+SFT
+→ RL
+→ on-policy distillation
+```
+
+而且官方强调主要改进集中在自动合成 agent tasks / environments 和 rollout 数据管线，而不是新的 RL 算法。
+
+Qwen3 flagship 使用：
+
+```text
+Long-CoT cold-start SFT
+→ reasoning RL
+→ thinking / non-thinking fusion
+→ general RL
+```
+
+Qwen3-VL 又加入 multimodal SFT、strong-to-weak distillation 与 multimodal RL。
+
+这说明：
+
+```text
+“post-training”
+不是一个操作，
+而是多个阶段分别安装 / 保留 / 改写不同能力。
+```
+
+### 机器人训练和 LLM 一样吗？
+
+只在高层结构上类似：
+
+```text
+general prior
+→ specialization
+→ feedback
+→ deployment
+```
+
+但机器人动作会改变真实世界和下一帧输入，因此训练问题根本更难：
+
+```text
+covariate shift
+continuous / multimodal action
+control frequency / latency
+embodiment-specific semantics
+real-world reset 很贵甚至不可逆
+reward sparse / delayed
+contact dynamics
+hardware drift
+safety / irreversible action
+sim2real gap
+teleoperation quality
+```
+
+所以：
+
+```text
+LLM 的 SFT → RL
+≠ 可以直接照搬成 robot recipe
+```
+
+### 当前重点机器人训练范式
+
+```text
+Behavior Cloning / imitation
+Action Chunking
+Diffusion / Flow action expert
+VLM + VLA co-training
+future-latent / world-model auxiliary
+cross-embodiment alignment
+human-video latent-action pretraining
+synthetic / simulation pretraining
+offline sample reweighting
+online RL
+on-policy teacher distillation
+simulated/world-model RL
+failure / recovery / deployment self-training
+```
+
+重点参考：
+
+- OpenVLA-OFT — https://arxiv.org/abs/2502.19645
+- π0 / π0.5 — https://www.physicalintelligence.company/download/pi0.pdf · https://www.physicalintelligence.company/download/pi05.pdf
+- Qwen-RobotManip — https://arxiv.org/abs/2606.17846
+- GR00T N1.7 — https://developer.nvidia.com/blog/develop-humanoid-robot-policies-end-to-end-with-nvidia-isaac-gr00t/
+- VLAFlow — https://arxiv.org/abs/2607.01586
+- VLA-OPD — https://arxiv.org/abs/2603.26666
+- TEMPO — https://arxiv.org/abs/2608.07314
+- RehearseVLA — https://openaccess.thecvf.com/content/CVPR2026/html/Xiao_RehearseVLA_Simulated_Post-Training_for_VLAs_with_Physically-Consistent_World_Model_CVPR_2026_paper.html
+- LoopWAM — https://arxiv.org/abs/2610.18873
+
+Qwen-RobotManip 特别强调：
 
 ```text
 跨 embodiment 海量机器人数据
@@ -185,7 +265,26 @@ Qwen-RobotManip 给出的重要工程信号是：
 不一定越多越好，反而可能互相冲突。
 ```
 
-所以 Stage 1 现在把 **training data 本身**也视为一级研究变量，而不是只研究网络结构。
+VLAFlow 则在固定 π0-style 架构 / backbone / action space 下比较 action-only、language co-training、future-latent alignment 和组合，说明 **objective 本身会改变 transfer behavior**。
+
+### 后训练可能提升一项、损伤另一项
+
+必须继续跟踪：
+
+```text
+catastrophic forgetting
+reward overoptimization
+perception-reasoning interference
+action-mode collapse
+unsafe exploration
+simulator exploitation
+embodiment over-specialization
+calibration loss
+memory / state regression
+deployment-data feedback bias
+```
+
+因此以后不能只看 task success。
 
 ## Mac mini M4：现在能做什么
 
@@ -199,37 +298,30 @@ Mac mini + Apple M4
 
 ```text
 small / medium open VLM baseline
-MLX / MLX-VLM
-Core AI / Core ML
+frozen backbone + state/action head
+LoRA / adapter tuning
+MLX / Core AI / Core ML
 visual-token / frame-rate ablation
 context vs explicit memory
 quantization / cache experiment
+offline behavior cloning
+flow / diffusion action-head experiment
+small MuJoCo RL
+teacher distillation
 streaming state prototype
-MuJoCo integration
 runtime / unified-memory profiling
 ```
 
-不应该把 552B DeepSeek 或 2.4T Qwen 当成本地部署目标；这类 frontier model 只在确实需要回答 scaling 问题时用 remote/cloud/API 做 comparator。
+不应该把 552B DeepSeek 或超大 Qwen 当成本地部署目标；frontier model 只在确实需要验证 scaling 时用 remote/cloud/API 做 comparator。
 
-## Foundation Model 还要重点补的实验问题
+并且：
 
 ```text
-visual token budget vs physical-state retention
-video FPS / token sampling vs fast dynamics
-long raw context vs explicit grounded memory（等 byte / 等 latency）
-KV precision vs uncertainty calibration
-MoE expert 是否会形成 physical/spatial specialization
-small proxy → frontier 是否保留同一个机制结论
-frozen backbone vs LoRA/adapter vs partial/full tuning
-language prior 对 physical reasoning 的污染程度
-incremental visual encoding / streaming prefill
-fast controller + slow reasoner 的同步
-harness / tool / external memory 到底贡献多少 benchmark 分数
-kernel/runtime version drift
-不同硬件 backend 的数值差异是否累积成 world-state drift
-API hosted model 与 open checkpoint 是否真的等价
-architecture gain 与 data/post-training gain 如何拆开
+4B proxy 上成立
+≠ frontier MoE 上自动成立
 ```
+
+重要机制必须做 scaling validation。
 
 ## Engineering / Deployment / Validation
 
@@ -243,25 +335,7 @@ architecture gain 与 data/post-training gain 如何拆开
 ≠ 科学假设
 ```
 
-后续不能只看平均 FPS，还要测：
-
-```text
-cold load / first inference
-p50 / p95 / p99 / deadline miss
-peak / persistent-state memory
-thermal / sustained runtime
-camera→state→decision→action 全链路 latency
-```
-
-并检查优化是否改变科学能力：
-
-```text
-quantization 是否损伤 uncertainty？
-visual-token pruning 是否丢物理证据？
-memory pruning 是否损伤 permanence？
-缩短 history 是否产生 aliasing？
-异步执行是否让 belief stale？
-```
+后续不能只看平均 FPS，还要测 cold load、first inference、p50/p95/p99、deadline miss、peak/persistent-state memory、thermal/sustained runtime 和 camera→state→decision→action 全链路 latency。
 
 ## 目前没有真实机器人：验证必须分层
 
@@ -286,16 +360,6 @@ sim-only success
 ```
 
 没有真机意味着 claim 要更保守，不意味着现在不能严谨验证。
-
-## Simulation 策略
-
-### 本地
-MuJoCo：https://github.com/google-deepmind/mujoco
-
-### 必要时 remote Linux + NVIDIA
-Isaac Sim / Isaac Lab、大规模 GPU simulation、photorealistic sensor generation、NVIDIA-specific SysID。
-
-不要为了 Stage 1 强行让重型 NVIDIA 基础设施成为本地依赖。
 
 ## Vision alone 双轴协议
 
@@ -323,7 +387,7 @@ Isaac Sim / Isaac Lab、大规模 GPU simulation、photorealistic sensor generat
 ## 后续阶段
 
 ### Stage 2 — Analysis
-对真正重要的方法逐个做 one-method-one-report 机制分析。
+对真正重要的方法逐个做 one-method-one-report 机制分析，并把 architecture 与 training recipe 分开报告。
 
 ### Stage 3 — Synthesis
 统一比较优点、缺点、trade-off、capability matrix、Failure Matrix 和共同 gap。
@@ -341,6 +405,7 @@ Isaac Sim / Isaac Lab、大规模 GPU simulation、photorealistic sensor generat
 ```text
 explicit / latent / object / field / token
 DeepSeek / Qwen / 其他 foundation backbone
+SFT / RL / distillation / robot training recipe
 MoE / dense / linear attention / Transformer 路线
 hierarchy
 information-gain objective
@@ -349,7 +414,7 @@ information-gain objective
 任何新的 Clover core algorithm
 ```
 
-Mac mini M4 是参考开发环境，不是最终答案；DeepSeek/Qwen 是重要研究对象，不是默认技术选型；simulator 是实验仪器，不是真实世界。
+Mac mini M4 是参考开发环境，不是最终答案；DeepSeek/Qwen 是重要研究对象，不是默认技术选型；training recipe 是实验变量，不是预设答案；simulator 是实验仪器，不是真实世界。
 
 ---
 
