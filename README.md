@@ -27,11 +27,12 @@ For a new agent, researcher or contributor:
 11. [`research/RESEARCH_VALUE_OF_INFORMATION.md`](research/RESEARCH_VALUE_OF_INFORMATION.md)
 12. [`research/RESEARCH_OPEN_WORLD_EPISTEMICS.md`](research/RESEARCH_OPEN_WORLD_EPISTEMICS.md)
 13. [`research/RESEARCH_MODEL_DISCOVERY.md`](research/RESEARCH_MODEL_DISCOVERY.md)
-14. [`research/RESEARCH_ENGINEERING_VALIDATION.md`](research/RESEARCH_ENGINEERING_VALIDATION.md)
-15. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
-16. [`AGENTS.md`](AGENTS.md)
-17. [`STATUS.md`](STATUS.md)
-18. [`research/README.md`](research/README.md)
+14. [`research/RESEARCH_FOUNDATION_MODEL_SYSTEMS.md`](research/RESEARCH_FOUNDATION_MODEL_SYSTEMS.md)
+15. [`research/RESEARCH_ENGINEERING_VALIDATION.md`](research/RESEARCH_ENGINEERING_VALIDATION.md)
+16. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
+17. [`AGENTS.md`](AGENTS.md)
+18. [`STATUS.md`](STATUS.md)
+19. [`research/README.md`](research/README.md)
 
 ## Current stage — 1 Research
 
@@ -73,7 +74,9 @@ What if the current hypothesis set is incomplete, stale, unsafe to test, or soci
 ↓
 How should hypotheses, mechanisms, experiments, falsification and provenance be managed?
 ↓
-Can the candidate run under realistic edge/closed-loop constraints, and how strong is its simulation-to-real validation evidence?
+How do foundation-model architecture, multimodal tokenization, data, context/cache, kernels and harness affect the result?
+↓
+Can the candidate run under realistic edge/closed-loop constraints, and how strong is its simulation-to-real evidence?
 ↓
 Which current methods and benchmarks discriminate competing answers?
 ```
@@ -84,53 +87,28 @@ This is a research map, not a proposed Clover architecture.
 
 ```text
 pixels ≠ world state
-
 statistical predictability ≠ physical identifiability
-
 vision alone ≠ passive vision only
-
 observational indistinguishability ≠ representation failure
-
-complete physical description
-≠ minimal predictive state
-≠ minimal control-sufficient state
-≠ general-purpose world state
-
+complete physical description ≠ minimal predictive/control/general-purpose state
+long context ≠ persistent grounded world memory
+serving KV cache ≠ epistemic world memory
+base model ≠ model + harness ≠ model + harness + tools/memory
+hosted product ≠ open-weight checkpoint unless exact artifact is verified
+total parameters ≠ active parameters ≠ runtime memory ≠ communication cost
+architecture efficiency on paper ≠ realized efficiency on available kernels/hardware
 minimum state ≠ best state at every timescale
-
 maximum information gain ≠ best safe / permitted experiment
-
-uncertainty over known hypotheses
-≠ correct hypothesis missing entirely
-
-uncertain state
-≠ stale / wrong world model
-
-parameter estimation
-≠ model selection
-≠ mechanism discovery
-≠ open-world model expansion
-
-current development machine
-≠ final edge computer
-≠ scientific hypothesis
-
-model inference latency
-≠ camera-to-action closed-loop latency
-
-single-simulator success
-≠ sim2sim robustness
-≠ sim2real transfer
-≠ target-robot validation
-
+uncertainty over known hypotheses ≠ correct hypothesis missing entirely
+uncertain state ≠ stale / wrong world model
+parameter estimation ≠ model selection ≠ mechanism discovery ≠ open-world model expansion
+current development machine ≠ final edge computer ≠ scientific hypothesis
+model inference latency ≠ camera-to-action closed-loop latency
+single-simulator success ≠ sim2sim robustness ≠ sim2real transfer ≠ target-robot validation
 reflection ≠ falsification
-
 current best hypothesis ≠ permanent truth
-
 external-world state ≠ self / embodiment state
-
-visible behavior of another agent
-≠ its hidden goal / belief
+visible behavior of another agent ≠ its hidden goal / belief
 ```
 
 ## What Stage 1 currently covers
@@ -139,101 +117,90 @@ The inventory is intentionally wider than “world models” or “VLA.” It in
 
 - inverse problems, observability, identifiability, uncertainty and POMDPs;
 - human/developmental visual cognition;
-- image formation / inverse rendering / camera acquisition;
-- transparency, reflection, refraction, blur, rolling shutter and adverse visual conditions;
-- classical geometry, SfM, VO, SLAM, correspondence and tracking;
+- image formation, camera acquisition and adverse visual conditions;
+- geometry, SfM, VO, SLAM, tracking and learned 3D/4D reconstruction;
 - static/video self-supervised representation;
-- learned geometry, NeRF/3DGS/4D reconstruction;
 - object-centric representation, scene graphs and semantic mapping;
-- persistent/episodic memory and world change;
-- hidden physical properties: mass, inertia, friction, stiffness, temperature, viscosity and material state;
-- rigid, articulated, deformable, fluid and granular dynamics;
-- irreversible topology change: cutting, splitting, merging and breakage;
+- persistent/episodic memory, world change and belief revision;
+- hidden physical properties and rigid/articulated/deformable/fluid/granular dynamics;
+- irreversible topology change;
 - intuitive/quantitative/causal physical reasoning;
-- active perception, active system identification and intervention;
-- generative world models, world-action models and VLA/direct policies;
-- belief state, predictive state, information state and representation sufficiency;
-- state aliasing and Markov-state diagnostics;
-- state abstraction, bisimulation, hierarchical / multi-timescale state;
-- structured/equivariant memory;
-- value of information, epistemic actions and safe probing;
-- open-world hypothesis generation and verification;
-- mechanism/causal-structure discovery and Bayesian experiment design;
-- hypothesis provenance, falsification and refutation memory;
-- world-model changepoints, slow drift and model misspecification;
-- self/body schema and embodiment mismatch;
-- help-seeking, abstention and human escalation;
-- social/intentional hidden state, recursive belief and permission constraints;
-- uncertainty calibration, OOD and continual/test-time adaptation;
-- edge inference, quantization, memory/latency/power constraints and hardware-aware profiling;
-- simulation fidelity, domain randomization, sim2sim, sim2real, real2sim and digital-twin/system-identification workflows;
-- hardware-in-the-loop / proxy-hardware validation and reality-gap measurement;
-- simulation/data engines, datasets, benchmarks, reproducibility and systems integration.
+- active perception, system identification, intervention and value of information;
+- generative world models, WAMs, VLA/direct policies and embodied reasoning;
+- sufficient state, aliasing, abstraction and multi-timescale state;
+- open-world hypothesis generation, mechanism discovery and falsification;
+- self/body schema, social hidden state, help-seeking and permission constraints;
+- **foundation-model systems:** dense/MoE, sparse/linear/full attention, multimodal fusion, visual/video tokenization, long context, KV/cache hierarchy, data mixture/alignment, post-training, quantization, kernels, distributed runtime and agent harness;
+- edge inference, memory/latency/power constraints and hardware-aware profiling;
+- simulation fidelity, domain randomization, sim2sim, sim2real, real2sim and digital twins;
+- hardware-in-the-loop / proxy-hardware validation, runtime monitoring, regression and rollback;
+- datasets, benchmarks, reproducibility and systems integration.
 
-If another direction materially constrains the mother question, it should be added even if it does not fit an existing category.
+## DeepSeek / Qwen watch
+
+Stage 1 now explicitly tracks DeepSeek and Qwen as **foundation-model systems references**, not default Clover dependencies.
+
+- [`research/RESEARCH_FOUNDATION_MODEL_SYSTEMS.md`](research/RESEARCH_FOUNDATION_MODEL_SYSTEMS.md)
+- [`research/foundation_models/DEEPSEEK_QWEN.md`](research/foundation_models/DEEPSEEK_QWEN.md)
+
+Current questions include:
+
+```text
+visual token budget vs physical-state retention
+long raw context vs explicit grounded memory under equal bytes/latency
+MoE active compute vs storage/communication
+FP4/FP8/INT quantization vs uncertainty and long-horizon state
+streaming visual encoding vs repeated long-context prefill
+frozen backbone vs adapters vs backbone adaptation
+training-data alignment vs architecture gain
+base model vs harness/tool/memory contribution
+small proxy model vs frontier-scale mechanism validity
+```
 
 ## Current practical environment
 
 The current local development reference is a **Mac mini with Apple M4**.
 
-This is useful for:
+Use it for:
 
 ```text
-model development
-Apple-Silicon profiling
+small/medium open multimodal baselines
 MLX / Core AI / Core ML experiments
-quantization / compression studies
-local MuJoCo and controlled simulation
-end-to-end software/runtime measurements
+visual-token/context/memory ablations
+quantization / compression
+streaming state prototypes
+local MuJoCo
+runtime profiling
 ```
 
-It is **not** assumed to be the final robot computer and does not determine the scientific representation.
-
-Current Isaac Sim standard requirements do not support macOS/non-NVIDIA hardware, so GPU-heavy Isaac/Isaac-Lab work should be treated as an optional remote/Linux-NVIDIA validation path rather than a local prerequisite.
-
-See [`research/RESEARCH_ENGINEERING_VALIDATION.md`](research/RESEARCH_ENGINEERING_VALIDATION.md).
+It is **not** the final robot computer and does not determine the scientific representation. Frontier-scale DeepSeek/Qwen models and Linux/NVIDIA-only simulation/runtime stacks should be remote comparators only when the research question requires them.
 
 ## No-real-robot validation policy
-
-Clover currently has no target physical robot. Therefore validation claims should be tiered:
 
 ```text
 EV0 mathematical / synthetic diagnostic
 EV1 controlled single simulator
 EV2 randomized simulator robustness
 EV3 sim-to-sim transfer
-EV4 offline real-data validation
+EV4 offline real-data / policy evaluation
 EV5 real-to-sim / digital-twin validation
-EV6 real deployment runtime / compute hardware in the loop
+EV6 deployment-runtime / compute HIL
 EV7 proxy physical hardware
 EV8 target real robot
 ```
 
 Do not describe EV0–EV6 as demonstrated sim2real success.
 
-The absence of a robot limits claim strength; it does not justify postponing validation.
+## Current frontier
 
-## Current frontier highlights
+The thin current-edge index is [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md), freshness checked through **2026-10-15**. Recent high-value additions include WorldOracle, RoboSimStudio, LIBERO-RIG, LoopWAM, ForceWAM, RoboFQE, LADDER, GreenWAM, DR-WM, SpecWM and other sources that materially change the comparison space.
 
-The thin current-edge index is [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md). As of **2026-10-14**, important additions include:
-
-- SpecWM — https://arxiv.org/abs/2610.15429
-- DR-WM — https://arxiv.org/abs/2610.17630
-- Gemini 4 Argon for Robotics — https://developers.googleblog.com/gemini-4-argon-for-robotics/
-- Mental-Models — https://arxiv.org/abs/2610.12453
-- Identifiable World Models — https://arxiv.org/abs/2610.07028
-- RobotWorld — https://arxiv.org/abs/2610.10409
-- Video2World — https://arxiv.org/abs/2610.04432
-- HUME — https://arxiv.org/abs/2607.06501
-- Learning Task-Sufficient World Models — https://proceedings.mlr.press/v306/feng26aa.html
-- robust / constrained Bayesian experimental design — https://proceedings.mlr.press/v300/tang26d.html and https://proceedings.mlr.press/v306/guo26g.html
-
-These are research objects and comparators, not Clover components.
+The foundation-model watch additionally tracks current DeepSeek V4.1/V4 systems and Qwen3.8/Qwen3.5/Qwen3-VL/Physical-AI systems with exact official/open artifacts.
 
 ## Later stages
 
 ### 2 Analysis
-One important method → one small mechanism report.
+One important method → one mechanism report.
 
 ### 3 Synthesis
 Compare methods across common dimensions, strengths, weaknesses, trade-offs and failure modes.
@@ -267,11 +234,9 @@ Learning provenance:
 - `L3` — action-conditioned demonstrations/experience;
 - `L4` — non-visual or privileged physical evidence.
 
-This prevents “RGB at deployment” from being confused with “learned only from vision.”
-
 ## What we do not assume
 
-Clover does **not** assume that CPU/GPU/NPU choice determines the science, that the Mac mini M4 is the final target hardware, that one simulator is reality, that sim-only success proves transfer, that explicit state must beat distributed latent state, that field/object/geometry/token must be the final primitive, that hierarchy is automatically superior to flat state, that information gain is itself the final algorithm, that the correct hypothesis set is always known, that prediction/reconstruction/generation is necessarily sufficient, or that one benchmark defines understanding.
+Clover does **not** assume that DeepSeek/Qwen/another foundation model is the answer, that CPU/GPU/NPU choice determines the science, that the Mac mini M4 is the final target hardware, that long context equals memory, that one simulator is reality, that sim-only success proves transfer, that explicit state must beat distributed latent state, that hierarchy is automatically superior, or that one benchmark defines understanding.
 
 Historical Clover mechanisms remain ideas until the research process supports or rejects them.
 
