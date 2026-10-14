@@ -49,6 +49,8 @@ RESEARCH_MODEL_DISCOVERY.md
 ↓
 RESEARCH_FOUNDATION_MODEL_SYSTEMS.md
 ↓
+RESEARCH_TRAINING_POSTTRAINING.md
+↓
 RESEARCH_ENGINEERING_VALIDATION.md
 ↓
 RESEARCH_FRONTIER.md
@@ -67,7 +69,8 @@ RESEARCH_FRONTIER.md
 | [`RESEARCH_VALUE_OF_INFORMATION.md`](RESEARCH_VALUE_OF_INFORMATION.md) | Which view, probe or intervention is worth acquiring next? |
 | [`RESEARCH_OPEN_WORLD_EPISTEMICS.md`](RESEARCH_OPEN_WORLD_EPISTEMICS.md) | What if the hypothesis set is incomplete, the model is wrong/outdated, probing is unsafe, or another agent has hidden state? |
 | [`RESEARCH_MODEL_DISCOVERY.md`](RESEARCH_MODEL_DISCOVERY.md) | How should hypotheses, mechanisms, experiments, falsification and provenance be managed when the model class itself may be wrong? |
-| [`RESEARCH_FOUNDATION_MODEL_SYSTEMS.md`](RESEARCH_FOUNDATION_MODEL_SYSTEMS.md) | How do backbone architecture, multimodal tokenization, data, MoE/attention, context/cache, kernels, post-training and agent harness alter what is scientifically and operationally possible? |
+| [`RESEARCH_FOUNDATION_MODEL_SYSTEMS.md`](RESEARCH_FOUNDATION_MODEL_SYSTEMS.md) | How do backbone architecture, multimodal tokenization, data, MoE/attention, context/cache, kernels and agent harness alter what is scientifically and operationally possible? |
+| [`RESEARCH_TRAINING_POSTTRAINING.md`](RESEARCH_TRAINING_POSTTRAINING.md) | How do pretraining, co-training, SFT/behavior cloning, distillation, RL, simulated training and deployment learning alter representation, generalization and robot behavior? |
 | [`RESEARCH_ENGINEERING_VALIDATION.md`](RESEARCH_ENGINEERING_VALIDATION.md) | Can candidate models run under realistic edge constraints, and how should evidence graduate from simulation toward real-robot validation? |
 | [`RESEARCH_FRONTIER.md`](RESEARCH_FRONTIER.md) | Which current primary/official sources materially change the comparison space? |
 
@@ -104,6 +107,8 @@ model discovery / experiment / falsification
 ↓
 foundation-model architecture / data / runtime / harness
 ↓
+training / post-training / embodied learning regime
+↓
 engineering feasibility / simulation / validation ladder
 ↓
 current frontier
@@ -123,6 +128,11 @@ base model ≠ model + harness ≠ model + harness + external tools
 hosted product ≠ open-weight checkpoint unless exact artifact is verified
 total parameters ≠ active parameters ≠ memory footprint ≠ communication cost
 architecture efficiency on paper ≠ realized efficiency on available kernels/hardware
+architecture ≠ training recipe ≠ data mixture ≠ post-training objective
+supervised task success ≠ on-policy robustness
+LLM post-training ≠ robot post-training
+more heterogeneous robot data ≠ better transfer without alignment
+reasoning improvement ≠ perception preservation
 minimum state ≠ best state at every timescale
 maximum information gain ≠ best safe / permitted experiment
 uncertainty inside a known hypothesis set ≠ correct hypothesis missing from the set
@@ -173,6 +183,23 @@ Do not call a system vision-only merely because deployment input is RGB.
 ### Open-world epistemic failure
 `E1` observation · `E2` state · `E3` parameter · `E4` model structure · `E5` hypothesis-set incompleteness · `E6` regime/model invalidation · `E7` social/intentional · `E8` epistemic-action safety.
 
+### Training regime
+
+```text
+TR0  base pretraining
+TR1  continued/domain pretraining
+TR2  SFT / behavior cloning
+TR3  co-training / auxiliary objectives
+TR4  preference / conservative offline alignment
+TR5  verifier/reward RL
+TR6  online embodied RL
+TR7  on-policy distillation
+TR8  strong-to-weak distillation
+TR9  simulated/world-model post-training
+TR10 deployment-rollout/self-improvement
+TR11 continual/test-time adaptation
+```
+
 ### Validation evidence ladder
 `EV0` synthetic/math · `EV1` controlled sim · `EV2` randomized sim · `EV3` sim2sim · `EV4` offline real data · `EV5` real2sim/digital twin · `EV6` deployment-runtime HIL · `EV7` proxy hardware · `EV8` target robot.
 
@@ -193,7 +220,10 @@ visual/video tokenizer + token budget
 context length + KV/cache cost
 multimodal fusion
 training-data provenance / mixture / alignment
-post-training method
+pretraining + post-training stages
+on/off-policy interaction
+reward / verifier / teacher source
+which modules are frozen / updated
 precision / quantization
 runtime / kernels / parallelism
 harness / tools / external memory
@@ -202,6 +232,8 @@ local Mac-M4 feasibility
 ```
 
 DeepSeek/Qwen current watch: [`foundation_models/DEEPSEEK_QWEN.md`](foundation_models/DEEPSEEK_QWEN.md).
+
+Training/post-training map: [`RESEARCH_TRAINING_POSTTRAINING.md`](RESEARCH_TRAINING_POSTTRAINING.md).
 
 ## Current practical development constraint
 
@@ -233,7 +265,11 @@ byte-matched long-context vs explicit-memory comparison
 KV precision vs epistemic calibration
 MoE expert specialization for spatial/physical variables
 small-proxy → frontier scaling validity
-frozen-backbone vs adaptation trade-offs
+frozen-backbone vs partial/full adaptation trade-offs
+post-training effects on uncertainty / memory / physical reasoning
+reward design for partial success / safety / epistemic quality
+failure/recovery trajectory sampling
+human-video / robot / sim mixture attribution
 language-prior contamination in physical reasoning
 streaming multimodal prefill / incremental visual encoding
 fast controller + slow reasoner synchronization
