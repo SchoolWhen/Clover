@@ -27,13 +27,14 @@ Before proposing architecture, code, experiments or conclusions, read:
 11. [`research/RESEARCH_VALUE_OF_INFORMATION.md`](research/RESEARCH_VALUE_OF_INFORMATION.md)
 12. [`research/RESEARCH_OPEN_WORLD_EPISTEMICS.md`](research/RESEARCH_OPEN_WORLD_EPISTEMICS.md)
 13. [`research/RESEARCH_MODEL_DISCOVERY.md`](research/RESEARCH_MODEL_DISCOVERY.md)
-14. [`research/RESEARCH_ENGINEERING_VALIDATION.md`](research/RESEARCH_ENGINEERING_VALIDATION.md)
-15. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
-16. [`PRINCIPLES.md`](PRINCIPLES.md)
-17. [`STATUS.md`](STATUS.md)
-18. [`research/README.md`](research/README.md)
-19. [`research/survey/SOURCE_MAP.md`](research/survey/SOURCE_MAP.md)
-20. deeper survey/dossier files only as needed.
+14. [`research/RESEARCH_FOUNDATION_MODEL_SYSTEMS.md`](research/RESEARCH_FOUNDATION_MODEL_SYSTEMS.md)
+15. [`research/RESEARCH_ENGINEERING_VALIDATION.md`](research/RESEARCH_ENGINEERING_VALIDATION.md)
+16. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
+17. [`PRINCIPLES.md`](PRINCIPLES.md)
+18. [`STATUS.md`](STATUS.md)
+19. [`research/README.md`](research/README.md)
+20. [`research/survey/SOURCE_MAP.md`](research/survey/SOURCE_MAP.md)
+21. deeper survey/dossier/supporting files only as needed.
 
 Historical/news files are evidence signals, not SSOT.
 
@@ -52,13 +53,13 @@ Historical/news files are evidence signals, not SSOT.
 
 **Current active stage: Stage 1 — Research.**
 
-Do not prematurely freeze a Clover representation or core algorithm.
+Do not prematurely freeze a Clover representation, foundation backbone or core algorithm.
 
 ## 4. Research rules
 
 ### 4.1 Protect the question, not an old answer
 
-CPU/GPU choices, field crystallization, visual charge, CSP, SEP, epistemic licences, LCPS/GCPS, Visual World Compiler, Evidence Replay, explicit state, latent state, object-centric state, Transformer/non-Transformer and historical Clover mechanisms are hypotheses or engineering choices, not axioms.
+CPU/GPU choices, DeepSeek/Qwen/other vendor backbones, field crystallization, visual charge, CSP, SEP, epistemic licences, LCPS/GCPS, Visual World Compiler, Evidence Replay, explicit state, latent state, object-centric state, Transformer/non-Transformer and historical Clover mechanisms are hypotheses or engineering choices, not axioms.
 
 ### 4.2 Research before Innovation
 
@@ -73,7 +74,7 @@ broad Research
 → Reflection
 ```
 
-Do not choose a preferred representation first and search for justification afterward.
+Do not choose a preferred representation/backbone first and search for justification afterward.
 
 ### 4.3 Benchmarks are instruments
 
@@ -308,7 +309,117 @@ Keep distinct visible action, short-term intention, goal, belief, recursive beli
 
 Do not turn a Theory-of-Mind inference into an observed fact.
 
-## 18. Engineering feasibility is part of the evidence chain
+## 18. Foundation-model systems provenance is mandatory
+
+When a method depends on an LLM/VLM/foundation backbone, do not record only the family name.
+
+Record when material:
+
+```text
+exact backbone + version / checkpoint / API model
+open weights vs hosted/API artifact
+license
+modalities in the exact artifact
+total parameters
+active parameters per token
+attention / sequence architecture
+MoE routing / expert count if relevant
+visual/video tokenizer
+image resolution / patch / token budget
+video frame sampling / timestamp representation
+multimodal fusion
+native / extended context length
+KV/cache precision + memory cost
+training-data provenance / mixture / alignment
+post-training method
+precision / quantization
+runtime / compiler / custom kernels
+parallelism / expert communication
+harness / tools / external memory
+reasoning-effort setting
+local Mac-M4 feasibility
+```
+
+Keep explicit:
+
+```text
+scientific world-state hypothesis
+≠ backbone architecture
+≠ training recipe
+≠ runtime
+≠ harness
+```
+
+Also:
+
+```text
+long context ≠ persistent grounded memory
+serving KV cache ≠ epistemic world memory
+base model ≠ model + harness ≠ model + tools/memory
+hosted product ≠ open-weight checkpoint unless verified
+total params ≠ active params ≠ memory ≠ communication cost
+```
+
+DeepSeek/Qwen are current high-value systems references, not default Clover choices. See [`research/foundation_models/DEEPSEEK_QWEN.md`](research/foundation_models/DEEPSEEK_QWEN.md).
+
+## 19. Data/training gains must be separated from architecture gains
+
+For foundation/embodied models, track:
+
+```text
+data source + hours/tokens/examples
+robot vs human vs synthetic
+cross-embodiment alignment
+coordinate/action normalization
+temporal synchronization
+filtering / deduplication
+curriculum
+SFT / RL / preference / distillation
+deployment-rollout reuse
+```
+
+Do not attribute a gain to architecture if data scale/alignment/post-training changed simultaneously.
+
+Synthetic data is not observed physical evidence; preserve its provenance.
+
+## 20. Visual tokenization is part of the observation bottleneck
+
+For multimodal backbones, image/video preprocessing can discard evidence before world-state reasoning starts.
+
+Later comparisons should test:
+
+```text
+resolution / patch size
+pixel-unshuffle / pooling
+token pruning / merging
+frame rate / sampling
+multi-view synchronization
+visual cache reuse
+```
+
+against physical/spatial/permanence capability under matched memory/latency budgets.
+
+## 21. Agent harness contribution must be measured
+
+Modern agent benchmarks often measure a system rather than a base model.
+
+Preserve:
+
+```text
+harness name/version
+prompt/protocol
+tools/plugins/MCP
+external VLM/perception helpers
+retrieval/memory subsystem
+retry policy
+parallel-tool policy
+sandbox/browser/shell
+reasoning effort
+```
+
+A DeepSeek/Qwen/vendor result that includes an agent harness must not be compared directly to a bare model without marking the difference.
+
+## 22. Engineering feasibility is part of the evidence chain
 
 Current local development reference:
 
@@ -326,23 +437,11 @@ current development machine
 ≠ scientific representation hypothesis
 ```
 
-For performance claims record:
-
-```text
-hardware + RAM
-OS/runtime/backend
-precision / quantization
-input resolution / context
-cold load
-first inference
-warm p50 / p95 / p99 latency
-peak memory
-sustained latency / thermal behavior
-```
+For performance claims record hardware/RAM, OS/runtime/backend, precision/quantization, input resolution/context, cold load, first inference, warm p50/p95/p99, peak memory and sustained/thermal behavior.
 
 When relevant measure full camera→state→decision→action latency, not only isolated model inference.
 
-## 19. Simulation evidence must be tiered
+## 23. Simulation evidence must be tiered
 
 Use this validation ladder when applicable:
 
@@ -364,56 +463,31 @@ Current absence of a target real robot is a constraint on claim strength, not a 
 
 ### Simulation-specific provenance
 
-Record:
-
-```text
-simulator / version
-physics engine / solver
-physics timestep
-renderer
-assets / hashes
-camera settings
-control frequency
-latency/noise models
-collision/contact/friction parameters
-domain-randomization distributions
-privileged simulator state used
-```
+Record simulator/version, physics engine/solver, physics timestep, renderer, assets/hashes, camera settings, control frequency, latency/noise models, collision/contact/friction parameters, randomization distributions and privileged simulator state used.
 
 ### Failure attribution
 
-Distinguish:
+Distinguish scenario/configuration bug, simulator/solver artifact, synthetic visual shortcut, actuator/controller mismatch, simulator overfit, genuine algorithmic failure and reality-gap failure.
 
-```text
-scenario/configuration bug
-simulator/solver artifact
-synthetic visual shortcut
-actuator/controller mismatch
-simulator overfitting
-genuine algorithmic failure
-reality-gap failure
-```
-
-A failure in one simulator is not automatically a failure of the scientific hypothesis; success in one simulator is not proof of real-world validity.
-
-## 20. Hardware-aware optimization must preserve capability
+## 24. Hardware-aware optimization must preserve capability
 
 Quantization, pruning, state compression, lower resolution, shorter context, batching and asynchronous execution may change scientific behavior.
 
 Later ablations should ask:
 
 ```text
-Does quantization damage uncertainty calibration?
+Does visual-token reduction damage physical-state retention?
+Does KV/cache quantization damage uncertainty calibration?
 Does memory pruning damage object permanence or revision?
-Does lower resolution damage physical identifiability?
 Does shorter history introduce state aliasing?
-Does batching or remote execution violate control deadlines?
-Does asynchronous execution make the maintained belief stale?
+Does batching/remote execution violate deadlines?
+Does async execution make belief stale?
+Does a custom kernel/backend change state numerically over long horizons?
 ```
 
 Speed alone is not a sufficient optimization metric.
 
-## 21. Plausible generation is not world truth
+## 25. Plausible generation is not world truth
 
 Keep distinct:
 
@@ -429,7 +503,7 @@ refuted
 model-incomplete
 ```
 
-## 22. Stage-1 contribution template
+## 26. Stage-1 contribution template
 
 Record as much as known:
 
@@ -449,42 +523,50 @@ Record as much as known:
 - open-world epistemic failure type (`E1–E8`);
 - hypothesis class / identifiability assumptions when relevant;
 - experiment/falsification mechanism when relevant;
-- hypothesis provenance/refutation handling when relevant;
-- deployment/runtime assumptions when relevant;
-- validation-evidence level (`EV0–EV8`) when relevant;
-- simulator/runtime/hardware provenance when relevant;
+- hypothesis provenance/refutation handling;
+- exact foundation backbone/artifact when relevant;
+- total/active parameters, attention, visual-token/context/cache assumptions when relevant;
+- data mixture/alignment/post-training when relevant;
+- runtime/kernel/harness/tool assumptions when relevant;
+- deployment/runtime assumptions;
+- validation-evidence level (`EV0–EV8`);
+- simulator/runtime/hardware provenance;
 - demonstrated capability;
 - limitation/open question.
 
 Do not turn a collection record into an architecture decision.
 
-## 23. Coding agents
+## 27. Coding agents
 
 Do not rewrite research claims to match current code. Small diagnostic code is allowed before Stage 5 only when genuinely needed to answer a research question. Core algorithm implementation belongs downstream of Innovation.
 
-## 24. Research agents
+## 28. Research agents
 
 During Stage 1:
 
 1. search broadly, including outside current categories;
 2. upgrade discovery signals to primary/official sources;
-3. preserve exact URLs;
+3. preserve exact URLs and exact model artifacts;
 4. record code/datasets/benchmarks;
 5. summarize claims conservatively;
 6. distinguish learning/evidence provenance from deployment input;
 7. record observation assumptions;
 8. state representation sufficiency target;
-9. test for aliasing / discarded information;
+9. test for aliasing/discarded information;
 10. record granularity/timescale assumptions;
-11. record active evidence acquisition and its risk/cost;
-12. ask whether the model/hypothesis set can itself be wrong or incomplete;
-13. record the assumptions required for causal/mechanism identification;
-14. preserve hypothesis/refutation provenance when available;
+11. record active evidence acquisition and risk/cost;
+12. ask whether the model/hypothesis set can be wrong/incomplete;
+13. record causal/mechanism-identification assumptions;
+14. preserve hypothesis/refutation provenance;
 15. keep self/embodiment and social hidden state visible;
-16. record hardware/runtime assumptions where they affect feasibility;
-17. classify simulation/real-world validation evidence conservatively;
-18. record missing research areas explicitly;
-19. do not import external mechanisms into Clover by default.
+16. separate architecture gains from data/post-training gains;
+17. separate base-model capability from harness/tool/memory capability;
+18. record total vs active parameters and visual/context/cache budgets when material;
+19. record runtime/kernel/hardware dependencies when they affect claimed efficiency;
+20. record local-M4 feasibility vs remote/frontier-only comparison;
+21. classify simulation/real-world evidence conservatively;
+22. record missing research areas explicitly;
+23. do not import external mechanisms into Clover by default.
 
 ## Final rule
 
