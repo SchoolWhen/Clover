@@ -23,7 +23,7 @@ Clover 是一个长期公开研究项目。**问题固定，答案开放。**
 ↺ 下一轮
 ```
 
-当前原则是：**coverage before commitment**。先把问题空间调查完整，再决定 Clover 自己应该发明什么。
+当前原则：**coverage before commitment**。先把问题空间调查完整，再决定 Clover 自己应该发明什么。
 
 ## 新 Agent 推荐阅读顺序
 
@@ -40,20 +40,19 @@ Clover 是一个长期公开研究项目。**问题固定，答案开放。**
 11. [research/RESEARCH_VALUE_OF_INFORMATION.md](research/RESEARCH_VALUE_OF_INFORMATION.md)
 12. [research/RESEARCH_OPEN_WORLD_EPISTEMICS.md](research/RESEARCH_OPEN_WORLD_EPISTEMICS.md)
 13. [research/RESEARCH_MODEL_DISCOVERY.md](research/RESEARCH_MODEL_DISCOVERY.md)
-14. [research/RESEARCH_ENGINEERING_VALIDATION.md](research/RESEARCH_ENGINEERING_VALIDATION.md)
-15. [research/RESEARCH_FRONTIER.md](research/RESEARCH_FRONTIER.md)
-16. [AGENTS.md](AGENTS.md)
-17. [STATUS.md](STATUS.md)
-18. [research/README.md](research/README.md)
+14. [research/RESEARCH_FOUNDATION_MODEL_SYSTEMS.md](research/RESEARCH_FOUNDATION_MODEL_SYSTEMS.md)
+15. [research/RESEARCH_ENGINEERING_VALIDATION.md](research/RESEARCH_ENGINEERING_VALIDATION.md)
+16. [research/RESEARCH_FRONTIER.md](research/RESEARCH_FRONTIER.md)
+17. [AGENTS.md](AGENTS.md)
+18. [STATUS.md](STATUS.md)
+19. [research/README.md](research/README.md)
 
 ## Stage 1 当前问题链
-
-现在不是直接问“下一代 Clover 架构长什么样”，而是依次回答：
 
 ```text
 有哪些相关研究？
 ↓
-真实世界里到底有哪些状态？
+真实世界里有哪些状态？
 ↓
 这些状态怎样经过光学 / 材料 / 相机变成 RGB？
 ↓
@@ -63,32 +62,180 @@ Clover 是一个长期公开研究项目。**问题固定，答案开放。**
 ↓
 内部 world state 至少需要保留什么信息？
 ↓
-什么时候不同真实世界被压成了同一个 latent / state？
+什么时候不同真实世界被压成同一个 latent / state？
 ↓
-状态应该以什么粒度、什么时间尺度表示？
+状态应该用什么粒度、什么时间尺度表示？
 ↓
-当前证据不足时，下一眼 / 下一次 probing action 应该选什么？
+当前证据不足时，下一眼 / probing action 应该是什么？
 ↓
-如果当前 hypothesis set 不完整、模型已经失效、实验不安全怎么办？
+如果 hypothesis set 不完整、模型失效或实验不安全怎么办？
 ↓
 怎样做 mechanism discovery、实验设计、falsification 和 provenance？
 ↓
-模型以后能不能在真实 edge 约束下运行？没有真机时怎样逐级验证？
+Foundation Model 的 backbone / data / token / context / cache / kernel / harness 会怎样改变能力与成本？
 ↓
-哪些方法 / dataset / benchmark 能真正区分这些答案？
+模型能不能在真实 edge 约束下运行？没有真机时怎样逐级验证？
+↓
+哪些方法 / dataset / benchmark 真正能区分这些答案？
 ```
 
-## 新增：Engineering / Deployment / Validation
+## 新增：Foundation Model Systems
 
-[research/RESEARCH_ENGINEERING_VALIDATION.md](research/RESEARCH_ENGINEERING_VALIDATION.md)
+[research/RESEARCH_FOUNDATION_MODEL_SYSTEMS.md](research/RESEARCH_FOUNDATION_MODEL_SYSTEMS.md)
 
-当前本地参考开发环境是：
+DeepSeek / Qwen 专门 watch：
+[research/foundation_models/DEEPSEEK_QWEN.md](research/foundation_models/DEEPSEEK_QWEN.md)
+
+这次审计发现，Stage 1 之前对现代大模型系统层覆盖不足。现在正式调研：
+
+```text
+Dense vs MoE
+总参数 vs 每 token 激活参数
+full / sparse / linear / hybrid attention
+multimodal fusion
+visual / video tokenization
+long context
+KV/cache hierarchy
+streaming perception
+data mixture / alignment / curriculum
+synthetic data provenance
+SFT / RL / distillation
+FP16 / FP8 / FP4 / INT8 / INT4
+kernel / compiler / runtime
+expert / tensor / context parallelism
+agent harness / tools / external memory
+backbone reuse vs from-scratch
+small proxy → frontier scaling validity
+```
+
+必须区分：
+
+```text
+科学 world-state 假设
+≠ foundation-model backbone
+≠ training recipe
+≠ inference runtime
+≠ agent harness
+
+long context
+≠ persistent grounded world memory
+
+serving KV cache
+≠ epistemic world memory
+
+base model
+≠ model + harness
+≠ model + harness + tools / memory
+
+hosted product
+≠ open-weight checkpoint
+除非确认是同一个 artifact
+
+总参数
+≠ 激活参数
+≠ 实际内存
+≠ 通信开销
+```
+
+### DeepSeek 当前重点
+
+截至 2026-10-15，重点跟踪：
+
+- DeepSeek-V4.1-Flash：552B MoE，输入 8B active、输出 16B active，原生视觉理解，1M context；
+- Causal Encoder–Decoder、压缩/稀疏 attention、KV 压缩；
+- FlashMLA / DeepSelect / DeepGEMM / DeepEP / TileKernels；
+- speculative decoding / conditional sparse memory；
+- DeepSeek Harness；
+- Janus 作为“理解与生成视觉编码解耦”的历史对照。
+
+这里真正重要的是：
+
+```text
+model architecture
++
+cache
++
+kernels
++
+communication
++
+post-training data
++
+harness
+```
+
+共同决定最终系统表现。
+
+### Qwen 当前重点
+
+截至 2026-10-15，重点跟踪：
+
+- Qwen3.8-Max：2.4T total / 95B active 的长时程 agent reference；
+- Qwen3.8-Omni / Realtime：连续 multimodal runtime / agent reference；
+- Qwen3.5：native multimodal + hybrid linear/full attention + sparse MoE；
+- Qwen3-VL：dense / MoE 多尺度多模态 family；
+- FlashQLA、Qwen-MM-Plugins、Qwen-Live-Harness；
+- Qwen-RobotWorld、Qwen-RobotManip、Qwen-VLA、Qwen-Drive。
+
+Qwen-RobotManip 给出的重要工程信号是：
+
+```text
+跨 embodiment 海量机器人数据
+如果没有 representation / motion / behavior alignment
+不一定越多越好，反而可能互相冲突。
+```
+
+所以 Stage 1 现在把 **training data 本身**也视为一级研究变量，而不是只研究网络结构。
+
+## Mac mini M4：现在能做什么
+
+当前本地参考：
 
 ```text
 Mac mini + Apple M4
 ```
 
-但必须区分：
+适合：
+
+```text
+small / medium open VLM baseline
+MLX / MLX-VLM
+Core AI / Core ML
+visual-token / frame-rate ablation
+context vs explicit memory
+quantization / cache experiment
+streaming state prototype
+MuJoCo integration
+runtime / unified-memory profiling
+```
+
+不应该把 552B DeepSeek 或 2.4T Qwen 当成本地部署目标；这类 frontier model 只在确实需要回答 scaling 问题时用 remote/cloud/API 做 comparator。
+
+## Foundation Model 还要重点补的实验问题
+
+```text
+visual token budget vs physical-state retention
+video FPS / token sampling vs fast dynamics
+long raw context vs explicit grounded memory（等 byte / 等 latency）
+KV precision vs uncertainty calibration
+MoE expert 是否会形成 physical/spatial specialization
+small proxy → frontier 是否保留同一个机制结论
+frozen backbone vs LoRA/adapter vs partial/full tuning
+language prior 对 physical reasoning 的污染程度
+incremental visual encoding / streaming prefill
+fast controller + slow reasoner 的同步
+harness / tool / external memory 到底贡献多少 benchmark 分数
+kernel/runtime version drift
+不同硬件 backend 的数值差异是否累积成 world-state drift
+API hosted model 与 open checkpoint 是否真的等价
+architecture gain 与 data/post-training gain 如何拆开
+```
+
+## Engineering / Deployment / Validation
+
+[research/RESEARCH_ENGINEERING_VALIDATION.md](research/RESEARCH_ENGINEERING_VALIDATION.md)
+
+当前开发机、最终机器人计算平台与科学假设必须分开：
 
 ```text
 当前开发机
@@ -96,44 +243,36 @@ Mac mini + Apple M4
 ≠ 科学假设
 ```
 
-Stage 1 现在正式调研：
+后续不能只看平均 FPS，还要测：
 
 ```text
-MLX / Core AI / Core ML / ExecuTorch
-CPU / GPU / ANE / NPU 映射
-quantization / palettization / pruning
-latency / p95 / p99 / deadline miss
-unified-memory pressure
-persistent-state memory
+cold load / first inference
+p50 / p95 / p99 / deadline miss
+peak / persistent-state memory
 thermal / sustained runtime
 camera→state→decision→action 全链路 latency
 ```
 
-不能只看平均 FPS。
-
-尤其需要检查加速是否改变科学能力：
+并检查优化是否改变科学能力：
 
 ```text
-quantization 是否损伤 uncertainty calibration？
-memory pruning 是否损伤 object permanence？
-缩短 history 是否产生 state aliasing？
-降低 resolution 是否损伤 physical identifiability？
-batching / remote inference 是否破坏 control deadline？
-异步执行是否让 belief 变 stale？
+quantization 是否损伤 uncertainty？
+visual-token pruning 是否丢物理证据？
+memory pruning 是否损伤 permanence？
+缩短 history 是否产生 aliasing？
+异步执行是否让 belief stale？
 ```
 
 ## 目前没有真实机器人：验证必须分层
 
-现在明确使用：
-
 ```text
 EV0 数学 / synthetic diagnostic
-EV1 单 simulator controlled test
-EV2 simulator domain randomization
+EV1 controlled simulator
+EV2 randomized simulator
 EV3 sim2sim
-EV4 offline real-data validation
-EV5 real2sim / digital-twin validation
-EV6 deployment-runtime / compute hardware-in-the-loop
+EV4 offline real-data / policy evaluation
+EV5 real2sim / digital twin
+EV6 deployment-runtime / compute HIL
 EV7 proxy physical hardware
 EV8 target real robot
 ```
@@ -146,79 +285,17 @@ sim-only success
 ≠ target-robot validation
 ```
 
-没有真机意味着**claim 要更保守**，不是意味着现在不能验证。
+没有真机意味着 claim 要更保守，不意味着现在不能严谨验证。
 
-## 当前 Mac M4 下的 simulation 策略
+## Simulation 策略
 
-### 本地优先
+### 本地
+MuJoCo：https://github.com/google-deepmind/mujoco
 
-MuJoCo：
-https://github.com/google-deepmind/mujoco
+### 必要时 remote Linux + NVIDIA
+Isaac Sim / Isaac Lab、大规模 GPU simulation、photorealistic sensor generation、NVIDIA-specific SysID。
 
-适合本地做 controlled physics、state/aliasing/system-identification diagnostic、model-based control 和 sim2sim 的一个基准端。
-
-### 有条件再远程使用 Linux + NVIDIA
-
-Isaac Sim / Isaac Lab 更适合大规模 GPU simulation、photorealistic sensor generation、domain randomization 和 NVIDIA 生态实验，但当前标准 Isaac Sim 并不支持 macOS / 非 NVIDIA hardware。
-
-所以不要为了 Stage 1 强行购买或搭建重型 GPU 基础设施；需要时再使用 remote/cloud Linux NVIDIA。
-
-### ManiSkill
-
-Mac 可作为有限 CPU/render path，但完整 GPU parallel simulation 仍更适合 Linux + NVIDIA。
-
-## Sim2Real / Real2Sim / Real2Sim2Real
-
-以后必须分别研究：
-
-```text
-Sim2Real
-sim training / testing
-→ real deployment
-
-Real2Sim
-real observation / telemetry
-→ calibrated simulation / digital twin
-
-Real2Sim2Real
-real evidence
-→ simulator calibration/randomization
-→ training / analysis
-→ real execution
-→ new real evidence
-→ recalibration
-```
-
-但：
-
-```text
-simulator fit 得更好
-≠ simulator 就是真实世界
-```
-
-还要结合 identifiability：多个参数组合可能产生相似 trajectory。
-
-## 未来还需要继续调研的“工程后半程”问题
-
-暂时不继续拆顶层文件，但要保留：
-
-```text
-runtime failure monitoring
-fault injection / sensor dropout / latency
-watchdog / degraded mode
-model update regression
-checkpoint / rollback
-failure replay / telemetry
-training-data / model provenance
-security / adversarial physical inputs
-world-state / memory integrity
-long-running memory leak / cache growth
-online adaptation safety
-real robot wear / data-collection cost
-low-cost proxy robot validation
-```
-
-这些不决定 Clover 的最终 representation，但会决定结果是否可信、能不能长期运行、能不能复现。
+不要为了 Stage 1 强行让重型 NVIDIA 基础设施成为本地依赖。
 
 ## Vision alone 双轴协议
 
@@ -237,8 +314,6 @@ low-cost proxy robot validation
 - `L3`：带动作的 demonstration / interaction；
 - `L4`：非视觉或 privileged physical evidence。
 
-所以：
-
 ```text
 部署时只有 RGB
 ≠
@@ -248,26 +323,33 @@ low-cost proxy robot validation
 ## 后续阶段
 
 ### Stage 2 — Analysis
-
 对真正重要的方法逐个做 one-method-one-report 机制分析。
 
 ### Stage 3 — Synthesis
-
 统一比较优点、缺点、trade-off、capability matrix、Failure Matrix 和共同 gap。
 
 ### Stage 4 — Innovation
-
 只有当 gap 已被充分证明后，才正式提出 Clover-original hypothesis / algorithm。
 
 ### Stage 5–7
-
 实现 → 实验 → 反思。
 
 ## 当前不做什么
 
-目前不冻结 explicit/latent/object/field/token、hierarchy、information-gain objective、Transformer/non-Transformer、具体 edge 芯片、具体 simulator 或任何新 Clover core algorithm。
+目前不冻结：
 
-Mac mini M4 是当前参考开发环境，不是最终答案；simulator 是实验仪器，不是真实世界。
+```text
+explicit / latent / object / field / token
+DeepSeek / Qwen / 其他 foundation backbone
+MoE / dense / linear attention / Transformer 路线
+hierarchy
+information-gain objective
+具体 edge 芯片
+具体 simulator
+任何新的 Clover core algorithm
+```
+
+Mac mini M4 是参考开发环境，不是最终答案；DeepSeek/Qwen 是重要研究对象，不是默认技术选型；simulator 是实验仪器，不是真实世界。
 
 ---
 
