@@ -2,147 +2,137 @@
 
 Last updated: 2026-10-14
 
-## Research Question
+## Research question
 
 > **How can a machine understand the real world through vision alone?**
 
-## Product Goal
+## Product goal
 
 > **Build a general-purpose robotic brain that forms an understanding of the real world through vision alone, then uses that understanding to decide and act.**
 
-## Current Phase
+## Current stage
 
-**Background Research / Problem Reconstruction — ACTIVE.**
+> **Stage 1 — Research / Survey & Evidence Collection — ACTIVE**
 
-The immediate priority is to build a sufficiently complete, primary-source-backed understanding of the problem before freezing a new Clover representation or architecture.
-
-Current order:
+The repository now follows:
 
 ```text
-Background Research / Research Map
-→ Baseline Setup
-→ Understanding Battery
-→ Failure Matrix
-→ Representation Hypothesis
+1 Research
+→ 2 Analysis
+→ 3 Synthesis
+→ 4 Innovation
+→ 5 Implementation
+→ 6 Evaluation
+→ 7 Reflection
 ```
 
-Start with [`SSOT.md`](SSOT.md), then [`research/survey/RESEARCH_OVERVIEW.md`](research/survey/RESEARCH_OVERVIEW.md), [`research/survey/BACKGROUND_RESEARCH.md`](research/survey/BACKGROUND_RESEARCH.md), [`research/dossiers/README.md`](research/dossiers/README.md) and [`research/survey/SOURCE_MAP.md`](research/survey/SOURCE_MAP.md).
+The immediate priority is breadth, traceability and coverage. We are collecting the full research landscape before making a new Clover algorithmic commitment.
 
-## Background Research Foundation — ACTIVE / EXPANDING
+Start with:
 
-The repository now has two complementary research layers:
+1. [`SSOT.md`](SSOT.md)
+2. [`research/PIPELINE.md`](research/PIPELINE.md)
+3. [`research/RESEARCH.md`](research/RESEARCH.md)
+4. [`research/README.md`](research/README.md)
 
-1. a broad Survey that maps the full problem, sources, methods, benchmarks and unresolved questions;
-2. eight deep research dossiers that push each domain from literature summary toward explicit baselines, discriminating experiments and kill conditions.
+## Stage-1 foundation — active / expanding
 
-Current dossiers:
+The current inventory covers more than the original eight deep domains. It now explicitly tracks directions including:
 
-- `R-A` observability / epistemology;
-- `R-B` geometry;
-- `R-C` representation;
-- `R-D` memory / persistence;
-- `R-E` physics;
-- `R-F` causality / interaction;
-- `R-G` world model ↔ action;
-- `R-H` active perception / lifelong learning.
-
-The compact visual map is [`research/survey/RESEARCH_OVERVIEW.md`](research/survey/RESEARCH_OVERVIEW.md).
-
-Every durable external claim should map to a primary paper, official technical source or open repository, plus a statement of what the source does **not** establish.
-
-## Current Primary Contradictions
-
-The current research map is organized around six competing questions rather than historical Clover module names:
-
-```text
-C1 explicit state vs distributed latent vs hybrid / identifiable state
-C2 reconstruction vs prediction vs generation
-C3 object-centric vs dense scene representation
-C4 passive observation vs interaction
-C5 persistent world state vs long context / direct policy
-C6 evidence-grounded belief vs plausible generative completion
-```
-
-These contradictions will determine which baselines and diagnostic experiments are needed before a representation hypothesis is promoted.
-
-## Current Research Baseline Updates
-
-The Survey now treats these as important current references:
-
-- DINOv3 for static self-supervised visual representation;
-- V-JEPA 2 / 2.1 for predictive video representation;
-- VGGT / VGGT-Ω for learned geometry;
-- SAM 3 / 3.1 for visible open-vocabulary entity detection/segmentation/tracking;
-- PersistBench, S-EMBER and VISTA-style comparisons for persistent/streaming visual memory;
-- IntPhys 2, Minimal Video Pairs, QuantiPhy, Principia and CausalVQA for physical/causal diagnostics;
-- RoboPhys-3D for state/action-grounded world-model evaluation;
-- OpenVLA / π0.5 / Gemini Robotics / Helix 2.5 / Skild S1 as embodied policy/reasoning counter-hypotheses;
-- WAM / ReWAM / Being-M0.7-class systems as world-action comparators;
-- Atlas and Cosmos 3 as generative/general world-model counter-hypotheses;
-- causal representation learning and active-perception literature as theoretical constraints on what passive observation can identify.
-
-These are **comparators and evidence**, not components automatically adopted into Clover.
-
-## Existing Clover Prototype — RESEARCH_PROTOTYPE
-
-A substantial pre-reset Research Prototype 1 exists outside the current public codebase, exploring field-based visual evidence, persistent entities/spacetime support, typed world queries, epistemic licences, decision, tool-use and execution loops.
-
-Those mechanisms are **candidate hypotheses**, not architectural commitments. Public code migration and the naming/versioning scheme for future code generations remain downstream of the background research and representation decision process.
-
-## Active Research Questions — OPEN
-
-The current Survey explicitly investigates, among others:
-
-- what a world representation must contain;
-- explicit vs distributed vs hybrid state;
-- geometry vs learned representation;
-- prediction vs reconstruction vs generation;
-- what vision can directly observe vs only infer;
-- passive observation vs interaction;
-- object-centric vs dense/field representation;
-- persistent memory and evidence retention;
-- belief revision and contradiction handling;
-- intuitive, quantitative and relational physics;
-- causal identifiability and counterfactual reasoning;
-- language/world-knowledge confounds;
+- epistemology, inverse problems and partial observability;
+- human/developmental visual cognition;
+- classical geometry, SfM, VO and SLAM;
+- optical flow, correspondence and tracking;
+- static self-supervised representation;
+- predictive video representation;
+- learned geometry;
+- NeRF / Gaussian Splatting / 4D reconstruction;
+- object-centric representation;
+- scene graphs and semantic mapping;
+- persistent / episodic memory;
+- belief revision and forgetting;
+- intuitive, relational and quantitative physics;
+- physics-structured / differentiable world models;
+- causal representation learning;
+- counterfactual visual reasoning;
 - active perception;
-- continual visual learning and forgetting;
-- whether a persistent worldview measurably improves action;
-- embodiment-invariant abstractions;
-- hardware/software co-design only after scientific structure is known.
+- system identification and action consequences;
+- generative world models;
+- world-action models;
+- VLA and direct policy;
+- hierarchical embodied reasoning;
+- robot foundation models;
+- human / egocentric video transfer;
+- affordance learning;
+- model-based control and belief-space planning;
+- semantic memory;
+- uncertainty and calibration;
+- open-world / OOD recognition;
+- continual / lifelong learning;
+- simulation and synthetic data;
+- large robot datasets;
+- benchmark design and shortcut auditing;
+- systems integration and compounded failure;
+- unified physical-AI surveys.
 
-## Evaluation — BEING REFRAMED AS A BATTERY
+This list is intentionally expandable. If a direction materially constrains the mother question, Stage 1 should collect it.
 
-Public benchmarks and robot tasks remain measurement instruments rather than project goals.
+## Current method references
 
-The evidence hierarchy is:
+Important references already tracked include ORB-SLAM3, RAFT, DINOv3, V-JEPA 2 / 2.1, DUSt3R, VGGT / VGGT-Ω, SAM 3 / 3.1, Slot Attention, PLATO, NeRF / 3DGS / 4D reconstruction, PersistBench, S-EMBER, VISTA, IntPhys 2, Minimal Video Pairs, Principia, RoboPhys-3D, CausalVQA, causal representation learning, Vantage, Atlas, Cosmos 3, OpenVLA, π0.5, Gemini Robotics, Helix, Skild, ReWAM, Being-M0.7, HWAM, HumanEgo, DreamerV3, TD-MPC2 and related work.
 
-1. controlled cognitive/physical diagnostics;
-2. shortcut-resistant paired tests;
-3. persistent/streaming memory diagnostics;
-4. quantitative and relational physics tests;
-5. causal/interventional tests;
-6. geometry/world-state diagnostics;
-7. real-video transfer;
-8. active-perception tasks;
-9. long-horizon embodied tasks in unfamiliar environments;
-10. action usefulness and recovery;
-11. efficiency and hardware co-design once capability is established.
+These are **research materials and comparators**, not Clover components.
 
-## Not Yet Demonstrated
+## Dataset / benchmark collection
 
-Clover has not yet publicly demonstrated:
+Tracked resources include:
 
-- general real-world visual world understanding;
-- a final world representation;
-- superiority of explicit state over distributed latent state;
-- superiority of historical Clover field/CSP/licence mechanisms;
-- comprehensive positive-result SOTA;
-- robust open-world generalization;
-- persistent long-horizon real-robot world state;
-- general causal understanding;
-- long-horizon autonomous robot-brain capability;
-- an empirically established memory architecture;
-- a final CPU/GPU/Metal allocation.
+- Ego4D;
+- Perception Test;
+- DROID;
+- Open X-Embodiment;
+- LIBERO;
+- CALVIN;
+- RoboCasa;
+- ManiSkill;
+- IntPhys 2;
+- Minimal Video Pairs;
+- CausalVQA;
+- PersistBench;
+- S-EMBER;
+- Principia;
+- RoboPhys-3D;
+- EmbodimentSemantic.
 
-These are research targets or open hypotheses. They do not justify lowering the research question.
+Stage 1 records what each dataset/benchmark actually measures, its inputs, hidden ground truth, shortcuts, licensing and reproducibility.
+
+## Existing Clover prototype
+
+Pre-reset Clover mechanisms remain `INTERNAL_HYPOTHESIS` material. They conceptually belong to Stage 4 Innovation until evidence promotes, transforms or rejects them.
+
+No historical mechanism is protected.
+
+## Current non-goals
+
+We are not currently:
+
+- freezing a final representation;
+- implementing a new Clover core architecture;
+- optimizing leaderboard scores;
+- claiming explicit state is superior to latent state;
+- claiming a direct policy is sufficient;
+- claiming a generative world model is sufficient;
+- choosing hardware before the scientific mechanism;
+- treating one benchmark as the definition of understanding.
+
+## Next transition
+
+Stage 2 Analysis becomes the primary activity only when Stage 1 coverage is broad enough that method selection for deeper reports is not distorted by obvious missing fields.
+
+Analysis will then produce one-method-one-report mechanism breakdowns; Stage 3 Synthesis will compare their strengths, weaknesses and common gaps; only Stage 4 Innovation will formalize Clover-original algorithms.
+
+## Not yet demonstrated
+
+Clover has not yet publicly demonstrated general real-world visual world understanding, a final world representation, comprehensive positive-result SOTA, robust open-world generalization, general causal understanding, persistent long-horizon real-robot world state, a validated original algorithm, or a final hardware mapping.
+
+These remain research targets.
