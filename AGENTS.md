@@ -1,6 +1,6 @@
 # AGENTS.md — Clover Project Instructions
 
-This file is mandatory reading for any AI agent, coding agent, research agent, or human contributor working in this repository.
+This file is mandatory reading for AI agents, coding agents, research agents and contributors.
 
 ## 1. Highest SSOT
 
@@ -8,11 +8,11 @@ This file is mandatory reading for any AI agent, coding agent, research agent, o
 >
 > **Long-term product goal:** Build a general-purpose robotic brain that forms an understanding of the real world through vision alone, then uses that understanding to decide and act.
 
-The research question is fixed. The answer is open.
+The question is fixed. The answer is open.
 
 ## 2. Mandatory reading order
 
-Before proposing architecture, code, experiments or research conclusions, read:
+Before proposing architecture, code, experiments or conclusions, read:
 
 1. [`SSOT.md`](SSOT.md)
 2. [`research/PIPELINE.md`](research/PIPELINE.md)
@@ -25,16 +25,17 @@ Before proposing architecture, code, experiments or research conclusions, read:
 9. [`research/RESEARCH_STATE_ALIASING.md`](research/RESEARCH_STATE_ALIASING.md)
 10. [`research/RESEARCH_ADAPTIVE_ABSTRACTION.md`](research/RESEARCH_ADAPTIVE_ABSTRACTION.md)
 11. [`research/RESEARCH_VALUE_OF_INFORMATION.md`](research/RESEARCH_VALUE_OF_INFORMATION.md)
-12. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
-13. [`PRINCIPLES.md`](PRINCIPLES.md)
-14. [`STATUS.md`](STATUS.md)
-15. [`research/README.md`](research/README.md)
-16. [`research/survey/SOURCE_MAP.md`](research/survey/SOURCE_MAP.md)
-17. deeper survey/dossier files only as needed.
+12. [`research/RESEARCH_OPEN_WORLD_EPISTEMICS.md`](research/RESEARCH_OPEN_WORLD_EPISTEMICS.md)
+13. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
+14. [`PRINCIPLES.md`](PRINCIPLES.md)
+15. [`STATUS.md`](STATUS.md)
+16. [`research/README.md`](research/README.md)
+17. [`research/survey/SOURCE_MAP.md`](research/survey/SOURCE_MAP.md)
+18. deeper survey/dossier files only as needed.
 
-Historical documents and news notes are evidence/signal sources, not SSOT.
+Historical/news files are evidence signals, not SSOT.
 
-## 3. Canonical research lifecycle
+## 3. Lifecycle
 
 ```text
 1 Research
@@ -44,87 +45,20 @@ Historical documents and news notes are evidence/signal sources, not SSOT.
 → 5 Implementation
 → 6 Evaluation
 → 7 Reflection
-↺ next research cycle
+↺ next cycle
 ```
 
 **Current active stage: Stage 1 — Research.**
 
-The current priority is broad, traceable material collection. Do not prematurely freeze a new Clover representation or core algorithm.
+Do not prematurely freeze a Clover representation or core algorithm.
 
-## 4. Stage discipline
+## 4. Research rules
 
-### Stage 1 — Research
+### 4.1 Protect the question, not an old answer
 
-Collect broadly:
+CPU/GPU choices, field crystallization, visual charge, CSP, SEP, epistemic licences, LCPS/GCPS, Visual World Compiler, Evidence Replay, explicit state, latent state, object-centric state, Transformer/non-Transformer and historical Clover mechanisms are hypotheses or engineering choices, not axioms.
 
-- research directions;
-- canonical foundations;
-- latest strong methods;
-- primary papers;
-- official project pages;
-- open code/checkpoints;
-- datasets;
-- benchmarks;
-- labs/projects to monitor;
-- limitations and open questions.
-
-A source may be catalogued without being endorsed.
-
-### Stage 2 — Analysis
-
-For important methods, produce one-method-one-report mechanism analysis using [`research/ANALYSIS.md`](research/ANALYSIS.md).
-
-### Stage 3 — Synthesis
-
-Compare analyzed methods using common dimensions, capability matrices, pros/cons, trade-offs and failure maps.
-
-### Stage 4 — Innovation
-
-Only after a well-supported gap exists, formulate Clover-original hypotheses and algorithms. Ideas must include predictions and falsifiers.
-
-### Stage 5 — Implementation
-
-Implement reproducibly. Code volume does not validate a scientific idea.
-
-### Stage 6 — Evaluation
-
-Run diagnostics, benchmarks, ablations, real-world tests and Results with explicit protocols.
-
-### Stage 7 — Reflection
-
-Interpret results, reject failed assumptions, update hypothesis status and decide the next cycle.
-
-## 5. Non-negotiable research rules
-
-### 5.1 Do not protect an old answer
-
-The following are hypotheses or engineering choices, not axioms:
-
-- CPU-first or GPU-first computation;
-- field crystallization;
-- visual charge;
-- CSP / machine-native primitives;
-- SEP;
-- epistemic licences;
-- LCPS / GCPS;
-- Visual World Compiler;
-- Evidence Replay;
-- explicit state;
-- latent state;
-- object-centric state;
-- Transformer / non-Transformer architecture.
-
-If evidence contradicts them, revise, replace or delete them.
-
-### 5.2 Do not lower the research question
-
-Failure of a current mechanism is not a reason to redefine “understanding” downward.
-
-### 5.3 Research before Innovation
-
-Do not choose a preferred representation and then search for papers that justify it.
-
-Required logic:
+### 4.2 Research before Innovation
 
 ```text
 broad Research
@@ -137,112 +71,69 @@ broad Research
 → Reflection
 ```
 
-### 5.4 Benchmarks are instruments
+Do not choose a preferred representation first and search for justification afterward.
 
-A benchmark result is evidence about a capability, not a definition of understanding.
+### 4.3 Benchmarks are instruments
 
-### 5.5 No framework stacking
+A benchmark score is evidence about a capability, not the definition of understanding.
 
-Do not integrate an external method merely because it is strong.
+### 4.4 No framework stacking
 
-For every important external method:
-
-1. identify the problem it addresses;
-2. record what the source actually demonstrates;
-3. record what it does not demonstrate;
-4. identify its representation and learning evidence;
-5. compare it with competing methods during Analysis/Synthesis;
-6. only after a gap is established consider a Clover innovation.
-
-### 5.6 Source-to-claim traceability
-
-Prefer, in order:
-
-1. primary paper / preprint;
-2. official technical/model/project page;
-3. official open-source repository/checkpoint;
-4. company/lab reported capability with explicit `OFFICIAL_REPORTED_RESULT` status;
-5. secondary news only as `SURVEY_SIGNAL` until upgraded.
-
-A durable research record should preserve:
+For every external method, record:
 
 ```text
-exact source URL
-research direction
-evidence level
-demonstrated capability
-limitation / unresolved question
-visual protocol when material
-learning provenance when material
-code / dataset / benchmark links when available
+problem
+what it actually demonstrates
+what it does not demonstrate
+representation / mechanism
+input / learning provenance
+observation assumptions
+code / dataset / benchmark
+competing method / counter-hypothesis
 ```
 
-### 5.7 Separate evidence levels
+Do not import a method into Clover merely because it is strong.
 
-Use:
+### 4.5 Source traceability
 
-- `PRIMARY_PAPER`
-- `OFFICIAL_PROJECT`
-- `OPEN_SOURCE`
-- `OFFICIAL_REPORTED_RESULT`
-- `BACKGROUND_REFERENCE`
-- `SURVEY_SIGNAL`
-- `INTERNAL_HYPOTHESIS`
-- `OPEN`
-- `SUPERSEDED`
+Prefer:
 
-Never silently turn a company report, news article or internal idea into scientific fact.
+```text
+PRIMARY_PAPER
+OFFICIAL_PROJECT
+OPEN_SOURCE
+OFFICIAL_REPORTED_RESULT
+BACKGROUND_REFERENCE
+SURVEY_SIGNAL
+INTERNAL_HYPOTHESIS
+OPEN
+SUPERSEDED
+```
 
-### 5.8 Preserve the vision-only protocol
+Preserve exact URLs. Company reports and news do not become scientific fact silently.
+
+## 5. Vision-only discipline
 
 Observation protocol:
 
-- `V0`: monocular RGB + temporal ordering;
-- `V1`: RGB + camera calibration;
+- `V0`: monocular RGB + temporal order;
+- `V1`: V0 + camera intrinsics;
 - `V2`: calibrated multi-camera RGB;
-- `V3`: embodied active vision where actions change future visual evidence.
+- `V3`: active embodied vision where action changes future visual evidence.
 
-Depth, LiDAR, tactile, force, IMU, privileged simulator state, GT object identity and GT geometry are not silently allowed in V0/V1.
+Learning provenance:
 
-### 5.9 Record learning-evidence provenance
-
-- `L0`: visual self-supervision only;
+- `L0`: visual self-supervision;
 - `L1`: visual labels/annotations;
 - `L2`: language/world-knowledge supervision;
 - `L3`: action-conditioned demonstrations/experience;
-- `L4`: non-visual or privileged physical evidence.
+- `L4`: non-visual / privileged physical evidence.
 
-Do not call a system “learned from vision alone” merely because deployment input is RGB.
+Do not call a system “learned from vision alone” just because deployment input is RGB.
 
-### 5.10 Language is a confound
+## 6. Observation is not world state
 
-When studying VLM/VLA systems, distinguish visual evidence from language/world knowledge, robot interaction data, action supervision and privileged non-visual state.
-
-### 5.11 Plausible generation is not automatically world truth
-
-Keep distinct:
-
-```text
-observed
-inferred
-predicted
-hypothetical / generated
-ambiguous
-unobserved
-contradicted
-```
-
-### 5.12 Hardware is a design variable
-
-The algorithm determines the hardware mapping. Hardware does not determine the scientific hypothesis.
-
-### 5.13 Real capability eventually matters
-
-The long-term standard is not a QA score. Clover must ultimately support real behavior in unfamiliar environments, including memory, recovery, world change, active perception and long-horizon decision-making.
-
-### 5.14 The camera is not a transparent window onto state
-
-When a result depends on RGB, record the relevant observation assumptions where material:
+Record camera/image-formation assumptions when material:
 
 ```text
 camera model
@@ -262,106 +153,93 @@ Keep distinct:
 
 ```text
 world-state ambiguity
-≠
-image-formation ambiguity
-≠
-sensor/acquisition corruption.
+≠ image-formation ambiguity
+≠ sensor/acquisition corruption
 ```
 
-Photometric or pixel reconstruction does not by itself prove recovery of the true physical decomposition.
+Photometric reconstruction is not proof of true physical decomposition.
 
-### 5.15 Predictability is not identifiability
+## 7. Predictability is not identifiability
 
-A model predicting mass, material, friction, temperature or another hidden variable accurately on a dataset does not prove that the variable is uniquely determined by the visual evidence.
+A model predicting mass, material, friction, temperature or another hidden variable from a dataset does not prove the variable is uniquely determined by visual evidence.
 
-Record whether success depends on:
+Record dependence on:
 
 ```text
-category/world priors
+category/world prior
 metric scale
 multiple frames
-active viewpoint changes
-known interventions / action-response
+active viewpoints
+known intervention / action-response
 language knowledge
 non-visual sensing
-privileged simulator state.
+privileged simulator state
 ```
 
-When multiple worlds remain compatible with the evidence, uncertainty can be the scientifically correct output.
+When several worlds remain compatible with the evidence, uncertainty can be the correct output.
 
-### 5.16 Task sufficiency is not general world understanding
+## 8. State sufficiency must be named
 
-When a representation is called compact, sufficient, Markov, predictive or action-relevant, record **what it is sufficient for**.
-
-Use these research labels when helpful:
+When a representation is called compact, Markov, predictive or action-relevant, state what it is sufficient for:
 
 ```text
-S-PRED   prediction
-S-CTRL   control
-S-PLAN   planning
-S-MEM    memory / revision
-S-CAUSE  intervention / counterfactuals
-S-EPI    uncertainty / belief
-S-OPEN   open-world / future-task optionality
+S-PRED prediction
+S-CTRL control
+S-PLAN planning
+S-MEM memory / revision
+S-CAUSE intervention / counterfactuals
+S-EPI uncertainty / belief
+S-OPEN open-world / future-task optionality
 ```
 
-A representation sufficient for one fixed manipulation task is not automatically sufficient for future unknown tasks, persistent memory, causal reasoning or general robotic intelligence.
+Task sufficiency is not automatically general world understanding.
 
-### 5.17 Detect state aliasing rather than assuming a latent is Markov
+## 9. Diagnose aliasing
 
-Ask whether distinct histories/worlds collapse into the same internal state while still requiring different predictions, beliefs or actions.
-
-When relevant distinguish:
+Ask whether distinct histories/worlds collapse into one state while requiring different predictions, beliefs or actions.
 
 ```text
-A1 perceptual aliasing
-A2 history aliasing
-A3 representation aliasing
-A4 action / embodiment aliasing
-A5 causal aliasing
-A6 task-conditioned aliasing
+A1 perceptual
+A2 history
+A3 representation
+A4 action / embodiment
+A5 causal
+A6 task-conditioned
 ```
 
-Do not call observational equivalence a representation failure when the evidence genuinely cannot distinguish the worlds.
+If the evidence itself cannot distinguish two worlds, do not call that a representation failure. If discriminating evidence existed but was discarded, it may be one.
 
-Do call it a potential representation failure when the necessary information existed in history/evidence but the representation discarded it.
+## 10. Abstraction must state what it preserves
 
-### 5.18 Abstraction must state what it preserves and at what granularity
-
-Do not reward a representation merely for being minimal or compressed.
-
-Record whether abstraction is:
+When relevant record:
 
 ```text
-task-conditioned
-temporal / multi-timescale
-event-conditioned
-spatial coarse-to-fine
-entity / relation / role based
-uncertainty-conditioned
-embodiment-conditioned
-open-world / recoverability oriented
+G1 task-conditioned
+G2 temporal / multi-timescale
+G3 event-conditioned
+G4 spatial coarse-to-fine
+G5 entity / relation / role
+G6 uncertainty-conditioned
+G7 embodiment-conditioned
+G8 open-world reserve / recoverability
+G9 regime-conditioned
 ```
 
-Ask what behavioral, predictive, causal, memory or planning property is preserved.
+Minimal state is not automatically better; maximal detail is not automatically better.
 
-A task-specific abstraction is not automatically safe for future unknown tasks.
-
-### 5.19 Information-gathering actions are first-class research objects
-
-When current evidence is insufficient, ask whether a view/action can reduce uncertainty.
+## 11. Information-gathering actions are first-class
 
 Distinguish information about:
 
 ```text
-latent state
-physical parameters
-mechanism
-ausal structure
-task interpretation
+V1 latent state
+V2 parameters
+V3 mechanism
+V4 causal structure
+V5 task interpretation
 ```
 
-Also record the cost of the probe:
+Record probe cost:
 
 ```text
 time
@@ -369,71 +247,120 @@ energy
 risk
 irreversibility
 world disturbance
-safety
+safety / social cost
 ```
 
 The most informative action is not automatically the best action.
 
-### 5.20 Open-world hypothesis failure must remain possible
+## 12. Open-world epistemic failure must remain possible
 
-Many uncertainty methods assume the correct model/hypothesis is already inside the candidate set.
+Do not assume the correct model already exists in the candidate set.
 
-A general robot must also handle:
+When relevant classify uncertainty/failure as:
 
 ```text
-none of my current hypotheses explain this evidence
+E1 observation uncertainty
+E2 state uncertainty
+E3 parameter uncertainty
+E4 model-structure uncertainty
+E5 hypothesis-set incompleteness
+E6 regime change / model invalidation
+E7 social / intentional uncertainty
+E8 epistemic-action safety
 ```
 
-Keep open-world hypothesis generation, non-stationarity/change-point detection, self/embodiment model mismatch and test-time adaptation visible in Stage 1.
+A credible agent must be allowed to represent:
 
-## 6. Stage-1 research contribution template
+```text
+none of my current hypotheses explain this
+my model may be wrong
+my model used to work but the world changed
+I need more evidence
+that experiment is unsafe
+I should ask for help / abstain
+```
 
-When adding a method or source during the current stage, record as much of the following as is known:
+Do not force probability mass onto a known-wrong model set.
 
-- **Direction**
-- **Name / version / date**
-- **Primary paper URL**
-- **Official project URL**
-- **Official code URL**
-- **Dataset / benchmark URL**
-- **Evidence level**
-- **Input / training provenance**
-- **Observation / image-formation assumptions when material**
-- **Sufficiency target when the method claims a state representation**
-- **Aliasing failure addressed or introduced, when material**
-- **Abstraction/granularity assumption, when material**
-- **Information-gathering mechanism/cost, when material**
-- **One-sentence demonstrated capability**
-- **One-sentence limitation / open question**
+## 13. Self / embodiment is part of state
 
-Do not turn this collection record into a full architecture decision.
+Do not assume the robot body, controller, camera mounting or actuator response is fixed forever.
 
-## 7. Coding agents
+Distinguish:
 
-Do not rewrite research claims to match current code.
+```text
+external world changed
+robot body changed
+controller changed
+camera changed
+action semantics changed
+```
 
-Small diagnostic code is allowed before Stage 5 only when it is genuinely necessary to resolve a research/analysis question. Core algorithm implementation belongs downstream of Innovation.
+Cross-embodiment claims must report what transfers and what still requires calibration/adaptation.
 
-## 8. Research agents
+## 14. Plausible generation is not world truth
 
-During the current Research stage:
+Keep distinct:
 
-1. search broadly, including directions outside the current dossiers;
-2. locate the primary/official source;
+```text
+observed
+inferred
+predicted
+hypothetical / generated
+ambiguous
+unobserved
+contradicted
+refuted
+model-incomplete
+```
+
+## 15. Stage-1 contribution template
+
+Record as much as known:
+
+- direction;
+- name/version/date;
+- primary paper URL;
+- official project/code/checkpoint;
+- dataset/benchmark;
+- evidence level;
+- input/training provenance;
+- observation/image-formation assumptions;
+- world variables represented;
+- sufficiency target;
+- aliasing failure addressed/introduced;
+- abstraction/granularity assumption;
+- information-gathering mechanism and cost;
+- open-world epistemic failure type (`E1–E8`) when relevant;
+- demonstrated capability;
+- limitation/open question.
+
+Do not turn a collection record into an architecture decision.
+
+## 16. Coding agents
+
+Do not rewrite research claims to match current code. Small diagnostic code is allowed before Stage 5 only when genuinely needed to answer a research question. Core algorithm implementation belongs downstream of Innovation.
+
+## 17. Research agents
+
+During Stage 1:
+
+1. search broadly, including outside current categories;
+2. upgrade discovery signals to primary/official sources;
 3. preserve exact URLs;
-4. classify evidence level;
-5. collect code/datasets/benchmarks where available;
-6. summarize claims conservatively;
-7. record observation assumptions and evidence provenance;
-8. state what a claimed representation is sufficient for;
-9. ask whether distinct histories/worlds are aliased by the representation;
-10. record state granularity / hierarchy / timescale assumptions;
-11. record whether active evidence acquisition is used and what uncertainty it targets;
-12. record missing areas explicitly;
-13. do not import external mechanisms into Clover by default.
+4. record code/datasets/benchmarks;
+5. summarize conservatively;
+6. distinguish evidence provenance from deployment input;
+7. record observation assumptions;
+8. state representation sufficiency target;
+9. test for aliasing / discarded information;
+10. record granularity/timescale assumptions;
+11. record active evidence acquisition and its risk/cost;
+12. ask whether the model/hypothesis set can itself be wrong or incomplete;
+13. keep self/embodiment mismatch visible;
+14. record missing research areas explicitly;
+15. do not import external mechanisms into Clover by default.
 
-News archives are discovery feeds. Durable material should graduate to primary/official evidence before becoming a core research record.
-
-## 9. Final rule
+## Final rule
 
 > **Research broadly. Analyze deeply. Synthesize comparatively. Innovate only from demonstrated gaps.**
