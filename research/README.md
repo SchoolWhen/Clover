@@ -24,7 +24,8 @@ Clover uses one flat research lifecycle:
 | Stage | File | Purpose | Current status |
 |---|---|---|---|
 | 0 | [`PIPELINE.md`](PIPELINE.md) | explains the complete lifecycle | canonical |
-| 1 | [`RESEARCH.md`](RESEARCH.md) | broad source/method/dataset/benchmark inventory | **ACTIVE** |
+| 1 | [`RESEARCH.md`](RESEARCH.md) | stable broad source/method/dataset/benchmark inventory | **ACTIVE** |
+| 1 | [`RESEARCH_FRONTIER.md`](RESEARCH_FRONTIER.md) | current primary sources that materially expand/challenge the inventory | **ACTIVE** |
 | 2 | [`ANALYSIS.md`](ANALYSIS.md) | one-method-one-report mechanism analysis | template ready |
 | 3 | [`SYNTHESIS.md`](SYNTHESIS.md) | compare strengths, weaknesses, trade-offs and gaps | future |
 | 4 | [`INNOVATION.md`](INNOVATION.md) | Clover-original hypotheses / algorithms / ideas | ideas only |
@@ -32,7 +33,7 @@ Clover uses one flat research lifecycle:
 | 6 | [`EVALUATION.md`](EVALUATION.md) | experiments and Results | framework ready |
 | 7 | [`REFLECTION.md`](REFLECTION.md) | interpret failures and start the next cycle | future |
 
-A new agent should start with `PIPELINE.md`, then read the active `RESEARCH.md` inventory before opening deeper survey material.
+A new agent should start with `PIPELINE.md`, read the stable `RESEARCH.md` inventory, then scan `RESEARCH_FRONTIER.md` for the current research edge before opening deeper survey material.
 
 ## Current Stage 1 goal
 
@@ -58,6 +59,8 @@ open questions
 ```
 
 `RESEARCH.md` currently tracks dozens of directions including epistemology, classical geometry, static/video SSL, 3D/4D reconstruction, neural scene representations, object-centric models, scene graphs, persistent memory, physical reasoning, causal learning, active perception, system identification, generative world models, world-action models, VLA, robot foundation models, egocentric video, affordance learning, model-based control, uncertainty/OOD, continual learning and simulation/data engines.
+
+`RESEARCH_FRONTIER.md` tracks newly important primary work such as execution-grounded world-model evaluation, trustworthiness/counterfactual evaluation, contact/deformable dynamics, video-to-simulation functional correctness, persistent semantic maps and amodal tracking.
 
 ## Detailed Stage-1 assets
 
