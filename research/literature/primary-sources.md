@@ -4,6 +4,17 @@ Last updated: 2026-10-14
 
 This index collects primary papers, official project pages and official code used by the Research Map and Research Questions. Company-only results are marked as official reported results, not independent reproductions.
 
+## Historical representation-learning transition
+
+- SIFT — paper/DOI: https://doi.org/10.1023/B:VISI.0000029664.99615.94
+- SIFT — author-hosted PDF: https://www-inst.eecs.berkeley.edu/~ee225b/sp11/readings/sift-lowe.pdf
+- HOG — paper/DOI: https://doi.org/10.1109/CVPR.2005.177
+- AlexNet — NeurIPS page: https://proceedings.neurips.cc/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html
+- AlexNet — PDF: https://papers.nips.cc/paper_files/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf
+- ResNet: https://arxiv.org/abs/1512.03385
+- Vision Transformer: https://arxiv.org/abs/2010.11929
+- CLIP: https://arxiv.org/abs/2103.00020
+
 ## Classical / geometry
 
 - ORB-SLAM3 — paper: https://arxiv.org/abs/2007.11898
