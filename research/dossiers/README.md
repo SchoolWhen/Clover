@@ -1,26 +1,20 @@
 # Clover Research Dossiers
 
-Last updated: 2026-10-14  
-Phase: **Background Research / Problem Reconstruction**
+Last updated: 2026-10-14
 
 > **Research question:** How can a machine understand the real world through vision alone?
->
-> **Long-term goal:** Build a general-purpose robotic brain that forms an understanding of the real world through vision alone, then uses that understanding to decide and act.
 
-These dossiers deepen the broad Survey into domain-specific research records. They are not architecture specifications. Each dossier is expected to answer:
+These files are **supporting topic notes for Stage 1 Research and later Stage 2 Analysis**.
+
+They are not a separate project-phase system and they are not architecture specifications.
+
+The canonical stage flow is defined in [`../PIPELINE.md`](../PIPELINE.md):
 
 ```text
-fundamental question
-→ canonical foundations
-→ strongest current approaches
-→ exact primary / official / code URLs
-→ demonstrated capability
-→ limitation / confound
-→ unresolved contradiction
-→ best baseline
-→ discriminating experiment
-→ implication for Clover
+Research → Analysis → Synthesis → Innovation → Implementation → Evaluation → Reflection
 ```
+
+The broad active inventory is [`../RESEARCH.md`](../RESEARCH.md). These dossiers provide deeper notes for several major topic clusters.
 
 ## Dossiers
 
@@ -33,39 +27,44 @@ fundamental question
 - [`R-G-world-action.md`](R-G-world-action.md) — VLA, world-action models, planners and whether a persistent worldview adds measurable action value.
 - [`R-H-active-perception-lifelong.md`](R-H-active-perception-lifelong.md) — information-seeking action, viewpoint selection, world growth and lifelong visual experience.
 
-## Cross-domain contradictions
+These eight dossiers are **not exhaustive**. `RESEARCH.md` intentionally tracks many additional directions such as 4D reconstruction, scene graphs, semantic mapping, uncertainty calibration, system identification, affordances, continual learning and simulation/data engines.
 
-The dossiers should converge on evidence about six primary contradictions rather than on historical module names:
+## Dossier content discipline
+
+Useful dossier material includes:
 
 ```text
-C1 explicit state vs distributed latent vs hybrid / identifiable state
-C2 reconstruction vs prediction vs generation
-C3 object-centric vs dense scene representation
-C4 passive observation vs interaction
-C5 persistent world state vs long context / direct policy
-C6 evidence-grounded belief vs plausible generative completion
+fundamental question
+canonical foundations
+current strong methods
+exact primary / official / code URLs
+datasets / benchmarks
+demonstrated capability
+limitation / confound
+open question
+candidate baseline
+possible discriminating experiment
 ```
+
+A full one-method-one-report decomposition should eventually move into Stage 2 Analysis format.
+
+## Cross-domain questions already identified
+
+Useful current questions include:
+
+```text
+explicit state vs distributed latent vs hybrid
+reconstruction vs prediction vs generation
+object-centric vs dense representation
+passive observation vs interaction
+persistent world state vs long context / direct policy
+evidence-grounded belief vs plausible completion
+```
+
+These are research questions, not assumptions and not the complete set of future synthesis dimensions.
 
 ## Source discipline
 
-For durable claims, prefer in order:
+Prefer primary paper / preprint, official project page and official code. Vendor-reported results must remain explicitly labeled. Secondary/news material is discovery signal until upgraded.
 
-1. peer-reviewed paper or primary preprint;
-2. official project/model/research page;
-3. official open-source repository/checkpoint;
-4. official company/lab result, explicitly labeled `OFFICIAL_REPORTED_RESULT`;
-5. secondary/news source only as `SURVEY_SIGNAL` until replaced by a primary source.
-
-Every important source should also be mirrored into [`../survey/SOURCE_MAP.md`](../survey/SOURCE_MAP.md) when it materially constrains the project.
-
-## Research order
-
-```text
-Background Research / Research Map
-→ Baseline Setup
-→ Understanding Battery
-→ Failure Matrix
-→ Representation Hypothesis
-```
-
-A dossier is mature when it makes a future baseline or falsifier clearer. It is not mature merely because it contains many papers.
+A dossier is useful when it makes later Analysis easier; it is not useful merely because it contains many paper names.
