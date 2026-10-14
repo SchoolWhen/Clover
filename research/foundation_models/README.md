@@ -4,11 +4,13 @@ This directory supports [`../RESEARCH_FOUNDATION_MODEL_SYSTEMS.md`](../RESEARCH_
 
 It is **not** a vendor-selection layer and does not make DeepSeek, Qwen, or any other model family a Clover dependency.
 
-## Current watches
+## Current watches / matrices
 
 - [`DEEPSEEK_QWEN.md`](DEEPSEEK_QWEN.md) — current DeepSeek/Qwen architecture, multimodal, data, inference-kernel, harness and Physical-AI signals checked through 2026-10-15.
+- [`CROSS_BOUNDARIES.md`](CROSS_BOUNDARIES.md) — P0/P1/P2 cross-boundary matrix: visual tokenizer/video sampling, streaming foundation models, long context vs world memory, backbone adaptation, data science, quantization, proxy→frontier scaling, harness attribution, distributed systems and optimizer/runtime boundaries.
 - [`../RESEARCH_TRAINING_POSTTRAINING.md`](../RESEARCH_TRAINING_POSTTRAINING.md) — pretraining, SFT/behavior cloning, co-training, distillation, RL, simulated post-training, deployment learning and continual adaptation across LLM/VLM/VLA/world-model systems.
 - [`../training/README.md`](../training/README.md) — controlled training-variable matrix covering data diversity/quality, alignment, action representation, horizon, update scope, reward/teacher, failure data, simulator trust and checkpoint selection.
+- [`../training/HIGH_RISK_BOUNDARIES.md`](../training/HIGH_RISK_BOUNDARIES.md) — partial-success rewards, epistemic reward, failure/recovery ratios, world-model trust, module adaptation timescales, uncertainty regression, distillation loss, scale transfer, fleet contamination and stateful rollback.
 
 ## Why it exists
 
