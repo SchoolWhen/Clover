@@ -23,7 +23,7 @@ Clover 是一个长期公开研究项目。**问题固定，答案开放。**
 ↺ 下一轮
 ```
 
-当前原则是：**coverage before commitment**。先把问题空间调查完整，再决定 Clover 自己应该发明什么。
+当前原则：**coverage before commitment**。先把问题空间调查完整，再决定 Clover 自己应该发明什么。
 
 ## 新 Agent 推荐阅读顺序
 
@@ -38,180 +38,125 @@ Clover 是一个长期公开研究项目。**问题固定，答案开放。**
 9. [research/RESEARCH_STATE_ALIASING.md](research/RESEARCH_STATE_ALIASING.md)
 10. [research/RESEARCH_ADAPTIVE_ABSTRACTION.md](research/RESEARCH_ADAPTIVE_ABSTRACTION.md)
 11. [research/RESEARCH_VALUE_OF_INFORMATION.md](research/RESEARCH_VALUE_OF_INFORMATION.md)
-12. [research/RESEARCH_FRONTIER.md](research/RESEARCH_FRONTIER.md)
-13. [AGENTS.md](AGENTS.md)
-14. [STATUS.md](STATUS.md)
-15. [research/README.md](research/README.md)
+12. [research/RESEARCH_OPEN_WORLD_EPISTEMICS.md](research/RESEARCH_OPEN_WORLD_EPISTEMICS.md)
+13. [research/RESEARCH_MODEL_DISCOVERY.md](research/RESEARCH_MODEL_DISCOVERY.md)
+14. [research/RESEARCH_FRONTIER.md](research/RESEARCH_FRONTIER.md)
+15. [AGENTS.md](AGENTS.md)
+16. [STATUS.md](STATUS.md)
+17. [research/README.md](research/README.md)
 
 ## Stage 1 当前问题链
 
-现在不是直接问“下一代 Clover 架构长什么样”，而是依次回答：
-
 ```text
 有哪些相关研究？
-        ↓
+↓
 真实世界里到底有哪些状态？
-        ↓
+↓
 这些状态怎样经过光学 / 材料 / 相机变成 RGB？
-        ↓
+↓
 哪些隐藏状态能由当前证据辨识？
-        ↓
+↓
 哪些物理属性需要时间、主动视角、交互或非视觉证据？
-        ↓
+↓
 内部 world state 至少需要保留什么信息？
-        ↓
-什么时候不同真实世界被压成了同一个 latent / state？
-        ↓
+↓
+什么时候不同真实世界被压成同一个 latent / state？
+↓
 状态应该以什么粒度、什么时间尺度表示？
-        ↓
+↓
 当前证据不足时，下一眼 / 下一次 probing action 应该选什么？
-        ↓
-哪些方法 / dataset / benchmark 能真正区分这些答案？
+↓
+如果当前 hypothesis set 本身不完整、模型已经过期或实验不安全怎么办？
+↓
+怎样管理 hypothesis、mechanism、experiment、falsification 与 provenance？
+↓
+哪些最新方法 / dataset / benchmark 真正区分这些答案？
 ```
 
-## Stage 1 的几个核心区分
+## Stage 1 核心区分
 
 ```text
-pixels
-≠
-world state
+pixels ≠ world state
 
 从像素统计上能猜对
 ≠
 物理上由像素唯一可辨识
 
-vision alone
-≠
-passive vision only
+vision alone ≠ passive vision only
 
 当前证据本来就无法区分两个世界
-≠
-representation failure
+≠ representation failure
 
 证据里有信息但 encoder 丢掉了
-=
-潜在 representation failure
+= 潜在 representation failure
 
 完整物理描述
-≠
-最小 predictive state
-≠
-最小 control-sufficient state
-≠
-通用 world state
-
-当前任务 sufficient
-≠
-未来未知任务 sufficient
-
-最小 state
-≠
-所有时间尺度上都最好的 state
+≠ 最小 predictive state
+≠ 最小 control-sufficient state
+≠ 通用 world state
 
 最 informative 的动作
-≠
-考虑风险 / 成本 / 不可逆性后最值得执行的动作
+≠ 考虑风险 / 成本 / 不可逆性 / permission 后最值得执行的动作
+
+已知 hypothesis 内部的不确定性
+≠ 正确 hypothesis 根本不在当前集合中
+
+当前 state 不确定
+≠ world model 本身已经失效
+
+parameter estimation
+≠ model selection
+≠ mechanism discovery
+≠ open-world model expansion
+
+reflection ≠ falsification
+
+当前最好 hypothesis ≠ 永久真理
 ```
 
-## 新增的三个 Stage-1 研究面
+## 目前 Stage 1 已覆盖
 
-### 1. State Aliasing / Representation Failure
+- inverse problem / observability / identifiability / POMDP；
+- image formation / inverse rendering / camera acquisition；
+- transparency / reflection / refraction / blur / rolling shutter；
+- geometry / SfM / VO / SLAM / correspondence / tracking；
+- static/video SSL 与 learned geometry / NeRF / 3DGS / 4D；
+- object / scene graph / semantic map / persistent memory；
+- mass / inertia / friction / stiffness / temperature / viscosity / materials；
+- rigid / articulated / deformable / fluid / granular dynamics；
+- cutting / splitting / merging / breakage 等不可逆拓扑变化；
+- physical / causal / counterfactual reasoning；
+- active perception / system identification / intervention；
+- world model / WAM / VLA / direct policy；
+- belief state / predictive state / information state / sufficiency；
+- state aliasing / state abstraction / hierarchical / multi-timescale state；
+- value of information / probing action / epistemic safety；
+- open-world hypothesis generation / model mismatch / changepoint；
+- model-class / mechanism discovery / Bayesian experiment design；
+- hypothesis provenance / falsification / refutation memory；
+- self/body schema / embodiment mismatch；
+- help-seeking / abstention / human escalation；
+- recursive belief / Theory of Mind / social permission；
+- OOD / continual adaptation / simulation / datasets / benchmarks / systems integration。
 
-[research/RESEARCH_STATE_ALIASING.md](research/RESEARCH_STATE_ALIASING.md)
+## 当前 frontier（截至 2026-10-14）
 
-研究：不同真实世界或历史什么时候会被压成同一个内部状态。
+入口：[research/RESEARCH_FRONTIER.md](research/RESEARCH_FRONTIER.md)
 
-包括：
+当前值得后续 Stage 2 深拆的代表工作包括：
 
-```text
-perceptual aliasing
-history aliasing
-representation aliasing
-action / embodiment aliasing
-causal aliasing
-task-conditioned aliasing
-```
+- SpecWM — https://arxiv.org/abs/2610.15429
+- DR-WM — https://arxiv.org/abs/2610.17630
+- Gemini 4 Argon for Robotics — https://developers.googleblog.com/gemini-4-argon-for-robotics/
+- Mental-Models — https://arxiv.org/abs/2610.12453
+- Identifiable World Models — https://arxiv.org/abs/2610.07028
+- RobotWorld — https://arxiv.org/abs/2610.10409
+- Video2World — https://arxiv.org/abs/2610.04432
+- HUME — https://arxiv.org/abs/2607.06501
+- Learning Task-Sufficient World Models — https://proceedings.mlr.press/v306/feng26aa.html
+- robust / constrained Bayesian experimental design — https://proceedings.mlr.press/v300/tang26d.html · https://proceedings.mlr.press/v306/guo26g.html
 
-重要参考包括 λ-discrepancy、PO-PDDL、observable quotient world models、bisimulation/state abstraction。
-
-### 2. Adaptive Abstraction / State Granularity
-
-[research/RESEARCH_ADAPTIVE_ABSTRACTION.md](research/RESEARCH_ADAPTIVE_ABSTRACTION.md)
-
-研究：world state 是否应该根据任务、时间尺度、事件、空间、uncertainty 和 embodiment 动态改变表示粒度。
-
-目前明确保留：
-
-```text
-task-conditioned abstraction
-multi-timescale state
-event-driven state
-coarse-to-fine state
-entity / relation / functional-role state
-uncertainty-conditioned detail
-embodiment-conditioned state
-open-world recoverability
-```
-
-### 3. Value of Information / Probing Actions
-
-[research/RESEARCH_VALUE_OF_INFORMATION.md](research/RESEARCH_VALUE_OF_INFORMATION.md)
-
-研究：当证据不足时，机器人应该怎样选择下一次观察或交互来最快减少关键 uncertainty。
-
-需要区分：
-
-```text
-state information
-parameter information
-mechanism information
-causal-structure information
-task-interpretation information
-```
-
-以及 probing action 的：
-
-```text
-time
-energy
-risk
-irreversibility
-world disturbance
-safety
-```
-
-## 这轮新增发现的其他缺口
-
-暂时不再拆更多顶层文件，但 Stage 1 会继续追踪：
-
-```text
-open-world hypothesis generation
-— 当前所有 hypothesis 都解释不了新证据时怎么办？
-
-non-stationarity / change-point detection
-— 世界动力学、任务规则、embodiment 发生变化时怎样发现？
-
-self / embodiment model
-— 怎样区分机器人自身、controller、camera 的变化和外部世界变化？
-
-representation reversibility
-— 之前为了压缩而丢掉的信息，未来任务需要时还能否从保留的 evidence/provenance 恢复？
-
-multi-timescale / event-time state
-— 高频物理过程与低频语义事件是否应该用不同更新频率？
-
-structured / equivariant memory
-— 是否能利用 self-motion / world-motion 结构维护 out-of-view state，而不是暴力保存全部历史？
-
-epistemic-action safety
-— 为了获得信息而做的实验本身可能危险、不可逆或改变世界。
-
-model-structure uncertainty
-— 不只是“不知道 state”，还可能“不知道应该用哪个动力学 / 因果模型”。
-
-meta-reasoning
-— 什么时候应该继续思考、再看一眼、移动、probe、询问、等待，还是直接行动？
-```
+这些都是 **research objects / comparators**，不是 Clover 组件。
 
 ## Vision alone 双轴协议
 
@@ -240,21 +185,7 @@ meta-reasoning
 
 ## 后续阶段
 
-### Stage 2 — Analysis
-
-对真正重要的方法逐个做 one-method-one-report 机制分析。
-
-### Stage 3 — Synthesis
-
-统一比较优点、缺点、trade-off、capability matrix、Failure Matrix 和共同 gap。
-
-### Stage 4 — Innovation
-
-只有当 gap 已被充分证明后，才正式提出 Clover-original hypothesis / algorithm。
-
-### Stage 5–7
-
-实现 → 实验 → 反思。
+Stage 2 才逐方法做 one-method-one-report；Stage 3 横向总结优缺点与共同 gap；Stage 4 才正式提出 Clover-original hypothesis / algorithm；之后再实现、实验、反思。
 
 ## 当前不做什么
 
