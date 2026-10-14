@@ -96,19 +96,15 @@ Closed-company results above are tagged in the Survey as `OFFICIAL_REPORTED_RESU
 ## Reading order for Clover
 
 ### Tier 1 — representation
-
 V-JEPA 2/2.1 → Interpreting Physics → VGGT/VGGT-Ω → ReWAM → VISTA → Identifiable World Models.
 
 ### Tier 2 — robot-brain alternatives
-
 Gemini Robotics ER 2 → π0.5/OpenVLA → Being-H/M0.7 → Helix 2.5 → Skild S1 → H-WM/HWAM.
 
 ### Tier 3 — foundations
-
 ORB-SLAM3/RAFT → Slot Attention → DreamerV3/TD-MPC2 → active perception/POMDP literature.
 
 ### Tier 4 — evaluation
-
 IntPhys 2 → MVPBench → CausalVQA → RoboPhys-3D → real long-horizon unseen-environment robot tasks.
 
 The purpose of reading is not to find a framework to import. It is to determine what the next Clover hypothesis must explain that these methods do not already solve.
