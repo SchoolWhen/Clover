@@ -41,8 +41,9 @@ Immediate objective: **coverage before commitment**. No new Clover core represen
 10. [`research/RESEARCH_ADAPTIVE_ABSTRACTION.md`](research/RESEARCH_ADAPTIVE_ABSTRACTION.md)
 11. [`research/RESEARCH_VALUE_OF_INFORMATION.md`](research/RESEARCH_VALUE_OF_INFORMATION.md)
 12. [`research/RESEARCH_OPEN_WORLD_EPISTEMICS.md`](research/RESEARCH_OPEN_WORLD_EPISTEMICS.md)
-13. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
-14. [`research/README.md`](research/README.md)
+13. [`research/RESEARCH_MODEL_DISCOVERY.md`](research/RESEARCH_MODEL_DISCOVERY.md)
+14. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
+15. [`research/README.md`](research/README.md)
 
 ## Current Stage-1 surfaces
 
@@ -57,59 +58,75 @@ Immediate objective: **coverage before commitment**. No new Clover core represen
 8  adaptive abstraction / state granularity
 9  value of information / probing actions
 10 open-world epistemics / model mismatch / epistemic safety
-11 current frontier
+11 model discovery / experiment design / falsification / provenance
+12 current frontier
 ```
 
-### Open-world epistemics now explicitly includes
+## Newly strengthened surface: model discovery
 
-[`research/RESEARCH_OPEN_WORLD_EPISTEMICS.md`](research/RESEARCH_OPEN_WORLD_EPISTEMICS.md)
+[`research/RESEARCH_MODEL_DISCOVERY.md`](research/RESEARCH_MODEL_DISCOVERY.md) now separates:
 
 ```text
-E1 observation uncertainty
-E2 state uncertainty
-E3 parameter uncertainty
-E4 model-structure uncertainty
-E5 hypothesis-set incompleteness
-E6 regime change / model invalidation
-E7 social / intentional uncertainty
-E8 epistemic-action safety
+state estimation
+parameter estimation
+model selection
+mechanism / causal-structure discovery
+open-world model expansion
+falsification
+model replacement / regime-specific reuse
 ```
 
-Current primary/reference anchors include:
+Current anchors include:
 
-- HUME open-world model expansion — https://arxiv.org/abs/2607.06501 · https://open-world-planning.github.io/
-- Changepoint-Aware World Models — https://arxiv.org/abs/2609.18950
-- Feedback World Model — https://arxiv.org/abs/2605.15705
-- Sirius-Fleet deployment monitoring — https://proceedings.mlr.press/v270/liu25g.html
-- Diffusion-Based Body Schema — https://arxiv.org/abs/2608.01029
-- Embodiment Gap survey — https://arxiv.org/abs/2608.18433
-- Splat-CBF safe next-best-view — https://arxiv.org/abs/2609.23100
-- ATOM-CBF — https://proceedings.mlr.press/v331/yun26a.html
-- hidden-goal human–robot coordination — https://arxiv.org/abs/2608.04309
+- HUME — https://arxiv.org/abs/2607.06501 · https://github.com/threefruits/HUME
+- Unknown Unknowns / Model Misspecification — https://arxiv.org/abs/2608.13633
+- intervention-only causal discovery — https://proceedings.mlr.press/v337/mazaheri26b.html
+- Causal Discovery in Action — https://proceedings.mlr.press/v323/panayiotou26a.html
+- Bayesian Experimental Design via Score Matching — https://proceedings.mlr.press/v337/phillips26a.html
+- robust BOED under model misspecification — https://proceedings.mlr.press/v300/tang26d.html
+- constrained Bayesian experimental design — https://proceedings.mlr.press/v306/guo26g.html
+- SAGE — https://arxiv.org/abs/2606.31478 · https://github.com/JieMaMagic/SAGE
+- Socratic autonomous scientific discovery — https://arxiv.org/abs/2606.26722
+- Mental-Models — https://arxiv.org/abs/2610.12453 · https://github.com/hananshafi/Mental-Models
+- Recursive ToM — https://arxiv.org/abs/2606.11724
 
-Central new distinctions:
+Central distinctions:
 
 ```text
-uncertainty over known hypotheses
-≠
-correct hypothesis missing entirely
+confidence inside a model
+≠ model-class correctness
 
-uncertain current state
-≠
-world model itself is wrong / stale
+active exploration
+≠ scientific experiment design
 
-information-seeking action
-≠
-safe information-seeking action
+reflection
+≠ falsification
 
-external world state
-≠
-self / embodiment state
+one failed prediction
+≠ proof that the representation is wrong
 
-visible behavior of another agent
-≠
-that agent's hidden goal / belief
+current best hypothesis
+≠ permanent truth
 ```
+
+## Current frontier refresh
+
+[`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md) is now a thin current-edge table rather than a second survey.
+
+Important current additions include:
+
+- SpecWM — https://arxiv.org/abs/2610.15429 — representation objective controls which world variables remain recoverable;
+- DR-WM — https://arxiv.org/abs/2610.17630 — action-response calibrates hidden physical parameters;
+- Gemini 4 Argon for Robotics — https://developers.googleblog.com/gemini-4-argon-for-robotics/ — strong multimodal reasoner/tool baseline;
+- Mental-Models — https://arxiv.org/abs/2610.12453 — explicit first/second-order partner-state modeling;
+- Identifiable World Models — https://arxiv.org/abs/2610.07028 — hybrid distributed + identifiable-state route;
+- RobotWorld — https://arxiv.org/abs/2610.10409 — composition/state/recovery failures;
+- Video2World — https://arxiv.org/abs/2610.04432 — functional correctness beyond visual similarity;
+- Learning Task-Sufficient World Models — https://proceedings.mlr.press/v306/feng26aa.html — active probing ↔ task-sufficient state discovery;
+- HUME — https://arxiv.org/abs/2607.06501 — open-world hypothesis expansion and verification;
+- robust experimental design under misspecification — https://proceedings.mlr.press/v300/tang26d.html.
+
+These are research materials and comparators, not Clover components.
 
 ## Current non-goals
 
@@ -123,25 +140,26 @@ We are not currently:
 - treating information gain as the final control objective;
 - treating a world-model prediction as ground truth;
 - assuming the correct hypothesis/model class is always known;
+- treating language-generated hypotheses as physical truth;
 - assuming the robot body/controller/camera is permanently fixed;
 - treating one benchmark as the definition of understanding;
 - optimizing hardware before the scientific mechanism.
 
 ## Remaining collection gaps
 
-Stage 1 still needs stronger primary evidence for:
+Stage 1 still needs stronger primary embodied evidence for:
 
 ```text
-unknown-unknown detection
-open-set mechanism discovery
-model-class selection / nonparametric world models
-persistent provenance for hypotheses and refutations
-scientific experiment design / falsification
-slow long-horizon model drift
+unknown-unknown diagnostics in real environments
+nonparametric / open-set mechanism discovery
+persistent hypothesis provenance and refutation-memory benchmarks
+slow drift versus abrupt changepoint detection
 representation reversibility after compression
+self-model ↔ external-world-model coupling
+safe exploration under irreversible actions
 human-query / escalation cost models
 social permission / consent for probing actions
-multi-agent belief recursion
+multi-agent recursive belief from embodied observations
 correlated uncertainty / model-ensemble collapse
 ```
 
@@ -159,8 +177,9 @@ Stage 2 Analysis becomes primary only when a new agent can identify:
 8. abstraction/granularity/timescale assumptions;
 9. information-gathering strategy and cost;
 10. open-world epistemic failure mode (`E1–E8`) where relevant;
-11. datasets/benchmarks that discriminate claims;
-12. methods deserving one-method-one-report Analysis.
+11. hypothesis/model class and falsification assumptions where relevant;
+12. datasets/benchmarks that discriminate claims;
+13. methods deserving one-method-one-report Analysis.
 
 ## Not yet demonstrated
 
