@@ -42,8 +42,9 @@ Immediate objective: **coverage before commitment**. No new Clover core represen
 11. [`research/RESEARCH_VALUE_OF_INFORMATION.md`](research/RESEARCH_VALUE_OF_INFORMATION.md)
 12. [`research/RESEARCH_OPEN_WORLD_EPISTEMICS.md`](research/RESEARCH_OPEN_WORLD_EPISTEMICS.md)
 13. [`research/RESEARCH_MODEL_DISCOVERY.md`](research/RESEARCH_MODEL_DISCOVERY.md)
-14. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
-15. [`research/README.md`](research/README.md)
+14. [`research/RESEARCH_ENGINEERING_VALIDATION.md`](research/RESEARCH_ENGINEERING_VALIDATION.md)
+15. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
+16. [`research/README.md`](research/README.md)
 
 ## Current Stage-1 surfaces
 
@@ -59,72 +60,107 @@ Immediate objective: **coverage before commitment**. No new Clover core represen
 9  value of information / probing actions
 10 open-world epistemics / model mismatch / epistemic safety
 11 model discovery / experiment design / falsification / provenance
-12 current frontier
+12 engineering / edge deployment / simulation / validation
+13 current frontier
 ```
 
-## Newly strengthened surface: model discovery
+## Newly strengthened surface: engineering and validation
 
-[`research/RESEARCH_MODEL_DISCOVERY.md`](research/RESEARCH_MODEL_DISCOVERY.md) now separates:
+[`research/RESEARCH_ENGINEERING_VALIDATION.md`](research/RESEARCH_ENGINEERING_VALIDATION.md) now tracks:
 
 ```text
-state estimation
-parameter estimation
-model selection
-mechanism / causal-structure discovery
-open-world model expansion
-falsification
-model replacement / regime-specific reuse
+edge inference / runtime feasibility
+latency / memory / power / thermal behavior
+quantization / compression effects
+hardware-accelerator mapping
+end-to-end camera→state→decision→action timing
+simulation fidelity
+simulator-specific shortcuts
+sim2sim transfer
+sim2real / real2sim / real2sim2real
+system identification / digital twins
+hardware-in-the-loop / proxy hardware
+reproducibility metadata
 ```
 
-Current anchors include:
-
-- HUME — https://arxiv.org/abs/2607.06501 · https://github.com/threefruits/HUME
-- Unknown Unknowns / Model Misspecification — https://arxiv.org/abs/2608.13633
-- intervention-only causal discovery — https://proceedings.mlr.press/v337/mazaheri26b.html
-- Causal Discovery in Action — https://proceedings.mlr.press/v323/panayiotou26a.html
-- Bayesian Experimental Design via Score Matching — https://proceedings.mlr.press/v337/phillips26a.html
-- robust BOED under model misspecification — https://proceedings.mlr.press/v300/tang26d.html
-- constrained Bayesian experimental design — https://proceedings.mlr.press/v306/guo26g.html
-- SAGE — https://arxiv.org/abs/2606.31478 · https://github.com/JieMaMagic/SAGE
-- Socratic autonomous scientific discovery — https://arxiv.org/abs/2606.26722
-- Mental-Models — https://arxiv.org/abs/2610.12453 · https://github.com/hananshafi/Mental-Models
-- Recursive ToM — https://arxiv.org/abs/2606.11724
-
-Central distinctions:
+Current local development reference:
 
 ```text
-confidence inside a model
-≠ model-class correctness
+Mac mini with Apple M4
+```
 
-active exploration
-≠ scientific experiment design
+This is a measured development environment, **not** the assumed final robot computer and not a scientific constraint.
 
-reflection
-≠ falsification
+Current practical stack references include:
 
-one failed prediction
-≠ proof that the representation is wrong
+- MLX — https://github.com/ml-explore/mlx
+- Apple Core AI / Core ML — https://developer.apple.com/core-ai/ · https://developer.apple.com/documentation/coreml
+- ExecuTorch Core ML / MLX backends — https://docs.pytorch.org/executorch/stable/backends/coreml/coreml-overview.html · https://docs.pytorch.org/executorch/stable/backends/mlx/mlx-overview.html
+- MuJoCo — https://github.com/google-deepmind/mujoco
+- Isaac Sim SysID — https://docs.isaacsim.omniverse.nvidia.com/latest/robot_setup/ext_isaacsim_robot_setup_sysid.html
+- reality-gap survey — https://arxiv.org/abs/2510.20808
+- Real-is-Sim — https://arxiv.org/abs/2504.03597
 
-current best hypothesis
-≠ permanent truth
+Current Isaac Sim standard requirements do not support macOS/non-NVIDIA hardware, so Isaac/Isaac-Lab should be treated as an optional remote Linux/NVIDIA research path rather than a local project dependency.
+
+## Validation evidence ladder while no target robot exists
+
+```text
+EV0 mathematical / synthetic diagnostic
+EV1 controlled single-simulator test
+EV2 randomized in-simulator robustness
+EV3 sim-to-sim transfer
+EV4 offline real-data validation
+EV5 real-to-sim / digital-twin validation
+EV6 deployment-runtime / compute hardware in the loop
+EV7 proxy physical hardware
+EV8 target real robot
+```
+
+Important rule:
+
+```text
+sim-only evidence
+≠ sim2real evidence
+≠ target-robot validation
+```
+
+The absence of a current target robot limits claim strength but should not postpone rigorous testing.
+
+## Current engineering distinctions
+
+```text
+current development machine
+≠ final edge computer
+≠ scientific hypothesis
+
+model inference latency
+≠ closed-loop latency
+
+peak throughput
+≠ sustained real-time performance
+
+average latency
+≠ p95 / p99 / deadline behavior
+
+quantized benchmark accuracy
+≠ preserved uncertainty / memory / persistence
+
+same-simulator robustness
+≠ cross-simulator robustness
+
+fitted simulator trajectory
+≠ validated digital twin
+
+cross-simulator success
+≠ real-world transfer
 ```
 
 ## Current frontier refresh
 
-[`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md) is now a thin current-edge table rather than a second survey.
+[`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md) remains a thin current-edge table rather than a second survey.
 
-Important current additions include:
-
-- SpecWM — https://arxiv.org/abs/2610.15429 — representation objective controls which world variables remain recoverable;
-- DR-WM — https://arxiv.org/abs/2610.17630 — action-response calibrates hidden physical parameters;
-- Gemini 4 Argon for Robotics — https://developers.googleblog.com/gemini-4-argon-for-robotics/ — strong multimodal reasoner/tool baseline;
-- Mental-Models — https://arxiv.org/abs/2610.12453 — explicit first/second-order partner-state modeling;
-- Identifiable World Models — https://arxiv.org/abs/2610.07028 — hybrid distributed + identifiable-state route;
-- RobotWorld — https://arxiv.org/abs/2610.10409 — composition/state/recovery failures;
-- Video2World — https://arxiv.org/abs/2610.04432 — functional correctness beyond visual similarity;
-- Learning Task-Sufficient World Models — https://proceedings.mlr.press/v306/feng26aa.html — active probing ↔ task-sufficient state discovery;
-- HUME — https://arxiv.org/abs/2607.06501 — open-world hypothesis expansion and verification;
-- robust experimental design under misspecification — https://proceedings.mlr.press/v300/tang26d.html.
+Important current additions include SpecWM, DR-WM, Gemini 4 Argon for Robotics, Mental-Models, Identifiable World Models, RobotWorld, Video2World, HUME, Learning Task-Sufficient World Models and robust experimental design under misspecification.
 
 These are research materials and comparators, not Clover components.
 
@@ -142,8 +178,10 @@ We are not currently:
 - assuming the correct hypothesis/model class is always known;
 - treating language-generated hypotheses as physical truth;
 - assuming the robot body/controller/camera is permanently fixed;
-- treating one benchmark as the definition of understanding;
-- optimizing hardware before the scientific mechanism.
+- designing the science around Mac mini M4;
+- claiming sim2real success without real hardware;
+- making Isaac Sim/NVIDIA a mandatory project dependency;
+- treating one benchmark as the definition of understanding.
 
 ## Remaining collection gaps
 
@@ -161,6 +199,13 @@ human-query / escalation cost models
 social permission / consent for probing actions
 multi-agent recursive belief from embodied observations
 correlated uncertainty / model-ensemble collapse
+robot-edge runtime benchmarks for streaming world models
+quantization effects on calibration / permanence / memory
+cross-simulator benchmark standardization
+sim2sim-to-sim2real correlation
+reality-gap metrics for world models rather than only policies
+hardware-in-the-loop benchmarks for learned world models
+low-cost proxy-robot validation protocols
 ```
 
 ## Stage-1 exit condition
@@ -178,11 +223,13 @@ Stage 2 Analysis becomes primary only when a new agent can identify:
 9. information-gathering strategy and cost;
 10. open-world epistemic failure mode (`E1–E8`) where relevant;
 11. hypothesis/model class and falsification assumptions where relevant;
-12. datasets/benchmarks that discriminate claims;
-13. methods deserving one-method-one-report Analysis.
+12. deployment/runtime assumptions and hardware constraints where relevant;
+13. validation evidence level (`EV0–EV8`) and simulator/hardware provenance;
+14. datasets/benchmarks that discriminate claims;
+15. methods deserving one-method-one-report Analysis.
 
 ## Not yet demonstrated
 
-Clover has not yet publicly demonstrated a validated general real-world visual world model, a final representation, robust open-world generalization, general causal understanding, persistent long-horizon real-robot world state, a validated original algorithm, or a final hardware mapping.
+Clover has not yet publicly demonstrated a validated general real-world visual world model, a final representation, robust open-world generalization, general causal understanding, persistent long-horizon real-robot world state, validated sim2real transfer, a validated original algorithm, or a final hardware mapping.
 
 These remain research targets.
