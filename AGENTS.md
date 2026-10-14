@@ -22,12 +22,15 @@ Before proposing architecture, code, experiments or research conclusions, read:
 6. [`research/RESEARCH_OBSERVATION_PHYSICS.md`](research/RESEARCH_OBSERVATION_PHYSICS.md)
 7. [`research/RESEARCH_PHYSICAL_PROPERTIES.md`](research/RESEARCH_PHYSICAL_PROPERTIES.md)
 8. [`research/RESEARCH_SUFFICIENT_STATE.md`](research/RESEARCH_SUFFICIENT_STATE.md)
-9. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
-10. [`PRINCIPLES.md`](PRINCIPLES.md)
-11. [`STATUS.md`](STATUS.md)
-12. [`research/README.md`](research/README.md)
-13. [`research/survey/SOURCE_MAP.md`](research/survey/SOURCE_MAP.md)
-14. deeper survey/dossier files only as needed.
+9. [`research/RESEARCH_STATE_ALIASING.md`](research/RESEARCH_STATE_ALIASING.md)
+10. [`research/RESEARCH_ADAPTIVE_ABSTRACTION.md`](research/RESEARCH_ADAPTIVE_ABSTRACTION.md)
+11. [`research/RESEARCH_VALUE_OF_INFORMATION.md`](research/RESEARCH_VALUE_OF_INFORMATION.md)
+12. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
+13. [`PRINCIPLES.md`](PRINCIPLES.md)
+14. [`STATUS.md`](STATUS.md)
+15. [`research/README.md`](research/README.md)
+16. [`research/survey/SOURCE_MAP.md`](research/survey/SOURCE_MAP.md)
+17. deeper survey/dossier files only as needed.
 
 Historical documents and news notes are evidence/signal sources, not SSOT.
 
@@ -304,7 +307,84 @@ S-OPEN   open-world / future-task optionality
 
 A representation sufficient for one fixed manipulation task is not automatically sufficient for future unknown tasks, persistent memory, causal reasoning or general robotic intelligence.
 
-Do not reward compression merely for being small. Evaluate what information was discarded and whether another history/query/action can expose state aliasing.
+### 5.17 Detect state aliasing rather than assuming a latent is Markov
+
+Ask whether distinct histories/worlds collapse into the same internal state while still requiring different predictions, beliefs or actions.
+
+When relevant distinguish:
+
+```text
+A1 perceptual aliasing
+A2 history aliasing
+A3 representation aliasing
+A4 action / embodiment aliasing
+A5 causal aliasing
+A6 task-conditioned aliasing
+```
+
+Do not call observational equivalence a representation failure when the evidence genuinely cannot distinguish the worlds.
+
+Do call it a potential representation failure when the necessary information existed in history/evidence but the representation discarded it.
+
+### 5.18 Abstraction must state what it preserves and at what granularity
+
+Do not reward a representation merely for being minimal or compressed.
+
+Record whether abstraction is:
+
+```text
+task-conditioned
+temporal / multi-timescale
+event-conditioned
+spatial coarse-to-fine
+entity / relation / role based
+uncertainty-conditioned
+embodiment-conditioned
+open-world / recoverability oriented
+```
+
+Ask what behavioral, predictive, causal, memory or planning property is preserved.
+
+A task-specific abstraction is not automatically safe for future unknown tasks.
+
+### 5.19 Information-gathering actions are first-class research objects
+
+When current evidence is insufficient, ask whether a view/action can reduce uncertainty.
+
+Distinguish information about:
+
+```text
+latent state
+physical parameters
+mechanism
+ausal structure
+task interpretation
+```
+
+Also record the cost of the probe:
+
+```text
+time
+energy
+risk
+irreversibility
+world disturbance
+safety
+```
+
+The most informative action is not automatically the best action.
+
+### 5.20 Open-world hypothesis failure must remain possible
+
+Many uncertainty methods assume the correct model/hypothesis is already inside the candidate set.
+
+A general robot must also handle:
+
+```text
+none of my current hypotheses explain this evidence
+```
+
+Keep open-world hypothesis generation, non-stationarity/change-point detection, self/embodiment model mismatch and test-time adaptation visible in Stage 1.
 
 ## 6. Stage-1 research contribution template
 
@@ -320,6 +400,9 @@ When adding a method or source during the current stage, record as much of the f
 - **Input / training provenance**
 - **Observation / image-formation assumptions when material**
 - **Sufficiency target when the method claims a state representation**
+- **Aliasing failure addressed or introduced, when material**
+- **Abstraction/granularity assumption, when material**
+- **Information-gathering mechanism/cost, when material**
 - **One-sentence demonstrated capability**
 - **One-sentence limitation / open question**
 
@@ -342,9 +425,12 @@ During the current Research stage:
 5. collect code/datasets/benchmarks where available;
 6. summarize claims conservatively;
 7. record observation assumptions and evidence provenance;
-8. state whether a claimed representation is sufficient for prediction, control, planning, memory, causality or some other target;
-9. record missing areas explicitly;
-10. do not import external mechanisms into Clover by default.
+8. state what a claimed representation is sufficient for;
+9. ask whether distinct histories/worlds are aliased by the representation;
+10. record state granularity / hierarchy / timescale assumptions;
+11. record whether active evidence acquisition is used and what uncertainty it targets;
+12. record missing areas explicitly;
+13. do not import external mechanisms into Clover by default.
 
 News archives are discovery feeds. Durable material should graduate to primary/official evidence before becoming a core research record.
 
