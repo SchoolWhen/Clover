@@ -28,20 +28,19 @@ execution
 new visual experience
 ```
 
-The decomposition is useful, but the internal representation and learning architecture are not frozen.
+The internal representation and learning architecture are not frozen.
 
 ## 3. What “understanding” currently means
 
 Clover does not treat understanding as a philosophical label or a single benchmark score.
 
-The working technical definition requires a system to form and revise internal structure that supports, at minimum:
+The working technical target requires internal structure that supports, at minimum:
 
 - existence and object identity;
 - persistence through time and occlusion;
-- spatial structure;
-- temporal structure;
-- observability and unknown state;
-- physically plausible dynamics;
+- spatial and temporal structure;
+- observability, uncertainty and unknown state;
+- physically plausible and quantitatively meaningful dynamics;
 - cause, intervention and counterfactual reasoning;
 - long-horizon memory and belief revision;
 - generalization to unfamiliar objects, scenes, cameras, dynamics and compositions;
@@ -50,41 +49,33 @@ The working technical definition requires a system to form and revise internal s
 
 This definition remains a research object and may become more precise.
 
-## 4. Comprehensive positive-result target
+## 4. Evidence dimensions
 
-“Comprehensive positive result” does **not** mean first place on one dataset.
+A comprehensive result is not first place on one dataset.
 
-The target evidence stack has at least six dimensions.
+Evidence should cover:
 
 ### U — Understanding
-
-Can the system correctly represent identity, persistence, space, time, observability, physics and causality?
+Identity, persistence, space, time, observability, physics and causality.
 
 ### G — Generalization
-
-Does the capability transfer to new objects, scenes, cameras, dynamics and compositions?
+New objects, scenes, cameras, dynamics, compositions and embodiments.
 
 ### P — Prediction
-
-Can the system answer what will happen, what could happen, what cannot happen and what would happen under an intervention?
+What will happen, could happen, cannot happen and would happen under intervention.
 
 ### A — Action usefulness
-
-Does the world representation improve decision, planning, recovery and execution?
+Decision, planning, recovery and execution value.
 
 ### R — Real-world transfer
-
-Does the same scientific mechanism survive the path from controlled settings to unfamiliar real environments?
+Controlled settings → unfamiliar real environments.
 
 ### E — Efficiency
-
-What are the latency, memory, energy, bandwidth and hardware requirements once capability is established?
+Latency, memory, energy, bandwidth and hardware requirements once capability is established.
 
 No single axis substitutes for the others.
 
 ## 5. Vision protocols
-
-“Vision alone” is not left ambiguous.
 
 ### V0 — Strict monocular vision
 
@@ -112,17 +103,13 @@ V0 plus declared camera intrinsics.
 
 Calibrated RGB from multiple cameras.
 
-Still vision, but materially more information than V0/V1.
-
 ### V3 — Embodied active vision
 
-The robot can move to obtain new visual evidence.
-
-The sensory evidence remains visual, but action changes what can be observed.
+The robot can move to obtain new visual evidence. Sensory evidence remains visual, but action changes what can be observed.
 
 ### Learning-evidence provenance
 
-Observation protocol alone is not enough to describe modern systems. When relevant, the research record also annotates how knowledge was acquired:
+When relevant, also annotate how knowledge was acquired:
 
 - `L0` — visual self-supervision only;
 - `L1` — visual labels / annotations;
@@ -130,13 +117,11 @@ Observation protocol alone is not enough to describe modern systems. When releva
 - `L3` — action-conditioned demonstrations or interaction experience;
 - `L4` — non-visual or privileged physical evidence such as proprioception, force/tactile, IMU, depth/LiDAR or simulator state.
 
-These labels are descriptive, not a quality ranking.
-
-A model that receives RGB at deployment but was trained with language, actions or privileged state is not scientifically equivalent to a `V0/L0` system.
+A model receiving RGB at deployment but trained with language, actions or privileged state is not scientifically equivalent to `V0/L0`.
 
 ## 6. Current research posture
 
-The 2026-10-14 Research Reset established:
+The Research Reset established:
 
 - CPU-first is not a scientific assumption;
 - field crystallization is not a scientific assumption;
@@ -148,11 +133,67 @@ The 2026-10-14 Research Reset established:
 
 Past Clover mechanisms remain candidate hypotheses until they survive comparison with prior art, strong baselines and discriminating experiments.
 
-## 7. Benchmark policy
+## 7. Canonical research lifecycle
+
+Clover now uses one flat seven-stage lifecycle:
+
+```text
+1 Research
+→ 2 Analysis
+→ 3 Synthesis
+→ 4 Innovation
+→ 5 Implementation
+→ 6 Evaluation
+→ 7 Reflection
+↺ next research cycle
+```
+
+Definitions:
+
+- **Research** — collect directions, sources, methods, datasets, benchmarks and frontier work.
+- **Analysis** — produce method-by-method mechanism reports.
+- **Synthesis** — compare strengths, weaknesses, trade-offs, common failures and gaps.
+- **Innovation** — formulate Clover-original hypotheses and algorithms from demonstrated gaps.
+- **Implementation** — build reproducible baselines, diagnostics and selected hypotheses.
+- **Evaluation** — run experiments, Results, ablations, generalization and real-world tests.
+- **Reflection** — interpret failures, update hypothesis status and decide the next research cycle.
+
+The stages describe epistemic maturity, not software versions.
+
+## 8. Current stage
+
+> **Stage 1 — Research is ACTIVE.**
+
+The immediate goal is broad material collection and source traceability.
+
+Current tasks:
+
+1. map every materially relevant research direction;
+2. collect canonical and current primary papers;
+3. collect official project pages, code and checkpoints;
+4. collect datasets and benchmarks;
+5. record visual protocol and learning provenance where possible;
+6. record what each source actually demonstrates and does not demonstrate;
+7. identify important missing areas and keep searching;
+8. maintain strong baseline candidates without turning baseline execution into the current project goal.
+
+Stage 1 is intentionally broader than the current eight deep dossiers. Any research direction that materially constrains the mother question should be collected.
+
+Primary current entry points:
+
+1. `research/PIPELINE.md`
+2. `research/RESEARCH.md`
+3. `research/README.md`
+4. `research/survey/SOURCE_MAP.md`
+5. `research/survey/BACKGROUND_RESEARCH.md`
+
+Deeper survey/dossier files support Stage 1 but are not separate project phases.
+
+## 9. Benchmark policy
 
 Benchmarks are diagnostic instruments.
 
-The eventual evidence stack should combine:
+The evidence stack may include:
 
 ```text
 controlled diagnostic benchmarks
@@ -168,64 +209,15 @@ controlled diagnostic benchmarks
 
 A benchmark score alone does not establish world understanding.
 
-## 8. Hardware policy
+## 10. Hardware policy
 
 The current local platform is Apple M4.
 
-Apple unified memory makes CPU/GPU collaboration attractive, but it does not make communication or synchronization free.
-
-The policy is:
+Policy:
 
 > **Algorithm-first, hardware-co-designed.**
 
-The representation and algorithm determine whether work belongs on CPU, GPU/Metal, Neural Engine, or a combination.
-
-## 9. Current phase
-
-Current phase:
-
-> **Background Research / Problem Reconstruction**
-
-The required research order is:
-
-```text
-Background Research / Research Map
-→ Baseline Setup
-→ Understanding Battery
-→ Failure Matrix
-→ Representation Hypothesis
-→ World Formation / Learning
-→ Robot Brain
-→ Real-world Evaluation
-→ Hardware Co-design
-```
-
-Immediate goals:
-
-1. build a primary-source-backed background map of the full problem;
-2. distinguish what each major route actually represents and proves;
-3. record training/evidence provenance and important confounds;
-4. identify unresolved contradictions across method families;
-5. define strong, qualitatively different baselines;
-6. define the capability/evaluation battery;
-7. only after baseline and failure evidence, freeze a next-generation Clover representation.
-
-Large-scale reproduction and leaderboard optimization remain downstream. Minimal baseline reconstruction is allowed when it answers a discriminating research question and cannot be replaced by a smaller analysis.
-
-## 10. Primary current research surfaces
-
-Read in this order after this SSOT:
-
-1. `research/survey/BACKGROUND_RESEARCH.md`
-2. `research/survey/SOURCE_MAP.md`
-3. `research/survey/README.md`
-4. `research/survey/FRONTIER_METHODS.md`
-5. `research/survey/RESEARCH_QUESTIONS.md`
-6. `research/survey/PAPERS.md`
-7. `research/survey/BENCHMARKS_TASKS.md`
-8. `research/survey/DATASETS_CODE.md`
-
-The Source Map should connect every durable external claim to a primary paper, official technical source or open repository, plus the limitation of that evidence.
+CPU, GPU, Metal, MPS and Neural Engine are design resources, not scientific priors.
 
 ## 11. Historical Clover ideas
 
@@ -243,25 +235,28 @@ The following remain useful candidate hypotheses, not SSOT:
 - counter-witness causality;
 - world growth and revision.
 
-They may be retained, transformed, merged, falsified or removed.
+They belong conceptually to Stage 4 Innovation until evidence promotes, transforms or rejects them.
 
-## 12. Architecture-decision gate
+## 12. Innovation gate
 
-A new Clover architecture may not be justified by historical preference or one strong external paper.
+A new Clover core algorithm should not be justified by historical preference or one strong external paper.
 
 Required chain:
 
 ```text
-background evidence
-→ strong baseline
-→ Understanding Battery
-→ Failure Matrix
-→ unresolved cross-family contradiction
-→ candidate representation
-→ discriminating experiment / falsifier
-→ architecture decision
+broad Research
+→ method Analysis
+→ cross-method Synthesis
+→ well-supported unresolved gap
+→ original hypothesis
+→ falsifier
+→ Implementation
+→ Evaluation
+→ Reflection
 ```
+
+Small diagnostic code may be used earlier when reading alone cannot resolve a question, but implementation effort does not substitute for analysis.
 
 ## 13. Final principle
 
-> **Protect the question, not the current answer.**
+> **Protect the question, not the current answer. Research broadly before inventing narrowly.**
