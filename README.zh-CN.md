@@ -23,7 +23,7 @@ Clover 是一个长期公开研究项目。**问题固定，答案开放。**
 ↺ 下一轮
 ```
 
-当前原则：**coverage before commitment**。先把问题空间调查完整，再决定 Clover 自己应该发明什么。
+当前原则是：**coverage before commitment**。先把问题空间调查完整，再决定 Clover 自己应该发明什么。
 
 ## 新 Agent 推荐阅读顺序
 
@@ -40,12 +40,15 @@ Clover 是一个长期公开研究项目。**问题固定，答案开放。**
 11. [research/RESEARCH_VALUE_OF_INFORMATION.md](research/RESEARCH_VALUE_OF_INFORMATION.md)
 12. [research/RESEARCH_OPEN_WORLD_EPISTEMICS.md](research/RESEARCH_OPEN_WORLD_EPISTEMICS.md)
 13. [research/RESEARCH_MODEL_DISCOVERY.md](research/RESEARCH_MODEL_DISCOVERY.md)
-14. [research/RESEARCH_FRONTIER.md](research/RESEARCH_FRONTIER.md)
-15. [AGENTS.md](AGENTS.md)
-16. [STATUS.md](STATUS.md)
-17. [research/README.md](research/README.md)
+14. [research/RESEARCH_ENGINEERING_VALIDATION.md](research/RESEARCH_ENGINEERING_VALIDATION.md)
+15. [research/RESEARCH_FRONTIER.md](research/RESEARCH_FRONTIER.md)
+16. [AGENTS.md](AGENTS.md)
+17. [STATUS.md](STATUS.md)
+18. [research/README.md](research/README.md)
 
 ## Stage 1 当前问题链
+
+现在不是直接问“下一代 Clover 架构长什么样”，而是依次回答：
 
 ```text
 有哪些相关研究？
@@ -60,103 +63,162 @@ Clover 是一个长期公开研究项目。**问题固定，答案开放。**
 ↓
 内部 world state 至少需要保留什么信息？
 ↓
-什么时候不同真实世界被压成同一个 latent / state？
+什么时候不同真实世界被压成了同一个 latent / state？
 ↓
 状态应该以什么粒度、什么时间尺度表示？
 ↓
 当前证据不足时，下一眼 / 下一次 probing action 应该选什么？
 ↓
-如果当前 hypothesis set 本身不完整、模型已经过期或实验不安全怎么办？
+如果当前 hypothesis set 不完整、模型已经失效、实验不安全怎么办？
 ↓
-怎样管理 hypothesis、mechanism、experiment、falsification 与 provenance？
+怎样做 mechanism discovery、实验设计、falsification 和 provenance？
 ↓
-哪些最新方法 / dataset / benchmark 真正区分这些答案？
+模型以后能不能在真实 edge 约束下运行？没有真机时怎样逐级验证？
+↓
+哪些方法 / dataset / benchmark 能真正区分这些答案？
 ```
 
-## Stage 1 核心区分
+## 新增：Engineering / Deployment / Validation
+
+[research/RESEARCH_ENGINEERING_VALIDATION.md](research/RESEARCH_ENGINEERING_VALIDATION.md)
+
+当前本地参考开发环境是：
 
 ```text
-pixels ≠ world state
-
-从像素统计上能猜对
-≠
-物理上由像素唯一可辨识
-
-vision alone ≠ passive vision only
-
-当前证据本来就无法区分两个世界
-≠ representation failure
-
-证据里有信息但 encoder 丢掉了
-= 潜在 representation failure
-
-完整物理描述
-≠ 最小 predictive state
-≠ 最小 control-sufficient state
-≠ 通用 world state
-
-最 informative 的动作
-≠ 考虑风险 / 成本 / 不可逆性 / permission 后最值得执行的动作
-
-已知 hypothesis 内部的不确定性
-≠ 正确 hypothesis 根本不在当前集合中
-
-当前 state 不确定
-≠ world model 本身已经失效
-
-parameter estimation
-≠ model selection
-≠ mechanism discovery
-≠ open-world model expansion
-
-reflection ≠ falsification
-
-当前最好 hypothesis ≠ 永久真理
+Mac mini + Apple M4
 ```
 
-## 目前 Stage 1 已覆盖
+但必须区分：
 
-- inverse problem / observability / identifiability / POMDP；
-- image formation / inverse rendering / camera acquisition；
-- transparency / reflection / refraction / blur / rolling shutter；
-- geometry / SfM / VO / SLAM / correspondence / tracking；
-- static/video SSL 与 learned geometry / NeRF / 3DGS / 4D；
-- object / scene graph / semantic map / persistent memory；
-- mass / inertia / friction / stiffness / temperature / viscosity / materials；
-- rigid / articulated / deformable / fluid / granular dynamics；
-- cutting / splitting / merging / breakage 等不可逆拓扑变化；
-- physical / causal / counterfactual reasoning；
-- active perception / system identification / intervention；
-- world model / WAM / VLA / direct policy；
-- belief state / predictive state / information state / sufficiency；
-- state aliasing / state abstraction / hierarchical / multi-timescale state；
-- value of information / probing action / epistemic safety；
-- open-world hypothesis generation / model mismatch / changepoint；
-- model-class / mechanism discovery / Bayesian experiment design；
-- hypothesis provenance / falsification / refutation memory；
-- self/body schema / embodiment mismatch；
-- help-seeking / abstention / human escalation；
-- recursive belief / Theory of Mind / social permission；
-- OOD / continual adaptation / simulation / datasets / benchmarks / systems integration。
+```text
+当前开发机
+≠ 最终机器人 edge computer
+≠ 科学假设
+```
 
-## 当前 frontier（截至 2026-10-14）
+Stage 1 现在正式调研：
 
-入口：[research/RESEARCH_FRONTIER.md](research/RESEARCH_FRONTIER.md)
+```text
+MLX / Core AI / Core ML / ExecuTorch
+CPU / GPU / ANE / NPU 映射
+quantization / palettization / pruning
+latency / p95 / p99 / deadline miss
+unified-memory pressure
+persistent-state memory
+thermal / sustained runtime
+camera→state→decision→action 全链路 latency
+```
 
-当前值得后续 Stage 2 深拆的代表工作包括：
+不能只看平均 FPS。
 
-- SpecWM — https://arxiv.org/abs/2610.15429
-- DR-WM — https://arxiv.org/abs/2610.17630
-- Gemini 4 Argon for Robotics — https://developers.googleblog.com/gemini-4-argon-for-robotics/
-- Mental-Models — https://arxiv.org/abs/2610.12453
-- Identifiable World Models — https://arxiv.org/abs/2610.07028
-- RobotWorld — https://arxiv.org/abs/2610.10409
-- Video2World — https://arxiv.org/abs/2610.04432
-- HUME — https://arxiv.org/abs/2607.06501
-- Learning Task-Sufficient World Models — https://proceedings.mlr.press/v306/feng26aa.html
-- robust / constrained Bayesian experimental design — https://proceedings.mlr.press/v300/tang26d.html · https://proceedings.mlr.press/v306/guo26g.html
+尤其需要检查加速是否改变科学能力：
 
-这些都是 **research objects / comparators**，不是 Clover 组件。
+```text
+quantization 是否损伤 uncertainty calibration？
+memory pruning 是否损伤 object permanence？
+缩短 history 是否产生 state aliasing？
+降低 resolution 是否损伤 physical identifiability？
+batching / remote inference 是否破坏 control deadline？
+异步执行是否让 belief 变 stale？
+```
+
+## 目前没有真实机器人：验证必须分层
+
+现在明确使用：
+
+```text
+EV0 数学 / synthetic diagnostic
+EV1 单 simulator controlled test
+EV2 simulator domain randomization
+EV3 sim2sim
+EV4 offline real-data validation
+EV5 real2sim / digital-twin validation
+EV6 deployment-runtime / compute hardware-in-the-loop
+EV7 proxy physical hardware
+EV8 target real robot
+```
+
+所以：
+
+```text
+sim-only success
+≠ sim2real success
+≠ target-robot validation
+```
+
+没有真机意味着**claim 要更保守**，不是意味着现在不能验证。
+
+## 当前 Mac M4 下的 simulation 策略
+
+### 本地优先
+
+MuJoCo：
+https://github.com/google-deepmind/mujoco
+
+适合本地做 controlled physics、state/aliasing/system-identification diagnostic、model-based control 和 sim2sim 的一个基准端。
+
+### 有条件再远程使用 Linux + NVIDIA
+
+Isaac Sim / Isaac Lab 更适合大规模 GPU simulation、photorealistic sensor generation、domain randomization 和 NVIDIA 生态实验，但当前标准 Isaac Sim 并不支持 macOS / 非 NVIDIA hardware。
+
+所以不要为了 Stage 1 强行购买或搭建重型 GPU 基础设施；需要时再使用 remote/cloud Linux NVIDIA。
+
+### ManiSkill
+
+Mac 可作为有限 CPU/render path，但完整 GPU parallel simulation 仍更适合 Linux + NVIDIA。
+
+## Sim2Real / Real2Sim / Real2Sim2Real
+
+以后必须分别研究：
+
+```text
+Sim2Real
+sim training / testing
+→ real deployment
+
+Real2Sim
+real observation / telemetry
+→ calibrated simulation / digital twin
+
+Real2Sim2Real
+real evidence
+→ simulator calibration/randomization
+→ training / analysis
+→ real execution
+→ new real evidence
+→ recalibration
+```
+
+但：
+
+```text
+simulator fit 得更好
+≠ simulator 就是真实世界
+```
+
+还要结合 identifiability：多个参数组合可能产生相似 trajectory。
+
+## 未来还需要继续调研的“工程后半程”问题
+
+暂时不继续拆顶层文件，但要保留：
+
+```text
+runtime failure monitoring
+fault injection / sensor dropout / latency
+watchdog / degraded mode
+model update regression
+checkpoint / rollback
+failure replay / telemetry
+training-data / model provenance
+security / adversarial physical inputs
+world-state / memory integrity
+long-running memory leak / cache growth
+online adaptation safety
+real robot wear / data-collection cost
+low-cost proxy robot validation
+```
+
+这些不决定 Clover 的最终 representation，但会决定结果是否可信、能不能长期运行、能不能复现。
 
 ## Vision alone 双轴协议
 
@@ -185,13 +247,27 @@ reflection ≠ falsification
 
 ## 后续阶段
 
-Stage 2 才逐方法做 one-method-one-report；Stage 3 横向总结优缺点与共同 gap；Stage 4 才正式提出 Clover-original hypothesis / algorithm；之后再实现、实验、反思。
+### Stage 2 — Analysis
+
+对真正重要的方法逐个做 one-method-one-report 机制分析。
+
+### Stage 3 — Synthesis
+
+统一比较优点、缺点、trade-off、capability matrix、Failure Matrix 和共同 gap。
+
+### Stage 4 — Innovation
+
+只有当 gap 已被充分证明后，才正式提出 Clover-original hypothesis / algorithm。
+
+### Stage 5–7
+
+实现 → 实验 → 反思。
 
 ## 当前不做什么
 
-目前不冻结 explicit/latent/object/field/token、hierarchy、information-gain objective、Transformer/non-Transformer 或任何新 Clover core algorithm。
+目前不冻结 explicit/latent/object/field/token、hierarchy、information-gain objective、Transformer/non-Transformer、具体 edge 芯片、具体 simulator 或任何新 Clover core algorithm。
 
-旧 Clover 机制仍然只是未来 Innovation 阶段的候选 idea，是否保留必须由 Research → Analysis → Synthesis → Evaluation 决定。
+Mac mini M4 是当前参考开发环境，不是最终答案；simulator 是实验仪器，不是真实世界。
 
 ---
 
