@@ -36,9 +36,7 @@ interesting mechanism
 → defend mechanism
 ```
 
-This Survey is the prior-art and synthesis layer.
-
-It is intentionally flatter than the older `docs/research-map/` structure: a small number of larger Markdown files should let a reader scan the whole research landscape quickly.
+This Survey is the prior-art and synthesis layer. It is intentionally flatter than the older `docs/research-map/` structure: a small number of larger Markdown files should let a reader scan the whole research landscape quickly.
 
 ## Reading order
 
@@ -53,79 +51,56 @@ It is intentionally flatter than the older `docs/research-map/` structure: a sma
 
 ## Source inputs used for this synthesis
 
-This Survey incorporates screened material from three internal documents:
+This Survey incorporates screened material from three internal documents.
 
-### 1. Clover Research Reset — 2026-10-14
+### Clover Research Reset — 2026-10-14
 
 Kept:
-
-- highest SSOT;
-- product goal;
-- "benchmark as instrument" principle;
+- highest SSOT and product goal;
+- benchmark-as-instrument principle;
 - V0–V3 vision protocol;
-- research map;
-- benchmark/task map;
+- research map and benchmark/task map;
 - hardware-as-design-variable principle;
-- representation questions;
-- model and dataset links.
+- representation questions and primary links.
 
 Not kept as current commitments:
-
 - immediate reproduction schedule;
-- any implication that one baseline must be reproduced before research can proceed;
-- CPU-first as a scientific prior.
+- CPU-first as a scientific prior;
+- any pre-reset mechanism as a final answer.
 
-### 2. `news_answers.md`
+### `news_answers.md`
 
 Kept as candidate research hypotheses:
-
 - Evidence Replay;
 - query-conditioned temporal support;
-- separation of epistemic state and licence lifecycle;
-- proof-carrying auditability;
+- separation of epistemic state and verification lifecycle;
+- proof/auditability ideas;
 - counter-witness causality;
-- visual/event IR;
+- sparse/event-like visual IR;
 - epistemic compute scheduling;
 - static/dynamic verification compilation;
 - geometry as a proposal heuristic;
-- shortcut/leakage audits;
-- long-horizon world-change evaluation.
+- state-transition affordance;
+- active perception and long-horizon world-change evaluation.
 
-Not kept as SSOT:
+Old implementation priority labels are not SSOT.
 
-- old P0/P1/P2 implementation ordering;
-- historical architecture-specific assumptions;
-- any old statement that explicit authority is already the final answer.
+### `news(5).md`
 
-### 3. `news(5).md`
-
-Used only as a signal archive.
-
-A news item enters this Survey only when at least one of the following exists:
-
-- a primary paper;
-- an official model card;
-- an official project page;
-- an official code repository.
-
-Secondary news and vendor claims remain useful for tracking, but they are not treated as independent scientific evidence.
+Used only as a signal archive. A news item enters the Survey as durable evidence only when primary/official material is available. Funding, secondary summaries and vendor claims remain signals, not scientific facts.
 
 ## Evidence labels
 
-Throughout the Survey:
-
-- **PRIMARY_PAPER** — primary preprint or peer-reviewed paper;
-- **OFFICIAL_PROJECT** — official project/model page;
-- **OPEN_SOURCE** — public implementation/checkpoint;
-- **OFFICIAL_REPORTED_RESULT** — company/lab result without independent reproduction;
-- **SURVEY_SIGNAL** — useful trend, not a scientific result by itself;
-- **INTERNAL_HYPOTHESIS** — Clover candidate;
-- **OPEN** — unresolved;
+- **PRIMARY_PAPER** — primary preprint or peer-reviewed paper.
+- **OFFICIAL_PROJECT** — official model/project page.
+- **OPEN_SOURCE** — public implementation/checkpoint.
+- **OFFICIAL_REPORTED_RESULT** — company/lab result without independent reproduction.
+- **SURVEY_SIGNAL** — useful trend, not a scientific result by itself.
+- **INTERNAL_HYPOTHESIS** — Clover candidate.
+- **OPEN** — unresolved.
 - **SUPERSEDED** — historical, no longer current.
 
 ## Research landscape at a glance
-
-The current landscape can be understood as several different answers to the world-understanding problem.
 
 | Route | Typical internal state | Primary strength | Typical weakness / unresolved issue |
 |---|---|---|---|
@@ -146,72 +121,48 @@ No row is declared the winner.
 ## Current strongest tensions
 
 ### Explicit vs distributed
+Physical variables can emerge in distributed/hierarchical video representations rather than only compact classical state. This is direct counter-pressure against assuming that explicit state is always the correct answer.
 
-Meta's 2026 mechanistic analysis of video models argues that physical variables can be distributed and hierarchically organized rather than represented as compact classical state variables.
-
-Primary paper: https://arxiv.org/abs/2602.07050  
-Official Meta page: https://ai.meta.com/research/publications/interpreting-physics-in-video-world-models/
-
-This is direct counter-evidence against assuming that "understanding" requires explicit compact variables.
+- Paper: https://arxiv.org/abs/2602.07050
+- Official: https://ai.meta.com/research/publications/interpreting-physics-in-video-world-models/
 
 ### Prediction vs reconstruction vs generation
-
 - V-JEPA 2/2.1: predictive latent representation.
 - VGGT/VGGT-Ω: learned geometry and reconstruction.
 - Atlas: reconstruction + generation + simulation.
-- Cosmos 3: unified reasoning / world generation / action generation.
+- Cosmos 3: reasoning + world generation + action generation.
 
-The unresolved question is not "which architecture is newest?" but:
-
-> **Which learning objective produces the state most useful for persistent understanding and action?**
+Open question: **which learning objective produces the state most useful for persistent understanding and action?**
 
 ### Observation vs interaction
-
-V-JEPA 2 demonstrates broad learning from passive web video and then adds comparatively little robot interaction data for action-conditioned planning.
-
-Figure and Skild report large gains from human/robot experience scaling.
-
-Open question:
-
-> **What information about causality, controllability and affordance is fundamentally unavailable from passive observation?**
+V-JEPA 2 shows broad passive-video learning before a smaller action-conditioned stage; robot foundation models increasingly mix human video, robot data, simulation and self-play. Open question: **what information about causality, controllability and affordance is unavailable from passive observation alone?**
 
 ### World state vs direct policy
-
-Gemini Robotics ER 2 explicitly separates embodied reasoning from low-level execution, while systems such as π0.5, Helix 2.5 and S1 show strong end-to-end or foundation-policy behavior.
-
-Open question:
-
-> **What measurable capability is gained by a persistent world state that a sufficiently strong policy cannot obtain implicitly?**
+Gemini Robotics ER 2 explicitly separates high-level embodied reasoning from lower-level execution, while π0.5, Helix and Skild represent stronger policy/foundation routes. Open question: **what measurable capability is gained by a persistent worldview that a sufficiently strong policy cannot obtain implicitly?**
 
 ### Visual truth vs plausible generation
+A generative model can produce coherent rollouts while inventing underdetermined hidden details. Clover must preserve the difference between plausible completion and evidence-supported world state.
 
-Generative world models can produce coherent rollouts, but plausible video is not identical to a correct world state.
+## Survey maturity criteria
 
-This distinction is central for Clover.
-
-## Current survey objective
-
-The Survey is considered sufficiently mature only when we can answer, for each major route:
-
+For every major route we should eventually answer:
 1. What representation does it assume?
-2. What information is learned vs engineered?
-3. How does it treat space?
-4. How does it treat time?
-5. How does it maintain identity?
-6. How does it distinguish unknown from false?
-7. How does it treat physical law?
-8. Does it support interventions/counterfactuals?
-9. What memory persists?
-10. How does it connect to action?
-11. What real capability has been demonstrated?
-12. What remains unresolved?
-13. What code/data is public?
-14. What would falsify its relevance to Clover?
+2. What is learned vs engineered?
+3. How does it treat space and time?
+4. How does it maintain identity?
+5. How does it distinguish unknown from false?
+6. How does it treat physical law?
+7. Does it support interventions/counterfactuals?
+8. What memory persists?
+9. How does it connect to action?
+10. What real capability has been demonstrated?
+11. What remains unresolved?
+12. What code/data is public?
+13. What would falsify its relevance to Clover?
 
 ## Current phase boundary
 
 We are **not** yet freezing:
-
 - a final world representation;
 - an explicit-vs-latent decision;
 - a Transformer-vs-non-Transformer decision;
