@@ -4,7 +4,7 @@ Last updated: 2026-10-14
 
 This file preserves the strongest internal ideas from pre-reset Clover and `news_answers.md` **as hypotheses, not commitments**.
 
-The filtering rule is:
+Filtering rule:
 
 ```text
 external evidence / internal contradiction
@@ -14,290 +14,129 @@ external evidence / internal contradiction
 → only later decide whether to implement
 ```
 
-No item in this file is part of the SSOT merely because it originated inside Clover.
-
----
-
 ## H1 — Evidence Replay / Dual Memory
 
-### Problem
+**Problem:** compressed world state can discard evidence that later becomes relevant to a new query, contradiction or reinterpretation.
 
-A compressed world state is useful for efficient reasoning, but compression can discard visual evidence that becomes important later when:
-
-- a new query appears;
-- a belief is contradicted;
-- a verifier challenges a claim;
-- an earlier ambiguous observation becomes interpretable after later evidence.
-
-### Candidate
-
-Maintain two conceptually different things:
+**Candidate:** keep evidence memory conceptually distinct from current world state.
 
 ```text
 visual evidence memory
-        ↓ compile / infer
+→ compile / infer
 current world state
 ```
 
-The world state is not identical to memory. Historical evidence can be selectively replayed when a local part of the world must be reconsidered.
+Historical evidence can be selectively replayed for local revision.
 
-### External pressure
+**External pressure:** VISTA shows that visual-memory organization/retrieval can unlock long-horizon reasoning without changing the base model. Paper: https://arxiv.org/abs/2610.02200
 
-VISTA demonstrates that visual-memory organization and retrieval can unlock long-horizon reasoning without changing the underlying base model.
-
-- Paper: https://arxiv.org/abs/2610.02200
-
-### Falsifier
-
-If a learned recurrent/contextual state achieves equal or better:
-
-- long-occlusion continuity;
-- belief revision;
-- new-query recovery;
-- memory cost;
-
-without evidence replay, this hypothesis loses its justification.
+**Falsifier:** learned recurrent/contextual state matches or exceeds long-occlusion continuity, belief revision and memory cost without replay.
 
 **Status:** `INTERNAL_HYPOTHESIS`
 
----
-
 ## H2 — Visual World Compiler
 
-### Problem
+**Problem:** staged evidence transforms, state, queries and revision can develop duplicate semantics if treated as unrelated modules.
 
-Clover historically accumulated frontend transforms, evidence primitives, world state, queries, licences and update logic. Treating each as an independent module risks duplicate semantics.
-
-### Candidate abstraction
-
-Treat world formation as a compilation process:
+**Candidate abstraction:**
 
 ```text
 visual history
-→ evidence / intermediate representation
+→ evidence / IR
 → spatial-temporal structure
 → world representation
 → query/action-facing state
 ```
 
-with reverse operations:
+with selective invalidation/re-analysis after new evidence or queries.
 
-```text
-new query → selective re-analysis
-counter-evidence → dependency invalidation
-belief revision → local recompile
-```
+This is an abstraction for dependency/provenance, not a commitment to compiler-style software architecture.
 
-### Why it remains useful after reset
-
-This is not a proposal to imitate LLVM. It is an abstraction for:
-
-- staged information transforms;
-- dependency tracking;
-- local invalidation;
-- provenance;
-- query-sufficiency.
-
-### Falsifier
-
-If a unified learned recurrent/world model handles these functions more simply and robustly without explicit staged compilation/dependency machinery, the compiler abstraction should remain documentation only or be removed.
-
-**Status:** `INTERNAL_HYPOTHESIS`
-
----
+**Falsifier:** a unified learned recurrent/world model handles revision, queries and provenance more simply and robustly.
 
 ## H3 — Query-Sufficient Representation
 
-### Problem
+**Problem:** compression, projection, pruning or downsampling can silently delete information required later.
 
-Compression, token pruning, downsampling, projection and latent bottlenecks can make the system faster while silently deleting information needed for later world questions.
+**Candidate principle:** information may be discarded, but a transform should preserve distinctions needed by the downstream query/task family it claims to support.
 
-### Candidate principle
+Related evidence:
+- V-JEPA shows useful representation can intentionally discard raw-pixel detail.
+- ReWAM shows reconstruction fidelity is not the same as control usefulness: https://arxiv.org/abs/2609.38163
+- VISTA shows discarded historical evidence may matter later.
 
-Every authoritative transform should be evaluated relative to the query/task family it claims to support:
-
-```text
-before transform: query distinction exists
-        ↓ transform
-required distinction must remain recoverable
-```
-
-The claim is not that every representation must be lossless. It is that information loss must be aligned with declared downstream capability.
-
-### Related prior art
-
-- V-JEPA 2/2.1: predictive representations intentionally discard raw-pixel detail while preserving useful structure.
-- ReWAM: reconstruction fidelity alone does not imply control usefulness.
-- VISTA: discarded historical visual evidence can matter later.
-
-### Falsifier
-
-If a representation that fails the proposed query-sufficiency test nevertheless generalizes and acts better on the full embodied evaluation hierarchy, the test is incomplete or wrong.
-
-**Status:** `INTERNAL_HYPOTHESIS`
-
----
+**Falsifier:** representations that violate proposed sufficiency diagnostics consistently generalize and act better on full embodied evaluation.
 
 ## H4 — Query-Conditioned Temporal Persistence
 
-### Problem
+**Problem:** evidence, object identity, place state and task state live on different time scales.
 
-Different world structures operate on different temporal scales:
-
-- texture/motion evidence can change rapidly;
-- object identity may persist through occlusion;
-- room/place structure may persist much longer;
-- task state can span minutes.
-
-A single fixed memory horizon is unlikely to be optimal.
-
-### Candidate
-
-For representation level or state component `l` and query family `q`:
+**Candidate:** effective retention should depend on state/query/dynamics rather than one fixed history window.
 
 ```text
-H_l(q) = effective temporal support required for that state/query
+H_l(q) = temporal support required by state level l for query/task q
 ```
 
-The horizon should depend on evidence persistence, dynamics, query dependency and world change rather than fixed hand-written frame counts.
+Compare flat history, fixed hierarchy, learned recurrent memory and adaptive/query-conditioned persistence.
 
-### Competing baselines
+**Falsifier:** adaptive persistence gives no capability/memory advantage at matched compute.
 
-1. flat history window;
-2. fixed hierarchical windows;
-3. learned recurrent memory;
-4. query-conditioned persistence.
+## H5 — Separate Epistemic State from Verification / Validity State
 
-### Falsifier
-
-If adaptive persistence does not improve long-occlusion/place/task reasoning at matched compute/memory, remove it.
-
-**Status:** `INTERNAL_HYPOTHESIS`
-
----
-
-## H5 — Epistemic State Must Be Separate from Authority / Verification State
-
-### Problem
-
-Several concepts are easy to collapse incorrectly:
+Do not collapse:
 
 ```text
 world uncertainty
 model confidence
 statistical calibration
 claim validity
-proof / verification lifecycle
+proof/provenance lifecycle
 ```
 
-### Candidate distinction
+A world hypothesis can be observed/inferred/unobserved/ambiguous/conflicted while a previously issued claim artifact can independently be valid/stale/revoked.
 
-A world may be:
+This distinction may remain useful even if the old Licence implementation disappears.
 
-```text
-observed
-inferred
-unobserved
-ambiguous
-conflicted
-```
-
-while a particular issued claim/proof could separately be:
-
-```text
-valid
-stale
-revoked
-```
-
-Historical example: `Underdetermined` should not automatically become a lifecycle state of a previously issued licence.
-
-### Why it matters independent of the old Licence design
-
-Even if the old proof-carrying licence mechanism is replaced, separating *what the system knows* from *whether a particular artifact is valid* remains conceptually important.
-
-### Falsifier
-
-If a simpler unified probabilistic representation supports equal correctness, revision, refusal and planning without semantic confusion, the separate authority abstraction may be unnecessary.
-
-**Status:** `INTERNAL_HYPOTHESIS`
-
----
+**Falsifier:** a simpler unified probabilistic representation provides equal correctness, revision, refusal and planning without semantic confusion.
 
 ## H6 — Proof-Carrying / Auditable World Assertions
 
-### Problem
+**Problem:** long-horizon robots can act on stale or origin-unknown beliefs.
 
-A robot can act on a belief that was once correct but is now stale, or on an assertion whose evidence source is unknown.
+**Candidate:** important world/decision assertions may carry compact machine-checkable dependencies/provenance.
 
-### Candidate
+Possible alternatives to compare:
+- Bayesian belief only;
+- calibrated confidence;
+- event-sourced history;
+- proof/provenance-bearing claim;
+- implicit state + audit log.
 
-Important world/decision assertions may carry machine-checkable provenance such as:
-
-```text
-evidence dependency
-world version / state dependency
-claim identity
-validity / stale status
-```
-
-Historical Clover implemented a richer licence idea; the reset asks whether the useful essence can be retained without over-engineering the representation.
-
-### Competing alternatives
-
-- Bayesian belief state only;
-- confidence calibration;
-- event-sourced state history;
-- proof-carrying claims;
-- learned implicit state with external audit logs.
-
-### Falsifier
-
-If explicit proof/provenance adds meaningful latency/complexity without improving recovery, safety, debugging or long-horizon correctness, it should not be core architecture.
-
-**Status:** `INTERNAL_HYPOTHESIS`
-
----
+**Falsifier:** explicit provenance adds complexity/latency without improving recovery, safety, debugging or long-horizon correctness.
 
 ## H7 — Counter-Witness-First Causality
 
-### Problem
+**Problem:** temporal correlation is weaker than causal structure.
 
-Learning temporal correlations does not necessarily reveal causal structure.
-
-### Candidate
-
-Start from violated expectation:
+**Candidate:** begin from violated expectation.
 
 ```text
-predicted / expected world
+expected world
 → new observation disagrees
 → locate minimum broken dependency
-→ propose causal explanation
+→ causal candidate
 → test through future prediction/intervention
 ```
 
-This makes causal learning a form of structured model revision rather than an isolated graph-learning module.
+This connects prediction error, model revision and causal discovery.
 
-### External context
-
-CausalVQA and action-conditioned world models reinforce the need to distinguish prediction from counterfactual/intervention competence.
-
-### Falsifier
-
-If counter-witness localization does not improve intervention prediction beyond ordinary learned dynamics at matched data/compute, reject the mechanism.
-
-**Status:** `INTERNAL_HYPOTHESIS`
-
----
+**Falsifier:** does not improve intervention prediction over ordinary learned dynamics at matched data/compute.
 
 ## H8 — Epistemic Compute Scheduling
 
-### Problem
+**Problem:** equal computation everywhere wastes resources.
 
-A robot should not spend equal computation everywhere.
-
-Potential demand signals include:
+Potential demand signals:
 
 ```text
 unresolved evidence
@@ -308,259 +147,108 @@ query/task dependency
 expected information gain
 ```
 
-### Candidate
-
 Use epistemic state to decide **where/how much to compute**, not to decide truth directly.
 
-```text
-uncertain / relevant region → deeper or higher-resolution computation
-stable / irrelevant region  → reuse / skip / coarsen
-```
-
-### Related frontier signals
-
-- dynamic computation in VLA systems;
-- sparse event processing;
-- active view selection (Vantage).
-
-### Falsifier
-
-If dynamic allocation causes unstable semantics or saves negligible compute at equal capability, use uniform computation.
-
-**Status:** `INTERNAL_HYPOTHESIS`
-
----
+**Falsifier:** dynamic allocation saves negligible end-to-end compute or destabilizes semantics.
 
 ## H9 — Sparse Visual Event IR
 
-### Problem
+**Problem:** consecutive frames contain high redundancy; meaningful physical change may be sparse.
 
-Consecutive visual frames contain large redundant regions, while physically meaningful change can be sparse.
+**Candidate:** keep RGB as scientific input, derive sparse event-like internal evidence from change/prediction residuals.
 
-### Candidate
+External evidence: Motion-aware Event Suppression demonstrates high-rate sparse processing and downstream compute savings: https://arxiv.org/abs/2602.23204
 
-Standard RGB remains the scientific input, but internal evidence could use an event-like representation:
+**Falsifier:** eventization loses world/query information or worsens total latency.
 
-```text
-RGB history
-→ change / prediction residual
-→ sparse signed event evidence
-→ world update
-```
+## H10 — Geometry as Proposal / Heuristic
 
-This avoids binding Clover to event-camera hardware while testing the computational value of sparsity.
+**Problem:** a useful world representation should reduce downstream reasoning cost.
 
-### External evidence
+**Candidate:** geometry informs proposal ordering, reachability or lower-bound heuristics without becoming a separate decision authority.
 
-Motion-aware Event Suppression demonstrates high-speed sparse event processing and downstream token reduction:
-https://arxiv.org/abs/2602.23204
-
-### Falsifier
-
-If eventization loses query/world information or total system latency is worse than dense processing, reject it.
-
-**Status:** `INTERNAL_HYPOTHESIS`
-
----
-
-## H10 — Geometry as an Admissible Proposal / Heuristic
-
-### Problem
-
-A world representation should make downstream reasoning easier, not merely answer descriptive queries.
-
-### Candidate
-
-Use spatial/geometry structure to reduce search or prioritize proposals while keeping final decision legality/verification separate.
-
-```text
-world geometry
-→ proposal ordering / reachability heuristic
-→ decision search
-```
-
-This is more conservative than creating a second geometry-specific planner.
-
-### Falsifier
-
-If geometry does not reduce planning cost or improve generalization under matched correctness, it is not carrying useful decision structure.
-
-**Status:** `INTERNAL_HYPOTHESIS`
-
----
+**Falsifier:** geometry does not reduce planning cost or improve generalization at matched correctness.
 
 ## H11 — Static / Dynamic Verification Compilation
 
-### Problem
+If future Clover retains explicit checking, invariant/static structure could be precompiled while current evidence produces a small dynamic witness.
 
-If future Clover uses explicit verification, repeatedly checking invariant structure at runtime may be wasteful.
+**Falsifier:** explicit verification is not core, or precompilation gives no meaningful latency benefit.
 
-### Candidate
+## H12 — State-Transition Affordance Instead of Category→Action Lookup
 
-Separate what is static from what depends on current visual evidence:
+A general robot should not depend on rules like `ball → push`.
 
-```text
-static schema / invariant / program structure
-→ precompiled proof/check structure
-
-current evidence / state
-→ small dynamic witness
-```
-
-### Falsifier
-
-If verification is not a core architecture or compiled checking does not materially reduce latency without weakening semantics, remove this mechanism.
-
-**Status:** `INTERNAL_HYPOTHESIS`
-
----
-
-## H12 — State-Transition Affordance Instead of Category-to-Action Lookup
-
-### Problem
-
-A general robot cannot rely on rules such as:
-
-```text
-ball → push
-block → grasp
-```
-
-because novel objects and tasks break category-action tables.
-
-### Candidate
-
-Represent action/tool usefulness through expected world transformation:
+Candidate:
 
 ```text
 required world change ΔW_goal
-vs
-predicted capability effect ΔW_tool
+vs predicted capability effect ΔW_tool
 → compatibility / affordance
 ```
 
-The object's name is secondary.
+The object's human name becomes secondary.
 
-### Related prior art
+ReWAM/HWAM/world-action models reinforce the importance of action-conditioned/task-relevant state.
 
-ReWAM/HWAM/world-action models all emphasize task-relevant or action-conditioned state.
+**Falsifier:** direct learned policies transfer better to novel objects/tasks at equal data/compute with no benefit from explicit transformation matching.
 
-### Falsifier
+## H13 — Type as Dynamical / Transformation Equivalence
 
-If learned direct policy transfer outperforms explicit transformation matching on novel-object/generalization tasks at equal data/compute, the explicit affordance state may be unnecessary.
+Candidate internal type is a reusable equivalence class of geometry, motion response, interaction, deformability or affordance rather than only a human category name.
 
-**Status:** `INTERNAL_HYPOTHESIS`
+**Falsifier:** semantic categories or distributed features consistently transfer better to unseen objects/actions.
 
----
+## H14 — Active Perception as Unknown→Action Bridge
 
-## H13 — Type as a Dynamical / Transformation Equivalence Class
-
-### Problem
-
-Human category names may not be the most useful ontology for robot action.
-
-### Candidate
-
-A machine type can be induced from reusable behavior:
+When current view is insufficient:
 
 ```text
-entities with similar predicted transformations / interactions
-→ same internal type family
-```
-
-Possible dimensions:
-
-- geometry;
-- motion response;
-- support/contact behavior;
-- deformability;
-- affordance.
-
-### Falsifier
-
-If semantic categories or distributed features transfer better to unseen objects/tasks, do not preserve an explicit dynamical type system.
-
-**Status:** `INTERNAL_HYPOTHESIS`
-
----
-
-## H14 — Active Perception as Unknown-to-Action Bridge
-
-### Problem
-
-Some world questions are not identifiable from the current view.
-
-### Candidate
-
-Represent missing evidence well enough to select an information-gaining visual action:
-
-```text
-current ambiguity
+ambiguity
 → candidate visual action
 → expected information gain
 → look/move/inspect
-→ world update
+→ updated world
 ```
 
-### External pressure
+External pressure: Vantage shows view/evidence selection can improve spatial reasoning: https://arxiv.org/abs/2610.11810
 
-Vantage demonstrates that evidence/view selection can improve spatial reasoning:
-https://arxiv.org/abs/2610.11810
-
-### Falsifier
-
-If passive context/memory reaches equivalent reliability and task success without active view selection, active perception is not universally required.
-
-**Status:** `INTERNAL_HYPOTHESIS`
-
----
+**Falsifier:** passive context/memory reaches equal reliability/task success without active evidence acquisition.
 
 ## H15 — Worldview Value Must Be Proven Through Action
 
-### Problem
+An explicit world representation is scientifically valuable only if it produces measurable benefit such as:
 
-An explicit world representation can be interpretable yet unnecessary for competent behavior.
-
-### Candidate scientific criterion
-
-Clover's worldview is valuable only if it produces measurable benefit such as:
-
-- lower sample complexity;
 - better unseen-scene transfer;
-- lower planning/search cost;
+- lower sample complexity;
+- faster planning/search;
 - stronger world-change recovery;
 - fewer unjustified actions;
-- better long-horizon task success;
+- better long-horizon success;
 - better diagnosis/revision.
 
-### Critical comparison
+Critical eventual comparison:
 
 ```text
 strong policy
 vs
-same/similar policy + Clover world representation
+matched policy + Clover world representation
 ```
 
-with matched data, compute and task protocol.
-
-This is a central falsifier for the entire explicit-worldview program.
-
-**Status:** `INTERNAL_HYPOTHESIS / REQUIRED_TEST`
+This is a required falsifier for the explicit-worldview program itself.
 
 ---
 
-# Hypothesis policy
+# Promotion rule
 
-These ideas survived screening because they address durable contradictions. They are **not** the next architecture by default.
+Before any hypothesis becomes next-generation Clover architecture, it needs:
 
-Before promotion, each hypothesis needs:
-
-1. clear operational variables;
+1. operational variables/definitions;
 2. prior-art comparison;
-3. a discriminating experiment;
-4. a kill condition;
-5. an action-relevance argument;
+3. discriminating experiment;
+4. kill condition;
+5. action-relevance argument;
 6. compute/hardware implications;
-7. evidence that it unifies rather than adds another side path.
+7. evidence that it unifies rather than adds a side path.
 
-The correct outcome may be to merge, transform or delete several of them.
+The correct outcome may be to merge, transform or delete several hypotheses.
