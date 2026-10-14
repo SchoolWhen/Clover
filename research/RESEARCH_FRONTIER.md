@@ -22,6 +22,7 @@ Stable concepts belong in the Stage-1 topic files and source maps. Add a source 
 
 | Date | Source | Evidence | Why it matters now | Does **not** prove | Stage-1 landing |
 |---|---|---|---|---|---|
+| 2026-10-13 | LIBERO-RIG — https://arxiv.org/abs/2610.18843 | `PRIMARY_PAPER` | holds tasks fixed while perturbing camera mounting/calibration, actuation gain, control rate, proprioception, base/table geometry and gripper setup; exposes hardware/setup fragility distinct from scene/task generalization | one benchmark covers all real hardware drift or simulator rig perturbations predict target-robot reliability | engineering validation · embodiment robustness · fault injection |
 | 2026-10-13 | DR-WM / From Pixels to Executable Physics — https://arxiv.org/abs/2610.17630 | `PRIMARY_PAPER` | separates RGB geometry from contact/friction properties calibrated by action-response; predicts executable physical consequences | passive RGB identifies friction/contact generally | physical properties · identifiability · model discovery |
 | 2026-10-13 | Gemini 4 Argon for Robotics — https://developers.googleblog.com/gemini-4-argon-for-robotics/ | `OFFICIAL_REPORTED_RESULT` | strong general multimodal reasoner/tool-user spanning physical reasoning, Real2Sim and robot workflows | vision-only learning or persistent world state is sufficient/necessary | frontier comparator · general reasoner counter-hypothesis |
 | 2026-10-13 | Mobility-Budget-Constrained Semantic Exploration — https://arxiv.org/abs/2610.17562 | `PRIMARY_PAPER` | explicit uncertainty/information gain remains a strong structured active-perception baseline | large learned world models are unnecessary in general | value of information |
@@ -132,6 +133,14 @@ world model for belief
 world simulator
 ≠
 world data engine
+
+scene / task generalization
+≠
+hardware / calibration / control-loop robustness
+
+model accuracy
+≠
+runtime reliability
 ```
 
 ---
@@ -157,6 +166,7 @@ GR00T N1.7 / OpenVLA / π0.5 direct-policy baselines
 Video2World + RoboWM-Bench
 What-If World / CRONOS / CausalPhys / CG-World
 Splat-CBF / active-perception baselines
+LIBERO-RIG / deployment-robustness baselines
 Mental-Models / recursive-ToM references for social hidden state
 ```
 
@@ -181,6 +191,9 @@ model misspecification handling
 hypothesis provenance/refutation memory
 safety / cost / irreversibility / permission
 self/embodiment modeling
+hardware/setup robustness
+runtime latency / jitter / deadline behavior
+fault tolerance / recovery
 world-model role: belief / simulator / data engine / direct policy
 reproducibility
 ```
