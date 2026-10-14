@@ -17,12 +17,13 @@ For a new agent, researcher or contributor:
 1. [`SSOT.md`](SSOT.md) — fixed research question, product goal and scientific stance.
 2. [`research/PIPELINE.md`](research/PIPELINE.md) — the seven-stage research lifecycle.
 3. [`research/RESEARCH.md`](research/RESEARCH.md) — the active broad research inventory.
-4. [`research/RESEARCH_STATE_VARIABLES.md`](research/RESEARCH_STATE_VARIABLES.md) — what kinds of world variables matter and what evidence constrains them.
-5. [`research/RESEARCH_IDENTIFIABILITY.md`](research/RESEARCH_IDENTIFIABILITY.md) — predictability vs observability vs identifiability, partial observability and intervention.
-6. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md) — current frontier sources checked through the latest Stage-1 refresh.
-7. [`AGENTS.md`](AGENTS.md) — operating rules for research and coding agents.
-8. [`STATUS.md`](STATUS.md) — current stage and non-goals.
-9. [`research/README.md`](research/README.md) — flat research navigation.
+4. [`research/RESEARCH_STATE_VARIABLES.md`](research/RESEARCH_STATE_VARIABLES.md) — what kinds of world state may matter and what evidence currently constrains them.
+5. [`research/RESEARCH_IDENTIFIABILITY.md`](research/RESEARCH_IDENTIFIABILITY.md) — predictability vs observability vs identifiability, partial observability and information limits.
+6. [`research/RESEARCH_PHYSICAL_PROPERTIES.md`](research/RESEARCH_PHYSICAL_PROPERTIES.md) — hidden physical properties, contact/deformation, topology change and intervention datasets.
+7. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md) — the current research edge through 2026-10-14.
+8. [`AGENTS.md`](AGENTS.md) — operating rules for research and coding agents.
+9. [`STATUS.md`](STATUS.md) — current stage and non-goals.
+10. [`research/README.md`](research/README.md) — flat research navigation.
 
 ## Current stage — 1 Research
 
@@ -60,25 +61,43 @@ We are collecting:
 
 The active inventory is [`research/RESEARCH.md`](research/RESEARCH.md).
 
-## Stage-1 structure
+## Three Stage-1 questions before architecture
 
-The current flat research entry has four complementary surfaces:
+The current foundation is organized around three increasingly precise questions:
 
 ```text
-RESEARCH.md
-    what directions / methods / datasets exist?
-
-RESEARCH_STATE_VARIABLES.md
-    what does “world state” actually contain?
-
-RESEARCH_IDENTIFIABILITY.md
-    which variables are determined by which evidence, under what assumptions?
-
-RESEARCH_FRONTIER.md
-    what new primary/official work materially changes the map right now?
+What relevant research exists?
+        ↓
+What state actually exists in the real world?
+        ↓
+What evidence is sufficient to know that state?
 ```
 
-This separation is intentional. It prevents the repository from treating a new model, a latent variable and an information-theoretic limitation as the same kind of research object.
+This creates three corresponding research surfaces:
+
+- [`RESEARCH.md`](research/RESEARCH.md) — methods, theories, datasets, benchmarks and directions;
+- [`RESEARCH_STATE_VARIABLES.md`](research/RESEARCH_STATE_VARIABLES.md) — geometry, identity, persistence, physical parameters, function, causality and epistemic state;
+- [`RESEARCH_IDENTIFIABILITY.md`](research/RESEARCH_IDENTIFIABILITY.md) — which variables are observable, only statistically predictable, identifiable after interaction, or remain uncertain.
+
+[`RESEARCH_PHYSICAL_PROPERTIES.md`](research/RESEARCH_PHYSICAL_PROPERTIES.md) then deepens the most difficult physical boundary: mass/inertia, friction, stiffness, temperature, fluids, granular media, deformables, cutting/topology change and intervention-sensitive evaluation.
+
+A central Stage-1 distinction is:
+
+```text
+statistically predictable from pixels
+≠
+physically identifiable from pixels
+```
+
+and another is:
+
+```text
+vision alone
+≠
+passive vision only
+```
+
+An embodied agent may act on the world and still receive only visual sensory evidence; controlled action can reveal information that passive observation cannot.
 
 ## What Stage 1 currently covers
 
@@ -92,22 +111,24 @@ The inventory is intentionally wider than “world models” or “VLA.” It in
 - predictive video representation;
 - learned geometry;
 - neural scene representations, NeRF, 3DGS and 4D reconstruction;
+- transparent/reflective perception and severe observation ambiguity;
 - object-centric representation;
 - scene graphs and semantic mapping;
 - persistent and episodic memory;
-- world change, multi-session maps and belief revision;
+- belief revision and dynamic-world change;
 - intuitive, relational and quantitative physics;
-- mass, density, inertia, friction, stiffness and material-property inference;
-- articulated, deformable, soft-body, contact and liquid dynamics;
+- hidden physical properties such as mass, friction, stiffness and temperature;
+- contact, deformable, fluid and granular dynamics;
+- irreversible topology change such as splitting, merging and cutting;
 - structured / physics-informed world models;
-- causal representation learning and counterfactual reasoning;
-- active perception, intervention and system identification;
+- causal representation learning and counterfactual/intervention benchmarks;
+- active perception and system identification;
 - generative world models;
 - world-action models;
 - VLA and direct policies;
 - embodied reasoning and robot foundation models;
 - human / egocentric video learning;
-- affordance and functional-object learning;
+- affordance learning;
 - model-based control;
 - semantic memory;
 - uncertainty calibration and OOD;
@@ -115,35 +136,9 @@ The inventory is intentionally wider than “world models” or “VLA.” It in
 - simulation / synthetic data;
 - robot datasets;
 - benchmark methodology;
-- systems integration and compounded failure;
-- multi-agent / social world modeling.
+- systems integration and compounded failure.
 
 If another direction materially constrains the mother question, it should be added even if it does not fit an existing category.
-
-## A central Stage-1 distinction
-
-Current evidence increasingly requires Clover to keep this distinction explicit:
-
-```text
-statistically predictable from pixels
-≠
-physically identifiable from pixels
-```
-
-A model can estimate mass, material or future motion using strong learned priors without proving that the visual evidence uniquely determines those variables.
-
-Therefore Stage 1 now asks, per variable:
-
-```text
-What is directly observed?
-What is inferred from passive temporal evidence?
-What becomes clearer from active viewpoints?
-What requires action-response / system identification?
-What currently relies on non-visual or privileged state?
-What uncertainty remains after all allowed evidence?
-```
-
-See [`research/RESEARCH_STATE_VARIABLES.md`](research/RESEARCH_STATE_VARIABLES.md) and [`research/RESEARCH_IDENTIFIABILITY.md`](research/RESEARCH_IDENTIFIABILITY.md).
 
 ## What happens later
 
@@ -163,8 +158,6 @@ datasets / benchmarks
 results
 strengths / weaknesses
 confounds / failure modes
-identifiability assumptions
-evidence budget
 ```
 
 ### 3 Synthesis
@@ -209,9 +202,10 @@ Interpret failures, reject bad assumptions and begin the next research cycle.
 
 The flat stage files are the main navigation. Deeper research assets remain available:
 
-- [World-State Variables & Observability](research/RESEARCH_STATE_VARIABLES.md)
-- [Identifiability & Information Limits](research/RESEARCH_IDENTIFIABILITY.md)
 - [Current Frontier Watch](research/RESEARCH_FRONTIER.md)
+- [World-State Variables](research/RESEARCH_STATE_VARIABLES.md)
+- [Identifiability / Information Limits](research/RESEARCH_IDENTIFIABILITY.md)
+- [Hidden Physical Properties / Irreversible Change](research/RESEARCH_PHYSICAL_PROPERTIES.md)
 - [Source Map](research/survey/SOURCE_MAP.md)
 - [Background Research](research/survey/BACKGROUND_RESEARCH.md)
 - [Research Overview](research/survey/RESEARCH_OVERVIEW.md)
