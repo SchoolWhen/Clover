@@ -14,8 +14,6 @@ Curated reading index for the Clover Survey. A source is included because it con
 - Vision Transformer — https://arxiv.org/abs/2010.11929
 - CLIP — https://arxiv.org/abs/2103.00020
 
-These works frame the shift from handcrafted/task-specific representation to learned scalable representation, data and accelerator co-evolution.
-
 ## Self-supervised visual/video representation
 - I-JEPA — https://arxiv.org/abs/2301.08243
 - DINOv2 — https://arxiv.org/abs/2304.07193 · https://github.com/facebookresearch/dinov2
@@ -29,14 +27,14 @@ These works frame the shift from handcrafted/task-specific representation to lea
 - RAFT — https://arxiv.org/abs/2003.12039 · https://github.com/princeton-vl/RAFT
 - NeRF — https://arxiv.org/abs/2003.08934
 - DUSt3R — https://arxiv.org/abs/2312.14132
-- VGGT — https://arxiv.org/abs/2503.11651 · https://openaccess.thecvf.com/content/CVPR2025/html/Wang_VGGT_Visual_Geometry_Grounded_Transformer_CVPR_2025_paper.html · https://github.com/facebookresearch/vggt
+- VGGT — https://arxiv.org/abs/2503.11651 · https://github.com/facebookresearch/vggt
 - VGGT-Ω — https://arxiv.org/abs/2605.15195 · https://vggt-omega.github.io/ · https://github.com/facebookresearch/vggt-omega
 - Slot Attention — https://arxiv.org/abs/2006.15055
 - SAM 2 — https://arxiv.org/abs/2408.00714 · https://github.com/facebookresearch/sam2
 
 ## Memory and evidence organization
 - VISTA — https://arxiv.org/abs/2610.02200
-- Vantage / Seek-and-View — https://arxiv.org/abs/2610.11810 · https://github.com/q1xiangchen/Vantage
+- Vantage — https://arxiv.org/abs/2610.11810 · https://github.com/q1xiangchen/Vantage
 - SpatialCORE — https://arxiv.org/abs/2609.38716 · https://github.com/rafiibnsultan/SpatialCORE
 
 ## World models for control
@@ -46,7 +44,7 @@ These works frame the shift from handcrafted/task-specific representation to lea
 - Identifiable World Models — https://arxiv.org/abs/2610.07028
 
 ## VLA and world-action models
-- RT-2 — https://arxiv.org/abs/2307.15818 · https://proceedings.mlr.press/v229/zitkovich23a.html
+- RT-2 — https://arxiv.org/abs/2307.15818
 - OpenVLA — https://arxiv.org/abs/2406.09246 · https://github.com/openvla/openvla
 - π0.5 — https://arxiv.org/abs/2504.16054 · https://www.pi.website/blog/pi05
 - ReWAM — https://arxiv.org/abs/2609.38163
@@ -61,21 +59,19 @@ These works frame the shift from handcrafted/task-specific representation to lea
 - Skild S1 — https://skild.ai/blogs/s1
 - Skild Physical Self-Play — https://skild.ai/blogs/physical-self-play
 
-Closed-company results are tracked as `OFFICIAL_REPORTED_RESULT`, not independent reproduction.
-
 ## Generative / physical world foundation models
 - World Labs Atlas — https://www.worldlabs.ai/blog/atlas
-- Cosmos 3 — https://arxiv.org/abs/2606.02800 · https://github.com/nvidia/cosmos · https://www.nvidia.com/en-us/ai/cosmos/
+- Cosmos 3 — https://arxiv.org/abs/2606.02800 · https://github.com/nvidia/cosmos
 - EVEWorld — https://arxiv.org/abs/2610.03374
-- From Pixels to Executable Physics / DR-WM — https://arxiv.org/abs/2610.17630
+- DR-WM / From Pixels to Executable Physics — https://arxiv.org/abs/2610.17630
 
 ## Physical / causal evaluation
 - IntPhys 2 — https://ai.meta.com/research/publications/intphys-2-benchmarking-intuitive-physics-understanding-in-complex-synthetic-environments/ · https://github.com/facebookresearch/IntPhys2
-- MVPBench — https://arxiv.org/abs/2506.09987 · https://ai.meta.com/research/publications/a-shortcut-aware-video-qa-benchmark-for-physical-understanding-via-minimal-video-pairs/
+- MVPBench — https://arxiv.org/abs/2506.09987
 - CausalVQA — https://ai.meta.com/research/publications/causalvqa-a-physically-grounded-causal-reasoning-benchmark-for-video-models/
 - RoboPhys-3D — https://arxiv.org/abs/2608.28718
 
-## Sparse / event-based computation
+## Sparse/event-based computation
 - Motion-aware Event Suppression — https://arxiv.org/abs/2602.23204
 
 ## Broad surveys
@@ -91,5 +87,3 @@ Closed-company results are tracked as `OFFICIAL_REPORTED_RESULT`, not independen
 **Tier 3 — foundations:** ORB-SLAM3/RAFT → Slot Attention → DreamerV3/TD-MPC2 → active perception/POMDP literature.
 
 **Tier 4 — evaluation:** IntPhys 2 → MVPBench → CausalVQA → RoboPhys-3D → real long-horizon unseen-environment robot tasks.
-
-The purpose of reading is to determine what the next Clover hypothesis must explain that these methods do not already solve.
