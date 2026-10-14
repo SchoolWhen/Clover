@@ -8,6 +8,8 @@ This map exists to answer one question:
 
 The map is not a shopping list of modules to add to Clover. Each area is studied for the problem it solves, the representation it assumes, the evidence it has produced, and the questions it leaves unresolved.
 
+For cross-cutting synthesis by research question rather than by research family, see [Research Questions / Synthesis](../research-questions/README.md).
+
 ## Research axes
 
 We track every research route along the same axes:
@@ -41,6 +43,24 @@ We track every research route along the same axes:
 | [Active perception](active-perception.md) | What should a robot look at next? | active vision, belief-space exploration | Can uncertainty become a visual information-seeking action? |
 | [Causality](causality.md) | What must be represented to understand interventions? | causal reasoning, action-conditioned models | Prediction is not yet causality. |
 | [Lifelong learning](lifelong-learning.md) | How does a world model revise itself over time? | continual learning, LIBERO | How can the robot grow without freezing or catastrophic forgetting? |
+
+## Problem-level synthesis
+
+The [Research Questions](../research-questions/README.md) layer now studies the same literature horizontally across eleven unresolved questions:
+
+- what a world representation must contain;
+- explicit vs distributed state;
+- prediction vs reconstruction vs generation;
+- what vision alone can identify;
+- what requires interaction;
+- memory and persistence;
+- objects vs fields vs geometry;
+- physical understanding;
+- causal understanding;
+- why a worldview should improve action;
+- how language should be separated from the vision-only scientific claim.
+
+Each synthesis page includes concrete primary-source URLs and paper links. The consolidated index is [research/literature/primary-sources.md](../../research/literature/primary-sources.md).
 
 ## A useful non-answer
 
@@ -87,4 +107,4 @@ Closed-system claims are recorded as **reported results**, not independently rep
 
 ## Next step
 
-Continue filling this map before committing to a new Clover representation. Reproduction and benchmark comparison come later, after the research landscape is sufficiently clear.
+Continue filling this map and the problem-level synthesis before committing to a new Clover representation. Reproduction and benchmark comparison come later, after the research landscape is sufficiently clear.
