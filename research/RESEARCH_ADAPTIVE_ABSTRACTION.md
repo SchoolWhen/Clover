@@ -240,7 +240,91 @@ may require different state summaries.
 
 ---
 
-## 10. Adaptive abstraction taxonomy
+## 10. Non-stationarity means a previously sufficient abstraction can become wrong
+
+A world representation may be sufficient under one dynamics regime and fail after the robot, controller, environment or task distribution changes.
+
+### ReDRAW
+
+**Adapting World Models with Latent-State Dynamics Residuals**  
+PMLR/L4DC 2026: https://proceedings.mlr.press/v331/lanier26a.html  
+Evidence: `PRIMARY_PAPER`
+
+ReDRAW pretrains a latent world model in simulation and adapts it to changed target dynamics by learning residual corrections in latent-state dynamics. It evaluates both vision-based control domains and a physical visual lane-following task.
+
+Stage-1 relevance:
+
+```text
+same representation
++
+changed transition law
+```
+
+can require adaptation even when observations remain visually similar.
+
+### ROAM
+
+**Adapt On-the-Go: Behavior Modulation for Single-Life Robot Deployment**  
+PMLR/CoLLAs 2026: https://proceedings.mlr.press/v330/chen26a.html  
+Evidence: `PRIMARY_PAPER`
+
+ROAM adapts within one deployment episode to novel situations and changed dynamics using a repertoire of learned behaviors, including a real quadruped dynamics-shift demonstration.
+
+This is useful evidence that open-world robotics requires **online recognition of regime mismatch**, not only offline robustness.
+
+### WorMI
+
+**World Model Implanting for Test-time Adaptation of Embodied Agents**  
+PMLR/ICML 2025: https://proceedings.mlr.press/v267/yoo25a.html  
+Evidence: `PRIMARY_PAPER`
+
+WorMI retrieves and composes domain-specific world models at test time for unseen domains.
+
+Research question:
+
+```text
+when should one world model be adapted,
+when should another model be selected,
+and when should the system conclude that no existing model is adequate?
+```
+
+---
+
+## 11. Embodiment itself changes the meaning of state and action
+
+### LAC-WM
+
+**Cross-Embodiment Robot Foundation World Models with Latent Actions**  
+PMLR/ICML 2026: https://proceedings.mlr.press/v306/huang26bv.html  
+ArXiv: https://arxiv.org/abs/2610.10846  
+Project: https://lacwm.github.io/  
+Evidence: `PRIMARY_PAPER`
+
+LAC-WM learns a unified latent action space across diverse robot embodiments and compares it with explicit action conditioning. The paper reports that explicit action spaces fragment across embodiments while the learned latent action representation transfers better to unseen robots.
+
+Stage-1 implication:
+
+```text
+numerical action label
+≠
+embodiment-independent action meaning.
+```
+
+This strengthens the need to treat **self/embodiment state** as part of the world-model interface rather than a fixed external assumption.
+
+### OSCAR
+
+**OSCAR: Omni-Embodiment Skeleton-Conditioned World Action Model for Robotics**  
+Primary paper: https://arxiv.org/abs/2606.04463  
+Evidence: `PRIMARY_PAPER`
+
+OSCAR uses a 2D kinematic skeleton rendering as a common conditioning representation across robot arms and human hands. This is another candidate answer to cross-embodiment action semantics.
+
+Neither result proves a universal embodiment representation; together they show that action/world abstraction depends strongly on how the robot body is represented.
+
+---
+
+## 12. Adaptive abstraction taxonomy
 
 Stage 1 should distinguish at least:
 
@@ -276,11 +360,15 @@ Keep state variables relevant to the current robot/action interface.
 
 Retain enough recoverable evidence so future tasks can reconstruct distinctions that were not important at the moment of compression.
 
-This last item is especially important for Clover's long-term general-purpose goal.
+### G9 — regime-conditioned abstraction
+
+Change representation/model assumptions when dynamics, domain or environment regime changes.
+
+This is especially important for Clover's long-term general-purpose goal.
 
 ---
 
-## 11. Failure modes of abstraction
+## 13. Failure modes of abstraction
 
 ### Over-abstraction
 
@@ -309,15 +397,38 @@ correct short-term state but lost long-horizon event history
 
 ### Static abstraction under non-stationarity
 
-A representation may be sufficient in one environment/domain and fail after world dynamics, embodiment or task family changes.
+```text
+state was sufficient yesterday
+but dynamics / embodiment / controller / task distribution changed today.
+```
 
-Related reference:
-
-- WorMI — https://proceedings.mlr.press/v267/yoo25a.html — test-time composition/retrieval of domain-specific world models for unseen domains.
+A general-purpose system therefore needs a way to detect when an abstraction/model is no longer adequate.
 
 ---
 
-## 12. Candidate later diagnostics
+## 14. Representation reversibility is an under-studied requirement
+
+Compression can discard information that later becomes useful.
+
+For a general-purpose robot, Stage 1 should distinguish:
+
+```text
+lossy active state
+vs
+recoverable evidence store / provenance
+```
+
+A state may remain compact while preserving links to evidence from which omitted distinctions can later be reconstructed.
+
+This is not a recommendation for any historical Clover replay mechanism; it is a generic research requirement:
+
+> If the future task distribution is unknown, how much information should remain recoverable after abstraction?
+
+This connects memory, provenance, abstraction and open-world optionality.
+
+---
+
+## 15. Candidate later diagnostics
 
 ### D-G1 — task-switch stress test
 
@@ -349,24 +460,43 @@ Compare one-rate memory/state against multi-timescale or event-driven state upda
 
 Evaluate whether raw evidence/provenance allows reconstruction of information that the active abstraction omitted.
 
+### D-G6 — regime-shift detection
+
+Change dynamics, camera, controller or embodiment and measure:
+
+```text
+mismatch-detection latency
+adaptation time
+false alarms
+catastrophic interference
+recovery of calibrated prediction/control
+```
+
+### D-G7 — embodiment transfer
+
+Keep task/environment fixed while changing robot morphology/action interface; test whether the state/action abstraction still preserves equivalent physical meaning.
+
 ---
 
-## 13. Adjacent gaps discovered
+## 16. Adjacent gaps discovered
 
-The literature suggests four areas that should remain visible during Stage 1:
+The literature suggests these areas should remain visible during Stage 1:
 
 ```text
 multi-timescale state
 structured/equivariant memory
 non-stationarity and test-time adaptation
 task-semantic / functional-role state
+self / embodiment model
+representation reversibility
+open-world model inadequacy detection
 ```
 
 These are not separate Clover commitments. They are candidate dimensions along which future representations should be compared.
 
 ---
 
-## 14. Stage-1 questions
+## 17. Stage-1 questions
 
 ```text
 Should state granularity be fixed or adaptive?
@@ -377,6 +507,9 @@ Should uncertainty control representation resolution?
 Can structured transformation laws replace brute-force memory?
 How should global scene state and local manipulation state interact?
 When does hierarchy genuinely improve sufficiency rather than merely add modules?
+How should the system detect that its current dynamics/embodiment abstraction is stale?
+Should action semantics be represented in robot-specific coordinates or a shared embodiment-invariant space?
+When should a model be adapted, replaced, composed with another model, or rejected as inadequate?
 ```
 
 ---
@@ -387,4 +520,4 @@ Do not equate minimal state with general understanding.
 
 Do not equate maximal-detail state with better intelligence.
 
-The research target is **appropriate sufficiency at appropriate granularity, with explicit knowledge of what was discarded and whether it can be recovered when needed**.
+The research target is **appropriate sufficiency at appropriate granularity, with explicit knowledge of what was discarded, whether it can be recovered, and whether the abstraction remains valid when the world or embodiment changes**.
