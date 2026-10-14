@@ -4,444 +4,185 @@ Last updated: 2026-10-14
 
 This file is the practical resource map for Clover's Survey phase.
 
-It answers:
+> Listing a resource does **not** mean it should be reproduced now. The current phase is survey-first.
 
-> If we later need to inspect, reproduce or compare a method, where are the primary code, data and platform resources?
+## Visual representation
 
-The current phase is research-first, so listing a resource does **not** mean it must be downloaded or reproduced now.
-
----
-
-# 1. Core visual representation code
-
-## DINOv2
-
+### DINOv2
 - Paper: https://arxiv.org/abs/2304.07193
 - Code: https://github.com/facebookresearch/dinov2
+- Future use: generic static visual-feature baseline and probing.
 
-Potential future use:
-
-- generic visual feature baseline;
-- static representation probe;
-- object/part feature analysis.
-
----
-
-## V-JEPA 2 / 2.1
-
-- Paper V-JEPA 2: https://arxiv.org/abs/2506.09985
-- Paper V-JEPA 2.1: https://arxiv.org/abs/2603.14482
-- Official page: https://ai.meta.com/vjepa/
+### V-JEPA 2 / 2.1
+- V-JEPA 2: https://arxiv.org/abs/2506.09985
+- V-JEPA 2.1: https://arxiv.org/abs/2603.14482
+- Official: https://ai.meta.com/vjepa/
 - Code/checkpoints: https://github.com/facebookresearch/vjepa2
+- Future use: predictive video representation, physical-variable probing, planning/state comparison.
 
-Potential future use:
-
-- temporal representation baseline;
-- physical variable probing;
-- prediction/planning comparison.
-
----
-
-## SAM 2
-
+### SAM 2
 - Paper: https://arxiv.org/abs/2408.00714
 - Code: https://github.com/facebookresearch/sam2
+- Future use: strong segmentation/video entity baseline.
 
-Potential future use:
+## Geometry / spatial code
 
-- video mask/track baseline;
-- persistence/entity diagnostics.
-
----
-
-# 2. Classical / geometric code
-
-## ORB-SLAM3
-
+### ORB-SLAM3
 - Paper: https://arxiv.org/abs/2007.11898
 - Code: https://github.com/UZ-SLAMLab/ORB_SLAM3
+- Future use: explicit pose/map/relocalization baseline.
 
-Potential future use:
-
-- explicit geometric state baseline;
-- camera tracking;
-- map persistence;
-- relocalization.
-
----
-
-## RAFT
-
+### RAFT
 - Paper: https://arxiv.org/abs/2003.12039
 - Code: https://github.com/princeton-vl/RAFT
+- Future use: dense correspondence/motion baseline.
 
-Potential future use:
-
-- dense motion baseline;
-- optical-flow derived event/evidence experiments.
-
----
-
-## VGGT
-
+### VGGT
 - Paper: https://arxiv.org/abs/2503.11651
 - Code: https://github.com/facebookresearch/vggt
 
-Potential future use:
-
-- learned 3D geometry;
-- depth/camera/track baseline;
-- spatial feature probing.
-
----
-
-## VGGT-Ω
-
+### VGGT-Ω
 - Paper: https://arxiv.org/abs/2605.15195
 - Project: https://vggt-omega.github.io/
 - Code: https://github.com/facebookresearch/vggt-omega
 
-Potential future use:
-
-- dynamic/scalable learned geometry baseline.
-
----
-
-## Vantage
-
+### Vantage
 - Paper: https://arxiv.org/abs/2610.11810
 - Code: https://github.com/q1xiangchen/Vantage
 
-Potential future use:
-
-- view/evidence planning;
-- active perception inspiration;
-- multi-view reasoning baseline.
-
----
-
-## SpatialCORE
-
+### SpatialCORE
 - Paper: https://arxiv.org/abs/2609.38716
 - Code: https://github.com/rafiibnsultan/SpatialCORE
 
-Potential future use:
+## Open robot/VLA code
 
-- confidence-aware grounding analysis.
-
----
-
-# 3. Open VLA / robot policy code
-
-## OpenVLA
-
+### OpenVLA
 - Paper: https://arxiv.org/abs/2406.09246
 - Code: https://github.com/openvla/openvla
+- Role: future open VLA comparator, not a current dependency.
 
-Potential future role:
+## Robot datasets
 
-Open VLA comparator once Clover reaches an embodied evaluation stage.
-
-Not a current implementation dependency.
-
----
-
-# 4. Robot datasets
-
-## DROID
-
+### DROID
 - Project: https://droid-dataset.github.io/droid/
-- Paper/resources: linked from project site.
+- Role: in-the-wild robot interaction/action-conditioned representation.
 
-Description:
+### Open X-Embodiment
+- Code/data hub: https://github.com/google-deepmind/open_x_embodiment
+- Overview: https://deepmind.google/blog/scaling-up-learning-across-many-different-robot-types/
+- Role: cross-embodiment abstraction and transfer.
 
-Large-scale in-the-wild robot manipulation data.
-
-Clover relevance:
-
-- interaction vs passive observation;
-- action-conditioned representation;
-- consequence modeling.
-
-V-JEPA 2-AC uses DROID robot video for action-conditioned post-training.
-
----
-
-## Open X-Embodiment
-
-- Repository: https://github.com/google-deepmind/open_x_embodiment
-- DeepMind overview: https://deepmind.google/blog/scaling-up-learning-across-many-different-robot-types/
-
-Why relevant:
-
-Cross-embodiment robot experience provides evidence about:
-
-- shared action abstractions;
-- embodiment-specific state;
-- representation transfer.
-
----
-
-## BridgeData V2
-
-OpenVLA ecosystem resource.
-
+### BridgeData V2
 - Project: https://rail-berkeley.github.io/bridgedata/
+- Role: manipulation-policy data and generalization research.
 
-Potential relevance:
+## Human / egocentric visual experience
 
-Robot manipulation policy learning and generalization.
-
----
-
-# 5. Human / egocentric video datasets
-
-## Ego4D
-
+### Ego4D
 - Official: https://ego4d-data.org/
-- Documentation: https://ego4d-data.org/docs/
+- Docs: https://ego4d-data.org/docs/
+- Questions: long-term memory, place/object continuity, forecasting.
 
-Potential research questions:
-
-- persistent egocentric memory;
-- long-term activity context;
-- place recognition;
-- anticipation;
-- object continuity.
-
----
-
-## EPIC-KITCHENS
-
+### EPIC-KITCHENS
 - Official: https://epic-kitchens.github.io/
+- Questions: egocentric object interaction and action anticipation.
 
-Potential research questions:
+### Something-Something
+- Resource: https://developer.qualcomm.com/software/ai-datasets/something-something
+- Question: motion-sensitive transformation semantics.
 
-- object interaction;
-- action anticipation;
-- kitchen dynamics;
-- first-person physical experience.
+## Physical / causal evaluation resources
 
----
-
-## Something-Something
-
-- Dataset resource: https://developer.qualcomm.com/software/ai-datasets/something-something
-
-Potential research questions:
-
-- motion-sensitive semantics;
-- transformation/action representation.
-
----
-
-# 6. Physical / causal benchmark resources
-
-## IntPhys 2
-
-- Official page: https://ai.meta.com/research/publications/intphys-2-benchmarking-intuitive-physics-understanding-in-complex-synthetic-environments/
+### IntPhys 2
+- Official: https://ai.meta.com/research/publications/intphys-2-benchmarking-intuitive-physics-understanding-in-complex-synthetic-environments/
 - Code: https://github.com/facebookresearch/IntPhys2
 
-Use later:
-
-Controlled physics diagnostic.
-
----
-
-## MVPBench
-
+### MVPBench
 - Paper: https://arxiv.org/abs/2506.09987
-- Official page: https://ai.meta.com/research/publications/a-shortcut-aware-video-qa-benchmark-for-physical-understanding-via-minimal-video-pairs/
+- Official: https://ai.meta.com/research/publications/a-shortcut-aware-video-qa-benchmark-for-physical-understanding-via-minimal-video-pairs/
 
-Use later:
+### CausalVQA
+- Official: https://ai.meta.com/research/publications/causalvqa-a-physically-grounded-causal-reasoning-benchmark-for-video-models/
 
-Shortcut-resistant physical video reasoning.
+### Perception Test
+- Code: https://github.com/google-deepmind/perception_test
 
----
+### RoboPhys-3D
+- Paper: https://arxiv.org/abs/2608.28718
 
-## CausalVQA
+## Robot simulation / task suites
 
-- Official page: https://ai.meta.com/research/publications/causalvqa-a-physically-grounded-causal-reasoning-benchmark-for-video-models/
-
-Use later:
-
-Causal/counterfactual video reasoning.
-
----
-
-## Perception Test
-
-- Repository: https://github.com/google-deepmind/perception_test
-
-Use later:
-
-Broad video perception/reasoning diagnostics.
-
----
-
-# 7. Robot simulation / task suites
-
-## LIBERO
-
+### LIBERO
 - Project: https://libero-project.github.io/main.html
 - Code: https://github.com/Lifelong-Robot-Learning/LIBERO
 
-Focus:
-
-- lifelong learning;
-- transfer;
-- task suites.
-
----
-
-## CALVIN
-
+### CALVIN
 - Code: https://github.com/mees/calvin
 
-Focus:
-
-- long-horizon sequence tasks;
-- language-conditioned manipulation.
-
----
-
-## RoboCasa
-
+### RoboCasa
 - Project: https://robocasa.ai/
 - Leaderboard: https://robocasa.ai/leaderboard.html
 
-Focus:
-
-- household/kitchen tasks;
-- compositional tasks;
-- scene diversity.
-
----
-
-## ManiSkill
-
+### ManiSkill
 - Code: https://github.com/haosulab/ManiSkill
 
-Focus:
+Before future use, verify Mac/MPS/CUDA compatibility instead of adapting the scientific question to local hardware.
 
-- scalable manipulation simulation;
-- task generation/evaluation.
+## World-model / physical-AI ecosystems
 
-Current caveat:
-
-Mac support and GPU simulation capabilities should be checked before any future reproduction plan.
-
----
-
-# 8. World-model / generative ecosystems
-
-## NVIDIA Cosmos
-
+### NVIDIA Cosmos
 - Official: https://www.nvidia.com/en-us/ai/cosmos/
-- Code/ecosystem: https://github.com/nvidia/cosmos
-- Cosmos 3 paper: https://arxiv.org/abs/2606.02800
+- Code: https://github.com/nvidia/cosmos
+- Cosmos 3: https://arxiv.org/abs/2606.02800
 
-Use later:
+### World Labs Atlas
+- Official: https://www.worldlabs.ai/blog/atlas
+- Role now: capability/conceptual reference; relatively closed compared with academic code.
 
-- generative physical AI comparison;
-- synthetic data / simulation;
-- world/action model taxonomy.
+## Closed / partially closed robot-brain references
 
----
-
-## World Labs Atlas
-
-- Official report: https://www.worldlabs.ai/blog/atlas
-
-Current availability:
-
-Early-access/closed relative to open academic code.
-
-Use now:
-
-Conceptual and capability reference.
-
----
-
-# 9. Closed / partially closed robot-brain references
-
-These are important even when code is not open.
-
-## Gemini Robotics ER 2
-
+### Gemini Robotics ER 2
 - Model card: https://deepmind.google/models/model-cards/gemini-robotics-er-2/
-- Product page: https://deepmind.google/models/gemini-robotics/embodied-reasoning/
+- Product: https://deepmind.google/models/gemini-robotics/embodied-reasoning/
+- Evidence: `OFFICIAL_PROJECT`
 
-Evidence class:
+### Figure Helix 2.5
+- Official: https://www.figure.ai/news/helix-2-5-zero-shot-30-home-generalization
+- Evidence: `OFFICIAL_REPORTED_RESULT`
 
-`OFFICIAL_PROJECT`
+### Skild S1 / Physical Self-Play
+- S1: https://skild.ai/blogs/s1
+- Self-play: https://skild.ai/blogs/physical-self-play
+- Evidence: `OFFICIAL_REPORTED_RESULT`
 
----
-
-## Figure Helix 2.5
-
-- Official report: https://www.figure.ai/news/helix-2-5-zero-shot-30-home-generalization
-
-Evidence class:
-
-`OFFICIAL_REPORTED_RESULT`
-
----
-
-## Skild S1
-
-- Official report: https://skild.ai/blogs/s1
-- Physical Self-Play: https://skild.ai/blogs/physical-self-play
-
-Evidence class:
-
-`OFFICIAL_REPORTED_RESULT`
-
----
-
-## π0.5
-
+### π0.5
 - Paper: https://arxiv.org/abs/2504.16054
 - Official: https://www.pi.website/blog/pi05
 
-Evidence class:
+## WAM / physical-world-model frontier resources
 
-`PRIMARY_PAPER + OFFICIAL_PROJECT`
+- Being-H0.7: https://arxiv.org/abs/2605.00078
+- Being-M0.7: https://arxiv.org/abs/2610.11283
+- HWAM: https://arxiv.org/abs/2610.12026
+- ReWAM: https://arxiv.org/abs/2609.38163
+- H-WM: https://arxiv.org/abs/2602.11291
+- EVEWorld: https://arxiv.org/abs/2610.03374
+- DR-WM / Pixels to Executable Physics: https://arxiv.org/abs/2610.17630
+- WAM survey: https://arxiv.org/abs/2609.16074
+- WAM resource page: https://rcl-robotics.github.io/Awesome-World-Action-Models
 
----
+## Apple M4 / local compute
 
-# 10. Apple M4 / local compute resources
+Local development platform: Mac mini M4. This is an engineering resource, not a scientific constraint.
 
-The local development platform is a Mac mini M4.
+- Mac mini M4 specs: https://support.apple.com/en-gb/121555
+- Metal: https://developer.apple.com/metal/
+- Unified memory API: https://developer.apple.com/documentation/metal/mtldevice/hasunifiedmemory
+- Metal Performance Shaders: https://developer.apple.com/documentation/MetalPerformanceShaders
+- PyTorch MPS: https://pytorch.org/docs/stable/notes/mps.html
+- Core ML: https://developer.apple.com/documentation/coreml
 
-This is an engineering resource, not a scientific constraint.
-
-## Apple Mac mini M4 specs
-
-- https://support.apple.com/en-gb/121555
-
-## Apple Silicon / unified memory
-
-- Metal `hasUnifiedMemory`:
-  https://developer.apple.com/documentation/metal/mtldevice/hasunifiedmemory
-
-## Metal
-
-- https://developer.apple.com/metal/
-
-## Metal Performance Shaders
-
-- https://developer.apple.com/documentation/MetalPerformanceShaders
-
-## PyTorch MPS backend
-
-- https://pytorch.org/docs/stable/notes/mps.html
-
-## Core ML
-
-- https://developer.apple.com/documentation/coreml
-
-Future principle:
+Policy:
 
 ```text
 science question
@@ -454,46 +195,21 @@ science question
 not:
 
 ```text
-M4 hardware
+local hardware
 → force scientific representation
 ```
 
----
-
-# 11. Resource selection policy
-
-A resource should not be downloaded merely because it is popular.
+## Resource-selection policy
 
 Before reproduction, record:
 
 1. exact research question;
 2. expected discriminatory result;
-3. why this specific code/data is needed;
+3. why this resource is necessary;
 4. whether a smaller analysis can answer the same question;
 5. compute/storage requirements;
-6. M4 compatibility or external GPU need;
+6. M4 compatibility or external GPU requirement;
 7. licence terms;
 8. expected evidence level.
 
-This prevents the Survey phase from turning into an unstructured reproduction campaign.
-
----
-
-# 12. Future resource metadata
-
-When actual reproduction begins, add for each resource:
-
-```text
-version / commit SHA
-checkpoint hash
-dataset version
-licence
-expected disk
-expected RAM/VRAM
-supported OS
-MPS/CUDA requirements
-run command
-known patches
-```
-
-That information is intentionally deferred until reproduction becomes an active task.
+When reproduction becomes active, add commit/checkpoint hashes, dataset versions, disk/RAM/VRAM requirements, OS/backend support, run commands and known patches.
