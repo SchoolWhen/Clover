@@ -4,7 +4,11 @@ This directory contains **time-sensitive Stage-1 audits** for fast-moving areas 
 
 It is not a new Clover lifecycle stage. Stable concepts should eventually land in the existing Stage-1 topic files or Stage-2 Analysis reports.
 
-## Current audits
+## Start here
+
+- [`REAUDIT_SUMMARY_2026-10-15.md`](REAUDIT_SUMMARY_2026-10-15.md) — second-pass Stage-1 audit summary after the EmbodiedJev / AgentRSI prompt; records the new cross-boundary clusters, high-value sources and why they do not require a new top-level lifecycle stage.
+
+## Detailed audits
 
 - [`JEPA_RSI_RUNTIME_2026-10-15.md`](JEPA_RSI_RUNTIME_2026-10-15.md) — embodied JEPA / latent predictive control, cross-embodiment latent actions, VLA test-time scaling, WAM acceleration and inference-state staleness, recursive self-improvement of models/harnesses/research processes, embodied RSI, EmbodiedJev, generative-video perception backbones, multi-view world models and process-level evaluation.
 - [`CV_EMBODIMENT_SYSTEMS_2026-10-15.md`](CV_EMBODIMENT_SYSTEMS_2026-10-15.md) — adjacent visual sensing/event cameras, morphology-conditioned world models, affordance foundation models, fast-weight/retrieval test-time adaptation, LeWAM naming collision/artifact identity, WAM video-domain curriculum and multi-robot edge serving/SLOs.
