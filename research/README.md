@@ -76,8 +76,10 @@ RESEARCH_FRONTIER.md
 
 Supporting material:
 
-- [`foundation_models/`](foundation_models/) — DeepSeek/Qwen and future foundation-model systems watches;
+- [`foundation_models/`](foundation_models/) — DeepSeek/Qwen and foundation-model systems watches/matrices;
+- [`training/`](training/) — controlled training variables and high-risk post-training boundary questions;
 - [`engineering/`](engineering/) — deployment lifecycle, fault injection, runtime reliability and validation resources;
+- [`emerging/`](emerging/) — dated audits for fast-moving cross-boundary clusters; current audit covers embodied JEPA, RSI, VLA test-time scaling, WAM runtime acceleration and generative-video perception;
 - [`survey/`](survey/) / [`dossiers/`](dossiers/) — source maps, datasets, benchmarks and deeper topic notes.
 
 ## Stage-1 logic
@@ -111,7 +113,7 @@ training / post-training / embodied learning regime
 ↓
 engineering feasibility / simulation / validation ladder
 ↓
-current frontier
+current frontier / emerging cross-boundaries
 ```
 
 ## Non-negotiable distinctions
@@ -125,6 +127,7 @@ complete physical description ≠ predictive/control/general-purpose sufficient 
 long context ≠ persistent grounded world memory
 serving KV cache ≠ epistemic world memory
 base model ≠ model + harness ≠ model + harness + external tools
+base policy ≠ policy + verifier/search/test-time compute
 hosted product ≠ open-weight checkpoint unless exact artifact is verified
 total parameters ≠ active parameters ≠ memory footprint ≠ communication cost
 architecture efficiency on paper ≠ realized efficiency on available kernels/hardware
@@ -132,12 +135,16 @@ architecture ≠ training recipe ≠ data mixture ≠ post-training objective
 supervised task success ≠ on-policy robustness
 LLM post-training ≠ robot post-training
 more heterogeneous robot data ≠ better transfer without alignment
+cross-embodiment state alignment ≠ cross-embodiment action alignment
 reasoning improvement ≠ perception preservation
 minimum state ≠ best state at every timescale
 maximum information gain ≠ best safe / permitted experiment
 uncertainty inside a known hypothesis set ≠ correct hypothesis missing from the set
 uncertain current state ≠ current world model has become invalid
 parameter estimation ≠ model selection ≠ mechanism discovery ≠ open-world model expansion
+reused inference state ≠ valid inference state
+self-evolution ≠ demonstrated self-improvement
+RSI evolve-set gain ≠ held-out / OOD gain
 current development machine ≠ final robot edge computer ≠ scientific hypothesis
 model latency ≠ end-to-end closed-loop latency
 same-simulator success ≠ sim2sim robustness ≠ sim2real transfer ≠ real-world validation
@@ -228,12 +235,28 @@ precision / quantization
 runtime / kernels / parallelism
 harness / tools / external memory
 reasoning-effort setting
+test-time sampling / verifier / search budget
+inference-state reuse + refresh criterion
 local Mac-M4 feasibility
+```
+
+For self-improving systems additionally record:
+
+```text
+editable surface: model / data / harness / code / memory
+immutable evaluator / safety boundary
+evolve-set vs held-out evaluation
+accepted-change inheritance
+lineage / rollback
+research / training budget
+whether improvements persist across later cycles
 ```
 
 DeepSeek/Qwen current watch: [`foundation_models/DEEPSEEK_QWEN.md`](foundation_models/DEEPSEEK_QWEN.md).
 
 Training/post-training map: [`RESEARCH_TRAINING_POSTTRAINING.md`](RESEARCH_TRAINING_POSTTRAINING.md).
+
+Latest emerging cross-boundary audit: [`emerging/JEPA_RSI_RUNTIME_2026-10-15.md`](emerging/JEPA_RSI_RUNTIME_2026-10-15.md).
 
 ## Current practical development constraint
 
@@ -273,6 +296,11 @@ human-video / robot / sim mixture attribution
 language-prior contamination in physical reasoning
 streaming multimodal prefill / incremental visual encoding
 fast controller + slow reasoner synchronization
+test-time verifier/search scaling under matched latency and energy
+inference-state staleness under asynchronous / cached WAM execution
+embodied-JEPA scaling vs physical-variable retention
+RSI evaluator validity / hidden-eval leakage / reward hacking
+RSI process-level retention and OOD transfer
 harness contribution to benchmark scores
 runtime/kernel version drift and cross-hardware numerical divergence
 API/hosted vs open-weight artifact equivalence
