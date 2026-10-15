@@ -12,7 +12,8 @@ It is **not** a vendor-selection layer and does not make DeepSeek, Qwen, or any 
 - [`../RESEARCH_TRAINING_POSTTRAINING.md`](../RESEARCH_TRAINING_POSTTRAINING.md) — pretraining, SFT/behavior cloning, co-training, distillation, RL, simulated post-training, deployment learning and continual adaptation across LLM/VLM/VLA/world-model systems.
 - [`../training/README.md`](../training/README.md) — controlled training-variable matrix covering data diversity/quality, alignment, action representation, horizon, update scope, reward/teacher, failure data, simulator trust and checkpoint selection.
 - [`../training/HIGH_RISK_BOUNDARIES.md`](../training/HIGH_RISK_BOUNDARIES.md) — partial-success rewards, epistemic reward, failure/recovery ratios, world-model trust, module adaptation timescales, uncertainty regression, distillation loss, scale transfer, fleet contamination and stateful rollback.
-- [`../STAGE1_FINAL_AUDIT_2026-10-15.md`](../STAGE1_FINAL_AUDIT_2026-10-15.md) — final Stage-1 coverage audit and cross-boundary priorities through 2026-10-15.
+- [`../emerging/JEPA_RSI_RUNTIME_2026-10-15.md`](../emerging/JEPA_RSI_RUNTIME_2026-10-15.md) — current cross-boundary audit of embodied JEPA, latent-action world models, test-time VLA verification, WAM inference-state acceleration, recursive self-improvement, embodied RSI, and generative-video perception.
+- [`../STAGE1_FINAL_AUDIT_2026-10-15.md`](../STAGE1_FINAL_AUDIT_2026-10-15.md) — Stage-1 coverage audit and cross-boundary priorities through 2026-10-15.
 
 ## Why it exists
 
@@ -50,9 +51,21 @@ architecture
 → observed capability
 ```
 
+Self-improving systems require another decomposition:
+
+```text
+model-weight change
+≠ harness change
+≠ data/curriculum change
+≠ memory/skill artifact change
+≠ embodied deployment adaptation
+```
+
+For RSI claims, also preserve the immutable evaluator, held-out split, resource budget, accepted-change lineage and rollback mechanism.
+
 ## Current rule
 
-For every vendor/model result, preserve the exact artifact and distinguish:
+For every vendor/model/system result, preserve the exact artifact and distinguish:
 
 ```text
 base model
@@ -62,6 +75,7 @@ training / post-training recipe
 runtime/kernel stack
 agent harness
 external tools / memory
+test-time verifier / search budget
 ```
 
-A benchmark result from one of these configurations does not automatically transfer to the others.
+A benchmark result from one configuration does not automatically transfer to the others.
