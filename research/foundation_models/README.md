@@ -6,11 +6,13 @@ It is **not** a vendor-selection layer and does not make DeepSeek, Qwen, or any 
 
 ## Current watches / matrices
 
-- [`DEEPSEEK_QWEN.md`](DEEPSEEK_QWEN.md) — current DeepSeek/Qwen architecture, multimodal, data, inference-kernel, harness and Physical-AI signals checked through 2026-10-15.
+- [`DEEPSEEK_QWEN.md`](DEEPSEEK_QWEN.md) — DeepSeek/Qwen architecture, multimodal, data, inference-kernel, harness and Physical-AI watch.
+- [`DEEPSEEK_QWEN_CURRENT_2026-10-15.md`](DEEPSEEK_QWEN_CURRENT_2026-10-15.md) — current official-state snapshot, including API/hosted/open-artifact distinctions and later changelog corrections.
 - [`CROSS_BOUNDARIES.md`](CROSS_BOUNDARIES.md) — P0/P1/P2 cross-boundary matrix: visual tokenizer/video sampling, streaming foundation models, long context vs world memory, backbone adaptation, data science, quantization, proxy→frontier scaling, harness attribution, distributed systems and optimizer/runtime boundaries.
 - [`../RESEARCH_TRAINING_POSTTRAINING.md`](../RESEARCH_TRAINING_POSTTRAINING.md) — pretraining, SFT/behavior cloning, co-training, distillation, RL, simulated post-training, deployment learning and continual adaptation across LLM/VLM/VLA/world-model systems.
 - [`../training/README.md`](../training/README.md) — controlled training-variable matrix covering data diversity/quality, alignment, action representation, horizon, update scope, reward/teacher, failure data, simulator trust and checkpoint selection.
 - [`../training/HIGH_RISK_BOUNDARIES.md`](../training/HIGH_RISK_BOUNDARIES.md) — partial-success rewards, epistemic reward, failure/recovery ratios, world-model trust, module adaptation timescales, uncertainty regression, distillation loss, scale transfer, fleet contamination and stateful rollback.
+- [`../STAGE1_FINAL_AUDIT_2026-10-15.md`](../STAGE1_FINAL_AUDIT_2026-10-15.md) — final Stage-1 coverage audit and cross-boundary priorities through 2026-10-15.
 
 ## Why it exists
 
