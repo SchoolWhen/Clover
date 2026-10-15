@@ -1,0 +1,37 @@
+# Emerging Cross-Boundary Research — Supporting Index
+
+This directory contains **time-sensitive Stage-1 audits** for fast-moving areas that cut across multiple stable research surfaces.
+
+It is not a new Clover lifecycle stage. Stable concepts should eventually land in the existing Stage-1 topic files or Stage-2 Analysis reports.
+
+## Current audit
+
+- [`JEPA_RSI_RUNTIME_2026-10-15.md`](JEPA_RSI_RUNTIME_2026-10-15.md) — embodied JEPA / latent predictive control, cross-embodiment latent actions, VLA test-time scaling, WAM acceleration and inference-state staleness, recursive self-improvement of models/harnesses/research processes, embodied RSI, EmbodiedJev, generative-video perception backbones, multi-view world models and process-level evaluation.
+
+## Evidence discipline
+
+Keep separate:
+
+```text
+primary paper
+≠ official project page
+≠ open-source implementation
+≠ community research repository
+≠ experimental workbench
+```
+
+A GitHub repository can be highly useful engineering evidence without being primary scientific evidence.
+
+## Current rule
+
+Use this directory when a new fast-moving cluster is important enough to audit but does not yet justify changing Clover's stable Stage-1 ontology.
+
+Once the concept stabilizes:
+
+```text
+emerging audit
+→ Stage-2 method reports / stable Stage-1 landing
+→ Synthesis
+```
+
+Do not promote an emerging mechanism directly into Clover Innovation.
