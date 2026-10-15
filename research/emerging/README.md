@@ -8,6 +8,7 @@ It is not a new Clover lifecycle stage. Stable concepts should eventually land i
 
 - [`JEPA_RSI_RUNTIME_2026-10-15.md`](JEPA_RSI_RUNTIME_2026-10-15.md) — embodied JEPA / latent predictive control, cross-embodiment latent actions, VLA test-time scaling, WAM acceleration and inference-state staleness, recursive self-improvement of models/harnesses/research processes, embodied RSI, EmbodiedJev, generative-video perception backbones, multi-view world models and process-level evaluation.
 - [`CV_EMBODIMENT_SYSTEMS_2026-10-15.md`](CV_EMBODIMENT_SYSTEMS_2026-10-15.md) — adjacent visual sensing/event cameras, morphology-conditioned world models, affordance foundation models, fast-weight/retrieval test-time adaptation, LeWAM naming collision/artifact identity, WAM video-domain curriculum and multi-robot edge serving/SLOs.
+- [`REPRESENTATION_DIAGNOSTICS_2026-10-15.md`](REPRESENTATION_DIAGNOSTICS_2026-10-15.md) — probe recoverability vs causal use vs closed-loop behavioral evidence; activation patching/steering and a representation-evidence ladder for Stage-2 world-state claims.
 
 ## Evidence discipline
 
