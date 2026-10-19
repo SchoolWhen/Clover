@@ -29,3 +29,4 @@ This folder is a **discovery / signal archive** (`SURVEY_SIGNAL` in the labels o
 | File | Created | Coverage |
 |---|---|---|
 | `news_2610192217.md` | 2026-10-19 22:17 CST | Morning + evening digests 2026-10-16 → 2026-10-19; frontier design-tracking weekly 2026-10-12 ~ 2026-10-18 |
+| `news_2610192237.md` | 2026-10-19 22:37 CST | **Backfill**: morning digests 2026-10-03 → 2026-10-15; evening digests 2026-10-04 → 2026-10-15; frontier tracking weekly 2026-10-05 ~ 2026-10-11 + 2026-10-07 instant report |
