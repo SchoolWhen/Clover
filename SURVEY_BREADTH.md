@@ -59,12 +59,13 @@ Company statements never become scientific fact silently (§4.5). News remains a
 - **Source:** *Origins of knowledge*, Psychological Review 99(4):605–632. DOI 10.1037/0033-295X.99.4.605 · PubMed: http://www.ncbi.nlm.nih.gov/pubmed/1454901 · `PRIMARY_PAPER` (abstract verified 2026-10-19)
 - **Demonstrates:** early infant physical reasoning accords with **continuity** (objects move on connected paths) and **solidity** (no two objects in the same place at the same time).
 - **Does not demonstrate — equally important:** early reasoning does **not** accord with **gravity** or **inertia**. The honest reading is a *partial* constraint set, not a full physics engine at birth.
+- **Full-read refinement (2026-10-20):** the 1992 full text remains paywalled (abstract-level here), but Spelke (1994), *Initial knowledge: six suggestions*, Cognition 50:431–445, was read in full: the object-domain principles are stated as **cohesion, continuity, contact**; gravity/inertia are excluded with the rationale that initial knowledge captures what is most *true*, not what is most obvious (unsupported objects do not always fall perceptibly, motion is not always smooth); and a task-specificity caveat — 6-month-olds' looking-time inferences follow continuity-not-inertia while their predictive *reaching* extrapolates along the line of motion. Looking knowledge ≠ acting knowledge.
 - **Landing for Clover:** continuity + solidity are candidate Stage-1 test constraints (object permanence across occlusion); gravity/inertia must be treated as *learned or absent*, not assumed as priors. This also warns against importing a complete "core knowledge" checklist as an axiom set (§4.1).
 
 ### B2. Violation-of-expectation — Baillargeon (1985; Baillargeon & Graber 1987)
 
-- **Source:** drawbridge experiments (1985) and tall/short-rabbit screen experiments (1987), Developmental Psychology / Cognition venues. Locator (secondary): https://simplypsychology.org/wp-content/uploads/cogDev_BaillargeonEssay.pdf · `BACKGROUND_REFERENCE` — primary full-text read queued.
-- **Demonstrates:** infants as young as ~3.5–5 months look longer at physically *impossible* events (screen rotating through a hidden box; tall rabbit failing to appear in a window), i.e. they maintain occluded objects and expectations about them.
+- **Source:** Baillargeon, Spelke & Wasserman (1985), *Object permanence in five-month-old infants*, Cognition 20:191–208, DOI 10.1016/0010-0277(85)90008-3; and the tall/short-rabbit screen experiments (Baillargeon & Graber 1987). · `BACKGROUND_REFERENCE` — **primary abstract read 2026-10-20; full text confirmed closed-access** (Semantic Scholar openAccessPdf: CLOSED), so this entry stays abstract-level by evidence, not by omission.
+- **Demonstrates:** in the 1985 drawbridge study, 5-month-olds (n=21) looked longer at the impossible event (screen rotating through the space of a hidden box) than at the possible event (screen stopping at the box); a control experiment (n=22, box placed *beside* the screen) rules out a simple rotation-length preference. Infants maintain occluded objects and expectations about them.
 - **Does not demonstrate:** the internal representation format; looking time is an expectation signal, not a state readout. The paradigm's interpretation has known critiques (perceptual-novelty confounds), which any borrowing must record.
 - **Landing for Clover:** VoE is a transferable *evaluation* design — possible vs impossible event pairs with matched perceptual novelty — directly usable as a shortcut-resistant test shape for object permanence (see Axis F).
 
@@ -90,9 +91,9 @@ Company statements never become scientific fact silently (§4.5). News remains a
 
 ### C2. ORB-SLAM3 — Campos et al. (2021)
 
-- **Source:** *ORB-SLAM3: An Accurate Open-Source Library for Visual, Visual-Inertial and Multimap SLAM*, IEEE Transactions on Robotics 37(6):1874–1890, 2021 (bibliographic record via citing literature, verified 2026-10-19). `PRIMARY_PAPER` / `OPEN_SOURCE`
-- **Demonstrates:** the mature classical stack (feature tracking, local mapping, loop closure, map merging, visual-inertial fusion) and its documented operating envelope.
-- **Does not demonstrate:** robustness in low-texture, dynamic, or badly lit scenes — the classical failure triad that motivated learned methods.
+- **Source:** *ORB-SLAM3: An Accurate Open-Source Library for Visual, Visual-Inertial and Multimap SLAM*, IEEE Transactions on Robotics 37(6):1874–1890, 2021. https://arxiv.org/abs/2007.11898 · `PRIMARY_PAPER` / `OPEN_SOURCE` · **FULL READ 2026-10-20**
+- **Demonstrates:** the mature classical stack (feature tracking, local mapping, loop closure, map merging via the Atlas multi-map system, visual-inertial fusion) and its documented operating envelope. Full-read specifics: stereo-inertial EuRoC ATE ≈ 3.5 cm RMS, multi-session operation 2.6–3.2× better than VINS-Mono; the authors' own accuracy thesis is that exploiting short/mid/long-term **and multi-map** data association "overpowers" front-end choices.
+- **Does not demonstrate:** robustness in low-texture, dynamic, or badly lit scenes — the classical failure triad that motivated learned methods. The full read names the frontier precisely: **low texture is the stated main failure case** (descriptor matching loses to photometric LK tracking on near-featureless dark sequences); dynamic objects exist only as outliers to reject; pure rotation blocks monocular depth; IMU initialisation needs gravity/roll-pitch excitation (a car on flat ground may never initialise); long outdoor runs drift 10–70 m in inertial parameters; far/sky points are discarded by hand rules. Calibrated intrinsics are a required input (`V1`-adjacent); monocular scale is unobservable.
 - **Landing for Clover:** the reference failure catalogue for Axis D: classical geometry fails exactly where image formation stops cooperating. A vision-alone brain must degrade *licences*, not silently hallucinate state, in the same conditions.
 
 ---
@@ -113,7 +114,20 @@ Company statements never become scientific fact silently (§4.5). News remains a
 - **Source:** *Seeing Through Fog Without Seeing Fog: Deep Multimodal Sensor Fusion in Unseen Adverse Weather*, CVPR 2020, pp. 11682–11692. https://openaccess.thecvf.com/content_CVPR_2020/html/Bijelic_Seeing_Through_Fog_Without_Seeing_Fog_Deep_Multimodal_Sensor_Fusion_CVPR_2020_paper.html · arXiv:1902.08913 (preprint under an earlier title) · `PRIMARY_PAPER` (bibliographic + abstract verified 2026-10-19)
 - **Demonstrates:** on a 100k-label multimodal dataset (>10,000 km of northern-Europe driving plus a controlled fog chamber), RGB object detection degrades severely in fog/snow/rain while lidar, radar and gated NIR degrade *asymmetrically*; an entropy-driven fusion network trained on clean data survives adverse weather by leaning on the non-RGB sensors.
 - **Does not demonstrate:** anything about vision-alone understanding — the paper is multimodal **by design**; its point is precisely that the camera stream fails. The gated camera is active sensing (backscatter gating), not passive vision.
-- **Landing for Clover:** this is the honest boundary marker for Axis D. It documents *which* observation regimes defeat RGB-only perception and how other sensors compensate. Any Clover claim scoped to adverse conditions must state its observation-physics regime; this paper must never be cited as vision-alone support. Still open on this axis: a *passive-RGB-only* adverse-condition anchor (low light, specular/transparent, motion blur) — gap recorded, not filled (§28.22).
+- **Landing for Clover:** this is the honest boundary marker for Axis D. It documents *which* observation regimes defeat RGB-only perception and how other sensors compensate. Any Clover claim scoped to adverse conditions must state its observation-physics regime; this paper must never be cited as vision-alone support.
+
+### D3. Low light, passive RGB — Chen, Chen, Xu & Koltun (2018)
+
+- **Source:** *Learning to See in the Dark*, CVPR 2018. https://arxiv.org/abs/1805.01934 · `PRIMARY_PAPER` (verified 2026-10-20)
+- **Demonstrates:** a fully-convolutional network operating directly on raw sensor data replaces the traditional ISP pipeline and restores clean, colourful images from extreme low-light (<0.1 lux) short exposures; introduces the SID dataset (5,094 raw short-exposure images paired with long-exposure references).
+- **Does not demonstrate:** world-state estimation — this is image restoration. And the restoration is *supervised by a privileged pairing* (long-exposure references): it shows the photon-noise floor can be learned around with paired data, not that low-light RGB yields reliable state for free.
+- **Landing for Clover:** the first genuinely passive-RGB adverse-condition anchor. Low-light claims inherit its condition: restoration quality is bought with paired supervision; without pairs, the noise floor is the honest limit.
+
+### D4. Low-light detection benchmark — Loh & Chan (2019)
+
+- **Source:** *Getting to know low-light images with the Exclusively Dark dataset*, Computer Vision and Image Understanding 178:30–42, 2019. DOI 10.1016/j.cviu.2018.10.010 · `PRIMARY_PAPER` (verified 2026-10-20)
+- **Demonstrates:** ExDark — 7,363 low-light images captured in visible light only, 10 lighting conditions, bounding-box annotations over 12 object classes — and the finding that low-light corruption reaches far deeper into hand-crafted and learned features than "illumination invariance" fixes.
+- **Landing for Clover:** passive-side corroboration of D2's lesson: degraded RGB corrupts features non-superficially, so adverse-condition capability claims need examiners that go beyond invariance assumptions. **Still open on this axis:** passive anchors for specular/transparent materials and motion blur (§28.22).
 
 ---
 
@@ -140,6 +154,20 @@ Company statements never become scientific fact silently (§4.5). News remains a
 - **Does not demonstrate:** perception — inputs are privileged particle positions, velocities and material properties (`L4`); there are no pixels anywhere in the paper.
 - **Landing for Clover:** the dynamics-side anchor for this axis, and it sharpens the open problem by contrast: learned *dynamics from state* is demonstrated (E1, E3); *state from vision alone* for deformable/fluid/granular matter remains unmeasured. That perception-side gap stays **open** (§28.22).
 
+### E4. Particle dynamics with real-world control — Li et al. (2019, DPI-Net)
+
+- **Source:** *Learning Particle Dynamics for Manipulating Rigid Bodies, Deformable Objects, and Fluids*, ICLR 2019. https://arxiv.org/abs/1810.01566 · `PRIMARY_PAPER` (bibliographic + provenance verified 2026-10-20)
+- **Demonstrates:** a learned graph-network particle simulator (dynamic graphs, hierarchical propagation) spanning fluids, rigid bodies and deformables; its dynamics plus MPC control real tasks (fluid shaking, foam/rice-grip moulding), beating PPO baselines on sample efficiency.
+- **State provenance — the decisive audit:** `MIXED`, leaning privileged. Training is entirely in simulation against simulator ground truth; for the real-world task, particles are *randomly sampled inside a mesh reconstructed from a depth camera via TSDF fusion* — geometry arrives from a classical reconstruction pipeline, never from a learned pixel estimator; the dynamics model never consumes an image.
+- **Landing for Clover:** sibling dynamics anchor to E3, and the provenance verdict is its value: even the flagship "learning particle dynamics" system gets its real-world state from depth-camera reconstruction. The perception half remains unbuilt here.
+
+### E5. Perception-side deformable state — Shi et al. (2022, RoboCraft)
+
+- **Source:** *RoboCraft: Learning to See, Simulate, and Shape Elasto-Plastic Objects with Graph Networks*, RSS 2022. DOI 10.15607/RSS.2022.XVIII.008 · https://www.roboticsproceedings.org/rss18/p008.html · `PRIMARY_PAPER` (bibliographic + provenance verified 2026-10-20)
+- **Demonstrates:** a full perception→dynamics→planning loop for elasto-plastic objects: particles are sampled from an RGB-D point cloud / reconstructed mesh; the GNN dynamics model is trained **directly from raw visual data** (10 minutes of real-world interaction, distribution-based losses, no particle-to-particle temporal correspondence); MPC then shapes plasticine into target shapes — including unseen ones — at untrained-human level.
+- **State provenance:** `PIXELS`, with two honest caveats: input is RGB-**D** (depth participates — outside the RGB-only `V0–V2` protocol), and particle sampling leans on classical mesh reconstruction (alpha shapes / ball pivoting) with shape-prior refinements, not an end-to-end learned pixel→state estimator.
+- **Landing for Clover:** the first true perception-side anchor on this axis — the closest existing demonstration of the capability the mother question demands for deformable matter. Its boundary defines the successor's target: same loop, from RGB alone, without classical reconstruction in the middle. Fluid/granular perception-side anchors remain **open** (§28.22).
+
 ---
 
 ## 6. Axis F — Evaluation methodology (shortcut resistance, examiner isolation)
@@ -158,8 +186,8 @@ Company statements never become scientific fact silently (§4.5). News remains a
 ## 7. What this file changes, and the read queue
 
 1. **Every Stage-1 surface now has at least one primary anchor or an explicitly recorded gap.** Axes A–F map to surfaces 3, 2/5, 1/7, 4, 5, and 11/15 respectively in [`STATUS.md`](STATUS.md).
-2. **Full-text read queue — status 2026-10-19 evening:** DONE and recorded in `research/survey/SOURCE_MAP.md` (§1, §2, §8): Battaglia 2013 · Khemakhem 2020 · Kaelbling 1998 · DROID-SLAM 2021 · PlasticineLab 2021 · Geirhos 2020. Remaining: Spelke 1992 full text (paywalled; already held as `BACKGROUND_REFERENCE` in SOURCE_MAP §1), Baillargeon primary full text (B2), ORB-SLAM3 full read (C2).
-3. **Open gaps (explicit, §28.22):** passive-RGB-only adverse-condition anchor (Axis D — D2 is a multimodal counter-anchor, not a substitute); deformable/fluid/granular *perception-side* anchors (Axis E — E1/E3 cover dynamics from privileged state only); a modern identifiability-of-world-models synthesis beyond A2; evaluation-methodology anchors beyond F1 (benchmark leakage / contamination literature).
+2. **Full-text read queue — status 2026-10-20:** DONE and recorded in `research/survey/SOURCE_MAP.md`: Battaglia 2013 · Khemakhem 2020 · Kaelbling 1998 · DROID-SLAM 2021 · PlasticineLab 2021 · Geirhos 2020 · ORB-SLAM3 2021 · Spelke 1994 (companion to B1). Closed at abstract level by access, not by choice: Spelke 1992 and Baillargeon 1985 full texts are paywalled/closed (verified 2026-10-20); their entries carry the abstract-level label permanently until access changes.
+3. **Open gaps (explicit, §28.22):** passive anchors for specular/transparent materials and motion blur (Axis D; low light now anchored by D3/D4, fog boundary by D2); fluid/granular *perception-side* anchors (Axis E — E5 covers elasto-plastic from RGB-D; DPI-Net E4 audited as privileged-state); RGB-alone (no depth) deformable state estimation; a modern identifiability-of-world-models synthesis beyond A2; evaluation-methodology anchors beyond F1 (benchmark leakage / contamination literature).
 4. **Next frontier sweep obligation (unchanged):** include at least one *new primary source* per axis above, or state why the axis produced nothing — silence is not coverage.
 
 *Update rule: this is a living root file. New anchors are appended per axis with the same record shape and verification date; superseded entries are marked `SUPERSEDED`, never silently deleted (§15).*
