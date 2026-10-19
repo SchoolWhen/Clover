@@ -86,6 +86,10 @@ Supporting watches:
 15 current frontier
 ```
 
+## Breadth foundation (root survey, added 2026-10-19)
+
+[`SURVEY_BREADTH.md`](SURVEY_BREADTH.md) (repository root, flat layout) holds the verified anchor sources for the six breadth axes the 2026-10-19 frontier sweep found empty — partial observability / identifiability, developmental visual cognition, classical geometry / SLAM, observation physics, deformable dynamics, and evaluation methodology — plus the standing tracking channels (arXiv, CoRL / RSS / ICRA / CVPR / NeurIPS, journals, official industry sources). Frontier intake without breadth intake counts as a failed sweep.
+
 ## Newly added surface: training and post-training
 
 [`research/RESEARCH_TRAINING_POSTTRAINING.md`](research/RESEARCH_TRAINING_POSTTRAINING.md) makes training procedure a first-class research variable rather than an implementation footnote.
