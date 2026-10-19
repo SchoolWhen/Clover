@@ -18,7 +18,7 @@ CPU-only Clover implementation track: FROZEN at its current results.
 Main line: embodied-intelligence robotic-brain research (this repository, Stage 1).
 CPU-only full implementation resumes only after the embodied line produces
 a new, complete frontier breakthrough.
-News synchronization: timestamped editions in `news/` (`news_yymmddhhmm.md`),
+News synchronization: timestamped editions flat at the repository root (`news_yymmddhhmm.md`, index in `NEWS.md`),
 collecting the daily morning/evening digests and the frontier design-tracking reports.
 Latest frontier extension: `research/emerging/FRONTIER_SWEEP_2026-10-19.md`.
 ```

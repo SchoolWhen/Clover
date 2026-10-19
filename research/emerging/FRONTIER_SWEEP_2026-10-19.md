@@ -7,7 +7,7 @@ Freshness cutoff checked through: **2026-10-19**
 
 This sweep extends the Stage-1 frontier watch from the 2026-10-15 cutoff (`../RESEARCH_FRONTIER.md`) to 2026-10-19. It is supporting Stage-1 material: it does **not** freeze a representation, backbone or training recipe, and it does **not** promote any mechanism into Clover Innovation.
 
-Raw discovery material for this window lives in the news archive edition [`../../news/news_2610192217.md`](../../news/news_2610192217.md) (`SURVEY_SIGNAL`). Items below were upgraded against primary or official sources on 2026-10-19 where a source is marked `PRIMARY_PAPER` / `OFFICIAL_*`; items still resting on secondary listings stay `SURVEY_SIGNAL`.
+Raw discovery material for this window lives in the news archive edition [`../../news_2610192217.md`](../../news_2610192217.md) (`SURVEY_SIGNAL`). Items below were upgraded against primary or official sources on 2026-10-19 where a source is marked `PRIMARY_PAPER` / `OFFICIAL_*`; items still resting on secondary listings stay `SURVEY_SIGNAL`.
 
 ## Project context for this sweep
 
