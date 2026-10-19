@@ -9,7 +9,7 @@ The 2026-10-19 frontier sweep found that recent intake was almost entirely VLA /
 a sweep with frontier but no breadth counts as failed
 ```
 
-This file records verified anchor sources for those six axes, plus the standing tracking channels that keep both breadth and frontier current. Entries follow the AGENTS §4.4 record shape (problem / demonstrates / does-not-demonstrate / assumptions / counter-hypothesis) in compact form. Anchors were located and bibliographically verified on 2026-10-19; the same evening, six of them were read in full text and recorded into [`research/survey/SOURCE_MAP.md`](research/survey/SOURCE_MAP.md) (marked **FULL READ** below). Remaining entries are abstract/bibliographic level, labelled as such. No entry here is an architecture decision (§4.2, §26).
+This file records verified anchor sources for those six axes, plus the standing tracking channels that keep both breadth and frontier current. Entries follow the AGENTS §4.4 record shape (problem / demonstrates / does-not-demonstrate / assumptions / counter-hypothesis) in compact form. Anchors were located and bibliographically verified on 2026-10-19; nine of them were then read in full text and recorded into [`research/survey/SOURCE_MAP.md`](research/survey/SOURCE_MAP.md) (marked **FULL READ** below), and the remaining gap hunts were completed on 2026-10-20 (see §7). Remaining entries are abstract/bibliographic level, labelled as such. No entry here is an architecture decision (§4.2, §26).
 
 ---
 
@@ -49,6 +49,13 @@ Company statements never become scientific fact silently (§4.5). News remains a
 - **Landing for Clover:** pairs with *Identifiable World Models* (arXiv:2610.07028, already tracked in the frontier survey). Together they set the Stage-1 question precisely: *what auxiliary structure (temporal contrast, action, multi-view, intervention) makes a visual world state identifiable, and what equivalence class remains?* Any "learned world state" claim that cannot answer this is incomplete.
 
 ---
+
+### A3. The identifiability ladder, modern steps — CITRIS (2022) & iCITRIS (2023)
+
+- **Sources:** Lippe et al., *CITRIS: Causal Identifiability from Temporal Intervened Sequences*, ICML 2022 (Spotlight), PMLR 162:13557–13603, https://proceedings.mlr.press/v162/lippe22a.html · Lippe et al., *iCITRIS: Causal Representation Learning for Instantaneous and Temporal Effects in Interactive Systems*, **ICLR 2023** (venue and arXiv ID corrected during verification: arXiv:2206.06169). https://arxiv.org/abs/2206.06169 · `PRIMARY_PAPER` (bibliographic + claim-level verified 2026-10-20; iCITRIS record is abstract/author-page level)
+- **The ladder:** A2 buys identifiability of independent *sources* with a static auxiliary variable. CITRIS adds **time + known intervention targets** and buys identifiability of the intervention-*affected parts* of causal variables (including multidimensional factors) — assuming all causal relations are temporal and targets are observed. iCITRIS adds **instantaneous effects** (frame rate slower than the true dynamics) and buys the causal *graph* as well — but only with **partially-perfect interventions** that sever a variable's instantaneous parents.
+- **Does not demonstrate:** anything on real-world robotic video (all experiments are synthetic/stylised); intervention targets are always *given*, never discovered; unaffected parts of variables remain unidentified at every rung.
+- **Landing for Clover:** the updated Stage-1 question is now precise: *passive video provably identifies none of this ladder.* The robot's own actions are the only candidate auxiliary/intervention structure — and whether an action counts as a known, let alone partially-perfect, intervention on a latent factor is itself a probing problem the robot must earn (Axis: §11 value of information), not an assumption the survey may grant.
 
 ## 2. Axis B — Human & developmental visual cognition
 
@@ -131,6 +138,20 @@ Company statements never become scientific fact silently (§4.5). News remains a
 
 ---
 
+### D5. Transparent materials — Sajjan et al. (2020, ClearGrasp)
+
+- **Source:** *Clear Grasp: 3D Shape Estimation of Transparent Objects for Manipulation*, ICRA 2020, pp. 3634–3642. https://arxiv.org/abs/1910.02550 · `PRIMARY_PAPER` (verified 2026-10-20)
+- **Demonstrates:** from a single RGB-D image, networks predict surface normals, transparent-surface masks and occlusion boundaries, and use them to *complete the depth* of transparent objects (trained on 50,000+ synthetic RGB-D images; 286-image real benchmark); grasping on novel transparent objects improves out of the box.
+- **The observation-physics fact it documents:** standard depth sensors pointed at transparent objects return values belonging to the surfaces *behind* them — the depth channel is not merely noisy, it is systematically wrong, and learning repairs it from RGB appearance cues. Input is RGB-**D** and training is synthetic-supervised (`L4`): an RGB-D boundary anchor, never RGB-alone evidence.
+- **Landing for Clover:** transparency is a regime where "the sensor said so" is false by construction; state licences in transparent scenes must be issued from the appearance-based completion, with its synthetic-training provenance attached.
+
+### D6. Motion blur, passive RGB — Nah, Kim & Lee (2017)
+
+- **Source:** *Deep Multi-Scale Convolutional Neural Network for Dynamic Scene Deblurring*, CVPR 2017, pp. 3883–3891. https://openaccess.thecvf.com/content_cvpr_2017/html/Nah_Deep_Multi-Scale_Convolutional_CVPR_2017_paper.html · `PRIMARY_PAPER` (verified 2026-10-20)
+- **Demonstrates:** end-to-end restoration of sharp images from single blurred photos without explicit kernel estimation (PSNR 29.23 on the GoPro benchmark introduced by the paper, SOTA at publication).
+- **Caveat that matters:** GoPro "blur" is *synthesised* by averaging consecutive high-frame-rate sharp frames — an approximation of true long-exposure blur; models trained on it transfer imperfectly to real blur (RealBlur evidence). The restoration works insofar as the dataset's blur physics are invertible by construction.
+- **Landing for Clover:** motion blur closes the Axis-D set with the same lesson in a third form (cf. D3's paired supervision, D5's corrupted channel): photometric repair is possible, but the repaired pixels are *inference*, and any state built on them inherits that status. Remaining Axis-D gap: a passive anchor for **specular** materials specifically (§28.22).
+
 ## 5. Axis E — Deformable, fluid & granular dynamics
 
 **Why this axis:** rigid-body benchmarks dominate the frontier intake; household worlds are cloth, dough, liquid, cables and piles. A brain claim scoped to rigid scenes must say so.
@@ -170,6 +191,21 @@ Company statements never become scientific fact silently (§4.5). News remains a
 
 ---
 
+### E6. Hidden fluid fields from visualisations — Raissi, Yazdani & Karniadakis (2020)
+
+- **Source:** *Hidden fluid mechanics: Learning velocity and pressure fields from flow visualizations*, Science 367(6481):1026–1030, 2020. DOI 10.1126/science.aaw4741 · `PRIMARY_PAPER` (verified 2026-10-20)
+- **Demonstrates:** a Navier–Stokes-informed network infers *unobservable* velocity and pressure fields from spatio-temporal images of a passive scalar (dye/smoke concentration), robust to low resolution and substantial noise — including extracting lift/drag and wall shear stress in an aneurysm where direct measurement is impossible.
+- **State provenance:** `MIXED`, and the mix is the lesson: inputs are genuinely image-domain (pixels → hidden physical fields, the exact *form* of the mother question), but the governing PDE is **supplied as prior** — this is data assimilation solving an inverse problem, not physics learned from vision — and the benchmark visualisations are generated by direct numerical simulation, so no camera optics, occlusion or clutter are present.
+- **Landing for Clover:** the flagship proof that hidden physical state *can* be recovered from visual observation — and simultaneously the honesty anchor for its price: identifiability here is bought with a known physics class (cf. Axis A: without the Navier–Stokes prior, the same images are underdetermined). The open remainder is doing this with *real camera* observations and an *un*supplied physics class.
+
+### E7. Granular state from real robot cameras — Schenck, Tompson, Fox & Levine (2017)
+
+- **Source:** *Learning Robotic Manipulation of Granular Media*, CoRL 2017. Full text: https://rse-lab.cs.washington.edu/papers/corl2017_granularmedia.pdf · `PRIMARY_PAPER` · **FULL READ 2026-10-20**
+- **Demonstrates:** the first ConvNet dynamics model of granular media, learned from a real robot fleet scooping and dumping pinto beans in a tray; the structured dynamics model beats a hand-crafted heuristic and an implicit value network, and its predictions drive actions that shape target configurations.
+- **State provenance:** `PIXELS`-adjacent, observed-not-privileged: the state is a heightmap (~1 cm cells) **computed from the depth image** (RGB → depth → heightmap); no simulator state or mocap anywhere. Boundaries: the state is the *observable surface only* (no stress, no per-grain identity), effectively 2.5D, and RGB texture is discarded.
+- **Negative result recorded (2026-10-20):** a dedicated search found **no** primary-standard work estimating granular state from RGB alone — verifiable work uses depth-derived heightmaps or predicts scooping volumes instead. The RGB-alone granular slot stays open as a searched-and-empty gap, not an unsearched one.
+- **Landing for Clover:** with E5 (elasto-plastic, RGB-D) and E6 (fluid, image-domain + PDE prior), Axis E now has a perception-side anchor per material class — each with a different, explicitly recorded provenance compromise. The pattern across all three: nobody has yet done it from passive RGB alone with learned state estimation end-to-end. That conjunction is the axis's real open problem.
+
 ## 6. Axis F — Evaluation methodology (shortcut resistance, examiner isolation)
 
 **Why this axis:** a world-understanding claim is only as strong as the test that could have refuted it. This axis is the methodological licence for every capability claim in the repository.
@@ -181,13 +217,25 @@ Company statements never become scientific fact silently (§4.5). News remains a
 - **Does not demonstrate:** a complete remedy; it offers benchmarking recommendations, not a certification procedure.
 - **Landing for Clover:** mandatory audit shape for any internal result — (1) what is the cheapest cue that solves this test without the claimed capability? (2) does the test include a condition where that cue misleads? (3) is the examiner isolated from the system's inputs (pixels-only discipline)? VoE pairs (Axis B2) are one concrete anti-shortcut instrument. Internal precedent: the frozen CPU-track S0 audit recorded its own TaskSuite as *not pixels-only* (`FALSIFIED + OPEN`) — this axis exists so that class of error is caught by design, not by luck.
 
+### F2. Data contamination — Sainz et al. (2023)
+
+- **Source:** *NLP Evaluation in trouble: On the Need to Measure LLM Data Contamination for each Benchmark*, Findings of EMNLP 2023, pp. 10776–10787. https://arxiv.org/abs/2310.18018 · `PRIMARY_PAPER` (position paper; abstract-level verified 2026-10-20)
+- **Demonstrates/argues:** the worst contamination — a model trained on a benchmark's test split, then evaluated on it — silently overestimates performance and corrupts published conclusions (correct results get discarded); the extent is unknown precisely because exposure is not measured. Prescription: measure contamination **per benchmark**, per model.
+- **Landing for Clover:** contamination has embodied forms this paper's taxonomy predates: *simulator-asset leakage* (test worlds drawn from the same public asset libraries / simulator as training), *pretraining-corpus leakage* (the visual front-end's web-scale training already contains the benchmark's public datasets), and *examiner non-isolation* (grader shares channels with the system — the repository's own S0 FALSIFIED precedent). A "we filtered the data" claim without a per-benchmark measurement is not evidence.
+
+### F3. Contamination-limited design — White et al. (2024, LiveBench)
+
+- **Source:** *LiveBench: A Challenging, Contamination-Limited LLM Benchmark*, ICLR 2025 Spotlight. https://arxiv.org/abs/2406.19314 · Project: https://livebench.ai · `PRIMARY_PAPER` (abstract-level verified 2026-10-20)
+- **Design:** questions built from *recently released* sources and refreshed monthly with dated releases (the test is always younger than training cutoffs); scoring is automatic against objective ground truth — explicitly rejecting LLM-as-judge; difficulty headroom is a design goal (top models < 70% at release) so the instrument stays discriminative. The title's "limited", not "free", is deliberate: freshness is a moving defence, not a proof of non-exposure.
+- **Landing for Clover:** the translation to embodied evaluation writes itself — **dated, regenerated evaluation worlds** (scene/asset generation seeded after the training-data cutoff, generation provenance recorded, no fixed public test set) + **code-computed physical predicates** (contact, support, occlusion-recovery) as the scorer instead of VLM judges or human ratings. A static simulated benchmark is a memorisation target in exactly the way a static test split is.
+
 ---
 
 ## 7. What this file changes, and the read queue
 
 1. **Every Stage-1 surface now has at least one primary anchor or an explicitly recorded gap.** Axes A–F map to surfaces 3, 2/5, 1/7, 4, 5, and 11/15 respectively in [`STATUS.md`](STATUS.md).
 2. **Full-text read queue — status 2026-10-20:** DONE and recorded in `research/survey/SOURCE_MAP.md`: Battaglia 2013 · Khemakhem 2020 · Kaelbling 1998 · DROID-SLAM 2021 · PlasticineLab 2021 · Geirhos 2020 · ORB-SLAM3 2021 · Spelke 1994 (companion to B1). Closed at abstract level by access, not by choice: Spelke 1992 and Baillargeon 1985 full texts are paywalled/closed (verified 2026-10-20); their entries carry the abstract-level label permanently until access changes.
-3. **Open gaps (explicit, §28.22):** passive anchors for specular/transparent materials and motion blur (Axis D; low light now anchored by D3/D4, fog boundary by D2); fluid/granular *perception-side* anchors (Axis E — E5 covers elasto-plastic from RGB-D; DPI-Net E4 audited as privileged-state); RGB-alone (no depth) deformable state estimation; a modern identifiability-of-world-models synthesis beyond A2; evaluation-methodology anchors beyond F1 (benchmark leakage / contamination literature).
+3. **Open gaps (explicit, §28.22) — status after the 2026-10-20 completion run:** the breadth build-out is complete at anchor level; what remains open is deliberately narrow: (i) a passive anchor for **specular** materials specifically (Axis D; transparency anchored on RGB-D by D5, motion blur by D6, low light by D3/D4, fog boundary by D2); (ii) **RGB-alone** (no depth channel) state estimation for deformable (E5 is RGB-D) and granular matter (E7 is depth-derived; RGB-alone granular was searched 2026-10-20 and found empty at primary standard — a recorded negative result); (iii) identifiability results demonstrated on **real** robotic video (Axis A ladder A2/A3 is synthetic-only so far); (iv) full texts of Spelke 1992 and Baillargeon 1985 (access-closed; entries permanently labelled abstract-level until access changes). Everything else in the original six-axis gap list is closed by the anchors above.
 4. **Next frontier sweep obligation (unchanged):** include at least one *new primary source* per axis above, or state why the axis produced nothing — silence is not coverage.
 
 *Update rule: this is a living root file. New anchors are appended per axis with the same record shape and verification date; superseded entries are marked `SUPERSEDED`, never silently deleted (§15).*
