@@ -1,6 +1,6 @@
 # Source Map — Evidence → Research Question → Clover Landing
 
-Last updated: 2026-10-14
+Last updated: 2026-10-19
 
 This file maps important external evidence to the exact Clover research question it constrains. It is designed for fast review and to prevent source drift.
 
@@ -27,6 +27,9 @@ Domain-level synthesis now lives in [`../dossiers/README.md`](../dossiers/README
 | Bajcsy, Active Perception | https://ieeexplore.ieee.org/abstract/document/5968 | `BACKGROUND_REFERENCE` | Perception includes selecting sensing actions to gain information. | `R-H-active-perception-lifelong.md`; V3 protocol |
 | Spelke et al., Origins of Knowledge | https://pubmed.ncbi.nlm.nih.gov/1454901/ | `BACKGROUND_REFERENCE` | Continuity and solidity are useful object/physics research dimensions. | `R-E-physics.md` |
 | Physics for infants review | https://pubmed.ncbi.nlm.nih.gov/26302470/ | `BACKGROUND_REFERENCE` | Reviews continuity, solidity, cohesion and object/substance reasoning. | Benchmark interpretation; not a mandate to copy human cognition |
+| Kaelbling, Littman & Cassandra 1998 — POMDP | https://doi.org/10.1016/S0004-3702(98)00023-X | `PRIMARY_PAPER` | Belief state is a sufficient statistic for history; optimal behaviour is a policy over beliefs; information-gathering actions are valued inside the value function (tiger problem: listening is provably optimal under uncertainty). Full text read 2026-10-19 (see [`SURVEY_BREADTH.md`](../../SURVEY_BREADTH.md) Axis A). | `R-A-observability-epistemology.md`; belief/licence discipline precedent — but assumes a complete, correct, enumerative model; no model learning, no vision |
+| Khemakhem et al. 2020 — iVAE / nonlinear ICA identifiability | http://proceedings.mlr.press/v108/khemakhem20a.html | `PRIMARY_PAPER` | Learned latent state is identifiable (up to linear, resp. permutation + pointwise, indeterminacy) **only** with an observed auxiliary variable modulating a factorised exponential-family prior; unconditional latent models are provably non-identifiable. Corrigendum: the discrete-observation claim was retracted. Full text read 2026-10-19. | `R-F` theory background; every claimed world variable must name its auxiliary structure (time / action / multi-view) and its remaining equivalence class |
+| Battaglia, Hamrick & Tenenbaum 2013 — intuitive physics engine | https://pmc.ncbi.nlm.nih.gov/articles/PMC3831455/ | `PRIMARY_PAPER` | Human physical judgments across 5 experiments are fit by approximate probabilistic simulation over an inferred scene distribution (uncertainty parameters σ/φ/μ; ~3–7 effective samples), including human illusions a ground-truth model misses. Full text read 2026-10-19. | `R-E-physics.md`; also §8 — named rival to the queryable-state hypothesis; scene inputs were ground-truth-based, not estimated from pixels |
 
 ---
 
@@ -39,6 +42,9 @@ Domain-level synthesis now lives in [`../dossiers/README.md`](../dossiers/README
 | ORB-SLAM3 code | https://github.com/UZ-SLAMLab/ORB_SLAM3 | `OPEN_SOURCE` | Reproducible SLAM baseline. | — | Baseline setup |
 | RAFT paper | https://arxiv.org/abs/2003.12039 | `PRIMARY_PAPER` | Strong dense optical flow / temporal correspondence. | Identity, permanence, causal state. | Motion baseline; `R-B` |
 | RAFT code | https://github.com/princeton-vl/RAFT | `OPEN_SOURCE` | Reproducible flow baseline. | — | Baseline setup |
+| DROID-SLAM paper | https://arxiv.org/abs/2108.10869 | `PRIMARY_PAPER` | Learned recurrent correspondence + differentiable dense bundle adjustment (Gauss–Newton over poses and per-pixel inverse depth); one model across mono/stereo/RGB-D; zero tracking failures on TartanAir/EuRoC/TUM-RGBD (EuRoC mono ATE 2.2 cm); ablation: removing DBA from training makes the system unstable. Full text read 2026-10-19. | Pose + dense depth only — no object/physical state; training is `L4` (synthetic TartanAir, ground-truth pose/depth supervision); pinhole intrinsics assumed known. | Learned-geometry baseline; `R-B` — the learned front-end did not replace geometric optimisation |
+| DROID-SLAM code | https://github.com/princeton-vl/DROID-SLAM | `OPEN_SOURCE` | Reproducible learned-SLAM baseline. | — | Baseline setup |
+| Bijelic et al. 2020 — seeing through fog | https://openaccess.thecvf.com/content_CVPR_2020/html/Bijelic_Seeing_Through_Fog_Without_Seeing_Fog_Deep_Multimodal_Sensor_Fusion_CVPR_2020_paper.html | `PRIMARY_PAPER` | Documents how RGB detection degrades in fog/snow/rain relative to lidar/radar/gated-NIR (100k-label multimodal dataset, >10,000 km + fog chamber); entropy-driven fusion survives by falling back to non-RGB sensors. Bibliographic + abstract verified 2026-10-19. | **Not vision-alone evidence** — multimodal by design; usable only as an adverse-condition boundary / falsifier reference. | Observation-physics counter-anchor ([`SURVEY_BREADTH.md`](../../SURVEY_BREADTH.md) Axis D); any adverse-condition claim must state its observation regime |
 
 ---
 
@@ -117,6 +123,9 @@ Domain-level synthesis now lives in [`../dossiers/README.md`](../dossiers/README
 | Principia | https://arxiv.org/abs/2609.04200 | `PRIMARY_PAPER` | Relational physics can be tested without absolute calibration; current generators/VLMs remain weak. | Relational consistency vs executable physical state. | `R-E`; Physics battery |
 | Principia project | https://principiabench.github.io/ | `OFFICIAL_PROJECT` | Benchmark protocol/resources. | — | Battery setup |
 | RoboPhys-3D | https://arxiv.org/abs/2608.28718 | `PRIMARY_PAPER` | State/execution-grounded metrics expose failures missed by appearance/VLM metrics. | How much 3D-grounded state predicts real task success. | `R-E`; `R-G`; world-model evaluation |
+| Geirhos et al. 2020 — shortcut learning | https://arxiv.org/abs/2004.07780 | `PRIMARY_PAPER` | Decision rules that pass i.i.d. tests but fail o.o.d. unify many DNN failures (texture counting, hospital-token detection, context cues); shortcuts also occur in animal/human learning; o.o.d. tests themselves decay as models improve. Full text read 2026-10-19. | Perspective, not a certification procedure; the "intended solution" must be defined by the researcher. | Anti-shortcut audit for every capability claim (cheapest cue → misleading condition → examiner isolation); `R-E` |
+| PlasticineLab | https://arxiv.org/abs/2104.03311 | `PRIMARY_PAPER` | 10 soft-body tasks / 50 configurations on differentiable MLS-MPM elastoplastic simulation; gradient-based open-loop planning solves many single-stage tasks (e.g. RollingPin 0.93 soft-IoU) where SAC/TD3/PPO largely fail; multi-stage tasks (Pinch, Writer) fail even with perfect state — gradients vanish at detachment/reattachment. Full text read 2026-10-19. | State is privileged particle landmarks (`L4`); no perception evaluated; open-loop plans assume full environment knowledge. | Deformable-planning evidence with an explicit "no perception-side benchmark exists" disclaimer; `R-E` |
+| GNS — Sanchez-Gonzalez et al. 2020 | https://arxiv.org/abs/2002.09405 | `PRIMARY_PAPER` | Learned graph-network simulator over particle state generalises across fluids, rigid solids and deformable materials (Water/Sand/Goop), to ~10× particles and thousands of timesteps at test time. Abstract verified 2026-10-19. | Input is privileged particle state (`L4`) from classical simulators (SPH/MPM/PBD) — evidence about dynamics computation, not about observing state from vision. | Axis-E dynamics anchor ([`SURVEY_BREADTH.md`](../../SURVEY_BREADTH.md)); separates "dynamics from state" from "state from vision" |
 
 ---
 
