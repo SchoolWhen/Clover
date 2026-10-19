@@ -1,7 +1,7 @@
 # Clover Status
 
-Last updated: **2026-10-15**  
-Stage-1 freshness checked through: **2026-10-15**
+Last updated: **2026-10-19**  
+Stage-1 freshness checked through: **2026-10-19**
 
 ## Research question
 
@@ -10,6 +10,18 @@ Stage-1 freshness checked through: **2026-10-15**
 ## Long-term goal
 
 > **Build a general-purpose robotic brain that forms an understanding of the real world through vision alone, then uses that understanding to decide and act.**
+
+## Project decision — 2026-10-19
+
+```text
+CPU-only Clover implementation track: FROZEN at its current results.
+Main line: embodied-intelligence robotic-brain research (this repository, Stage 1).
+CPU-only full implementation resumes only after the embodied line produces
+a new, complete frontier breakthrough.
+News synchronization: timestamped editions in `news/` (`news_yymmddhhmm.md`),
+collecting the daily morning/evening digests and the frontier design-tracking reports.
+Latest frontier extension: `research/emerging/FRONTIER_SWEEP_2026-10-19.md`.
+```
 
 ## Current stage
 

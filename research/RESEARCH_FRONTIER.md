@@ -1,13 +1,13 @@
 # Stage 1 — Research Frontier Watch
 
-Last updated: **2026-10-15**  
-Freshness cutoff checked through: **2026-10-15**
+Last updated: **2026-10-19**  
+Freshness cutoff checked through: **2026-10-19**
 
 > **Research question:** How can a machine understand the real world through vision alone?
 
 This file is a **thin current-edge index**. It is not a second survey and it does not make Clover design decisions.
 
-As of 2026-10-15, the latest complete arXiv daily batches visible for the relevant categories include work submitted through **2026-10-13 UTC**, with some records revised on 2026-10-14. Preserve both submission/revision dates and the date Clover checked the source.
+As of 2026-10-15, the latest complete arXiv daily batches visible for the relevant categories include work submitted through **2026-10-13 UTC**, with some records revised on 2026-10-14. The 2026-10-16 → 2026-10-19 extension is recorded in [`emerging/FRONTIER_SWEEP_2026-10-19.md`](emerging/FRONTIER_SWEEP_2026-10-19.md); its verified additions are: Preserve both submission/revision dates and the date Clover checked the source.
 
 Stable concepts belong in the Stage-1 topic files. Fast-moving cross-boundary clusters are also summarized in [`emerging/JEPA_RSI_RUNTIME_2026-10-15.md`](emerging/JEPA_RSI_RUNTIME_2026-10-15.md).
 
@@ -25,6 +25,11 @@ Stable concepts belong in the Stage-1 topic files. Fast-moving cross-boundary cl
 
 | Date | Source | Evidence | Why it matters now | Does **not** prove | Stage-1 landing |
 |---|---|---|---|---|---|
+| 2026-10-15 / listed 10-16 | VLA-Δ — https://arxiv.org/abs/2610.21306 · code https://github.com/ZJU-OmniAI/VLA-Delta | `PRIMARY_PAPER` / `OPEN_SOURCE` | physical state-transition (Δ) supervision improves VLA policies at zero added inference cost; reported above π0.5 in real-robot experiments | a Δ training target is a sufficient world state, or transfers without its pretraining mixture | state-transition supervision · sufficient state · post-training |
+| 2026-10-16 | HIJP (Hindsight Inverse JEPA Planning) — https://arxiv.org/abs/2610.23615 | `PRIMARY_PAPER` | search-free latent planning via goal-conditioned inverse model; hindsight relabeling shapes the visual representation; 1.9–16.5× planning speedup reported | latent inverse planning preserves epistemic/uncertainty state | JEPA planning · runtime · sufficient state |
+| 2026-06-30 / resurfaced 10-19 | AdaJEPA — https://arxiv.org/abs/2606.32026 · https://agenticlearning.ai/adajepa/ | `PRIMARY_PAPER` / `OFFICIAL_PROJECT` | deployment-time adaptation of a latent world model inside the MPC loop from executed transitions; breaks the frozen-at-deployment default | online adaptation is safe/monotonic, or preserves calibration and memory | deployment learning · model invalidation · belief revision |
+| 2026-10-14 / demo 10-20→22 | NEURA Neuron AI (PLA) — https://neura-robotics.com/neura-robotics-introduces-neuron-ai/ | `OFFICIAL_REPORTED_RESULT` | vendor robotic brain (vision+touch+sound+proprioception+memory, on-robot inference) with an 11-min unattended laundry demo at GTC Berlin as its public test | any benchmark capability: no success rates or Time-to-Skill figures published; not a vision-alone result | robotic-brain competitor watch · memory claims · EV ladder |
+| 2026-10-17→19 | OpenAI humanoid program (Altman statements) — https://www.timesnownews.com/technology-science/openai-is-building-its-own-humanoid-robot-ceo-sam-altman-confirms-article-156365247 | `OFFICIAL_REPORTED_RESULT` | largest foundation-model lab goes full-stack robotic brain: own humanoid, 2027 demo target, "brain over body" thesis | any capability: no model/data/benchmark disclosed | industry structure · robotic-brain race |
 | 2026-10-13 / rev. 10-14 | Thinker-WM — https://arxiv.org/abs/2610.18447 · project https://thinkercosmos.ubtrobot.com | `PRIMARY_PAPER` / `OFFICIAL_PROJECT` | jointly evolves RGB, metric depth and robot action in a shared dynamics representation; exposes a strong unified-multimodal-state counter-hypothesis | depth/action-supervised training is vision-only, or one shared state is universally sufficient | representation · geometry · WAM · provenance |
 | 2026-10-13 | AReaL-RSI — https://arxiv.org/abs/2610.18083 | `PRIMARY_PAPER` | makes recursive improvement a resource-allocation / role-specialization / evidence-sharing problem across persistent research campaigns | more agents automatically yield better or safer self-improvement | foundation-model systems · research automation · RSI evaluation |
 | 2026-10-13 | WorldOracle — https://arxiv.org/abs/2610.18826 | `PRIMARY_PAPER` | evaluates action-conditioned world models against paired real executions from the same initial observation and low-level action sequence | world-model score implies good policy or complete physical understanding | world-model evaluation · real-execution grounding |
