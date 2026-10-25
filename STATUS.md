@@ -16,16 +16,16 @@ Apple M4 remains the local development reference; no target real robot is curren
 
 ## 当前进展与下一步 — 2026-10-25
 
-
-| 事项 | 当前状态 | 入口 |
+| 事项 | 当前证据 | 入口 |
 |---|---|---|
-| 仓库结构 | 跨阶段约束留在根目录；七个阶段各有目录，第一阶段按研究方向平铺；历史保留在 Git | [主页](README.zh-CN.md) · [维护规则](AGENTS.md) |
-| 被动镜面视觉 | 新增 Ref-NeRF / NeRFactor；区分光度拟合与唯一物理分解，以及测量先验 | [观测](01-research/perception-and-identifiability.md#reflection-evidence) |
-| 因果可识别性 | 新增 BISCUIT 与真实光学 CRL 负结果；修正“所有被动视频不可能”的过度推断 | [因果](01-research/causality-and-active-perception.md#causal-identification-evidence) |
-| 压缩与记忆 | 新增 FastV / FrameFusion；固定版本、配置与时延范围，保留未知未来任务的证据缺口 | [表示](01-research/representation-and-memory.md#compression-evidence) · [评估](01-research/evaluation-and-benchmarks.md#evidence-retention-diagnostics) |
-| 引用与阅读深度 | 6 篇新增一手文献，逐条标明核读部分、V/L来源与复现边界；继承文献不自动升级为新核验 | [来源](01-research/sources-and-resources.md#verified-additions) |
+| 研究目标 | 完整、全面、当前的前沿/相关/交叉研究；仍保持原视觉问题与 Stage 1 | [完整性审查](01-research/README.md#coverage-and-completion-audit) |
+| 本轮方向补充 | 首次登记 **53 篇**，深化 **1 篇**已有论文，按机制、输入/学习来源、证据和边界写回现有正文 | [交叉桥接](01-research/research-questions.md#cross-domain-research-bridges) |
+| 前沿检索 | 3 组一手接口返回 1,611 条、去重 1,482 条；分类公告核对到 10-23；未把所有候选声称为精读 | [来源协议](01-research/sources-and-resources.md#current-search-protocol) |
+| 旧引文核查 | 335 个数字 arXiv ID 均取回书目；未据此宣布全部旧研究结论正确 | [书目边界](01-research/sources-and-resources.md#current-search-protocol) |
+| 模型 artifact | 四个官方权重 revision 已读取模型卡与配置，分清公开文本权重和托管视觉/工具特性 | [精确版本](01-research/foundation-models-and-systems.md#current-model-artifacts) |
+| 结构与持续维护 | 根目录跨阶段规则；调研继续按原八方向原位更新，没有新增调研文件 | [第一阶段](01-research/README.md) |
 
-**未完成的科学工作：** RGB-only 可变形/颗粒状态；自然真实机器人视频的可靠可识别性；压缩后未来任务的证据保留与恢复；封闭原文全文核读。下一步继续定向调研和反例登记。原有跨主题问题仍见下文；这里没有宣布阶段退出、实验通过或算法达标。
+**尚未完成：** 非 arXiv 前沿与全部旧官方 artifact 刷新；部分新增论文的方法/监督/实验完整核读；335 篇旧记录的内容级主张审查；RGB-only 隐藏态、真实因果识别和未知未来任务证据恢复的进一步检索。当前未通过全范围完整性核查，目标继续推进，没有宣布“全面完成”或推进阶段。
 
 ## Current reading route
 
@@ -40,7 +40,7 @@ Apple M4 remains the local development reference; no target real robot is curren
 - Systems: streaming encode/cache invalidation; fast-control/slow-reasoner synchronization; end-to-end latency; runtime drift; API/checkpoint/harness provenance.
 - Validation: independent splits and matched baselines; simulator/solver shortcuts; sim-to-sim versus real transfer; rollback and persistent-state corruption.
 
-These remain research questions, not a declared collection failure or an instruction to invent an architecture. Individual evidence dates remain in their topic records. The six new papers do not revalidate all inherited vendor/frontier claims.
+These remain research questions, not a declared collection failure or an instruction to invent an architecture. Individual evidence dates remain in their topic records. Newly registered papers and metadata retrieval do not revalidate all inherited vendor/frontier claims.
 
 ## Stage-1 exit condition
 

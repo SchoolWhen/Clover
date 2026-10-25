@@ -8,6 +8,27 @@ Unresolved questions and the evidence that could distinguish competing answers. 
 
 This is the canonical topic document. Update it in place; source-level dates and reading-depth labels below qualify the evidence, not the maintenance date.
 
+<!-- BEGIN cross-domain-research-bridges -->
+<a id="cross-domain-research-bridges"></a>
+
+## 交叉研究：可以检验的桥接问题
+
+这些是文献提出的对照和条件，不是本项目采纳的模块列表。
+
+| 交叉方向 | 原问题中的作用 | 已核实的参照 | 仍需解决的接口 |
+|---|---|---|---|
+| 多视图几何 × 循环状态 × SLAM | 多帧如何形成一致且可修正的状态 | CUT3R、MonST3R、HiP3R、Stream4D | 几何漂移、动态身份、隐藏态与物性不是同一误差 |
+| 物理结构学习 × 系统辨识 | 什么先验允许从轨迹找到紧凑动力学 | HNN、LNN、Koopman、SINDy、GNS、FNO | 真状态/坐标/方程族是否被额外提供；相机逆问题在哪里解决 |
+| 信息论 × 状态充分性 × 记忆 | 压缩究竟保留谁需要的信息 | Information Bottleneck、CADRE、WholeBodyMem | 指定任务充分与未知未来任务充分；可恢复/不可重看的证据 |
+| 无监督技能 × 可达性几何 | 不靠单任务奖励学习可复用行为坐标 | METRA、HILP | 时间距离是否丢失身份、物性、不可逆事件或反事实区分 |
+| 领域泛化 × 因果结构 | 区分外观捷径和物理机制外推 | IRM、DomainBed、WILDS、物性偏移世界模型 | 环境划分/模型选择是否泄漏；已知质量与视觉识别质量分开 |
+| 成像物理 × 主动感知 | 真实获取哪些测量值得其时间/风险 | 采证式 CLOSER、照明检查、任务相关 NBV | depth/地图/机体状态来源；亮度、熵和任务风险的区别 |
+| 生成视频 × 因果验证 × 评测 | 区分看似合理、执行正确、持久保持和行动有用 | MIST、PhysTrace、Dual Exam、Sensorimotor Alignment | 独立考官、生成证据地位和闭环校验 |
+| 部分可观测控制 × 可变形/接触 | 近静态图像下哪些隐藏量会改变动作 | FlowVLA、CW-WAM、软衣物世界模型、DefFlow | 点云、力、动作和完整模拟状态带来的额外可识别性 |
+
+当前材料仍不足以从任何一行推出完整的 Clover 解法。后续应按共同失败与可证伪预测比较，避免把这些方向直接堆成网络结构。
+<!-- END cross-domain-research-bridges -->
+
 ## Contents
 
 - [Research Questions](#topic-research-survey-research_questions)

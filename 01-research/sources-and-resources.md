@@ -8,9 +8,113 @@ Primary-source map, papers, code, datasets and discovery signals. Read evidence 
 
 This is the canonical topic document. Update it in place; source-level dates and reading-depth labels below qualify the evidence, not the maintenance date.
 
+<!-- BEGIN current-search-protocol -->
+<a id="current-search-protocol"></a>
+
+## 当前检索范围、入选规则与书目核验
+
+核验日：**2026-10-25（Asia/Shanghai）**。本次同时补经典/相关/交叉研究与当前前沿；来源优先级为论文原文、会议论文库、作者项目/代码和精确官方模型卡。公司材料保留 `OFFICIAL_*` 身份；摘要和下载到本地的全文不自动升级为完整精读。
+
+**收录标准：** 直接约束视觉观测、可识别性、表示/记忆、物理因果、主动采证、学习、决策效用或评估条件；或提供能够区分竞争解释的交叉领域机制。**不直接升级：** 只有名称相似的文本世界模型、仅行业宣言、无公开条件的排名、医疗任务成绩对机器人/临床的外推、以及未知额外输入的“纯视觉”说法。
+
+### 当前前沿的可复查检索
+
+| 一手检索 | 完整查询 | 返回记录数 | 公共接口 |
+|---|---|---|---|
+| Robotics | `cat:cs.RO AND submittedDate:[202610150000 TO 202610252359]` | 514 / 接口 total=514 | [arXiv API](https://export.arxiv.org/api/query?search_query=cat%3Acs.RO+AND+submittedDate%3A%5B202610150000+TO+202610252359%5D&start=0&max_results=1000&sortBy=submittedDate&sortOrder=descending) |
+| Vision | `cat:cs.CV AND submittedDate:[202610150000 TO 202610252359]` | 981 / 接口 total=981 | [arXiv API](https://export.arxiv.org/api/query?search_query=cat%3Acs.CV+AND+submittedDate%3A%5B202610150000+TO+202610252359%5D&start=0&max_results=1000&sortBy=submittedDate&sortOrder=descending) |
+| AI/ML 交叉 | `(cat:cs.AI OR cat:cs.LG) AND submittedDate:[202610150000 TO 202610252359] AND (all:"world model" OR all:"causal representation" OR all:"partial observability" OR all:"embodied" OR all:"physical reasoning" OR all:"system identification" OR all:"active perception")` | 116 / 接口 total=116 | [arXiv API](https://export.arxiv.org/api/query?search_query=%28cat%3Acs.AI+OR+cat%3Acs.LG%29+AND+submittedDate%3A%5B202610150000+TO+202610252359%5D+AND+%28all%3A%22world+model%22+OR+all%3A%22causal+representation%22+OR+all%3A%22partial+observability%22+OR+all%3A%22embodied%22+OR+all%3A%22physical+reasoning%22+OR+all%3A%22system+identification%22+OR+all%3A%22active+perception%22%29&start=0&max_results=1000&sortBy=submittedDate&sortOrder=descending) |
+
+三组共 1,611 条返回记录，按论文 ID 去重后 **1,482** 条。当前分类列表也核对了 [cs.RO recent](https://arxiv.org/list/cs.RO/recent) 与 [cs.CV recent](https://arxiv.org/list/cs.CV/recent)：最新可见公告批次为 **2026-10-23**。公告日期、初次提交日期、修订日期和本项目核验日期不是一回事。
+
+关键词排序只用于找候选，不能充当全部论文的人类精读或排除判决。本次自动高分候选有 81 条；另用几何、物性、记忆、泛化、风险等题名检索补查，发现低分但直接相关的工作。本节登记的入选论文均人工检查了摘要，部分另核读方法/监督/局限段。未将 1,482 条全部声称为纳入文献或精读文献。
+
+### 既有记录书目检查
+
+基线提交 `fae924516c5bc3862125cd67d57b3850f3fdf462` 的九份调研正文，以 `arxiv.org/(abs|html|pdf)/(数字ID)` 提取并去掉版本号，得到 **335 个数字格式 arXiv ID**；全部从一手 API 返回了题名、作者、初次提交、当前版本/修订日期与摘要。批次每组不超过 70 个 ID，按 `id_list` 读取，没有以检索命中率替代结论核查。此项检查证明编号可追溯，**不证明** 全部旧综述句子、数值、理论条件、代码或部署能力正确；旧式 ID、非 arXiv 原文与所有官方项目的新鲜度仍需另查。
+
+当前书目示例应使用精确题名：`2610.23615` 返回 **Beyond Action Prediction: Learning Search-Free Planning in Latent Space**（旧简称 HIJP 仅作别名）；`2610.15429` 返回 **World Modeling through Spectral Alignment**（旧简称 SpecWM 不是完整题名）。不得用简称猜测作者、版本或证明内容。
+
+### 本轮新增与深化文献索引
+
+下表共 54 条：53 篇首次登记；GNS（`2002.09405`）原已登记，本轮将摘要级记录深化到方法与监督边界选读，不重复计入新增论文。
+
+| 原始提交 / 当前返回版本 | 题名与一手来源 | 方向正文 | 阅读深度 |
+|---|---|---|---|
+| 2025-01-21 / `2501.12387v1` | [Continuous 3D Perception Model with Persistent State](https://arxiv.org/abs/2501.12387v1) | [perception-and-identifiability.md](perception-and-identifiability.md#current-cross-domain-evidence) | 正文选读：方法、监督或局限段；未复核全部实验/证明 |
+| 2024-10-04 / `2410.03825v2` | [MonST3R: A Simple Approach for Estimating Geometry in the Presence of Motion](https://arxiv.org/abs/2410.03825v2) | [perception-and-identifiability.md](perception-and-identifiability.md#current-cross-domain-evidence) | 正文选读：方法、监督或局限段；未复核全部实验/证明 |
+| 2019-06-04 / `1906.01563v3` | [Hamiltonian Neural Networks](https://arxiv.org/abs/1906.01563v3) | [representation-and-memory.md](representation-and-memory.md#current-cross-domain-evidence) | 正文选读：方法、监督或局限段；未复核全部实验/证明 |
+| 2020-03-10 / `2003.04630v2` | [Lagrangian Neural Networks](https://arxiv.org/abs/2003.04630v2) | [representation-and-memory.md](representation-and-memory.md#current-cross-domain-evidence) | 正文选读：方法、监督或局限段；未复核全部实验/证明 |
+| 2017-12-27 / `1712.09707v2` | [Deep learning for universal linear embeddings of nonlinear dynamics](https://arxiv.org/abs/1712.09707v2) | [representation-and-memory.md](representation-and-memory.md#current-cross-domain-evidence) | 正文选读：方法、监督或局限段；未复核全部实验/证明 |
+| 2000-04-24 / `physics/0004057v1` | [The information bottleneck method](https://arxiv.org/abs/physics/0004057v1) | [representation-and-memory.md](representation-and-memory.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2015-09-11 / `1509.03580v1` | [Discovering governing equations from data: Sparse identification of nonlinear dynamical systems](https://arxiv.org/abs/1509.03580v1) | [causality-and-active-perception.md](causality-and-active-perception.md#current-cross-domain-evidence) | 正文选读：方法、监督或局限段；未复核全部实验/证明 |
+| 2023-10-13 / `2310.08887v2` | [METRA: Scalable Unsupervised RL with Metric-Aware Abstraction](https://arxiv.org/abs/2310.08887v2) | [causality-and-active-perception.md](causality-and-active-perception.md#current-cross-domain-evidence) | 正文选读：方法、监督或局限段；未复核全部实验/证明 |
+| 2024-02-23 / `2402.15567v2` | [Foundation Policies with Hilbert Representations](https://arxiv.org/abs/2402.15567v2) | [causality-and-active-perception.md](causality-and-active-perception.md#current-cross-domain-evidence) | 正文选读：方法、监督或局限段；未复核全部实验/证明 |
+| 2024-09-18 / `2409.12192v2` | [DynaMo: In-Domain Dynamics Pretraining for Visuo-Motor Control](https://arxiv.org/abs/2409.12192v2) | [learning-and-data.md](learning-and-data.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2019-07-05 / `1907.02893v3` | [Invariant Risk Minimization](https://arxiv.org/abs/1907.02893v3) | [learning-and-data.md](learning-and-data.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2020-07-02 / `2007.01434v1` | [In Search of Lost Domain Generalization](https://arxiv.org/abs/2007.01434v1) | [evaluation-and-benchmarks.md](evaluation-and-benchmarks.md#current-cross-domain-evidence) | 正文选读：方法、监督或局限段；未复核全部实验/证明 |
+| 2020-12-14 / `2012.07421v3` | [WILDS: A Benchmark of in-the-Wild Distribution Shifts](https://arxiv.org/abs/2012.07421v3) | [evaluation-and-benchmarks.md](evaluation-and-benchmarks.md#current-cross-domain-evidence) | 正文选读：方法、监督或局限段；未复核全部实验/证明 |
+| 2020-06-13 / `2006.07710v2` | [The Pitfalls of Simplicity Bias in Neural Networks](https://arxiv.org/abs/2006.07710v2) | [evaluation-and-benchmarks.md](evaluation-and-benchmarks.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2020-02-21 / `2002.09405v2` | [Learning to Simulate Complex Physics with Graph Networks](https://arxiv.org/abs/2002.09405v2) | [perception-and-identifiability.md](perception-and-identifiability.md#current-cross-domain-evidence) | 正文选读：方法、监督或局限段；未复核全部实验/证明 |
+| 2020-10-18 / `2010.08895v3` | [Fourier Neural Operator for Parametric Partial Differential Equations](https://arxiv.org/abs/2010.08895v3) | [perception-and-identifiability.md](perception-and-identifiability.md#current-cross-domain-evidence) | 正文选读：方法、监督或局限段；未复核全部实验/证明 |
+| 2026-08-31 / `2608.30320v1` | [On the Design of Qwen3.8-Next Architecture: Evaluation, Efficiency, and Training Stability](https://arxiv.org/abs/2608.30320v1) | [foundation-models-and-systems.md](foundation-models-and-systems.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2026-10-22 / `2610.31645v1` | [OmniRay: Camera-Agnostic Monocular 3D Reconstruction with Composite Ray Fields](https://arxiv.org/abs/2610.31645v1) | [perception-and-identifiability.md](perception-and-identifiability.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2026-10-22 / `2610.31635v1` | [HiP3R: Hierarchical Pose Graphs for Long-Horizon 3D Reconstruction](https://arxiv.org/abs/2610.31635v1) | [perception-and-identifiability.md](perception-and-identifiability.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2026-10-22 / `2610.31320v1` | [Stream4D: Streaming 4D Reconstruction with Training-free Motion Decoupling via Causal KV-Cache Attention](https://arxiv.org/abs/2610.31320v1) | [perception-and-identifiability.md](perception-and-identifiability.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2026-10-22 / `2610.30781v1` | [DeXplicit: Making Physical State Explicit in Dexterous Manipulation World Models](https://arxiv.org/abs/2610.30781v1) | [perception-and-identifiability.md](perception-and-identifiability.md#current-cross-domain-evidence) | 正文选读：方法、监督或局限段；未复核全部实验/证明 |
+| 2026-10-22 / `2610.30988v1` | [In-Context Learning World Models for Robot Dual-Arm Manipulation of Soft Garment with Partial Observations](https://arxiv.org/abs/2610.30988v1) | [perception-and-identifiability.md](perception-and-identifiability.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2026-10-16 / `2610.22827v1` | [DefFlow: Goal-Conditioned Deformable Object Manipulation using 3D Point Flows](https://arxiv.org/abs/2610.22827v1) | [perception-and-identifiability.md](perception-and-identifiability.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2026-10-21 / `2610.30120v1` | [ALPS: Visual State Encoders for World Models](https://arxiv.org/abs/2610.30120v1) | [representation-and-memory.md](representation-and-memory.md#current-cross-domain-evidence) | 正文选读：方法、监督或局限段；未复核全部实验/证明 |
+| 2026-10-22 / `2610.30724v1` | [Learning from Next-Frame Prediction: Towards Unified and Scalable Visual Representation Learning](https://arxiv.org/abs/2610.30724v1) | [representation-and-memory.md](representation-and-memory.md#current-cross-domain-evidence) | 正文选读：方法、监督或局限段；未复核全部实验/证明 |
+| 2026-10-20 / `2610.28074v1` | [Slot-JEPA: Object-Structured Prediction Interfaces for Latent World Models](https://arxiv.org/abs/2610.28074v1) | [representation-and-memory.md](representation-and-memory.md#current-cross-domain-evidence) | 正文选读：方法、监督或局限段；未复核全部实验/证明 |
+| 2026-10-21 / `2610.30129v1` | [Rethinking Video Autoencoders for Interactive World Models](https://arxiv.org/abs/2610.30129v1) | [representation-and-memory.md](representation-and-memory.md#current-cross-domain-evidence) | 正文选读：方法、监督或局限段；未复核全部实验/证明 |
+| 2026-10-22 / `2610.31166v1` | [Memory before Goal: Role of Pre-History Memory for Humanoid Loco-Manipulation](https://arxiv.org/abs/2610.31166v1) | [representation-and-memory.md](representation-and-memory.md#current-cross-domain-evidence) | 正文选读：方法、监督或局限段；未复核全部实验/证明 |
+| 2026-10-16 / `2610.23795v1` | [Persistent Planar Memory for Video World Models](https://arxiv.org/abs/2610.23795v1) | [representation-and-memory.md](representation-and-memory.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2026-10-15 / `2610.22311v1` | [Velox: Spatial Memory Makes World Models Efficient](https://arxiv.org/abs/2610.22311v1) | [foundation-models-and-systems.md](foundation-models-and-systems.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2026-10-21 / `2610.30125v1` | [PhysiCalWorld: In-Context Physics Calibration for World Models](https://arxiv.org/abs/2610.30125v1) | [causality-and-active-perception.md](causality-and-active-perception.md#current-cross-domain-evidence) | 正文选读：方法、监督或局限段；未复核全部实验/证明 |
+| 2026-10-21 / `2610.29088v1` | [Causal world models under physical parameter shifts](https://arxiv.org/abs/2610.29088v1) | [causality-and-active-perception.md](causality-and-active-perception.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2026-10-20 / `2610.28476v1` | [CLOSER: Evidence-Aware Active Visual Verification for Embodied Object-Goal Navigation](https://arxiv.org/abs/2610.28476v1) | [causality-and-active-perception.md](causality-and-active-perception.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2026-10-16 / `2610.23396v1` | [AWAM: Active Trajectory-Conditioned View Imagination for Robust Robot Manipulation](https://arxiv.org/abs/2610.23396v1) | [causality-and-active-perception.md](causality-and-active-perception.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2026-10-21 / `2610.29964v1` | [Object- and Task-Aware Active Perception for Safe Navigation of Mobile Manipulators in Semi-Static Environments](https://arxiv.org/abs/2610.29964v1) | [causality-and-active-perception.md](causality-and-active-perception.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2026-10-15 / `2610.22335v1` | [Illumination-Aware Active Perception for Spacecraft Inspection](https://arxiv.org/abs/2610.22335v1) | [causality-and-active-perception.md](causality-and-active-perception.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2026-10-22 / `2610.31617v1` | [DiffDreamer: Coupling World Models with Differentiable Simulation for Agile Quadrotor Control](https://arxiv.org/abs/2610.31617v1) | [learning-and-data.md](learning-and-data.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2026-10-22 / `2610.30814v1` | [DRILL: Training World Models to Improve Policies, Not Predict Pixels](https://arxiv.org/abs/2610.30814v1) | [learning-and-data.md](learning-and-data.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2026-10-21 / `2610.30320v1` | [Self-Distilling Future Video Representations for World Action Models](https://arxiv.org/abs/2610.30320v1) | [learning-and-data.md](learning-and-data.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2026-10-22 / `2610.31474v1` | [Skeleton-Grounded Latent Action Model for Robot World Models](https://arxiv.org/abs/2610.31474v1) | [learning-and-data.md](learning-and-data.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2026-10-19 / `2610.26855v1` | [Ropedia W0: Scaling Loco-Manipulation World Models across Embodiments with Human Experience](https://arxiv.org/abs/2610.26855v1) | [learning-and-data.md](learning-and-data.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2026-10-19 / `2610.26564v1` | [PrismWAM: Decoupling State Representations in World Action Models](https://arxiv.org/abs/2610.26564v1) | [representation-and-memory.md](representation-and-memory.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2026-10-20 / `2610.28626v1` | [UniWALM: Unified World Action Language Model for Embodied Robot Control](https://arxiv.org/abs/2610.28626v1) | [representation-and-memory.md](representation-and-memory.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2026-10-20 / `2610.27890v1` | [EndoWorld-JEPA: Motion-Guided Global-Local Latent World Modeling for Endoscopic Video Representation Learning](https://arxiv.org/abs/2610.27890v1) | [learning-and-data.md](learning-and-data.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2026-10-21 / `2610.29168v1` | [How Representational Priors Shape Generalization in World Action Models](https://arxiv.org/abs/2610.29168v1) | [evaluation-and-benchmarks.md](evaluation-and-benchmarks.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2026-10-22 / `2610.31670v1` | [Sensorimotor Alignment: A Platonic Proxy for Embodied Policy Success](https://arxiv.org/abs/2610.31670v1) | [evaluation-and-benchmarks.md](evaluation-and-benchmarks.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2026-10-16 / `2610.23542v1` | [Execution Before Memory: Diagnosing Memory Failures in Video World Models](https://arxiv.org/abs/2610.23542v1) | [evaluation-and-benchmarks.md](evaluation-and-benchmarks.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2026-10-22 / `2610.31429v1` | [PhysTrace: Interpretable Temporal Evaluation of Physical Consistency in Video Generative Models](https://arxiv.org/abs/2610.31429v1) | [evaluation-and-benchmarks.md](evaluation-and-benchmarks.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2026-10-22 / `2610.31066v1` | [Dual Exam: Controlled Evaluation of Multimodal Agents and World Models](https://arxiv.org/abs/2610.31066v1) | [evaluation-and-benchmarks.md](evaluation-and-benchmarks.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2026-10-21 / `2610.30089v1` | [ProactEgoMem: Benchmarking Proactive Memory in Streaming Egocentric Video](https://arxiv.org/abs/2610.30089v1) | [evaluation-and-benchmarks.md](evaluation-and-benchmarks.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2026-10-22 / `2610.31613v1` | [Progress Probes $P^2$: Lightweight Runtime Monitoring for Vision-Language-Action Models](https://arxiv.org/abs/2610.31613v1) | [foundation-models-and-systems.md](foundation-models-and-systems.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2026-10-21 / `2610.29730v1` | [Post-hoc Epistemic Uncertainty for Vision-Language-Action Policies](https://arxiv.org/abs/2610.29730v1) | [foundation-models-and-systems.md](foundation-models-and-systems.md#current-cross-domain-evidence) | 正文选读：方法、监督或局限段；未复核全部实验/证明 |
+| 2026-10-21 / `2610.29692v1` | [FlowVLA: Learning Flow-Aware Physical Completion for Quantitative Robotic Pouring](https://arxiv.org/abs/2610.29692v1) | [perception-and-identifiability.md](perception-and-identifiability.md#current-cross-domain-evidence) | 摘要与书目核验 |
+| 2026-10-21 / `2610.30117v1` | [CW-WAM: A Structured Contact-Wrench World Action Model for Force-Sensitive Manipulation](https://arxiv.org/abs/2610.30117v1) | [perception-and-identifiability.md](perception-and-identifiability.md#current-cross-domain-evidence) | 摘要与书目核验 |
+
+### 交叉领域检索与官方 artifact
+
+定向检索串包括 `CUT3R Continuous 3D Perception Model with Persistent State`、`MonST3R Estimating Geometry in the Presence of Motion`、`METRA Metric-Aware Abstraction`、`Foundation Policies with Hilbert Representations`、`DynaMo In-Domain Dynamics Pretraining`、`Hamiltonian Neural Networks`、`Lagrangian Neural Networks`、`Fourier Neural Operator`、`Learning to Simulate Complex Physics with Graph Networks`、`Deep learning for universal linear embeddings of nonlinear dynamics`、`SINDy Discovering governing equations`、`The information bottleneck method`、`WILDS`、`DomainBed`、`Invariant Risk Minimization`。结果以精确论文 ID 回到原文；不是把搜索结果摘要当作评审结论。
+
+交叉核对使用了 [CVPR 2025 CUT3R 会议记录](https://openaccess.thecvf.com/content/CVPR2025/html/Wang_Continuous_3D_Perception_Model_with_Persistent_State_CVPR_2025_paper.html)、[HILP 原论文](https://openreview.net/pdf?id=LhNsSaAKub)、[SINDy 正式期刊全文](https://pmc.ncbi.nlm.nih.gov/articles/PMC4839439/)、[Koopman 正式期刊全文](https://pmc.ncbi.nlm.nih.gov/articles/PMC6251871/)、[Simplicity Bias 会议记录](https://proceedings.neurips.cc/paper/2020/hash/6cfe0e6127fa25df2a0ef2ae1067d915-Abstract.html)。访问或缓存可用与完整精读分别登记。
+
+另外读取了四个精确官方模型 revision 的模型卡与 `config.json`；[当前 artifact 表](foundation-models-and-systems.md#current-model-artifacts)保留 SHA、公开/托管模态差异、位置上限与许可元数据。模型配置没有被运行验证，也没有被当成视觉世界状态方案。
+
+### 本轮尚未闭合的核查
+
+- 当前前沿的非 arXiv 会议/期刊/官方发布，以及旧 335 篇的全部研究性主张，尚未逐项完成内容级复核。
+- 部分新论文当前只有摘要级登记；模拟器版本、精确 checkpoints、完整训练混合、许可及公平预算仍待方法级核读。正文入口可访问/缓存不等于已读完。
+- RGB-only 可变形/颗粒隐藏态、自然机器人视频的可识别性、压缩后的未知任务证据恢复仍是实质证据缺口；点云/力传感方案不能替代它们。
+- 泛化、风险覆盖和物理因果的经典定理条件仍需继续与视觉/闭环设置逐项比对。当前覆盖表不是“全面完成”的证明。
+<!-- END current-search-protocol -->
+
 <a id="verified-additions"></a>
 
-## 2026-10-25 定向核验与新增来源
+## 镜面、因果与压缩方向的六篇既有核验记录
 
 核验日期：2026-10-25。本轮是针对现有资料缺口的定向检索，不声称穷尽领域。以下均为外部文献；没有运行代码或产生 Clover 性能结果。阅读深度与 V/L 细分见链接的主题正文。
 

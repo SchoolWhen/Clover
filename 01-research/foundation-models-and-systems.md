@@ -8,6 +8,71 @@ Exact model artifacts, engineering constraints and validation resources. Artifac
 
 This is the canonical topic document. Update it in place; source-level dates and reading-depth labels below qualify the evidence, not the maintenance date.
 
+<!-- BEGIN current-model-artifacts -->
+<a id="current-model-artifacts"></a>
+
+## 当前精确模型 artifact 核验
+
+核验日：**2026-10-25**。本次读取以下官方权重仓库的精确 revision、模型卡和配置，没有加载模型、运行推理或验证本机可行性。后面保留的 2026-10-15 记录须与这里的新核验区分。
+
+| 精确 artifact | 固定 revision | 配置/卡片中实际可见的模态与结构 | 许可元数据 |
+|---|---|---|---|
+| [deepseek-ai/DeepSeek-V4.1-Flash-1017](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017/tree/1bae0e1088993b9b82de08f59de5be5a34e42170) | `1bae0e1088993b9b82de08f59de5be5a34e42170` | `DeepseekV41ForCausalLM` + `vision_config`；文本配置最大位置 1,048,576；视觉 patch=14、downsample_ratio=3、max_image_tokens=1024。 [固定配置](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017/blob/1bae0e1088993b9b82de08f59de5be5a34e42170/config.json) | MIT |
+| [Qwen/Qwen3.8-Flash-Next](https://huggingface.co/Qwen/Qwen3.8-Flash-Next/tree/de4b8e4d43b917e7706784d8bb445c9af86a3540) | `de4b8e4d43b917e7706784d8bb445c9af86a3540` | `Qwen4ExpForConditionalGeneration` + `vision_config`；配置 model_type=`qwen4_exp`；文本最大位置 262,144；线性/完整注意力混合。品牌名不能替代配置。 [固定配置](https://huggingface.co/Qwen/Qwen3.8-Flash-Next/blob/de4b8e4d43b917e7706784d8bb445c9af86a3540/config.json) | `other` / `qwen-community-1.0` |
+| [Qwen/Qwen3.8-2.4T-A95B](https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B/tree/207bd685a7e3696cfaff12ded7c6a7ea0f88c996) | `207bd685a7e3696cfaff12ded7c6a7ea0f88c996` | 卡片 pipeline=`text-generation`；`Qwen3_5MoeForCausalLM`；公开配置未含 `vision_config`；最大位置 262,144。 [固定配置](https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B/blob/207bd685a7e3696cfaff12ded7c6a7ea0f88c996/config.json) | `other` / `qwen3.8-max` |
+| [Qwen/Qwen3.8-27B](https://huggingface.co/Qwen/Qwen3.8-27B/tree/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0) | `1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0` | `Qwen3_5ForConditionalGeneration` + `vision_config`；卡片为 image-text-to-text；文本最大位置 262,144。 [固定配置](https://huggingface.co/Qwen/Qwen3.8-27B/blob/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/config.json) | Apache-2.0 |
+
+**已解决的混淆：** `Qwen3.8-2.4T-A95B` 模型卡明确把托管 `Qwen3.8-Max` 的视觉输入、非思考模式、默认 1M 上下文和内置工具列为更多服务特性；不能把这些能力直接赋给这个公开文本权重。Flash-Next/27B 的公开多模态配置也不能代表相同托管产品的全部工具和运行策略。配置位置上限不是本机实测可用上下文，许可名称也不能按家族统一假定。
+
+**仍待核验：** 全部厂商条目的现行 API 路由、推理默认值、精确训练混合、总/激活参数的独立计数、实际 runtime/kernel、视觉预处理、量化与端到端质量/内存/时延。以上四个 artifact 的当前元数据不替代这些实验或其余旧条目的刷新。DeepSeek-1017 的卡片是对原 Flash 的更新，相关 benchmark 仍按官方报告对待。
+<!-- END current-model-artifacts -->
+
+<!-- BEGIN current-cross-domain-evidence -->
+<a id="current-cross-domain-evidence"></a>
+
+## 当前跨领域与前沿证据：运行系统、在线监控与精确 artifact
+
+检索/核验：**2026-10-25（Asia/Shanghai）**。下表是外部研究记录，不是 Clover 的实验结果或架构决定。
+
+缓存路由、进度探针和核不确定性头改变的是计算/监控接口，不自动构成世界记忆、可识别状态或安全保证。所有效率结果要连同计算阶段、硬件、输入/历史预算和质量条件记录。厂商旧发布计划不能替代当前可访问的模型 artifact。
+
+### Qwen3.8-Next 架构研究
+
+- **来源/版本：** [原论文](https://arxiv.org/abs/2608.30320v1)；初始提交 2026-08-31；本次返回版本更新于 2026-08-31。`PRIMARY_PAPER`。
+- **问题与机制：** Qwen3.8-Next 的架构研究把效率、效果和训练稳定性放在一起比较。
+- **输入/学习来源：** 基础模型数据与后训练来源不能省略；具体开放 artifact 另以官方模型卡/配置为准。
+- **实际证据：** 是系统和骨干设计的外部参照，不是 Clover 的视觉状态方案。
+- **不能推出 / 待区分：** 不能只凭模型家族名迁移总参数、激活参数、模态、缓存成本或某个硬件上的速度。
+- **本次阅读深度：** 摘要与书目核验。
+
+### Velox
+
+- **来源/版本：** [原论文](https://arxiv.org/abs/2610.22311v1)；初始提交 2026-10-15；本次返回版本更新于 2026-10-15。`PRIMARY_PAPER`。 [作者提供的项目/代码入口](https://velox-world.com/velox/)（未运行复现）。
+- **问题与机制：** Velox 用流式几何和相机视锥对应选择历史注意力块，限制随 rollout 增长的成本。
+- **输入/学习来源：** 基于既有视频世界模型；几何与模型路由来源分别记录。
+- **实际证据：** H200 上的 attention/denoising 与 WBench 导航质量比较。
+- **不能推出 / 待区分：** 分阶段加速不是端到端机器人速度；生成历史的几何覆盖不等于真实相机证据的新鲜度。
+- **本次阅读深度：** 摘要与书目核验。
+
+### Progress Probes P²
+
+- **来源/版本：** [原论文](https://arxiv.org/abs/2610.31613v1)；初始提交 2026-10-22；本次返回版本更新于 2026-10-22。`PRIMARY_PAPER`。
+- **问题与机制：** Progress Probes P² 用 VLA 内部激活上的线性进度探针监测执行偏离。
+- **输入/学习来源：** 示范进度监督与原 VLA 知识链保留；不需要外部监控 VLM 不等于不需监督。
+- **实际证据：** π0.5 的模拟/真实执行失败检测。
+- **不能推出 / 待区分：** 进度下降可作为监控信号，但不是世界状态正确、校准或形式安全证书。
+- **本次阅读深度：** 摘要与书目核验。
+
+### Post-hoc Kernel-variance Heads
+
+- **来源/版本：** [原论文](https://arxiv.org/abs/2610.29730v1)；初始提交 2026-10-21；本次返回版本更新于 2026-10-21。`PRIMARY_PAPER`。
+- **问题与机制：** Kernel-variance heads 从单策略示范嵌入估计不熟悉度，比较 ensemble、主动采样和转交。
+- **输入/学习来源：** 训练示范 support、具体 SmolVLA 特征/核与 supervisor proxy 是条件。
+- **实际证据：** LIBERO-10 和受控模态扰动；正文区分跨任务覆盖与任务内排序。
+- **不能推出 / 待区分：** 不熟悉不必失败，低不熟悉也不保证安全；转交代理不是人的许可或实际风险覆盖保证。
+- **本次阅读深度：** 正文选读：方法、监督或局限段；未复核全部实验/证明。
+<!-- END current-cross-domain-evidence -->
+
 ## Contents
 
 - [Foundation-Model Architecture, Training and Runtime Systems](#topic-research-research_foundation_model_systems)
