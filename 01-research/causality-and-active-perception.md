@@ -121,6 +121,68 @@ This is the canonical topic document. Update it in place; source-level dates and
 - **本次阅读深度：** 摘要与书目核验。
 <!-- END current-cross-domain-evidence -->
 
+<!-- BEGIN broad-vision-primary-evidence -->
+<a id="broad-vision-primary-evidence"></a>
+
+## 广义视觉理解的一手比较证据
+
+核验日：2026-10-25。以下是外部方法与反例，覆盖经典接口、当前基础视觉与跨领域条件；未被采纳为 Clover 架构。
+
+### 局部稀疏动力系统参数识别
+
+- **一手来源：** [正式会议记录](https://proceedings.mlr.press/v323/baumgartner26a.html) · [论文](https://raw.githubusercontent.com/mlresearch/v323/main/assets/baumgartner26a/baumgartner26a.pdf)。
+- **机制：** 以局部稀疏依赖图与稀疏 Transformer 解码轨迹，识别参数的排列/可逆变换等价类。
+- **输入与学习来源：** 观测状态轨迹和初始状态，非直接 RGB；要求参数影响/单射、观测等价、图与光滑性等条件。
+- **实际证据：** 图判据与四个合成系统实验。
+- **边界与反假设：** 参数维数预先已知；论文将下游泛化列为未来工作。不能把合成状态识别记为真实视觉物性已恢复。
+- **阅读深度：** 正文假设1–3、实验与局限选读；未复核全部证明；未运行复现。
+
+### CDSD 空间分区与因果
+
+- **一手来源：** [正式会议记录](https://proceedings.mlr.press/v323/brouillard26a.html) · [论文](https://raw.githubusercontent.com/mlresearch/v323/main/assets/brouillard26a/brouillard26a.pdf)。
+- **机制：** 单父解码使测量位置归属单个潜变量，同时学习时间因果图。
+- **输入与学习来源：** 时序科学测量；已知潜维/滞后，依赖平稳性、无潜在混杂等假设，非机器人 RGB。
+- **实际证据：** 合成可识别性与真实气候场的分区/关联。
+- **边界与反假设：** 光照、阴影、反射和遮挡可使一个像素依赖多实体；视觉场景能否满足单父解码必须另证。
+- **阅读深度：** 正文 §3.4、实验设置与讨论选读；未运行复现。
+
+### 干预因果图粗化
+
+- **一手来源：** [正式会议记录](https://proceedings.mlr.press/v323/madaleno26b.html) · [论文](https://raw.githubusercontent.com/mlresearch/v323/main/assets/madaleno26b/madaleno26b.pdf)。
+- **机制：** 由未知干预目标的数据学习可识别粗图，并利用粗化空间的格结构搜索。
+- **输入与学习来源：** 需干预数据、coarse Markov/faithfulness 和干预有效变化等条件。
+- **实际证据：** 抽象层级的图理论、合成与真实数据比较。
+- **边界与反假设：** 分辨率由干预集合与样本数约束；不自动发现像素中的实体或证明任意压缩保持任务/因果充分性。
+- **阅读深度：** 正文假设、算法范围及统计局限选读；未运行复现。
+
+### ε 可识别性
+
+- **一手来源：** [正式会议记录](https://proceedings.mlr.press/v300/li26j.html) · [论文](https://raw.githubusercontent.com/mlresearch/v300/main/assets/li26j/li26j.pdf)。
+- **机制：** 以因果概率上下界在明示约束下足够窄来刻画近似识别。
+- **输入与学习来源：** 变量、观测/干预概率与子群约束；非原始像素学习。
+- **实际证据：** 在给定容差与假设下，部分因果/反事实概率可近似识别。
+- **边界与反假设：** 容差或边界条件不是由模型自信度产生；不能据此把未识别物性任意填成点估计。
+- **阅读深度：** 正文界与部分条件选读；未复核全部证明；未运行复现。
+
+### 状态级因果效应识别
+
+- **一手来源：** [正式会议记录](https://proceedings.mlr.press/v337/chen26c.html) · [论文](https://raw.githubusercontent.com/mlresearch/v337/main/assets/chen26c/chen26c.pdf)。
+- **机制：** 利用上下文特定独立与状态约束区分状态级和变量级识别。
+- **输入与学习来源：** 给定因果图、观测变量与上下文条件；不是从视觉自动得图。
+- **实际证据：** 额外知识使部分具体状态查询在整体未识别时仍可识别。
+- **边界与反假设：** 不能用一个状态下可回答推出全域机制已掌握；上下文可观测性和知识来源是承重条件。
+- **阅读深度：** 正文问题定义与 ID-CSI 条件选读；未运行复现。
+
+### Jumpy world models
+
+- **一手来源：** [正式会议记录](https://proceedings.mlr.press/v306/farebrother26a.html) · [论文](https://raw.githubusercontent.com/mlresearch/v306/main/assets/farebrother26a/farebrother26a.pdf)。
+- **机制：** 学习预训练策略在多时间尺度诱导的状态占据分布，再组合策略规划。
+- **输入与学习来源：** 预训练策略与离线/交互轨迹；动作与目标经验 L3。
+- **实际证据：** 多步时间抽象作为逐帧预测之外的比较方向。
+- **边界与反假设：** 时间跳跃依赖已有策略的行为覆盖；不能保证保留短暂事件、失败证据或一般反事实历史。
+- **阅读深度：** 摘要、引言及问题设定选读；未复核完整方法/实验；未运行复现。
+<!-- END broad-vision-primary-evidence -->
+
 ## Contents
 
 - [Value of Information, Probing Actions and Active Evidence Acquisition](#topic-research-research_value_of_information)

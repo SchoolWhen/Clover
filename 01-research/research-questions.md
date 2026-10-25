@@ -29,6 +29,27 @@ This is the canonical topic document. Update it in place; source-level dates and
 当前材料仍不足以从任何一行推出完整的 Clover 解法。后续应按共同失败与可证伪预测比较，避免把这些方向直接堆成网络结构。
 <!-- END cross-domain-research-bridges -->
 
+<!-- BEGIN broad-vision-questions -->
+<a id="broad-vision-questions"></a>
+
+## 广义纯视觉 AGI 与原生 ultrafast：必须共同回答的问题
+
+原母问题不变。研究范围包括基础视觉功能，也包括跨时间、跨任务、开放世界的理解；机器人控制是其中一个用途。一个任务成功不授予其他能力，列全任务也没有自动回答一般智能如何形成。
+
+| 待区分问题 | 竞争解释/参照 | 后续能区分它们的证据 |
+|---|---|---|
+| 是否存在兼顾识别、定位、分割、追踪与阅读的共同表征？ | 专用模型、统一架构分别训练、单权重多任务、持续共享状态 | 配平数据/骨干/计算后，基本功能、跨任务迁移和负迁移分项报告 |
+| 共享“身份”究竟对应点、外观、语义实例还是物理实体？ | 点轨迹、框关联、掩码记忆、显式/分布式实体状态 | 遮挡/重现、相近实例、分裂合并、外观/功能改变与反证后修正 |
+| 开放词汇识别来自视觉经验还是语言/教师知识？ | 视觉 SSL、视觉监督、图文预训练、标签/知识图驱动数据引擎 | V/L 来源匹配；新类别/属性/关系组合与无关文字/背景替换 |
+| 多任务接口带来一般能力还是任务 token 路由？ | Pix2Seq/Florence/OneFormer/WeVisOne 等不同统一方式 | 新任务或新组合的学习、输出接口改变和共同状态贡献；不把 API 数量当 AGI |
+| 视觉阅读如何与世界理解共存？ | 转写/布局专用器、图文解析器、视觉推理状态 | 小字/密集文档与自然视频同时覆盖；像素所见、语言先验和推断错误分开 |
+| 原生计算机制能否同时保持全部关键视觉证据？ | 直接密集预测、序列解码、循环/SSM、稀疏/自适应与混合计算 | 相同完整工作负载的结果完成时间、证据年龄、长时内存及小物体/边界/运动/记忆保持 |
+| 物理/因果识别是否依赖不可见的结构先验？ | 像素预测、已知 ODE、单父解码、局部稀疏/干预图等理论 | 在明示假设内外对照；报告未识别等价类/近似界，不用自信度补成真值 |
+| 部署任务外的证据是否仍可恢复？ | 任务充分压缩、共享世界状态、原始证据/可恢复记忆 | 在采集后才公布的新查询/新任务与反例；区分当时不存在和后来被丢弃的信息 |
+
+[完整能力地图](perception-and-identifiability.md#broad-visual-capabilities)、[学习来源](learning-and-data.md#broad-visual-learning)、[计算维度](foundation-models-and-systems.md#native-ultrafast-research)与[验收地图](evaluation-and-benchmarks.md#broad-visual-evaluation)共同维护这些问题。它们约束调研/分析，当前没有选定 Clover 的答案或宣布实验通过。
+<!-- END broad-vision-questions -->
+
 ## Contents
 
 - [Research Questions](#topic-research-survey-research_questions)

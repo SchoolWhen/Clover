@@ -106,11 +106,81 @@ This is the canonical topic document. Update it in place; source-level dates and
 
 ### 本轮尚未闭合的核查
 
-- 当前前沿的非 arXiv 会议/期刊/官方发布，以及旧 335 篇的全部研究性主张，尚未逐项完成内容级复核。
+- 六个非 arXiv 官方会议目录与部分正文已补核（见下节）；ICLR/CoRL 全目录、更多期刊/官方发布和旧 335 个数字 ID 的全部研究性主张仍未逐项完成内容级复核。
 - 部分新论文当前只有摘要级登记；模拟器版本、精确 checkpoints、完整训练混合、许可及公平预算仍待方法级核读。正文入口可访问/缓存不等于已读完。
 - RGB-only 可变形/颗粒隐藏态、自然机器人视频的可识别性、压缩后的未知任务证据恢复仍是实质证据缺口；点云/力传感方案不能替代它们。
 - 泛化、风险覆盖和物理因果的经典定理条件仍需继续与视觉/闭环设置逐项比对。当前覆盖表不是“全面完成”的证明。
 <!-- END current-search-protocol -->
+
+<!-- BEGIN broad-vision-sources -->
+<a id="broad-vision-sources"></a>
+
+## 广义视觉与跨领域来源：当前版本、阅读深度和检索范围
+
+核验日：2026-10-25。依据用户明确的“纯视觉 AGI、原生 ultrafast、广义理解”，将基础识别/检测/分割/追踪/阅读与既有时空/物理/因果调研合并维护。下面 **31 条比较记录**分为 16 条基础视觉/效率与 15 条正式会议的相关/交叉研究；记录数量不等于独立完整精读或复现数量。
+
+### 非 arXiv 官方目录检索
+
+| 官方目录 | 获取的题名记录数 | 当前用途 |
+|---|---:|---|
+| [CVPR 2026](https://openaccess.thecvf.com/CVPR2026?day=all) | 4,041 | 核心视觉、物理/世界模型与评测 |
+| [ICML 2026 / PMLR 306](https://proceedings.mlr.press/v306/) | 6,552 | 表示、时间/任务抽象、因果、世界模型、效率 |
+| [CLeaR 2026 / PMLR 323](https://proceedings.mlr.press/v323/) | 53 | 因果可识别性、动力系统与抽象条件 |
+| [AISTATS 2026 / PMLR 300](https://proceedings.mlr.press/v300/) | 588 | 部分识别、信念与离线评估 |
+| [UAI 2026 / PMLR 337](https://proceedings.mlr.press/v337/) | 330 | 识别等价类、评测反例与不确定性 |
+| [RSS 2026 / XXII](https://www.roboticsproceedings.org/rss22/) | 210 | 视觉记忆、视频–动作、具身模型与真实验证边界 |
+
+合计 **11,774 条题名**；用题名正则 `world model|physical|causal|identifiab|object.perman|memory|belief|partial.observ|active.percep|inverse.render|system.identif|deformab|uncertainty|visual.odometr|slam|continual|embod|sim.to.real|counterfactual|contact|sufficien|compress|safety|explor|epistem|event.camera|tactil|affordance` 自动筛出 **1,423 条候选**。这是目录级检索池，不是 1,423 篇人工筛完/全文读完；基础 CV 又用检测、OCR、统一感知和追踪关键词定向补查，不能让初始世界模型关键词决定整个研究边界。
+
+[CoRL 2026 官方主页](https://2026.corl.org/)在 10-19 公布[录用入口](https://2026.corl.org/program/accepted-papers)，但本次页面正文提取未得到完整内嵌列表；不采用第三方列表数充当官方已审范围。ICLR 官方目录/API本次访问受限，仍需进一步补齐其全目录和最新 CoRL 的定向内容核读。当前不声称所有会议、期刊和厂商已经穷尽刷新。
+
+### 固定论文记录
+
+| 固定版本/载体 | 一手论文题名与链接 | 正文归属 | 实际阅读深度 |
+|---|---|---|---|
+| 2206.07669v2 | [A Unified Sequence Interface for Vision Tasks](https://arxiv.org/abs/2206.07669v2) | [representation-and-memory](representation-and-memory.md#broad-vision-primary-evidence) | 正文选读：任务接口与输出编码；未复核全部实验 |
+| 2112.01527v3 | [Masked-attention Mask Transformer for Universal Image Segmentation](https://arxiv.org/abs/2112.01527v3) | [perception-and-identifiability](perception-and-identifiability.md#broad-vision-primary-evidence) | 正文选读：通用架构定义及掩码注意力；未复核全部实验 |
+| 2211.06220v2 | [OneFormer: One Transformer to Rule Universal Image Segmentation](https://arxiv.org/abs/2211.06220v2) | [perception-and-identifiability](perception-and-identifiability.md#broad-vision-primary-evidence) | 正文选读：任务条件训练；未复核全部实验 |
+| 2110.06864v3 | [ByteTrack: Multi-Object Tracking by Associating Every Detection Box](https://arxiv.org/abs/2110.06864v3) | [perception-and-identifiability](perception-and-identifiability.md#broad-vision-primary-evidence) | 正文选读：两阶段关联；未复核全部实验 |
+| 2410.11831v1 | [CoTracker3: Simpler and Better Point Tracking by Pseudo-Labelling Real Videos](https://arxiv.org/abs/2410.11831v1) | [perception-and-identifiability](perception-and-identifiability.md#broad-vision-primary-evidence) | 正文/官方说明选读：训练与在线变体；未复核全部实验 |
+| 2504.05579v2 | [TAPNext: Tracking Any Point (TAP) as Next Token Prediction](https://arxiv.org/abs/2504.05579v2) | [foundation-models-and-systems](foundation-models-and-systems.md#broad-vision-primary-evidence) | 正文/官方项目选读：架构、时延口径与局限 |
+| 2604.10582v1 | [TAPNext++: What's Next for Tracking Any Point (TAP)?](https://arxiv.org/abs/2604.10582v1) | [perception-and-identifiability](perception-and-identifiability.md#broad-vision-primary-evidence) | 正文/官方项目选读：方法、数据与重检测指标 |
+| 2510.25257v2 | [RT-DETRv4: Painlessly Furthering Real-Time Object Detection with Vision Foundation Models](https://arxiv.org/abs/2510.25257v2) | [perception-and-identifiability](perception-and-identifiability.md#broad-vision-primary-evidence) | 正文选读：教师、配置表与时延测量；未复核全部实验 |
+| 2610.31329v1 | [WeVisOne-VL: Unified Visual Perception from Objects to Pixels](https://arxiv.org/abs/2610.31329v1) | [perception-and-identifiability](perception-and-identifiability.md#broad-vision-primary-evidence) | 正文选读：§2–4、§8；未复核全部实验 |
+| 2303.05499v5 | [Grounding DINO: Marrying DINO with Grounded Pre-Training for Open-Set Object Detection](https://arxiv.org/abs/2303.05499v5) | [perception-and-identifiability](perception-and-identifiability.md#broad-vision-primary-evidence) | 正文选读：跨模态机制与训练；未复核全部实验 |
+| 2401.17270v3 | [YOLO-World: Real-Time Open-Vocabulary Object Detection](https://arxiv.org/abs/2401.17270v3) | [perception-and-identifiability](perception-and-identifiability.md#broad-vision-primary-evidence) | 正文选读：离线词汇与重参数化；未复核全部实验 |
+| 2311.06242v1 | [Florence-2: Advancing a Unified Representation for a Variety of Vision Tasks](https://arxiv.org/abs/2311.06242v1) | [representation-and-memory](representation-and-memory.md#broad-vision-primary-evidence) | 正文选读：统一任务与数据说明；未复核全部实验 |
+| 2502.14786v1 | [SigLIP 2: Multilingual Vision-Language Encoders with Improved Semantic Understanding, Localization, and Dense Features](https://arxiv.org/abs/2502.14786v1) | [learning-and-data](learning-and-data.md#broad-vision-primary-evidence) | 正文选读：训练目标与模型发布说明；未复核全部实验 |
+| 2412.13303v2 | [FastVLM: Efficient Vision Encoding for Vision Language Models](https://arxiv.org/abs/2412.13303v2) | [foundation-models-and-systems](foundation-models-and-systems.md#broad-vision-primary-evidence) | 正文选读：分辨率/延迟权衡；官方架构说明核对 |
+| 2405.07992v3 | [MambaOut: Do We Really Need Mamba for Vision?](https://arxiv.org/abs/2405.07992v3) | [foundation-models-and-systems](foundation-models-and-systems.md#broad-vision-primary-evidence) | 会议摘要及部分实验设置选读；未复核全部实验 |
+| 2610.22306v1 | [ARC-SORT: Adaptive, Robust, Compensated Multi-Object Tracking with Interacting Multiple Models](https://arxiv.org/abs/2610.22306v1) | [perception-and-identifiability](perception-and-identifiability.md#broad-vision-primary-evidence) | 摘要及问题设定选读；未复核完整实验 |
+| icml2026 / 正式会议 2026 | [Physics from Video: Identifiability of Time-Invariant Second-Order ODEs under Minimal Trajectory Conditions](https://proceedings.mlr.press/v306/wang26iq.html) | [perception-and-identifiability](perception-and-identifiability.md#broad-vision-primary-evidence) | 正文 §3–4 与定理条件选读；未复核全部证明/实验 |
+| cvpr2026 / 正式会议 2026 | [Physical Object Understanding with a Physically Controllable World Model](https://openaccess.thecvf.com/content/CVPR2026/html/Venkatesh_Physical_Object_Understanding_with_a_Physically_Controllable_World_Model_CVPR_2026_paper.html) | [perception-and-identifiability](perception-and-identifiability.md#broad-vision-primary-evidence) | 主文 §3–4 与补充数据说明选读；未复核全部实验 |
+| rss2026 / 正式会议 2026 | [Memory Retrieval in Visuomotor Policies for Long-Horizon Robot Control](https://www.roboticsproceedings.org/rss22/p010.html) | [representation-and-memory](representation-and-memory.md#broad-vision-primary-evidence) | 正文 §III 与任务/实验设置选读 |
+| rss2026 / 正式会议 2026 | [Causal World Modeling for Robot Control](https://www.roboticsproceedings.org/rss22/p016.html) | [learning-and-data](learning-and-data.md#broad-vision-primary-evidence) | 正文建模/编码与训练说明选读；未复核全部实验 |
+| rss2026 / 正式会议 2026 | [Collaborating Visual and Parameter Spaces for Consistent Long-Horizon Embodied World Model](https://www.roboticsproceedings.org/rss22/p014.html) | [representation-and-memory](representation-and-memory.md#broad-vision-primary-evidence) | 正文条件接口与 §V 局限选读 |
+| clear2026 / 正式会议 2026 | [Disentangling Dynamical Systems: Causal Representation Learning Meets Local Sparse Attention](https://proceedings.mlr.press/v323/baumgartner26a.html) | [causality-and-active-perception](causality-and-active-perception.md#broad-vision-primary-evidence) | 正文假设1–3、实验与局限选读；未复核全部证明 |
+| clear2026 / 正式会议 2026 | [Learning a Spatial Partitioning and its Causal Relations from Temporal Data](https://proceedings.mlr.press/v323/brouillard26a.html) | [causality-and-active-perception](causality-and-active-perception.md#broad-vision-primary-evidence) | 正文 §3.4、实验设置与讨论选读 |
+| clear2026 / 正式会议 2026 | [Coarsening Causal DAG Models](https://proceedings.mlr.press/v323/madaleno26b.html) | [causality-and-active-perception](causality-and-active-perception.md#broad-vision-primary-evidence) | 正文假设、算法范围及统计局限选读 |
+| icml2026 / 正式会议 2026 | [Causal-JEPA: Learning World Models through Object-Level Latent Masking](https://proceedings.mlr.press/v306/nam26c.html) | [representation-and-memory](representation-and-memory.md#broad-vision-primary-evidence) | 正文 §5–6、影响邻域解释与局限选读 |
+| icml2026 / 正式会议 2026 | [Identifiable Token Correspondence for World Models](https://proceedings.mlr.press/v306/kim26bq.html) | [representation-and-memory](representation-and-memory.md#broad-vision-primary-evidence) | 正文问题设定、对应变量与解码说明选读 |
+| uai2026 / 正式会议 2026 | [Who Guards the Guardians? The Challenges of Evaluating Identifiability of Learned Representations](https://proceedings.mlr.press/v337/joshi26a.html) | [evaluation-and-benchmarks](evaluation-and-benchmarks.md#broad-vision-primary-evidence) | 正文指标反例、分类及局限选读 |
+| aistats2026 / 正式会议 2026 | [$ε$-Identifiability of Causal Quantities](https://proceedings.mlr.press/v300/li26j.html) | [causality-and-active-perception](causality-and-active-perception.md#broad-vision-primary-evidence) | 正文界与部分条件选读；未复核全部证明 |
+| uai2026 / 正式会议 2026 | [On the Granularity of Causal Effect Identifiability](https://proceedings.mlr.press/v337/chen26c.html) | [causality-and-active-perception](causality-and-active-perception.md#broad-vision-primary-evidence) | 正文问题定义与 ID-CSI 条件选读 |
+| aistats2026 / 正式会议 2026 | [A Covering Framework for Offline POMDPs Learning Using Belief Space Metric](https://proceedings.mlr.press/v300/zhu26a.html) | [evaluation-and-benchmarks](evaluation-and-benchmarks.md#broad-vision-primary-evidence) | 正文问题设定、稳定性与覆盖条件选读；未复核全部证明 |
+| icml2026 / 正式会议 2026 | [Compositional Planning with Jumpy World Models](https://proceedings.mlr.press/v306/farebrother26a.html) | [causality-and-active-perception](causality-and-active-perception.md#broad-vision-primary-evidence) | 摘要、引言及问题设定选读；未复核完整方法/实验 |
+
+外部结果仍为 `PRIMARY_PAPER` / `OFFICIAL_REPORTED_RESULT`，不是 Clover 实测。原文选读包含实际读到的方法/假设/局限段，不表示全部证明、附录、训练混合、checkpoints和实验公平性均通过独立复核。各正文记录继续保留 V/L 条件与反假设；代码或数据链接存在也不等于已运行。
+
+### 及时更新而不混淆发布物
+
+- [Ultralytics 当前 release](https://github.com/ultralytics/ultralytics/releases/tag/v8.4.189)、[YOLO26 论文](https://arxiv.org/abs/2606.03748v1)与[模型文档](https://docs.ultralytics.com/models/yolo26/)分别是软件包、研究记录和模型接口。[YOLO27 预览](https://docs.ultralytics.com/models/yolo27/)截至核验日没有已发布权重，不能登记成已运行的对比模型。
+- [PaddleOCR 官方代码](https://github.com/PaddlePaddle/PaddleOCR)包含 PP-OCRv6、PaddleOCR-VL-1.6 与 HPD-Parsing 的发布说明；这里按 `OPEN_SOURCE` / `OFFICIAL_REPORTED_RESULT` 登记，不把工具 README 的速度/榜单数字升为独立科学结果。
+- [TAP 系列官方代码](https://github.com/google-deepmind/tapnet)区分 TAPNext、BootsTAPNext 与 TAPNext++ checkpoints/在线接口；[CoTracker 官方代码](https://github.com/facebookresearch/co-tracker)区分在线滑窗与离线条件。项目中的 GPU 延迟不是本机或整体视觉模型的速度。
+- [SAM 官方代码](https://github.com/facebookresearch/sam3)、[WeVisOne-VL 官方代码](https://github.com/Tencent/WeVisOne-VL)和[OmniDocBench 官方资源](https://github.com/opendatalab/OmniDocBench)补齐概念/像素感知、统一任务与文档评测入口。尚未下载权重/数据或执行评测；精确权重、依赖、许可与脚本 revision 在方法比较/实验注册中继续锁定。
+
+这次补充闭合了“基础 CV 功能未被明确列为必备”和“非 arXiv 正式来源不足”的一部分缺口。旧 335 个数字 arXiv ID 的内容级主张、未覆盖目录/官方 artifact、未知未来任务证据恢复与严格视觉物性/因果问题仍在当前队列；没有以扩大目录数量冒充这些问题已经解决。
+<!-- END broad-vision-sources -->
 
 <a id="verified-additions"></a>
 

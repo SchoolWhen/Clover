@@ -6,6 +6,8 @@ Maintained: **2026-10-25** · Document stage: **1 — Research** ([status](../ST
 
 本目录只收纳前期调研：按研究方向维护当前文献、证据边界、资源与未解问题。每个方向一份正文，直接更新；不会因文件属于某个方向就冻结其表示或方法。
 
+**范围：纯视觉 AGI、原生 ultrafast、广义理解。** 识别、检测、分割、追踪、阅读与其他基础 CV 功能是必备维度；时空、记忆、物理、因果、抽象推理和行动用途共同研究。机器人是长期应用，世界模型是一类候选研究路线。当前要求和能力范围见[根目录契约](../SSOT.md#model-objective-and-breadth-of-understanding)。
+
 This is the canonical topic document. Update it in place; source-level dates and reading-depth labels below qualify the evidence, not the maintenance date.
 
 ## 调研方向与文件归属
@@ -15,7 +17,7 @@ This is the canonical topic document. Update it in place; source-level dates and
 | 方向 | 当前文档 |
 |---|---|
 | 问题定义与待区分问题 | [研究问题](research-questions.md) |
-| 观测、几何、物性与可识别性 | [感知与可识别性](perception-and-identifiability.md) |
+| 识别、检测、分割、追踪、阅读；几何、物性与可识别性 | [视觉感知与可识别性](perception-and-identifiability.md#broad-visual-capabilities) |
 | 状态充分性、表示、记忆与压缩 | [表示与记忆](representation-and-memory.md) |
 | 因果、主动观测、干预与开放世界 | [因果与主动感知](causality-and-active-perception.md) |
 | 数据、训练、后训练与持续学习 | [学习与数据](learning-and-data.md) |
@@ -34,17 +36,17 @@ This is the canonical topic document. Update it in place; source-level dates and
 
 | 要求 | 当前可核查证据 | 尚未满足的部分 |
 |---|---|---|
-| 原问题与科学纪律保持 | 根目录契约；V0–V3/L0–L4；当前八方向正文 | 不能由某种实现方便而缩窄目标 |
+| 原问题与广义视觉目标保持 | 根目录明确纯视觉 AGI / 原生 ultrafast；[十九类能力地图](perception-and-identifiability.md#broad-visual-capabilities)与八方向正文 | 基础 CV、时空/物理/因果/推理须共同覆盖，不能缩成机器人或视频预测 |
 | 经典、相关、交叉与前沿并重 | 新登记动力系统/信息论/技能学习/OOD 参照和 10 月前沿 | 部分交叉定理条件仍需继续原文审查 |
-| 更新到当前 | 2026-10-25 抓取；一手 API 窗口 10-15→10-25；分类公告到 10-23 | 非 arXiv 与全部旧官方 artifact 尚未统一刷新 |
+| 更新到当前 | 2026-10-25 抓取；arXiv 窗口 10-15→10-25、公告到 10-23；六个官方会议目录；实时视觉/OCR/TAP 发布核对 | ICLR/CoRL 全目录、更多正式期刊与全部旧官方 artifact 尚未统一刷新 |
 | 引文可靠 | 335 个旧数字 arXiv ID 取回书目；新增逐篇固定当前版本和阅读深度 | 元数据检查不是旧综述全部结论复核 |
-| 知道方法怎样约束解法 | 各方向按问题/机制/输入来源/证据/边界记录；交叉桥接表 | 尚不能冻结一套一般解法或宣布研究完成 |
-| 评测与资源能区分解释 | 重建/动作、执行/记忆、代理/闭环、生成/测量的分离 | 新方法 checkpoint、训练混合、许可与公平预算仍有待核字段 |
+| 知道方法怎样约束解法 | 基础视觉/效率与正式会议新增 31 条比较记录；各方向机制/来源/证据/边界、交叉桥接表 | 尚不能冻结一套一般解法或宣布研究完成 |
+| 评测与资源能区分解释 | [基础视觉联合验收](evaluation-and-benchmarks.md#broad-visual-evaluation)、[原生速度口径](foundation-models-and-systems.md#native-ultrafast-research)，兼顾既有理解/行动证据 | 尚无 Clover 模型测量；新方法 checkpoint、训练混合、许可与公平预算仍有待核字段 |
 | 持续可读且不碎片化 | 原八方向原位更新，来源/总览/全局状态同步 | 不另建日期补丁或阶段外新调研目录 |
 
 当前已补充跨领域比较并深化已有工作，找到多项新的强反假设；**完整性目标仍未通过上述全范围核查，调研工作继续。** 方法已被收录不等于被 Clover 采纳。
 
-优先继续：①新旧一手材料的内容级反证检查；②非 arXiv 及精确 artifact 的当前状态；③严格 RGB 条件下的隐藏态/因果恢复；④未知未来任务的证据保留；⑤将剩余跨域理论的前提映射到相机、历史、干预和控制协议。检索细节见 [来源协议](sources-and-resources.md#current-search-protocol)，可区分的问题见 [交叉桥接表](research-questions.md#cross-domain-research-bridges)。
+优先继续：①基础 CV、统一视觉模型与原生速度的剩余一手内容；②新旧研究性主张和 ICLR/CoRL/期刊/精确 artifact；③严格视觉条件下的隐藏态/因果恢复；④未知未来任务的证据保留；⑤将跨域理论前提映射到相机、历史、干预和控制协议。检索细节见 [arXiv 协议](sources-and-resources.md#current-search-protocol)与[正式会议/视觉来源](sources-and-resources.md#broad-vision-sources)，当前问题见[广义视觉研究问题](research-questions.md#broad-vision-questions)。
 <!-- END coverage-and-completion-audit -->
 
 <a id="current-collection-queue"></a>
@@ -55,12 +57,12 @@ This is the canonical topic document. Update it in place; source-level dates and
 
 | 当前方向 | 本轮已补的比较证据 | 下一项未闭合问题 |
 |---|---|---|
-| 观测与物性 | 持续/动态三维、相机模型、科学模拟、软体/接触操作 | 严格 RGB 的隐藏态/物性识别，不能用点云/力觉代过 |
+| 基础视觉与观测 | 识别/检测/分割/追踪/OCR 等十九类能力；持续/动态三维、物性与成像 | 最强专用/统一模型的同协议比较；严格视觉隐藏态和物性识别 |
 | 表示与记忆 | 物理结构、信息瓶颈、统一/对象/几何/语言状态、压缩和 pre-history | 未知未来任务下的证据可恢复；身份/部件/接触的充分性 |
 | 因果与主动采证 | 系统辨识、技能时间度量、物性校准、真实再观察与虚拟视角对照 | 可识别性前提在真实成像和闭环中是否成立；采证代价/风险 |
 | 学习与数据 | 无真动作预训练、策略效用目标、骨架/人视频对齐、可微自机模型 | 配平数据/监督/骨干，检验世界能力是否随任务回报退化 |
-| 模型与系统 | 监控/不确定性头、生成缓存路由、四个精确模型 artifact | 完整厂商状态刷新与统一端到端资源/能力测量 |
-| 评测与来源 | 执行/记忆、代理/闭环、判断/真值、OOD 模型选择；335 旧 ID 书目检查 | 旧主张和新正文的内容级核查、非 arXiv 前沿、完整可复现字段 |
+| 模型与系统 | 原生计算路线、TAPNext/FastViTHD/骨干反例；四个精确模型 artifact | 广义能力与完整延迟共同兑现；厂商 artifact 与资源口径继续核查 |
+| 评测与来源 | 基础视觉/理解/速度联合地图；六个正式会议目录；335 旧 ID 书目检查 | 未覆盖会议/期刊、旧主张内容级核查、当前可复现字段 |
 
 各方向的当前条目见本页方向表；新论文版本/阅读深度见 [来源协议](sources-and-resources.md#current-search-protocol)。此前六篇镜面/因果/压缩原文记录仍保留在对应主题，未被新一轮登记覆盖。全文访问封闭的经典文献继续标明阅读边界。
 
@@ -227,7 +229,7 @@ object permanence while not visible
 
 ---
 
-### R05 — Static self-supervised visual representation
+### R05 — Recognition, detection, dense perception and visual representation
 
 Study:
 
@@ -237,6 +239,13 @@ Study:
 - part structure;
 - representation scaling;
 - frozen-backbone transfer.
+- image/scene/category/attribute and instance recognition;
+- object detection, counting and localization, including small, rare and unknown objects;
+- semantic, instance and panoptic segmentation, matting and visual text/document reading;
+- dedicated models versus a common architecture versus one jointly trained checkpoint;
+- shared visual competence under native latency and memory budgets.
+
+The maintained [broad visual capability map](perception-and-identifiability.md#broad-visual-capabilities) owns the functional coverage; [current primary records](sources-and-resources.md#broad-vision-sources) include unified perception, fast detectors, trackers, dense prediction and visual reading resources. Static SSL is one learning route within this direction.
 
 Current reference:
 

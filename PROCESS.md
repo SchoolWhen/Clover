@@ -26,6 +26,7 @@ Stages describe evidence maturity. Moving a file or creating a directory does no
 ## Common gates
 
 - Research records primary/official sources, exact artifacts, observation/training provenance, demonstrated capability, limitations and open gaps. Coverage precedes commitment.
+- Every stage retains the broad visual-AGI scope in SSOT.md: core recognition/detection/segmentation/tracking/visual-reading competence, general understanding and native ultrafast computation. Track capability coverage and the complete speed boundary together; a robotics-only, generation-only or single-benchmark result does not close this objective.
 - Analysis explains individual mechanisms, assumptions, objectives, memory/time treatment, confounds and reproducibility; it does not select Clover's architecture by popularity.
 - Synthesis compares methods under common dimensions, separates protocol differences from capability differences and identifies a supported unresolved gap.
 - Innovation states an original scientific/algorithmic hypothesis, mathematical definitions, prediction, counter-hypothesis, falsifier and minimal discriminating experiment.

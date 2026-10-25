@@ -10,6 +10,8 @@ This file is mandatory reading for AI agents, coding agents, research agents and
 
 The question is fixed. The answer is open.
 
+**Model objective:** pure-vision AGI with natively ultrafast computation and broad visual understanding. Core computer-vision functions—recognition, detection, segmentation, tracking, correspondence, pose, counting and visual reading—are mandatory research/capability dimensions alongside memory, spatial/physical/causal reasoning and action usefulness. A robotic brain is a long-term application; do not reduce the model's scope to robotics, video generation or a single world-state task. These are targets, not demonstrated Clover results. Read the full scope and speed contract in SSOT.md.
+
 ## 2. Mandatory reading order and document ownership
 
 1. [`SSOT.md`](SSOT.md) — the fixed research question and scientific contract, binding on every stage.

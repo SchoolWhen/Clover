@@ -11,7 +11,7 @@
 
 # 机器如何仅凭视觉理解真实世界？
 
-这是 Clover 的研究问题。长期目标是构建一个通用机器人“大脑”：通过视觉形成对真实世界的理解，再据此决策和行动。**问题固定，答案开放。**
+**Clover 的目标是纯视觉 AGI、原生 ultrafast 模型。** 这里的理解是广义的：识别、检测、分割、追踪、阅读、重建、记忆，以及对视觉世界的推理。通用机器人“大脑”是该模型的长期应用目标。**问题固定，答案开放。**
 
 **当前阶段：前期调研。** 我们正在重建问题、研究相互竞争的解释，并逐项追溯证据。最终表示、基础模型和核心算法尚未确定。研究进展与未解决问题统一记录在 [`STATUS.md`](STATUS.md)。
 
@@ -27,11 +27,13 @@
 
 | 问题 | 持续更新的主题文档 |
 |---|---|
+| 一个模型怎样识别、检测、分割、追踪和阅读？ | [基础视觉能力地图](01-research/perception-and-identifiability.md#broad-visual-capabilities) · [能力评测](01-research/evaluation-and-benchmarks.md#broad-visual-evaluation) |
 | 视觉证据究竟能辨识什么？ | [观测、几何与物理](01-research/perception-and-identifiability.md) · [研究问题](01-research/research-questions.md) |
 | 机器应当记住世界的哪些信息？ | [状态、表示与记忆](01-research/representation-and-memory.md) |
 | 什么时候应该再看一眼、干预或修正认识？ | [因果、行动与开放世界](01-research/causality-and-active-perception.md) |
 | 数据与训练怎样改变能力？ | [学习与数据](01-research/learning-and-data.md) |
 | 基础模型和部署系统分别贡献了什么？ | [模型、运行时与工程](01-research/foundation-models-and-systems.md) |
+| 什么证据能证明原生 ultrafast？ | [计算机制与完整延迟](01-research/foundation-models-and-systems.md#native-ultrafast-research) |
 | 什么证据能区分相互竞争的答案？ | [评测与资源](01-research/evaluation-and-benchmarks.md) · [一手来源](01-research/sources-and-resources.md) |
 | 哪些 Clover 想法仍需经受检验？ | [候选假设](04-innovation/README.md) · [研究流程](PROCESS.md) |
 

@@ -13,7 +13,17 @@ Maintained: **2026-10-25**. Current progress is maintained in [`STATUS.md`](STAT
 
 This is Clover's highest scientific authority. The question is fixed; the answer is open.
 
-The target is an embodied computational system that maintains and uses knowledge across time. The real world includes persistent entities outside the current view, incomplete observations, physical interactions, unfamiliar objects/environments and consequences of action. Controlled synthetic environments can isolate mechanisms; the scientific target extends to real environments.
+<a id="model-objective-and-breadth-of-understanding"></a>
+
+## Model objective and breadth of understanding
+
+**Clover targets a pure-vision AGI model with natively ultrafast computation.** This is the research objective, not a claim that an existing Clover model has achieved AGI, generality or a measured speed threshold. A general-purpose robotic brain is a long-term application of this model; the scientific scope includes broad visual intelligence beyond robotic control or world-model prediction.
+
+Broad understanding includes recognizing images, objects, parts, attributes and scenes; locating, detecting, counting and segmenting them; associating and tracking points and entities through video; reading visual text, documents, diagrams and charts; recovering spatial and temporal structure; understanding events, actions, relations and affordances; learning, remembering, reasoning, handling uncertainty and using this knowledge across unfamiliar tasks. These are required research and capability dimensions. They do not prescribe a collection of separate task models or freeze a module topology.
+
+Native speed must shape the investigation of representations, learning rules and computation from the outset. Record whole-model and multi-capability latency, visual evidence age, memory growth and capability retention. A fast external detector, a throughput figure, a cached answer, a distilled component or a fast language-model first token cannot establish an ultrafast general visual model. No numerical ultrafast threshold or final hardware has yet been agreed; future evaluation must predeclare both instead of relabeling an achieved number afterward.
+
+The model must maintain and use knowledge across time and support embodied use as well as broad visual tasks. The real world includes persistent entities outside the current view, incomplete observations, physical interactions, unfamiliar objects/environments and consequences of action. Controlled synthetic environments can isolate mechanisms; the scientific target extends to real environments.
 
 <a id="topic-docs-product-goal"></a>
 
@@ -29,6 +39,7 @@ The intended functional loop is visual experience → world understanding → de
 
 The definition remains a research object. Required capabilities include:
 
+- **Core visual competence:** image/category/instance/attribute recognition; detection and localization; semantic, instance and panoptic segmentation; point/single/multi-object tracking and re-identification; optical flow, visual correspondence, pose, counting and visual reading. Include open-set and degraded-input cases; maintain these capabilities when adding memory, reasoning or efficiency mechanisms.
 - **Existence, identity and persistence:** associate observations across time; preserve or deliberately suspend beliefs through occlusion; do not equate unseen with absent.
 - **Spatial and temporal structure:** positions, containment, support, visibility, relations and change at task-relevant precision and timescales.
 - **Dynamics and physics:** recognize plausible, quantitatively meaningful changes and violations, with appropriate uncertainty.
@@ -50,7 +61,7 @@ No single capability or benchmark establishes the whole definition.
 | P — Prediction | What will, could, cannot and would happen under intervention |
 | A — Action usefulness | Decision, planning, execution and recovery value |
 | R — Real-world transfer | Controlled settings through unfamiliar real environments |
-| E — Efficiency | Latency, memory, energy, bandwidth and hardware once capability is established |
+| E — Efficiency | Native computation, complete latency, evidence age, sustained throughput, memory, energy and bandwidth at declared capability and hardware; study speed and competence jointly |
 
 These axes do not substitute for each other. Benchmark SOTA is evidence about a defined protocol, not the project objective or proof of world understanding.
 
@@ -76,6 +87,8 @@ Depth, LiDAR, tactile, force, IMU, ground-truth poses/identities and privileged 
 | L4 | Non-visual/privileged physical evidence: proprioception, force/tactile, IMU, depth/LiDAR, measured physical priors or simulator state |
 
 A deployed RGB model trained with language, actions, measured material priors or privileged state is not scientifically equivalent to V0/L0. Record privileged evidence used by the examiner separately from information used by the learner. Task instructions and question text also belong in the input record.
+
+Text visible inside an image is visual observation. Transcription labels, language-pretrained teachers and external textual world knowledge still have distinct learning provenance. A text output interface does not by itself add a non-visual sensor; an external VLM answering a query is an additional model whose knowledge, cost and role must be disclosed.
 
 <a id="topic-principles"></a>
 

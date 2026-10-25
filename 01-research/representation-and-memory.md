@@ -145,6 +145,68 @@ This is the canonical topic document. Update it in place; source-level dates and
 - **本次阅读深度：** 摘要与书目核验。
 <!-- END current-cross-domain-evidence -->
 
+<!-- BEGIN broad-vision-primary-evidence -->
+<a id="broad-vision-primary-evidence"></a>
+
+## 广义视觉理解的一手比较证据
+
+核验日：2026-10-25。以下是外部方法与反例，覆盖经典接口、当前基础视觉与跨领域条件；未被采纳为 Clover 架构。
+
+### Pix2Seq 多任务接口
+
+- **一手来源：** [固定版本](https://arxiv.org/abs/2206.07669v2) · [作者资源](https://github.com/google-research/pix2seq)。
+- **机制：** 把框、轮廓、关键点、类别和描述序列化，用任务提示共享自回归训练接口。
+- **输入与学习来源：** 视觉输入与任务 token；框/关键点/掩码 L1，描述与语言目标 L2。
+- **实际证据：** 四类任务的统一架构/目标和联合训练对照。
+- **边界与反假设：** 离散坐标、轮廓和输出序列长度限制精度与时延；统一接口未证明统一长期状态或 AGI。
+- **阅读深度：** 正文选读：任务接口与输出编码；未复核全部实验；未运行复现。
+
+### Florence-2
+
+- **一手来源：** [固定版本](https://arxiv.org/abs/2311.06242v1) · [作者资源](https://huggingface.co/microsoft/Florence-2-large)。
+- **机制：** 提示驱动的统一图像到序列接口，覆盖图像、区域与像素层次任务。
+- **输入与学习来源：** FLD-5B 图像及海量自动视觉/文本标注，含 L1/L2；数据引擎知识不能归零。
+- **实际证据：** 多种感知任务的共享模型与微调/零样本比较。
+- **边界与反假设：** 单图/单轮任务覆盖未证明在线追踪、长期因果状态或 AGI；需区分一个权重、统一架构及任务微调结果。
+- **阅读深度：** 正文选读：统一任务与数据说明；未复核全部实验；未运行复现。
+
+### HALO
+
+- **一手来源：** [正式会议记录](https://www.roboticsproceedings.org/rss22/p010.html) · [论文](http://www.roboticsproceedings.org/rss22/p010.pdf)。
+- **机制：** 用 VLM 生成历史问答辅助训练检索，再用稀疏注意力限制误差历史的影响。
+- **输入与学习来源：** RGB、可含本体状态与历史动作，语言指令/教师、示范，含 L2/L3/L4。
+- **实际证据：** 多类历史信息的模拟及真实长时操作对照。
+- **边界与反假设：** 任务相关问题可能筛掉未知未来任务所需证据；检索正确、状态真实与动作成功须分开检验。
+- **阅读深度：** 正文 §III 与任务/实验设置选读；未运行复现。
+
+### ViPSim
+
+- **一手来源：** [正式会议记录](https://www.roboticsproceedings.org/rss22/p014.html) · [论文](http://www.roboticsproceedings.org/rss22/p014.pdf)。
+- **机制：** 将端执行器投影、相机/深度/形态图与数值动作共同约束长时视频生成。
+- **输入与学习来源：** 动作、相机矩阵、深度几何及形态先验，含 L3/L4，非严格 RGB-only 接口。
+- **实际证据：** 轨迹与视频几何一致性对照。
+- **边界与反假设：** 作者记录机械臂轨迹正确但炉门不动等失败；当前主要静态相机验证，兼容动态相机的设计不等于已验证。
+- **阅读深度：** 正文条件接口与 §V 局限选读；未运行复现。
+
+### Causal-JEPA
+
+- **一手来源：** [正式会议记录](https://proceedings.mlr.press/v306/nam26c.html) · [论文](https://raw.githubusercontent.com/mlresearch/v306/main/assets/nam26c/nam26c.pdf)。
+- **机制：** 遮挡对象级 latent，迫使由其他对象/历史预测，学习交互相关影响邻域。
+- **输入与学习来源：** 对象编码、时序数据和任务特定监督按实验分记；理论预设对象对齐表示与共享动态机制。
+- **实际证据：** 反事实问答及 PushT latent 规划的比较。
+- **边界与反假设：** 作者将邻域定义为预测充分集而非真实因果父节点，且未直接用显式时间因果图验证；对象编码质量限制上限。
+- **阅读深度：** 正文 §5–6、影响邻域解释与局限选读；未运行复现。
+
+### ITC token 对应
+
+- **一手来源：** [正式会议记录](https://proceedings.mlr.press/v306/kim26bq.html) · [论文](https://raw.githubusercontent.com/mlresearch/v306/main/assets/kim26bq/kim26bq.pdf)。
+- **机制：** 将下一帧 token 解码为复制旧 token 或新生成的结构化分配。
+- **输入与学习来源：** 已有 token 世界模型及强化学习环境/动作经验；不是无监督真实世界识别。
+- **实际证据：** 改善生成中的消失/复制与视觉强化学习回报。
+- **边界与反假设：** token 对应关系不是物理实体身份的可识别性定理；需独立测物体、部件、遮挡与编辑，而非只看回报。
+- **阅读深度：** 正文问题设定、对应变量与解码说明选读；未运行复现。
+<!-- END broad-vision-primary-evidence -->
+
 ## Contents
 
 - [Minimum Sufficient World State](#topic-research-research_sufficient_state)

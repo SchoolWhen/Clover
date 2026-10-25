@@ -6,11 +6,13 @@ Last updated: **2026-10-25**.
 >
 > **Long-term goal:** Build a general-purpose robotic brain that forms an understanding of the real world through vision alone, then uses that understanding to decide and act.
 
+**Model objective:** pure-vision AGI with natively ultrafast computation and broad visual understanding. Core recognition, detection, segmentation, tracking and visual reading belong to the required capability scope. The [research contract](SSOT.md#model-objective-and-breadth-of-understanding) records the scope; these are targets, not achieved Clover results.
+
 ## Current project decision
 
 **Stage 1 — Research / Survey & Evidence Collection is ACTIVE.** No representation, backbone or core algorithm is frozen. The 2026-10-15 recommendations to make Stage 2 primary remain [dated assessments in Stage 1](01-research/README.md#topic-research-stage1_final_audit_2026-10-15); they were not an approved stage transition.
 
-The 2026-10-19 decision remains in force: the CPU-only implementation line is frozen at its current results. It resumes only after the embodied-intelligence line produces a new, complete frontier breakthrough. This repository's main line is robotic-brain research.
+The 2026-10-19 decision remains in force: the CPU-only implementation line is frozen at its current results. It resumes only after the embodied-intelligence line produces a new, complete frontier breakthrough. The main research scope is the broad visual-AGI model; a robotic brain remains a long-term application.
 
 Apple M4 remains the local development reference; no target real robot is currently available. Final robot hardware is open. No new algorithm, experiment or deployment is reported in this update.
 
@@ -19,13 +21,17 @@ Apple M4 remains the local development reference; no target real robot is curren
 | 事项 | 当前证据 | 入口 |
 |---|---|---|
 | 研究目标 | 完整、全面、当前的前沿/相关/交叉研究；仍保持原视觉问题与 Stage 1 | [完整性审查](01-research/README.md#coverage-and-completion-audit) |
+| 最新范围明确 | 纯视觉 AGI、原生 ultrafast、广义理解；识别/检测/分割/追踪/阅读等十九类能力已明确归属 | [能力地图](01-research/perception-and-identifiability.md#broad-visual-capabilities) |
 | 本轮方向补充 | 首次登记 **53 篇**，深化 **1 篇**已有论文，按机制、输入/学习来源、证据和边界写回现有正文 | [交叉桥接](01-research/research-questions.md#cross-domain-research-bridges) |
+| 基础视觉与正式来源补充 | 在上述资料上增补 **31 条比较记录**：基础视觉/效率 16，正式会议相关/交叉研究 15；分别保留选读范围 | [固定来源与深度](01-research/sources-and-resources.md#broad-vision-sources) |
 | 前沿检索 | 3 组一手接口返回 1,611 条、去重 1,482 条；分类公告核对到 10-23；未把所有候选声称为精读 | [来源协议](01-research/sources-and-resources.md#current-search-protocol) |
+| 正式会议检索 | 六个官方目录取回 11,774 条题名、规则筛出 1,423 候选；不是全部人工筛完/全文读完 | [目录范围](01-research/sources-and-resources.md#broad-vision-sources) |
 | 旧引文核查 | 335 个数字 arXiv ID 均取回书目；未据此宣布全部旧研究结论正确 | [书目边界](01-research/sources-and-resources.md#current-search-protocol) |
 | 模型 artifact | 四个官方权重 revision 已读取模型卡与配置，分清公开文本权重和托管视觉/工具特性 | [精确版本](01-research/foundation-models-and-systems.md#current-model-artifacts) |
+| 原生速度与视觉发布 | 增加完整时延/证据年龄/多能力负载口径；核对当前 YOLO26/OCR/TAP 等入口，YOLO27 仍属未发布预览 | [计算研究](01-research/foundation-models-and-systems.md#native-ultrafast-research) |
 | 结构与持续维护 | 根目录跨阶段规则；调研继续按原八方向原位更新，没有新增调研文件 | [第一阶段](01-research/README.md) |
 
-**尚未完成：** 非 arXiv 前沿与全部旧官方 artifact 刷新；部分新增论文的方法/监督/实验完整核读；335 篇旧记录的内容级主张审查；RGB-only 隐藏态、真实因果识别和未知未来任务证据恢复的进一步检索。当前未通过全范围完整性核查，目标继续推进，没有宣布“全面完成”或推进阶段。
+**尚未完成：** 基础 CV 与统一视觉/原生速度路线的进一步一手核读；ICLR/CoRL 全目录、更多正式期刊与全部旧官方 artifact 刷新；部分论文的方法/监督/实验完整复核；335 个旧数字 ID 的内容级主张审查；严格视觉隐藏态、真实因果识别和未知未来任务证据恢复。当前未通过全范围完整性核查，目标继续推进，没有宣布“全面完成”或推进阶段。
 
 ## Current reading route
 

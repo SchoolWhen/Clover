@@ -11,7 +11,7 @@
 
 # How can a machine understand the real world through vision alone?
 
-That is Clover’s research question. The long-term goal is a general-purpose robotic brain that forms an understanding of the real world through vision, then uses it to decide and act. **The question is fixed; the answer is open.**
+**Clover targets a pure-vision AGI model with natively ultrafast computation.** Understanding is broad: recognize, detect, segment, track, read, reconstruct, remember and reason about the visual world. A general-purpose robotic brain is a long-term application of that model. **The question is fixed; the answer is open.**
 
 **Current stage: Research.** We are mapping the problem, studying competing explanations and tracing claims to their evidence. A final representation, backbone and core algorithm remain open. Scientific progress and unresolved gaps live in [`STATUS.md`](STATUS.md).
 
@@ -27,11 +27,13 @@ That is Clover’s research question. The long-term goal is a general-purpose ro
 
 | Question | Living documents |
 |---|---|
+| How can one model recognize, detect, segment, track and read? | [Core visual capability map](01-research/perception-and-identifiability.md#broad-visual-capabilities) · [Capability evaluation](01-research/evaluation-and-benchmarks.md#broad-visual-evaluation) |
 | What can visual evidence actually identify? | [Perception, geometry and physics](01-research/perception-and-identifiability.md) · [Research questions](01-research/research-questions.md) |
 | What should a machine remember about the world? | [State, representation and memory](01-research/representation-and-memory.md) |
 | When should it look again, intervene or revise its beliefs? | [Causality, action and open-world reasoning](01-research/causality-and-active-perception.md) |
 | How do data and training change capability? | [Learning and data](01-research/learning-and-data.md) |
 | What do foundation models and deployment systems contribute? | [Models, runtime and engineering](01-research/foundation-models-and-systems.md) |
+| What would establish natively ultrafast visual intelligence? | [Computation and complete latency](01-research/foundation-models-and-systems.md#native-ultrafast-research) |
 | What evidence would distinguish the competing answers? | [Evaluation and resources](01-research/evaluation-and-benchmarks.md) · [Primary sources](01-research/sources-and-resources.md) |
 | Which Clover ideas still need to survive a test? | [Hypotheses](04-innovation/README.md) · [Research process](PROCESS.md) |
 
