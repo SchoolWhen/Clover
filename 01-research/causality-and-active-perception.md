@@ -1,8 +1,8 @@
 <a id="top"></a>
 
-# Action, causality and open-world inference
+# 调研方向：因果、主动感知与开放世界
 
-Maintained: **2026-10-25** · Current project stage: **Research** ([status](STATUS.md)).
+Maintained: **2026-10-25** · Document stage: **1 — Research** ([status](../STATUS.md)).
 
 Active evidence acquisition, causal interventions, model discovery, uncertainty, embodiment and action usefulness.
 

@@ -1,8 +1,8 @@
 <a id="top"></a>
 
-# State, representation and memory
+# 调研方向：世界状态、表示、记忆与压缩
 
-Maintained: **2026-10-25** · Current project stage: **Research** ([status](STATUS.md)).
+Maintained: **2026-10-25** · Document stage: **1 — Research** ([status](../STATUS.md)).
 
 Sufficiency, aliasing, abstraction, temporal persistence and diagnostics. No representation family is selected.
 
@@ -717,7 +717,7 @@ same latent state may be sufficient for task A
 but aliased for task B.
 ```
 
-State aliasing is therefore directly connected to [`REPRESENTATION.md`](#topic-research-research_sufficient_state).
+State aliasing is therefore directly connected to [`representation-and-memory.md`](#topic-research-research_sufficient_state).
 
 ---
 

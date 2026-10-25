@@ -1,10 +1,10 @@
 <a id="top"></a>
 
-# Evaluation and evidence
+# 调研方向：评测方法、基准与证据
 
-Maintained: **2026-10-25** · Current project stage: **Research** ([status](STATUS.md)).
+Maintained: **2026-10-25** · Document stage: **1 — Research** ([status](../STATUS.md)).
 
-Benchmarks, capability batteries, protocol controls and the evidence ladder. Designs and external results are not Clover measurements.
+This Stage-1 direction surveys benchmarks, capability batteries, protocol controls and the evidence ladder. Designs and external results are not Clover measurements. Registered experiments and results belong to [Stage 6](../06-evaluation/README.md).
 
 This is the canonical topic document. Update it in place; source-level dates and reading-depth labels below qualify the evidence, not the maintenance date.
 
@@ -26,88 +26,10 @@ This is the canonical topic document. Update it in place; source-level dates and
 
 ## Contents
 
-- [Stage 6 — Evaluation](#topic-research-evaluation)
 - [Evaluation Principles](#topic-docs-evaluation-evaluation-principles)
 - [Clover Understanding Battery — Working Design](#topic-docs-evaluation-understanding-battery)
 - [Evaluation & Benchmark Map](#topic-docs-evaluation-benchmark-map)
 - [Benchmarks and Tasks](#topic-research-survey-benchmarks_tasks)
-
-<a id="topic-research-evaluation"></a>
-
-## Stage 6 — Evaluation
-
-### Experiments, Results and Falsification
-
-Source record updated: 2026-10-14
-
-**Status:** FRAMEWORK DEFINED; full execution is downstream of Analysis, Synthesis and selected implementations.
-
-Evaluation asks whether the claimed capability actually appears under controlled conditions and whether it survives comparison with strong alternatives.
-
-### Evidence ladder
-
-```text
-unit / synthetic diagnostic
-→ controlled benchmark
-→ controlled real-world test
-→ unfamiliar real environment
-→ long-horizon embodied task
-```
-
-Not every question requires the full ladder, but claims must not exceed the highest evidence level reached.
-
-### Required result metadata
-
-```text
-hypothesis or baseline
-exact model / checkpoint
-exact code version
-exact dataset / split
-visual protocol V0–V3
-learning provenance L0–L4
-prompt / query protocol when applicable
-hardware
-metric definition
-number of trials
-uncertainty / variance
-failure cases
-reproduction status
-```
-
-### Evaluation dimensions
-
-- geometry;
-- identity;
-- object permanence;
-- temporal consistency;
-- observability / unknown;
-- memory / retrieval;
-- belief revision;
-- intuitive physics;
-- quantitative / relational physics;
-- causality / intervention;
-- counterfactual reasoning;
-- active perception;
-- open-world generalization;
-- camera / embodiment shift;
-- planning usefulness;
-- action success;
-- recovery;
-- latency / memory / energy when relevant.
-
-### Baseline rule
-
-Compare across qualitatively different method families, not only variants of Clover.
-
-### Results rule
-
-Report negative results. Preserve failures that kill an idea. Do not hide trade-offs behind one average score.
-
-### Output
-
-Stage 6 produces result tables, figures, ablations, failure logs and explicit hypothesis status changes. Interpretation belongs to Stage 7 Reflection.
-
----
 
 <a id="topic-docs-evaluation-evaluation-principles"></a>
 

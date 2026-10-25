@@ -1,8 +1,8 @@
 <a id="top"></a>
 
-# Research questions
+# 调研方向：研究问题与可证伪边界
 
-Maintained: **2026-10-25** · Current project stage: **Research** ([status](STATUS.md)).
+Maintained: **2026-10-25** · Document stage: **1 — Research** ([status](../STATUS.md)).
 
 Unresolved questions and the evidence that could distinguish competing answers. These are questions, not adopted mechanisms.
 

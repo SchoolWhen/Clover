@@ -12,15 +12,16 @@ The question is fixed. The answer is open.
 
 ## 2. Mandatory reading order and document ownership
 
-1. [SSOT.md](SSOT.md#topic-ssot) — fixed question and scientific contract.
-2. [STATUS.md](STATUS.md) — the only current progress and stage authority.
-3. [RESEARCH.md](RESEARCH.md) — breadth, competing fields and coverage.
-4. [PROCESS.md](PROCESS.md) — lifecycle and contribution templates.
-5. Read the relevant canonical topic: [questions](QUESTIONS.md), [perception](PERCEPTION.md), [representation](REPRESENTATION.md), [action](ACTION.md), [learning](LEARNING.md), [systems](SYSTEMS.md), [evaluation](EVALUATION.md), [sources](SOURCES.md), [hypotheses](HYPOTHESES.md).
+1. [`SSOT.md`](SSOT.md) — the fixed research question and scientific contract, binding on every stage.
+2. [`PROCESS.md`](PROCESS.md) — the common lifecycle, stage boundaries, contribution and evidence rules.
+3. [`STATUS.md`](STATUS.md) — the only current project-progress and active-stage authority.
+4. Read the owning stage's README and then the relevant direction document. The current research entry is [Stage 1](01-research/README.md).
 
-Maintain each topic in place. One method means one structured section, not one new file. Do not create dated research supplements, patch reports, per-question progress files, duplicate indexes, archive trees or news editions. Fold verified discoveries into the topic and SOURCES.md; update STATUS.md for material progress. Preserve exact evidence URLs, reading depth, assumptions, counterevidence and refutation history. Git commits preserve prior versions. Add a file only when an existing topic genuinely cannot own its content.
+Root scope is shared across stages: research contract, agent rules, process, global status and the bilingual homepage. Stage-specific material belongs under `01-research/` through `07-reflection/`. Within a stage, prefer one file per direction and structured sections per method/question. Do not add date-named supplements, per-question update files, duplicate indexes or news editions. Introduce a direction file only when its content has a distinct continuing owner.
 
-Source record dates are not the document maintenance date. A merge or cleanup never upgrades an inherited source to newly verified evidence. Dated audit recommendations remain historical; STATUS.md governs the current stage. The former timestamped news-publication rule is retired by the 2026-10-25 repository simplification.
+Update the existing direction document in place. Fold Stage-1 verified discoveries into its topic and source map; register method analysis in Stage 2, comparative synthesis in Stage 3, candidate innovation in Stage 4, implementation in Stage 5, experiments/results in Stage 6 and interpretation in Stage 7. A benchmark survey is Stage 1; an executed benchmark result is Stage 6. A historical hypothesis may be housed in Stage 4 without being adopted or making that stage active.
+
+Preserve exact source URLs, reading depth, assumptions, counterevidence, falsifiers and refutation history. Source dates are not maintenance dates. Moves, merges and directory creation never upgrade evidence or imply stage completion. Git commits preserve prior versions; do not retain obsolete path shells or archive trees. STATUS.md alone governs the current stage.
 
 ## 3. Lifecycle
 
@@ -35,7 +36,7 @@ Source record dates are not the document maintenance date. A merge or cleanup ne
 ↺ next cycle
 ```
 
-**Current active stage: Stage 1 — Research.**
+The active stage is recorded only in [`STATUS.md`](STATUS.md); the same scientific controls apply to every stage.
 
 Do not prematurely freeze a Clover representation, foundation backbone or core algorithm.
 
@@ -344,7 +345,7 @@ hosted product ≠ open-weight checkpoint unless verified
 total params ≠ active params ≠ memory ≠ communication cost
 ```
 
-DeepSeek/Qwen are current high-value systems references, not default Clover choices. See [`SYSTEMS.md`](SYSTEMS.md#topic-research-foundation_models-deepseek_qwen).
+DeepSeek/Qwen are current high-value systems references, not default Clover choices. See [`01-research/foundation-models-and-systems.md`](01-research/foundation-models-and-systems.md#topic-research-foundation_models-deepseek_qwen).
 
 ## 19. Data/training gains must be separated from architecture gains
 
@@ -487,38 +488,9 @@ refuted
 model-incomplete
 ```
 
-## 26. Stage-1 contribution template
+## 26. Stage-specific contribution templates
 
-Record as much as known:
-
-- direction;
-- name/version/date;
-- primary paper URL;
-- official project/code/checkpoint;
-- dataset/benchmark;
-- evidence level;
-- input/training provenance;
-- observation/image-formation assumptions;
-- world variables represented;
-- sufficiency target;
-- aliasing failure addressed/introduced;
-- abstraction/granularity assumption;
-- information-gathering mechanism and cost;
-- open-world epistemic failure type (`E1–E8`);
-- hypothesis class / identifiability assumptions when relevant;
-- experiment/falsification mechanism when relevant;
-- hypothesis provenance/refutation handling;
-- exact foundation backbone/artifact when relevant;
-- total/active parameters, attention, visual-token/context/cache assumptions when relevant;
-- data mixture/alignment/post-training when relevant;
-- runtime/kernel/harness/tool assumptions when relevant;
-- deployment/runtime assumptions;
-- validation-evidence level (`EV0–EV8`);
-- simulator/runtime/hardware provenance;
-- demonstrated capability;
-- limitation/open question.
-
-Do not turn a collection record into an architecture decision.
+The Stage-1 source template and collection rules live in [`01-research/README.md`](01-research/README.md). Each later stage owns its template in its README; all remain subordinate to this file and SSOT.md.
 
 ## 27. Coding agents
 
@@ -526,31 +498,7 @@ Do not rewrite research claims to match current code. Small diagnostic code is a
 
 ## 28. Research agents
 
-During Stage 1:
-
-1. search broadly, including outside current categories;
-2. upgrade discovery signals to primary/official sources;
-3. preserve exact URLs and exact model artifacts;
-4. record code/datasets/benchmarks;
-5. summarize claims conservatively;
-6. distinguish learning/evidence provenance from deployment input;
-7. record observation assumptions;
-8. state representation sufficiency target;
-9. test for aliasing/discarded information;
-10. record granularity/timescale assumptions;
-11. record active evidence acquisition and risk/cost;
-12. ask whether the model/hypothesis set can be wrong/incomplete;
-13. record causal/mechanism-identification assumptions;
-14. preserve hypothesis/refutation provenance;
-15. keep self/embodiment and social hidden state visible;
-16. separate architecture gains from data/post-training gains;
-17. separate base-model capability from harness/tool/memory capability;
-18. record total vs active parameters and visual/context/cache budgets when material;
-19. record runtime/kernel/hardware dependencies when they affect claimed efficiency;
-20. record local-M4 feasibility vs remote/frontier-only comparison;
-21. classify simulation/real-world evidence conservatively;
-22. record missing research areas explicitly;
-23. do not import external mechanisms into Clover by default.
+During Stage 1, follow the collection rules in [`01-research/README.md`](01-research/README.md). Research outputs stay with their direction; do not route a source record into a later stage solely because it mentions training, evaluation or innovation.
 
 ## Final rule
 

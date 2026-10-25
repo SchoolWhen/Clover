@@ -1,8 +1,8 @@
 <a id="top"></a>
 
-# Learning and experience
+# 调研方向：数据、训练与持续学习
 
-Maintained: **2026-10-25** · Current project stage: **Research** ([status](STATUS.md)).
+Maintained: **2026-10-25** · Document stage: **1 — Research** ([status](../STATUS.md)).
 
 Training, post-training, data provenance, continual learning and capability preservation under adaptation.
 
@@ -828,11 +828,11 @@ Do not attribute the result to architecture alone.
 Source record updated: **2026-10-15**
 Source intake checked through: **2026-10-15**
 
-> Supporting material for [`LEARNING.md`](#topic-research-research_training_posttraining).
+> Supporting material for [`learning-and-data.md`](#topic-research-research_training_posttraining).
 
 This file is **not** a Clover training recipe. It records variables that must be controlled before attributing a capability gain to architecture or representation.
 
-High-risk cross-boundary questions live in [`LEARNING.md`](#topic-research-training-high_risk_boundaries), including partial-success rewards, epistemic calibration, failure/recovery ratios, simulator trust, module adaptation timescales, uncertainty regression, distillation, scaling, fleet-update contamination and model/memory rollback consistency.
+High-risk cross-boundary questions live in [`learning-and-data.md`](#topic-research-training-high_risk_boundaries), including partial-success rewards, epistemic calibration, failure/recovery ratios, simulator trust, module adaptation timescales, uncertainty regression, distillation, scaling, fleet-update contamination and model/memory rollback consistency.
 
 ---
 
@@ -1285,7 +1285,7 @@ Do not change all axes at once.
 
 ### 13. Remaining training-specific gaps
 
-See [`LEARNING.md`](#topic-research-training-high_risk_boundaries) for the expanded evidence matrix. Remaining open questions include:
+See [`learning-and-data.md`](#topic-research-training-high_risk_boundaries) for the expanded evidence matrix. Remaining open questions include:
 
 ```text
 robot post-training scaling laws under matched architecture/data quality
@@ -1333,7 +1333,7 @@ Until these are controlled, do not call the gain an architectural discovery.
 Source record updated: **2026-10-15**
 Source intake checked through: **2026-10-15**
 
-> Supporting material for [`LEARNING.md`](#topic-research-research_training_posttraining).
+> Supporting material for [`learning-and-data.md`](#topic-research-research_training_posttraining).
 
 These questions are high-risk because optimizing one headline metric can silently damage other properties of a robotic world model or policy.
 

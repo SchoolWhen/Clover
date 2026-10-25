@@ -1,12 +1,29 @@
 <a id="top"></a>
 
-# Research map
+# 第一阶段：调研 / Research
 
-Maintained: **2026-10-25** · Current project stage: **Research** ([status](STATUS.md)).
+Maintained: **2026-10-25** · Document stage: **1 — Research** ([status](../STATUS.md)).
 
-The broad problem space, competing research families and breadth coverage. Read the current collection queue before adding more names.
+本目录只收纳前期调研：按研究方向维护当前文献、证据边界、资源与未解问题。每个方向一份正文，直接更新；不会因文件属于某个方向就冻结其表示或方法。
 
 This is the canonical topic document. Update it in place; source-level dates and reading-depth labels below qualify the evidence, not the maintenance date.
+
+## 调研方向与文件归属
+
+本目录直接放方向文档，不再按论文、日期或子问题建立更深目录。方向中包含的公式与外部实验结论仍是调研材料；本项目的方法分析、创新和实测成果按阶段分别记录。
+
+| 方向 | 当前文档 |
+|---|---|
+| 问题定义与待区分问题 | [研究问题](research-questions.md) |
+| 观测、几何、物性与可识别性 | [感知与可识别性](perception-and-identifiability.md) |
+| 状态充分性、表示、记忆与压缩 | [表示与记忆](representation-and-memory.md) |
+| 因果、主动观测、干预与开放世界 | [因果与主动感知](causality-and-active-perception.md) |
+| 数据、训练、后训练与持续学习 | [学习与数据](learning-and-data.md) |
+| 基础模型、运行时与工程条件 | [基础模型与系统](foundation-models-and-systems.md) |
+| 评测研究、基准与数据资源 | [评测与基准](evaluation-and-benchmarks.md) |
+| 一手来源、代码与资源索引 | [来源与资源](sources-and-resources.md) |
+
+跨阶段约束见 [`../SSOT.md`](../SSOT.md)、[`../AGENTS.md`](../AGENTS.md) 和 [`../PROCESS.md`](../PROCESS.md)。项目当前阶段只以 [`../STATUS.md`](../STATUS.md) 为准。
 
 <a id="current-collection-queue"></a>
 
@@ -16,11 +33,11 @@ This is the canonical topic document. Update it in place; source-level dates and
 
 | 资料缺口 | 当前新增证据 | 尚未闭合的更强问题 |
 |---|---|---|
-| 被动 RGB 镜面外观锚点 | [Ref-NeRF / NeRFactor](PERCEPTION.md#reflection-evidence) | 相机/视角/光照/材质先验各贡献多少；渲染拟合何时支持真实物理分解？ |
-| 未知交互目标与真实成像 | [BISCUIT / 真实光学负结果](ACTION.md#causal-identification-evidence) | 可识别性假设在噪声、遮挡、混杂与自然机器人视频中是否成立？ |
-| 视觉压缩效率参照 | [FastV / FrameFusion](REPRESENTATION.md#compression-evidence) | 未知后续任务需要的短暂历史证据是否丢失；还能否安全再观察？ |
+| 被动 RGB 镜面外观锚点 | [Ref-NeRF / NeRFactor](perception-and-identifiability.md#reflection-evidence) | 相机/视角/光照/材质先验各贡献多少；渲染拟合何时支持真实物理分解？ |
+| 未知交互目标与真实成像 | [BISCUIT / 真实光学负结果](causality-and-active-perception.md#causal-identification-evidence) | 可识别性假设在噪声、遮挡、混杂与自然机器人视频中是否成立？ |
+| 视觉压缩效率参照 | [FastV / FrameFusion](representation-and-memory.md#compression-evidence) | 未知后续任务需要的短暂历史证据是否丢失；还能否安全再观察？ |
 
-下一轮优先：RGB-only 可变形/颗粒状态；自然真实机器人视频的因果恢复；同字节/时延预算下的延迟提问与证据恢复；封闭原文的合法全文入口。先登记来源与反例，再决定后续区分实验。不能用“没搜到”推出领域不存在，也不能把定理充分条件改写为全域不可能性。具体版本、阅读深度和检索词见 [新增来源](SOURCES.md#verified-additions)。
+下一轮优先：RGB-only 可变形/颗粒状态；自然真实机器人视频的因果恢复；同字节/时延预算下的延迟提问与证据恢复；封闭原文的合法全文入口。先登记来源与反例，再决定后续区分实验。不能用“没搜到”推出领域不存在，也不能把定理充分条件改写为全域不可能性。具体版本、阅读深度和检索词见 [新增来源](sources-and-resources.md#verified-additions)。
 
 ## Contents
 
@@ -46,7 +63,7 @@ The purpose of Stage 1 is **coverage before commitment**. We want to know what r
 
 This file is deliberately broad and relatively flat so a new research agent can understand the landscape before entering deeper documents.
 
-Detailed mechanism reports belong to Stage 2 [`PROCESS.md`](PROCESS.md#topic-research-analysis), not here.
+Detailed mechanism reports belong to Stage 2 [`../02-analysis/README.md`](../02-analysis/README.md#topic-research-analysis), not here.
 
 ---
 
@@ -1645,13 +1662,13 @@ Each may become supported, transformed or rejected after baseline, battery and f
 
 Before the next architecture proposal, complete and keep current:
 
-1. `RESEARCH.md` — problem-space synthesis.
-2. `SOURCES.md` — one-to-one source/evidence/landing map.
-3. `SOURCES.md` — method-family comparison.
-4. `SOURCES.md` — primary-source reading index.
-5. `EVALUATION.md` — capability measurement map.
-6. `SOURCES.md` — reproducibility resources.
-7. `QUESTIONS.md` — unresolved contradictions.
+1. `README.md` — problem-space synthesis.
+2. `sources-and-resources.md` — one-to-one source/evidence/landing map.
+3. `sources-and-resources.md` — method-family comparison.
+4. `sources-and-resources.md` — primary-source reading index.
+5. `evaluation-and-benchmarks.md` — capability measurement map.
+6. `sources-and-resources.md` — reproducibility resources.
+7. `research-questions.md` — unresolved contradictions.
 8. baseline reconstruction notes/results when experiments begin.
 9. Understanding Battery protocol.
 10. Failure Matrix.
@@ -1673,7 +1690,7 @@ The fixed target is a machine that forms a useful understanding of the real worl
 ## SURVEY_BREADTH — Breadth Foundation for Stage-1 Research
 
 **Source checks:** 2026-10-19–20; new targeted checks are listed above.
-**Companion:** [`SOURCES.md`](SOURCES.md#topic-research-emerging-frontier_sweep_2026-10-19) tracks the *frontier*; this file builds the *breadth* underneath it.
+**Companion:** [`sources-and-resources.md`](sources-and-resources.md#topic-research-emerging-frontier_sweep_2026-10-19) tracks the *frontier*; this file builds the *breadth* underneath it.
 
 The 2026-10-19 frontier sweep found that recent intake was almost entirely VLA / world-action-model / industry-brain news, with **zero new material on six breadth axes**. Rule adopted there and kept here:
 
@@ -1681,7 +1698,7 @@ The 2026-10-19 frontier sweep found that recent intake was almost entirely VLA /
 a sweep with frontier but no breadth counts as failed
 ```
 
-This file records verified anchor sources for those six axes, plus the standing tracking channels that keep both breadth and frontier current. Entries follow the AGENTS §4.4 record shape (problem / demonstrates / does-not-demonstrate / assumptions / counter-hypothesis) in compact form. Anchors were located and bibliographically verified on 2026-10-19; nine of them were then read in full text and recorded into [`SOURCES.md`](SOURCES.md#topic-research-survey-source_map) (marked **FULL READ** below), and the remaining gap hunts were completed on 2026-10-20 (see §7). Remaining entries are abstract/bibliographic level, labelled as such. No entry here is an architecture decision (§4.2, §26).
+This file records verified anchor sources for those six axes, plus the standing tracking channels that keep both breadth and frontier current. Entries follow the AGENTS §4.4 record shape (problem / demonstrates / does-not-demonstrate / assumptions / counter-hypothesis) in compact form. Anchors were located and bibliographically verified on 2026-10-19; nine of them were then read in full text and recorded into [`sources-and-resources.md`](sources-and-resources.md#topic-research-survey-source_map) (marked **FULL READ** below), and the remaining gap hunts were completed on 2026-10-20 (see §7). Remaining entries are abstract/bibliographic level, labelled as such. No entry here is an architecture decision (§4.2, §26).
 
 ---
 
@@ -1696,7 +1713,7 @@ This file records verified anchor sources for those six axes, plus the standing 
 | Journals: T-RO, IJRR, Science Robotics, PNAS, Nature Machine Intelligence, Artificial Intelligence | durable results | monthly scan |
 | Official industry sources only (NVIDIA, Google DeepMind, Physical Intelligence, Figure, NEURA, OpenAI, Tesla) | industry claims as `OFFICIAL_*` / `SURVEY_SIGNAL` | daily digest |
 
-Company statements never become scientific fact silently (§4.5). News remains a discovery layer; durable conclusions must be upgraded to `PRIMARY_PAPER` / `OFFICIAL_*` and recorded in `SOURCES.md` / `SOURCES.md`.
+Company statements never become scientific fact silently (§4.5). News remains a discovery layer; durable conclusions must be upgraded to `PRIMARY_PAPER` / `OFFICIAL_*` and recorded in `sources-and-resources.md` / `sources-and-resources.md`.
 
 ---
 
@@ -1786,7 +1803,7 @@ Company statements never become scientific fact silently (§4.5). News remains a
 - **Source:** *Determining Optical Flow*, Artificial Intelligence 17:185–203, 1981. Reprint locator: http://dev.ipol.im/git/?p=coco/ipol_phs.git;a=blob_plain;f=doc/ipol_horn_schunck_draft.pdf;h=dc931ccba98cafe3742ffeb819d161ac361e3cbb;hb=575a90230da4c38969a1674748b29c9bb5fedf70 · `PRIMARY_PAPER` (bibliographic verified 2026-10-19)
 - **Demonstrates:** under brightness constancy, one pixel yields one equation for two unknowns (the aperture problem): local image evidence *provably underdetermines* motion; their smoothness prior is an added assumption that fills the gap — visibly, the field's first explicit "licence" for inferred state.
 - **Does not demonstrate:** validity under illumination change, specularity, transparency or occlusion boundaries — exactly where brightness constancy breaks.
-- **Landing for Clover:** the canonical template for every observation-physics entry: name the image-formation assumption, name what it licenses, name where it dies. Full assumption checklist lives in [`PERCEPTION.md`](PERCEPTION.md#topic-research-research_observation_physics).
+- **Landing for Clover:** the canonical template for every observation-physics entry: name the image-formation assumption, name what it licenses, name where it dies. Full assumption checklist lives in [`perception-and-identifiability.md`](perception-and-identifiability.md#topic-research-research_observation_physics).
 
 #### D2. Adverse-condition boundary — Bijelic et al. (2020) — *counter-anchor, not vision evidence*
 
@@ -1806,7 +1823,7 @@ Company statements never become scientific fact silently (§4.5). News remains a
 
 - **Source:** *Getting to know low-light images with the Exclusively Dark dataset*, Computer Vision and Image Understanding 178:30–42, 2019. DOI 10.1016/j.cviu.2018.10.010 · `PRIMARY_PAPER` (verified 2026-10-20)
 - **Demonstrates:** ExDark — 7,363 low-light images captured in visible light only, 10 lighting conditions, bounding-box annotations over 12 object classes — and the finding that low-light corruption reaches far deeper into hand-crafted and learned features than "illumination invariance" fixes.
-- **Landing for Clover:** passive-side corroboration of D2's lesson: degraded RGB corrupts features non-superficially, so adverse-condition capability claims need examiners that go beyond invariance assumptions. **Coverage update 2026-10-25:** motion blur and RGB-D transparency anchors are recorded below; passive posed-RGB specular anchors are now recorded in [PERCEPTION.md](PERCEPTION.md#reflection-evidence). RGB-only transparency and unique physical decomposition remain separate questions.
+- **Landing for Clover:** passive-side corroboration of D2's lesson: degraded RGB corrupts features non-superficially, so adverse-condition capability claims need examiners that go beyond invariance assumptions. **Coverage update 2026-10-25:** motion blur and RGB-D transparency anchors are recorded below; passive posed-RGB specular anchors are now recorded in [`perception-and-identifiability.md`](perception-and-identifiability.md#reflection-evidence). RGB-only transparency and unique physical decomposition remain separate questions.
 
 ---
 
@@ -1822,7 +1839,7 @@ Company statements never become scientific fact silently (§4.5). News remains a
 - **Source:** *Deep Multi-Scale Convolutional Neural Network for Dynamic Scene Deblurring*, CVPR 2017, pp. 3883–3891. https://openaccess.thecvf.com/content_cvpr_2017/html/Nah_Deep_Multi-Scale_Convolutional_CVPR_2017_paper.html · `PRIMARY_PAPER` (verified 2026-10-20)
 - **Demonstrates:** end-to-end restoration of sharp images from single blurred photos without explicit kernel estimation (PSNR 29.23 on the GoPro benchmark introduced by the paper, SOTA at publication).
 - **Caveat that matters:** GoPro "blur" is *synthesised* by averaging consecutive high-frame-rate sharp frames — an approximation of true long-exposure blur; models trained on it transfer imperfectly to real blur (RealBlur evidence). The restoration works insofar as the dataset's blur physics are invertible by construction.
-- **Landing for Clover:** motion blur closes the Axis-D set with the same lesson in a third form (cf. D3's paired supervision, D5's corrupted channel): photometric repair is possible, but the repaired pixels are *inference*, and any state built on them inherits that status. The former passive-specular source gap is now covered by Ref-NeRF and NeRFactor; see [the qualified 2026-10-25 record](PERCEPTION.md#reflection-evidence). This closes an inventory gap, not material identifiability.
+- **Landing for Clover:** motion blur closes the Axis-D set with the same lesson in a third form (cf. D3's paired supervision, D5's corrupted channel): photometric repair is possible, but the repaired pixels are *inference*, and any state built on them inherits that status. The former passive-specular source gap is now covered by Ref-NeRF and NeRFactor; see [the qualified 2026-10-25 record](perception-and-identifiability.md#reflection-evidence). This closes an inventory gap, not material identifiability.
 
 ### 5. Axis E — Deformable, fluid & granular dynamics
 
@@ -1905,9 +1922,837 @@ Company statements never become scientific fact silently (§4.5). News remains a
 
 ### 7. What this file changes, and the read queue
 
-1. **Every Stage-1 surface now has at least one primary anchor or an explicitly recorded gap.** Axes A–F map to surfaces 3, 2/5, 1/7, 4, 5, and 11/15 respectively in [`STATUS.md`](STATUS.md).
-2. **Full-text read queue — status 2026-10-20:** DONE and recorded in `SOURCES.md`: Battaglia 2013 · Khemakhem 2020 · Kaelbling 1998 · DROID-SLAM 2021 · PlasticineLab 2021 · Geirhos 2020 · ORB-SLAM3 2021 · Spelke 1994 (companion to B1). Closed at abstract level by access, not by choice: Spelke 1992 and Baillargeon 1985 full texts are paywalled/closed (verified 2026-10-20); their entries carry the abstract-level label permanently until access changes.
+1. **Every Stage-1 surface now has at least one primary anchor or an explicitly recorded gap.** Axes A–F map to surfaces 3, 2/5, 1/7, 4, 5, and 11/15 respectively in [`../STATUS.md`](../STATUS.md).
+2. **Full-text read queue — status 2026-10-20:** DONE and recorded in `sources-and-resources.md`: Battaglia 2013 · Khemakhem 2020 · Kaelbling 1998 · DROID-SLAM 2021 · PlasticineLab 2021 · Geirhos 2020 · ORB-SLAM3 2021 · Spelke 1994 (companion to B1). Closed at abstract level by access, not by choice: Spelke 1992 and Baillargeon 1985 full texts are paywalled/closed (verified 2026-10-20); their entries carry the abstract-level label permanently until access changes.
 3. **Current coverage gaps — updated 2026-10-25:** the passive-specular inventory now has Ref-NeRF/NeRFactor anchors; real optical CRL has a qualified negative-result anchor. Still open in this inventory: RGB-only deformable/granular state with downstream evidence; robust identification in natural real-robot video; safe recovery of evidence discarded before a future query; and full-text access to Spelke 1992 / Baillargeon 1985. Existing anchors do not establish scientific closure of any entire capability class.
 4. **Next frontier sweep obligation (unchanged):** include at least one *new primary source* per axis above, or state why the axis produced nothing — silence is not coverage.
 
 *Update rule: this is a living root file. New anchors are appended per axis with the same record shape and verification date; superseded entries are marked `SUPERSEDED`, never silently deleted (§15).*
+
+## 调研条目模板
+
+
+Record as much as known:
+
+- direction;
+- name/version/date;
+- primary paper URL;
+- official project/code/checkpoint;
+- dataset/benchmark;
+- evidence level;
+- input/training provenance;
+- observation/image-formation assumptions;
+- world variables represented;
+- sufficiency target;
+- aliasing failure addressed/introduced;
+- abstraction/granularity assumption;
+- information-gathering mechanism and cost;
+- open-world epistemic failure type (`E1–E8`);
+- hypothesis class / identifiability assumptions when relevant;
+- experiment/falsification mechanism when relevant;
+- hypothesis provenance/refutation handling;
+- exact foundation backbone/artifact when relevant;
+- total/active parameters, attention, visual-token/context/cache assumptions when relevant;
+- data mixture/alignment/post-training when relevant;
+- runtime/kernel/harness/tool assumptions when relevant;
+- deployment/runtime assumptions;
+- validation-evidence level (`EV0–EV8`);
+- simulator/runtime/hardware provenance;
+- demonstrated capability;
+- limitation/open question.
+
+Do not turn a collection record into an architecture decision.
+
+
+## 调研执行规则
+
+
+During Stage 1:
+
+1. search broadly, including outside current categories;
+2. upgrade discovery signals to primary/official sources;
+3. preserve exact URLs and exact model artifacts;
+4. record code/datasets/benchmarks;
+5. summarize claims conservatively;
+6. distinguish learning/evidence provenance from deployment input;
+7. record observation assumptions;
+8. state representation sufficiency target;
+9. test for aliasing/discarded information;
+10. record granularity/timescale assumptions;
+11. record active evidence acquisition and risk/cost;
+12. ask whether the model/hypothesis set can be wrong/incomplete;
+13. record causal/mechanism-identification assumptions;
+14. preserve hypothesis/refutation provenance;
+15. keep self/embodiment and social hidden state visible;
+16. separate architecture gains from data/post-training gains;
+17. separate base-model capability from harness/tool/memory capability;
+18. record total vs active parameters and visual/context/cache budgets when material;
+19. record runtime/kernel/hardware dependencies when they affect claimed efficiency;
+20. record local-M4 feasibility vs remote/frontier-only comparison;
+21. classify simulation/real-world evidence conservatively;
+22. record missing research areas explicitly;
+23. do not import external mechanisms into Clover by default.
+
+
+<details>
+<summary>2026-10-15 调研就绪度评估：当时意见，当前阶段以全局状态为准</summary>
+
+<a id="topic-research-stage1_final_audit_2026-10-15"></a>
+
+## Stage 1 Final Audit — 2026-10-15
+
+> Dated audit record: 2026-10-15. Its recommendation to make Stage 2 primary was not the subsequent project decision. Stage 1 remains active; see STATUS.md. Read readiness claims below as that audit’s assessment, not a current completeness finding.
+
+> Research question: **How can a machine understand the real world through vision alone?**
+
+This audit checks whether Stage 1 still has missing *major domains* after expanding from visual world modeling into identifiability, memory, causality, model discovery, foundation-model systems, training/post-training, deployment and validation.
+
+### Audit conclusion
+
+**No obvious major research domain is currently missing.**
+
+The remaining work is dominated by **cross-boundary controlled-variable problems** rather than new top-level categories.
+
+The important implication is:
+
+```text
+Stage 1 should remain open to freshness updates,
+but Stage 2 can become the primary mode once these boundaries are recorded.
+```
+
+Do not interpret this as “research is complete forever.” It means the broad problem map is sufficiently complete that continued collection should be selective and evidence-driven.
+
+---
+
+### 1. Cross-boundary priorities
+
+### P0 — must be understood before serious architecture selection
+
+#### P0.1 Visual tokenizer / video sampling
+
+The effective observation path is:
+
+```text
+world
+→ optics / camera
+→ RGB
+→ resize / crop / ISP
+→ frame sampling
+→ visual tokenizer / patching / pixel-unshuffle / pooling
+→ token pruning / merging
+→ backbone
+→ internal state
+```
+
+The tokenizer is therefore part of the sensing pipeline, not merely an implementation detail.
+
+Current evidence to track:
+
+- Qwen2.5-VL dynamic FPS + absolute-time encoding: https://qwen.ai/blog?from=research.research-list&id=c5e7415d9a9e89adc18c59d9e466e5a1a459b8f4
+- Qwen3-VL: https://github.com/QwenLM/Qwen3-VL
+- SAPrune / stage-aware VLA token pruning: https://arxiv.org/abs/2610.05273
+- VLA-ACL / action-consistent token pruning: https://arxiv.org/abs/2610.08133
+- adaptive two-stage video token pruning: https://arxiv.org/abs/2608.03112
+
+Required future experiment:
+
+```text
+same raw video
+same checkpoint
+vary resolution / FPS / token count / pruning policy
+```
+
+Measure geometry, fast contact, permanence, uncertainty, OOD behavior, action stability, latency and memory.
+
+A model must not be blamed for missing evidence that the tokenizer already discarded.
+
+---
+
+#### P0.2 Streaming foundation models
+
+A robot receives an unbounded stream; it should not be modeled as repeated independent chat prompts.
+
+Study:
+
+```text
+incremental visual encoding
+frame reuse
+cache invalidation
+bounded history
+periodic global refresh
+fast local state update
+slow semantic/planning update
+stream interruption / resume
+```
+
+DeepSeek-V4.1-Flash is relevant because its Causal Encoder–Decoder explicitly separates input-heavy and output-heavy compute: https://www.deepseek.com/en/news/deepseek-v4-1-flash/
+
+Qwen3.8-Omni-Flash and Qwen-Live-Harness are useful runtime comparators for continuous multimodal streams, although audio is outside strict Clover V0–V3 sensing: https://qwen.ai/blog?id=qwen3.8-omni-flash · https://github.com/QwenLM/Qwen-Live-Harness
+
+Required metrics:
+
+```text
+incremental latency
+full-refresh latency
+state staleness
+frame backlog
+dropped/reordered frame robustness
+cache growth
+memory leak
+p95/p99 camera→action deadline
+```
+
+---
+
+#### P0.3 Long context vs grounded world memory
+
+Long context is a computational resource. It is not automatically:
+
+```text
+persistent world belief
+belief revision
+evidence provenance
+identity memory
+```
+
+Current multimodal memory evidence:
+
+- M3Exam shows persistent gaps and efficiency costs in multimodal long-context memory, while query-conditioned memory can reduce retrieved tokens: https://arxiv.org/abs/2606.07402
+- ICM-Bench isolates long-term identity memory rather than generic event recall: https://arxiv.org/abs/2609.04438
+
+Required equal-budget comparison:
+
+```text
+A raw long context
+B persistent state
+C evidence retrieval
+D hybrid state + evidence + bounded recent context
+```
+
+Match bytes, peak memory and latency as far as possible.
+
+---
+
+#### P0.4 Backbone adaptation
+
+Compare under matched data/compute:
+
+```text
+frozen backbone + state/action head
+LoRA / adapter
+selective visual-language adaptation
+partial fine-tuning
+full fine-tuning
+teacher→student distillation
+```
+
+Current controlled evidence:
+
+- π0 LoRA vs full fine-tuning study: https://arxiv.org/abs/2607.10172
+  - some LoRA settings match full tuning on the evaluated industrial tasks;
+  - over-freezing the VLM/vision path can hurt embodiment adaptation.
+- Qwen-Drive demonstrates another design family: keep the pretrained Qwen3.5-4B VLM architecture and add explicit BEV/perception/planning modules: https://qwen.ai/blog?id=qwen-drive-1.0
+
+Future selection must jointly consider adaptation quality, catastrophic forgetting, calibration, memory, OOD vision and deployment cost.
+
+---
+
+### 2. P1 research variables
+
+### P1.1 Data science / data alignment
+
+Do not summarize robot data by `hours` alone.
+
+Record:
+
+```text
+unique scenes
+objects
+tasks
+embodiments
+operators
+camera setups
+success/failure/recovery distribution
+real/human/sim/generated fractions
+alignment method
+retargeting error
+temporal synchronization
+deduplication / leakage
+curriculum / sampling ratio
+```
+
+High-value current evidence:
+
+- Qwen-RobotManip uses ~38.1K hours across robot, egocentric human and synthesized human→robot data, but emphasizes representation/motion/behavior alignment before scale: https://qwen.ai/blog?id=qwen-robotmanip
+- Rethinking VLA Scaling finds naive heterogeneous robot pooling can cause negative transfer: https://arxiv.org/abs/2602.09722
+
+Open question:
+
+> Does the best robot/human/sim/generated mixture change with model scale and representation capacity?
+
+No universal mixture is currently justified.
+
+---
+
+### P1.2 Quantization as a capability intervention
+
+Low-bit inference should not be evaluated only by average task success.
+
+Current evidence:
+
+- FoldQuantVLA: https://arxiv.org/abs/2609.24433
+- LiteVLA-Edge: https://arxiv.org/abs/2603.03380
+
+Required measurements:
+
+```text
+nominal success
+OOD success
+uncertainty calibration
+unknown/refusal
+rare-event sensitivity
+object identity/permanence
+belief revision
+long-horizon drift
+action smoothness/contact stability
+latency/memory/energy
+```
+
+Keep distinct:
+
+```text
+PTQ
+QAT
+quantization-aware / quantization-conditioned post-training
+```
+
+A quantized model may need additional post-training; that gain must not be attributed to quantization alone.
+
+---
+
+### P1.3 Small→large scaling validity
+
+Mac-M4 experiments will often use 2B/4B/8B proxies.
+
+Required protocol:
+
+```text
+small-model discovery
+→ medium replication
+→ large/frontier counter-check
+```
+
+Track whether the effect changes with:
+
+```text
+parameter count
+active parameters
+MoE routing
+context length
+visual-token budget
+data mixture
+precision
+runtime backend
+```
+
+A 4B result is not a 30B/MoE result by default.
+
+---
+
+### P1.4 Harness attribution
+
+Modern benchmarks can measure a full system rather than the base model.
+
+Ablate:
+
+```text
+base model
++ prompt/protocol
++ external memory
++ visual/perception helper
++ tools/MCP
++ retry/recovery
++ full harness
+```
+
+Track token cost, latency and memory together with capability.
+
+DeepSeek and Qwen make this particularly important because both expose explicit harness/runtime layers.
+
+---
+
+### 3. P2 — understand but do not let systems detail dominate science
+
+Track enough of the following to reproduce feasibility claims:
+
+```text
+data/tensor/pipeline/expert/context parallelism
+network topology
+all-to-all / expert communication
+storage bandwidth
+checkpoint/optimizer size
+custom kernels
+Muon/AdamW variants
+mHC/hyper-connections
+speculative decoding
+multi-token prediction
+```
+
+DeepSeek references:
+
+- DeepEP — https://github.com/deepseek-ai/DeepEP
+- DeepGEMM — https://github.com/deepseek-ai/DeepGEMM
+- DeepSelect — https://github.com/deepseek-ai/DeepSelect
+- 3FS — https://github.com/deepseek-ai/3FS
+
+These affect feasibility and scaling. They are not evidence that a world-state representation is scientifically superior.
+
+---
+
+### 4. Training/post-training high-risk boundaries
+
+The detailed matrix is in [`learning-and-data.md`](learning-and-data.md#topic-research-training-high_risk_boundaries).
+
+Stage 1 now explicitly requires research on:
+
+```text
+partial-success reward
+reward for epistemic correctness
+failure/recovery sampling ratio
+recovery-vs-nominal interference
+world-model trust controlling imagined rollout
+human/sim/robot mixture × model scale
+frozen vs LoRA vs partial vs full tuning
+module-specific learning rates/update frequencies
+slow semantic vs fast motor adaptation
+post-training calibration degradation
+world-capability regression despite task success
+capability loss under distillation
+4B→MoE recipe transfer
+fleet contamination / update admission
+model rollback ↔ persistent-memory compatibility
+```
+
+Important current reward evidence:
+
+- RoboReward constructs calibrated negatives, near-misses and partial-progress outcomes for robotics reward modeling: https://arxiv.org/abs/2601.00675
+- SARM2 uses stage-aware dense reward for long-horizon robot policy improvement: https://arxiv.org/abs/2606.10305
+- TOPReward extracts temporal task-progress signals from VLM token probabilities: https://arxiv.org/abs/2602.19313
+- MERL uses simulator trust to control imagined-data ratio and rollout horizon: https://arxiv.org/abs/2610.16517
+
+No universal failure-data percentage, recovery ratio, real/human/sim mixture or tuning method is currently justified.
+
+---
+
+### 5. Training curriculum itself is part of the scientific comparison
+
+Current Qwen robot systems make this especially visible.
+
+### Qwen-VLA
+
+Official description uses four stages:
+
+```text
+T2A pretraining
+→ continual pretraining
+→ SFT
+→ PPO RL in simulation
+```
+
+Source: https://qwen.ai/blog?id=qwenvla
+
+This means final behavior cannot be attributed to the backbone alone.
+
+### Qwen-RobotManip
+
+Official training uses:
+
+```text
+VLA/VLM dual-stream pretraining at ~9:1
+→ benchmark/generalist SFT
+→ continued VLA+VL co-training during post-training
+```
+
+Source: https://qwen.ai/blog?id=qwen-robotmanip
+
+### Qwen-RobotWorld
+
+Uses a general→expert curriculum combining general image/video priors, human-interaction data and progressive embodied SFT stages including multi-view and cross-domain training.
+
+Source: https://qwen.ai/blog?email_hash=23463b99b62a72f26ed677cc556c44e8&id=qwen-robotworld
+
+Central rule:
+
+```text
+architecture result
+≠ training-curriculum result
+```
+
+---
+
+### 6. Final audit additions beyond the original P0/P1/P2 list
+
+These are not new project stages. They are cross-cutting constraints that should remain visible.
+
+### A. Runtime safety / formal safety interface
+
+Task success can coexist with unsafe behavior.
+
+Track:
+
+```text
+unsafe-success
+risk exposure time
+constraint violations
+collision/force/workspace limits
+safety-layer intervention rate
+recovery after intervention
+```
+
+Current sources:
+
+- VLA safety survey: https://arxiv.org/abs/2604.23775
+- AEGIS / plug-and-play CBF safety layer: https://arxiv.org/abs/2512.11891
+- FEARL / verifiable modular safety: https://arxiv.org/abs/2606.23754
+- ForesightSafety-VLA: https://arxiv.org/abs/2606.27079
+
+A safety filter is not proof that the underlying world model is safe or correct; but deployment evidence without a safety analysis is incomplete.
+
+---
+
+### B. Statistical / reproducibility discipline for real robots
+
+Real-robot evaluation is expensive and noisy.
+
+Required metadata:
+
+```text
+number of trials
+number of seeds/checkpoints
+operator identity / blinding
+initial-state randomization
+hardware/calibration version
+confidence intervals / variance
+failure taxonomy
+selection criterion
+```
+
+Rethinking VLA Scaling introduces a grouped blind ensemble protocol to reduce operator/model-identity bias during real evaluation: https://arxiv.org/abs/2602.09722
+
+One impressive video or one lucky checkpoint is not sufficient evidence.
+
+---
+
+### C. Reward/verifier reliability
+
+A learned reward can itself hallucinate progress or be exploited.
+
+Reward-model evaluation should be independent from policy evaluation and include:
+
+```text
+false-positive success
+near-miss ranking
+stage ordering
+OOD task transfer
+reward hacking
+reward uncertainty
+human agreement
+```
+
+Reward-model improvement and policy improvement are distinct claims.
+
+---
+
+### D. Artifact drift / API routing / benchmark contamination
+
+Preserve exact:
+
+```text
+model/checkpoint/API version
+release date
+API route
+harness version
+runtime/kernel version
+benchmark snapshot
+training-data cutoff/provenance if known
+```
+
+Vendor release plans can change after publication. Current-state claims should prefer the latest official changelog/status page over an older launch announcement.
+
+Example: DeepSeek's 2026-09-10 launch post initially said V4-Pro requests would be routed to V4.1-Flash after Sept 14, while the later API changelog states V4 Pro would continue to be served. Current record must preserve the later status.
+
+DeepSeek launch: https://www.deepseek.com/en/news/deepseek-v4-1-flash/
+DeepSeek API changelog: https://api-docs.deepseek.com/updates/
+
+---
+
+### 7. Stage-1 readiness judgment
+
+The broad map now covers:
+
+```text
+world / observation / identifiability
+representation / state / memory / causality
+active evidence / model discovery
+foundation-model architecture / tokenizer / context / runtime
+training / post-training / data / reward
+edge deployment / simulation / sim2real / validation
+runtime safety / monitoring / rollback
+```
+
+Therefore the recommended project mode is now:
+
+```text
+Stage 1 = incremental freshness + gap maintenance
+Stage 2 = primary method-by-method analysis
+```
+
+Stage 1 should reopen a major category only if new evidence shows that an entire capability class is absent from the map.
+
+Otherwise new work should be attached to an existing surface and tested as a controlled variable.
+
+---
+
+### 8. Highest-priority Stage-2 experiments implied by this audit
+
+1. **Visual-token / FPS ablation** on a tractable open Qwen VLM/VLA proxy.
+2. **Equal-byte long-context vs persistent-memory comparison**.
+3. **Frozen vs LoRA vs partial tuning** under matched robot data.
+4. **BC vs co-training vs future-latent auxiliary vs on-policy distillation**.
+5. **Post-training preservation battery**: task success + permanence + memory revision + causal probes + calibration.
+6. **Quantization before/after post-training** and capability regression.
+7. **Failure/recovery ratio sweep** under fixed total data budget.
+8. **World-model trust vs imagined rollout horizon**.
+9. **Small dense proxy → larger dense/MoE replication**.
+10. **Base model vs harness/memory/tools ablation**.
+
+These experiments are downstream candidates, not Stage-1 conclusions.
+
+</details>
+
+<details>
+<summary>2026-10-15 第二次调研评估：当时意见，当前阶段以全局状态为准</summary>
+
+<a id="topic-research-emerging-reaudit_summary_2026-10-15"></a>
+
+## Stage-1 Re-audit Summary — 2026-10-15
+
+> Dated audit record: 2026-10-15. Its recommendation to make Stage 2 primary was not the subsequent project decision. Stage 1 remains active; see STATUS.md. Read readiness claims below as that audit’s assessment, not a current completeness finding.
+
+This note records the **second-pass audit** triggered by recent EmbodiedJev / AgentRSI / embodied-JEPA / recursive-self-improvement developments and a fresh arXiv/GitHub scan across computer vision, embodied intelligence, physical intelligence, frontier foundation-model engineering and performance optimization.
+
+It supersedes the assumption that the earlier `../PROCESS.md` was the last search pass. It does **not** change Clover's seven-stage lifecycle.
+
+Detailed audits:
+
+- [`foundation-models-and-systems.md`](foundation-models-and-systems.md#topic-research-emerging-jepa_rsi_runtime_2026-10-15)
+- [`foundation-models-and-systems.md`](foundation-models-and-systems.md#topic-research-emerging-cv_embodiment_systems_2026-10-15)
+- [`representation-and-memory.md`](representation-and-memory.md#topic-research-emerging-representation_diagnostics_2026-10-15)
+
+---
+
+### Re-audit conclusion
+
+No missing foundational domain comparable to geometry, memory, causality, identifiability, world-state representation, training or deployment was found.
+
+However, several **fast-moving cross-boundary method families** were underweighted and are now first-class comparison axes:
+
+```text
+1  embodied JEPA / latent predictive control
+2  cross-embodiment latent action representations
+3  test-time policy scaling: verifier / Best-of-N / search
+4  WAM inference-state reuse, verification and staleness
+5  fast-weight / retrieval / gradient / verifier forms of test-time adaptation
+6  recursive self-improvement of model / harness / data / research process
+7  embodied recursive improvement / Real2Sim2Real policy refinement
+8  process-level RSI evaluation, held-out transfer and lineage
+9  generative video foundation models used as perception representations
+10 multi-view geometry-aware world modeling
+11 morphology-conditioned world models / body schema
+12 affordance foundation models / functionality representations
+13 alternative visual-sensing boundary such as event cameras
+14 mechanistic / causal representation diagnostics
+15 manipulation-video continued pretraining as part of WAM design
+16 multi-robot edge serving / SLO scheduling
+17 explicit state + reusable code policy as a counter-hypothesis to always-on VLA/WAM
+```
+
+These belong to existing Stage-1 surfaces. They do not require new lifecycle stages.
+
+---
+
+### High-value current sources added in this pass
+
+#### Embodied JEPA / latent dynamics
+
+- RoboJEPA — https://arxiv.org/abs/2610.10515 · https://github.com/facebookresearch/robo_jepa
+- ThinkJEPA — https://arxiv.org/abs/2603.22281
+- Demo-JEPA — https://arxiv.org/abs/2605.20811
+- LeapBot-WA — https://arxiv.org/abs/2607.23969
+- SkyJEPA — https://arxiv.org/abs/2606.23444
+- Vision-Predictor-Action — https://arxiv.org/abs/2610.15556
+- LeWAM (end-to-end JEPA/action) — https://arxiv.org/abs/2610.12818
+- LeWAM (diffusion-steering MPC) — https://arxiv.org/abs/2610.12407
+
+The two different `LeWAM` papers are a concrete reason to identify methods by exact title + arXiv ID + authors/version rather than acronym alone.
+
+#### Embodiment / action / body
+
+- LAC-WM — https://arxiv.org/abs/2610.10846
+- morphology-conditioned quadrupedal world model — https://arxiv.org/abs/2604.08780
+- diffusion body-schema learning under actuator/body faults — https://arxiv.org/abs/2608.01029
+- AFUN affordance foundation model — https://arxiv.org/abs/2606.02551
+
+#### Test-time adaptation / runtime
+
+- DiVeR — https://arxiv.org/abs/2610.04933
+- RoboTTT — https://arxiv.org/abs/2607.15275
+- RA-VLA — https://arxiv.org/abs/2608.25585
+- MARS — https://arxiv.org/abs/2610.17141 · https://github.com/PKU-VaLuE-Lab/MARS
+- Δ Flow Matching — https://arxiv.org/abs/2610.15794
+- WAMachine — https://arxiv.org/abs/2609.34608
+- AsyncVLA — https://arxiv.org/abs/2602.13476
+- Efficient VLA serving / Robion — https://arxiv.org/abs/2609.12075
+
+#### World-model / visual-representation boundaries
+
+- Thinker-WM — https://arxiv.org/abs/2610.18447
+- EVEWorld — https://arxiv.org/abs/2610.03374
+- RLHND — https://arxiv.org/abs/2610.09455
+- PAIWorld — https://arxiv.org/abs/2606.18375
+- Video Prediction Policy 2 — https://arxiv.org/abs/2610.10270
+- EventCV — https://arxiv.org/abs/2609.21330
+
+#### Recursive self-improvement
+
+- AIDE² — https://arxiv.org/abs/2609.26457
+- RRSI — https://arxiv.org/abs/2609.24972 · https://github.com/google-research/rrsi
+- RSI-Master — https://arxiv.org/abs/2609.35561
+- RSI-Forge — https://arxiv.org/abs/2610.09426
+- RSIGym — https://arxiv.org/abs/2610.10310
+- HELIX — https://arxiv.org/abs/2608.13951
+- Harmony Harness — https://arxiv.org/abs/2610.15150
+- Harness² — https://arxiv.org/abs/2610.14224
+- AReaL-RSI — https://arxiv.org/abs/2610.18083
+- EmbodiRSI — https://arxiv.org/abs/2609.38905
+- RegenHarness — https://arxiv.org/abs/2609.27612
+- Embodied Turing Machines / COAP — https://arxiv.org/abs/2610.12369
+
+---
+
+### GitHub projects classified separately from primary papers
+
+#### EmbodiedJev / 行知
+
+https://github.com/FBddcz/embodied-jev
+
+Classification: `OPEN_SOURCE_PROJECT / ENGINEERING_REFERENCE`.
+
+Useful for:
+
+```text
+MuJoCo + Franka local workbench
+Mac/local API experiments
+controlled same-task model comparison
+trajectory export/replay
+pre-execution simulation checks
+EV1 / EV6 validation workflow ideas
+```
+
+Do not attribute controller-provided candidates, geometry or safety checks to the model itself.
+
+#### AgentRSI
+
+https://github.com/heng526/AgentRSI
+
+Classification: `COMMUNITY_RESEARCH_REPOSITORY`.
+
+Useful for:
+
+```text
+RSI literature / reproduction organization
+append-only ResearchOps evidence records
+robot scoring reports
+research ledger / reducer workflow ideas
+```
+
+Do not treat repository organization as primary scientific evidence for an RSI method.
+
+---
+
+### New non-negotiable distinctions
+
+```text
+probe recoverability ≠ causal use ≠ closed-loop physical consequence
+base VLA ≠ VLA + verifier/search/test-time compute
+cross-embodiment state alignment ≠ cross-embodiment action alignment
+history in KV/context ≠ explicit memory ≠ fast-weight memory
+inference-state reuse ≠ inference-state validity
+fast-path + slow-path ≠ synchronized closed-loop system
+self-editing ≠ recursive self-improvement
+RSI evolve-set gain ≠ held-out/OOD improvement
+model RSI ≠ harness RSI ≠ data RSI ≠ research-process RSI ≠ embodied RSI
+frame RGB ≠ all possible visual sensing
+world dynamics ≠ robot morphology/body dynamics
+object semantics ≠ affordance/function
+single-robot latency ≠ fleet edge-serving SLO reliability
+method acronym/name ≠ stable artifact identity
+```
+
+---
+
+### DeepSeek / Qwen status in this re-audit
+
+No newly verified DeepSeek/Qwen release in this pass requires replacing the current stable watch in:
+
+- [`foundation-models-and-systems.md`](foundation-models-and-systems.md#topic-research-foundation_models-deepseek_qwen)
+- [`foundation-models-and-systems.md`](foundation-models-and-systems.md#topic-research-foundation_models-deepseek_qwen_current_2026-10-15)
+
+The new RSI/runtime evidence **strengthens**, rather than replaces, the existing model-systems rule:
+
+```text
+checkpoint
++
+post-training
++
+runtime/kernel
++
+harness/tools/memory
++
+test-time compute
++
+hardware / serving topology
+→ observed system capability
+```
+
+For DeepSeek/Qwen comparisons, continue recording the exact API/checkpoint, reasoning-effort setting, harness/plugin configuration, external memory/tools and artifact date.
+
+---
+
+### Stage-1 status after the re-audit
+
+Stage 1 remains **coverage-sufficient but freshness-active**.
+
+Recommended operating mode:
+
+```text
+Stage 1: incremental frontier maintenance
+Stage 2: primary method-by-method mechanism analysis
+```
+
+Future additions should change at least one of:
+
+```text
+what information is observable
+what state is represented
+how state is learned / updated
+how action is chosen
+how uncertainty/evidence is handled
+how the system is trained / adapted
+how the runtime changes behavior
+how claims are validated
+```
+
+Otherwise, log the work as a comparator/source rather than expanding the stable ontology.
+
+</details>

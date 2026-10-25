@@ -1,8 +1,8 @@
 <a id="top"></a>
 
-# Perception and identifiability
+# 调研方向：观测、几何、物性与可识别性
 
-Maintained: **2026-10-25** · Current project stage: **Research** ([status](STATUS.md)).
+Maintained: **2026-10-25** · Document stage: **1 — Research** ([status](../STATUS.md)).
 
 World variables, image formation, geometry, hidden physical properties and the limits of visual evidence.
 
@@ -1856,7 +1856,7 @@ Source intake checked through: **2026-10-14**
 
 This is a Stage-1 research inventory. It does **not** propose a Clover architecture.
 
-Its purpose is to deepen one part of [`PERCEPTION.md`](#topic-research-research_state_variables): the real world contains important state that is only weakly visible, becomes informative only through temporal change or intervention, or changes irreversibly under contact.
+Its purpose is to deepen one part of [`perception-and-identifiability.md`](#topic-research-research_state_variables): the real world contains important state that is only weakly visible, becomes informative only through temporal change or intervention, or changes irreversibly under contact.
 
 The central questions are:
 
@@ -1869,7 +1869,7 @@ Which remain better measured through non-visual sensing?
 How should a world model represent irreversible change?
 ```
 
-Use the evidence-route notation from `PERCEPTION.md`:
+Use the evidence-route notation from `perception-and-identifiability.md`:
 
 ```text
 P0  static RGB

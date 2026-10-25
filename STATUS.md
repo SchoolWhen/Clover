@@ -8,28 +8,28 @@ Last updated: **2026-10-25**.
 
 ## Current project decision
 
-**Stage 1 — Research / Survey & Evidence Collection is ACTIVE.** No representation, backbone or core algorithm is frozen. The 2026-10-15 recommendations to make Stage 2 primary remain dated assessments in PROCESS.md; they were not an approved stage transition.
+**Stage 1 — Research / Survey & Evidence Collection is ACTIVE.** No representation, backbone or core algorithm is frozen. The 2026-10-15 recommendations to make Stage 2 primary remain [dated assessments in Stage 1](01-research/README.md#topic-research-stage1_final_audit_2026-10-15); they were not an approved stage transition.
 
 The 2026-10-19 decision remains in force: the CPU-only implementation line is frozen at its current results. It resumes only after the embodied-intelligence line produces a new, complete frontier breakthrough. This repository's main line is robotic-brain research.
 
 Apple M4 remains the local development reference; no target real robot is currently available. Final robot hardware is open. No new algorithm, experiment or deployment is reported in this update.
 
-## 本轮进展与下一步 — 2026-10-25
+## 当前进展与下一步 — 2026-10-25
 
 
 | 事项 | 当前状态 | 入口 |
 |---|---|---|
-| 仓库结构 | 研究正文收拢为 16 份根目录当前文档，旧导航和新闻快照退出当前树；历史保留在 Git | [主页](README.zh-CN.md) · [维护规则](AGENTS.md) |
-| 被动镜面视觉 | 新增 Ref-NeRF / NeRFactor；区分光度拟合与唯一物理分解，以及测量先验 | [观测](PERCEPTION.md#reflection-evidence) |
-| 因果可识别性 | 新增 BISCUIT 与真实光学 CRL 负结果；修正“所有被动视频不可能”的过度推断 | [因果](ACTION.md#causal-identification-evidence) |
-| 压缩与记忆 | 新增 FastV / FrameFusion；固定版本、配置与时延范围，保留未知未来任务的证据缺口 | [表示](REPRESENTATION.md#compression-evidence) · [评估](EVALUATION.md#evidence-retention-diagnostics) |
-| 引用与阅读深度 | 6 篇新增一手文献，逐条标明核读部分、V/L来源与复现边界；继承文献不自动升级为新核验 | [来源](SOURCES.md#verified-additions) |
+| 仓库结构 | 跨阶段约束留在根目录；七个阶段各有目录，第一阶段按研究方向平铺；历史保留在 Git | [主页](README.zh-CN.md) · [维护规则](AGENTS.md) |
+| 被动镜面视觉 | 新增 Ref-NeRF / NeRFactor；区分光度拟合与唯一物理分解，以及测量先验 | [观测](01-research/perception-and-identifiability.md#reflection-evidence) |
+| 因果可识别性 | 新增 BISCUIT 与真实光学 CRL 负结果；修正“所有被动视频不可能”的过度推断 | [因果](01-research/causality-and-active-perception.md#causal-identification-evidence) |
+| 压缩与记忆 | 新增 FastV / FrameFusion；固定版本、配置与时延范围，保留未知未来任务的证据缺口 | [表示](01-research/representation-and-memory.md#compression-evidence) · [评估](01-research/evaluation-and-benchmarks.md#evidence-retention-diagnostics) |
+| 引用与阅读深度 | 6 篇新增一手文献，逐条标明核读部分、V/L来源与复现边界；继承文献不自动升级为新核验 | [来源](01-research/sources-and-resources.md#verified-additions) |
 
 **未完成的科学工作：** RGB-only 可变形/颗粒状态；自然真实机器人视频的可靠可识别性；压缩后未来任务的证据保留与恢复；封闭原文全文核读。下一步继续定向调研和反例登记。原有跨主题问题仍见下文；这里没有宣布阶段退出、实验通过或算法达标。
 
 ## Current reading route
 
-[Contract](SSOT.md) → [research map and current queue](RESEARCH.md#current-collection-queue) → [research questions](QUESTIONS.md) → the relevant topic. [SOURCES.md](SOURCES.md#verified-additions) owns source discovery; [PROCESS.md](PROCESS.md) owns lifecycle/templates; [AGENTS.md](AGENTS.md) defines document ownership.
+[Contract](SSOT.md) → [research map and current queue](01-research/README.md#current-collection-queue) → [research questions](01-research/research-questions.md) → the relevant topic. [`01-research/sources-and-resources.md`](01-research/sources-and-resources.md#verified-additions) owns source discovery; [`PROCESS.md`](PROCESS.md) owns lifecycle/templates; [`AGENTS.md`](AGENTS.md) defines document ownership.
 
 ## Remaining cross-topic collection questions
 
@@ -71,10 +71,10 @@ Clover has not yet publicly demonstrated a validated general real-world visual w
 
 These remain research targets.
 
-## Repository maintenance — 2026-10-25
+## Repository structure — 2026-10-25
 
-- Scientific research text is consolidated into root-level canonical topic documents. Exact source URLs, evidence levels, qualifications and dated decisions remain in the current documents.
-- Redundant navigation pages and timestamped news snapshots are removed from the current tree. The old tree, including unverified discovery signals, remains at Git commit `126e32bcb7ebecc366ed94d7961a287849e82f91`; no news archive is copied back into the reading path.
-- The 2026-10-15 readiness audits are preserved as dated assessments in [PROCESS.md](PROCESS.md). Their Stage-2 recommendation does not override the current Stage-1 decision.
-- Repository cleanup is not scientific validation. No experiment, robot deployment, source-wide revalidation or new algorithm result is claimed by this edit.
-- Continue updating a topic in place; no new dated supplements or per-subproblem progress files.
+- Root: shared research contract, agent rules, lifecycle, global status, bilingual homepage and repository metadata.
+- `01-research/`: one current file per research direction, plus its substantive overview; benchmark/source surveys remain Research material.
+- `02-analysis/` through `07-reflection/`: stage-owned templates/current records. Existing candidate ideas live in Stage 4 without being adopted; directory creation is not stage completion.
+- Update the existing stage/direction file in place. Keep earlier states in Git rather than dated progress files, old-path shells or an archive tree.
+- This layout supersedes the previous all-root topic layout. No research claim, source-reading depth, experiment result or active-stage decision changes through the move.

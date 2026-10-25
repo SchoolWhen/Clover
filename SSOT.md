@@ -2,7 +2,7 @@
 
 # Research contract
 
-Maintained: **2026-10-25**. Current progress is maintained in [STATUS.md](STATUS.md).
+Maintained: **2026-10-25**. Current progress is maintained in [`STATUS.md`](STATUS.md).
 
 <a id="topic-ssot"></a>
 <a id="topic-docs-research-question"></a>
@@ -21,7 +21,7 @@ The target is an embodied computational system that maintains and uses knowledge
 
 > **Build a general-purpose robotic brain that forms an understanding of the real world through vision alone, then uses that understanding to decide and act.**
 
-The intended functional loop is visual experience → world understanding → decision → capability/tool selection → execution → new visual experience. This describes responsibilities, not a frozen network or module topology. Candidate decomposition and authority mechanisms live in [HYPOTHESES.md](HYPOTHESES.md#topic-docs-architecture-readme).
+The intended functional loop is visual experience → world understanding → decision → capability/tool selection → execution → new visual experience. This describes responsibilities, not a frozen network or module topology. Candidate decomposition and authority mechanisms live in [`04-innovation/README.md`](04-innovation/README.md#topic-docs-architecture-readme).
 
 <a id="topic-docs-what-is-understanding"></a>
 
@@ -83,7 +83,7 @@ A deployed RGB model trained with language, actions, measured material priors or
 
 1. **Protect the question, not an old answer.** CPU-first, field crystallization, visual charge, CSP/SEP, licence envelopes, LCPS/GCPS, Visual World Compiler, Evidence Replay, explicit/latent/object-centric state, geometry, fields, Transformers and vendor backbones are candidate answers or resources.
 2. **Evidence before commitment.** Compare the strongest explanations before freezing a representation, backbone, objective or training recipe. Historical Clover ideas may be revised, rejected or removed when evidence changes.
-3. **Research before innovation.** Broad Research → method Analysis → comparative Synthesis → demonstrated unresolved gap → original hypothesis and falsifier → Implementation → Evaluation → Reflection. [PROCESS.md](PROCESS.md) defines the seven stages. Small diagnostics are allowed earlier only when needed to answer a research question.
+3. **Research before innovation.** Broad Research → method Analysis → comparative Synthesis → demonstrated unresolved gap → original hypothesis and falsifier → Implementation → Evaluation → Reflection. [`PROCESS.md`](PROCESS.md) defines the seven stages. Small diagnostics are allowed earlier only when needed to answer a research question.
 4. **No framework stacking.** For an external method, record the problem, demonstrated/undemonstrated capability, mechanism, input/training provenance, observation assumptions, resources and competing explanation before considering adoption.
 5. **Benchmarks are instruments.** Use shortcut-resistant, persistent/streaming, causal, active-vision, real-transfer and embodied evidence to distinguish claims; never redefine understanding around the easiest score.
 6. **Facts and hypotheses stay separate.** Distinguish implemented, tested, validated, externally reported, hypothesized, planned, open and superseded. Source records retain exact URLs, check dates and reading depth.
@@ -96,9 +96,9 @@ A deployed RGB model trained with language, actions, measured material priors or
 
 ## Current operating posture
 
-**Stage 1 — Research remains active.** [STATUS.md](STATUS.md) is the only progress/stage authority; dated audit recommendations do not advance the project automatically. Current work maps relevant fields, canonical/current papers, official code/checkpoints, data/benchmarks, evidence provenance, limitations and missing areas. Baseline candidates are maintained without making expensive reproduction the immediate objective.
+[`STATUS.md`](STATUS.md) is the only progress/stage authority; dated audit recommendations and directory creation do not advance the project automatically. The numbered stage directories own their current material and templates; this scientific contract applies throughout the lifecycle.
 
-Read [RESEARCH.md](RESEARCH.md), then the relevant canonical topic and [SOURCES.md](SOURCES.md). Findings update those documents in place. Candidate Clover mechanisms remain in [HYPOTHESES.md](HYPOTHESES.md) until comparisons, prior-art checks and experiments justify promotion.
+Read [`01-research/README.md`](01-research/README.md), then the relevant canonical topic and [`01-research/sources-and-resources.md`](01-research/sources-and-resources.md). Findings update those documents in place. Candidate Clover mechanisms remain in [`04-innovation/README.md`](04-innovation/README.md) until comparisons, prior-art checks and experiments justify promotion.
 
 <a id="topic-docs-glossary"></a>
 

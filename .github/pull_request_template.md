@@ -21,4 +21,9 @@
 - [ ] STATUS updated if public capability changed
 - [ ] Relevant decision section in PROCESS.md updated if direction/SSOT changed
 
-- [ ] Existing topic document updated in place; no dated supplement, duplicate index or per-question progress file added
+- [ ] Existing stage/direction document updated in place; no dated supplement, duplicate index or per-question progress file added
+
+## Owning stage and direction
+
+Stage directory:
+Direction document:

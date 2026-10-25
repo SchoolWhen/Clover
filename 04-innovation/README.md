@@ -1,12 +1,91 @@
 <a id="top"></a>
 
-# Candidate hypotheses
+# 第4阶段：Innovation / 创新假设
 
-Maintained: **2026-10-25** · Current project stage: **Research** ([status](STATUS.md)).
+Maintained: **2026-10-25**.
+
+本阶段必须遵守根目录的 [研究契约](../SSOT.md)、[agent 规则](../AGENTS.md) 和 [全局流程](../PROCESS.md)。当前项目阶段由 [`../STATUS.md`](../STATUS.md) 唯一确定；目录存在不代表该阶段已启动或产出已通过。
+
+## 当前状态与归属
+
+候选想法可以登记；当前没有被采纳或冻结的核心假设。目录内的历史想法不代表通过研究闸门。
+
+本阶段先在本文件内维护结构化条目；需要多个方向时按方向命名文件，直接更新其最新状态。每项工作通过来源、方法、假设或运行 ID 连接其他阶段的证据，不复制整篇上游文档，也不生成日期补丁或每次进展的新文件。
+
+<a id="topic-research-innovation"></a>
+
+## Stage 4 — Innovation
+
+### Original Hypotheses and Algorithm Design
+
+Source record updated: 2026-10-14
+
+**Status:** IDEAS MAY BE RECORDED; NO CORE HYPOTHESIS IS CURRENTLY FROZEN.
+
+Innovation is where Clover may finally propose its own representation, algorithm or learning principle. It must be downstream of Research, Analysis and Synthesis.
+
+### Innovation record template
+
+```text
+Idea name:
+Status: IDEA / HYPOTHESIS / TESTABLE / REJECTED / SUPERSEDED
+
+Observed gap:
+Evidence for the gap:
+Existing approaches considered:
+Why existing approaches appear insufficient:
+
+Original hypothesis:
+Mathematical statement:
+State / representation:
+Learning signal:
+Update rule:
+Memory rule:
+Uncertainty semantics:
+Action relationship:
+
+Prediction:
+Falsifier / kill condition:
+Minimal discriminating experiment:
+Required baseline:
+Expected advantage:
+Expected cost / risk:
+```
+
+### Rules
+
+- Novelty must be algorithmic or scientific, not merely a new arrangement of named modules.
+- If a new variable is introduced, every dependent equation and definition must be updated consistently.
+- A hypothesis should explain an observed failure, not merely sound elegant.
+- Historical Clover concepts may appear here, but only as candidates.
+- An idea does not become the project answer until Evaluation supports it against strong alternatives.
+
+### Historical idea bucket
+
+Examples of historical concepts that may be re-examined here include field/crystallization, CSP/SEP, evidence state, licence/auditability, evidence replay, growth/revision, visual world compiler and related ideas.
+
+Their historical existence is not evidence of correctness.
+
+### Preferred innovation form
+
+```text
+field evidence
+→ unresolved contradiction
+→ simplest new hypothesis capable of resolving it
+→ mathematical formulation
+→ experiment that can kill it
+```
+
+This stage is the proper home for “our own ideas.”
+
+---
+
+## 候选假设与既有记录
+
 
 Historical and current candidate ideas with their falsifiers. Inclusion is not adoption, implementation or validation.
 
-This is the canonical topic document. Update it in place; source-level dates and reading-depth labels below qualify the evidence, not the maintenance date.
+以下记录维护候选假设的当前状态；来源日期限定其证据，不能把本次结构调整当作新验证。
 
 ## Contents
 

@@ -1,8 +1,8 @@
 <a id="top"></a>
 
-# Sources, methods and resources
+# 调研方向：论文来源、代码、数据与资源
 
-Maintained: **2026-10-25** · Current project stage: **Research** ([status](STATUS.md)).
+Maintained: **2026-10-25** · Document stage: **1 — Research** ([status](../STATUS.md)).
 
 Primary-source map, papers, code, datasets and discovery signals. Read evidence labels and source dates before using any claim.
 
@@ -16,12 +16,12 @@ This is the canonical topic document. Update it in place; source-level dates and
 
 | 工作 | 固定版本 / 一手论文 | 官方复现资源 | 证据边界与主题落点 |
 |---|---|---|---|
-| Ref-NeRF | CVPR 2022：[论文](https://openaccess.thecvf.com/content/CVPR2022/html/Verbin_Ref-NeRF_Structured_View-Dependent_Appearance_for_Neural_Radiance_Fields_CVPR_2022_paper.html) | [项目](https://dorverbin.github.io/refnerf/) · [MultiNeRF](https://github.com/google-research/multinerf) | 摘要/项目/代码说明核对；posed RGB 多视图，非严格 V0；渲染改进不是物理分解唯一性。[观测](PERCEPTION.md#reflection-evidence) |
-| NeRFactor | TOG / SIGGRAPH Asia 2021：[论文](https://arxiv.org/abs/2106.01970) | [项目](https://xiuming.info/projects/nerfactor/) · [代码](https://github.com/google/nerfactor) | 摘要/项目核对；光度拟合 L0 加测量 BRDF 先验 L4；不能称全链视觉自监督。[观测](PERCEPTION.md#reflection-evidence) |
-| BISCUIT | UAI 2023：[PMLR 216](https://proceedings.mlr.press/v216/lippe23a.html) | [项目](https://phlippe.github.io/BISCUIT/) · [代码/数据](https://github.com/phlippe/BISCUIT) | 核对主文 §2–3；模拟、动作/regime L3，未知目标不消除辅助结构。[因果](ACTION.md#causal-identification-evidence) |
-| Sanity Checking Causal Representation Learning on a Simple Real-World System | ICML 2025：[PMLR 267](https://proceedings.mlr.press/v267/gamella25a.html) · [正文 v2](https://arxiv.org/html/2502.20099v2) | [代码](https://github.com/simonbing/CRLSanityCheck) · [Causal Chamber](https://github.com/juangamella/causal-chamber) | 核读 §2/§3.1/讨论；真实光学混合、合成因果控制，部分设置含 L4；选定方法的负结果不推广为所有方法不可能。[因果](ACTION.md#causal-identification-evidence) |
-| FastV | ECCV 2024：[论文 v3](https://arxiv.org/abs/2403.06764v3) | [代码](https://github.com/pkunlp-icler/FastV) | 核读 §4.2/§5/表1与4；FLOPs 和实测时延配置不同；VLM 含 L2。[压缩](REPRESENTATION.md#compression-evidence) |
-| FrameFusion | ICCV 2025：[论文 v2](https://arxiv.org/abs/2501.01986v2) | [代码](https://github.com/thu-nics/FrameFusion) | 核读 §5.1/§5.3–5.4；视频+文本/部分字幕，L2；token budget/端到端时延/版本须对应。[压缩](REPRESENTATION.md#compression-evidence) |
+| Ref-NeRF | CVPR 2022：[论文](https://openaccess.thecvf.com/content/CVPR2022/html/Verbin_Ref-NeRF_Structured_View-Dependent_Appearance_for_Neural_Radiance_Fields_CVPR_2022_paper.html) | [项目](https://dorverbin.github.io/refnerf/) · [MultiNeRF](https://github.com/google-research/multinerf) | 摘要/项目/代码说明核对；posed RGB 多视图，非严格 V0；渲染改进不是物理分解唯一性。[观测](perception-and-identifiability.md#reflection-evidence) |
+| NeRFactor | TOG / SIGGRAPH Asia 2021：[论文](https://arxiv.org/abs/2106.01970) | [项目](https://xiuming.info/projects/nerfactor/) · [代码](https://github.com/google/nerfactor) | 摘要/项目核对；光度拟合 L0 加测量 BRDF 先验 L4；不能称全链视觉自监督。[观测](perception-and-identifiability.md#reflection-evidence) |
+| BISCUIT | UAI 2023：[PMLR 216](https://proceedings.mlr.press/v216/lippe23a.html) | [项目](https://phlippe.github.io/BISCUIT/) · [代码/数据](https://github.com/phlippe/BISCUIT) | 核对主文 §2–3；模拟、动作/regime L3，未知目标不消除辅助结构。[因果](causality-and-active-perception.md#causal-identification-evidence) |
+| Sanity Checking Causal Representation Learning on a Simple Real-World System | ICML 2025：[PMLR 267](https://proceedings.mlr.press/v267/gamella25a.html) · [正文 v2](https://arxiv.org/html/2502.20099v2) | [代码](https://github.com/simonbing/CRLSanityCheck) · [Causal Chamber](https://github.com/juangamella/causal-chamber) | 核读 §2/§3.1/讨论；真实光学混合、合成因果控制，部分设置含 L4；选定方法的负结果不推广为所有方法不可能。[因果](causality-and-active-perception.md#causal-identification-evidence) |
+| FastV | ECCV 2024：[论文 v3](https://arxiv.org/abs/2403.06764v3) | [代码](https://github.com/pkunlp-icler/FastV) | 核读 §4.2/§5/表1与4；FLOPs 和实测时延配置不同；VLM 含 L2。[压缩](representation-and-memory.md#compression-evidence) |
+| FrameFusion | ICCV 2025：[论文 v2](https://arxiv.org/abs/2501.01986v2) | [代码](https://github.com/thu-nics/FrameFusion) | 核读 §5.1/§5.3–5.4；视频+文本/部分字幕，L2；token budget/端到端时延/版本须对应。[压缩](representation-and-memory.md#compression-evidence) |
 
 检索词：`BISCUIT Causal Representation Learning Binary Interactions real world robot`；`Ref-NeRF Structured View-Dependent Appearance`；`NeRFactor shape reflectance unknown illumination`；`Sanity Checking Causal Representation Learning on a Simple Real-World System`；`FastV ECCV 2024`；`FrameFusion video token reduction`。检索来源为一手会议库、论文正文/摘要、作者项目和官方代码。未逐篇重审附录证明，未重验继承资料的全部链接。
 
@@ -57,7 +57,7 @@ Evidence labels:
 
 A source appearing here does **not** mean its mechanism is adopted.
 
-Domain-level synthesis now lives in [`../dossiers/README.md`](RESEARCH.md).
+Domain-level synthesis now lives in [`README.md`](README.md).
 
 ---
 
@@ -65,15 +65,15 @@ Domain-level synthesis now lives in [`../dossiers/README.md`](RESEARCH.md).
 
 | Source | URL | Evidence | What it constrains | Clover landing |
 |---|---|---|---|---|
-| POMDPs in Robotics survey | https://arxiv.org/abs/2209.10342 | `PRIMARY_PAPER` | Real robot state is often partially observable; belief/state uncertainty is a first-class decision variable. | `RESEARCH.md` §1; `PERCEPTION.md` |
+| POMDPs in Robotics survey | https://arxiv.org/abs/2209.10342 | `PRIMARY_PAPER` | Real robot state is often partially observable; belief/state uncertainty is a first-class decision variable. | `README.md` §1; `perception-and-identifiability.md` |
 | Probabilistic Robotics | https://mitpress.mit.edu/9780262201629/probabilistic-robotics/ | `BACKGROUND_REFERENCE` | Bayesian state estimation, localization and mapping under uncertainty. | `R-A`; `R-B` |
-| Bajcsy, Active Perception | https://ieeexplore.ieee.org/abstract/document/5968 | `BACKGROUND_REFERENCE` | Perception includes selecting sensing actions to gain information. | `ACTION.md`; V3 protocol |
-| Spelke et al., Origins of Knowledge | https://pubmed.ncbi.nlm.nih.gov/1454901/ | `BACKGROUND_REFERENCE` | Continuity and solidity are useful object/physics research dimensions. Companion full text read 2026-10-20: Spelke (1994) "Initial knowledge: six suggestions", Cognition 50:431–445, states the object-domain principles as **cohesion, continuity, contact** — and explicitly *not* gravity or inertia (rationale: initial knowledge captures what is most *true*, not most obvious); looking-time knowledge ≠ reaching knowledge (task-specificity caveat). | `PERCEPTION.md`; 1992 full text itself still paywalled (abstract-level) |
-| Baillargeon, Spelke & Wasserman 1985 — drawbridge | https://doi.org/10.1016/0010-0277(85)90008-3 | `BACKGROUND_REFERENCE` | 5-month-olds (n=21) look longer when a screen rotates *through* a hidden box than when it stops at it; control (n=22, box beside the screen) rules out rotation-length preference. Primary abstract read 2026-10-20; full text closed-access. | `PERCEPTION.md`; methodological ancestor of violation-of-expectation evaluation — must be paired with the perceptual-novelty counter-hypothesis (impossible event is more similar to habituation) |
+| Bajcsy, Active Perception | https://ieeexplore.ieee.org/abstract/document/5968 | `BACKGROUND_REFERENCE` | Perception includes selecting sensing actions to gain information. | `causality-and-active-perception.md`; V3 protocol |
+| Spelke et al., Origins of Knowledge | https://pubmed.ncbi.nlm.nih.gov/1454901/ | `BACKGROUND_REFERENCE` | Continuity and solidity are useful object/physics research dimensions. Companion full text read 2026-10-20: Spelke (1994) "Initial knowledge: six suggestions", Cognition 50:431–445, states the object-domain principles as **cohesion, continuity, contact** — and explicitly *not* gravity or inertia (rationale: initial knowledge captures what is most *true*, not most obvious); looking-time knowledge ≠ reaching knowledge (task-specificity caveat). | `perception-and-identifiability.md`; 1992 full text itself still paywalled (abstract-level) |
+| Baillargeon, Spelke & Wasserman 1985 — drawbridge | https://doi.org/10.1016/0010-0277(85)90008-3 | `BACKGROUND_REFERENCE` | 5-month-olds (n=21) look longer when a screen rotates *through* a hidden box than when it stops at it; control (n=22, box beside the screen) rules out rotation-length preference. Primary abstract read 2026-10-20; full text closed-access. | `perception-and-identifiability.md`; methodological ancestor of violation-of-expectation evaluation — must be paired with the perceptual-novelty counter-hypothesis (impossible event is more similar to habituation) |
 | Physics for infants review | https://pubmed.ncbi.nlm.nih.gov/26302470/ | `BACKGROUND_REFERENCE` | Reviews continuity, solidity, cohesion and object/substance reasoning. | Benchmark interpretation; not a mandate to copy human cognition |
-| Kaelbling, Littman & Cassandra 1998 — POMDP | https://doi.org/10.1016/S0004-3702(98)00023-X | `PRIMARY_PAPER` | Belief state is a sufficient statistic for history; optimal behaviour is a policy over beliefs; information-gathering actions are valued inside the value function (tiger problem: listening is provably optimal under uncertainty). Full text read 2026-10-19 (see [`RESEARCH.md`](RESEARCH.md#topic-survey_breadth) Axis A). | `PERCEPTION.md`; belief/licence discipline precedent — but assumes a complete, correct, enumerative model; no model learning, no vision |
+| Kaelbling, Littman & Cassandra 1998 — POMDP | https://doi.org/10.1016/S0004-3702(98)00023-X | `PRIMARY_PAPER` | Belief state is a sufficient statistic for history; optimal behaviour is a policy over beliefs; information-gathering actions are valued inside the value function (tiger problem: listening is provably optimal under uncertainty). Full text read 2026-10-19 (see [`README.md`](README.md#topic-survey_breadth) Axis A). | `perception-and-identifiability.md`; belief/licence discipline precedent — but assumes a complete, correct, enumerative model; no model learning, no vision |
 | Khemakhem et al. 2020 — iVAE / nonlinear ICA identifiability | http://proceedings.mlr.press/v108/khemakhem20a.html | `PRIMARY_PAPER` | Learned latent state is identifiable (up to the transformations stated in the respective theorems) under an observed auxiliary variable modulating a factorised exponential-family prior; this is a sufficient-condition result, not a necessity theorem for every passive-video setting; unconditional latent models are provably non-identifiable. Corrigendum: the discrete-observation claim was retracted. Full text read 2026-10-19. | `R-F` theory background; every claimed world variable must name its auxiliary structure (time / action / multi-view) and its remaining equivalence class |
-| Battaglia, Hamrick & Tenenbaum 2013 — intuitive physics engine | https://pmc.ncbi.nlm.nih.gov/articles/PMC3831455/ | `PRIMARY_PAPER` | Human physical judgments across 5 experiments are fit by approximate probabilistic simulation over an inferred scene distribution (uncertainty parameters σ/φ/μ; ~3–7 effective samples), including human illusions a ground-truth model misses. Full text read 2026-10-19. | `PERCEPTION.md`; also §8 — named rival to the queryable-state hypothesis; scene inputs were ground-truth-based, not estimated from pixels |
+| Battaglia, Hamrick & Tenenbaum 2013 — intuitive physics engine | https://pmc.ncbi.nlm.nih.gov/articles/PMC3831455/ | `PRIMARY_PAPER` | Human physical judgments across 5 experiments are fit by approximate probabilistic simulation over an inferred scene distribution (uncertainty parameters σ/φ/μ; ~3–7 effective samples), including human illusions a ground-truth model misses. Full text read 2026-10-19. | `perception-and-identifiability.md`; also §8 — named rival to the queryable-state hypothesis; scene inputs were ground-truth-based, not estimated from pixels |
 
 ---
 
@@ -81,7 +81,7 @@ Domain-level synthesis now lives in [`../dossiers/README.md`](RESEARCH.md).
 
 | Source | URL | Evidence | Demonstrates | Does not establish | Clover landing |
 |---|---|---|---|---|---|
-| Multiple View Geometry | https://www.robots.ox.ac.uk/~vgg/hzbook/ | `BACKGROUND_REFERENCE` | Projective/multi-view geometry has explicit mathematical structure. | Semantics, physics, causality. | `PERCEPTION.md` |
+| Multiple View Geometry | https://www.robots.ox.ac.uk/~vgg/hzbook/ | `BACKGROUND_REFERENCE` | Projective/multi-view geometry has explicit mathematical structure. | Semantics, physics, causality. | `perception-and-identifiability.md` |
 | ORB-SLAM3 paper | https://arxiv.org/abs/2007.11898 | `PRIMARY_PAPER` | Explicit pose/map/trajectory estimation, relocalization, multi-map (Atlas) reuse across mono/stereo/RGB-D × visual/visual-inertial; stereo-inertial EuRoC ATE ≈3.5 cm, multi-session 2.6–3.2× better than VINS-Mono; accuracy thesis: exploiting short/mid/long-term **and** multi-map data association beats front-end choices. Full text read 2026-10-20. | Open-world world understanding; named failure frontier: low texture (its stated main failure case), dynamic objects (outliers only, never state), pure rotation blocks monocular depth, IMU init needs gravity/roll-pitch excitation. | Classical baseline; `R-B` — degrade licences, never hallucinate state, exactly in its failure regimes |
 | ORB-SLAM3 code | https://github.com/UZ-SLAMLab/ORB_SLAM3 | `OPEN_SOURCE` | Reproducible SLAM baseline. | — | Baseline setup |
 | RAFT paper | https://arxiv.org/abs/2003.12039 | `PRIMARY_PAPER` | Strong dense optical flow / temporal correspondence. | Identity, permanence, causal state. | Motion baseline; `R-B` |
@@ -89,7 +89,7 @@ Domain-level synthesis now lives in [`../dossiers/README.md`](RESEARCH.md).
 | DROID-SLAM paper | https://arxiv.org/abs/2108.10869 | `PRIMARY_PAPER` | Learned recurrent correspondence + differentiable dense bundle adjustment (Gauss–Newton over poses and per-pixel inverse depth); one model across mono/stereo/RGB-D; zero tracking failures on TartanAir/EuRoC/TUM-RGBD (EuRoC mono ATE 2.2 cm); ablation: removing DBA from training makes the system unstable. Full text read 2026-10-19. | Pose + dense depth only — no object/physical state; training is `L4` (synthetic TartanAir, ground-truth pose/depth supervision); pinhole intrinsics assumed known. | Learned-geometry baseline; `R-B` — the learned front-end did not replace geometric optimisation |
 | DROID-SLAM code | https://github.com/princeton-vl/DROID-SLAM | `OPEN_SOURCE` | Reproducible learned-SLAM baseline. | — | Baseline setup |
 | Nah, Kim & Lee 2017 — dynamic scene deblurring | https://openaccess.thecvf.com/content_cvpr_2017/html/Nah_Deep_Multi-Scale_Convolutional_CVPR_2017_paper.html | `PRIMARY_PAPER` | Multi-scale CNN restores sharp images from single motion-blurred photos without kernel estimation (PSNR 29.23 on the introduced GoPro benchmark, SOTA at publication). Verified 2026-10-20. | Restoration, not state estimation; GoPro "blur" is synthesised by averaging high-fps frames — an approximation of true long-exposure blur, and GoPro-trained models transfer imperfectly to real blur (RealBlur evidence). | Axis-D motion-blur boundary anchor: blurred RGB is photometrically repairable only insofar as the blur physics are invertible by dataset construction |
-| Bijelic et al. 2020 — seeing through fog | https://openaccess.thecvf.com/content_CVPR_2020/html/Bijelic_Seeing_Through_Fog_Without_Seeing_Fog_Deep_Multimodal_Sensor_Fusion_CVPR_2020_paper.html | `PRIMARY_PAPER` | Documents how RGB detection degrades in fog/snow/rain relative to lidar/radar/gated-NIR (100k-label multimodal dataset, >10,000 km + fog chamber); entropy-driven fusion survives by falling back to non-RGB sensors. Bibliographic + abstract verified 2026-10-19. | **Not vision-alone evidence** — multimodal by design; usable only as an adverse-condition boundary / falsifier reference. | Observation-physics counter-anchor ([`RESEARCH.md`](RESEARCH.md#topic-survey_breadth) Axis D); any adverse-condition claim must state its observation regime |
+| Bijelic et al. 2020 — seeing through fog | https://openaccess.thecvf.com/content_CVPR_2020/html/Bijelic_Seeing_Through_Fog_Without_Seeing_Fog_Deep_Multimodal_Sensor_Fusion_CVPR_2020_paper.html | `PRIMARY_PAPER` | Documents how RGB detection degrades in fog/snow/rain relative to lidar/radar/gated-NIR (100k-label multimodal dataset, >10,000 km + fog chamber); entropy-driven fusion survives by falling back to non-RGB sensors. Bibliographic + abstract verified 2026-10-19. | **Not vision-alone evidence** — multimodal by design; usable only as an adverse-condition boundary / falsifier reference. | Observation-physics counter-anchor ([`README.md`](README.md#topic-survey_breadth) Axis D); any adverse-condition claim must state its observation regime |
 
 ---
 
@@ -97,9 +97,9 @@ Domain-level synthesis now lives in [`../dossiers/README.md`](RESEARCH.md).
 
 | Source | URL | Evidence | Demonstrates | Open contradiction | Clover landing |
 |---|---|---|---|---|---|
-| DINOv3 research | https://ai.meta.com/research/publications/dinov3/ | `OFFICIAL_PROJECT` | Large-scale label-free image SSL; strong frozen dense features. | How much world structure still requires time/state? | `REPRESENTATION.md`; generic visual baseline |
+| DINOv3 research | https://ai.meta.com/research/publications/dinov3/ | `OFFICIAL_PROJECT` | Large-scale label-free image SSL; strong frozen dense features. | How much world structure still requires time/state? | `representation-and-memory.md`; generic visual baseline |
 | DINOv3 paper | https://arxiv.org/abs/2508.10104 | `PRIMARY_PAPER` | 7B-scale SSL, 1.7B-image training, broad dense-task performance. | Static representation vs persistent world model. | Baseline/probing |
-| DINOv3 code | https://github.com/facebookresearch/dinov3 | `OPEN_SOURCE` | Current reproducible Meta SSL baseline. | — | `SOURCES.md` |
+| DINOv3 code | https://github.com/facebookresearch/dinov3 | `OPEN_SOURCE` | Current reproducible Meta SSL baseline. | — | `sources-and-resources.md` |
 | DINOv2 paper | https://arxiv.org/abs/2304.07193 | `PRIMARY_PAPER` | Historical predecessor and established SSL baseline. | Superseded as primary current static SSL comparator by DINOv3. | Historical comparison |
 
 ---
@@ -110,7 +110,7 @@ Domain-level synthesis now lives in [`../dossiers/README.md`](RESEARCH.md).
 |---|---|---|---|---|---|
 | V-JEPA 2 research | https://ai.meta.com/research/publications/v-jepa-2-self-supervised-video-models-enable-understanding-prediction-and-planning/ | `OFFICIAL_PROJECT` | Web-scale video SSL plus small robot post-training can support planning. | Does latent predictive state replace explicit state? | `R-C`; `R-G` |
 | V-JEPA 2 paper | https://arxiv.org/abs/2506.09985 | `PRIMARY_PAPER` | Understanding, anticipation and action-conditioned planning. | What is encoded and how persistent is it? | Baseline/probing |
-| V-JEPA 2 code | https://github.com/facebookresearch/vjepa2 | `OPEN_SOURCE` | Reproducible pretrained baseline. | — | `SOURCES.md` |
+| V-JEPA 2 code | https://github.com/facebookresearch/vjepa2 | `OPEN_SOURCE` | Reproducible pretrained baseline. | — | `sources-and-resources.md` |
 | V-JEPA 2.1 | https://arxiv.org/abs/2603.14482 | `PRIMARY_PAPER` | Dense, spatially structured and temporally consistent SSL features. | Dense latent vs explicit/entity state. | `R-C` |
 | Interpreting Physics in Video World Models | https://ai.meta.com/research/publications/interpreting-physics-in-video-world-models/ | `PRIMARY_PAPER` | Physical variables can emerge as distributed/high-dimensional population codes. | Compact explicit physics variables are not automatically necessary. | `R-C`; `R-E` |
 | Identifiable World Models | https://arxiv.org/abs/2610.07028 | `PRIMARY_PAPER` | Frozen diffusion latents can be aligned to identifiable state coordinates in studied systems. | Whether hybrid identifiable state scales to open-world robotics. | `R-C`; `R-F` |
@@ -121,11 +121,11 @@ Domain-level synthesis now lives in [`../dossiers/README.md`](RESEARCH.md).
 
 | Source | URL | Evidence | Demonstrates | Open contradiction | Clover landing |
 |---|---|---|---|---|---|
-| DUSt3R | https://arxiv.org/abs/2312.14132 | `PRIMARY_PAPER` | Learned point-map reconstruction bridges learned and classical geometry. | Learned vs explicit geometry division of labor. | `PERCEPTION.md` |
+| DUSt3R | https://arxiv.org/abs/2312.14132 | `PRIMARY_PAPER` | Learned point-map reconstruction bridges learned and classical geometry. | Learned vs explicit geometry division of labor. | `perception-and-identifiability.md` |
 | VGGT | https://arxiv.org/abs/2503.11651 | `PRIMARY_PAPER` | Cameras, depth, point maps and tracks from image sets. | Reconstruction vs world understanding. | Spatial baseline; `R-B` |
 | VGGT code | https://github.com/facebookresearch/vggt | `OPEN_SOURCE` | Reproducible learned geometry. | — | Baseline setup |
 | VGGT-Ω | https://arxiv.org/abs/2605.15195 | `PRIMARY_PAPER` | Scaled static/dynamic reconstruction; scene registers help VLA/language alignment. | Is reconstruction a sufficient spatial proxy? | `R-B`; `R-C` |
-| VGGT-Ω project | https://vggt-omega.github.io/ | `OFFICIAL_PROJECT` | Project/evaluation resources. | — | `SOURCES.md` / `SOURCES.md` |
+| VGGT-Ω project | https://vggt-omega.github.io/ | `OFFICIAL_PROJECT` | Project/evaluation resources. | — | `sources-and-resources.md` / `sources-and-resources.md` |
 | VGGT-Ω code | https://github.com/facebookresearch/vggt-omega | `OPEN_SOURCE` | Reproducibility resource. | — | Baseline setup |
 | ClearGrasp — Sajjan et al. 2020 | https://arxiv.org/abs/1910.02550 | `PRIMARY_PAPER` | From a single RGB-D image, networks infer surface normals, transparent-surface masks and occlusion boundaries, then complete the depth of transparent objects (trained on 50k+ synthetic RGB-D images; real benchmark 286 images); improves grasping on novel transparent objects. Verified 2026-10-20. | Input is RGB-**D**; the documented sensor fact is that depth channels themselves return corrupted values on transparent surfaces — learning repairs depth from RGB appearance cues. Training is synthetic-supervised (`L4`). | Axis-D transparent-material boundary anchor (RGB-D, never cite as RGB-alone); `R-B` |
 
@@ -135,10 +135,10 @@ Domain-level synthesis now lives in [`../dossiers/README.md`](RESEARCH.md).
 
 | Source | URL | Evidence | Demonstrates | Open contradiction | Clover landing |
 |---|---|---|---|---|---|
-| Slot Attention | https://proceedings.neurips.cc/paper/2020/hash/8511df98c02ab60aea1b2356c013bc0f-Abstract.html | `PRIMARY_PAPER` | Exchangeable object-like slots and compositional generalization. | Scaling and real-world object discovery. | `REPRESENTATION.md` |
+| Slot Attention | https://proceedings.neurips.cc/paper/2020/hash/8511df98c02ab60aea1b2356c013bc0f-Abstract.html | `PRIMARY_PAPER` | Exchangeable object-like slots and compositional generalization. | Scaling and real-world object discovery. | `representation-and-memory.md` |
 | PLATO | https://www.nature.com/articles/s41562-022-01394-8 | `PRIMARY_PAPER` | Object-centric inductive bias can support intuitive-physics learning. | Whether object-centric state is necessary at scale. | `R-C`; `R-E` |
 | SAM 3 research | https://ai.meta.com/research/publications/sam-3-segment-anything-with-concepts/ | `PRIMARY_PAPER` | Open-vocabulary detection, segmentation and video tracking. | Visible tracking is not object permanence. | `R-B`; `R-D` |
-| SAM 3.1 code | https://github.com/facebookresearch/sam3 | `OPEN_SOURCE` | Current code/checkpoints for SAM 3/3.1. | — | `SOURCES.md` |
+| SAM 3.1 code | https://github.com/facebookresearch/sam3 | `OPEN_SOURCE` | Current code/checkpoints for SAM 3/3.1. | — | `sources-and-resources.md` |
 | SAM 3.1 release | https://github.com/facebookresearch/sam3/blob/main/RELEASE_SAM3p1.md | `OPEN_SOURCE` | Shared-memory object multiplexing improves multi-object tracking efficiency. | Does not create hidden-state permanence. | Primary contemporary tracking comparator |
 
 ---
@@ -147,10 +147,10 @@ Domain-level synthesis now lives in [`../dossiers/README.md`](RESEARCH.md).
 
 | Source | URL | Evidence | Demonstrates | Open contradiction | Clover landing |
 |---|---|---|---|---|---|
-| PersistBench paper | https://arxiv.org/abs/2609.20819 | `PRIMARY_PAPER` | 4D/world models lose object permanence, motion continuity and appearance consistency after objects leave view. | Seeing/reconstruction vs remembering. | `REPRESENTATION.md`; Memory Battery |
-| PersistBench project/code | https://guangzhaohe.com/persistbench | `OPEN_SOURCE` | Dataset/metric access. | — | `EVALUATION.md` |
+| PersistBench paper | https://arxiv.org/abs/2609.20819 | `PRIMARY_PAPER` | 4D/world models lose object permanence, motion continuity and appearance consistency after objects leave view. | Seeing/reconstruction vs remembering. | `representation-and-memory.md`; Memory Battery |
+| PersistBench project/code | https://guangzhaohe.com/persistbench | `OPEN_SOURCE` | Dataset/metric access. | — | `evaluation-and-benchmarks.md` |
 | S-EMBER research | https://ai.meta.com/research/publications/s-ember-a-large-scale-benchmark-for-streaming-egocentric-memory-retrieval/ | `OFFICIAL_PROJECT` | Streaming grounded episodic retrieval exposes temporal localization gap. | Long context/scale vs grounded recall. | `R-D`; Memory Battery |
-| S-EMBER paper | https://arxiv.org/abs/2607.02689 | `PRIMARY_PAPER` | 388 h streaming egocentric benchmark with temporal evidence localization. | Memory architecture remains open. | `EVALUATION.md` |
+| S-EMBER paper | https://arxiv.org/abs/2607.02689 | `PRIMARY_PAPER` | 388 h streaming egocentric benchmark with temporal evidence localization. | Memory architecture remains open. | `evaluation-and-benchmarks.md` |
 | VISTA | https://arxiv.org/abs/2610.02200 | `PRIMARY_PAPER` | Memory/evidence harness can be varied independently from model weights. | Replay vs recurrent/latent memory. | `R-D`; Evidence Replay hypothesis comparator |
 | VISTA project | https://vista-research.github.io/ | `OFFICIAL_PROJECT` | Describes lossless visual memory and model-directed inspection. | Interactive-game evidence is not yet real-robot memory proof. | `R-D` |
 | VISTA code | https://github.com/joshhhhhan/VISTA | `OPEN_SOURCE` | Reproducible harness implementation. | — | Future harness comparison |
@@ -161,7 +161,7 @@ Domain-level synthesis now lives in [`../dossiers/README.md`](RESEARCH.md).
 
 | Source | URL | Evidence | Demonstrates | Open contradiction | Clover landing |
 |---|---|---|---|---|---|
-| IntPhys 2 | https://ai.meta.com/research/publications/intphys-2-benchmarking-intuitive-physics-understanding-in-complex-synthetic-environments/ | `PRIMARY_PAPER` | Permanence, immutability, continuity and solidity remain difficult. | Synthetic intuitive physics vs real-world transfer. | `PERCEPTION.md`; Understanding Battery |
+| IntPhys 2 | https://ai.meta.com/research/publications/intphys-2-benchmarking-intuitive-physics-understanding-in-complex-synthetic-environments/ | `PRIMARY_PAPER` | Permanence, immutability, continuity and solidity remain difficult. | Synthetic intuitive physics vs real-world transfer. | `perception-and-identifiability.md`; Understanding Battery |
 | IntPhys 2 code | https://github.com/facebookresearch/IntPhys2 | `OPEN_SOURCE` | Reproducible benchmark. | — | Battery setup |
 | MVP / Minimal Video Pairs | https://ai.meta.com/research/publications/a-shortcut-aware-video-qa-benchmark-for-physical-understanding-via-minimal-video-pairs/ | `PRIMARY_PAPER` | Minimal pairs reveal shortcut-based physical reasoning. | QA still mixes language and visual evidence. | `R-E`; anti-shortcut policy |
 | MVP code | https://github.com/facebookresearch/minimal_video_pairs | `OPEN_SOURCE` | Reproducible minimal-pair benchmark. | — | Battery setup |
@@ -171,7 +171,7 @@ Domain-level synthesis now lives in [`../dossiers/README.md`](RESEARCH.md).
 | RoboPhys-3D | https://arxiv.org/abs/2608.28718 | `PRIMARY_PAPER` | State/execution-grounded metrics expose failures missed by appearance/VLM metrics. | How much 3D-grounded state predicts real task success. | `R-E`; `R-G`; world-model evaluation |
 | Geirhos et al. 2020 — shortcut learning | https://arxiv.org/abs/2004.07780 | `PRIMARY_PAPER` | Decision rules that pass i.i.d. tests but fail o.o.d. unify many DNN failures (texture counting, hospital-token detection, context cues); shortcuts also occur in animal/human learning; o.o.d. tests themselves decay as models improve. Full text read 2026-10-19. | Perspective, not a certification procedure; the "intended solution" must be defined by the researcher. | Anti-shortcut audit for every capability claim (cheapest cue → misleading condition → examiner isolation); `R-E` |
 | PlasticineLab | https://arxiv.org/abs/2104.03311 | `PRIMARY_PAPER` | 10 soft-body tasks / 50 configurations on differentiable MLS-MPM elastoplastic simulation; gradient-based open-loop planning solves many single-stage tasks (e.g. RollingPin 0.93 soft-IoU) where SAC/TD3/PPO largely fail; multi-stage tasks (Pinch, Writer) fail even with perfect state — gradients vanish at detachment/reattachment. Full text read 2026-10-19. | State is privileged particle landmarks (`L4`); no perception evaluated; open-loop plans assume full environment knowledge. | Deformable-planning evidence with an explicit "no perception-side benchmark exists" disclaimer; `R-E` |
-| GNS — Sanchez-Gonzalez et al. 2020 | https://arxiv.org/abs/2002.09405 | `PRIMARY_PAPER` | Learned graph-network simulator over particle state generalises across fluids, rigid solids and deformable materials (Water/Sand/Goop), to ~10× particles and thousands of timesteps at test time. Abstract verified 2026-10-19. | Input is privileged particle state (`L4`) from classical simulators (SPH/MPM/PBD) — evidence about dynamics computation, not about observing state from vision. | Axis-E dynamics anchor ([`RESEARCH.md`](RESEARCH.md#topic-survey_breadth)); separates "dynamics from state" from "state from vision" |
+| GNS — Sanchez-Gonzalez et al. 2020 | https://arxiv.org/abs/2002.09405 | `PRIMARY_PAPER` | Learned graph-network simulator over particle state generalises across fluids, rigid solids and deformable materials (Water/Sand/Goop), to ~10× particles and thousands of timesteps at test time. Abstract verified 2026-10-19. | Input is privileged particle state (`L4`) from classical simulators (SPH/MPM/PBD) — evidence about dynamics computation, not about observing state from vision. | Axis-E dynamics anchor ([`README.md`](README.md#topic-survey_breadth)); separates "dynamics from state" from "state from vision" |
 | DPI-Net — Li et al. 2019 | https://arxiv.org/abs/1810.01566 | `PRIMARY_PAPER` | Learned particle dynamics (dynamic graph, hierarchical propagation) for fluids/rigid/deformables; dynamics + MPC control real foam/fluid tasks, beating PPO on sample efficiency. Bibliographic + provenance verified 2026-10-20. | State provenance is `MIXED`/privileged: training in simulation; real-world particles are sampled inside a depth-camera TSDF mesh — no learned pixel→state estimator anywhere. | Axis-E dynamics anchor; sharpens that real-world deformable state still arrives via classical reconstruction |
 | RoboCraft — Shi et al. 2022 | https://www.roboticsproceedings.org/rss18/p008.html | `PRIMARY_PAPER` | Full perception→dynamics→planning loop for elasto-plastic shaping: particles sampled from RGB-D point cloud / reconstructed mesh; GNN dynamics trained **directly from raw visual data** (10 min real interaction, distribution losses, no particle correspondence); MPC shaping reaches untrained-human level incl. unseen target shapes. Bibliographic + provenance verified 2026-10-20. | Input is RGB-**D** (beyond RGB-only `V0–V2`); particle sampling leans on classical mesh reconstruction + shape priors, not an end-to-end learned estimator. | Axis-E **perception-side** anchor — closest existing "state from visual observation" demonstration for deformables; defines what a vision-alone successor must beat |
 | Learning to See in the Dark — Chen et al. 2018 | https://arxiv.org/abs/1805.01934 | `PRIMARY_PAPER` | A network on raw sensor data replaces the ISP pipeline and restores clean images from extreme low light (<0.1 lux) short exposures; SID dataset: 5,094 raw short-exposure images with long-exposure references. Verified 2026-10-20. | Image restoration, not state estimation; supervision is a privileged pairing (long-exposure references). | Axis-D passive-RGB boundary anchor: the low-light noise floor can be learned *around* only with paired supervision |
@@ -187,14 +187,14 @@ Domain-level synthesis now lives in [`../dossiers/README.md`](RESEARCH.md).
 
 | Source | URL | Evidence | Demonstrates | Open contradiction | Clover landing |
 |---|---|---|---|---|---|
-| CausalVQA | https://ai.meta.com/research/publications/causalvqa-a-physically-grounded-causal-reasoning-benchmark-for-video-models/ | `PRIMARY_PAPER` | Real-video counterfactual, hypothetical, anticipation and planning questions remain difficult. | Language QA vs machine-native causal state. | `ACTION.md`; Causal Battery |
+| CausalVQA | https://ai.meta.com/research/publications/causalvqa-a-physically-grounded-causal-reasoning-benchmark-for-video-models/ | `PRIMARY_PAPER` | Real-video counterfactual, hypothetical, anticipation and planning questions remain difficult. | Language QA vs machine-native causal state. | `causality-and-active-perception.md`; Causal Battery |
 | CausalVQA paper | https://arxiv.org/abs/2506.09943 | `PRIMARY_PAPER` | Primary preprint for the benchmark. | — | `R-F` |
 | CausalVQA code | https://github.com/facebookresearch/CausalVQA | `OPEN_SOURCE` | Reproducible benchmark/data interface. | — | Battery setup |
 | Interventional CRL — Ahuja et al. | https://proceedings.mlr.press/v202/ahuja23a.html | `PRIMARY_PAPER` | Interventional data can identify latent causal factors under stated assumptions. | Which interventions a robot can obtain. | `R-F` theory background |
 | CRL identifiability — Varici et al. | https://proceedings.mlr.press/v238/varici24a.html | `PRIMARY_PAPER` | Interventions can make latent causal models identifiable under broad stated assumptions. | What intervention structure is available to a robot. | `R-F` theory background |
 | CRL multi-node interventions | https://proceedings.mlr.press/v236/bing24a | `PRIMARY_PAPER` | Extends identifiability analysis to multi-node interventions. | Passive-video-only causality remains underconstrained. | Active interaction rationale |
 | Partially Observable CRL | https://proceedings.mlr.press/v235/xu24ac.html | `PRIMARY_PAPER` | Studies causal representation when observations expose changing subsets of latent state. | Scaling from synthetic assumptions to open-world vision. | `R-A`; `R-F` |
-| CITRIS — Lippe et al. 2022 | https://proceedings.mlr.press/v162/lippe22a.html | `PRIMARY_PAPER` | From temporal image sequences with **known intervention targets** (values unknown), the intervention-affected ("minimal") causal variables are identifiable up to componentwise invertible transforms — including multidimensional factors; only some components of a factor need be affected. Verified 2026-10-20. | Assumes all causal relations are temporal (no instantaneous effects); targets must be observed, not discovered; synthetic rendered data only. | `R-F` theory background; identifiability ladder step 2 (time + known interventions) — see [`RESEARCH.md`](RESEARCH.md#topic-survey_breadth) A3 |
+| CITRIS — Lippe et al. 2022 | https://proceedings.mlr.press/v162/lippe22a.html | `PRIMARY_PAPER` | From temporal image sequences with **known intervention targets** (values unknown), the intervention-affected ("minimal") causal variables are identifiable up to componentwise invertible transforms — including multidimensional factors; only some components of a factor need be affected. Verified 2026-10-20. | Assumes all causal relations are temporal (no instantaneous effects); targets must be observed, not discovered; synthetic rendered data only. | `R-F` theory background; identifiability ladder step 2 (time + known interventions) — see [`README.md`](README.md#topic-survey_breadth) A3 |
 | iCITRIS — Lippe et al. 2023 | https://arxiv.org/abs/2206.06169 | `PRIMARY_PAPER` | Extends CITRIS to **instantaneous** effects (frame rate slower than true dynamics): with *partially-perfect* interventions (removing a variable's instantaneous parents), minimal causal variables **and** their temporal + instantaneous causal graph are jointly identifiable. Verified 2026-10-20 (ICLR 2023; arXiv ID corrected during verification). | The price is steeper: partially-perfect interventions, targets still observed; stylised synthetic video only — nothing on real robotic vision. | `R-F` theory background; ladder step 3 — passive video identifies none of this; the robot's own actions are the candidate intervention, and earning "intervention" status is itself a learning problem |
 
 ---
@@ -203,7 +203,7 @@ Domain-level synthesis now lives in [`../dossiers/README.md`](RESEARCH.md).
 
 | Source | URL | Evidence | Demonstrates | Open contradiction | Clover landing |
 |---|---|---|---|---|---|
-| Bajcsy, Active Perception | https://ieeexplore.ieee.org/abstract/document/5968 | `BACKGROUND_REFERENCE` | Perception can select actions that reduce uncertainty. | How to learn information value end-to-end. | `ACTION.md`; V3 protocol |
+| Bajcsy, Active Perception | https://ieeexplore.ieee.org/abstract/document/5968 | `BACKGROUND_REFERENCE` | Perception can select actions that reduce uncertainty. | How to learn information value end-to-end. | `causality-and-active-perception.md`; V3 protocol |
 | Vantage | https://arxiv.org/abs/2610.11810 | `PRIMARY_PAPER` | View planning/evidence acquisition can improve spatial reasoning. | General active world learning. | `R-H`; active-perception baseline |
 | Vantage code | https://github.com/q1xiangchen/Vantage | `OPEN_SOURCE` | Reproducibility resource. | — | Baseline setup |
 | Vision in Action | https://arxiv.org/abs/2506.15666 | `PRIMARY_PAPER` | Learns task-relevant searching/tracking/focusing camera behavior from human demonstrations. | Information-gain objective vs imitation. | `R-H` |
@@ -219,7 +219,7 @@ Domain-level synthesis now lives in [`../dossiers/README.md`](RESEARCH.md).
 | World-model taxonomy | https://www.worldlabs.ai/blog/taxonomy-of-world-models | `OFFICIAL_PROJECT` | Clarifies renderer/simulator/planner functions commonly conflated as “world model.” | Taxonomy is not independent empirical validation. | Terminology background |
 | Cosmos 3 project | https://research.nvidia.com/labs/cosmos-lab/cosmos3/ | `OFFICIAL_PROJECT` | Open omnimodal world-model family spanning reasoning, generation and action. | General benchmark strength vs robust persistent world truth. | Generative/WAM comparator |
 | Cosmos 3 report | https://arxiv.org/abs/2606.02800 | `PRIMARY_PAPER` | Unifies language/image/video/audio/action in one architecture. | Whether unified generation/action is sufficient for robot belief. | Frontier method map |
-| Cosmos code | https://github.com/nvidia/cosmos | `OPEN_SOURCE` | Public implementation/checkpoints/resources. | — | `SOURCES.md` |
+| Cosmos code | https://github.com/nvidia/cosmos | `OPEN_SOURCE` | Public implementation/checkpoints/resources. | — | `sources-and-resources.md` |
 
 ---
 
@@ -227,7 +227,7 @@ Domain-level synthesis now lives in [`../dossiers/README.md`](RESEARCH.md).
 
 | Source | URL | Evidence | Demonstrates | Open contradiction | Clover landing |
 |---|---|---|---|---|---|
-| OpenVLA | https://arxiv.org/abs/2406.09246 | `PRIMARY_PAPER` | Open 7B VLA trained on 970k robot demonstrations. | Direct policy vs persistent world state. | `ACTION.md`; open action baseline |
+| OpenVLA | https://arxiv.org/abs/2406.09246 | `PRIMARY_PAPER` | Open 7B VLA trained on 970k robot demonstrations. | Direct policy vs persistent world state. | `causality-and-active-perception.md`; open action baseline |
 | OpenVLA code | https://github.com/openvla/openvla | `OPEN_SOURCE` | Fine-tuning/evaluation access. | — | Future embodied baseline |
 | π0.5 | https://arxiv.org/abs/2504.16054 | `PRIMARY_PAPER` | Long-horizon manipulation in entirely new homes with heterogeneous multimodal co-training. | Visual understanding vs language/semantic/action priors. | `R-G`; strong direct-policy falsifier |
 | π0.5 project | https://www.pi.website/blog/pi05 | `OFFICIAL_PROJECT` | Qualitative/system context. | — | Robot foundation map |
@@ -293,7 +293,7 @@ Curated reading index for the Clover Survey. Sources are grouped by the research
 
 > **Research question:** How can a machine understand the real world through vision alone?
 
-Use [`SOURCES.md`](#topic-research-survey-source_map) when you need the one-to-one mapping from source → demonstrated capability → limitation → Clover landing.
+Use [`sources-and-resources.md`](#topic-research-survey-source_map) when you need the one-to-one mapping from source → demonstrated capability → limitation → Clover landing.
 
 ---
 
@@ -1090,7 +1090,7 @@ This document compares method families that materially constrain the Clover rese
 
 The purpose is not to assemble a stack. Each route is treated as a competing explanation of what internal state is sufficient.
 
-For the source/claim/landing map, see [`SOURCES.md`](#topic-research-survey-source_map). For the broader synthesis, see [`RESEARCH.md`](RESEARCH.md#topic-research-survey-background_research).
+For the source/claim/landing map, see [`sources-and-resources.md`](#topic-research-survey-source_map). For the broader synthesis, see [`README.md`](README.md#topic-research-survey-background_research).
 
 ---
 
@@ -1696,9 +1696,9 @@ Source intake checked through: **2026-10-19**
 
 This file is a **thin current-edge index**. It is not a second survey and it does not make Clover design decisions.
 
-As of 2026-10-15, the latest complete arXiv daily batches visible for the relevant categories include work submitted through **2026-10-13 UTC**, with some records revised on 2026-10-14. The 2026-10-16 → 2026-10-19 extension is recorded in [`SOURCES.md`](#topic-research-emerging-frontier_sweep_2026-10-19); its verified additions are: Preserve both submission/revision dates and the date Clover checked the source.
+As of 2026-10-15, the latest complete arXiv daily batches visible for the relevant categories include work submitted through **2026-10-13 UTC**, with some records revised on 2026-10-14. The 2026-10-16 → 2026-10-19 extension is recorded in [`sources-and-resources.md`](#topic-research-emerging-frontier_sweep_2026-10-19); its verified additions are: Preserve both submission/revision dates and the date Clover checked the source.
 
-Stable concepts belong in the Stage-1 topic files. Fast-moving cross-boundary clusters are also summarized in [`SYSTEMS.md`](SYSTEMS.md#topic-research-emerging-jepa_rsi_runtime_2026-10-15).
+Stable concepts belong in the Stage-1 topic files. Fast-moving cross-boundary clusters are also summarized in [`foundation-models-and-systems.md`](foundation-models-and-systems.md#topic-research-emerging-jepa_rsi_runtime_2026-10-15).
 
 ### Evidence labels
 
@@ -1948,7 +1948,7 @@ Source intake checked through: **2026-10-19**
 
 > Mother question: **How can a machine understand the real world through vision alone?**
 
-This sweep extends the Stage-1 frontier watch from the 2026-10-15 cutoff (`SOURCES.md`) to 2026-10-19. It is supporting Stage-1 material: it does **not** freeze a representation, backbone or training recipe, and it does **not** promote any mechanism into Clover Innovation.
+This sweep extends the Stage-1 frontier watch from the 2026-10-15 cutoff (`sources-and-resources.md`) to 2026-10-19. It is supporting Stage-1 material: it does **not** freeze a representation, backbone or training recipe, and it does **not** promote any mechanism into Clover Innovation.
 
 Raw discovery material for this 2026-10-19 window is preserved in Git history before the 2026-10-25 cleanup; it is not a current reading-tree archive. Items below were upgraded against primary or official sources on 2026-10-19 where a source is marked `PRIMARY_PAPER` / `OFFICIAL_*`; items still resting on secondary listings stay `SURVEY_SIGNAL`.
 
@@ -2008,7 +2008,7 @@ HexaShell / CarryOn / CoDA (2026-10-15/16 listings)
 
 ### 3. Breadth check recorded on 2026-10-19
 
-Stage 1 requires coverage **before** commitment. This sweep re-checked the breadth axes of `RESEARCH.md` against the 10-16→19 inflow; the inflow is heavily concentrated in VLA/WAM and industry brain announcements. The following breadth areas received **no** new material in that window. This was the 2026-10-19 intake gap; the 2026-10-20 anchors and 2026-10-25 additions are recorded in [the current queue](RESEARCH.md#current-collection-queue). Do not treat this dated list as today's unfilled inventory:
+Stage 1 requires coverage **before** commitment. This sweep re-checked the breadth axes of `README.md` against the 10-16→19 inflow; the inflow is heavily concentrated in VLA/WAM and industry brain announcements. The following breadth areas received **no** new material in that window. This was the 2026-10-19 intake gap; the 2026-10-20 anchors and 2026-10-25 additions are recorded in [the current queue](README.md#current-collection-queue). Do not treat this dated list as today's unfilled inventory:
 
 ```text
 classical geometry / SLAM / SfM baselines and their failure records
@@ -2045,7 +2045,7 @@ public unattended long-sequence demos (NEURA laundry, 11 min)
 
 ### 5. Next checks (owners: research line, no deadline theatre)
 
-1. Read VLA-Δ and HIJP in full; record both with the AGENTS §26 template in `SOURCES.md` and decide whether Δ-supervision deserves a structured Stage-2 method section.
+1. Read VLA-Δ and HIJP in full; record both with the AGENTS §26 template in `sources-and-resources.md` and decide whether Δ-supervision deserves a structured Stage-2 method section.
 2. NEURA GTC Berlin (2026-10-20→22): collect independent reporting/video of the laundry sequence; score against the EV ladder and the memory/persistence claims; upgrade or downgrade the `OFFICIAL_REPORTED_RESULT` accordingly.
 3. Upgrade §2 signals to primary sources in listing order; drop any that cannot be upgraded.
 4. Next sweep must include at least one canonical/breadth source per §3 axis (pre-2026 primary literature counts).

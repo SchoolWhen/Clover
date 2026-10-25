@@ -1,8 +1,8 @@
 <a id="top"></a>
 
-# Backbones, runtime and deployment
+# 调研方向：基础模型架构、运行时与工程条件
 
-Maintained: **2026-10-25** · Current project stage: **Research** ([status](STATUS.md)).
+Maintained: **2026-10-25** · Document stage: **1 — Research** ([status](../STATUS.md)).
 
 Exact model artifacts, engineering constraints and validation resources. Artifact-specific records retain their original check dates; inherited vendor claims are not reverified by this consolidation.
 
@@ -533,7 +533,7 @@ re-encoding a 1M-token history every step
 
 ### 9. Current DeepSeek lessons
 
-Detailed current-source watch: [`SYSTEMS.md`](#topic-research-foundation_models-deepseek_qwen).
+Detailed current-source watch: [`foundation-models-and-systems.md`](#topic-research-foundation_models-deepseek_qwen).
 
 High-value DeepSeek research signals include:
 
@@ -2244,7 +2244,7 @@ The research task is to identify which pieces are generic foundation-model engin
 Source record updated: **2026-10-15**
 Source intake checked through: **2026-10-15**
 
-> Supporting material for [`SYSTEMS.md`](#topic-research-research_foundation_model_systems) and [`LEARNING.md`](LEARNING.md#topic-research-research_training_posttraining).
+> Supporting material for [`foundation-models-and-systems.md`](#topic-research-research_foundation_model_systems) and [`learning-and-data.md`](learning-and-data.md#topic-research-research_training_posttraining).
 
 This document closes the remaining cross-boundary gaps between computer vision, multimodal foundation models, embodied learning, runtime systems and edge deployment. It is **not** a Clover architecture decision.
 
@@ -2632,7 +2632,7 @@ model rollback vs persistent-memory rollback
 fleet update admission / poisoned or broken-robot experience
 ```
 
-See [`LEARNING.md`](LEARNING.md#topic-research-training-high_risk_boundaries) for the training-specific matrix.
+See [`learning-and-data.md`](learning-and-data.md#topic-research-training-high_risk_boundaries) for the training-specific matrix.
 
 ---
 
@@ -2663,7 +2663,7 @@ not simply a model-family name.
 Source record updated: 2026-10-14
 Source intake checked through: **2026-10-14**
 
-> Companion to [`SYSTEMS.md`](#topic-research-research_engineering_validation).
+> Companion to [`foundation-models-and-systems.md`](#topic-research-research_engineering_validation).
 
 This file studies what happens after a model is scientifically interesting but before it can be trusted as a robot subsystem.
 
@@ -3306,7 +3306,7 @@ deployment / validation evidence level
 Source record updated: **2026-10-15**
 Source intake checked through: **2026-10-15**
 
-Companion to [`SYSTEMS.md`](#topic-research-research_engineering_validation).
+Companion to [`foundation-models-and-systems.md`](#topic-research-research_engineering_validation).
 
 This file is a compact resource table for downstream validation. It is not a Clover architecture proposal.
 
@@ -3424,7 +3424,7 @@ Source intake checked through: **2026-10-15**
 
 > Mother question: **How can a machine understand the real world through vision alone?**
 
-This audit follows [`SYSTEMS.md`](#topic-research-emerging-jepa_rsi_runtime_2026-10-15) and asks whether the latest arXiv/GitHub sweep exposes any remaining boundary that the stable Stage-1 map still underweights.
+This audit follows [`foundation-models-and-systems.md`](#topic-research-emerging-jepa_rsi_runtime_2026-10-15) and asks whether the latest arXiv/GitHub sweep exposes any remaining boundary that the stable Stage-1 map still underweights.
 
 Conclusion: no new top-level lifecycle stage is needed, but the following cross-boundaries should be explicit.
 
