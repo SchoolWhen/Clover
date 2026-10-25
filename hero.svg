@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="560" viewBox="0 0 1600 560" role="img" aria-labelledby="title description">
+  <title id="title">Clover — vision alone, an open question</title>
+  <desc id="description">A cobalt Clover wordmark beside a four-leaf optical form. Rays connect a camera viewpoint to several possible world structures, expressing an open research question rather than a validated model.</desc>
+  <defs>
+    <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1.1" fill="#2439DE" opacity=".12"/>
+    </pattern>
+    <path id="leaf" d="M0-12C-39-53-105-84-105-146C-105-189-74-215-37-215C12-215 47-169 39-123C32-82 12-38 0-12Z"/>
+    <clipPath id="bounds"><rect width="1600" height="560" rx="24"/></clipPath>
+  </defs>
+  <g clip-path="url(#bounds)">
+    <rect width="1600" height="560" fill="#F1F5FF"/>
+    <rect x="820" width="780" height="560" fill="url(#dots)"/>
+    <circle cx="1256" cy="280" r="354" fill="#E3E7FF"/>
+    <circle cx="1256" cy="280" r="286" fill="none" stroke="#C6CCF7"/>
+    <path d="M928 512L1532 48M928 48L1532 512" fill="none" stroke="#CFD5FA"/>
+    <g stroke="#7483E8" stroke-width="1.5" fill="none">
+      <path d="M870 280L1110 80M870 280L1350 80M870 280L1454 280M870 280L1350 480M870 280L1110 480"/>
+      <path d="M1060 106L1060 454" stroke-dasharray="5 8"/>
+    </g>
+    <g transform="translate(1240 280) rotate(45)">
+      <g fill="#2439DE" fill-opacity=".09" stroke="#2439DE" stroke-width="2.2">
+        <use href="#leaf"/>
+        <use href="#leaf" transform="rotate(90)"/>
+        <use href="#leaf" transform="rotate(180)"/>
+        <use href="#leaf" transform="rotate(270)"/>
+      </g>
+      <g fill="none" stroke="#8A75E9" stroke-width="1.2">
+        <ellipse rx="183" ry="70"/>
+        <ellipse rx="70" ry="183"/>
+      </g>
+    </g>
+    <g fill="none" stroke="#2439DE" stroke-width="2.2">
+      <path d="M1179 239L1240 204L1301 239L1301 309L1240 344L1179 309ZM1179 239L1240 274L1301 239M1240 274V344"/>
+      <path d="M1240 204V274" stroke-dasharray="4 6" opacity=".5"/>
+      <path d="M1135 399L1171 378L1207 399L1207 441L1171 462L1135 441ZM1135 399L1171 420L1207 399M1171 420V462" opacity=".5" stroke-dasharray="4 6"/>
+    </g>
+    <circle cx="870" cy="280" r="9" fill="#2439DE"/>
+    <circle cx="870" cy="280" r="23" fill="none" stroke="#2439DE" stroke-width="2"/>
+    <g fill="#2439DE">
+      <circle cx="1110" cy="80" r="4"/>
+      <circle cx="1350" cy="80" r="4"/>
+      <circle cx="1454" cy="280" r="4"/>
+      <circle cx="1350" cy="480" r="4"/>
+      <circle cx="1110" cy="480" r="4"/>
+    </g>
+    <g font-family="Arial, Helvetica, sans-serif">
+      <text x="68" y="219" font-size="156" font-weight="700" letter-spacing="-9" fill="#2439DE">Clover</text>
+      <text x="76" y="301" font-size="46" font-weight="500" letter-spacing="-1.4" fill="#16204A">Vision alone.</text>
+      <text x="76" y="350" font-size="27" fill="#485579">The question stays open.</text>
+      <path d="M76 453H132" stroke="#2439DE" stroke-width="4"/>
+      <text x="151" y="461" font-size="22" fill="#485579">An open research record</text>
+    </g>
+  </g>
+</svg>

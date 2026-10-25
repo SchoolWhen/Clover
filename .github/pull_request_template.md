@@ -19,4 +19,6 @@
 
 - [ ] Relevant docs updated
 - [ ] STATUS updated if public capability changed
-- [ ] Research decision added if direction/SSOT changed
+- [ ] Relevant decision section in PROCESS.md updated if direction/SSOT changed
+
+- [ ] Existing topic document updated in place; no dated supplement, duplicate index or per-question progress file added

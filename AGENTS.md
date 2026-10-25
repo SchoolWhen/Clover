@@ -10,33 +10,17 @@ This file is mandatory reading for AI agents, coding agents, research agents and
 
 The question is fixed. The answer is open.
 
-## 2. Mandatory reading order
+## 2. Mandatory reading order and document ownership
 
-Before proposing architecture, code, experiments or conclusions, read:
+1. [SSOT.md](SSOT.md#topic-ssot) — fixed question and scientific contract.
+2. [STATUS.md](STATUS.md) — the only current progress and stage authority.
+3. [RESEARCH.md](RESEARCH.md) — breadth, competing fields and coverage.
+4. [PROCESS.md](PROCESS.md) — lifecycle and contribution templates.
+5. Read the relevant canonical topic: [questions](QUESTIONS.md), [perception](PERCEPTION.md), [representation](REPRESENTATION.md), [action](ACTION.md), [learning](LEARNING.md), [systems](SYSTEMS.md), [evaluation](EVALUATION.md), [sources](SOURCES.md), [hypotheses](HYPOTHESES.md).
 
-1. [`SSOT.md`](SSOT.md)
-2. [`research/PIPELINE.md`](research/PIPELINE.md)
-3. [`research/RESEARCH.md`](research/RESEARCH.md)
-4. [`research/RESEARCH_STATE_VARIABLES.md`](research/RESEARCH_STATE_VARIABLES.md)
-5. [`research/RESEARCH_IDENTIFIABILITY.md`](research/RESEARCH_IDENTIFIABILITY.md)
-6. [`research/RESEARCH_OBSERVATION_PHYSICS.md`](research/RESEARCH_OBSERVATION_PHYSICS.md)
-7. [`research/RESEARCH_PHYSICAL_PROPERTIES.md`](research/RESEARCH_PHYSICAL_PROPERTIES.md)
-8. [`research/RESEARCH_SUFFICIENT_STATE.md`](research/RESEARCH_SUFFICIENT_STATE.md)
-9. [`research/RESEARCH_STATE_ALIASING.md`](research/RESEARCH_STATE_ALIASING.md)
-10. [`research/RESEARCH_ADAPTIVE_ABSTRACTION.md`](research/RESEARCH_ADAPTIVE_ABSTRACTION.md)
-11. [`research/RESEARCH_VALUE_OF_INFORMATION.md`](research/RESEARCH_VALUE_OF_INFORMATION.md)
-12. [`research/RESEARCH_OPEN_WORLD_EPISTEMICS.md`](research/RESEARCH_OPEN_WORLD_EPISTEMICS.md)
-13. [`research/RESEARCH_MODEL_DISCOVERY.md`](research/RESEARCH_MODEL_DISCOVERY.md)
-14. [`research/RESEARCH_FOUNDATION_MODEL_SYSTEMS.md`](research/RESEARCH_FOUNDATION_MODEL_SYSTEMS.md)
-15. [`research/RESEARCH_ENGINEERING_VALIDATION.md`](research/RESEARCH_ENGINEERING_VALIDATION.md)
-16. [`research/RESEARCH_FRONTIER.md`](research/RESEARCH_FRONTIER.md)
-17. [`PRINCIPLES.md`](PRINCIPLES.md)
-18. [`STATUS.md`](STATUS.md)
-19. [`research/README.md`](research/README.md)
-20. [`research/survey/SOURCE_MAP.md`](research/survey/SOURCE_MAP.md)
-21. deeper survey/dossier/supporting files only as needed.
+Maintain each topic in place. One method means one structured section, not one new file. Do not create dated research supplements, patch reports, per-question progress files, duplicate indexes, archive trees or news editions. Fold verified discoveries into the topic and SOURCES.md; update STATUS.md for material progress. Preserve exact evidence URLs, reading depth, assumptions, counterevidence and refutation history. Git commits preserve prior versions. Add a file only when an existing topic genuinely cannot own its content.
 
-Historical/news files are evidence signals, not SSOT.
+Source record dates are not the document maintenance date. A merge or cleanup never upgrades an inherited source to newly verified evidence. Dated audit recommendations remain historical; STATUS.md governs the current stage. The former timestamped news-publication rule is retired by the 2026-10-25 repository simplification.
 
 ## 3. Lifecycle
 
@@ -360,7 +344,7 @@ hosted product ≠ open-weight checkpoint unless verified
 total params ≠ active params ≠ memory ≠ communication cost
 ```
 
-DeepSeek/Qwen are current high-value systems references, not default Clover choices. See [`research/foundation_models/DEEPSEEK_QWEN.md`](research/foundation_models/DEEPSEEK_QWEN.md).
+DeepSeek/Qwen are current high-value systems references, not default Clover choices. See [`SYSTEMS.md`](SYSTEMS.md#topic-research-foundation_models-deepseek_qwen).
 
 ## 19. Data/training gains must be separated from architecture gains
 

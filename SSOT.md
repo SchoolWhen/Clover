@@ -1,262 +1,128 @@
-# Clover SSOT
+<a id="top"></a>
 
-Last updated: 2026-10-14
+# Research contract
 
-## 1. Highest research question
+Maintained: **2026-10-25**. Current progress is maintained in [STATUS.md](STATUS.md).
+
+<a id="topic-ssot"></a>
+<a id="topic-docs-research-question"></a>
+
+## Fixed question
 
 > **How can a machine understand the real world through vision alone?**
 
-This is the highest single source of truth for Clover.
+This is Clover's highest scientific authority. The question is fixed; the answer is open.
 
-## 2. Product goal
+The target is an embodied computational system that maintains and uses knowledge across time. The real world includes persistent entities outside the current view, incomplete observations, physical interactions, unfamiliar objects/environments and consequences of action. Controlled synthetic environments can isolate mechanisms; the scientific target extends to real environments.
+
+<a id="topic-docs-product-goal"></a>
+
+## Long-term product goal
 
 > **Build a general-purpose robotic brain that forms an understanding of the real world through vision alone, then uses that understanding to decide and act.**
 
-At a system level, the long-term loop is:
-
-```text
-visual experience
-      ↓
-world understanding
-      ↓
-decision
-      ↓
-tool / capability selection
-      ↓
-execution
-      ↓
-new visual experience
-```
-
-The internal representation and learning architecture are not frozen.
-
-## 3. What “understanding” currently means
-
-Clover does not treat understanding as a philosophical label or a single benchmark score.
-
-The working technical target requires internal structure that supports, at minimum:
-
-- existence and object identity;
-- persistence through time and occlusion;
-- spatial and temporal structure;
-- observability, uncertainty and unknown state;
-- physically plausible and quantitatively meaningful dynamics;
-- cause, intervention and counterfactual reasoning;
-- long-horizon memory and belief revision;
-- generalization to unfamiliar objects, scenes, cameras, dynamics and compositions;
-- active acquisition of missing visual evidence;
-- measurable value for decision, planning, execution and recovery.
-
-This definition remains a research object and may become more precise.
-
-## 4. Evidence dimensions
-
-A comprehensive result is not first place on one dataset.
-
-Evidence should cover:
-
-### U — Understanding
-Identity, persistence, space, time, observability, physics and causality.
-
-### G — Generalization
-New objects, scenes, cameras, dynamics, compositions and embodiments.
-
-### P — Prediction
-What will happen, could happen, cannot happen and would happen under intervention.
-
-### A — Action usefulness
-Decision, planning, recovery and execution value.
-
-### R — Real-world transfer
-Controlled settings → unfamiliar real environments.
-
-### E — Efficiency
-Latency, memory, energy, bandwidth and hardware requirements once capability is established.
-
-No single axis substitutes for the others.
-
-## 5. Vision protocols
-
-### V0 — Strict monocular vision
-
-Allowed:
-
-- monocular RGB frames;
-- frame ordering / timestamps.
-
-Not allowed as model evidence:
-
-- depth;
-- LiDAR;
-- tactile;
-- force;
-- IMU;
-- GT pose;
-- GT object identity;
-- privileged simulator state.
-
-### V1 — Calibrated monocular vision
-
-V0 plus declared camera intrinsics.
-
-### V2 — Multi-camera vision
-
-Calibrated RGB from multiple cameras.
-
-### V3 — Embodied active vision
-
-The robot can move to obtain new visual evidence. Sensory evidence remains visual, but action changes what can be observed.
-
-### Learning-evidence provenance
-
-When relevant, also annotate how knowledge was acquired:
-
-- `L0` — visual self-supervision only;
-- `L1` — visual labels / annotations;
-- `L2` — language / world-knowledge supervision;
-- `L3` — action-conditioned demonstrations or interaction experience;
-- `L4` — non-visual or privileged physical evidence such as proprioception, force/tactile, IMU, depth/LiDAR or simulator state.
-
-A model receiving RGB at deployment but trained with language, actions or privileged state is not scientifically equivalent to `V0/L0`.
-
-## 6. Current research posture
-
-The Research Reset established:
-
-- CPU-first is not a scientific assumption;
-- field crystallization is not a scientific assumption;
-- CSP / SEP / licence mechanisms are not scientific assumptions;
-- Transformer and non-Transformer architectures are both admissible;
-- explicit, distributed and hybrid representations are all admissible;
-- reconstruction, prediction, generation and interaction learning are competing or complementary hypotheses;
-- benchmark SOTA is evidence, not the project objective.
-
-Past Clover mechanisms remain candidate hypotheses until they survive comparison with prior art, strong baselines and discriminating experiments.
-
-## 7. Canonical research lifecycle
-
-Clover now uses one flat seven-stage lifecycle:
-
-```text
-1 Research
-→ 2 Analysis
-→ 3 Synthesis
-→ 4 Innovation
-→ 5 Implementation
-→ 6 Evaluation
-→ 7 Reflection
-↺ next research cycle
-```
-
-Definitions:
-
-- **Research** — collect directions, sources, methods, datasets, benchmarks and frontier work.
-- **Analysis** — produce method-by-method mechanism reports.
-- **Synthesis** — compare strengths, weaknesses, trade-offs, common failures and gaps.
-- **Innovation** — formulate Clover-original hypotheses and algorithms from demonstrated gaps.
-- **Implementation** — build reproducible baselines, diagnostics and selected hypotheses.
-- **Evaluation** — run experiments, Results, ablations, generalization and real-world tests.
-- **Reflection** — interpret failures, update hypothesis status and decide the next research cycle.
-
-The stages describe epistemic maturity, not software versions.
-
-## 8. Current stage
-
-> **Stage 1 — Research is ACTIVE.**
-
-The immediate goal is broad material collection and source traceability.
-
-Current tasks:
-
-1. map every materially relevant research direction;
-2. collect canonical and current primary papers;
-3. collect official project pages, code and checkpoints;
-4. collect datasets and benchmarks;
-5. record visual protocol and learning provenance where possible;
-6. record what each source actually demonstrates and does not demonstrate;
-7. identify important missing areas and keep searching;
-8. maintain strong baseline candidates without turning baseline execution into the current project goal.
-
-Stage 1 is intentionally broader than the current eight deep dossiers. Any research direction that materially constrains the mother question should be collected.
-
-Primary current entry points:
-
-1. `research/PIPELINE.md`
-2. `research/RESEARCH.md`
-3. `research/README.md`
-4. `research/survey/SOURCE_MAP.md`
-5. `research/survey/BACKGROUND_RESEARCH.md`
-
-Deeper survey/dossier files support Stage 1 but are not separate project phases.
-
-## 9. Benchmark policy
-
-Benchmarks are diagnostic instruments.
-
-The evidence stack may include:
-
-```text
-controlled diagnostic benchmarks
-+ shortcut-resistant tests
-+ persistent / streaming memory tests
-+ causal / interventional tasks
-+ real visual transfer
-+ active perception
-+ long-horizon embodied tasks
-+ unfamiliar real environments
-+ action usefulness
-```
-
-A benchmark score alone does not establish world understanding.
-
-## 10. Hardware policy
-
-The current local platform is Apple M4.
-
-Policy:
-
-> **Algorithm-first, hardware-co-designed.**
-
-CPU, GPU, Metal, MPS and Neural Engine are design resources, not scientific priors.
-
-## 11. Historical Clover ideas
-
-The following remain useful candidate hypotheses, not SSOT:
-
-- field crystallization;
-- machine-native primitives;
-- evidence / belief separation;
-- spacetime support;
-- persistent world state;
-- epistemic licences;
-- evidence replay;
-- world compilation;
-- query-conditioned computation;
-- counter-witness causality;
-- world growth and revision.
-
-They belong conceptually to Stage 4 Innovation until evidence promotes, transforms or rejects them.
-
-## 12. Innovation gate
-
-A new Clover core algorithm should not be justified by historical preference or one strong external paper.
-
-Required chain:
-
-```text
-broad Research
-→ method Analysis
-→ cross-method Synthesis
-→ well-supported unresolved gap
-→ original hypothesis
-→ falsifier
-→ Implementation
-→ Evaluation
-→ Reflection
-```
-
-Small diagnostic code may be used earlier when reading alone cannot resolve a question, but implementation effort does not substitute for analysis.
-
-## 13. Final principle
-
-> **Protect the question, not the current answer. Research broadly before inventing narrowly.**
+The intended functional loop is visual experience → world understanding → decision → capability/tool selection → execution → new visual experience. This describes responsibilities, not a frozen network or module topology. Candidate decomposition and authority mechanisms live in [HYPOTHESES.md](HYPOTHESES.md#topic-docs-architecture-readme).
+
+<a id="topic-docs-what-is-understanding"></a>
+
+## Working definition of understanding
+
+The definition remains a research object. Required capabilities include:
+
+- **Existence, identity and persistence:** associate observations across time; preserve or deliberately suspend beliefs through occlusion; do not equate unseen with absent.
+- **Spatial and temporal structure:** positions, containment, support, visibility, relations and change at task-relevant precision and timescales.
+- **Dynamics and physics:** recognize plausible, quantitatively meaningful changes and violations, with appropriate uncertainty.
+- **Causality and counterfactuals:** distinguish correlations, interventions, action consequences and alternatives.
+- **Open-world epistemics:** distinguish observed, inferred, predicted, hypothetical/generated, ambiguous, unobserved, contradicted, refuted and model-incomplete state.
+- **Memory and revision:** preserve long-horizon evidence and identity, and revise earlier beliefs after contradictory observations.
+- **Generalization:** remain useful across new objects, scenes, cameras, dynamics, compositions and embodiments.
+- **Active evidence acquisition:** obtain missing visual evidence when doing so is informative, permitted and worth its cost.
+- **Decision usefulness:** improve planning, execution, recovery or action, eventually in unfamiliar real environments.
+
+No single capability or benchmark establishes the whole definition.
+
+## Independent evidence dimensions
+
+| Axis | Required evidence |
+|---|---|
+| U — Understanding | Identity, persistence, space, time, observability, physics and causality |
+| G — Generalization | New objects, scenes, cameras, dynamics, compositions and embodiments |
+| P — Prediction | What will, could, cannot and would happen under intervention |
+| A — Action usefulness | Decision, planning, execution and recovery value |
+| R — Real-world transfer | Controlled settings through unfamiliar real environments |
+| E — Efficiency | Latency, memory, energy, bandwidth and hardware once capability is established |
+
+These axes do not substitute for each other. Benchmark SOTA is evidence about a defined protocol, not the project objective or proof of world understanding.
+
+## Vision protocols and learning provenance
+
+Observation protocol and learning evidence are independent labels. Record both for the exact experiment.
+
+| Protocol | Permitted observation evidence |
+|---|---|
+| V0 | Monocular RGB frames plus temporal order/timestamps |
+| V1 | V0 plus declared camera intrinsics |
+| V2 | Calibrated multi-camera RGB |
+| V3 | Embodied active vision: actions change future visual observations; sensory evidence remains visual |
+
+Depth, LiDAR, tactile, force, IMU, ground-truth poses/identities and privileged simulator state are not silently counted as RGB vision. Posed images from one moving camera do not automatically become physical multi-camera V2; declare the actual capture/calibration conditions. Action commands used as conditioning must be recorded separately from sensory measurements.
+
+| Learning label | Evidence used to acquire knowledge |
+|---|---|
+| L0 | Visual self-supervision |
+| L1 | Visual labels/annotations |
+| L2 | Language/world-knowledge supervision |
+| L3 | Action-conditioned demonstrations or interaction experience |
+| L4 | Non-visual/privileged physical evidence: proprioception, force/tactile, IMU, depth/LiDAR, measured physical priors or simulator state |
+
+A deployed RGB model trained with language, actions, measured material priors or privileged state is not scientifically equivalent to V0/L0. Record privileged evidence used by the examiner separately from information used by the learner. Task instructions and question text also belong in the input record.
+
+<a id="topic-principles"></a>
+
+## Research principles
+
+1. **Protect the question, not an old answer.** CPU-first, field crystallization, visual charge, CSP/SEP, licence envelopes, LCPS/GCPS, Visual World Compiler, Evidence Replay, explicit/latent/object-centric state, geometry, fields, Transformers and vendor backbones are candidate answers or resources.
+2. **Evidence before commitment.** Compare the strongest explanations before freezing a representation, backbone, objective or training recipe. Historical Clover ideas may be revised, rejected or removed when evidence changes.
+3. **Research before innovation.** Broad Research → method Analysis → comparative Synthesis → demonstrated unresolved gap → original hypothesis and falsifier → Implementation → Evaluation → Reflection. [PROCESS.md](PROCESS.md) defines the seven stages. Small diagnostics are allowed earlier only when needed to answer a research question.
+4. **No framework stacking.** For an external method, record the problem, demonstrated/undemonstrated capability, mechanism, input/training provenance, observation assumptions, resources and competing explanation before considering adoption.
+5. **Benchmarks are instruments.** Use shortcut-resistant, persistent/streaming, causal, active-vision, real-transfer and embodied evidence to distinguish claims; never redefine understanding around the easiest score.
+6. **Facts and hypotheses stay separate.** Distinguish implemented, tested, validated, externally reported, hypothesized, planned, open and superseded. Source records retain exact URLs, check dates and reading depth.
+7. **Mechanisms need falsifiers.** A name, analogy, implementation effort or appealing mathematical form is not evidence. State a discriminating prediction, counter-hypothesis and kill condition.
+8. **Real capability must matter for action.** A representation should eventually show measurable decision, planning, recovery or execution value in unfamiliar physical environments.
+9. **Hardware is a design variable.** Apple M4 is a local development reference, not the scientific constraint or assumed final robot computer. CPU, GPU, Metal, MPS and other accelerators are resources selected for the computation.
+10. **Keep code and records inspectable.** Avoid hidden state, duplicated authority and unnecessary complexity. Preserve prior versions and refutation history in Git; keep the current reading tree minimal.
+11. **Efficiency must preserve capability.** State the complete measurement boundary and capability changes under compression, quantization, sampling or asynchronous execution. Do not substitute cached inference or compute proxies for camera-to-action timing.
+12. **The answer remains open.** Explicit, distributed, hybrid or as-yet-unknown representations are admissible. Adopt mechanisms only from discriminating evidence.
+
+## Current operating posture
+
+**Stage 1 — Research remains active.** [STATUS.md](STATUS.md) is the only progress/stage authority; dated audit recommendations do not advance the project automatically. Current work maps relevant fields, canonical/current papers, official code/checkpoints, data/benchmarks, evidence provenance, limitations and missing areas. Baseline candidates are maintained without making expensive reproduction the immediate objective.
+
+Read [RESEARCH.md](RESEARCH.md), then the relevant canonical topic and [SOURCES.md](SOURCES.md). Findings update those documents in place. Candidate Clover mechanisms remain in [HYPOTHESES.md](HYPOTHESES.md) until comparisons, prior-art checks and experiments justify promotion.
+
+<a id="topic-docs-glossary"></a>
+
+## Glossary
+
+
+Definitions are **working definitions** unless marked otherwise.
+
+- **Worldview** — the system responsible for forming and updating claims about the world from visual evidence.
+- **World State** — the machine-readable state used to answer world queries at a given time.
+- **Understanding** — the collection of capabilities described in `SSOT.md`; not synonymous with benchmark accuracy.
+- **Evidence** — observation-derived information that can support or challenge a world claim.
+- **Belief** — a current internal proposition or state supported to some degree by evidence.
+- **Primitive** — a minimal representational element from which larger world structures may be composed.
+- **Entity** — a persistent individuated structure in the represented world.
+- **Identity** — continuity relation linking observations/entity state through time.
+- **Type** — an abstraction grouping entities by relevant shared structure, behavior or dynamics.
+- **Relation** — a structured dependency between entities, regions or states.
+- **Dynamics** — rules or learned regularities governing change through time.
+- **Causality** — structure connecting interventions or events to changes beyond mere correlation.
+- **Observability** — whether evidence sufficient for a particular assertion is available from the current visual history.
+- **Unknown** — an observed or represented question whose value cannot currently be determined.
+- **Unobserved** — a region/state lacking sufficient visual observation; not equivalent to free or absent.
+- **Licence** — a Clover candidate hypothesis for a machine-verifiable envelope granting authority to an assertion. Its final role remains under investigation.
+- **Decision** — conversion of goals plus available world information and uncertainty into desired state changes/subgoals; a licence envelope is an optional hypothesis.
+- **Tool Use** — selection of capabilities to realize desired state changes.
+- **Execution** — closed-loop realization of a selected capability in the environment.
