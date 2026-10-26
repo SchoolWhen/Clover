@@ -2,7 +2,7 @@
 
 # 调研方向：论文来源、代码、数据与资源
 
-Maintained: **2026-10-25** · Document stage: **1 — Research** ([status](../STATUS.md)).
+Maintained: **2026-10-26** · Document stage: **1 — Research** ([status](../STATUS.md)).
 
 Primary-source map, papers, code, datasets and discovery signals. Read evidence labels and source dates before using any claim.
 
@@ -25,7 +25,7 @@ This is the canonical topic document. Update it in place; source-level dates and
 | Vision | `cat:cs.CV AND submittedDate:[202610150000 TO 202610252359]` | 981 / 接口 total=981 | [arXiv API](https://export.arxiv.org/api/query?search_query=cat%3Acs.CV+AND+submittedDate%3A%5B202610150000+TO+202610252359%5D&start=0&max_results=1000&sortBy=submittedDate&sortOrder=descending) |
 | AI/ML 交叉 | `(cat:cs.AI OR cat:cs.LG) AND submittedDate:[202610150000 TO 202610252359] AND (all:"world model" OR all:"causal representation" OR all:"partial observability" OR all:"embodied" OR all:"physical reasoning" OR all:"system identification" OR all:"active perception")` | 116 / 接口 total=116 | [arXiv API](https://export.arxiv.org/api/query?search_query=%28cat%3Acs.AI+OR+cat%3Acs.LG%29+AND+submittedDate%3A%5B202610150000+TO+202610252359%5D+AND+%28all%3A%22world+model%22+OR+all%3A%22causal+representation%22+OR+all%3A%22partial+observability%22+OR+all%3A%22embodied%22+OR+all%3A%22physical+reasoning%22+OR+all%3A%22system+identification%22+OR+all%3A%22active+perception%22%29&start=0&max_results=1000&sortBy=submittedDate&sortOrder=descending) |
 
-三组共 1,611 条返回记录，按论文 ID 去重后 **1,482** 条（上一轮短窗口批次）。本轮另做 19 组主查询（`2026-09-01`→`2026-10-25`）加动作/指代/部件/点追踪/物体位姿/3D 占据补充检索：主查询原始 2,170 条、去重 **2,072** 条；合计筛出 304 篇做书目核验（303 arXiv + 1 PMLR-only），其中 290 篇此前未引用；查询组、计数与登记见[核心视觉来源批次](#core-vision-source-frontier)。当前分类列表也核对了 [cs.RO recent](https://arxiv.org/list/cs.RO/recent) 与 [cs.CV recent](https://arxiv.org/list/cs.CV/recent)：最新可见公告批次为 **2026-10-23**。公告日期、初次提交日期、修订日期和本项目核验日期不是一回事。
+三组共 1,611 条返回记录，按论文 ID 去重后 **1,482** 条（上一轮短窗口批次）。本轮另做 19 组主查询（`2026-09-01`→`2026-10-25`）加动作/指代/部件/点追踪/物体位姿/3D 占据/物理世界模型补充检索：主查询原始 2,170 条、去重 **2,072** 条；合计筛出 314 篇做书目核验（313 arXiv + 1 PMLR-only），其中 300 篇此前未引用；查询组、计数与登记见[核心视觉来源批次](#core-vision-source-frontier)。当前分类列表也核对了 [cs.RO recent](https://arxiv.org/list/cs.RO/recent) 与 [cs.CV recent](https://arxiv.org/list/cs.CV/recent)：最新可见公告批次为 **2026-10-23**。公告日期、初次提交日期、修订日期和本项目核验日期不是一回事。
 
 关键词排序只用于找候选，不能充当全部论文的人类精读或排除判决。上一轮自动高分候选有 81 条；另用几何、物性、记忆、泛化、风险等题名检索补查，发现低分但直接相关的工作。本节登记的入选论文均人工检查了摘要，部分另核读方法/监督/局限段。未将 1,482 条或 2,072 条全部声称为纳入文献或精读文献。
 
@@ -39,7 +39,7 @@ This is the canonical topic document. Update it in place; source-level dates and
 
 ### 上一轮新增与深化文献索引（2026-10-15→10-19）
 
-下表共 54 条：53 篇首次登记；GNS（`2002.09405`）原已登记，本轮将摘要级记录深化到方法与监督边界选读，不重复计入新增论文。2026-10-25 的 290 篇新批次见[核心视觉来源批次](#core-vision-source-frontier)，两批不合并计数。
+下表共 54 条：53 篇首次登记；GNS（`2002.09405`）原已登记，本轮将摘要级记录深化到方法与监督边界选读，不重复计入新增论文。2026-10-25 的 300 篇新批次见[核心视觉来源批次](#core-vision-source-frontier)，两批不合并计数。
 
 | 原始提交 / 当前返回版本 | 题名与一手来源 | 方向正文 | 阅读深度 |
 |---|---|---|---|
@@ -189,7 +189,7 @@ This is the canonical topic document. Update it in place; source-level dates and
 
 ## 2026-10 核心视觉与原生速度来源批次
 
-检索/核验：**2026-10-25（Asia/Shanghai）**。本批次用 19 组主 arXiv 查询（2026-09-01 至 2026-10-25）加动作/指代/部件/物理/点追踪/物体位姿/3D 占据补充检索，主查询原始返回 2,170 条、去重后 2,072 条；另核 ICLR/ECCV/NeurIPS 2026 camera-ready。按标题/摘要与能力缺口筛出 304 篇做书目核验（303 篇 arXiv + 1 篇 PMLR-only；含单独核验的 YOLO26 论文），其中 290 篇此前未被本仓库引用，14 篇已有引用。对 97 篇做正文级选读，对 RF-DETR/WeVisOne-VL 做部分正文核读，其余为摘要/官方项目核验。未筛完全部候选，未把摘要阅读升级为全文复现。
+检索/核验：**2026-10-25（Asia/Shanghai）**。本批次用 19 组主 arXiv 查询（2026-09-01 至 2026-10-25）加动作/指代/部件/物理/点追踪/物体位姿/3D 占据/物理世界模型补充检索，主查询原始返回 2,170 条、去重后 2,072 条；另核 ICLR/ECCV/NeurIPS 2026 camera-ready。按标题/摘要与能力缺口筛出 314 篇做书目核验（313 篇 arXiv + 1 篇 PMLR-only；含单独核验的 YOLO26 论文），其中 300 篇此前未被本仓库引用，14 篇已有引用。对 102 篇做正文级选读，对 RF-DETR/WeVisOne-VL 做部分正文核读，其余为摘要/官方项目核验。未筛完全部候选，未把摘要阅读升级为全文复现。
 
 **检索协议边界：** 查询按相关性排序，未穷尽 arXiv 全部结果；会议/期刊正式记录、模型权重、数据集许可与预训练-评测重叠仍须逐项审计。下列 URL 固定到本次返回版本；官方代码/项目页均为 `OPEN_SOURCE`/`OFFICIAL_PROJECT` 登记，不代表已加载权重或复现。
 
@@ -700,6 +700,21 @@ This is the canonical topic document. Update it in place; source-level dates and
 | [2609.00619](https://arxiv.org/abs/2609.00619v1) | DSG: Dynamic 3D Scene Graph Construction for Embodied Agents in Changing Indoor Environments | 摘要/书目 | 本轮新增 |
 | [2610.27696](https://arxiv.org/abs/2610.27696v1) | PanoGraphGS: Unifying Panoptic Segmentation and Hierarchical 3D Scene Graphs with Gaussian Splatting | 摘要/书目 | 本轮新增 |
 
+### 物理世界模型 2026
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2610.08791](https://arxiv.org/abs/2610.08791v1) | World Models' Last Exam in Physics | 正文选读 | 本轮新增 |
+| [2610.17630](https://arxiv.org/abs/2610.17630v1) | From Pixels to Executable Physics: Behavior-Grounded World Models for Embodied Action Consequence Prediction | 正文选读 | 本轮新增 |
+| [2610.09514](https://arxiv.org/abs/2610.09514v1) | STRIKE: Learning Visual State Transitions for Physical World Modeling | 正文选读 | 本轮新增 |
+| [2606.27575](https://arxiv.org/abs/2606.27575v1) | Perceptual 3D Simulation With Physical World Modeling | 正文选读 | 本轮新增 |
+| [2602.00096](https://arxiv.org/abs/2602.00096v1) | Mirage2Matter: A Physically Grounded Gaussian World Model from Video | 正文选读 | 本轮新增 |
+| [2606.01810](https://arxiv.org/abs/2606.01810v5) | Planning Takes More Than Token Prediction: Causal Plan for Benchmarking and Building Physically Grounded Embodied Reasoners | 摘要/书目 | 本轮新增 |
+| [2610.03587](https://arxiv.org/abs/2610.03587v1) | AVL-JEPA: Preventing Causal Dynamics Information Collapse In Joint Embedding Predictive Architecture World Models | 摘要/书目 | 本轮新增 |
+| [2610.28613](https://arxiv.org/abs/2610.28613v1) | Physical Canvas: A Vision Tactile World Model For Robot Policy Evaluation And Learning | 摘要/书目 | 本轮新增 |
+| [2609.31924](https://arxiv.org/abs/2609.31924v1) | HapticWorld: an Interactive World Simulator with Real-time Torque Feedback | 摘要/书目 | 本轮新增 |
+| [2607.18367](https://arxiv.org/abs/2607.18367v1) | AlayaWorld: Interactive Long-Horizon World Modeling -- Full Technical Report | 摘要/书目 | 本轮新增 |
+
 ### 补充：PMLR-only 正式记录
 
 | ID | 标题 | 深度 | 状态 |
@@ -723,8 +738,9 @@ This is the canonical topic document. Update it in place; source-level dates and
 | ViTPose / Sapiens / MoGe | https://github.com/ViTAE-Transformer/ViTPose · https://github.com/facebookresearch/sapiens · https://github.com/microsoft/MoGe | 代码入口存在；未加载 |
 | OmniDocBench | https://github.com/opendatalab/OmniDocBench | 代码/数据入口存在；未运行评测 |
 
-**未完成：** 上述 290 篇新增中 96 篇正文级选读（另 1 篇既有引用）；其余的方法细节、监督配比、全部实验与失败条件仍需逐篇复核。新批次没有执行任何 Clover 模型、权重转换、速度测量或基准复现。
+**未完成：** 上述 300 篇新增中 101 篇正文级选读（另 1 篇既有引用）；其余的方法细节、监督配比、全部实验与失败条件仍需逐篇复核。新批次没有执行任何 Clover 模型、权重转换、速度测量或基准复现。
 <!-- END core-vision-source-frontier -->
+
 
 
 

@@ -2,7 +2,7 @@
 
 # 调研方向：视觉感知、识别、追踪与可识别性
 
-Maintained: **2026-10-25** · Document stage: **1 — Research** ([status](../STATUS.md)).
+Maintained: **2026-10-26** · Document stage: **1 — Research** ([status](../STATUS.md)).
 
 Core visual recognition, detection, segmentation, tracking and visual reading; image formation, geometry, hidden physical properties and the limits of visual evidence.
 
@@ -1319,7 +1319,7 @@ FunRec 从第一人称 RGB-D 交互视频重建功能 3D 场景：自动发现�
 | 空间定位、里程计与在线建图 | UniSim-SLAM、FFVO、VGGT-GS SLAM、FoundationVIO、Failure or Drift、MomentBA、HuMemSLAM、OASIS、RawSLAM、RingNav、DAPEVO、GS 综述 | 部分（静态室内/驾驶基准）/薄（动态开放世界与纯视觉度量尺度） | 纯 RGB 绝对尺度、动态物体、长期地图维护、显式失败/漂移分离、几何-语义统一状态、端侧实时 |
 | 部件、关系、功能与可供性 | RelWitness、NoPA、层次 3D 场景图、RelationVGGT、UniFunc3D、UniRAP、AffordAny、UniAfford、AFUN、VoxAfford、AFFORDMEM、PartLLM、UniPart、FlexPart、PartImageNet++、FunRec | 部分（2D/3D 基准）/薄（物理闭环） | 关系不完整/词表、3D 位姿依赖、功能/因果推断、跨物体迁移、部件粒度、affordance 本体、真实接触/物理验证 |
 | 持续存在、记忆与修正 | iSEE、PersistBench、WROP、PPMem、Grid or Nodes、SAM3RL、When Trackers Fail、TAPNext++、OccJEPA、Amodal SAM、VolFill、R4DSG、Ledger、EgoProbe、EgoMonth、VideoLoop、PREM | 部分（短时/长时基准） | 纯视觉持久状态、精确事件召回、场景边界/跨月、在线更新、补全幻觉的写回、反证后修正 |
-| 物理、因果与反事实 | 单图质量、PhysicsLENS、ViTacPhys、ViWi、Causal-JEPA、ITC、Axiomatic World Modeling；既有系统辨识/因果表示 | 部分（本轮新增） | 真实相机下的唯一可识别性、干预等价类、反事实校验；触觉/WiFi 反证 |
+| 物理、因果与反事实 | 单图质量、PhysicsLENS、ViTacPhys、ViWi、Causal-JEPA、ITC、Axiomatic World Modeling；World Models' Last Exam in Physics、DR-WM、STRIKE、P3Sim、Mirage2Matter、Causal-Plan、AVL-JEPA、PhysCanvas、HapticWorld、AlayaWorld；既有系统辨识/因果表示 | 部分（基准/动作-后果模拟） | 真实相机下的唯一可识别性、干预等价类、反事实校验；触觉/WiFi 反证；可测量物理一致性最佳仅 57.76/100 |
 | 组合、抽象与视觉推理 | TraceViT、Locality-Length、Reachability、DIFFCZSL、PRPC、CS-CLIP、JRDB-AVR；RelationVGGT、WeVisOne-VL、SetCon、TempoGround | 部分（基准）/薄（自然开放世界） | 低支持组合、规则抽象、长输入状态、答案-证据绑定、纯视觉先验 |
 | 开放世界、学习与可靠性 | WOW-Seg、LaGoVAD、AdvPCS、WebSSL、RF-DETR、TrackFlood、长尾/尺度研究、Checkpoint-Selection、Colorist、GATE、RADC、CTTA、Geographic-JEPA、FORGE | 部分（基准/TTA） | 持续偏移/遗忘、MLLM TTA、source-free/transductive、校准、端侧、真实部署 |
 | 主动观察及行动用途 | FoveaVLA、EgoReveal、Rendering-Free Lookahead、Adaptive Observation、SpatialScout、ActiveArena、CanViT、I-Perceive、ActiveScale、LEAP、CoMe-VLA、BAVO/A-FAR、LEAP-NBV、TAVIS、Epistemic-Trap | 部分（基准/模拟）/薄（真实成本/风险） | 信息增益/成本/风险联合、不可逆动作、真实机器人转移、记忆写入/修正 |

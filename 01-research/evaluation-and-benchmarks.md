@@ -2,7 +2,7 @@
 
 # 调研方向：评测方法、基准与证据
 
-Maintained: **2026-10-25** · Document stage: **1 — Research** ([status](../STATUS.md)).
+Maintained: **2026-10-26** · Document stage: **1 — Research** ([status](../STATUS.md)).
 
 This Stage-1 direction surveys benchmarks, capability batteries, protocol controls and the evidence ladder. Designs and external results are not Clover measurements. Registered experiments and results belong to [Stage 6](../06-evaluation/README.md).
 
@@ -167,6 +167,10 @@ This is the canonical topic document. Update it in place; source-level dates and
 | UniCounting COCO clean500 | [2610.08379](https://arxiv.org/abs/2610.08379v1) | 固定词表、无图像查询的多类别计数；点估计向量 L1、缺席类假质量、micro presence F1 | 开放词汇计数、实例身份、空间关系；clean 子集由作者构造 |
 | TrackFlood 时延攻击协议 | [2609.33948](https://arxiv.org/abs/2609.33948v1) | NMS-free 检测→跟踪管线的内容相关时延、截止违约、bounded-admission 防御代价 | 平均 FPS；干净输入性能；其他威胁模型/硬件 |
 | 6-DoF 物体位姿跟踪 | [2610.28962](https://arxiv.org/abs/2610.28962v1)、[2609.39116](https://arxiv.org/abs/2609.39116v1)、[2605.23523](https://arxiv.org/abs/2605.23523v1)、[2607.23468](https://arxiv.org/abs/2607.23468v1)、[2610.15287](https://arxiv.org/abs/2610.15287v1) | 实例 CAD/类别先验/生成 CAD 条件下的位姿轨迹、遮挡恢复与分阶段延迟 | 对象身份、物理属性、可变形/透明、无 CAD/无深度、恢复语义；单帧估计≠跟踪 |
+| World Models' Last Exam in Physics | [2610.08791](https://arxiv.org/abs/2610.08791v1) · [项目页](https://lab.einsia.ai/phys-last-exam) | 40 个受控任务上的**可测量物理判据**：先做时间一致性与任务可观测性筛选，再做任务特定量化测量；8 模型 1,280 条视频，最佳综合分 57.76/100 | 内部物理状态、不可观测变量、40 任务之外的物理；初始帧由 GPT-Image-2.5 生成，评测器含 VLM 筛选 |
+| 动作-后果与因果规划基准 | DR-WM [2610.17630](https://arxiv.org/abs/2610.17630v1)、Causal-Plan [2606.01810](https://arxiv.org/abs/2606.01810v5)、AVL-JEPA [2610.03587](https://arxiv.org/abs/2610.03587v1) | 动作依从/物理真实感（VLM 打分 + 100 人盲评）、因果四维（可执行性/效果/组合/鲁棒性）、闭环控制成功率 | 物理参数识别、干预等价类、真实传感器闭环；DR-WM/AVL-JEPA 在模拟与四足域，Causal-Plan 评分依赖 GPT rubric |
+| 视觉状态转移与场景编辑（Physics-IQ / 3DEditBench） | STRIKE [2610.09514](https://arxiv.org/abs/2610.09514v1)、P3Sim [2606.27575](https://arxiv.org/abs/2606.27575v1) | 把"下一状态"与"下一帧"分开计分：STRIKE Physics-IQ Verified 41.9（骨干基线 30.5），P3Sim 3DEditBench PSNR 23.12 / EA 0.827 | 递归组合的误差累积、接触/力真值、真实机器人；生成分数不等于状态正确 |
+| 多模态交互式世界模型 | PhysCanvas [2610.28613](https://arxiv.org/abs/2610.28613v1)、HapticWorld [2609.31924](https://arxiv.org/abs/2609.31924v1)、AlayaWorld [2607.18367](https://arxiv.org/abs/2607.18367v1)、Mirage2Matter [2602.00096](https://arxiv.org/abs/2602.00096v1) | 视听触统一状态空间、关节扭矩相对误差、长时程一致性/记忆对称、模拟数据训练后真实机器人抓取率 | 纯视觉可得性；触觉/力/模拟器是 `L3/L4` 外部先验；渲染 10 Hz 低于机器人更新率；视觉一致性不等于物理状态 |
 
 > OmniDocBench 的版本边界（v1.6→v1.7）与解析评分已在[基础视觉验收地图](#broad-visual-evaluation)记录，本表不重复；新批次只把 MEVL-STP 等场景文字工作登记在[感知方向](perception-and-identifiability.md#core-vision-frontier)。
 
@@ -201,6 +205,7 @@ This is the canonical topic document. Update it in place; source-level dates and
 | 点追踪（AJ/δ） | 遮挡期位置、重现后重检测、长视频漂移；2D 分数不检验 3D 或尺度 | TAPNext 长序列退化；TAPNext++ 的 AJ_RD；TAPVid-MV 的几何瓶颈；Track-On-R 的教师上界 | AJ_RD、可见性、3D 几何误差、长时漂移、相机运动、伪标签教师来源 |
 | 3D 点追踪/每像素 `SE(3)`（APD/RRE/ADD） | median-scaled 指标会奖励错误尺度；世界坐标依赖外部位姿/深度；平均刚体假设掩盖非刚体 | 3D SSM 绝对米制 AJ 0.256 但 leaderboard 0.121 落后 DELTA+ 0.141；MoSE3 依赖 π³ 几何与 64×H100 合成数据；TrackCraft3R 的速度声明随基线/分辨率反转 | 绝对米制与 scale-invariant 分列、内参/位姿来源、相机 vs 世界坐标、对象/部件分组 IoU、非刚体、吞吐与显存 |
 | 3D 占据/场景图（mIoU/R@k/关系匹配） | 闭集语义税则与静态场景；mIoU 不含实例/关系；节点 recall 可被语言先验抬高；在线建图常借用 LiDAR/深度位姿 | OccAny 零样本序列 IoU 25.91；VEOcc 1 Hz 且位姿来自 LiDAR-惯导；LEXI-SG 含物体分割 1.56 FPS；LOST-3DSG 3 KB 语义状态但依赖 VLM；DSG 粗关系匹配 43% | 占据/实例/关系分列、位姿/深度来源、动态变化/删除/重现、关系真值、端到端延迟 |
+| 物理一致性/世界模型（FVD、PSNR、VLM 打分） | 生成保真与观感平滑可完全掩盖状态错误；评测器自身含 VLM，会把"看起来合理"当物理正确；模拟器/触觉注入的先验被记作"学到的物理" | World Models' Last Exam 最佳仅 57.76/100；STRIKE Physics-IQ 41.9 vs 骨干 30.5；DR-WM 动作依从 0.949 来自 Genesis + 真实动作-响应校准；HapticWorld 关节扭矩误差 3.5–4.8% 但 10 Hz 渲染；AlayaWorld 记忆对称 0.8871 是视觉一致性 | 可测物理判据与观感分分列、干预后状态、先验来源（模拟器/触觉/动作标签）单独标注、递归 rollout 误差累积、真实机器人闭环、评测器与人类排序一致性 |
 | HOI（mAP） | 同义描述、角色反转与匹配引擎混入语义增益；排序随口径反转 | HOI 审计五口径：官方/SHOE/严格等价领先者变化；语义增益 1.6–20.3 mAP，AgentHOI 仅 49% 保留 | 官方分 + 同引擎身份控制 + 严格等价/角色反转 + 配对区间 |
 | 光流/匹配（EPE/AUC） | 干净基准高不等于损坏鲁棒；低 EPE 不等于下游位姿/分割收益；匹配数量与几何显著性可冲突 | FreeFlow Sintel 0.68；Foundation Flow Sintel 2.37 但 RoCo-Spring 鲁棒分 1.10；SGFormer 视角 1px 略低于 LoFTR | 损坏鲁棒性、下游位姿/SLAM、最坏条件、匹配不确定性 |
 | 非模态/遮挡（mIoU/amodal DSC） | full-mask 分数奖励“穿过遮挡物”；生成补全把先验当观测；合成遮挡与真实遮挡不一致 | OccSAM-Bench MedSAM full 0.640/visible 0.302；Amodal SAM mIoU_o 提升；VolFill 可见 CD 4.52 差于 MoGe2 2.62 | visible/invisible 分解、遮挡物反事实、补全来源标签、3D 一致性 |

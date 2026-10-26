@@ -2,7 +2,7 @@
 
 # 第一阶段：调研 / Research
 
-Maintained: **2026-10-25** · Document stage: **1 — Research** ([status](../STATUS.md)).
+Maintained: **2026-10-26** · Document stage: **1 — Research** ([status](../STATUS.md)).
 
 本目录只收纳前期调研：按研究方向维护当前文献、证据边界、资源与未解问题。每个方向一份正文，直接更新；不会因文件属于某个方向就冻结其表示或方法。
 
@@ -37,8 +37,8 @@ This is the canonical topic document. Update it in place; source-level dates and
 | 要求 | 当前可核查证据 | 尚未满足的部分 |
 |---|---|---|
 | 原问题与广义视觉目标保持 | 根目录明确纯视觉 AGI / 原生 ultrafast；[二十类能力地图](perception-and-identifiability.md#broad-visual-capabilities)与八方向正文 | 基础 CV、时空/物理/因果/推理须共同覆盖，不能缩成机器人或视频预测 |
-| 经典、相关、交叉与前沿并重 | 本轮新增 **290 篇此前未引用论文**（304 篇书目核验：303 arXiv + 1 PMLR），覆盖识别/检测/分割/追踪/阅读/动作/人-物交互与人脸/表情/手势/指代/姿态/人体与手部3D/计数/几何/边界与抠图/光流与匹配/遮挡与非模态/事件视觉与异步感知/主动感知与视角规划/长视频与第一人称记忆/组合泛化与视觉推理/计数与视觉测量/空间状态与 SLAM/部件/可供性/隐藏态/分布偏移/因果、长尾/细粒度/尺度失败面、效率、世界模型、点追踪/3D 运动、物体级 6-DoF 跟踪、3D 占据/场景图与主动视觉；新增 14 条[交叉桥接](research-questions.md#cross-domain-research-bridges)与 6 个[可证伪问题](research-questions.md#frontier-synthesis-2026-10) | 多数新增仍为摘要级；方法监督配比、全部实验与失败条件需逐篇复核 |
-| 更新到当前 | 19 组主 arXiv 查询取回 **2,072 条去重候选**（2026-09-01→2026-10-25），另加动作/指代/部件/点追踪/物体位姿/3D 占据补充检索与 ICLR/ECCV/NeurIPS 2026 定向 camera-ready；304 篇书目核验、96 篇本轮新增正文级选读（另 1 篇既有引用）、1 篇既有记录深化；12 类官方 artifact 仅做入口/版本核验 | ICLR/ECCV/CoRL 全目录（本轮只补 ICLR/ECCV/NeurIPS 定向 18 篇）、更多正式期刊与全部旧官方 artifact 尚未统一刷新 |
+| 经典、相关、交叉与前沿并重 | 本轮新增 **300 篇此前未引用论文**（314 篇书目核验：313 arXiv + 1 PMLR），覆盖识别/检测/分割/追踪/阅读/动作/人-物交互与人脸/表情/手势/指代/姿态/人体与手部3D/计数/几何/边界与抠图/光流与匹配/遮挡与非模态/事件视觉与异步感知/主动感知与视角规划/长视频与第一人称记忆/组合泛化与视觉推理/计数与视觉测量/空间状态与 SLAM/部件/可供性/隐藏态/分布偏移/因果、长尾/细粒度/尺度失败面、效率、世界模型、点追踪/3D 运动、物体级 6-DoF 跟踪、3D 占据/场景图、物理世界模型与因果规划与主动视觉；新增 14 条[交叉桥接](research-questions.md#cross-domain-research-bridges)与 7 个[可证伪问题](research-questions.md#frontier-synthesis-2026-10) | 多数新增仍为摘要级；方法监督配比、全部实验与失败条件需逐篇复核 |
+| 更新到当前 | 19 组主 arXiv 查询取回 **2,072 条去重候选**（2026-09-01→2026-10-25），另加动作/指代/部件/点追踪/物体位姿/3D 占据/物理世界模型补充检索与 ICLR/ECCV/NeurIPS 2026 定向 camera-ready；314 篇书目核验、101 篇本轮新增正文级选读（另 1 篇既有引用）、1 篇既有记录深化；12 类官方 artifact 仅做入口/版本核验 | ICLR/ECCV/CoRL 全目录（本轮只补 ICLR/ECCV/NeurIPS 定向 18 篇）、更多正式期刊与全部旧官方 artifact 尚未统一刷新 |
 | 引文可靠 | 335 个旧数字 arXiv ID 取回书目；新增逐篇固定当前版本和阅读深度；坏链已剔除并记录（`emu.world`、`GZHU-DVL/LI-Dikai`） | 元数据检查不是旧综述全部结论复核；预训练-评测重叠仍多不可核对 |
 | 知道方法怎样约束解法 | [核心视觉前沿](perception-and-identifiability.md#core-vision-frontier)、[原生速度系统证据](foundation-models-and-systems.md#ultrafast-systems-frontier)、[世界模型前沿](representation-and-memory.md#world-model-frontier)、[主动视觉前沿](causality-and-active-perception.md#active-vision-frontier) 均按机制/来源/证据/边界记录 | 尚不能冻结一套一般解法或宣布研究完成 |
 | 评测与资源能区分解释 | [基础视觉联合验收](evaluation-and-benchmarks.md#broad-visual-evaluation)、[新验收面](evaluation-and-benchmarks.md#evaluation-frontier)、[U11–U15 验收门](evaluation-and-benchmarks.md#topic-docs-evaluation-understanding-battery)（能力向量/纯视觉来源/原生时延/统一模型/隐藏态可识别性）、[原生速度口径](foundation-models-and-systems.md#native-ultrafast-research)，兼顾既有理解/行动证据 | 门已定义，尚无 Clover 测量；checkpoint、训练混合、许可与公平预算仍待核 |
@@ -55,11 +55,11 @@ This is the canonical topic document. Update it in place; source-level dates and
 
 ## 当前调研结论与待补证据
 
-维护/核验日：2026-10-25。仍为 Stage 1，原研究问题与长期目标不变。
+维护/核验日：2026-10-26（文献检索窗口仍为 2026-09-01→2026-10-25）。仍为 Stage 1，原研究问题与长期目标不变。
 
 | 当前方向 | 本轮已补的比较证据 | 下一项未闭合问题 |
 |---|---|---|
-| 基础视觉与观测 | 识别、检测、分割、追踪、阅读、动作、指代、姿态、计数、几何、光流与匹配、遮挡与非模态、事件视觉、空间状态、可供性、点追踪/3D 运动、物体级 6-DoF 跟踪、3D 占据/场景图新增 290 篇一手比较；含长尾/细粒度/尺度失败面与 YOLO26/RF-DETR/SAM 3/SAMURAI/MOTIP2/UGO/UniSim-SLAM/FFVO/FineHOI/HOIBlender/GraspHOI/SAGE/FreeFlow/MVLoMa/B2TFPose/OccJEPA/Amodal SAM/VolFill/ChronoFuse/Event3R/E-TraMamba/R4DSG/Ledger/EgoProbe/TraceViT/JRDB-AVR/DualCount/BunchCount/SVCBench/RT-Counter/DenseFace/FaceLiVTv2/EventFace/TAG/SAM 3D Body/Fast SAM 3D Body/OnlineHMR/DanceHMR/TAPFormer/M2P/CoWTracker/Track4World/MoSE3/3D SSM/Track-On-R/TrackCraft3R/TrackerSplat/RoPT/GRC-Pose/ComPose/Robust Recovery/ASM-6D/Event6D/LEGAU/DICArt/OCH3R/OccAny/OccAnyScene/VEOcc/OccTrack360/FALCON/LEXI-SG/LOST-3DSG/OP3DSG/DSG/PanoGraphGS/AffordAny/UniAfford/PartLLM/UniPart/FunRec/VideoMaMa++/RenderMatte/SEP-YOLO/SeeClear/OPC16K/ActiveArena/CanViT/I-Perceive/Checkpoint-Selection/Colorist/GATE/PaddleOCR-VL/dots.ocr/DA3 等 | 统一视觉模型的同协议比较；小物体/长尾/细粒度/文字与追踪身份的联合验收；真实相机下隐藏态唯一识别（触觉/WiFi 反证） |
+| 基础视觉与观测 | 识别、检测、分割、追踪、阅读、动作、指代、姿态、计数、几何、光流与匹配、遮挡与非模态、事件视觉、空间状态、可供性、点追踪/3D 运动、物体级 6-DoF 跟踪、3D 占据/场景图、物理世界模型与因果规划新增 300 篇一手比较；含长尾/细粒度/尺度失败面与 YOLO26/RF-DETR/SAM 3/SAMURAI/MOTIP2/UGO/UniSim-SLAM/FFVO/FineHOI/HOIBlender/GraspHOI/SAGE/FreeFlow/MVLoMa/B2TFPose/OccJEPA/Amodal SAM/VolFill/ChronoFuse/Event3R/E-TraMamba/R4DSG/Ledger/EgoProbe/TraceViT/JRDB-AVR/DualCount/BunchCount/SVCBench/RT-Counter/DenseFace/FaceLiVTv2/EventFace/TAG/SAM 3D Body/Fast SAM 3D Body/OnlineHMR/DanceHMR/TAPFormer/M2P/CoWTracker/Track4World/MoSE3/3D SSM/Track-On-R/TrackCraft3R/TrackerSplat/RoPT/GRC-Pose/ComPose/Robust Recovery/ASM-6D/Event6D/LEGAU/DICArt/OCH3R/OccAny/OccAnyScene/VEOcc/OccTrack360/FALCON/LEXI-SG/LOST-3DSG/OP3DSG/DSG/PanoGraphGS/WorldModelsLastExam/DR-WM/STRIKE/P3Sim/Mirage2Matter/Causal-Plan/AVL-JEPA/PhysCanvas/HapticWorld/AlayaWorld/AffordAny/UniAfford/PartLLM/UniPart/FunRec/VideoMaMa++/RenderMatte/SEP-YOLO/SeeClear/OPC16K/ActiveArena/CanViT/I-Perceive/Checkpoint-Selection/Colorist/GATE/PaddleOCR-VL/dots.ocr/DA3 等 | 统一视觉模型的同协议比较；小物体/长尾/细粒度/文字与追踪身份的联合验收；真实相机下隐藏态唯一识别（触觉/WiFi 反证） |
 | 表示与记忆 | 世界模型前沿（Dreamer 4、Emu3.5、Gen4P）、PPMem 深化、平面/节点/生成 latent 的边界；既有物理结构、信息瓶颈、压缩 | 未知未来任务下的证据可恢复；身份/部件/接触的充分性；生成写回与观测证据的分离 |
 | 因果与主动采证 | 主动视觉（FoveaVLA、EgoReveal、Rendering-Free Lookahead、Adaptive Observation、SpatialScout）；视网膜/事件/V1 跨域证据 | 可识别性前提在真实成像和闭环中是否成立；采证代价/风险/不可逆性；主动策略与固定策略的等成本比较 |
 | 学习与数据 | WebSSL 同数据受控比较；教师/合成数据/RLVR/失败导向数据的归因；纯视觉 vs 语言监督的分层预测 | 配平数据/监督/骨干；纯视觉在开放词汇/文字/关系任务上的独立证据；数据-评测重叠审计 |
