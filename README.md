@@ -27,13 +27,13 @@
 
 | Question | Living documents |
 |---|---|
-| How can one model recognize, detect, segment, track and read? | [Core visual capability map](01-research/perception-and-identifiability.md#broad-visual-capabilities) · [Capability evaluation](01-research/evaluation-and-benchmarks.md#broad-visual-evaluation) |
+| How can one model recognize, detect, segment, track and read? | [Core visual capability map](01-research/perception-and-identifiability.md#broad-visual-capabilities) · [2026-10 core CV frontier](01-research/perception-and-identifiability.md#core-vision-frontier) · [Capability evaluation](01-research/evaluation-and-benchmarks.md#broad-visual-evaluation) |
 | What can visual evidence actually identify? | [Perception, geometry and physics](01-research/perception-and-identifiability.md) · [Research questions](01-research/research-questions.md) |
 | What should a machine remember about the world? | [State, representation and memory](01-research/representation-and-memory.md) |
 | When should it look again, intervene or revise its beliefs? | [Causality, action and open-world reasoning](01-research/causality-and-active-perception.md) |
 | How do data and training change capability? | [Learning and data](01-research/learning-and-data.md) |
 | What do foundation models and deployment systems contribute? | [Models, runtime and engineering](01-research/foundation-models-and-systems.md) |
-| What would establish natively ultrafast visual intelligence? | [Computation and complete latency](01-research/foundation-models-and-systems.md#native-ultrafast-research) |
+| What would establish natively ultrafast visual intelligence? | [Computation and complete latency](01-research/foundation-models-and-systems.md#native-ultrafast-research) · [2026-10 systems evidence](01-research/foundation-models-and-systems.md#ultrafast-systems-frontier) · [Latency-claim audit](01-research/foundation-models-and-systems.md#latency-claim-audit) |
 | What evidence would distinguish the competing answers? | [Evaluation and resources](01-research/evaluation-and-benchmarks.md) · [Primary sources](01-research/sources-and-resources.md) |
 | Which Clover ideas still need to survive a test? | [Hypotheses](04-innovation/README.md) · [Research process](PROCESS.md) |
 

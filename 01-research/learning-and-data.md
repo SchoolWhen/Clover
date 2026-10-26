@@ -90,6 +90,111 @@ This is the canonical topic document. Update it in place; source-level dates and
 - **本次阅读深度：** 摘要与书目核验。
 <!-- END current-cross-domain-evidence -->
 
+<!-- BEGIN learning-provenance-frontier -->
+<a id="learning-provenance-frontier"></a>
+
+## 学习来源的前沿归因：纯视觉、语言、教师与失败数据
+
+检索/核验：**2026-10-25（Asia/Shanghai）**。本节不重复各方法的任务记录，而回答一个对 Clover 更关键的问题：**当能力提升时，究竟该归因于视觉自监督、语言监督、教师蒸馏、合成数据、训练配方，还是部署分布？** 以下结论来自受控比较或作者自述的边界，不是 Clover 实验。
+
+### WebSSL：同一数据上，纯视觉自监督可以追平图文监督
+
+- **一手来源：** [固定版本](https://arxiv.org/abs/2504.01017v1) · [作者项目](https://davidfan.io/webssl/)。`PRIMARY_PAPER` / `OFFICIAL_PROJECT`。
+- **机制：** 把视觉自监督与 CLIP 放在**同一 MetaCLIP 图像数据**上训练，以 VQA 和经典视觉基准做受控比较；避免“SSL 与 CLIP 用了不同数据”这一混淆。
+- **输入与学习来源：** 训练目标不含图文对比（`L0`）；但数据来自 MetaCLIP 语料，筛选/来源元数据可能使用文本；VQA 评估提供问题文本。因此“language-free”指**训练目标**，不是整条数据与评估管线无语言。
+- **实际证据：** 在该设置中，视觉 SSL 随数据与模型规模增长优于 CLIP，扩到 7B 仍未饱和，并在多类 VQA 与经典视觉基准达到 CLIP 水平。
+- **不能推出：** 追平的是特定基准；开放词汇检测、文字阅读、空间/物理推理、持续记忆未由此闭合；数据策展与 VQA 语言接口仍是混杂因素；不等于“语言监督可被完全替代”。
+- **阅读深度：** 摘要与作者项目说明；未复核全部训练细节；未运行复现。
+
+### StreamMAE：连续视频流上的自监督学习，不等于把帧打乱
+
+- **一手来源：** [固定版本](https://arxiv.org/abs/2609.40333v1)（NeurIPS 2026）。`PRIMARY_PAPER`。
+- **机制：** 研究严格按时间顺序、滑窗 batch、无全局 shuffle/多 epoch 回放的连续视频自监督；构建 WT++（95 小时城市步行视频）与评估套件；发现对比/蒸馏方法在流式设置下退化，MAE 较稳但仍低于 i.i.d.；主因是同一 batch 内近重复帧造成的高 intra-batch 相似度。StreamMAE 保留 MAE 重建目标，加入 stream-aware 正则与运动偏置 crop。
+- **输入与学习来源：** 无标签连续视频 `L0`；MAE 像素重建；WT++ 数据与评估协议；不涉及语言/动作标签。
+- **实际证据：** 作者报告 StreamMAE 优于流式基线，并在相同视频数据上追平 i.i.d. MAE；对比/蒸馏基线在流式设置下明显退化。
+- **不能推出：** 除运动偏置 crop 外没有显式时序动力学；固定帧下采样是次优；只在 checkpoint averaging 层面处理长时聚合；城市步行域有限；不是视频世界模型、追踪或语义理解。
+- **阅读深度：** 正文选读：流式设置、WT++、主结果与附录 Limitations；未复核全部附录；未运行复现。
+
+**对 Clover 的意义：** 这是目前最直接支持“纯视觉路线在规模上可行”的受控证据，但它同时给出了两条约束：第一，必须匹配**数据**再比较监督目标；第二，纯视觉模型仍要在语言定义的任务（开放词汇、文字、关系）上单独证明，不能借 VQA 分数外推。
+
+### 监督来源的二维记账：目标 × 数据
+
+| 方法族 | 训练目标 | 数据/教师来源 | 能支持的主张 | 不能支持的主张 |
+|---|---|---|---|---|
+| MAE / DINOv3 | 像素重建 / 自蒸馏（`L0`） | 图像语料；策展可能含元数据 | 静态视觉特征可规模化、可迁移 | 开放词汇语义、文字、物理、时序状态 |
+| CLIP / Meta CLIP 2 / SigLIP 2 / PE | 图文对比 + 语言/定位辅助（`L2`） | 网络图文对；多语言/数据引擎 | 零样本分类/检索、语言对齐的密集特征 | 无语言先验的视觉概念发现；纯视觉学习证据 |
+| AIMv2 | 图像 patch + 文本自回归（`L2`） | 图文数据 | 冻结主干的强识别/定位迁移 | 纯视觉目标；长期记忆 |
+| WebSSL | 视觉自监督（`L0`） | **同一** MetaCLIP 图像数据 | 受控数据下 SSL 可追平 CLIP | 全任务等价；数据管线无语言 |
+| SAM 3 / SAM 3D / DA3 / olmOCR 2 | 检测/分割/几何/OCR + 数据引擎/教师/RLVR（`L1/L4`） | 人工+模型在环、合成、教师伪标签 | 特定能力的高质量监督可规模化 | 架构单独贡献；纯视觉自监督；开放世界因果 |
+| YOLO26 / DEIM / RF-DETR / D-FINE | 检测监督 + 训练配方/NAS（`L1`） | COCO/Objects365/目标数据集 | 训练收敛、NMS-free、目标域 Pareto | 推理机制独立贡献；跨任务统一权重；真实闭环时延 |
+
+<a id="pure-vision-provenance-audit"></a>
+
+### 纯视觉声称审计：V0–V3 × L0–L4
+
+“纯视觉”至少有三个不同主张：**部署只接收 RGB（V0）**、**训练不用人工标签/语言/动作（L0）**、**推理不接外部工具/记忆**。本轮 104 篇新论文中，同时满足三者的极少。下表按论文披露逐项拆分；“L0*”表示目标函数为视觉自监督，但数据策展/评估仍可能使用语言元数据。
+
+| 方法 | 部署输入 | 学习来源 | 外部先验/工具 | 纯视觉程度 | 不能声称 |
+|---|---|---|---|---|---|
+| MAE / DINOv3（base） | V0 图像 | L0 像素重建/自蒸馏 | 数据策展；DINOv3 文本对齐变体另记 | **接近 V0/L0** | 语义、文字、物理、时序状态 |
+| StreamMAE | V0 连续视频 | L0 重建 + 流式正则 | 固定帧下采样/光流式运动偏置 | **接近 V0/L0** | 世界模型、追踪、语义 |
+| WebSSL | V0 图像 | L0 视觉自监督 | 同 MetaCLIP 数据；评估 VQA 含语言 | **L0\*** | “整条管线无语言”；开放词汇/文字 |
+| MoSA | V0 图像（训练用视频） | L0 + 合成视频 + 光流伪标签 | 合成数据、运动分割前端 | **V0/L0 + 合成/光流** | 零先验；语义/身份/物理 |
+| CLIP / PE / MetaCLIP2 / SigLIP2 / AIMv2 | V0 图像/视频 | L2 图文对比/生成 | 网络图文对、数据策展 | **L2** | 无语言先验的视觉概念发现 |
+| SAM 3 | V0 图像/视频 | L1 掩码/概念标签 + L2 文本编码器 | 5.4B 图文对、4M 概念数据引擎、exemplar | **L1+L2** | 纯视觉学习；单 GPU 实时多目标 |
+| SAM 3D | V0 单图 | L1 3D/纹理标注 + L4 合成/艺术家数据 | 合成预训练、真实对齐、DPO 数据回收 | **L1+L4** | 纯视觉物理重建；接触/布局 |
+| DA3 | V0/V2 图像/多视图 | L1/L4 深度/位姿 + 教师伪标签 | 公开学术数据、教师模型 | **L1+L4** | 无监督；动态/物理理解 |
+| SAMURAI | V0 视频 + 首帧框 | 上游 SAM 2 L1；本身不重训 | Kalman 运动先验、SAM 2 记忆 | **V0 + L1 上游** | 从零纯视觉；开放世界多目标 |
+| MOTIP2 / UGO | V0 视频 + 首帧框/exemplar | L1 MOT/GMOT 标注 | 检测器预训练、空间先验 | **L1** | 纯视觉身份；物理实体理解 |
+| When Trackers Fail | V0 视频 | L1 SAM3 失败轨迹 + L2 VLM 验证 | VLM、SAM3 传播器 | **L1+L2** | 纯视觉；实时/形式安全 |
+| TAPNext / TAPNext++ | V0 视频 + 查询点 | L1/L4 合成轨迹/教师伪标签 | BootsTAP、合成数据 | **L1/L4** | 纯视觉物理状态；长时身份 |
+| CoTracker3 | V0 视频 + 查询点 | L1/L4 合成轨迹 + 教师伪标签 | Kubric、教师 | **L1/L4** | 纯视觉；对象语义 |
+| WOW-Seg | V0 图像 + 掩码 | L1 掩码/类别 + L2 VLLM | VLLM 世界知识、掩码生成器 | **L1+L2** | 无语言预训练；无文字提示≠纯视觉 |
+| PaddleOCR-VL / dots.ocr | V0 文档图像 | L1 OCR/结构 + L2 LLM | 语言模型、数据引擎 | **L1+L2** | 纯视觉阅读；语义推理 |
+| V-JEPA 2（机器人变体） | V0 视频（+动作） | L0 视频预测 + L3 动作条件 | 机器人动作/示范 | **L0/L3** | 纯被动视觉；通用物理 |
+| StarWM | V0 控制观测 | L0 动力学 + L3 奖励变体 | DreamerV3 骨架、奖励 | **L0/L3** | 真实机器人；任务无关状态 |
+| Dreamer 4 | V0 游戏画面 | L3 动作 + 离线游戏数据 | 动作标签、游戏模拟器 | **L3** | 真实相机物理；纯视觉 |
+| Gen4P | V0 单目视频 | L1/L4 几何/深度 + 生成器预训练 | 视频生成器、深度 LoRA | **L1/L4+生成先验** | 纯视觉 4D；因果/物性 |
+| FoveaVLA / EgoReveal | V0/V2 + 动作/位姿 | L3 示范 + L4 深度/关键点 | 机器人动作、外部相机、位姿 | **L3/L4** | 纯视觉；被动观察 |
+| RFL / SpatialScout | V0/V1/V2 + 位姿/标定 | L2 VLM + L4 3DGS/位姿 | VLM、3DGS、相机标定、物体清单 | **L2+L4/V1–V2** | 纯单目 V0；通用主动探索 |
+| LiFR-Seg | RGB + 事件（非 V0） | L1 语义标签 | 事件相机、标定 | **事件+L1** | 纯 RGB；通用视觉 |
+| UGO / UniRAP / UniFunc3D | V0/V2 图像/视频 | L1 标签 + L2 语言/可供性 | exemplar、语言、3D 表示 | **L1+L2** | 纯视觉；物理可行性 |
+
+**审计结论：**
+1. **真正接近 V0/L0 的只有静态/视频自监督表征与无监督分割**（MAE、DINOv3、StreamMAE、WebSSL、MoSA）；其中 WebSSL 的数据/评估、MoSA 的合成视频/光流仍是混杂项。
+2. **所有追踪/OCR/3D/可供性/主动视觉方法都至少依赖 L1 标注**；多数还依赖语言（L2）、动作（L3）、深度/位姿/力（L4）或模拟器。把它们统称“纯视觉”不成立。
+3. **“无文字提示”不等于“无语言训练”**（WOW-Seg），“无人工标注”不等于“无合成数据/光流”（MoSA），“只用 RGB 部署”不等于“只用 RGB 学习”（SAMURAI/CoTracker 上游）。
+4. **新增隐藏态证据进一步收紧边界：** 单图质量估计虽只需 RGB 推理，却依赖单目深度与 VLM 材料先验（`L1/L2`）；iSEE 是无标签视频下少见的 `V0/L0` 永久性证据，但限固定相机；ViTacPhys 与 ViWi 用触觉/WiFi 明确反证“视觉-only 唯一识别物性”。
+5. 因此 Clover 的“vision alone”必须分阶段声明：**V0/L0 表征**、**V0/L1 任务适配**、**V0/L2 语义接口**、**V3/L3 行动学习**。任何跨阶段的能力都必须单独证明，不能用一个总标签概括。
+
+### 教师、合成数据与“数据引擎”的归因规则
+
+1. **教师是额外证据来源。** DA3 的教师-学生继承 Depth Anything 2 的细节/泛化；SAM 3D 用合成预训练 + 真实对齐；olmOCR 2 用合成文档与可验证单元测试。若把学生成绩归因于“普通 Transformer 更强”，就抹掉了教师与合成数据。
+2. **人工在环不是免费标签。** SAM 3 的 4M 概念标签、SAM 3D 的人类+模型在环标注、PaddleOCR-VL 的多语言数据都需要标注成本与许可；这些是 `L1`，不是模型自发发现。
+3. **合成数据的物理地位不同。** 合成图像/文档可提供精确真值与可控版式，但不是观测到的真实物理证据；sim-to-real 差距必须单独测。
+4. **RLVR 的奖励是代理。** olmOCR 2 的二元单元测试、When Trackers Fail 的失败检测奖励、SAM3RL 的追踪奖励，都只覆盖被测试的性质；奖励漏洞会变成能力假象。
+5. **训练配方可与架构混淆。** YOLO26 同时改双头、去 DFL、MuSGD、Progressive Loss、STAL；DEIM 改匹配与损失；D-FINE 改回归表示与自蒸馏；RF-DETR 改 NAS。不能把联合收益写成单一模块的创新。
+
+### 失败导向数据：部署分布本身是一种监督
+
+- **When Trackers Fail** 在真实 SAM3 传播轨迹上挖掘失败，按失败类型过采样，训练验证/纠正器；这使监督分布接近部署时会遇到的错误，而不是 oracle 轨迹。作者同时指出：错误纠正会覆盖正确轨迹，门控无形式安全保证。
+- **TAPNext++** 用 1024 帧长序列、periodic roll 与遮挡点监督改善重现；这是把“长时/重入”写进训练分布，而不是只改推理。
+- **MOTIP2** 用空间 ID 交换/距离加权/位置锚点把“空间上不可能的 ID 跳变”写进数据、损失与表示；作者也给出其失败条件（同位置同时离开/进入）。
+- **SAMURAI / SAM3RL** 代表两条不同路线：前者不改权重、用运动先验修正记忆选择；后者用 RL 学习记忆控制。两者都说明“记忆管理”是可独立研究的变量，而不是骨干的附属品。
+
+**对 Clover 的可检验预测：** 若纯视觉路线成立，则在**匹配数据、模型规模与评测协议**后，视觉自监督应在识别/定位/密集特征上追平语言监督；但在文字定义的新概念、开放词汇关系、需要语言知识的任务上，除非视觉经验覆盖，否则仍应落后。这个“任务分层预测”比“纯视觉能否 AGI”这一笼统问题更容易被实验证伪。
+
+### 数据与评测污染：必须主动审计
+
+- **预训练-评测重叠不可核对：** When Trackers Fail 作者明确无法验证基础模型预训练数据与评测视频的重叠；这类不确定性应默认存在，而不是默认干净。
+- **基准版本漂移：** OmniDocBench 已从 v1.6 转到 v1.7；PaddleOCR-VL/dots.ocr/PolyOCR 各自使用不同版本与内部集，跨论文分数不能直接排序。
+- **内部基准与自建基准：** PaddleOCR-VL 的图表/公式集、UniCounting 的 COCO clean500、TAPVid-MV 的真值辅助模态，都是作者构造；需要独立复现与第三方评测。
+- **数据引擎的可复现性：** SAM 3/SAM 3D/olmOCR 2 的数据引擎规模大，公开权重不等于公开全部数据与筛选管线；“开放”程度须逐项登记。
+
+**本节结论：** 当前证据不支持“纯视觉自监督已经全面替代语言监督”，也不支持“语言监督是唯一出路”。更准确的现状是：**在匹配数据与规模时，视觉自监督可以追平部分识别/密集特征；但在开放词汇、文字、关系和知识密集任务上，语言/教师/数据引擎仍是强来源。** Clover 的纯视觉主张必须按任务分层、按来源记账、按数据重叠审计，才能成为可证伪的科学纲领。
+<!-- END learning-provenance-frontier -->
+
+
 <!-- BEGIN broad-vision-primary-evidence -->
 <a id="broad-vision-primary-evidence"></a>
 
@@ -137,8 +242,62 @@ This is the canonical topic document. Update it in place; source-level dates and
 数据分割至少按原图/原视频、实体身份、场景和采集来源去重；连续帧、裁剪、教师生成的重复标注不得跨训练/测试制造捷径。后续以未见类别、关系、任务组合、退化条件和新历史需求来检验广义理解；不因某种数据难收而删除对应能力目标。本节是研究维度，没有冻结训练配方。
 <!-- END broad-visual-learning -->
 
+<!-- BEGIN distribution-shift -->
+<a id="distribution-shift-2026"></a>
+
+## 分布偏移、检验点选择与持续适应
+
+真实部署的失败往往不是“训练集不够大”，而是**训练分布与部署分布不一致**：新医院、新城市、新传感器、新天气、新设备。2026 年这一方向出现三条互相独立的证据线：**数据侧**（多样性/合成/颜色增强）、**选择侧**（checkpoint/校准，不重训）、**在线适应侧**（TTA/持续 TTA）。本轮补 10 篇，重点不是再提一个 adapter，而是分清“什么在偏移下真的保留”。
+
+| 方法 | 一手来源 | 机制与可核查证据 | 边界与反假设 |
+|---|---|---|---|
+| Reliability-Aware Checkpoint Selection | [2609.39934](https://arxiv.org/abs/2609.39934v2) · [项目页](https://github.com/Jjjjjjh666/Reliability-Aware-DG) · 正文选读 | 指出 DG 常用 source-val 准确率选 checkpoint，但同轨迹中近最优准确率的 checkpoint 在目标域概率质量可不同；AC 规则在最优 source 准确率容差内按 source reliability 重选；PACS/OfficeHome/TerraIncognita 540 runs：ECE −0.2395 [−0.4038,−0.0903]、CwECE −0.1821、NLL −0.0295，准确率 +0.2133 pp 但 CI 跨 0；118/540 选点损失目标准确率；SWAD 在独立 OfficeHome rerun 上准确率/校准均更好 | 只重选固定训练轨迹，不改变训练；source reliability 与 target 概率质量仍非同一量；准确率不保证；容差/聚合规则未定；SWAD 反例说明“选择”不是万能；不是在线适应 |
+| DG + Synthetic Data in Detection | [2610.00030](https://arxiv.org/abs/2610.00030v1) · 正文选读 | 目标检测 DG 综述：合成数据可作 enabler（扩充多样性/对齐）、probe（受控偏移诊断）、以及 synthetic-to-real gap 的来源；结论：增加多样性常比增加真实感更有效；少量真实数据可显著改善合成到真实迁移；分类 DG 方法不能直接迁移到检测（定位+分类双误差） | 综述无新实验；检测的域偏移同时影响定位/分类；合成数据可能引入 shortcut；真实数据需求仍存在；不是具体方法；不覆盖视频/开放世界 |
+| Colorist / Statistical Color Matching | [2608.18915](https://arxiv.org/abs/2608.18915v2)（DEMI@MICCAI 2026） · 正文选读 | 训练-free 的 RGB 全局均值-标准差颜色匹配作为数据增强；19 个医学数据集；协变量偏移下 balanced accuracy 0.3953→0.5438（+0.148），30% 应用概率最佳；同分布仅 +0.008；作者报告结构保真优于生成式风格迁移，且计算/能耗更低 | 只建模光度偏移，不解决几何/分辨率/解剖差异；多类不平衡基准仍弱；医学域特定；不是表示学习；颜色统计匹配可能抹除诊断色差 |
+| Zero-Shot DG via Domain Prompt Learning | [2610.30680](https://arxiv.org/abs/2610.30680v1)（IJCV） · 摘要 | 不访问 source 数据，用 CLIP 文本/视觉 prompt 学习目标域知识，实现未见类/未见域零样本 DG | 摘要级；依赖 CLIP/语言先验；prompt 选择与目标域估计；不是纯视觉；未给跨数据集全表 |
+| GATE | [2608.29395](https://arxiv.org/abs/2608.29395v1)（BMVC 2026） · 摘要 | 训练-free 两遍 transductive TTA：冻结图像/文本编码器与 prompt，用文本高斯 + 视觉高斯证据融合，按可靠性门控 | 摘要级；需要未标注目标集（transductive）；CLIP/SigLIP 特定；不是生成式 MLLM；门控阈值/校准未核 |
+| RADC | [2610.06932](https://arxiv.org/abs/2610.06932v1) · 摘要 | VLM TTA 双缓存：语义前景缓存聚合类别一致空间证据，高斯风险准入联合类分离/特征不确定性筛选可靠样本 | 摘要级；依赖 CLIP 表示；背景偏差/缓存污染仍有风险；不是 MLLM 生成式；未给跨数据集全表 |
+| Continual TTA Survey | [2607.08164](https://arxiv.org/abs/2607.08164v3)（TMLR 2026） · 摘要 | 持续测试时适应综述：形式化非平稳目标分布、灾难遗忘与伪标签误差累积；提出层次分类与 benchmark 协议 | 综述不提供新方法；协议/指标未统一；真实部署的长尾/计算约束未解；不是纯视觉 |
+| Limits of Representation TTA for MLLMs | [2610.19892](https://arxiv.org/abs/2610.19892v1)（NeurIPS 2026 workshop） · 摘要 | 负结果：CLIP 类对比模型上有效的 representation-based TTA，在生成式 MLLM 上几乎不能恢复腐蚀性能；即使离线用目标数据做 sample-blind 特征对齐，收益也边际；原因是腐蚀偏移在生成式模型中不呈共享的单一分类域方向 | 摘要级；特定 MLLM/腐蚀协议；不是所有 TTA 都无效；说明 CLIP TTA 结论不能直接迁移到生成式模型；未给通用替代方案 |
+| Geographic Diversity JEPA | [2607.04500](https://arxiv.org/abs/2607.04500v1) · 正文选读 | 零标签 JEPA 驾驶世界模型：nuPlan 多城市 vs 单地理训练，零样本评估 Argoverse2 Miami/Austin；63K 多地理组合 surprise 0.228±0.015 vs 63K 单地理 0.273±0.008（−16.5%，p<0.05）；200K 单地理 AV2-only 仍 0.264；作者结论：地理多样性比数据量更能预测跨域泛化 | 驾驶场景/结构化 agent 状态，不是像素世界模型；AV2-only 为单 seed（训练不稳）；surprise 是代理指标，不是规划安全；地理多样性不是万能；未覆盖传感器大偏移 |
+| FORGE | [2609.01683](https://arxiv.org/abs/2609.01683v1)（TMLR 2026） · [代码](https://github.com/Rehan000/forge-tta) · 摘要 | 面向微控制器 integer-only、BN-folded 模型的前向-only TTA；不依赖反向传播/BN 统计，在部署运行时做偏移适应 | 摘要级；MCU 量化/算子限制；任务/传感器范围有限；不是通用 TTA；能效/精度权衡未核 |
+
+### Checkpoint Selection：source-val 选点会骗你，校准与准确率不是一回事
+
+DG 的常见做法是用 source validation accuracy 选 checkpoint；这篇工作指出：在同一条训练轨迹上，多个 checkpoint 的 source accuracy 可以几乎相同，但目标域的概率质量（ECE/CwECE/NLL）不同。它在 540 个 runs 上重选 checkpoint：ECE −0.2395、CwECE −0.1821、NLL −0.0295，三个区间都低于 0；但准确率 +0.2133 pp 的区间跨 0，且 118/540 个选择损失目标准确率。更刺眼的是，独立 OfficeHome rerun 中 checkpoint-SWAD 的准确率（62.62% vs 60.97%）和三个可靠性误差都更好。
+
+它给 Clover 的启发是：**“模型选择”本身是分布偏移下的一个独立变量**；source-val 最优不等于 target 可靠，校准提升也不等于准确率提升。Clover 的验收必须同时报告 source 选点规则、target 校准与 target 准确率，不能只报一个“最佳 checkpoint”的分数。
+
+### Synthetic Data 与 Colorist：多样性常比真实感更重要，简单基线不能省略
+
+目标检测 DG 综述把合成数据分成三种角色：enabler（扩充多样性/对齐）、probe（受控偏移诊断）、以及 synthetic-to-real gap 的来源。它的核心结论是：**增加多样性往往比增加真实感更有效**；少量真实数据可以显著改善合成到真实迁移；分类 DG 方法不能直接迁移到检测，因为检测的偏移同时作用于定位与分类。
+
+Colorist 则给出一个极简反例：训练-free 的 RGB 全局均值-标准差颜色匹配，在 19 个医学数据集上把协变量偏移下的 balanced accuracy 从 0.3953 提到 0.5438（+0.148），同分布只 +0.008；作者报告结构保真优于生成式风格迁移，计算/能耗更低。它说明：**在光度偏移上，简单的、可解释的、结构保真的增强可以打败复杂生成模型**；但颜色匹配不解决几何/分辨率/解剖差异，多类不平衡基准仍弱。
+
+对 Clover 的启发是：数据侧增益要先排除“简单基线”，并报告增益来自多样性、真实感还是结构保真；合成数据必须同时作为训练数据和诊断探针，不能只当扩容。
+
+### GATE、RADC 与持续 TTA：在线适应有收益，但边界比论文标题窄
+
+GATE 与 RADC 都走 VLM 的 training-free TTA：GATE 用文本高斯 + 视觉高斯证据、冻结编码器与 prompt；RADC 用语义前景缓存 + 高斯风险准入筛可靠样本。它们的共同主张是：不需要 source 数据/标签，也能在目标域提升 CLIP/SigLIP 的鲁棒性。
+
+但持续 TTA 综述指出两个结构性失败：**灾难遗忘**与**伪标签误差累积**；非平稳目标分布下，适应会越走越偏。更关键的是“Limits of Representation TTA for MLLMs”给出负结果：CLIP 类对比模型上有效的 representation-based TTA，在生成式 MLLM 上几乎不能恢复腐蚀性能；即使离线用目标数据做 sample-blind 特征对齐，收益也边际。原因是生成式模型的腐蚀偏移不呈共享的单一分类域方向。
+
+这三篇合起来说明：**TTA 不是“无标签就免费变强”**；CLIP 的 TTA 结论不能直接迁移到生成式 MLLM，持续偏移下的遗忘/误差累积仍未解，transductive 设定还需要目标集。Clover 若用 TTA，必须报告 source-free/transductive 条件、遗忘曲线、伪标签误差与计算开销。
+
+### Geographic Diversity JEPA 与 FORGE：多样性 vs 数据量，云端 vs 微控制器
+
+Geographic JEPA 用零标签驾驶世界模型做受控迁移：63K 多地理组合的 AV2 surprise 0.228±0.015，优于 63K 单地理 0.273±0.008（−16.5%，p<0.05）；200K 单地理 AV2-only 仍 0.264。作者结论是地理多样性比数据量更能预测跨域泛化；但 AV2-only 是单 seed、surprise 只是代理指标、场景是结构化 agent 状态而非像素。
+
+FORGE 把 TTA 推到另一个极端：微控制器上的 integer-only、BN-folded 模型，只能前向传播；它不依赖反向传播/BN 统计，在部署运行时做偏移适应。它的边界是 MCU 量化/算子限制、任务/传感器范围有限；但这条线对 Clover 的“原生 ultrafast”很关键：**适应必须能在端侧、无标签、无反向传播的条件下发生**，否则“在线适应”只是服务器特权。
+
+**本节结论：** 分布偏移的 2026 证据分成三层：**数据侧**（多样性/合成/颜色增强）、**选择侧**（checkpoint/校准，不重训）、**在线适应侧**（TTA/持续 TTA）。三层的共同结论是：简单基线不能省略（Colorist 打败生成式风格迁移）；source-val 选点会误导（checkpoint selection 校准升、准确率不保证）；TTA 的收益有模型族边界（CLIP 有效、生成式 MLLM 失败）；持续偏移的遗忘/误差累积仍未解；端侧适应需要前向-only/整数算子。Clover 若声称“在真实世界可靠”，必须分别报告：目标域校准/准确率、source-free 条件、遗忘曲线、伪标签误差、端侧计算/能耗；单一“TTA 提升”或“合成数据扩容”不能替代这些证据。
+<!-- END distribution-shift -->
+
 ## Contents
 
+- [Learning Provenance Frontier: Pure Vision, Language, Teachers and Failure Data](#learning-provenance-frontier)
+- [Distribution Shift, Checkpoint Selection and Continual Adaptation](#distribution-shift-2026)
+- [Pure-Vision Claim Audit: V0–V3 × L0–L4](#pure-vision-provenance-audit)
 - [Training, Post-Training and Embodied Learning Regimes](#topic-research-research_training_posttraining)
 - [Training / Post-Training — Supporting Stage-1 Matrix](#topic-research-training-readme)
 - [Training / Post-Training — High-Risk Boundary Questions](#topic-research-training-high_risk_boundaries)

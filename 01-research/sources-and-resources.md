@@ -25,19 +25,21 @@ This is the canonical topic document. Update it in place; source-level dates and
 | Vision | `cat:cs.CV AND submittedDate:[202610150000 TO 202610252359]` | 981 / 接口 total=981 | [arXiv API](https://export.arxiv.org/api/query?search_query=cat%3Acs.CV+AND+submittedDate%3A%5B202610150000+TO+202610252359%5D&start=0&max_results=1000&sortBy=submittedDate&sortOrder=descending) |
 | AI/ML 交叉 | `(cat:cs.AI OR cat:cs.LG) AND submittedDate:[202610150000 TO 202610252359] AND (all:"world model" OR all:"causal representation" OR all:"partial observability" OR all:"embodied" OR all:"physical reasoning" OR all:"system identification" OR all:"active perception")` | 116 / 接口 total=116 | [arXiv API](https://export.arxiv.org/api/query?search_query=%28cat%3Acs.AI+OR+cat%3Acs.LG%29+AND+submittedDate%3A%5B202610150000+TO+202610252359%5D+AND+%28all%3A%22world+model%22+OR+all%3A%22causal+representation%22+OR+all%3A%22partial+observability%22+OR+all%3A%22embodied%22+OR+all%3A%22physical+reasoning%22+OR+all%3A%22system+identification%22+OR+all%3A%22active+perception%22%29&start=0&max_results=1000&sortBy=submittedDate&sortOrder=descending) |
 
-三组共 1,611 条返回记录，按论文 ID 去重后 **1,482** 条。当前分类列表也核对了 [cs.RO recent](https://arxiv.org/list/cs.RO/recent) 与 [cs.CV recent](https://arxiv.org/list/cs.CV/recent)：最新可见公告批次为 **2026-10-23**。公告日期、初次提交日期、修订日期和本项目核验日期不是一回事。
+三组共 1,611 条返回记录，按论文 ID 去重后 **1,482** 条（上一轮短窗口批次）。本轮另做 19 组主查询（`2026-09-01`→`2026-10-25`）加动作/指代/部件/点追踪/物体位姿/3D 占据补充检索：主查询原始 2,170 条、去重 **2,072** 条；合计筛出 304 篇做书目核验（303 arXiv + 1 PMLR-only），其中 290 篇此前未引用；查询组、计数与登记见[核心视觉来源批次](#core-vision-source-frontier)。当前分类列表也核对了 [cs.RO recent](https://arxiv.org/list/cs.RO/recent) 与 [cs.CV recent](https://arxiv.org/list/cs.CV/recent)：最新可见公告批次为 **2026-10-23**。公告日期、初次提交日期、修订日期和本项目核验日期不是一回事。
 
-关键词排序只用于找候选，不能充当全部论文的人类精读或排除判决。本次自动高分候选有 81 条；另用几何、物性、记忆、泛化、风险等题名检索补查，发现低分但直接相关的工作。本节登记的入选论文均人工检查了摘要，部分另核读方法/监督/局限段。未将 1,482 条全部声称为纳入文献或精读文献。
+关键词排序只用于找候选，不能充当全部论文的人类精读或排除判决。上一轮自动高分候选有 81 条；另用几何、物性、记忆、泛化、风险等题名检索补查，发现低分但直接相关的工作。本节登记的入选论文均人工检查了摘要，部分另核读方法/监督/局限段。未将 1,482 条或 2,072 条全部声称为纳入文献或精读文献。
 
 ### 既有记录书目检查
 
 基线提交 `fae924516c5bc3862125cd67d57b3850f3fdf462` 的九份调研正文，以 `arxiv.org/(abs|html|pdf)/(数字ID)` 提取并去掉版本号，得到 **335 个数字格式 arXiv ID**；全部从一手 API 返回了题名、作者、初次提交、当前版本/修订日期与摘要。批次每组不超过 70 个 ID，按 `id_list` 读取，没有以检索命中率替代结论核查。此项检查证明编号可追溯，**不证明** 全部旧综述句子、数值、理论条件、代码或部署能力正确；旧式 ID、非 arXiv 原文与所有官方项目的新鲜度仍需另查。
 
+**2026-10-25 内容级抽样审计（新增）：** 对含单个旧 arXiv ID 的结构化来源块做“ID → 题名 → 链接”一致性核对：18 个块中 15 个题名精确或强匹配，3 个未写英文引题但 ID 解析到正确论文；发现并修正 2 个题名形式错误（`Clear Grasp`→`ClearGrasp`；`Multimap`→`Multi-Map`）。其余旧记录多为表格/多引用块，数字与主张来自正文或会议页，**尚未**逐句核对；本项不是“335 条全部内容级验证完成”。
+
 当前书目示例应使用精确题名：`2610.23615` 返回 **Beyond Action Prediction: Learning Search-Free Planning in Latent Space**（旧简称 HIJP 仅作别名）；`2610.15429` 返回 **World Modeling through Spectral Alignment**（旧简称 SpecWM 不是完整题名）。不得用简称猜测作者、版本或证明内容。
 
-### 本轮新增与深化文献索引
+### 上一轮新增与深化文献索引（2026-10-15→10-19）
 
-下表共 54 条：53 篇首次登记；GNS（`2002.09405`）原已登记，本轮将摘要级记录深化到方法与监督边界选读，不重复计入新增论文。
+下表共 54 条：53 篇首次登记；GNS（`2002.09405`）原已登记，本轮将摘要级记录深化到方法与监督边界选读，不重复计入新增论文。2026-10-25 的 290 篇新批次见[核心视觉来源批次](#core-vision-source-frontier)，两批不合并计数。
 
 | 原始提交 / 当前返回版本 | 题名与一手来源 | 方向正文 | 阅读深度 |
 |---|---|---|---|
@@ -104,10 +106,10 @@ This is the canonical topic document. Update it in place; source-level dates and
 
 另外读取了四个精确官方模型 revision 的模型卡与 `config.json`；[当前 artifact 表](foundation-models-and-systems.md#current-model-artifacts)保留 SHA、公开/托管模态差异、位置上限与许可元数据。模型配置没有被运行验证，也没有被当成视觉世界状态方案。
 
-### 本轮尚未闭合的核查
+### 两轮尚未闭合的核查
 
 - 六个非 arXiv 官方会议目录与部分正文已补核（见下节）；ICLR/CoRL 全目录、更多期刊/官方发布和旧 335 个数字 ID 的全部研究性主张仍未逐项完成内容级复核。
-- 部分新论文当前只有摘要级登记；模拟器版本、精确 checkpoints、完整训练混合、许可及公平预算仍待方法级核读。正文入口可访问/缓存不等于已读完。
+- 当前两批新增中仅部分正文级选读；模拟器版本、精确 checkpoints、完整训练混合、许可及公平预算仍待方法级核读。正文入口可访问/缓存不等于已读完。
 - RGB-only 可变形/颗粒隐藏态、自然机器人视频的可识别性、压缩后的未知任务证据恢复仍是实质证据缺口；点云/力传感方案不能替代它们。
 - 泛化、风险覆盖和物理因果的经典定理条件仍需继续与视觉/闭环设置逐项比对。当前覆盖表不是“全面完成”的证明。
 <!-- END current-search-protocol -->
@@ -181,6 +183,554 @@ This is the canonical topic document. Update it in place; source-level dates and
 
 这次补充闭合了“基础 CV 功能未被明确列为必备”和“非 arXiv 正式来源不足”的一部分缺口。旧 335 个数字 arXiv ID 的内容级主张、未覆盖目录/官方 artifact、未知未来任务证据恢复与严格视觉物性/因果问题仍在当前队列；没有以扩大目录数量冒充这些问题已经解决。
 <!-- END broad-vision-sources -->
+
+<!-- BEGIN core-vision-source-frontier -->
+<a id="core-vision-source-frontier"></a>
+
+## 2026-10 核心视觉与原生速度来源批次
+
+检索/核验：**2026-10-25（Asia/Shanghai）**。本批次用 19 组主 arXiv 查询（2026-09-01 至 2026-10-25）加动作/指代/部件/物理/点追踪/物体位姿/3D 占据补充检索，主查询原始返回 2,170 条、去重后 2,072 条；另核 ICLR/ECCV/NeurIPS 2026 camera-ready。按标题/摘要与能力缺口筛出 304 篇做书目核验（303 篇 arXiv + 1 篇 PMLR-only；含单独核验的 YOLO26 论文），其中 290 篇此前未被本仓库引用，14 篇已有引用。对 97 篇做正文级选读，对 RF-DETR/WeVisOne-VL 做部分正文核读，其余为摘要/官方项目核验。未筛完全部候选，未把摘要阅读升级为全文复现。
+
+**检索协议边界：** 查询按相关性排序，未穷尽 arXiv 全部结果；会议/期刊正式记录、模型权重、数据集许可与预训练-评测重叠仍须逐项审计。下列 URL 固定到本次返回版本；官方代码/项目页均为 `OPEN_SOURCE`/`OFFICIAL_PROJECT` 登记，不代表已加载权重或复现。
+
+| 查询组 | 主题 | 返回条数 |
+|---|---|---|
+| `recognition` | 图像/视觉识别与分类 | 45 |
+| `openvocab` | 开放词汇/零样本检测 | 120 |
+| `detection` | 目标检测/YOLO/DETR | 120 |
+| `segmentation` | 分割/SAM | 120 |
+| `tracking` | 目标/点多目标追踪 | 104 |
+| `pose` | 姿态/关键点 | 120 |
+| `ocr` | OCR/文档/场景文字 | 120 |
+| `counting` | 计数 | 120 |
+| `geometry` | 深度/三维/几何 | 120 |
+| `worldmodel` | 世界模型/视频预测 | 120 |
+| `selfsup` | JEPA/自监督/视觉表征 | 120 |
+| `efficient` | 实时/高效/边缘部署 | 120 |
+| `active` | 主动视觉/事件相机/神经形态 | 120 |
+| `vlm` | 视觉语言模型 | 120 |
+| `video` | 视频理解 | 120 |
+| `vla` | 视觉语言动作/机器人 | 120 |
+| `generative` | 图像/视频生成/扩散 | 120 |
+| `embodied` | 具身智能/空间智能 | 120 |
+| `neuro` | 神经科学/生物视觉 | 101 |
+
+原始 XML 与 2,072 条候选记录保存在工作区 `frontier-cv-2026-10/`（未提交到仓库）；上表是相关性排序的前 N 条，不代表穷尽。
+
+### 识别与视觉表征
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [1512.03385](https://arxiv.org/abs/1512.03385v1) | Deep Residual Learning for Image Recognition | 摘要/书目 | 既有引用 |
+| [2010.11929](https://arxiv.org/abs/2010.11929v2) | An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale | 摘要/书目 | 既有引用 |
+| [2201.03545](https://arxiv.org/abs/2201.03545v2) | A ConvNet for the 2020s | 摘要/书目 | 本轮新增 |
+| [2111.06377](https://arxiv.org/abs/2111.06377v3) | Masked Autoencoders Are Scalable Vision Learners | 摘要/书目 | 本轮新增 |
+| [2103.00020](https://arxiv.org/abs/2103.00020v1) | Learning Transferable Visual Models From Natural Language Supervision | 摘要/书目 | 既有引用 |
+| [2411.14402](https://arxiv.org/abs/2411.14402v1) | Multimodal Autoregressive Pre-training of Large Vision Encoders | 摘要/书目 | 本轮新增 |
+| [2507.22062](https://arxiv.org/abs/2507.22062v3) | Meta CLIP 2: A Worldwide Scaling Recipe | 摘要/书目 | 本轮新增 |
+| [2508.10104](https://arxiv.org/abs/2508.10104v1) | DINOv3 | 摘要/书目 | 既有引用 |
+| [2504.13181](https://arxiv.org/abs/2504.13181v2) | Perception Encoder: The best visual embeddings are not at the output of the network | 正文选读 | 本轮新增 |
+| [2504.01017](https://arxiv.org/abs/2504.01017v1) | Scaling Language-Free Visual Representation Learning | 摘要/书目 | 本轮新增 |
+| [2502.14786](https://arxiv.org/abs/2502.14786v1) | SigLIP 2: Multilingual Vision-Language Encoders with Improved Semantic Understanding, Localization, and Dense Features | 摘要/书目 | 既有引用 |
+
+### 检测
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2606.03748](https://arxiv.org/abs/2606.03748v1) | Ultralytics YOLO26: Unified Real-Time End-to-End Vision Models | 正文选读 | 本轮新增 |
+| [2502.12524](https://arxiv.org/abs/2502.12524v1) | YOLOv12: Attention-Centric Real-Time Object Detectors | 摘要/书目 | 本轮新增 |
+| [2410.13842](https://arxiv.org/abs/2410.13842v1) | D-FINE: Redefine Regression Task in DETRs as Fine-grained Distribution Refinement | 摘要/书目 | 本轮新增 |
+| [2412.04234](https://arxiv.org/abs/2412.04234v3) | DEIM: DETR with Improved Matching for Fast Convergence | 摘要/书目 | 本轮新增 |
+| [2511.09554](https://arxiv.org/abs/2511.09554v2) | RF-DETR: Neural Architecture Search for Real-Time Detection Transformers | 部分正文 | 本轮新增 |
+| [2406.03459](https://arxiv.org/abs/2406.03459v1) | LW-DETR: A Transformer Replacement to YOLO for Real-Time Detection | 摘要/书目 | 本轮新增 |
+| [2303.05499](https://arxiv.org/abs/2303.05499v5) | Grounding DINO: Marrying DINO with Grounded Pre-Training for Open-Set Object Detection | 摘要/书目 | 既有引用 |
+
+### 分割、三维与运动区域
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2511.16719](https://arxiv.org/abs/2511.16719v2) | SAM 3: Segment Anything with Concepts | 摘要/书目 | 既有引用 |
+| [2511.16624](https://arxiv.org/abs/2511.16624v2) | SAM 3D: 3Dfy Anything in Images | 摘要/书目 | 本轮新增 |
+| [2610.27960](https://arxiv.org/abs/2610.27960v1) | Efficient SAM3 Adaptation for Multi-Class Semantic Segmentation via Dense Competitive Representations | 摘要/书目 | 本轮新增 |
+| [2610.22921](https://arxiv.org/abs/2610.22921v1) | MaskMerge: Structure-aware Token Merging for Efficient Instance Segmentation | 摘要/书目 | 本轮新增 |
+| [2610.31209](https://arxiv.org/abs/2610.31209v1) | Moving Regions, Not Moving Objects: Segmenting What Actually Moves under Camera Motion | 摘要/书目 | 本轮新增 |
+| [2610.30623](https://arxiv.org/abs/2610.30623v1) | Refining Open-Vocabulary Semantic Segmentation via Regional Semantics and Visual Prototypes | 摘要/书目 | 本轮新增 |
+
+### 追踪、点轨迹与追踪安全
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2411.11922](https://arxiv.org/abs/2411.11922v2) | SAMURAI: Adapting Segment Anything Model for Zero-Shot Visual Tracking with Motion-Aware Memory | 正文选读 | 本轮新增 |
+| [2504.05579](https://arxiv.org/abs/2504.05579v2) | TAPNext: Tracking Any Point (TAP) as Next Token Prediction | 正文选读 | 既有引用 |
+| [2604.10582](https://arxiv.org/abs/2604.10582v1) | TAPNext++: What's Next for Tracking Any Point (TAP)? | 摘要/书目 | 既有引用 |
+| [2403.16848](https://arxiv.org/abs/2403.16848v2) | Multiple Object Tracking as ID Prediction | 摘要/书目 | 本轮新增 |
+| [2610.10391](https://arxiv.org/abs/2610.10391v1) | MOTIP2: Spatial Priors for End-to-End Multi-Object Tracking | 正文选读 | 本轮新增 |
+| [2609.37339](https://arxiv.org/abs/2609.37339v1) | UGO: Unified Architecture for General Multi-Object Tracking by Segmentation | 正文选读 | 本轮新增 |
+| [2511.00510](https://arxiv.org/abs/2511.00510v2) | OmniTrack++: Omnidirectional Multi-Object Tracking by Learning Large-FoV Trajectory Feedback | 摘要/书目 | 本轮新增 |
+| [2310.12982](https://arxiv.org/abs/2310.12982v2) | Putting the Object Back into Video Object Segmentation | 摘要/书目 | 本轮新增 |
+| [2610.19931](https://arxiv.org/abs/2610.19931v1) | SAM3RL: Memory Control via Reinforcement Learning for Visual Object Tracking | 摘要/书目 | 本轮新增 |
+| [2610.15929](https://arxiv.org/abs/2610.15929v1) | When Trackers Fail: VLM-Guided Verification and Recovery for Robust Video Object Segmentation | 正文选读 | 本轮新增 |
+| [2610.01314](https://arxiv.org/abs/2610.01314v1) | ARROW: Arbitrary Reconstruction and Tracking of 4D Observations in the Wild | 摘要/书目 | 本轮新增 |
+| [2609.33948](https://arxiv.org/abs/2609.33948v1) | TrackFlood: Relocating Latency Attacks from NMS-Free Detectors to Real-Time Trackers | 摘要/书目 | 本轮新增 |
+
+### 视觉阅读与文档解析
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2510.14528](https://arxiv.org/abs/2510.14528v4) | PaddleOCR-VL: Boosting Multilingual Document Parsing via a 0.9B Ultra-Compact Vision-Language Model | 正文选读 | 本轮新增 |
+| [2512.02498](https://arxiv.org/abs/2512.02498v4) | dots.ocr: Multilingual Document Layout Parsing in a Single Vision-Language Model | 摘要/书目 | 本轮新增 |
+| [2509.22186](https://arxiv.org/abs/2509.22186v2) | MinerU2.5: A Decoupled Vision-Language Model for Efficient High-Resolution Document Parsing | 摘要/书目 | 本轮新增 |
+| [2510.19817](https://arxiv.org/abs/2510.19817v1) | olmOCR 2: Unit Test Rewards for Document OCR | 摘要/书目 | 本轮新增 |
+| [2609.37712](https://arxiv.org/abs/2609.37712v1) | PolyOCR-Venus: Unified OCR Foundation Models for Text-Centric Visual Intelligence | 摘要/书目 | 本轮新增 |
+| [2609.28857](https://arxiv.org/abs/2609.28857v1) | MEVL-STP: Multi-Encoder and Vision Language Model for Arbitrarily Shaped Scene Text Spotting | 摘要/书目 | 本轮新增 |
+| [2610.31329](https://arxiv.org/abs/2610.31329v1) | WeVisOne-VL: Unified Visual Perception from Objects to Pixels | 部分正文 | 既有引用 |
+
+### 姿态、计数与几何
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2204.12484](https://arxiv.org/abs/2204.12484v3) | ViTPose: Simple Vision Transformer Baselines for Human Pose Estimation | 摘要/书目 | 本轮新增 |
+| [2408.12569](https://arxiv.org/abs/2408.12569v3) | Sapiens: Foundation for Human Vision Models | 摘要/书目 | 本轮新增 |
+| [2610.26096](https://arxiv.org/abs/2610.26096v2) | PnP-Transformer: A Neural Pose Solver for Zero-Shot 6D Object Pose Estimation | 摘要/书目 | 本轮新增 |
+| [2407.04619](https://arxiv.org/abs/2407.04619v2) | CountGD: Multi-Modal Open-World Counting | 摘要/书目 | 本轮新增 |
+| [2610.08379](https://arxiv.org/abs/2610.08379v1) | UniCounting: Instance-Aware Proposal Consolidation for Image-Query-Free Multi-Category Counting | 摘要/书目 | 本轮新增 |
+| [2511.10647](https://arxiv.org/abs/2511.10647v1) | Depth Anything 3: Recovering the Visual Space from Any Views | 正文选读 | 本轮新增 |
+| [2507.02546](https://arxiv.org/abs/2507.02546v1) | MoGe-2: Accurate Monocular Geometry with Metric Scale and Sharp Details | 摘要/书目 | 本轮新增 |
+
+### 原生效率与流式系统
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2305.07027](https://arxiv.org/abs/2305.07027v1) | EfficientViT: Memory Efficient Vision Transformer with Cascaded Group Attention | 摘要/书目 | 本轮新增 |
+| [2610.04457](https://arxiv.org/abs/2610.04457v1) | RPFQ-ViT: Rotated Phase-Frame Quantization for Extremely Low-Bit Weights in Vision Transformers | 摘要/书目 | 本轮新增 |
+| [2610.18399](https://arxiv.org/abs/2610.18399v2) | Bifocal: Training-Free Mixed Granularity Visual Token Pruning for Multimodal LLMs | 摘要/书目 | 本轮新增 |
+| [2610.25551](https://arxiv.org/abs/2610.25551v1) | StreamAhead: Real-Time Streaming Video Question Answering via Adaptive Precomputation | 摘要/书目 | 本轮新增 |
+| [2610.17540](https://arxiv.org/abs/2610.17540v1) | TacitVLA: Reasoning Vision-Language-Action Models Without Reasoning Latency | 摘要/书目 | 本轮新增 |
+| [2610.22155](https://arxiv.org/abs/2610.22155v3) | Realtime-Bench: Can Frontier Models Solve Real-time Interactive Problems? | 摘要/书目 | 本轮新增 |
+
+### 世界模型与持久状态
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2509.24527](https://arxiv.org/abs/2509.24527v1) | Training Agents Inside of Scalable World Models | 摘要/书目 | 本轮新增 |
+| [2510.26583](https://arxiv.org/abs/2510.26583v1) | Emu3.5: Native Multimodal Models are World Learners | 摘要/书目 | 本轮新增 |
+| [2610.22371](https://arxiv.org/abs/2610.22371v1) | Gen4P: Video Generators are 4D Perceivers | 摘要/书目 | 本轮新增 |
+| [2610.30789](https://arxiv.org/abs/2610.30789v1) | An Introduction to World Models for Generalist Agents | 摘要/书目 | 本轮新增 |
+| [2610.23795](https://arxiv.org/abs/2610.23795v1) | Persistent Planar Memory for Video World Models | 摘要/书目 | 既有引用 |
+| [2610.18637](https://arxiv.org/abs/2610.18637v1) | Grid or Nodes? Probing Object Memory in World Models Under Partial Observability | 摘要/书目 | 既有引用 |
+| [2610.30129](https://arxiv.org/abs/2610.30129v1) | Rethinking Video Autoencoders for Interactive World Models | 摘要/书目 | 既有引用 |
+| [2610.30814](https://arxiv.org/abs/2610.30814v1) | DRILL: Training World Models to Improve Policies, Not Predict Pixels | 摘要/书目 | 既有引用 |
+
+### 主动视觉与跨域证据
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2610.20064](https://arxiv.org/abs/2610.20064v2) | FoveaVLA: Foveation Actions Replace the Wrist Camera in VLAs | 摘要/书目 | 本轮新增 |
+| [2610.12999](https://arxiv.org/abs/2610.12999v1) | EgoReveal: Learning Active Vision and Object Manipulation under Partial Occlusions from Egocentric Demonstrations | 摘要/书目 | 本轮新增 |
+| [2610.11039](https://arxiv.org/abs/2610.11039v1) | Rendering-Free Lookahead for Question-Guided Active Vision | 摘要/书目 | 本轮新增 |
+| [2610.19624](https://arxiv.org/abs/2610.19624v1) | Adaptive Observation Control for Active Visual Recognition | 摘要/书目 | 本轮新增 |
+| [2610.26659](https://arxiv.org/abs/2610.26659v3) | SpatialScout: Can VLM Agents Actively Explore and Map 3D Scenes? | 摘要/书目 | 本轮新增 |
+| [2610.19046](https://arxiv.org/abs/2610.19046v1) | What Information Buys in Active Inference | 摘要/书目 | 本轮新增 |
+| [2610.20309](https://arxiv.org/abs/2610.20309v1) | Event Cameras versus Frame Cameras for Synthetic-Aperture Imaging: A Simulation Study | 摘要/书目 | 本轮新增 |
+| [2610.17154](https://arxiv.org/abs/2610.17154v1) | Neuromorphic Decoding and Dynamical Image Reconstruction from Populations of Spiking Retinal Ganglion Cells | 摘要/书目 | 本轮新增 |
+| [2610.09983](https://arxiv.org/abs/2610.09983v1) | Feedback to the primary visual cortex is highly concentrated on the central visual field representation | 摘要/书目 | 本轮新增 |
+| [2610.19199](https://arxiv.org/abs/2610.19199v1) | Moving Beyond the Flat Screen: Opportunities and Challenges of Extended Reality for Studying Human Brain and Behavior | 摘要/书目 | 本轮新增 |
+
+### 评测基准
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2609.01899](https://arxiv.org/abs/2609.01899v2) | TAPVid-MV: A Benchmark for Tracking Any Point in 3D Across Multiple Views | 摘要/书目 | 本轮新增 |
+| [2610.05911](https://arxiv.org/abs/2610.05911v2) | Every View Counts: View-Consistent Panoptic Quality for Multi-view Panoptic Segmentation | 摘要/书目 | 本轮新增 |
+| [2412.07626](https://arxiv.org/abs/2412.07626v2) | OmniDocBench: Benchmarking Diverse PDF Document Parsing with Comprehensive Annotations | 摘要/书目 | 本轮新增 |
+
+### 识别的长尾、细粒度与尺度失败面
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2609.04948](https://arxiv.org/abs/2609.04948v1) | VICAL: Vicinal Consistency Alignment for Long-Tailed Visual Recognition | 摘要/书目 | 本轮新增 |
+| [2609.37331](https://arxiv.org/abs/2609.37331v1) | OFBD: Object-Focused Background Debiasing for Long-Tailed Learning | 摘要/书目 | 本轮新增 |
+| [2610.13154](https://arxiv.org/abs/2610.13154v1) | From Glance to Focus: Mitigating Recognition Laziness in MLLMs for Fine-Grained Recognition | 摘要/书目 | 本轮新增 |
+| [2609.06051](https://arxiv.org/abs/2609.06051v1) | Image-Scale Robustness and Visual Recognition Performance: A Cross-Architecture Analysis | 摘要/书目 | 本轮新增 |
+
+### 动作、事件与指代/grounding
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2606.03490](https://arxiv.org/abs/2606.03490v1) | TrAction: Action Recognition with Sparse Trajectories | 摘要/书目 | 本轮新增 |
+| [2608.22760](https://arxiv.org/abs/2608.22760v1) | ByteAction: Byte-space Action Recognition Foundation Model | 摘要/书目 | 本轮新增 |
+| [2605.07141](https://arxiv.org/abs/2605.07141v1) | Qwen3-VL-Seg: Unlocking Open-World Referring Segmentation with Vision-Language Grounding | 摘要/书目 | 本轮新增 |
+| [2605.20110](https://arxiv.org/abs/2605.20110v1) | SetCon: Towards Open-Ended Referring Segmentation via Set-Level Concept Prediction | 摘要/书目 | 本轮新增 |
+| [2609.02359](https://arxiv.org/abs/2609.02359v1) | TempoGround: State-Aware Streaming Visual Grounding with Vision-Language Models | 摘要/书目 | 本轮新增 |
+
+### 部件/可供性与抠图
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2610.29768](https://arxiv.org/abs/2610.29768v1) | UniRAP: Towards Unified Part-level Physical Affordance Reasoning and Actionable Perception | 摘要/书目 | 本轮新增 |
+| [2606.27339](https://arxiv.org/abs/2606.27339v1) | SAM2Matting: Generalized Image and Video Matting | 摘要/书目 | 本轮新增 |
+
+### 正式会议 2026（ICLR/ECCV）
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2605.16903](https://arxiv.org/abs/2605.16903v1) | WOW-Seg: A Word-free Open World Segmentation Model | 摘要/书目 | 本轮新增 |
+| [2609.39785](https://arxiv.org/abs/2609.39785v1) | Seeing as Humans Do: Learning from Motion to Segment Anything Without Supervision | 摘要/书目 | 本轮新增 |
+| [2602.08550](https://arxiv.org/abs/2602.08550v3) | GOT-Edit: Geometry-Aware Generic Object Tracking via Online Model Editing | 摘要/书目 | 本轮新增 |
+| [2603.21115](https://arxiv.org/abs/2603.21115v1) | LiFR-Seg: Anytime High-Frame-Rate Segmentation via Event-Guided Propagation | 摘要/书目 | 本轮新增 |
+| [2602.19624](https://arxiv.org/abs/2602.19624v2) | Segmentation-Guided Homography Estimation for Long-Term Planar Tracking | 摘要/书目 | 本轮新增 |
+| [2505.15263](https://arxiv.org/abs/2505.15263v3) | gen2seg: Generative Models Enable Generalizable Instance Segmentation | 摘要/书目 | 本轮新增 |
+| [2510.11715](https://arxiv.org/abs/2510.11715v2) | Point Prompting: Counterfactual Tracking with Video Diffusion Models | 摘要/书目 | 本轮新增 |
+| [2601.23159](https://arxiv.org/abs/2601.23159v1) | Segment Any Events with Language | 摘要/书目 | 本轮新增 |
+| [2606.14307](https://arxiv.org/abs/2606.14307v2) | Pano3D: Unified 3D Reconstruction and Panoptic Segmentation | 摘要/书目 | 本轮新增 |
+| [2503.13160](https://arxiv.org/abs/2503.13160v3) | Language-guided Open-world Video Anomaly Detection under Weak Supervision | 摘要/书目 | 本轮新增 |
+
+### NeurIPS 2026（正式会议）
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2610.02946](https://arxiv.org/abs/2610.02946v1) | When Predicting Nothing Beats SAM 3: Revisiting Evaluation in Video Object Segmentation | 摘要/书目 | 本轮新增 |
+| [2609.39265](https://arxiv.org/abs/2609.39265v1) | Universal Cross-Prompt Adversarial Attacks on Promptable Concept Segmentation | 摘要/书目 | 本轮新增 |
+| [2609.40333](https://arxiv.org/abs/2609.40333v1) | I Have a Stream: Making Self-Supervised Learning Work on Continuous Video | 摘要/书目 | 本轮新增 |
+| [2609.30667](https://arxiv.org/abs/2609.30667v1) | StarWM: Self-Supervised Trained Attention Routing for Robust World Models | 摘要/书目 | 本轮新增 |
+| [2610.00970](https://arxiv.org/abs/2610.00970v2) | RelationVGGT: Visual Geometry Transformers for 3D Spatial Relation Segmentation | 摘要/书目 | 本轮新增 |
+| [2603.23478](https://arxiv.org/abs/2603.23478v2) | UniFunc3D: Unified Active Spatial-Temporal Grounding for 3D Affordance Segmentation | 摘要/书目 | 本轮新增 |
+| [2608.09613](https://arxiv.org/abs/2608.09613v2) | Marrying Optimal Transport and ODEs for Unified Continuous-Time 4D Reconstruction and Tracking | 摘要/书目 | 本轮新增 |
+| [2605.15618](https://arxiv.org/abs/2605.15618v2) | Latent Video Prediction for World Modeling: An Evaluation Uncovering Intriguing Favorable Evidence | 摘要/书目 | 本轮新增 |
+
+### 严格视觉隐藏态/因果 2026
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2601.20303](https://arxiv.org/abs/2601.20303v2) | Physically Guided Visual Mass Estimation from a Single RGB Image | 正文选读 | 本轮新增 |
+| [2610.01162](https://arxiv.org/abs/2610.01162v1) | PhysicsLENS: Diagnosing Physical Property Blindness in Video Generation Models | 摘要/书目 | 本轮新增 |
+| [2609.28654](https://arxiv.org/abs/2609.28654v1) | Training Object Permanence in World Models | 摘要/书目 | 本轮新增 |
+| [2610.01201](https://arxiv.org/abs/2610.01201v1) | iSEE: Object Permanence Through Self-Supervision | 正文选读 | 本轮新增 |
+| [2609.20819](https://arxiv.org/abs/2609.20819v2) | Can 4D Foundation Models Remember? | 正文选读 | 本轮新增 |
+| [2606.09646](https://arxiv.org/abs/2606.09646v2) | How Do Video Foundation Models Encode Intuitive Physics? Probing Across Pretraining Paradigms | 摘要/书目 | 本轮新增 |
+| [2602.11021](https://arxiv.org/abs/2602.11021v1) | ContactGaussian-WM: Learning Physics-Grounded World Model from Videos | 摘要/书目 | 本轮新增 |
+| [2608.21355](https://arxiv.org/abs/2608.21355v1) | ViTacPhys: Physical Property-Aware Grasping from Human Visual-Tactile Demonstrations | 摘要/书目 | 本轮新增 |
+| [2608.07726](https://arxiv.org/abs/2608.07726v2) | Vision Meets WiFi: Physics-Grounded Estimation of Volumetric Mechanical Properties | 摘要/书目 | 本轮新增 |
+| [2605.16457](https://arxiv.org/abs/2605.16457v3) | Identifiable Token Correspondence for World Models | 摘要/书目 | 本轮新增 |
+| [2610.24519](https://arxiv.org/abs/2610.24519v1) | Axiomatic World Modeling for Physics Reasoning | 摘要/书目 | 本轮新增 |
+
+### 检索/再识别 2026
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2609.07373](https://arxiv.org/abs/2609.07373v1) | TRAIL: Trajectory-Aware Visual Place Recognition against Unordered Databases | 摘要/书目 | 本轮新增 |
+| [2602.00841](https://arxiv.org/abs/2602.00841v1) | Beyond First-Order: Learning Riemannian Geometries for Invariant Visual Place Recognition | 摘要/书目 | 本轮新增 |
+| [2610.07366](https://arxiv.org/abs/2610.07366v1) | Identity-Conditioned Score Fusion for Open-Set Person Re-Identification | 摘要/书目 | 本轮新增 |
+| [2605.06637](https://arxiv.org/abs/2605.06637v1) | DPM++: Dynamic Masked Metric Learning for Occluded Person Re-identification | 摘要/书目 | 本轮新增 |
+| [2603.01640](https://arxiv.org/abs/2603.01640v1) | MSP-ReID: Hairstyle-Robust Cloth-Changing Person Re-Identification | 摘要/书目 | 本轮新增 |
+| [2606.01981](https://arxiv.org/abs/2606.01981v1) | Generalization Limits in Vehicle Re-Identification | 摘要/书目 | 本轮新增 |
+| [2607.09267](https://arxiv.org/abs/2607.09267v1) | REMIND: RE-Identification with Memory for INDoor Navigation | 摘要/书目 | 本轮新增 |
+| [2604.03277](https://arxiv.org/abs/2604.03277v1) | Event-Driven Neuromorphic Vision Enables Energy-Efficient Visual Place Recognition | 摘要/书目 | 本轮新增 |
+
+### 三维检测/场景图 2026
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2604.01646](https://arxiv.org/abs/2604.01646v1) | MonoSAOD: Monocular 3D Object Detection with Sparsely Annotated Label | 摘要/书目 | 本轮新增 |
+| [2604.13586](https://arxiv.org/abs/2604.13586v1) | Efficient Multi-View 3D Object Detection by Dynamic Token Selection and Fine-Tuning | 摘要/书目 | 本轮新增 |
+| [2608.19973](https://arxiv.org/abs/2608.19973v1) | Open-Vocabulary 3D Object Detection with Co-Distillation Discovery and Dual Guidance Robust Training | 摘要/书目 | 本轮新增 |
+| [2607.00529](https://arxiv.org/abs/2607.00529v1) | NoPA: Non-Parametric Online 3D Scene Graph Generation | 摘要/书目 | 本轮新增 |
+| [2605.20823](https://arxiv.org/abs/2605.20823v1) | RelWitness: Open-Vocabulary 3D Scene Graph Generation with Visual-Geometric Relation Witnesses | 摘要/书目 | 本轮新增 |
+| [2602.02456](https://arxiv.org/abs/2602.02456v1) | Relationship-Aware Hierarchical 3D Scene Graph for Task Reasoning | 摘要/书目 | 本轮新增 |
+
+### 动作/事件 2026
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2605.09976](https://arxiv.org/abs/2605.09976v1) | OZ-TAL: Online Zero-Shot Temporal Action Localization | 摘要/书目 | 本轮新增 |
+| [2607.00289](https://arxiv.org/abs/2607.00289v1) | OnPoint: Offline-to-Online Multi-Level Distillation for Point-Supervised Online Temporal Action Localization | 摘要/书目 | 本轮新增 |
+| [2603.01743](https://arxiv.org/abs/2603.01743v1) | Action-Guided Attention for Video Action Anticipation | 摘要/书目 | 本轮新增 |
+| [2608.14243](https://arxiv.org/abs/2608.14243v1) | Zero-Shot Skeleton-Based Action Anticipation | 摘要/书目 | 本轮新增 |
+| [2603.08289](https://arxiv.org/abs/2603.08289v1) | Novel Semantic Prompting for Zero-Shot Action Recognition | 摘要/书目 | 本轮新增 |
+| [2605.23288](https://arxiv.org/abs/2605.23288v1) | Spatio-Temporal Similarity Volume Aggregation for Open-Vocabulary Action Recognition | 摘要/书目 | 本轮新增 |
+
+### 空间状态/SLAM 2026
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2609.13733](https://arxiv.org/abs/2609.13733v1) | FFVO: A Feedforward Pose Decoder for Long-Horizon Visual Odometry | 正文选读 | 本轮新增 |
+| [2608.01706](https://arxiv.org/abs/2608.01706v1) | UniSim-SLAM: Feed-Forward SLAM with Unified Sim(3) Optimization | 正文选读 | 本轮新增 |
+| [2609.19628](https://arxiv.org/abs/2609.19628v1) | VGGT-GS SLAM: Uncalibrated Monocular Gaussian Splatting SLAM with Feed-Forward Priors | 摘要/书目 | 本轮新增 |
+| [2610.14951](https://arxiv.org/abs/2610.14951v1) | FoundationVIO: Enforcing Metric Scale in Feed-forward Visual-Inertial Odometry | 摘要/书目 | 本轮新增 |
+| [2608.30690](https://arxiv.org/abs/2608.30690v1) | Failure or Drift? Evaluating Monocular SLAM under Synthetic and Real-World Corruptions | 正文选读 | 本轮新增 |
+| [2609.13691](https://arxiv.org/abs/2609.13691v1) | MomentBA: Second-order Spatial Moments for Anisotropic Correspondence Uncertainty in Differentiable Bundle Adjustment | 正文选读 | 本轮新增 |
+| [2609.17168](https://arxiv.org/abs/2609.17168v1) | HuMemSLAM: Efficient Human-Inspired Semantic Place Recognition for Robust Visual SLAM | 摘要/书目 | 本轮新增 |
+| [2610.30589](https://arxiv.org/abs/2610.30589v1) | OASIS: Online Anchor-centric Scene Inference System for Open-Vocabulary Retrieval and Navigation in Dynamic Environments | 正文选读 | 本轮新增 |
+| [2609.20589](https://arxiv.org/abs/2609.20589v1) | RawSLAM: Online HDR Gaussian SLAM from Linear Radiance | 摘要/书目 | 本轮新增 |
+| [2610.19044](https://arxiv.org/abs/2610.19044v1) | RingNav: Task-Shaped Circular Memory for Visual Heading | 正文选读 | 本轮新增 |
+| [2609.30947](https://arxiv.org/abs/2609.30947v1) | DAPEVO: Deep Adaptive Patch Frame-Event Visual Odometry | 摘要/书目 | 本轮新增 |
+| [2610.17513](https://arxiv.org/abs/2610.17513v1) | Gaussian Splatting for Real-Time Scene Reconstruction: Methods, Systems, and Trade-offs | 摘要/书目 | 本轮新增 |
+
+### 人-物交互/社会场景 2026
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2609.05959](https://arxiv.org/abs/2609.05959v1) | FineHOI: Part-Aware Dense Representations for Zero-Shot Human-Object Interaction Detection | 正文选读 | 本轮新增 |
+| [2609.23431](https://arxiv.org/abs/2609.23431v2) | HOIBlender: Blending Lightweight Detection with Vision-Language Priors for Efficient Human-Object Interaction Detection | 正文选读 | 本轮新增 |
+| [2608.28386](https://arxiv.org/abs/2608.28386v2) | GraspHOI: Full-Body 3D Human-Object Reconstruction with Finger-Level Grasps from a Single In-the-Wild Image | 正文选读 | 本轮新增 |
+| [2607.04017](https://arxiv.org/abs/2607.04017v1) | SAGE: Synchronized Action-Gaze Recognition and Anticipation for Human Behavior Understanding | 正文选读 | 本轮新增 |
+| [2610.25849](https://arxiv.org/abs/2610.25849v1) | Auditing Semantic and Relational Reliability in Open-Vocabulary Human-Object Interaction Evaluation | 正文选读 | 本轮新增 |
+| [2609.14118](https://arxiv.org/abs/2609.14118v1) | Talking to Me or Someone Else? Rethinking Talk-to-Me Detection in Egocentric Videos | 摘要/书目 | 本轮新增 |
+| [2610.27496](https://arxiv.org/abs/2610.27496v1) | Evaluating Social Reasoning in Embodied Vision-Language Models | 摘要/书目 | 本轮新增 |
+| [2610.10438](https://arxiv.org/abs/2610.10438v1) | ECHO: Embodied Camera Observations of Human Object Carrying | 摘要/书目 | 本轮新增 |
+| [2610.09358](https://arxiv.org/abs/2610.09358v1) | COOL: Curiosity-Driven Object Ownership Learning for Personalized Robotic Assistance | 摘要/书目 | 本轮新增 |
+
+### 对应/光流/匹配 2026
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2609.11486](https://arxiv.org/abs/2609.11486v1) | FreeFlow: A Bias-free Hierarchical Transformer for Optical Flow Estimation | 正文选读 | 本轮新增 |
+| [2610.26690](https://arxiv.org/abs/2610.26690v1) | Foundation Model Driven Optical Flow | 正文选读 | 本轮新增 |
+| [2608.03423](https://arxiv.org/abs/2608.03423v2) | SGFormer: Structure-Guided Transformer for Robust Local Feature Matching | 正文选读 | 本轮新增 |
+| [2610.31321](https://arxiv.org/abs/2610.31321v1) | MVLoMa: Multi-View Local Feature Matching with Any Geometry Foundation Model | 正文选读 | 本轮新增 |
+| [2609.17905](https://arxiv.org/abs/2609.17905v1) | Co-occurrence-Aware Quadratic Assignment for Local Feature Matching in Simultaneous Localization and Mapping | 摘要/书目 | 本轮新增 |
+| [2608.11093](https://arxiv.org/abs/2608.11093v1) | Cross-View Feature Matching: Survey, Benchmarking, and Foundation-Model Perspectives | 摘要/书目 | 本轮新增 |
+| [2609.21754](https://arxiv.org/abs/2609.21754v1) | SFVO: Decoupled Confidence-Guided Stereo-Flow Visual Odometry with Bidirectional PnP | 摘要/书目 | 本轮新增 |
+| [2608.00499](https://arxiv.org/abs/2608.00499v1) | Optical Flow from Photons | 摘要/书目 | 本轮新增 |
+| [2609.06726](https://arxiv.org/abs/2609.06726v1) | Back to the Feature: Zero-Shot 6DoF Pose Estimation via Dense Local Features | 正文选读 | 本轮新增 |
+
+### 遮挡/非模态补全 2026
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2604.20748](https://arxiv.org/abs/2604.20748v1) | Amodal SAM: A Unified Amodal Segmentation Framework with Generalization | 正文选读 | 本轮新增 |
+| [2603.14741](https://arxiv.org/abs/2603.14741v1) | PHAC: Promptable Human Amodal Completion | 摘要/书目 | 本轮新增 |
+| [2610.29061](https://arxiv.org/abs/2610.29061v1) | OccJEPA: Occlusion as Masking for Amodal Video Segmentation | 正文选读 | 本轮新增 |
+| [2603.28333](https://arxiv.org/abs/2603.28333v1) | Integrating Multimodal Large Language Model Knowledge into Amodal Completion | 摘要/书目 | 本轮新增 |
+| [2605.24533](https://arxiv.org/abs/2605.24533v1) | Learnable Shape Prototypes with Occlusion-Geometry-Guided Injection for Amodal Instance Segmentation | 摘要/书目 | 本轮新增 |
+| [2604.11711](https://arxiv.org/abs/2604.11711v1) | Seeing Through the Tool: A Controlled Benchmark for Occlusion Robustness in Foundation Segmentation Models | 正文选读 | 本轮新增 |
+| [2605.31466](https://arxiv.org/abs/2605.31466v1) | VolFill: Single-View Amodal 3D Scene Reconstruction with Volumetric Flow Matching | 正文选读 | 本轮新增 |
+| [2603.04179](https://arxiv.org/abs/2603.04179v2) | NOVA3R: Non-pixel-aligned Visual Transformer for Amodal 3D Reconstruction | 正文选读 | 本轮新增 |
+| [2610.18670](https://arxiv.org/abs/2610.18670v1) | Perception Beyond the Visible: Incompleteness-Aware Scene Understanding for Robot Autonomy | 摘要/书目 | 本轮新增 |
+
+### 事件视觉/异步感知 2026
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2608.11075](https://arxiv.org/abs/2608.11075v1) | Static in Frames, Dynamic in Events: Rethinking Features in Event Cameras as Motion Cues | 正文选读 | 本轮新增 |
+| [2609.26919](https://arxiv.org/abs/2609.26919v1) | Bend the Clock: Predicting Ahead to Beat Latency in Event-Based Object Detection | 正文选读 | 本轮新增 |
+| [2607.15727](https://arxiv.org/abs/2607.15727v1) | Event3R: Asynchronous-to-Global 3D Reconstruction from Event Camera via Spatial-Temporal Feature Aggregation | 正文选读 | 本轮新增 |
+| [2607.02866](https://arxiv.org/abs/2607.02866v1) | E-TraMamba: A New Paradigm for Efficient Long-Term 3D Feature Tracking with Event Cameras | 正文选读 | 本轮新增 |
+| [2608.14027](https://arxiv.org/abs/2608.14027v1) | E-S2Feat:Semantic-Guided Spiking Local Feature Detection and Description for Event Cameras | 正文选读 | 本轮新增 |
+| [2607.26703](https://arxiv.org/abs/2607.26703v1) | Sequence-SOD: Bio-inspired Sequence-aware Spiking ObjectDetection for Event Cameras | 摘要/书目 | 本轮新增 |
+| [2608.21764](https://arxiv.org/abs/2608.21764v1) | LiteEvent-AE: Lightweight Autoencoder for Event-Based Vision on Low-Latency Energy-Constrained Edge Devices | 摘要/书目 | 本轮新增 |
+| [2609.17189](https://arxiv.org/abs/2609.17189v1) | EventEgoHands++: Event-based Egocentric 3D Hand Mesh Reconstruction with Real Dataset | 摘要/书目 | 本轮新增 |
+
+### 长视频/第一人称记忆 2026
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2608.11017](https://arxiv.org/abs/2608.11017v1) | R4DSG: Relative 4D Scene Graph Memory for Object-Centric Question Answering in Long Egocentric Video | 正文选读 | 本轮新增 |
+| [2610.10538](https://arxiv.org/abs/2610.10538v1) | Never Look Back: Understanding Persistence in 3D Object Memory from Egocentric Videos | 正文选读 | 本轮新增 |
+| [2610.17128](https://arxiv.org/abs/2610.17128v1) | EgoProbe: Benchmarking Long-Range and Exact Memory in Streaming Egocentric Videos | 正文选读 | 本轮新增 |
+| [2608.13113](https://arxiv.org/abs/2608.13113v1) | EgoMonth: A Month-Level Egocentric Video Benchmark for Long-Term Spatiotemporal Memory | 摘要/书目 | 本轮新增 |
+| [2610.30089](https://arxiv.org/abs/2610.30089v1) | ProactEgoMem: Benchmarking Proactive Memory in Streaming Egocentric Video | 摘要/书目 | 本轮新增 |
+| [2609.40195](https://arxiv.org/abs/2609.40195v1) | MemLife: Curating and Reasoning over Long-Term Egocentric Video Memories | 摘要/书目 | 本轮新增 |
+| [2609.38119](https://arxiv.org/abs/2609.38119v2) | VideoLoop: Looped Working Memory Against Semantic Thrashing in Long-Form Video Agents | 正文选读 | 本轮新增 |
+| [2609.23601](https://arxiv.org/abs/2609.23601v1) | PREM: Prefix-Steered Recurrent Memory for Long-Video Understanding | 正文选读 | 本轮新增 |
+| [2608.07663](https://arxiv.org/abs/2608.07663v2) | Keep It Simple: Multi-Key Episodic Memory Retrieval for Ultra-Long Video Understanding | 摘要/书目 | 本轮新增 |
+| [2607.02096](https://arxiv.org/abs/2607.02096v1) | LongEgoRefer: A Benchmark for Long-Form Egocentric Video Referring Expression Comprehension | 摘要/书目 | 本轮新增 |
+
+### 组合泛化/视觉推理 2026
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2607.29586](https://arxiv.org/abs/2607.29586v1) | TraceViT: Grounded Trace Supervision for Visual Abstract Reasoning | 正文选读 | 本轮新增 |
+| [2607.09061](https://arxiv.org/abs/2607.09061v1) | On Locality and Length Generalization in Visual Reasoning | 正文选读 | 本轮新增 |
+| [2610.00064](https://arxiv.org/abs/2610.00064v1) | Reachability Is Not Generalization: Understanding Verb--Noun Decomposition in Assembly Action Recognition | 正文选读 | 本轮新增 |
+| [2608.19871](https://arxiv.org/abs/2608.19871v1) | DIFFCZSL: Compositional Zero-Shot Learning Regularized by Diffusion Representations | 正文选读 | 本轮新增 |
+| [2607.05911](https://arxiv.org/abs/2607.05911v1) | Progressive Reasoning with Primitive Correction for Compositional Zero-Shot Learning | 摘要/书目 | 本轮新增 |
+| [2609.08242](https://arxiv.org/abs/2609.08242v1) | CS-CLIP: Compositional Scene Graph-guided CLIP for Robust Compositional Reasoning | 摘要/书目 | 本轮新增 |
+| [2609.35032](https://arxiv.org/abs/2609.35032v1) | JRDB-AVR: An Active Visual Reasoning Benchmark for Embodied Agents in Real-World Environments | 正文选读 | 本轮新增 |
+| [2610.13925](https://arxiv.org/abs/2610.13925v1) | Can machines reason non-verbally? | 摘要/书目 | 本轮新增 |
+| [2610.08966](https://arxiv.org/abs/2610.08966v2) | Humanity's Sixth Sense: Benchmarking Intuitive Visual Reasoning in Multimodal Models | 摘要/书目 | 本轮新增 |
+
+### 计数与视觉测量 2026
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2609.17613](https://arxiv.org/abs/2609.17613v1) | DualCount: Structurally Consistent Density and Point Modeling for Zero-Shot Object Counting | 正文选读 | 本轮新增 |
+| [2609.04716](https://arxiv.org/abs/2609.04716v1) | Counting Beyond Instances: A Benchmark for Group-Individual Object Counting | 正文选读 | 本轮新增 |
+| [2603.12703](https://arxiv.org/abs/2603.12703v3) | SVCBench: A Streaming Video Counting Benchmark for Spatial-Temporal State Maintenance | 正文选读 | 本轮新增 |
+| [2609.37096](https://arxiv.org/abs/2609.37096v2) | Why MLLMs Struggle to Count: Overcoming Individuation and Aggregation Bottlenecks with ConvStack | 正文选读 | 本轮新增 |
+| [2607.16826](https://arxiv.org/abs/2607.16826v2) | Spatially-Aware Class-Agnostic Object Counting | 摘要/书目 | 本轮新增 |
+| [2607.02139](https://arxiv.org/abs/2607.02139v1) | AdaCount: Training-Free Similarity-Guided Spatial and Feature Adaptation for Zero-Shot Object Counting | 摘要/书目 | 本轮新增 |
+| [2601.13871](https://arxiv.org/abs/2601.13871v1) | OCCAM: Class-Agnostic, Training-Free, Prior-Free and Multi-Class Object Counting | 摘要/书目 | 本轮新增 |
+| [2605.18063](https://arxiv.org/abs/2605.18063v1) | The MixCount Dataset: Bridging the Data Gap for Open-Vocabulary Object Counting | 摘要/书目 | 本轮新增 |
+| [2606.17561](https://arxiv.org/abs/2606.17561v1) | RT-Counter: Real-Time Text-Guided Open-Vocabulary Object Counting | 正文选读 | 本轮新增 |
+| [2605.17952](https://arxiv.org/abs/2605.17952v1) | Counting Machine Parts | 摘要/书目 | 本轮新增 |
+
+### 人脸/表情/手势 2026
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2609.16149](https://arxiv.org/abs/2609.16149v1) | DenseFace: Bias Mitigation in Face Recognition via Density-Aware Probabilistic Matching | 正文选读 | 本轮新增 |
+| [2604.09127](https://arxiv.org/abs/2604.09127v1) | FaceLiVTv2: An Improved Hybrid Architecture for Efficient Mobile Face Recognition | 正文选读 | 本轮新增 |
+| [2604.06782](https://arxiv.org/abs/2604.06782v1) | EventFace: Event-Based Face Recognition via Structure-Driven Spatiotemporal Modeling | 正文选读 | 本轮新增 |
+| [2610.24832](https://arxiv.org/abs/2610.24832v1) | VTF900: A 900-Subject Visible-Thermal Face Recognition Dataset and Benchmark | 摘要/书目 | 本轮新增 |
+| [2610.28766](https://arxiv.org/abs/2610.28766v1) | Different Defects, Different Effects: A Controlled Audit of Face Recognition Training Data | 正文选读 | 本轮新增 |
+| [2606.32040](https://arxiv.org/abs/2606.32040v1) | FaceMoE: Mixture of Experts for Low-Resolution Face Recognition | 摘要/书目 | 本轮新增 |
+| [2602.18763](https://arxiv.org/abs/2602.18763v1) | TAG: Thinking with Action Unit Grounding for Facial Expression Recognition | 正文选读 | 本轮新增 |
+| [2604.08990](https://arxiv.org/abs/2604.08990v2) | ActFER: Agentic Facial Expression Recognition via Active Tool-Augmented Visual Reasoning | 摘要/书目 | 本轮新增 |
+| [2608.13217](https://arxiv.org/abs/2608.13217v1) | UniCon-Former: Unified Convolution Transformer is All You Need for Hand Gesture Recognition | 摘要/书目 | 本轮新增 |
+| [2605.12297](https://arxiv.org/abs/2605.12297v1) | EgoEV-HandPose: Egocentric 3D Hand Pose Estimation and Gesture Recognition with Stereo Event Cameras | 摘要/书目 | 本轮新增 |
+
+### 分布偏移/持续适应 2026
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2609.39934](https://arxiv.org/abs/2609.39934v2) | Reliability-Aware Checkpoint Selection for Domain Generalization | 正文选读 | 本轮新增 |
+| [2610.00030](https://arxiv.org/abs/2610.00030v1) | Domain generalization and synthetic data in object detection: the enabler, the probe, and the gap | 正文选读 | 本轮新增 |
+| [2608.18915](https://arxiv.org/abs/2608.18915v2) | Simple, Safe, and Overlooked: Reclaiming Sustainable Domain Generalization with Statistical Color Matching | 正文选读 | 本轮新增 |
+| [2610.30680](https://arxiv.org/abs/2610.30680v1) | Zero-Shot Domain Generalization via Domain Prompt Learning | 摘要/书目 | 本轮新增 |
+| [2608.29395](https://arxiv.org/abs/2608.29395v1) | GATE: Reliability-Gated Gaussian Evidence Fusion for Training-Free Test-Time Adaptation of Vision-Language Models | 摘要/书目 | 本轮新增 |
+| [2610.06932](https://arxiv.org/abs/2610.06932v1) | RADC: Risk-Aware Dual Caching for Vision-Language Test-Time Adaptation | 摘要/书目 | 本轮新增 |
+| [2607.08164](https://arxiv.org/abs/2607.08164v3) | Continual Test-Time Adaptation in Computer Vision: Methods, Benchmarks, and Future Directions | 摘要/书目 | 本轮新增 |
+| [2610.19892](https://arxiv.org/abs/2610.19892v1) | On the Limits of Representation-Based Test-Time Adaptation for Multimodal LLMs | 摘要/书目 | 本轮新增 |
+| [2607.04500](https://arxiv.org/abs/2607.04500v1) | Geographic Diversity Beats Data Volume for Cross-Domain Generalization in Zero-Label JEPA Driving World Models | 正文选读 | 本轮新增 |
+| [2609.01683](https://arxiv.org/abs/2609.01683v1) | FORGE: Forward-Only Test-Time Adaptation for Integer-Only Vision Models on Microcontrollers | 摘要/书目 | 本轮新增 |
+
+### 人体/手部/全身 3D 2026
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2602.15989](https://arxiv.org/abs/2602.15989v1) | SAM 3D Body: Robust Full-Body Human Mesh Recovery | 正文选读 | 本轮新增 |
+| [2603.15603](https://arxiv.org/abs/2603.15603v1) | Fast SAM 3D Body: Accelerating SAM 3D Body for Real-Time Full-Body Human Mesh Recovery | 正文选读 | 本轮新增 |
+| [2603.17355](https://arxiv.org/abs/2603.17355v1) | OnlineHMR: Video-based Online World-Grounded Human Mesh Recovery | 正文选读 | 本轮新增 |
+| [2605.09856](https://arxiv.org/abs/2605.09856v1) | MoPO: Incorporating Motion Prior for Occluded Human Mesh Recovery | 正文选读 | 本轮新增 |
+| [2605.18102](https://arxiv.org/abs/2605.18102v3) | DanceHMR: Hand-Aware Whole-Body Human Mesh Recovery from Monocular Videos | 正文选读 | 本轮新增 |
+| [2601.22693](https://arxiv.org/abs/2601.22693v2) | PEAR: Pixel-aligned Expressive humAn mesh Recovery | 摘要/书目 | 本轮新增 |
+| [2605.12498](https://arxiv.org/abs/2605.12498v1) | EgoForce: Forearm-Guided Camera-Space 3D Hand Pose from a Monocular Egocentric Camera | 摘要/书目 | 本轮新增 |
+| [2608.20093](https://arxiv.org/abs/2608.20093v2) | HandMvNet: Real-Time 3D Hand Pose Estimation Using Multi-View Cross-Attention Fusion | 摘要/书目 | 本轮新增 |
+| [2603.25726](https://arxiv.org/abs/2603.25726v3) | AnyHand: A Large-Scale Synthetic Dataset for RGB(-D) Hand Pose Estimation | 摘要/书目 | 本轮新增 |
+| [2604.08543](https://arxiv.org/abs/2604.08543v1) | E-3DPSM: A State Machine for Event-Based Egocentric 3D Human Pose Estimation | 摘要/书目 | 本轮新增 |
+
+### 部件/可供性/功能场景 2026
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2608.20720](https://arxiv.org/abs/2608.20720v1) | AffordAny: Open-World 3D Affordance Grounding from Monocular RGB Images via Vision-Language-Guided Geometric Reasoning | 正文选读 | 本轮新增 |
+| [2609.37264](https://arxiv.org/abs/2609.37264v1) | UniAfford: Token-Routed Multitask Learning for Generalizable 2D-3D Affordance Perception | 正文选读 | 本轮新增 |
+| [2606.02551](https://arxiv.org/abs/2606.02551v1) | AFUN: Towards an Affordance Foundation Model for Functionality Understanding | 摘要/书目 | 本轮新增 |
+| [2605.01365](https://arxiv.org/abs/2605.01365v1) | VoxAfford: Multi-Scale Voxel-Token Fusion for Open-Vocabulary 3D Affordance Detection | 摘要/书目 | 本轮新增 |
+| [2605.11616](https://arxiv.org/abs/2605.11616v1) | Grounding by Remembering: Cross-Scene and In-Scene Memory for 3D Functional Affordances | 摘要/书目 | 本轮新增 |
+| [2609.25832](https://arxiv.org/abs/2609.25832v2) | PartLLM: A Unified Multimodal Foundation for 3D Part Segmentation | 正文选读 | 本轮新增 |
+| [2609.12898](https://arxiv.org/abs/2609.12898v1) | UniPart: Towards Zero-shot Language-Grounded 3D Part Segmentation for Embodied Interaction | 正文选读 | 本轮新增 |
+| [2610.23659](https://arxiv.org/abs/2610.23659v1) | FlexPart: Text-Controlled Semantics-Aware 3D Part Segmentation at Flexible Granularity | 摘要/书目 | 本轮新增 |
+| [2601.01454](https://arxiv.org/abs/2601.01454v1) | PartImageNet++ Dataset: Enhancing Visual Models with High-Quality Part Annotations | 摘要/书目 | 本轮新增 |
+| [2604.05621](https://arxiv.org/abs/2604.05621v2) | FunRec: Reconstructing Functional 3D Scenes from Egocentric Interaction Videos | 正文选读 | 本轮新增 |
+
+### 边界/抠图/透明与伪装 2026
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2601.14255](https://arxiv.org/abs/2601.14255v1) | VideoMaMa: Mask-Guided Video Matting via Generative Prior | 摘要/书目 | 本轮新增 |
+| [2610.26857](https://arxiv.org/abs/2610.26857v1) | VideoMaMa++: Temporally Consistent Video Matting via Preserve-and-Refine Token | 正文选读 | 本轮新增 |
+| [2608.08487](https://arxiv.org/abs/2608.08487v1) | RenderMatte: Exact-Alpha Rendering and Group-Relative Alignment for Image Matting | 正文选读 | 本轮新增 |
+| [2601.12080](https://arxiv.org/abs/2601.12080v1) | Toward Real-World High-Precision Image Matting and Segmentation | 摘要/书目 | 本轮新增 |
+| [2601.12147](https://arxiv.org/abs/2601.12147v1) | Segment and Matte Anything in a Unified Model | 摘要/书目 | 本轮新增 |
+| [2601.03362](https://arxiv.org/abs/2601.03362v1) | Guardians of the Hair: Rescuing Soft Boundaries in Depth, Stereo, and Novel Views | 摘要/书目 | 本轮新增 |
+| [2603.02648](https://arxiv.org/abs/2603.02648v1) | SEP-YOLO: Fourier-Domain Feature Representation for Transparent Object Instance Segmentation | 正文选读 | 本轮新增 |
+| [2603.19547](https://arxiv.org/abs/2603.19547v1) | SeeClear: Reliable Transparent Object Depth Estimation via Generative Opacification | 正文选读 | 本轮新增 |
+| [2608.11135](https://arxiv.org/abs/2608.11135v1) | Is There Really a Camouflaged Object? Towards Realistic Camouflaged Object Detection | 正文选读 | 本轮新增 |
+| [2610.09807](https://arxiv.org/abs/2610.09807v1) | Concentration, Not Uncertainty: Why Targeted Synthetic Data Doesn't Help Camouflaged Object Detection | 摘要/书目 | 本轮新增 |
+
+### 主动感知/视角规划 2026
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2609.24124](https://arxiv.org/abs/2609.24124v2) | ActiveArena: Benchmarking and Understanding Active Perception in Robotic Manipulation | 正文选读 | 本轮新增 |
+| [2603.22570](https://arxiv.org/abs/2603.22570v2) | CanViT: Toward Active-Vision Foundation Models | 正文选读 | 本轮新增 |
+| [2603.00600](https://arxiv.org/abs/2603.00600v3) | I-Perceive: A Foundation Model for Vision-Language Active Perception | 正文选读 | 本轮新增 |
+| [2609.18514](https://arxiv.org/abs/2609.18514v2) | ActiveScale: Scaling Active Perception for Robots across Model, Data, and Hardware | 摘要/书目 | 本轮新增 |
+| [2609.17628](https://arxiv.org/abs/2609.17628v1) | LEAP: Learning Emergent Active Perception for Quadruped Navigation | 摘要/书目 | 本轮新增 |
+| [2602.04600](https://arxiv.org/abs/2602.04600v2) | Act, Sense, Act: Learning Active Perception from Large-Scale Egocentric Human Data | 摘要/书目 | 本轮新增 |
+| [2609.37292](https://arxiv.org/abs/2609.37292v1) | Recovering the View: Benchmarking Physical Active Vision for Occlusion Recovery in Robotic Manipulation | 正文选读 | 本轮新增 |
+| [2609.23974](https://arxiv.org/abs/2609.23974v1) | LEAP-NBV: Lightweight Edge Active-Perception for Foundation-Model Next-Best-View Planning | 摘要/书目 | 本轮新增 |
+| [2605.07943](https://arxiv.org/abs/2605.07943v2) | TAVIS: A Benchmark for Egocentric Active Vision and Anticipatory Gaze in Imitation Learning | 摘要/书目 | 本轮新增 |
+| [2605.26627](https://arxiv.org/abs/2605.26627v2) | Breaking the Epistemic Trap: Active Perception Under Compound Uncertainty | 正文选读 | 本轮新增 |
+
+### 点追踪/3D 运动 2026
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2603.04989](https://arxiv.org/abs/2603.04989v2) | TAPFormer: Robust Arbitrary Point Tracking via Transient Asynchronous Fusion of Frames and Events | 正文选读 | 本轮新增 |
+| [2603.17813](https://arxiv.org/abs/2603.17813v1) | M2P: Improving Visual Foundation Models with Mask-to-Point Weakly-Supervised Learning for Dense Point Tracking | 正文选读 | 本轮新增 |
+| [2609.34035](https://arxiv.org/abs/2609.34035v1) | 3D Point Tracking with State Space Models | 正文选读 | 本轮新增 |
+| [2603.02573](https://arxiv.org/abs/2603.02573v2) | Track4World: Feedforward World-centric Dense 3D Tracking of All Pixels | 正文选读 | 本轮新增 |
+| [2610.03716](https://arxiv.org/abs/2610.03716v1) | MoSE3: Learning World-Space SE(3) at Every Pixel | 正文选读 | 本轮新增 |
+| [2602.04877](https://arxiv.org/abs/2602.04877v1) | CoWTracker: Tracking by Warping instead of Correlation | 摘要/书目 | 本轮新增 |
+| [2603.12217](https://arxiv.org/abs/2603.12217v1) | Real-World Point Tracking with Verifier-Guided Pseudo-Labeling | 摘要/书目 | 本轮新增 |
+| [2602.04441](https://arxiv.org/abs/2602.04441v1) | SynthVerse: A Large-Scale Diverse Synthetic Dataset for Point Tracking | 摘要/书目 | 本轮新增 |
+| [2605.12587](https://arxiv.org/abs/2605.12587v1) | TrackCraft3R: Repurposing Video Diffusion Transformers for Dense 3D Tracking | 摘要/书目 | 本轮新增 |
+| [2604.02586](https://arxiv.org/abs/2604.02586v1) | TrackerSplat: Exploiting Point Tracking for Fast and Robust Dynamic 3D Gaussians Reconstruction | 摘要/书目 | 本轮新增 |
+
+### 物体级 6-DoF 跟踪/关节物体 2026
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2610.28962](https://arxiv.org/abs/2610.28962v1) | RoPT: Robust 6DoF Object Pose Tracking in Video | 正文选读 | 本轮新增 |
+| [2609.39116](https://arxiv.org/abs/2609.39116v1) | GRC-Pose: Generation-Reconstruction Correspondence for Prior-Free 6D Object Pose Tracking | 正文选读 | 本轮新增 |
+| [2605.23523](https://arxiv.org/abs/2605.23523v1) | ComPose: When to Trust Hands for Object Pose Tracking | 正文选读 | 本轮新增 |
+| [2607.23468](https://arxiv.org/abs/2607.23468v1) | Robust 6-DoF Object Pose Tracking with Built-In Recovery under Occlusions and Rapid Object Motions | 正文选读 | 本轮新增 |
+| [2610.15287](https://arxiv.org/abs/2610.15287v1) | ASM-6D: Fast Certified Pose-Shape Inference with Complete Correspondence Flow Maps | 正文选读 | 本轮新增 |
+| [2603.28045](https://arxiv.org/abs/2603.28045v2) | Event6D: Event-based Novel Object 6D Pose Tracking | 摘要/书目 | 本轮新增 |
+| [2603.08264](https://arxiv.org/abs/2603.08264v2) | Event-based Motion & Appearance Fusion for 6D Object Pose Tracking | 摘要/书目 | 本轮新增 |
+| [2609.35046](https://arxiv.org/abs/2609.35046v1) | LEGAU: Learning Semantic Gaussian Priors for Scalable Category-level Pose Estimation | 摘要/书目 | 本轮新增 |
+| [2602.19565](https://arxiv.org/abs/2602.19565v2) | DICArt: Advancing Category-level Articulated Object Pose Estimation in Discrete State-Spaces | 摘要/书目 | 本轮新增 |
+| [2605.13018](https://arxiv.org/abs/2605.13018v2) | OCH3R: Object-Centric Holistic 3D Reconstruction | 摘要/书目 | 本轮新增 |
+
+### 三维占据/场景图 2026
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [2603.23502](https://arxiv.org/abs/2603.23502v2) | OccAny: Generalized Unconstrained Urban 3D Occupancy | 正文选读 | 本轮新增 |
+| [2608.08696](https://arxiv.org/abs/2608.08696v3) | OccAnyScene: Towards Unified Indoor-Outdoor 3D Occupancy Prediction | 摘要/书目 | 本轮新增 |
+| [2605.25059](https://arxiv.org/abs/2605.25059v4) | VEOcc: Voxel-Centric Online Semantic Occupancy Prediction For Embodied Scene Understanding | 正文选读 | 本轮新增 |
+| [2603.08521](https://arxiv.org/abs/2603.08521v3) | OccTrack360: 4D Panoptic Occupancy Tracking from Surround-View Fisheye Cameras | 正文选读 | 本轮新增 |
+| [2610.22143](https://arxiv.org/abs/2610.22143v2) | FALCON: FPGA-Accelerated Latency-Certifiable Occupancy Networks for Camera-Based Autonomous Driving | 摘要/书目 | 本轮新增 |
+| [2605.13741](https://arxiv.org/abs/2605.13741v1) | LEXI-SG: Monocular 3D Scene Graph Mapping with Room-Guided Feed-Forward Reconstruction | 正文选读 | 本轮新增 |
+| [2601.02905](https://arxiv.org/abs/2601.02905v2) | LOST-3DSG: Lightweight Open-Vocabulary 3D Scene Graphs with Semantic Tracking in Dynamic Environments | 正文选读 | 本轮新增 |
+| [2606.29786](https://arxiv.org/abs/2606.29786v2) | OP3DSG: Open-Vocabulary Part-Aware 3D Scene Graph Generation for Real-World Environments | 摘要/书目 | 本轮新增 |
+| [2609.00619](https://arxiv.org/abs/2609.00619v1) | DSG: Dynamic 3D Scene Graph Construction for Embodied Agents in Changing Indoor Environments | 摘要/书目 | 本轮新增 |
+| [2610.27696](https://arxiv.org/abs/2610.27696v1) | PanoGraphGS: Unifying Panoptic Segmentation and Hierarchical 3D Scene Graphs with Gaussian Splatting | 摘要/书目 | 本轮新增 |
+
+### 补充：PMLR-only 正式记录
+
+| ID | 标题 | 深度 | 状态 |
+|---|---|---|---|
+| [PMLR v306/nam26c](https://proceedings.mlr.press/v306/nam26c.html) | Causal-JEPA: Learning World Models through Object-Level Latent Masking | 摘要/官方记录 | 本轮新增 |
+
+### 官方 artifact 核验（HTTP 200，未加载权重）
+
+| Artifact | 入口 | 本轮核验 |
+|---|---|---|
+| YOLO26 | https://docs.ultralytics.com/models/yolo26/ · https://github.com/ultralytics/ultralytics | 官方模型页与论文 v1 对齐；未测速 |
+| SAM 3 / SAM 3D | https://github.com/facebookresearch/sam3 · https://github.com/facebookresearch/sam3d | 代码/模型入口存在；未加载 |
+| Depth Anything 3 | https://github.com/ByteDance-Seed/Depth-Anything-3 · https://depth-anything-3.github.io/ | 代码与项目页存在；未加载 |
+| RF-DETR | https://github.com/roboflow/rf-detr · https://rfdetr.roboflow.com/ | 代码与文档存在；未运行 NAS |
+| PaddleOCR-VL / PP-OCR | https://github.com/PaddlePaddle/PaddleOCR | 仓库存在；未下载权重 |
+| dots.ocr | https://github.com/rednote-hilab/dots.ocr | 仓库存在；arXiv HTML 不可用，仅摘要+代码说明 |
+| MinerU2.5 | https://github.com/opendatalab/MinerU | 仓库存在；未加载 |
+| olmOCR 2 | https://github.com/allenai/olmocr · https://olmocr.allen.ai/ | 代码/项目存在；未加载 |
+| DINOv3 / PE | https://github.com/facebookresearch/dinov3 · https://github.com/facebookresearch/perception_models | 代码/模型入口存在；未加载 |
+| SAMURAI / MOTIP / OmniTrack / Cutie | https://github.com/yangchris11/samurai · https://github.com/MCG-NJU/MOTIP · https://github.com/xifen523/OmniTrack · https://github.com/hkchengrex/Cutie | 代码入口存在；未运行 |
+| ViTPose / Sapiens / MoGe | https://github.com/ViTAE-Transformer/ViTPose · https://github.com/facebookresearch/sapiens · https://github.com/microsoft/MoGe | 代码入口存在；未加载 |
+| OmniDocBench | https://github.com/opendatalab/OmniDocBench | 代码/数据入口存在；未运行评测 |
+
+**未完成：** 上述 290 篇新增中 96 篇正文级选读（另 1 篇既有引用）；其余的方法细节、监督配比、全部实验与失败条件仍需逐篇复核。新批次没有执行任何 Clover 模型、权重转换、速度测量或基准复现。
+<!-- END core-vision-source-frontier -->
+
+
+
+
+
+
 
 <a id="verified-additions"></a>
 

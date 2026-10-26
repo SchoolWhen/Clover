@@ -27,13 +27,13 @@
 
 | 问题 | 持续更新的主题文档 |
 |---|---|
-| 一个模型怎样识别、检测、分割、追踪和阅读？ | [基础视觉能力地图](01-research/perception-and-identifiability.md#broad-visual-capabilities) · [能力评测](01-research/evaluation-and-benchmarks.md#broad-visual-evaluation) |
+| 一个模型怎样识别、检测、分割、追踪和阅读？ | [基础视觉能力地图](01-research/perception-and-identifiability.md#broad-visual-capabilities) · [2026-10 核心视觉前沿](01-research/perception-and-identifiability.md#core-vision-frontier) · [能力评测](01-research/evaluation-and-benchmarks.md#broad-visual-evaluation) |
 | 视觉证据究竟能辨识什么？ | [观测、几何与物理](01-research/perception-and-identifiability.md) · [研究问题](01-research/research-questions.md) |
 | 机器应当记住世界的哪些信息？ | [状态、表示与记忆](01-research/representation-and-memory.md) |
 | 什么时候应该再看一眼、干预或修正认识？ | [因果、行动与开放世界](01-research/causality-and-active-perception.md) |
 | 数据与训练怎样改变能力？ | [学习与数据](01-research/learning-and-data.md) |
 | 基础模型和部署系统分别贡献了什么？ | [模型、运行时与工程](01-research/foundation-models-and-systems.md) |
-| 什么证据能证明原生 ultrafast？ | [计算机制与完整延迟](01-research/foundation-models-and-systems.md#native-ultrafast-research) |
+| 什么证据能证明原生 ultrafast？ | [计算机制与完整延迟](01-research/foundation-models-and-systems.md#native-ultrafast-research) · [2026-10 系统证据](01-research/foundation-models-and-systems.md#ultrafast-systems-frontier) · [时延声明审计](01-research/foundation-models-and-systems.md#latency-claim-audit) |
 | 什么证据能区分相互竞争的答案？ | [评测与资源](01-research/evaluation-and-benchmarks.md) · [一手来源](01-research/sources-and-resources.md) |
 | 哪些 Clover 想法仍需经受检验？ | [候选假设](04-innovation/README.md) · [研究流程](PROCESS.md) |
 

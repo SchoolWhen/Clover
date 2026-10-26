@@ -115,6 +115,148 @@ This is the canonical topic document. Update it in place; source-level dates and
 - **本次阅读深度：** 摘要与书目核验。
 <!-- END current-cross-domain-evidence -->
 
+<!-- BEGIN evaluation-frontier -->
+<a id="evaluation-frontier"></a>
+
+## 2026-10 新验收面：3D 点追踪、多视图一致性、实时时钟与安全
+
+检索/核验：**2026-10-25（Asia/Shanghai）**。本节只登记**评测协议与基准**，不把基准分数当作 Clover 结果。一个基准要进入 Clover 的证据链，至少要通过四道检查：任务是否覆盖目标能力；真值/辅助模态是否泄漏了部署时不可得的信息；评价单位（帧、视图、轨迹、任务）是否与主张一致；以及延迟/资源是否按真实闭环记录。
+
+### TAPVid-MV：多视图 3D 点追踪的第一个长时基准
+
+- **一手来源：** [固定版本](https://arxiv.org/abs/2609.01899v2) · [项目页](https://tapvidmv.github.io/)。`PRIMARY_PAPER` / `OFFICIAL_PROJECT`。
+- **任务与规模：** 238 个序列、1,004 条校准相机流、74,147 条点轨迹，覆盖 7 个子集（室内/室外、机器人、人类活动、驾驶、合成程序场景）；序列与轨迹人工核验。
+- **真值来源：** 数据集特定的辅助模态——传感器深度、LiDAR、SLAM/SfM 点、人体网格、带位姿物体网格、模拟。均为 `L4` 级证据，不是纯 RGB 可得。
+- **实际证据：** 30+ 基线无一接近解决；令人意外的是，现有多视图点追踪器并不稳定优于单目点追踪器；同一数据上联合评估重建与追踪，作者把几何恢复识别为 3D 点追踪的主要瓶颈。
+- **边界：** 校准多相机 `V2` 条件，不是单目 `V0`；真值辅助模态不能作为训练输入；基准覆盖仍有限；几何误差与对应误差的分解依赖各自重建管线；不能据此宣布某一架构失败。
+- **阅读深度：** 摘要、基准构成与结论；未复核全部基线；未运行评测。
+
+### TAPVid-3D：median-scaled AJ 会消掉整段尺度误差
+
+- **一手来源：** [TAPVid-3D 项目页](https://tapvid3d.github.io/) · 协议审计见 [2609.34035](https://arxiv.org/abs/2609.34035v1) §4.2。`OFFICIAL_PROJECT` / `PRIMARY_PAPER`。
+- **任务与规模：** 单目视频中的任意点 3D 追踪，minival 150 段，三个子集分别覆盖室外驾驶（约 10–50 m）、室内多人动捕（约 1–5 m）与自我中心室内（约 1 m）；报告 3D-AJ、APD、OA。标准 leaderboard 的 3D-AJ 先按每条轨迹的预测/真值深度中位比做**全局尺度对齐**，阈值又随点深度放大，因此它评的是“相对形状”，不是绝对米制。
+- **实际证据：** 3D SSM 在同一 minival 上报告绝对米制 AJ 0.256（最强外部前馈 0.183），但 median-scaled leaderboard 仅 0.121（加可见性头 0.102），低于 DELTA+ 的 0.141。排序在两种口径下反转：**绝对更准的方法在尺度不变榜上更差**。这说明两种指标对应不同的误差结构，不能把 leaderboard 排名当作米制精度证据。
+- **边界：** median scaling 会抵消整段常数尺度误差，但消不掉随深度漂移的误差；阈值随深度增长会放过近处小误差、放大远处差异；内参/位姿来源、训练/测试 split 与可见性判定都影响结果。任何“3D 点追踪 SOTA”都必须同时报告 scale-invariant 与绝对米制，并说明内参、位姿和深度来自真值还是估计。
+- **阅读深度：** TAPVid-3D 项目页 + 3D SSM 的评测协议/结果表选读；未独立运行评测；未复核 TAPVid-3D 全部基线。
+
+
+### 6-DoF 物体位姿：ADD 不是轨迹误差，FPS 不是端到端
+
+- **一手来源：** [RoPT](https://arxiv.org/abs/2610.28962v1)、[GRC-Pose](https://arxiv.org/abs/2609.39116v1)、[ComPose](https://arxiv.org/abs/2605.23523v1)、[Robust Recovery](https://arxiv.org/abs/2607.23468v1)、[ASM-6D](https://arxiv.org/abs/2610.15287v1)。`PRIMARY_PAPER`。
+- **指标层级：** 实例级 `ADD/ADD-S` 需要物体 CAD 与直径阈值，回答“位姿是否对齐模型”；BOP 的 `AR`（MSPD/MSSD/VSD）混合投影、对称距离与可见表面；轨迹级 `RTE/RRE/ATE/ARE/TCC` 不需要 CAD，但常做首帧/Umeyama 对齐，回答“相对运动是否对”；类别级 ASM/LEGAU 的 `IoU50`/`VUS` 还需要类别形状先验。四类数字不可互换。
+- **实际证据：** RoPT 在 YCBInEOAT 16× 帧降采样下 ADD 90.85 / ADD-S 94.55，FoundationPose 只有 38.87/42.00；代价是 18.6 FPS vs 42.9 FPS。GRC-Pose 的后验 831.9 FPS（1.202 ms/帧），但支撑构建 2.061 s/帧 + 序列自适应 27.23 s，摊销端到端 0.79 FPS。ASM-6D 在 6–38 Hz 随假设/ADMM 预算变化；Event6D >120 FPS 但输入是事件 + 深度。ComPose 的 DexYCB RRE 1.5°，跨到 OakInk 仍为 2.4°，但 TCC_R 从 0.55 降到 0.19。Robust Recovery 有 10.74% 帧处于恢复，恢复延迟用冻结 6 帧对齐。
+- **边界：** `ADD/ADD-S` 对对称物体、CAD 误差与阈值敏感；轨迹指标的首帧/尺度对齐会掩盖绝对尺度错误；单帧估计与视频跟踪混报会制造假 SOTA；初始化来自首帧检测/生成模型，遮挡期位置是预测；FPS 必须分“后验/支撑构建/自适应/上游基础模型”四段。任何“实时 6-DoF 跟踪”都要同时报告对象先验来源、初始化、遮挡/恢复帧比例、端到端 P50/P95 与失败检测。
+- **阅读深度：** RoPT/GRC-Pose/ComPose/Robust Recovery/ASM-6D 的方法、主表、延迟与局限段选读；未独立运行评测；未复核全部附录。
+
+### VC-PQ：多视图全景分割需要按“每个视图都看见”计分
+
+- **一手来源：** [固定版本](https://arxiv.org/abs/2610.05911v1) · [官方代码](https://github.com/Renem24/vcpq)。`PRIMARY_PAPER` / `OPEN_SOURCE`。
+- **问题：** 现有多视图全景分割沿用单场景 PQ（`PQ^scene`），把所有视图拼成一张图，漏掉某视图或 ID 改变只按面积比例扣分；这掩盖了“实例在某些视图可见、另一些不可见”的一致性失败。
+- **机制：** VC-PQ 对每个实例可见的每个视图等权计数，并惩罚预测可见性与真值可见性不一致；分解为掩码精度、视图一致性、匹配阈值三部分；额外参数可恢复 tiling 的面积权重以便与旧指标比较。
+- **实际证据：** 在 ScanNet++/ScanNetv2 固定协议上重评近期前馈方法，分解显示各方法丢分来源不同；受控扰动表明 VC-PQ 对“漏掉多少视图/改了多少 ID”敏感，而 `PQ^scene` 对面积敏感。
+- **边界：** 指标不是模型；依赖真值实例 ID 与视图集；视图等权是否符合下游任务需论证；不能替代 3D 几何/物理正确性；新旧分数不可直接混用。
+- **阅读深度：** 摘要、指标定义与受控实验；未复核全部实验；未运行评测。
+
+### 2026-10 新增验收面一览
+
+| 基准/协议 | 一手来源 | 它真正测什么 | 不能替代什么 |
+|---|---|---|---|
+| SA-Co（SAM 3） | [2511.16719](https://arxiv.org/abs/2511.16719v2) · [官方代码](https://github.com/facebookresearch/sam3) | 概念提示下的图像/视频分割、唯一实例 ID、hard negatives；4M 概念标签数据引擎 | 开放世界概念发现、长期身份、物理状态；文本提示含 `L2` |
+| Realtime-Bench | [2610.22155](https://arxiv.org/abs/2610.22155v1) | Wall Clock 下动态任务的成功率/Pass^3；Paused/Token Clock 分离服务延迟与时间感知 | 真实机器人闭环；基准任务有限；理想时钟是上界 |
+| SpatialScout | [2610.26659](https://arxiv.org/abs/2610.26659v1) · [官方代码](https://github.com/JesseZZZZZ/SpatialScout) | 主动探索下的物体级 3D 建图：定位精度 × 覆盖率；给定位姿/标定/物体清单 | 真实 SLAM、开放世界发现、无清单探索；模拟环境 |
+| UniCounting COCO clean500 | [2610.08379](https://arxiv.org/abs/2610.08379v1) | 固定词表、无图像查询的多类别计数；点估计向量 L1、缺席类假质量、micro presence F1 | 开放词汇计数、实例身份、空间关系；clean 子集由作者构造 |
+| TrackFlood 时延攻击协议 | [2609.33948](https://arxiv.org/abs/2609.33948v1) | NMS-free 检测→跟踪管线的内容相关时延、截止违约、bounded-admission 防御代价 | 平均 FPS；干净输入性能；其他威胁模型/硬件 |
+| 6-DoF 物体位姿跟踪 | [2610.28962](https://arxiv.org/abs/2610.28962v1)、[2609.39116](https://arxiv.org/abs/2609.39116v1)、[2605.23523](https://arxiv.org/abs/2605.23523v1)、[2607.23468](https://arxiv.org/abs/2607.23468v1)、[2610.15287](https://arxiv.org/abs/2610.15287v1) | 实例 CAD/类别先验/生成 CAD 条件下的位姿轨迹、遮挡恢复与分阶段延迟 | 对象身份、物理属性、可变形/透明、无 CAD/无深度、恢复语义；单帧估计≠跟踪 |
+
+> OmniDocBench 的版本边界（v1.6→v1.7）与解析评分已在[基础视觉验收地图](#broad-visual-evaluation)记录，本表不重复；新批次只把 MEVL-STP 等场景文字工作登记在[感知方向](perception-and-identifiability.md#core-vision-frontier)。
+
+### FaVOS 与 Volumetric J&F：VOS 分数可能退化成“缺席分类”
+
+- **一手来源：** [固定版本](https://arxiv.org/abs/2610.02946v1)（NeurIPS 2026 E&D） · [项目页](https://aidaslab.github.io/FaVOS)。`PRIMARY_PAPER` / `OFFICIAL_PROJECT`。
+- **问题与规模：** 现有 VOS 基准多聚焦“几乎全程可见”的目标；FaVOS 专门覆盖低时间可见度：200 个视频、281 个目标，目标只间歇出现。
+- **实际证据：** 在该 regime 下，标准 J&F 会把评测压缩成“缺席分类”：目标缺席帧上的空预测获得高奖励，一个平凡的空掩码预测器甚至能超过 SAM 3 等强模型；作者提出 Volumetric J&F，把掩码序列当作时空体评估，降低缺席奖励主导，同时保留对分割质量与时间一致性的敏感度。
+- **不能推出：** FaVOS 是诊断性小基准（200 视频），不等于大规模训练/评测覆盖；Volumetric J&F 仍依赖真值掩码与可见性定义；空预测器“赢”是指标缺陷，不是 VOS 方法普遍失败；不能把该结论外推到所有 VOS 指标。
+- **阅读深度：** 正文选读：问题设定、指标定义、受控实验、Limitations 与结论；未复核全部附录；未运行评测。
+
+### Latent Video Prediction 评估：自监督视频模型作为世界模型编码器的鲁棒性
+
+- **一手来源：** [固定版本](https://arxiv.org/abs/2605.15618v2)（NeurIPS 2026 E&D）。`PRIMARY_PAPER`。
+- **对象与设置：** 四个匹配容量的前沿自监督模型——V-JEPA 2.1、V-JEPA 2、VideoPrism、VideoMAEv2；五个部署相关轴：特征可判别性、腐蚀鲁棒性、细粒度判别、遮挡鲁棒性、时间方向敏感性；在 Something-Something-v2 与 EGTEA Gaze+ 上重复。
+- **实际证据：** 作者报告 latent-prediction 模型（V-JEPA 家族）在像素腐蚀下退化更平缓、遮挡下保留可用类别结构、不重建像素也能捕捉细粒度接触线索，并独特编码时间箭头；模型排序在两个数据集上基本一致。
+- **不能推出：** 公开 checkpoint 的输入分辨率、clip 长度、预训练数据组成未完全配平；这是编码器鲁棒性评估，不是闭环世界模型/策略评估；五个轴不覆盖物理干预、长期记忆或主动采证；分数不证明“理解”。
+- **阅读深度：** 正文选读：五轴定义、主结果、Limitations/附录说明；未复核全部附录；未运行评测。
+
+### 指标失效模式：分数保持不等于能力保持
+
+下表把本轮证据中最容易被误读的指标放在一起。它不是“哪个 benchmark 不好”的清单，而是要求 Clover 的验收同时报告**指标、能力、失败模式**三列；任何单指标 SOTA 都不能单独回答“是否理解”。
+
+| 能力/常用指标 | 主要失效模式 | 本轮一手证据 | 必须同时报告 |
+|---|---|---|---|
+| 封闭集识别（ImageNet top-1） | 长尾、背景捷径、尺度变化被平均值掩盖 | VICAL/OFBD 的长尾偏差；Image-Scale 的尺度-精度曲线 | 每类/长尾组精度、背景替换、尺度曲线、开放词汇探针 |
+| 开放词汇识别（CLIP/PE 零样本） | 语言先验、提示词、数据策展混入“视觉”成绩 | WebSSL 同数据比较；WOW-Seg 无文字提示但仍用 VLLM | 匹配数据/算力、推理无文字条件、新概念组合、数据来源审计 |
+| 检测（COCO AP / FPS） | NMS 后处理、硬件/精度、小物体与长尾被平均 | YOLO26 NMS-free 回退；RF-DETR 目标域 NAS；DEIM 训练加速 | 端到端时延、P95/P99、小物体/长尾、未知类别、拒答校准 |
+| 分割（mask IoU / 边界） | 提示信息量、实例身份、细边界与透明/反光 | SAM 3 的概念/实例模式；SAM-H 的分割重检测；SAM2Matting 的 alpha | 提示类型、边界误差、实例 ID 持续、透明/反光条件 |
+| VOS（J&F） | 目标缺席帧奖励空预测，退化为缺席分类 | FaVOS/Volumetric J&F；空预测器可超 SAM 3 | 可见/缺席分项、Volumetric J&F、时间一致性、重入 |
+| MOT（HOTA/IDF1） | 物理身份、长期重入、拥挤场景被关联分数掩盖 | MOTIP2 同位置进出失败；UGO 的 exemplar 粒度；SAM3RL 的 5 FPS 假设 | ID switch、重入、遮挡时长、最坏延迟、类别粒度 |
+| 点追踪（AJ/δ） | 遮挡期位置、重现后重检测、长视频漂移；2D 分数不检验 3D 或尺度 | TAPNext 长序列退化；TAPNext++ 的 AJ_RD；TAPVid-MV 的几何瓶颈；Track-On-R 的教师上界 | AJ_RD、可见性、3D 几何误差、长时漂移、相机运动、伪标签教师来源 |
+| 3D 点追踪/每像素 `SE(3)`（APD/RRE/ADD） | median-scaled 指标会奖励错误尺度；世界坐标依赖外部位姿/深度；平均刚体假设掩盖非刚体 | 3D SSM 绝对米制 AJ 0.256 但 leaderboard 0.121 落后 DELTA+ 0.141；MoSE3 依赖 π³ 几何与 64×H100 合成数据；TrackCraft3R 的速度声明随基线/分辨率反转 | 绝对米制与 scale-invariant 分列、内参/位姿来源、相机 vs 世界坐标、对象/部件分组 IoU、非刚体、吞吐与显存 |
+| 3D 占据/场景图（mIoU/R@k/关系匹配） | 闭集语义税则与静态场景；mIoU 不含实例/关系；节点 recall 可被语言先验抬高；在线建图常借用 LiDAR/深度位姿 | OccAny 零样本序列 IoU 25.91；VEOcc 1 Hz 且位姿来自 LiDAR-惯导；LEXI-SG 含物体分割 1.56 FPS；LOST-3DSG 3 KB 语义状态但依赖 VLM；DSG 粗关系匹配 43% | 占据/实例/关系分列、位姿/深度来源、动态变化/删除/重现、关系真值、端到端延迟 |
+| HOI（mAP） | 同义描述、角色反转与匹配引擎混入语义增益；排序随口径反转 | HOI 审计五口径：官方/SHOE/严格等价领先者变化；语义增益 1.6–20.3 mAP，AgentHOI 仅 49% 保留 | 官方分 + 同引擎身份控制 + 严格等价/角色反转 + 配对区间 |
+| 光流/匹配（EPE/AUC） | 干净基准高不等于损坏鲁棒；低 EPE 不等于下游位姿/分割收益；匹配数量与几何显著性可冲突 | FreeFlow Sintel 0.68；Foundation Flow Sintel 2.37 但 RoCo-Spring 鲁棒分 1.10；SGFormer 视角 1px 略低于 LoFTR | 损坏鲁棒性、下游位姿/SLAM、最坏条件、匹配不确定性 |
+| 非模态/遮挡（mIoU/amodal DSC） | full-mask 分数奖励“穿过遮挡物”；生成补全把先验当观测；合成遮挡与真实遮挡不一致 | OccSAM-Bench MedSAM full 0.640/visible 0.302；Amodal SAM mIoU_o 提升；VolFill 可见 CD 4.52 差于 MoGe2 2.62 | visible/invisible 分解、遮挡物反事实、补全来源标签、3D 一致性 |
+| 事件检测/跟踪（sAP/ATE） | 用观测时刻而非预测可用时刻评测；事件数据由 RGB 模拟；SNN 能效为理论值 | Bend the Clock：RVT 从 47.39 降到 43.17 sAP 仅因 33 ms 延迟；ChronoFuse 恢复 71.8%/90.8%；Event3R/E-TraMamba 用模拟/半合成数据 | 可用时刻误差、事件率/照度分层、实测焦耳、真实事件基准 |
+| 长视频/第一人称记忆（QA accuracy） | 单段 QA 会把“选对相似事件”误判为记忆；长程与精确未分；场景切换/跨月/在线更新未覆盖 | EgoProbe ultra-long 28–40%，最佳两轮 43.69%；Ledger 场景切换回到 blind；R4DSG 单被试 | 长程/精确/干扰三维、场景边界、在线更新、纯视觉记忆来源 |
+| 组合/抽象推理（accuracy/ARC pass@2） | 平均 unseen 分数可被高支持组合抬高；答案对但证据错；语言先验可替代组合结构 | Reachability unseen HM 19.8–31.2 但低支持近 0；JRDB-AVR 答案 33.65/证据 13.01；TraceViT ARC-2 24.3 | 低支持组合、长输入、答案-证据绑定、纯视觉先验 |
+| 计数（MAE/RMSE） | 单图平均掩盖组/事件/流式失败；语言先验可让累计数单调但 grounding 错；实时与精度 trade-off | SVCBench 人类 96.1 vs 最佳模型 37.0，周期事件 93.2 vs 11.1；BunchCount 组 1.85 vs CountGD 9.21；RT-Counter 112 FPS 但精度低于 CountGD | 计数单元、实例/组/事件分层、流式状态、分辨率/时延、校准 |
+| 人脸/表情（准确率/FPR parity） | 平均准确率掩盖同阈值下的组间 FPR；表情标签有文化/主观歧义；AU 是代理；RL 可损害接地 | DenseFace FPR 比 8.82→0.91（African）；TAG 统一 74.34/逐集 83.78 但 RLVR IoU 46.73→43.46；Different Defects 随机删数据无增益 | 同阈值 FPR/TPR、低分辨率/事件/热成像、AU 证据、文化与不确定、数据缺陷审计 |
+| 分布偏移/TTA（target acc/ECE） | source-val 选点不等于 target 可靠；TTA 收益有模型族边界；持续偏移遗忘/误差累积；合成数据多样性≠真实感 | Checkpoint 选择 ECE −0.24 但准确率 CI 跨 0；Colorist 协变量 +0.148；MLLM representation TTA 失败 | 目标校准/准确率、source-free/transductive、遗忘曲线、端侧、真实部署 |
+| 姿态/手部（PA-MPJPE/MPJPE/PVE） | PA 与 MPJPE/PVE 不可互换；世界坐标尺度/相机轨迹未计；手部遮挡/接触仍难；实时数字依赖硬件 | SAM3D 3DPW PA 33.2/MPJPE 54.8；Fast 10.9×但 MPJPE 略升；OnlineHMR WA 93.5 但 W-MPJPE 受尺度拖累；DanceHMR 手 PA-PVE −28.6% | 坐标系、手/脸/全身分项、世界尺度、时序 jitter、遮挡/接触、端侧 |
+| 部件/可供性（mIoU/gIoU） | 语言本体/粒度决定分数；合成/自动标签；2D/3D 不可互换；物理可行性未验证 | AffordAny unseen category 0.305/instruction gap 0.105；PartLLM 3DCoMPaT 86.1 mask vs 71.9 SA-mIoU；FunRec part mIoU 74.8–77.9；UniPart real grasp 85% | 部件粒度、affordance 本体、2D/3D 分项、语言改写、真实接触/物理 |
+| 边界/抠图（MAD/Grad/dtSSD） | alpha 与 mask/depth 不可互换；视频时序与单帧精度分开；负样本假阳性常被漏报 | RenderMatte AIM MAD 0.008/Grad 11.2 但 2.7s；VideoMaMa++ dtSSD 0.82 vs 1.21；SEP-YOLO mask mAP50 0.851；OPC16K 现有 SOTA FPR 97.4%/49.3% | alpha/mask/depth 分项、时序、负样本 FPR、透明/软边界、计算/合成到真实 |
+| 主动视觉（成功率/信息增益） | 任务成功率掩盖“没看到/没记住/决策错”；信息增益代理可冲突任务；恢复可见性≠成功；成本/风险未联合 | ActiveArena 固定视角 DM 96.3%、记忆-free 27.37 vs chunk 62.97；BAVO 恢复可见性≠任务成功；Epistemic Trap 77% vs 46% additive | 失败分解、信息增益/成本/风险、真实机器人、记忆写入、复合不确定性 |
+| OCR/文档（CER/编辑距离） | 阅读顺序、表格/公式结构、版本漂移 | OmniDocBench v1.6→v1.7；MEVL-STP 多边形检测+识别 | 逐元素/结构分数、阅读顺序、版本、端到端耗时 |
+| 3D/4D（位姿/几何误差） | 物理合理性、动态、透明/反光、任意时刻 | DA3 静态为主；Pano3D 静态室内；Uni4R 连续速度场 | 度量尺度、动态/非刚性、透明/反光、接触/互穿、任意时刻 |
+| SLAM/里程计（ATE/RPE） | `Sim(3)` 对齐掩盖绝对尺度；显式失败与静默漂移混为一谈；合成损坏代理的排序可反转 | Failure or Drift 的 ORB-SLAM2 仅 37/63 有效轨迹、学习跟踪器 APE 常超 100 m；UniSim-SLAM 的未标定 ATE 需与尺度证据分开 | 有效性/覆盖率、失败与漂移分项、未对齐尺度误差、代理-真实一致性、运行时/地图/能耗 |
+| 世界模型/生成（像素 MSE、FVD） | 策略效用、因果干预、记忆真实性 | DRILL 像素更差但策略更好；StarWM 的 task-relevance 歧义；Gen4P 生成先验 | 干预后状态、策略回报、记忆/重现、生成证据 vs 观测证据 |
+| 实时（平均 FPS/TTFT） | 最坏截止、内容相关时延、证据年龄 | TrackFlood 跟踪器被拖垮；Realtime-Bench Wall Clock 44%；StreamAhead 平均 TTFT | P50/P95/P99、截止违约、证据年龄、队列/丢帧、攻击/退化输入 |
+| 主动视觉（成功率） | 信息增益/成本/风险/不可逆未联合计分 | RFL 的 judge score；SpatialScout 的覆盖率-精度；FoveaVLA 的真实任务 | 信息增益/焦耳、动作成本、风险/不可逆、真实机器人转移 |
+
+**结论：** 上述失效模式共同说明，**“分数保持”最多证明在特定协议下没有退化，不能证明能力保持**。Clover 的评测设计应把每个指标绑定到它可能掩盖的失败模式，并在 Stage 6 预注册“指标—能力—失败模式”三联表；否则速度、平均分或单一 SOTA 都可能把关键证据丢掉。
+
+<a id="overlap-audit"></a>
+
+### 预训练-评测重叠审计：哪些分数不能当作独立证据
+
+检索/核验：**2026-10-25**。一个分数只有在**训练数据、评测集与选择流程**分离时才支持泛化主张。本节对关键模型/基准做披露级审计；“未披露”本身就是证据边界，不等于一定污染。
+
+| 模型/基准 | 训练数据（披露） | 评测集 | 重叠证据/风险 | 能支持的主张 |
+|---|---|---|---|---|
+| WOW-Seg | LVIS、PACO、COCO Stuff 训练 2 epochs；InternVL3-1B 基座 | LVIS、PACO、RR-7K | **直接重叠**：在 LVIS/PACO 上训练后又在同数据集报告 SOTA；RR-7K 的 mask 来自 SA-1B，类别由 VLM+人工管线标注 | 只支持“在训练分布内区域识别强”；LVIS/PACO 分数不是开放世界泛化；RR-7K 是作者构造的半独立测试 |
+| PaddleOCR-VL | 30M+ 公开/合成文档；用内部评测引擎做 hard-case mining 并合成训练样本 | OmniDocBench v1.0/v1.5、olmOCR-Bench、内部集 | 内部评测集参与 hard-case mining/合成训练，内部分数非独立；公开 30M 数据是否含 OmniDocBench 页面未披露 | 公开基准需独立重叠核查；内部 SOTA 不能当作泛化证据 |
+| dots.ocr | 大规模多语言合成/真实文档数据引擎 | OmniDocBench、XDocParse | 训练数据与评测集重叠未披露；XDocParse 由作者提出 | 不能把 OmniDocBench/XDocParse SOTA 直接当作独立泛化；需第三方 split |
+| SAM 3 | 4M 概念标签数据引擎；SA-Co/VIDEO 52.5K 视频/467K masklets | SA-Co、PVS 等 | SA-Co 基准与训练数据同源（作者数据引擎）；训练/评测 split 未独立审计 | SA-Co 是作者基准，不是外部独立测试；跨数据集比较需另选 LVIS/自建留存集 |
+| MoSA | ~10,000 小时无标注视频；合成视频训练运动模块 | COCO、ADE20K 等七个分割基准 | 作者明确声明 **no overlap** with downstream benchmarks；仍依赖合成/光流伪标签 | 较干净的零样本分割证据；但不证明语义/物理/身份 |
+| GOT-Edit | VOT2022、GOT-10K 协议 | 多个 GOT 基准 | GOT-10k 测试类与训练类不重叠；部分数据集测试类与训练类完全重叠 | 基准内追踪提升；不能外推为开放世界身份理解 |
+| StreamMAE | WT++ 12h/95h 连续视频 | WT++ 同域评估 + 标准迁移 | 预训练与评估同域，非独立泛化；固定帧下采样 | 连续流式预训练可行性；不是跨域泛化证明 |
+| 单图质量估计 | image2mass、ABO-500；深度在 ShapeNetSem 上微调 | image2mass、ABO-500 | 物体/类别级 train/test 重叠未在摘要披露；ShapeNetSem 与目标物体可能重叠 | 单视图质量 SOTA 的证据有限；需按物体/材质 held-out |
+| PersistBench | 评测基准（YouTube 360） | 4D/视频模型 | 被评模型普遍在 YouTube 视频上预训练；与基准视频的重叠未披露 | 能揭示“离开视野后记忆崩塌”，但分数受预训练分布影响 |
+| LiFR-Seg | DSEC/SHF-DSEC/M3ED 训练 | DSEC、M3ED、DSEC-Night | 标准数据集 split；DSEC-Night 为零样本 | 事件+RGB 的帧间分割证据；不是纯 RGB/通用视觉 |
+
+**最小披露要求：** 训练数据来源与版本、评测 split/去重方法、是否做过 overlap 检测、benchmark 由谁构造、是否使用评测集做模型选择/硬样本挖掘、第三方独立复现。缺一项，分数就只能作为“作者报告”，不能作为 Clover 的独立证据。
+
+**当前结论：** WOW-Seg 的 LVIS/PACO SOTA 是训练集内评测，不能支持“开放世界泛化”；PaddleOCR-VL 的内部 SOTA 受 hard-case mining 影响；SAM 3/SA-Co 与 dots.ocr/XDocParse 都是作者同源基准。相反，MoSA 明确声明无重叠，是较干净的对照。Clover 的任何“纯视觉”或“统一模型”主张，都必须先通过这一审计。
+
+### 评测协议必须新增的四个记录项
+
+1. **真值来源分级：** 传感器深度/LiDAR/SLAM/人体网格/模拟位姿是 `L4`；用它们生成的 3D 轨迹不能反过来当作纯 RGB 模型的“视觉监督”。
+2. **视图/帧/轨迹的计分单位：** 多视图任务要报告每视图一致性；追踪要分别报告当前帧定位、关联、遮挡期状态、重现后身份；不能只报一个平均 J&F/HOTA。
+3. **时时钟：** 至少区分模型推理、完整管线、环境真实推进（Wall Clock）与理想暂停时钟；平均 TTFT 不能替代最坏干预延迟与证据年龄。
+4. **数据重叠与版本：** 基础模型预训练数据与评测集的重叠往往无法核对（When Trackers Fail 作者明确承认）；基准版本（OmniDocBench v1.6→v1.7）与评价脚本必须冻结。
+
+**本节结论：** 新基准把“看见”拆得更细：多视图一致性、3D 点追踪、主动建图覆盖率、实时交互成功率和内容相关时延都成为独立验收面。这支持 Clover 的广义理解目标，但也提高了证据门槛——任何单一 benchmark 的 SOTA 都不能代表视觉 AGI。
+<!-- END evaluation-frontier -->
+
+
 <!-- BEGIN broad-vision-primary-evidence -->
 <a id="broad-vision-primary-evidence"></a>
 
@@ -170,6 +312,7 @@ OmniDocBench 官方更新记录已在 2026-04-30 从 v1.6 转为 v1.7；历史�
 
 ## Contents
 
+- [2026-10 Evaluation Frontier: 3D Point Tracking, Multi-View Consistency, Real-Time Clocks and Safety](#evaluation-frontier)
 - [Evaluation Principles](#topic-docs-evaluation-evaluation-principles)
 - [Clover Understanding Battery — Working Design](#topic-docs-evaluation-understanding-battery)
 - [Evaluation & Benchmark Map](#topic-docs-evaluation-benchmark-map)
@@ -379,6 +522,102 @@ Measure:
 - recovery from world changes;
 - search/compute cost;
 - unsafe/unjustified commitments.
+
+#### U11 — Core visual capability vector
+
+The battery must score capabilities separately, not collapse them into one “recognition” number.
+
+| Capability | Minimal test | Required control | Pass criterion | Failure criterion |
+|---|---|---|---|---|
+| Closed-set classification | Image → category/attribute | Background replacement; class-balanced split | Per-class accuracy + calibrated confidence | High average from background/head-class shortcut |
+| Open-vocabulary recognition | Novel class names/attributes without task-specific training | Matched data/compute vs language-supervised baseline; prompt set frozen | Novel-class accuracy + unknown/refusal calibration | Gains disappear when prompts/language are removed |
+| Long-tail/fine-grained/scale | Tail classes, subordinate categories, scale sweep | Group-balanced metrics; same backbone | Tail/fine-grained retention; graceful scale curve | Average flat but tail/fine-grained collapses |
+| Detection | Boxes + class + absence | Small/medium/large AP; NMS-free vs NMS; end-to-end latency | AP per size + latency + calibration | AP gain only on large objects or with extra data |
+| Segmentation | Semantic/instance/panoptic masks | Prompt type fixed; boundary/transparent cases | Mask/pixel metrics + instance identity over time | High IoU but boundary/identity failures |
+| OCR/visual reading | Text/table/formula/chart page | Version-frozen benchmark; reading-order metric | Character/structure/order metrics + full-page latency | High CER but wrong order/structure |
+| Action/event | Clip → action/event/boundary | Temporal shuffle; static-frame probe | Top-1/locating + temporal sensitivity | Static/appearance shortcut |
+| Referring/grounding | Language → box/mask/set | Ambiguous/absent referents; set completeness | gIoU/box + set completeness + refusal | Guesses on absent/ambiguous queries |
+| Counting | Image → count vector | Dense/occluded/duplicate cases; fixed vocabulary | Count error + absent-class false mass | Duplicate detections inflate/deflate count |
+| Pose/6D/geometry | Keypoints/6D pose/depth/scale | Textureless/symmetric/transparent cases | Pose/depth/scale error + failure detection | Works only on textured, asymmetric objects |
+| 3D relation/affordance | Subject + relation/instruction → target/part | Novel relations/tools; contact feasibility | Relation/part accuracy + contact success | Memorized relation phrases or human-defined labels only |
+| Memory/permanence | Object leaves FOV/occluded → query later | Equal-byte memory baselines; 360° reference | Reappearance identity + hidden position + belief revision | Short-term consistency only; confuses absence with unobserved |
+
+#### U12 — Pure-vision provenance gate
+
+Every capability claim must carry:
+
+```text
+deployment: V0 / V1 / V2 / V3
+learning:   L0 / L1 / L2 / L3 / L4
+external priors: language / teacher / depth / pose / action / force / simulator / retrieval
+```
+
+Pass conditions:
+
+- The claim's stated “vision alone” matches **both** deployment and learning provenance.
+- No text prompt at inference does **not** imply no language in training.
+- No manual labels does **not** imply no synthetic data, optical flow, teacher or simulator.
+- RGB-only deployment does **not** imply RGB-only upstream training.
+- If any L1–L4 source is present, the claim must be phrased as “V0 + Lx”, not “pure vision”.
+
+#### U13 — Native ultrafast acceptance
+
+Measure the **complete** path:
+
+```text
+capture → decode → preprocess → encode → state update → retrieval/reasoning → decision → action
+```
+
+Required report:
+
+- cold load, first inference, warm P50/P95/P99, deadline misses;
+- sustained throughput, queue growth, dropped frames;
+- peak/steady memory, power/thermal state;
+- evidence age (timestamp of the newest evidence used);
+- worst-case object count/resolution/history, not only average;
+- capability layer damaged by compression/quantization/short context;
+- hardware, OS/runtime, precision/backend, batch size;
+- training/search/calibration cost separately from inference.
+
+Pass condition: a pre-registered per-capability latency/quality budget is met **simultaneously** for the multi-capability workload. A single detector FPS is not a pass.
+
+#### U14 — Same-protocol unified-model test
+
+To claim “one model” rather than “a family/router”:
+
+1. one checkpoint;
+2. one forward pass for a multi-task request (or a declared, measured routing cost);
+3. shared output interface for boxes/masks/alpha/text/identity;
+4. joint training data mixture, with negative-transfer report;
+5. all nineteen capabilities measured under matched data/compute;
+6. multi-task latency and worst-case memory reported.
+
+If any condition fails, report the system as “shared backbone + separate heads/checkpoints” or “routed experts”, not as a unified model.
+
+#### U15 — Real-camera hidden-state identifiability
+
+Purpose: test whether mass, friction, stiffness, object permanence and contact state are identifiable from **real RGB video**, not from synthetic video or language priors. Ground truth may use non-visual sensors for scoring, but the model path must be V0/V1 only.
+
+| Hidden variable | Minimal real-camera test | Required controls / ground truth | Identifiability criterion | Failure criterion |
+|---|---|---|---|---|
+| Mass | Drop/oscillate/collide objects; predict mass or ranking | Scale ground truth; same shape/different density; same mass/different shape | Correct ranking + metric error + calibrated uncertainty on held-out objects | Uses size/appearance shortcut; error correlates with color/material label |
+| Friction | Incline/slide; predict friction coefficient or stopping distance | Force/tribometer or controlled surface; same appearance/different surface | Ranking and stopping-distance prediction on unseen surfaces | Predicts from surface texture only; fails when appearance is decorrelated |
+| Stiffness/deformability | Press/squeeze/poke; predict stiffness or deformation | Force/displacement sensor; same color/shape, different compliance | Ranking + deformation prediction on held-out materials | Uses object category prior; cannot detect visually similar soft/hard pairs |
+| Object permanence | Occluder/out-of-FOV; query identity/position after delay | 360° camera or marker ground truth; equal-byte memory baselines | Reappearance identity + hidden position + belief revision | Short-term consistency only; confuses absent with unobserved |
+| Support/contact | Remove support; push/stack; predict fall/contact | Force plate/contact sensor; controlled geometry | Predicts support removal and contact onset | Predicts plausible video but wrong contact timing |
+| Causal intervention | Apply a controlled action; predict counterfactual outcome | Paired real intervention; same initial state | Counterfactual accuracy + intervention sensitivity | Matches observational correlation only; fails under action reversal |
+
+**Protocol requirements:**
+
+1. **Model path:** RGB (V0) or RGB+calibration (V1); no depth, force, tactile, WiFi, language prompt at inference. Ground-truth sensors are examiner-only.
+2. **Decorrelate appearance and property:** same shape/color with different mass/friction/stiffness; same property with different appearance. Otherwise a “success” may be a visual shortcut.
+3. **Held-out objects/materials:** split by object instance and material family, not random frames.
+4. **Repeated trials:** ≥5 per object/condition; report mean, variance and worst case; cross-camera and lighting.
+5. **Metrics:** ranking accuracy, metric error (MAE/MAPE), uncertainty calibration (ECE/coverage), refusal/unknown rate, equivalence-class reporting when the evidence cannot identify a unique value.
+6. **Counter-evidence:** run the same protocol with tactile/WiFi/force available; if performance jumps, the RGB-only claim is bounded.
+7. **Evidence level:** EV4 offline real data → EV5 real-to-sim/digital twin → EV7 proxy hardware; do not call it EV8 without the target robot.
+
+**Pass condition:** the model beats appearance-only and language-only baselines on held-out objects, reports calibrated uncertainty, and refuses when the video cannot distinguish the hidden value. **Failure condition:** high average accuracy driven by object category, size, color or surface texture; no uncertainty; tactile/WiFi ablation shows the visual claim is not identifiable.
 
 ### 3. Anti-shortcut requirements
 

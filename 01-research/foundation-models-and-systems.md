@@ -25,6 +25,29 @@ This is the canonical topic document. Update it in place; source-level dates and
 **已解决的混淆：** `Qwen3.8-2.4T-A95B` 模型卡明确把托管 `Qwen3.8-Max` 的视觉输入、非思考模式、默认 1M 上下文和内置工具列为更多服务特性；不能把这些能力直接赋给这个公开文本权重。Flash-Next/27B 的公开多模态配置也不能代表相同托管产品的全部工具和运行策略。配置位置上限不是本机实测可用上下文，许可名称也不能按家族统一假定。
 
 **仍待核验：** 全部厂商条目的现行 API 路由、推理默认值、精确训练混合、总/激活参数的独立计数、实际 runtime/kernel、视觉预处理、量化与端到端质量/内存/时延。以上四个 artifact 的当前元数据不替代这些实验或其余旧条目的刷新。DeepSeek-1017 的卡片是对原 Flash 的更新，相关 benchmark 仍按官方报告对待。
+### 视觉 artifact 核验（2026-10-25）
+
+下列元数据来自 Hugging Face API、固定 revision 的 `config.json`/模型卡与官方 README；**没有加载权重、运行推理或验证 M4 可行性**。`safetensors.total` 是张量计数，不等于论文报告的可训练/激活参数量；FP8 checkpoint 可能包含额外缩放张量。
+
+| Artifact（固定 revision） | 参数（来源） | 输入/上下文（配置） | 许可 | 核验边界 |
+|---|---|---|---|---|
+| [facebook/sam3](https://huggingface.co/facebook/sam3/tree/3c879f39826c281e95690f02c7821c4de09afae7) | 859.9M（safetensors）；论文约 850M | 图像/视频；论文图像 1008、文本上下文 32；pipeline mask-generation | **SAM License（custom，非 Apache）** | 未加载；30 FPS 多目标需多 H200（论文） |
+| [facebook/sam-3d-objects](https://huggingface.co/facebook/sam-3d-objects/tree/2e73555018d2741ccd486e56c24fac41155a1dc6) | API 未给 safetensors total（gated/未暴露） | 单图；论文粗形状 64³、32 splats/voxel | **SAM License（custom）** | 参数未独立计数；未加载 |
+| [depth-anything/DA3-GIANT](https://huggingface.co/depth-anything/DA3-GIANT/tree/7cd62ae9315b9dff094d2d300e4ad012640607dd) | 模型卡 1.15B；safetensors 1.356B（差异未解释） | 单/多视图几何；未给上下文 | **CC BY-NC 4.0，禁止商业使用** | 其他 DA3 规模未核；非商业限制关键 |
+| [PaddlePaddle/PaddleOCR-VL-1.6](https://huggingface.co/PaddlePaddle/PaddleOCR-VL-1.6/tree/c5630abae1d940eafe0697512a0325494b02ab42) | 958.6M | max_position 131,072；vision image 384/patch 14；tokens/sec 2 | Apache-2.0 | 配置上限≠可用上下文；未加载 |
+| [dots-studio/dots.ocr](https://huggingface.co/dots-studio/dots.ocr/tree/c0111ce6bc07803dbc267932ffef0ae3a51dc951) | 3.039B | max_position 131,072；patch 14；bfloat16 | MIT | 未加载；1.2B VE +1.7B decoder（论文） |
+| [opendatalab/MinerU2.5-Pro-2605-1.2B](https://huggingface.co/opendatalab/MinerU2.5-Pro-2605-1.2B/tree/08aaea840498d49ce16247b6263196cf02814885) | 1.156B | max_position 32,768（text 8,192）；patch 14 | Apache-2.0 | 未加载；本版与论文 2509 版差异需另记 |
+| [allenai/olmOCR-2-7B-1025-FP8](https://huggingface.co/allenai/olmOCR-2-7B-1025-FP8/tree/40bd7202494b8264ee17ada08b401b5aab7a9ce1) | 8.292B（FP8 张量计数）；名义 7B | max_position 128,000；patch 14；window 112 | Apache-2.0 | FP8 计数≠名义参数；未加载 |
+| [AAwcAA/WOW-Seg](https://huggingface.co/AAwcAA/WOW-Seg/tree/1896c3e37fce20ff35d129c873a41375ae6ee698) | 938M | image 448；InternVL chat | Apache-2.0 | 未加载；训练/评测重叠见评测方向 |
+| [Ultralytics YOLO26](https://docs.ultralytics.com/models/yolo26/) | n/s/m/l/x = 2.4/9.5/20.4/24.8/55.7M | 640；FLOPs 5.5/20.9/68.4/86.8/194.4 | **AGPL-3.0 或 Enterprise** | 不同 head/checkpoint；未测速 |
+| [RF-DETR](https://github.com/roboflow/rf-detr) | N/S/M/L = 30.5/32.1/33.7/33.9M | 384/512/576/704；T4 TensorRT FP16 2.3/3.5/4.4/6.8ms | **Apache-2.0（开源 base）/ PML 1.0（Plus）** | 官方 in-house COCO/RF100-VL 表；未复现 |
+
+**已解决的混淆：**
+- `other` 不是统一许可：SAM 3/SAM 3D 是自定义 SAM License；DA3-GIANT 是 CC BY-NC 4.0（非商业）；YOLO26 是 AGPL-3.0/Enterprise；RF-DETR 开源与 Plus 分开。
+- 参数量必须区分论文报告、模型卡、safetensors 计数与 FP8 张量；不能用一个数字跨模型比较。
+- 配置中的最大位置/图像尺寸不是本机可用上下文或实际分辨率；未加载权重前不能声称 M4 可运行。
+- 这些 artifact 的许可与参数已核验，但**训练数据、微调配方、量化校准和端到端时延仍未核验**。
+
 <!-- END current-model-artifacts -->
 
 <!-- BEGIN current-cross-domain-evidence -->
@@ -136,8 +159,123 @@ This is the canonical topic document. Update it in place; source-level dates and
 具体原文参照见 [TAPNext、FastVLM 与 MambaOut](#broad-vision-primary-evidence)；基础实时视觉的当前发布边界见[感知方向](perception-and-identifiability.md#broad-visual-capabilities)。这些是研究协议要求，尚未在 Clover 上执行，更不是已证明的超快架构。
 <!-- END native-ultrafast-research -->
 
+<!-- BEGIN ultrafast-systems-frontier -->
+<a id="ultrafast-systems-frontier"></a>
+
+## 原生 ultrafast 的系统证据：骨干、量化、token 与流式调度
+
+检索/核验：**2026-10-25（Asia/Shanghai）**。本节补齐“原生速度”从模型机制到部署系统的当前参照，重点不是宣传数字，而是**哪些瓶颈被真正移动了**。同一模型在分类、检测、追踪、文档解析和视频问答上的时延不能互相替代；所有加速都必须连同精度、输入分辨率、批大小、后端和完整输出完成时间记录。
+
+| 系统 | 一手来源 | 机制与可核查证据 | 边界与反假设 |
+|---|---|---|---|
+| YOLO26 | [2606.03748](https://arxiv.org/abs/2606.03748v1) · [官方文档](https://docs.ultralytics.com/models/yolo26/) | 双头 NMS-free + 去 DFL + MuSGD/Progressive Loss/STAL；COCO 40.9–57.5 mAP，T4 TensorRT 1.7–11.8 ms；19 种导出后端 | 检测/分割/分类/姿态/旋转框是不同 checkpoint；T4 数字不是 M4/真实相机；不支持 top-K 的运行时会回退非端到端分支；见[感知方向](perception-and-identifiability.md#core-vision-frontier)完整记录 |
+| DEIM | [2412.04234](https://arxiv.org/abs/2412.04234v3) | Dense O2O + MAL，训练收敛约快 50%；推理精度对齐 D-FINE-L/X | 加速在训练，不是推理；低质量匹配与额外数据须单列；见[感知方向](perception-and-identifiability.md#core-vision-frontier) |
+| RF-DETR | [2511.09554](https://arxiv.org/abs/2511.09554v2) | 权重共享 NAS 搜索目标数据集的精度-时延 Pareto；nano 48.0 AP，2x-large >60 AP COCO | 每个数据集要搜索/重训；NAS 成本未闭合；不是零样本开放世界；见[感知方向](perception-and-identifiability.md#core-vision-frontier) |
+| TrackFlood | [2609.33948](https://arxiv.org/abs/2609.33948v1) | NMS-free 把延迟攻击面转移到关联器；Jetson AGX Orin TensorRT FP16 上检测时延稳定、跟踪时延上升；高预算扰动造成截止违约 | 检测快 ≠ 系统实时安全；白盒威胁模型；防御会牺牲干净检测；见[感知方向](perception-and-identifiability.md#core-vision-frontier) |
+
+### EfficientViT：先消除访存瓶颈，再谈注意力
+
+- **一手来源：** [固定版本](https://arxiv.org/abs/2305.07027v1) · [官方代码](https://github.com/microsoft/Cream/tree/main/EfficientViT)（CVPR 2023）。`PRIMARY_PAPER` / `OPEN_SOURCE`。
+- **机制：** sandwich 布局在高效 FFN 之间只放一个访存受限的 MHSA；cascaded group attention 把特征分组喂给不同 head，降低冗余并增加多样性。
+- **输入与学习来源：** ImageNet 分类监督 `L1`；下游检测/分割需迁移训练。
+- **实际证据：** EfficientViT-M5 比 MobileNetV3-Large 高 1.9%，V100/Intel Xeon 吞吐高 40.4%/45.2%；M2 比 MobileViT-XXS 高 1.8%，GPU/CPU 快 5.8×/3.7×，ONNX 快 7.4×。
+- **不能推出：** 分类吞吐不代表检测/追踪的端到端时延；MHSA 与 reshape 的实际成本随编译器/后端变化；线性注意力或低 FLOPs 不自动带来低延迟；未覆盖小字、小物体或长时状态。
+- **阅读深度：** 摘要、官方代码说明与架构段；未复核全部实验；未运行测速。
+
+### RPFQ-ViT：极低比特量化的方向保持，而不是只压权重
+
+- **一手来源：** [固定版本](https://arxiv.org/abs/2610.04457v1)（NeurIPS 2026）。`PRIMARY_PAPER`。
+- **机制：** 把成对通道放到二维相位平面量化，用可学习旋转、相位锚点和残差相位细化保持投影方向；作为 `nn.Linear` 的 QAT 替换，不改注意力/归一化/激活图。
+- **输入与学习来源：** ImageNet-1K 分类 `L1`，300 epoch 匹配配方，三次独立运行报告均值；量化校准数据来自训练分布。
+- **实际证据：** ViT-B/16 在 W2/A4 达 79.33% top-1/94.48 top-5；Swin-T W2/A8 79.30/94.79；DeiT-S W2/A8 77.41/93.11；2-bit packed 权重相对 FP32 缩小 5.4–7.1×，iOS/Android 端到端时延降 1.4–1.6×。
+- **不能推出：** 分类精度与移动端时延不代表检测/追踪/文档解析；QAT 需训练管线与校准；低比特对长时状态、校准和不确定性的影响未测；不同手机 SoC/运行时差异大。
+- **阅读深度：** 摘要、方法与部署段；未复核全部消融；未运行移动端。
+
+### StreamAhead：把“何时预计算”变成可调度的实时系统问题
+
+- **一手来源：** [固定版本](https://arxiv.org/abs/2610.25551v1)。`PRIMARY_PAPER`。
+- **机制：** 视频分段独立编码，每段可停留在不同表示层级（廉价视觉特征→完整 KV cache）；查询到达时只为被检索段补齐 KV；离线 profile 各层级成本，运行时在 CPU/GPU 异构资源上与查询执行流水线并行。
+- **输入与学习来源：** 流式视频 + 任意时刻到达的问题；骨干 VLM 含 `L2`；检索/预计算策略是系统层，不改变模型训练目标。
+- **实际证据：** 作者报告相对 SOTA 流式系统 TTFT 最多低 10.4×/5.9×；30 FPS 时 P95 TTFT <0.5 s，57 FPS 时 <2 s；精度与 SOTA 竞争。
+- **不能推出：** 只测视频问答，不覆盖检测/追踪/状态更新；KV cache 复用不等于持久世界记忆；平均 TTFT 不覆盖最坏查询与证据年龄；多段检索可能漏掉跨段因果证据；未在 M4 上实测。
+- **阅读深度：** 摘要与系统设计段；未复核全部实验；未运行复现。
+
+### Bifocal：token 压缩对细粒度任务并不免费
+
+- **一手来源：** [固定版本](https://arxiv.org/abs/2610.18399v1) · [官方代码](https://github.com/EIT-NLP/Bifocal)。`PRIMARY_PAPER` / `OPEN_SOURCE`。
+- **机制：** 训练无关的两阶段混合粒度剪枝：给 query 相关证据与图像内在证据分配独立预算，并保留全图粗表示；LLM 内部再按密度调整的文本-图像注意力剪枝。
+- **输入与学习来源：** 现成 MLLM，含 `L2`；不改训练，只改推理 token 集。
+- **实际证据：** 评测 10 种方法、3 个 MLLM 家族、5 类能力；约 1/4 token 时，Bifocal 是唯一在三个模型的所有能力组都保持 >90% 未剪枝性能的方法；作者指出既有方法在 OCR/视觉 grounding 上严重退化。
+- **不能推出：** 平均 VQA 保持不等于小字、密集文档、遮挡或追踪证据保持；训练无关不等于任务无关；未覆盖视频时序与状态更新；预算/阈值需按部署校准。
+- **阅读深度：** 摘要与评测设计；未复核全部实验；未运行复现。
+
+### TacitVLA：推理监督改善表征，但动作不必等待推理文本
+
+- **一手来源：** [固定版本](https://arxiv.org/abs/2610.17540v1) · [项目页](https://tacitvla.github.io/)。`PRIMARY_PAPER` / `OFFICIAL_PROJECT`。
+- **机制：** 动作专家不对当前调用生成的推理文本做注意力；推理监督仍塑造骨干表征；长程任务中推理文本作为 episodic memory，可在执行期间生成。
+- **输入与学习来源：** VLA 示范/动作 `L3`，推理文本监督 `L2`；不是纯视觉，也不是无推理训练。
+- **实际证据：** 四个基准（RoboMME、RMBench、LIBERO、PhysicalAI-AV）上匹配显式推理版本，时延最多低 3.4×；相对无推理同架构成功率最多 +17.1%；RoboMME Counting 82.7% vs 66.8%，RMBench 77.5% vs 56.5%。
+- **不能推出：** 推理仍被生成并消耗训练/内存；基准多为模拟或受控真实任务；语言推理带来的先验不能记作视觉理解；长程记忆仍依赖文本条目。
+- **阅读深度：** 摘要与项目说明；未复核全部实验；未运行复现。
+
+### Realtime-Bench：实时交互的失败不是“模型不够聪明”一个变量
+
+- **一手来源：** [固定版本](https://arxiv.org/abs/2610.22155v1)。`PRIMARY_PAPER`。
+- **机制：** 用 Wall Clock（环境随真实推理延迟推进）、Paused Clock（移除推理延迟的理想参照）与 Token Clock（按生成 token 数推进模拟时间）分离服务延迟、流式能力与时间感知。
+- **输入与学习来源：** 动态交互任务与多模态模型；任务定义/评测协议是外部基准，不是 Clover 实验。
+- **实际证据：** Wall Clock 下最佳成功率仅 44%、最佳 Pass^3 仅 36%；更高 reasoning effort 在时间压力下效果混合。
+- **不能推出：** 基准任务不代表真实机器人/相机闭环；Paused Clock 是理想化上界；Token Clock 不是物理时间；不能据此选 Clover 架构，只能证明“离线准确率”不足以预测实时行为。
+- **阅读深度：** 摘要与基准设计；未复核全部实验；未运行复现。
+
+**本节结论：** 当前加速路线分别移动了训练收敛（DEIM）、检测后处理（YOLO26）、目标域架构（RF-DETR）、访存（EfficientViT）、权重位宽（RPFQ-ViT）、视觉 token（Bifocal）和流式调度（StreamAhead）。没有任何一条同时保持识别、追踪、阅读、记忆与主动采证的全部证据；因此“原生 ultrafast”必须作为**联合能力约束**研究，而不是单一 benchmark 的 FPS 竞赛。
+<!-- END ultrafast-systems-frontier -->
+
+<!-- BEGIN latency-claim-audit -->
+<a id="latency-claim-audit"></a>
+
+## 时延声明审计：硬件、精度、管线范围与证据年龄
+
+“原生 ultrafast”不能用一个 FPS 数字证明。下表把本轮及既有证据中的时延/吞吐声明放回其**硬件、精度、输入规模、管线边界**中；最后一列是 Clover 若引用该数字必须补测的部分。
+
+| 系统/任务 | 报告时延/吞吐 | 硬件/精度 | 管线范围 | 不能直接外推 |
+|---|---|---|---|---|
+| YOLO26（检测） | 40.9–57.5 mAP；1.7–11.8 ms | NVIDIA T4，TensorRT FP16 | 检测器前向；导出到 19 种后端 | M4/真实相机；分割/姿态/分类是不同 head；NMS-free 回退；多目标/长尾 |
+| YOLOv12（检测） | N 40.6 mAP，1.64 ms | T4 | 检测器前向 | 注意力算子/后端；完整采集与后处理；开放词汇 |
+| D-FINE（检测） | 54.0/55.8 AP，124/78 FPS | T4 | 检测器前向 | FPS 与 AP 的输入分辨率/批大小；Objects365 额外数据 |
+| DEIM（检测） | 训练收敛约 -50%；54.7/56.5 AP，124/78 FPS | T4；4090 训练 | 训练效率 + 检测前向 | 训练加速≠推理加速；低质量匹配；完整管线 |
+| RF-DETR（检测） | nano 48.0 AP；2x-large >60 AP；目标域 Pareto | 未在摘要给统一硬件 | 目标数据集 NAS + 检测 | 搜索/重训成本；每个数据集单独模型；真实相机 |
+| EfficientViT（分类） | M5 +1.9% vs MobileNetV3，吞吐 +40.4% V100 / +45.2% Xeon | V100 / Xeon | 分类骨干 | 检测/追踪/OCR 的端到端；编译器/分辨率；小物体 |
+| RPFQ-ViT（分类） | W2/A4 ViT-B 79.33%；2-bit 权重小 5.4–7.1×；端侧 1.4–1.6× | iOS/Android 运行时 | 分类模型量化推理 | 检测/追踪/文档；QAT 成本；长时状态/校准 |
+| SAMURAI（单目标 VOT） | “real-time”，无统一数字 | 未统一；SAM 2 骨干 | 首帧框 + 视频跟踪 | 多目标；SAM 2 规模；遮挡期间是预测；最坏延迟 |
+| SAM 3（概念分割/视频） | 30 FPS 需多 GPU：10 目标/2×H200、28/4×H200、64/8×H200 | H200 | 视频 PCS 多目标 | 单 GPU 实时；目标数线性成本；多目标共享上下文缺失 |
+| SAM-H / WOFTSAM（平面跟踪） | 2.4 FPS，4.5GB；分割约 42 ms/帧 | RTX A5000 | 平面单应跟踪（对应+重检测） | 非平面/非刚性；光流成本；实时 |
+| LiFR-Seg（事件+RGB 分割） | 帧间 50 ms 的任意时刻；DSEC 73.82% mIoU | 事件相机 + RGB；Segformer-B2 | 事件引导的帧间语义分割 | 纯 RGB；通用视觉；事件标定/噪声；完整管线 |
+| PnP-Transformer（6D 姿态） | 41.2% AR，0.46 s/obj；RANSAC 52.2%，0.52 s/obj | 未统一；BOP | 对应 + 姿态求解 | 实时；无纹理/对称；上游检测误差 |
+| StreamAhead（视频 QA） | TTFT <0.5 s @30 FPS；<2 s @57 FPS；相对 SOTA 低 10.4× | 异构 CPU/GPU | 流式视频问答系统（KV 预计算/检索） | 检测/追踪/状态更新；最坏查询；证据年龄 |
+| Bifocal（MLLM token 压缩） | ~25% token；>90% 未剪枝性能 | 3 个 MLLM 家族 | 推理 token 预算/精度 | 墙钟时延；视频时序；最坏 OCR/小字 |
+| Realtime-Bench（交互） | Wall Clock 最佳 44% 成功、36% Pass^3 | 未统一 | 动态交互任务基准 | 真实机器人；理想 Paused Clock 上界 |
+| TrackFlood（NMS-free 检测→跟踪） | 检测时延基本不变，跟踪时延显著上升；高预算截止违约 | Jetson AGX Orin，TensorRT FP16 | 检测→关联端到端 | 所有 NMS-free 家族；防御代价；干净输入性能 |
+
+### 这些数字共同漏掉了什么
+
+1. **采集/解码/预处理**：相机曝光、卷帘、去马赛克、缩放、色彩转换、事件解码通常不在“模型 FPS”内。
+2. **状态更新与检索**：跟踪记忆、KV cache、地图/检索、belief 更新都可能是内容相关成本；TrackFlood 已证明检测器稳定时跟踪器仍可被拖垮。
+3. **最坏情况而非平均**：多目标拥挤、长尾查询、遮挡重现、对抗/退化输入会把 P50 变成 P99；SAM 3 的 30 FPS 需要 8×H200 才支持 64 目标。
+4. **证据年龄**：低延迟但持续使用旧帧/旧 cache 仍会失败；StreamAhead 的平均 TTFT 不覆盖最坏查询的旧证据。
+5. **精度/能力代价**：token 压缩/量化/低分辨率/事件替代会先损伤 OCR、小物体、边界、重现身份；Bifocal/RPFQ/LiFR-Seg 都说明收益与条件强绑定。
+6. **训练/搜索成本**：RF-DETR 的 NAS、DEIM 的收敛加速、QAT 的校准都不是推理时延；部署账本要分列。
+
+**结论：** 当前没有一条外部结果等价于 Clover 的 **camera→state→decision→action** 端到端时延；也没有一条同时覆盖识别/检测/分割/追踪/阅读/记忆与最坏截止。Clover 的速度验收必须报告完整管线、P50/P95/P99、证据年龄、多目标最坏情况、精度/能力分层与硬件/精度/后端，而不是引用单一 FPS。
+
+<!-- END latency-claim-audit -->
+
+
+
+
 ## Contents
 
+- [Native Ultrafast Systems Evidence: Backbones, Quantization, Tokens and Streaming](#ultrafast-systems-frontier)
+- [Latency-Claim Audit: Hardware, Precision, Pipeline Scope](#latency-claim-audit)
 - [Foundation-Model Architecture, Training and Runtime Systems](#topic-research-research_foundation_model_systems)
 - [Engineering, Deployment and Validation Constraints](#topic-research-research_engineering_validation)
 - [DeepSeek and Qwen source records (checked 2026-10-15)](#topic-research-foundation_models-deepseek_qwen)

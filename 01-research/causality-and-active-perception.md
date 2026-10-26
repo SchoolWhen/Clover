@@ -121,6 +121,136 @@ This is the canonical topic document. Update it in place; source-level dates and
 - **本次阅读深度：** 摘要与书目核验。
 <!-- END current-cross-domain-evidence -->
 
+<!-- BEGIN active-vision-frontier -->
+<a id="active-vision-frontier"></a>
+
+## 主动视觉与跨域证据：看哪里、何时再看、看的价值
+
+检索/核验：**2026-10-25（Asia/Shanghai）**。主动视觉不是“多拍几张”的同义词：它要求模型把**当前不确定性、候选视角的预期信息、动作成本/风险、以及证据不可逆性**放进同一个决策。下列工作分别来自机器人主动观察、VLA 注视控制、3D 场景探索、认知科学、神经形态与视网膜解码；它们提供机制与反例，不构成 Clover 已采用的架构。
+
+| 方法/方向 | 一手来源 | 机制与可核查证据 | 边界与反假设 |
+|---|---|---|---|
+| What Information Buys in Active Inference | [2610.19046](https://arxiv.org/abs/2610.19046v1) | 把 Active Inference 与 Bayes-UCBVI 放到同一 tabular MDP 抽象下，只差探索项；发现未校准信息增益衰减过快，校准为平方根后可达 `√T` regret；在奖励由数据选择时校准 AIF 付 `√S` 因子，无目标记忆的智能体无法避免 | 理论/表格 MDP，不含视觉观测；`√T`/`√S` 是渐近保证，不是真实机器人样本效率；未处理连续状态、模型失配或安全约束 |
+| Event Cameras vs Frame Cameras | [2610.20309](https://arxiv.org/abs/2610.20309v1) | 同一 Blender 场景、同一相机路径，分别用 EMVA 1288 全局快门模型与 v2e/Sony IMX636 事件模拟做合成孔径成像；25 m/s 亮场景帧相机只记录 3 张、无法去遮挡，事件相机可重建；5 lux 下事件相机也失效；5 m/s/5 lux 两者相近；1 m/s 匹配数据预算时事件无优势 | 纯模拟，传感器参数/场景特定；事件率在高速亮场景最高，恰好也是需要它的时候；不代表真实事件相机标定/噪声；合成孔径去遮挡不等于一般世界理解 |
+| Retinal population decoding | [2610.17154](https://arxiv.org/abs/2610.17154v1) | 小鼠视网膜离体、最高 1,836 个 RGC 的 spike 输入端到端 SNN；运动数字同时重建与定位，SSIM 最高 0.93、32×32 网格平均跟踪误差 1.33 px；5.4M 参数、14.2% 平均放电率下估计比同架构稠密 ANN 少约 70× 计算能量 | 离体、有限刺激（闪光/移动条/光栅/手写数字）；32×32 网格不是自然场景；能量是突触操作估计，不是实测芯片功耗；不能推出通用视觉理解 |
+| V1 feedback and central field | [2610.09983](https://arxiv.org/abs/2610.09983v1) | 狨猴逆行示踪：投射到 V1 的 extrastriate 反馈神经元比例随视野偏心度增加而下降；支持中央-周边二分理论（中央偏识别、周边偏注意选择） | 解剖学证据，不是计算模型；物种/个体差异；不能直接推出人工视觉应做 foveation；中央-周边分工仍是理论 |
+| XR for brain and behavior | [2610.19199](https://arxiv.org/abs/2610.19199v1) | NeuroXR 2026 workshop 论文：总结 VR/AR 中注意、记忆、语言与 EEG 研究，讨论受控可重复的 3D 任务及硬件/时序/测量限制 | 观点/综述，不含新实验；虚拟/增强世界不能替代真实世界；生态效度与实验控制仍有张力 |
+
+### FoveaVLA：用“注视动作”替代腕部相机
+
+- **一手来源：** [固定版本](https://arxiv.org/abs/2610.20064v1) · [项目页](https://tml.stanford.edu/FoveaVLA/)。`PRIMARY_PAPER` / `OFFICIAL_PROJECT`。
+- **机制：** 在 π0.5 上，每次动作 chunk 同时预测下一策略查询要观察的交互区域；策略接收原分辨率区域 crop 与全视图；Single/Dual 使用一或两个外部立体相机，含 RGB-D。
+- **输入与学习来源：** DROID 数据 + RoboInter 交互标注后训练；含动作示范 `L3`、深度 `L4`、语言任务条件 `L2`；不是被动纯 RGB。
+- **实际证据：** 四类真实任务上，FoveaVLA-Single 70.8%、Dual 77.1%，腕部相机 π0.5 为 52.1%；在普通 pick-and-place 持平，在干扰物、布料操作、远距离物体上提升。未来交互框预测 0.465 mIoU/0.483 Acc@0.5，接近 YOLO11s 的 0.492/0.488，但无需等待目标帧（YOLO11s 需 +29ms）；Dual 零样本迁移到模拟 MolmoSpaces。
+- **不能推出：** 注视动作是策略输出的一部分，不是模型自发的好奇心；外部 RGB-D/动作/后训练数据都是条件；真实任务集有限；成功率不证明对象身份或物理理解；腕部相机与注视策略的公平比较需同感知预算；论文未给独立 limitations 节，深度/外部视角的贡献未完全分离。
+- **阅读深度：** 正文选读：方法、真实任务表、结论；未复核全部附录；未运行复现。
+
+### EgoReveal：部分遮挡下先 reposition 视角，再操作
+
+- **一手来源：** [固定版本](https://arxiv.org/abs/2610.12999v1)（IROS 2026）。`PRIMARY_PAPER`。
+- **机制：** 从第一人称人类示范学习两个模仿策略：一个从当前视图与相机-臂位姿预测未来相机-臂位姿序列；另一个从物体关键点与控制历史预测未来控制命令；按目标可见性在两者间切换。
+- **输入与学习来源：** 第一人称人类示范 `L3`；含相机-臂位姿、物体关键点与控制历史 `L4`；不是纯视觉。
+- **实际证据：** 初始部分遮挡时，EgoReveal 重新定位相机获得可见性，并比固定相机基线更可靠完成任务；作者指出完全遮挡/出视野不在范围内。
+- **不能推出（作者自述）：** 需要输入 reference image 判断是否仍被遮挡；ORA 用 HSV 颜色匹配做遮挡检测，假设照明一致/颜色可分；完全遮挡/出视野未处理；场景/物体类别有限、策略 scenario-specific；人类示范相机运动学与机器人不同；关键点/位姿是额外输入。
+- **阅读深度：** 正文选读：方法、实验与 Limitations；未复核全部附录；未运行复现。
+
+### Rendering-Free Lookahead：用特权未来视图训练“看哪里”的价值
+
+- **一手来源：** [固定版本](https://arxiv.org/abs/2610.11039v1) · [项目页](https://k0uya.github.io/rfl-proj/)。`PRIMARY_PAPER` / `OFFICIAL_PROJECT`。
+- **机制：** 把候选相机运动的“可回答性”定义为 VLM 对未来视图是否足以回答问题的估计；训练时特权教师用 3DGS 渲染候选未来视图并计算一/两步 answerability 目标；两阶段蒸馏到学生，部署时不渲染未来视图，只用问题、近期观测和候选运动预测价值。
+- **输入与学习来源：** 3DGS 场景 + 渲染未来视图 `L4`（特权）；冻结 VLM `L2`；学生输入 RGB/问题；训练与部署的信息条件不同，必须分开记账。
+- **实际证据：** E3VS-Bench 的 377 个未见环境测试 episode 上，平均 judge score 从直接基线 2.14 提到 3.05；真实 6-DoF 臂三题上取得最高平均 judge score。
+- **不能推出（作者自述）：** 训练需要 3DGS/任何 free-viewpoint renderer 做反事实渲染；off-policy 特权蒸馏存在分布偏移；细粒度证据（OST）最弱（2.55 vs Gemini 3.0 Flash 3.09）；会到达可回答视角但不会停；真实臂的可行运动与模拟不同；answerability 是代理，不是真实信息增益；未覆盖风险/不可逆动作。
+- **阅读深度：** 正文选读：方法、E3VS/真实臂结果、Limitations；未复核全部附录；未运行复现。
+
+### Adaptive Observation Control：分类也可以按需看、按需停
+
+- **一手来源：** [固定版本](https://arxiv.org/abs/2610.19624v1)（ACCV 2026）。`PRIMARY_PAPER`。论文给出的 `GZHU-DVL/LI-Dikai` 代码地址在本次核验中返回 404，故不登记为可复现 artifact。
+- **机制：** 扩展 AdaptiveNN-DeiT-S：每次注视预测尺度（视场），可选 scale-gated foveation 与高分辨率细节 token 分支；用 label-grounded stop head 做输入相关提前终止；同一 checkpoint 支持阈值控制精度-计算权衡。
+- **输入与学习来源：** ImageNet-1K 分类监督 `L1`；顺序注视仍是同一图像内的裁剪，不涉及真实相机运动或新物理证据。
+- **实际证据：** 顺序 ImageNet-1K 上，学习停止规则用 2.45/4 步达 81.9% top-1，优于同 checkpoint 的固定步截断；τ=0.70 比固定两步高 0.298pp 且平均步数更少。但作者给出的保守 GFLOPs 估算显示 τ=0.90 为 6.48，高于四步 Orig 的 5.50——步数减少不等于计算必然下降。
+- **不能推出（作者自述）：** 分类/静态图像/监督标签；注视是图像裁剪而非真实视角；部分数据集 3 seeds、ImageNet-A/R 行为单次运行；checkpoint 按 public-split Acc@1 选，边际受 epoch 选择影响；detail-token 从第二步起增加一次 encoder pass，早停少的数据集成本更高；阈值手工设定；组件交互随数据集变化。
+- **阅读深度：** 正文选读：方法、Table 3、Limitations；未复核全部附录；未运行复现。
+
+### SpatialScout：主动建图的现状远未解决
+
+- **一手来源：** [固定版本](https://arxiv.org/abs/2610.26659v1) · [官方代码](https://github.com/JesseZZZZZ/SpatialScout)。`PRIMARY_PAPER` / `OPEN_SOURCE`。
+- **机制：** 80 个室内场景、3,140 个目标物体；给定物体清单、RGB 观测、相机标定与位姿，VLM agent 控制相机探索并在共享坐标系估计物体中心；联合评估定位精度与覆盖率。
+- **输入与学习来源：** 模拟环境 RGB + 标定 + 位姿；VLM agent 含 `L2`；位姿/标定是额外输入，不是纯单目 V0；物体清单是任务提示。
+- **实际证据：** 最强被测模型 Claude Opus 5.5 平均 overlap 41.71%，47.23% 目标 IoU>0.5，仅 3.25% >0.9。40 条失败分析中仅 6 条同时达到 ≥90% 覆盖与 ≤0.2m 平均中心误差；26 条覆盖不全，21 条虽三角化残差低但对应错误，13 条几何不一致，13 条覆盖不足即提前终止；工具调用行为显示部分模型“移动多、观察/建图少”。
+- **不能推出：** 模拟环境 + 给定位姿/标定简化真实 SLAM；物体清单限制开放世界发现；xhigh reasoning/工具调用预算影响分数；VLM 版本是时点快照；低三角化残差不证明对应正确；benchmark 不证明具体架构。
+- **阅读深度：** 正文选读：基准、工具调用分析、失败分析；未复核全部附录；未运行复现。
+
+**本节结论：** 主动视觉的收益已经在注视控制、视角重定位、未来视图价值估计和分类提前停止中被分别演示；但没有工作同时证明**信息增益、动作成本、不可逆风险、长期记忆修正**四者被正确联合优化。对 Clover 而言，这意味着“主动看”必须作为一等研究变量，而不是在推理管线外挂一个 crop/zoom 工具。跨域的视网膜/事件/V1 证据进一步说明：传感器形态与前馈-反馈结构会改变可获得的证据，不能把 RGB 帧率与分辨率当作唯一观测预算。
+<!-- END active-vision-frontier -->
+
+<a id="active-perception-2026"></a>
+
+## 主动感知 2026：从“crop/zoom 工具”到基础模型、记忆与复合不确定性
+
+主动视觉的核心不是“多拍几张”，而是**用动作换取信息**：看哪里、何时再看、看多久、付出的时间/风险是否值得。此前本方向只有 FoveaVLA、EgoReveal、RFL、Adaptive Observation、SpatialScout；本轮补 10 篇 2026 年工作，覆盖主动感知基准、主动视觉基础模型、语言条件视角预测、遮挡恢复、边缘 NBV 与复合不确定性。
+
+| 方法 | 一手来源 | 机制与可核查证据 | 边界与反假设 |
+|---|---|---|---|
+| ActiveArena | [2609.24124](https://arxiv.org/abs/2609.24124v2) · [项目页](https://leeibo.github.io/ActiveArena) · 正文选读 | 主动感知操作基准：35 任务/5 类，多轮取证 + 记忆推理；45 页；ID/OOD 分离场景/干扰物/背景；失败分解为 Discovery Miss/Context Omission/Context Retained；固定视角 DM 96.3%，记忆-free 27.37 ID/6.12 OOD，chunk 记忆 62.97/47.60；真实 8 任务平均 55.6%（π0.5 23.8、SaPaVe 24.4、MemER 34.4）；planner 记忆 60.97/45.54，训练显存降 46% | 模拟为主 + 8 真实任务；任务/物体/场景有限；记忆写入策略比容量更关键；OOD 仍有大 gap；不是纯视觉（本体状态/语言）；不是开放世界 |
+| CanViT | [2603.22570](https://arxiv.org/abs/2603.22570v2) · [代码](https://github.com/m2b3/CanViT-PyTorch) · 正文选读 | 首个 task/policy-agnostic 主动视觉基础模型：retinotopic ViT + spatiotopic canvas 记忆 + scene-relative RoPE + 非对称 Canvas Attention；无需 RL，passive-to-active 蒸馏；作者报告 active-vision benchmark SOTA，微调后 IN1k 84.5% | 静态场景；需要 passive teacher/预训练特征；单一模型规模；不是真实机器人策略；canvas 记忆容量/遗忘未解；不是语言条件 |
+| I-Perceive | [2603.00600](https://arxiv.org/abs/2603.00600v3) · 正文选读 | 语言条件主动感知基础模型：给定当前/上下文图像 + 自然语言，预测满足意图的 6D 相机位姿；VLM 多层 KV + VGGT 式几何通路 + target/semantic tokens；室内大规模场景；作者报告 in-dist/OOD 视角精度/约束/偏好/运行时优于 active/VLM/VLN 基线，支持闭环 | 依赖场景扫描标注/模拟数据；只检测碰撞不校正；VLM/几何基础模型双通路成本；不是真实机器人闭环；语言意图本体限制 |
+| ActiveScale | [2609.18514](https://arxiv.org/abs/2609.18514v2) · 摘要 | 把主动感知扩展到 VLA：历史视频 + 显式相机位姿监督 + per-frame pose token/轻量预测头；1000 小时第一人称/机器人数据 mid-training | 摘要级；VLA/机器人域；数据/硬件协同；不是纯视觉；真实开放世界转移未核 |
+| LEAP | [2609.17628](https://arxiv.org/abs/2609.17628v1) · 摘要 | 四足导航中从任务压力自发涌现主动注视，不用 coverage/curiosity 代理目标；gaze-invariant 表征 + 地形课程 | 摘要级；模拟四足导航；任务特定；不是机械臂/通用视觉；真实机器人未核 |
+| Act, Sense, Act / CoMe-VLA | [2602.04600](https://arxiv.org/abs/2602.04600v2) · 摘要 | 把主动感知形式化为历史依赖的感知-动作循环（信息寻求动作 + 决策分支）；用大规模第一人称人类数据学习探索/操作先验；CoMe-VLA 含认知辅助头/记忆 | 摘要级；VLA/人类数据；不是纯视觉；真实闭环未核；信息寻求动作类型有限 |
+| Recovering the View / BAVO | [2609.37292](https://arxiv.org/abs/2609.37292v1) · [项目页](https://hcplab-sysu.github.io/BAVO-Bench) · 摘要 | 双臂遮挡恢复基准：Clean/Stage Occlusion/Random-time Occlusion；A-FAR 用 robot-base 3D + 4D 关系蒸馏联合视角/操作；作者报告 5 任务优于 ManiFlow，含随机遮挡，并迁移真实主动相机平台 | 摘要级；双臂/桌面操作；RGB-D/机器人；恢复可见性≠任务成功；真实平台有限；不是开放世界 |
+| LEAP-NBV | [2609.23974](https://arxiv.org/abs/2609.23974v1) · 摘要 | 在边缘设备上跑 foundation-model 驱动的 NBV 规划（以 HMR 为目标），蒸馏轻量策略，无需云端 | 摘要级；战术边缘/HMR 特定；算力/通信约束；不是通用主动感知；真实部署未核 |
+| TAVIS | [2605.07943](https://arxiv.org/abs/2605.07943v2) · [项目页](https://tavis-bench.github.io) · 摘要 | 第一人称主动视觉/预期注视基准：TAVIS-Head（5 任务，pan/tilt 全局搜索）+ TAVIS-Hands（3 任务，腕部局部遮挡），两种人形躯干；headcam-vs-fixedcam 配对协议 + Gaze-Action Lead Time 指标 | 摘要级；模拟 IsaacLab；操作任务有限；不是真实机器人；GALT 的认知解释需独立验证 |
+| Breaking the Epistemic Trap | [2605.26627](https://arxiv.org/abs/2605.26627v2) · 正文选读 | 指出状态不确定性与动力学不确定性协同会造成“认知陷阱”：模拟 locomotion 中复合不确定性导致 77% 退化，远高于加性预测 46%；动作延迟使超加性失败从约 9% 升到约 23%；提出 κ 不确定性 + dynamics information seeking + 因果先验/基础模型初始化 | 模拟概念验证；不是视觉 benchmark；κ/因果抽象/基础模型整合仍是框架；真实安全关键域未验证；不是纯视觉 |
+
+### ActiveArena：记忆写入策略比容量更关键，固定视角几乎必然“发现失败”
+
+ActiveArena 把主动感知操作拆成 35 个任务/5 类，要求多轮取证与记忆推理。关键结果不是某个策略分数，而是失败分解：固定视角的 Discovery Miss 高达 96.3%——不是“看得不准”，而是**根本没有看到任务相关物体**；记忆-free 策略 27.37 ID/6.12 OOD，chunk 记忆 62.97/47.60；真实 8 任务平均 55.6%，远高于 π0.5 23.8、SaPaVe 24.4、MemER 34.4。记忆写入策略（chunk）比容量更关键：事件触发的 subtask/motion 写入会因预测错误/控制抖动而漏掉信息；planner 介导的记忆用 12 帧稀疏记忆达到 60.97/45.54，并把 VLA 训练显存降 46%。
+
+它给 Clover 的启发是：**主动感知的失败要先分“没看到/没记住/记住了但决策错”**；只报任务成功率会把“发现失败”与“控制失败”混在一起。固定视角不是“弱一点”，而是在需要主动取证的任务上结构性失败。
+
+### CanViT 与 I-Perceive：主动视觉基础模型的两条路
+
+CanViT 走“任务/策略无关”的主动视觉基础模型：retinotopic ViT 处理局部 glimpse，spatiotopic canvas 作为场景级记忆，scene-relative RoPE 绑定两个坐标系，非对称 Canvas Attention 让大 canvas 不付二次成本；passive-to-active 蒸馏避免 RL。作者报告 active-vision benchmark SOTA，微调后 IN1k 84.5%；限制是静态场景、需要 passive teacher、单一模型规模、不是真实机器人策略。
+
+I-Perceive 走“语言条件视角预测”：给定当前/上下文图像与自然语言，直接预测满足意图的 6D 相机位姿；VLM 多层 KV + VGGT 式几何通路 + target/semantic tokens；作者报告 in-dist/OOD 视角精度、约束满足、偏好与运行时优于 active/VLM/VLN 基线，并支持闭环。限制是场景扫描标注/模拟数据、只检测碰撞不校正、双通路成本、不是真实机器人闭环。
+
+两者说明：**主动视觉可以做成“通用感知模型”，也可以做成“语言条件视角策略”**；前者需要场景记忆/坐标系，后者需要意图/几何；但都没有解决“动作成本/风险/不可逆”的联合优化。
+
+### BAVO 与 Epistemic Trap：恢复可见性 ≠ 任务成功；复合不确定性会超加性失败
+
+BAVO 把主动视觉放到双臂遮挡恢复：Clean/Stage Occlusion/Random-time Occlusion；A-FAR 用 robot-base 3D 表示 + 4D 关系蒸馏联合视角与操作。作者报告 5 个任务优于 ManiFlow，含随机遮挡，并迁移真实主动相机平台；但结论明确指出：**恢复可见性不一定转化为任务成功**——新观测如何被策略用于后续闭环控制仍是难点。
+
+“Breaking the Epistemic Trap”则指出更根本的问题：状态不确定性与动力学不确定性会相互锁定——不知道状态就无法估动力学，不知道动力学就无法估状态。模拟 locomotion 中复合不确定性导致 77% 退化，远高于加性预测 46%；动作延迟使超加性失败从约 9% 升到约 23%。它提出 κ 不确定性 + dynamics information seeking + 因果先验/基础模型初始化，但仍是概念验证，不是视觉 benchmark。
+
+这两篇给 Clover 的启发是：**主动看不是免费的**；信息增益必须与动作延迟、动力学不确定性、任务成功率联合评估；“看到”与“用上”是两件事。
+
+### ActiveScale、LEAP、CoMe-VLA、LEAP-NBV、TAVIS：数据、硬件与基准
+
+ActiveScale 把主动感知扩展到 VLA：历史视频 + 相机位姿监督 + per-frame pose token，1000 小时第一人称/机器人 mid-training；LEAP 让四足导航从任务压力自发涌现注视，不用 coverage/curiosity 代理；CoMe-VLA 把主动感知形式化为历史依赖的感知-动作循环，用人类第一人称数据学习探索/操作先验；LEAP-NBV 在边缘设备上跑 foundation-model 驱动的 NBV；TAVIS 提供第一人称主动视觉/预期注视基准（TAVIS-Head/Hands）与 Gaze-Action Lead Time 指标。
+
+它们共同补上 **数据规模、硬件约束、任务基准**，但都还是摘要级或模拟为主；真实机器人、开放世界、动作成本/风险仍未闭合。
+
+**本节结论：** 主动感知 2026 已从“crop/zoom 工具”推进到**基准、基础模型、语言条件视角、遮挡恢复、边缘规划、复合不确定性**。共同证据是：记忆写入/场景状态比“多看图”更关键；恢复可见性不等于任务成功；复合不确定性会超加性失败；数据/硬件/任务基准正在补齐。但**信息增益、动作成本、不可逆风险、长期记忆修正**四者仍未联合优化，真实机器人转移仍是少数。Clover 若把主动观察作为一等能力，必须报告：信息增益代理、动作/时间成本、风险/不可逆、真实转移、记忆写入与修正；单一任务成功率或“看得更多”不能替代这些证据。
+
+
+<!-- BEGIN causal-identifiability-2026 -->
+<a id="causal-identifiability-2026"></a>
+
+## 因果世界模型与可识别对应：2026 正式证据
+
+检索/核验：**2026-10-25**。严格因果识别不能只靠“预测下一帧”；下列工作把**对象级掩码、token 对应、公理世界模型**作为可识别性的结构约束。它们是机制参照，不是 Clover 已实现的因果状态。
+
+| 方法 | 一手来源 | 机制与可核查证据 | 边界与反假设 |
+|---|---|---|---|
+| Causal-JEPA（C-JEPA） | [ICML 2026](https://proceedings.mlr.press/v306/nam26c.html) · [官方代码](https://github.com/galilai-group/cjepa) | 把 masked joint-embedding prediction 从图像 patch 扩展到对象级 latent：遮住某对象状态，要求从周围上下文推断；训练时施加结构化部分可观测，形成反事实式查询；作者报告反事实 VQA 绝对提升约 20%，规划只用 patch 世界模型 1% 的 latent 特征即达可比性能，并给出可观测性控制的形式分析 | 对象槽/对象级表示是前提；合成/受控环境为主；形式分析针对掩码诱导的归纳偏置，不证明真实相机因果识别；不是纯视觉端到端 |
+| Identifiable Token Correspondence（ITC） | [ICML 2026](https://proceedings.mlr.press/v306/kim26bq.html) · [论文](https://arxiv.org/abs/2605.16457v3) · [官方代码](https://github.com/snu-mllab/Identifiable-Token-Correspondence) · 正文选读 | 把下一帧 token 预测写成结构化分配：每个新 token 要么复制上一帧的 token，要么新建；用 optimal transport 对齐 token 对应，不改 transformer 架构/训练流程；Craftax-classic 72.5% return / 35.6% score（此前 67.4%/27.9%），4 个基准报告提升 | token 世界模型/RL 基准（Craftax/MinAtar/Atari）；对应变量是潜在分配，不是物理对象身份；长时 rollout 的复制/新建仍可能错误；无真实视觉因果/物理验证；不是视觉-only 感知 |
+| Axiomatic World Modeling（RLAWM） | [NeurIPS 2026](https://arxiv.org/abs/2610.24519v1) · 正文选读 | 定义 “modeling drift”：模型内部公理世界模型与题目真实物理世界的偏离；RLAWM 用物理 grounded reward 同时监督建模与求解两层，惩罚静默改量、编造定律、注入未声明假设；作者报告 PhysReason +12.2、PHYSICS +5.2、olympiad 级 2.45× 提升，inference 无额外成本 | **作者自述**：训练需额外冻结 LLM 评分器、翻译器与从定理库合成的静态 checker，训练成本高且 checker 不随 rollout 适应；文本物理题/LLM 推理，不是视觉；奖励依赖“真实公理世界”；不覆盖开放世界新机制；不是因果发现 |
+
+**本节结论：** 2026 的正式证据把“可识别性”从抽象口号推进到可操作结构：对象级掩码、token 对应、公理约束都能改善反事实/长时预测。但它们分别依赖对象槽、token 分配或题目公理，尚无一个在真实单目视频上证明**视觉-only 的因果变量唯一恢复**。Clover 若使用这些结构，必须把它们当作待消融的假设，而不是已获得的因果理解。
+
+<!-- END causal-identifiability-2026 -->
+
 <!-- BEGIN broad-vision-primary-evidence -->
 <a id="broad-vision-primary-evidence"></a>
 
@@ -185,6 +315,9 @@ This is the canonical topic document. Update it in place; source-level dates and
 
 ## Contents
 
+- [Active Vision and Cross-Domain Evidence: Where to Look, When to Look Again](#active-vision-frontier)
+- [Active Perception 2026: Foundation Models, Memory and Compound Uncertainty](#active-perception-2026)
+- [Causal World Models and Identifiable Correspondence: 2026](#causal-identifiability-2026)
 - [Value of Information, Probing Actions and Active Evidence Acquisition](#topic-research-research_value_of_information)
 - [Open-World Epistemics, Model Mismatch and Epistemic Safety](#topic-research-research_open_world_epistemics)
 - [Model Discovery, Falsification and Scientific Reasoning](#topic-research-research_model_discovery)

@@ -120,11 +120,11 @@ This is the canonical topic document. Update it in place; source-level dates and
 ### PPMem
 
 - **来源/版本：** [原论文](https://arxiv.org/abs/2610.23795v1)；初始提交 2026-10-16；本次返回版本更新于 2026-10-16。`PRIMARY_PAPER`。 [作者提供的项目/代码入口](https://hyzcluster.github.io/ppmem)（未运行复现）。
-- **问题与机制：** PPMem 用平面几何作为生成视频的持久三维记忆。
-- **输入/学习来源：** 平面与深度预测、合并和历史生成构成条件链；其先验/训练监督按原文分开。
-- **实际证据：** DL3DV、RealEstate10K 的长序列跨视图视频生成和几何。
-- **不能推出 / 待区分：** 记住已经生成的平面，不等于跟踪真实世界被遮挡对象；平面紧凑性也不保证细小非平面接触证据被保留。
-- **本次阅读深度：** 摘要与书目核验。
+- **问题与机制：** PPMem 用平面几何作为生成视频的持久三维记忆：约 7 参数/平面，整场景约 100K primitives/5 MB；视频扩散 transformer 加平面预测头与 Depth Token Fusion，每个自回归 chunk 联合生成 RGB 与平面几何，合并后经渲染深度条件后续 chunk。
+- **输入/学习来源：** 平面与深度预测、合并和历史生成构成条件链；其先验/训练监督按原文分开。视频骨干冻结，仅通过轻量 adapter 学几何，未端到端共适应。
+- **实际证据：** DL3DV、RealEstate10K 的长序列跨视图视频生成和几何；作者报告在 288 帧、大视角变化下维持视频质量与深度，优于 Gen3C/Voyager/VMem/SPMem，并联合输出度量深度、法线与可导出平面。
+- **不能推出 / 待区分：** 记住已经生成的平面，不等于跟踪真实世界被遮挡对象；作者自述适合平面结构场景，植被/水面等有机环境细节不足，训练外极端轨迹退化；细文字在放大后仍会乱码；平面紧凑性也不保证细小非平面接触证据被保留。
+- **本次阅读深度：** 正文选读：方法、DL3DV/RealEstate10K 表、Limitations 与结论；未复核全部附录；未运行复现。
 
 ### PrismWAM
 
@@ -144,6 +144,112 @@ This is the canonical topic document. Update it in place; source-level dates and
 - **不能推出 / 待区分：** 单帧 anchor、文本记忆和 keyframe 对照的证据预算不同；语言记忆不能被默认视为视觉中立压缩。
 - **本次阅读深度：** 摘要与书目核验。
 <!-- END current-cross-domain-evidence -->
+
+<!-- BEGIN world-model-frontier -->
+<a id="world-model-frontier"></a>
+
+## 世界模型前沿：生成、预测与可用状态不是同一件事
+
+检索/核验：**2026-10-25（Asia/Shanghai）**。世界模型一词当前覆盖至少三类系统：预测下一帧的生成器、动作条件的潜在动力学、以及为策略训练提供想象 rollout 的学习模拟器。三者都能“预测未来”，但对**状态是否显式、动作是否条件、物理是否可干预、记忆是否持久**的要求不同。下列记录只支持各自评测条件下的结论。
+
+| 方法 | 一手来源 | 机制与可核查证据 | 边界与反假设 |
+|---|---|---|---|
+| An Introduction to World Models | [2610.30789](https://arxiv.org/abs/2610.30789v1) | 从 POMDP 统一梳理世界模型与经典控制、动力系统、信号处理、RL 的关系；区分预测动力学、学习模拟器、联合生成观测与动作；主张条件预测可统一世界建模与策略学习 | 概念/导论，不含新实验；“统一”是表述框架，不是可识别性定理；未解决模型失配、开放世界新机制或真实相机证据 |
+
+> CADRE 与 PPMem 的既有记录见[本方向既有证据](#current-cross-domain-evidence)，Grid or Nodes 见[评测方向](evaluation-and-benchmarks.md#evaluation-frontier)，DRILL 见[学习与数据](learning-and-data.md#current-cross-domain-evidence)；这里只补充尚未登记的世界模型证据，不重复计数。
+
+### StarWM：让重建只发生在“与动力学相关”的区域
+
+- **一手来源：** [固定版本](https://arxiv.org/abs/2609.30667v1)（NeurIPS 2026）。`PRIMARY_PAPER`。
+- **机制：** 用自监督动力学训练的 cross-attention 决定重建应用于哪些区域；双流解码器只重建被 attend 的区域，stop-gradient 隔离重建与动力学目标，避免不可预测内容污染 latent；建立在 DreamerV3 骨架上。
+- **输入与学习来源：** 视频/控制观测与自监督动力学；DeepMind Control 动态背景；无奖励版本用于主比较，reward-augmented 变体另记。
+- **实际证据：** 作者报告 reward-free StarWM 在随机帧干扰下最强，在连续视频下显著优于重建式基线；reward-augmented 版本匹配或超过重建基线；速度与 DreamerV3/Iso-Dream++ 相当，慢于不做图像解码的 R2-Dreamer。
+- **不能推出：** 自监督观测本身无法区分“可预测背景是任务相关还是干扰物”；小物体低于 8×8 attention 时退化；只在 DeepMind Control 验证；重建带来额外计算；不是真实机器人世界模型。
+- **阅读深度：** 正文选读：方法、DMC 主结果、运行时间与 Limitations；未复核全部附录；未运行复现。
+
+### Dreamer 4：在想象中训练智能体，但“世界”仍是游戏
+
+- **一手来源：** [固定版本](https://arxiv.org/abs/2509.24527v1) · [项目页](https://danijar.com/dreamer4/)。`PRIMARY_PAPER` / `OFFICIAL_PROJECT`。
+- **机制：** 学习动作条件的世界模型，用 shortcut forcing 与高效 transformer 实现单 GPU 实时交互推理；智能体完全在世界模型想象中做 RL；少量动作标注数据 + 大量无标签视频学习动作条件。
+- **输入与学习来源：** Minecraft 视频与动作 `L3`；绝大部分知识来自无标签视频（动作条件仅少量标注）；离线数据，无环境交互。
+- **实际证据：** 作者报告世界模型在 Minecraft 中准确预测物体交互与游戏机制，明显优于此前世界模型；首个仅用离线数据在 Minecraft 获得钻石的智能体，需选择 20,000+ 鼠标键盘动作。
+- **不能推出：** 游戏机制是封闭、可重置、带动作标签的域；离线 RL 成功不证明真实相机下的物理/因果理解；实时交互数字未给出完整硬件/分辨率口径；“想象中成功”仍需真实环境验证；不是纯视觉学习（动作标签 `L3`）。
+- **阅读深度：** 摘要与项目说明；未复核全部实验；未运行复现。
+
+### Emu3.5：原生多模态世界学习器，生成能力与因果理解仍要分开
+
+- **一手来源：** [固定版本](https://arxiv.org/abs/2510.26583v1) · [官方代码](https://github.com/baaivision/Emu3.5)（作者给定的 `emu.world` 项目页在本次核验中不可访问，不作为可复现 artifact）。`PRIMARY_PAPER` / `OPEN_SOURCE`。
+- **机制：** 统一 next-token 预测，原生接受/生成交错视觉-语言序列；预训练语料 >10T tokens，主要来自互联网视频的连续帧与转写；大规模 RL 后训练；Discrete Diffusion Adaptation（DiDA）把逐 token 解码改为双向并行预测，作者报告每图推理约 20× 加速。
+- **输入与学习来源：** 视频帧 + 转写/语言 `L2`，不是纯视觉；互联网视频的物理内容与剪辑偏差进入先验；RL 后训练的任务/奖励来源须另记。
+- **实际证据：** 长程视觉-语言生成、任意到图像（X2I）、复杂文字图像生成；作者报告在图像生成/编辑上与 Gemini 2.5 Flash Image 可比，并在交错生成任务上更强；展示时空一致的世界探索与开放世界具身操作。
+- **不能推出：** 生成逼真视频/图像不是因果模型；文本转写提供语言监督；世界探索的“一致性”由生成器自评/人评，不是干预实验；具身操作展示不等于真实机器人闭环；10T token 数据与算力不可复现。
+- **阅读深度：** 摘要与项目说明；未复核全部实验；未运行权重。
+
+### Gen4P：把视频生成器改造成前馈 4D 感知器
+
+- **一手来源：** [固定版本](https://arxiv.org/abs/2610.22371v1) · [项目页](https://gen4p.github.io/)。`PRIMARY_PAPER` / `OFFICIAL_PROJECT`。
+- **机制：** 复用预训练视频生成器的干净 latent，单次编码器前向，不用迭代去噪；轻量 cross-attention 解码器按 on-demand query 输出 4D 属性；连续时间 query 提供时间灵活性；冻结的视频深度 LoRA 作为几何先验。
+- **输入与学习来源：** 单目视频；生成器预训练数据与深度 LoRA 监督另记（含 `L1/L4`），不是从零纯视觉学习。
+- **实际证据：** 在 3D 点追踪、视频深度、相机位姿上达到 SOTA 或竞争性；野外视频定性显示复杂运动跟踪与细节保持。
+- **不能推出：** 生成器先验可能补出视频中不存在的结构；4D 几何一致不等于物体身份、材质或接触理解；评测集中在几何任务；未证明实时性或长视频状态保持；生成式预训练的知识来源难以完全审计。
+- **阅读深度：** 摘要与项目说明；未复核全部实验；未运行复现。
+
+**本节结论：** 当前世界模型的前沿同时朝三个方向推进：更强的生成保真（Emu3.5/Gen4P）、更显式的持久几何（PPMem）、以及更贴近策略效用的想象训练（Dreamer 4/DRILL）。但“能生成”与“能识别可干预的物理状态”之间仍缺独立证据；尤其需要把**生成器自评、像素误差、策略回报、真实干预后状态**四类指标分开。Clover 若走纯视觉路线，必须证明其状态不是生成器写回的自身预测，也不是语言转写提供的语义捷径。
+<!-- END world-model-frontier -->
+
+<!-- BEGIN long-video-memory -->
+<a id="long-video-memory-2026"></a>
+
+## 长视频与第一人称记忆：持久状态、事件索引与主动记忆
+
+短时追踪和世界模型回答“接下来会发生什么”，但长时间的第一人称生活还要求另一种能力：**在数小时到数月后，仍能找回某个物体、某次事件或某个状态变化，并区分“相似但不同”的经历**。这与 PPMem/PersistBench 的短时持久性不同：长视频记忆的核心不是单帧重建，而是**写什么、如何索引、如何读、何时主动写**。本轮补 10 篇 2026 年工作，覆盖 4D 场景图记忆、持久 3D 物体记忆、流式记忆基准、超长视频检索与工作记忆重写。
+
+| 方法 | 一手来源 | 机制与可核查证据 | 边界与反假设 |
+|---|---|---|---|
+| R4DSG | [2608.11017](https://arxiv.org/abs/2608.11017v1)（ACM MM 2026） · 正文选读 | 相对 4D 场景图记忆：把长视频压成按时间/地点/持久物体索引的可查询条目，保留物体身份与锚点转移；EgoLifeQA A1_JAKE 单被试 255 题上总体 39.6%（EgoRAG-Text 32.9，+6.7），when 43.1%（30.6，+12.5）；why 子集 33.3→40.0；828 clips 压成 134 文档/0.58 MB JSON | 单被试、离线回溯、非在线更新；依赖 Qwen3.5-27B 回答；错误来自漏事件、轨迹碎片/重复、锚点杂乱、检索失败；不是人类核验的感知基准；跨天持久性有限 |
+| Ledger | [2610.10538](https://arxiv.org/abs/2610.10538v1) · [项目页](https://ledger-3d.github.io) · [代码](https://github.com/LEDGER-3D/LEDGER) · 正文选读 | 持久 3D 物体记忆：物体位置、历史与上下文描述；按静止位置聚类、重复证据才记一次移动；包含从未被触碰的物体；HD-EPIC 2,400 题 42.6%（blind 29.7、ReMEmbR 29.8、DirectMe 30.7）；VQ3D 中位 L2 0.99 m（SAM3，51% <1 m）；UCS-Bench 记忆-only 38.5%（blind 33.8），帧+记忆 46.3% | 离线构建；计数/连续静止区间弱；场景切换会让检索与构建同时失效（回到 blind 水平）；依赖标定位姿/深度，UCS 多数记忆缺度量尺度；不是在线因果记忆 |
+| EgoProbe | [2610.17128](https://arxiv.org/abs/2610.17128v1) · 正文选读 | 流式第一人称记忆基准：长程保留（多远）+ 事件特异回忆（在相似事件干扰下多准）；19 个模型，最佳 GPT-5.6-Sol 仅 55.32% Base/43.69% 两轮；SimpleStream 两轮 6.75%；ultra-long（≥12 h）仅 28–40%；相关事件≥3 时事件链接错误率显著上升；VST 粗问 95.28% 但两轮仅 33.93% | 受 EgoLife 录制覆盖限制；无音频；多为 MLLM 语言读出；两轮指标要求两轮全对；不是纯视觉记忆；未跨月/年 |
+| EgoMonth | [2608.13113](https://arxiv.org/abs/2608.13113v1) · 摘要 | 月级第一人称基准：20 名参与者、20–120 天、300+ 小时、1,443 道人工选择题；14 项任务分三层认知（Schema Consolidation、Episodic Indexing 等），测试跨天/跨周一致记忆 | 摘要级；MLLM 语言问答；参与者/场景有限；不是纯视觉；任务/标注成本高；不能推出通用长时记忆 |
+| ProactEgoMem | [2610.30089](https://arxiv.org/abs/2610.30089v1) · 摘要 | 流式第一人称“主动记忆”基准：信息捕获（IC）、状态跟踪（ST）、位置跟踪（LT）三类任务；要求系统在用户不提问时主动决定记什么、何时维护 | 摘要级；主动策略的代价/误记未核；基准场景有限；不是端到端视觉系统 |
+| MemLife | [2609.40195](https://arxiv.org/abs/2609.40195v1) · 摘要 | 长期第一人称记忆系统：实体锚定的第一人称文本 episode + 时间索引 agentic reader；无需训练、查询时不回看原始视频；作者报告比最强 training-free 基线高 4.6–12.0% | 文本化记忆丢失视觉细节；依赖实体/转写质量；不是纯视觉；长时检索竞争仍可能失败；摘要未给全部基准 |
+| VideoLoop | [2609.38119](https://arxiv.org/abs/2609.38119v2) · [代码](https://github.com/philipxjm/videoloop) · 正文选读 | 长视频 agent 的“语义 thrashing”：append-only 工作记忆越长，关键证据注意力越塌缩；用外层推理 + 内层 orchestrator 重写有界工作记忆，并从文件系统检索；VideoMME long +5.1、VideoMMMU +4.1、LongVideoBench +5.9（Gemini 3 Flash）；Q4 难度 +9.3；token 仅 +0.5% | 依赖 Gemini/Claude 等强策略模型与字幕；不是纯视觉；记忆重写本身是 LLM 行为，可能丢证据；基准为语言 QA；未证明真实机器人长时任务 |
+| PREM | [2609.23601](https://arxiv.org/abs/2609.23601v1) · [代码](https://github.com/siruzhong/PReM) · 正文选读 | 冻结 VLM 的 prefix-steered recurrent memory：query-agnostic 写入 256 KiB 多槽关联状态，问题条件 readout 以 K/V 调制注入非视觉前缀；只训 27.5M 参数（<0.30%）；流式 Avg +1.43（Qwen3-VL-8B）、LVBench ≥60 min +5.61%；状态 0.063 MiB、ingest 7.81 s vs InfiniPot-V 17.44 s、无额外 prompt token | 仍是语言模型读出；状态压缩会丢细节；离线/流式均在基准 QA 上验证；不是 3D/物体身份记忆；训练数据 LLaVA-Video-178K 子集；未证明跨场景/跨月 |
+| MERIT | [2608.07663](https://arxiv.org/abs/2608.07663v2)（ECCV 2026 Oral） · [项目页](https://choi-yeeun.github.io/MERIT/) · 摘要 | 超长视频两阶段：query-agnostic 多键 episodic memory 构建 + 推理时时间扩展；优先高召回检索，把高层关系组合推迟到查询时；作者报告在超长视频基准上强于复杂记忆构建 | 摘要级；依赖 MLLM/agent；记忆构建仍以文本/帧为单位；不是纯视觉；未核全部数值 |
+| LongEgoRefer | [2607.02096](https://arxiv.org/abs/2607.02096v1)（ECCV 2026） · [代码](https://github.com/shunya-kato/LongEgoRefer) · 摘要 | 长时第一人称视频指代表达理解基准：视频长、目标稀疏出现、活动切换复杂；给出时序+空间定位与语言指代 | 语言查询任务；不是纯视觉；基准规模/指标摘要未全；指代成功不等于持久记忆；标注成本 |
+
+### R4DSG：记忆结构比回答模型更关键
+
+R4DSG 的出发点是：长第一人称问答的失败往往不是“回答模型不够强”，而是记忆里没有**持久物体身份与锚点转移**。它把视频压成相对 4D 场景图，按时间、地点、持久物体索引，再检索成文档交给 Qwen3.5-27B。EgoLifeQA 单被试 255 题上总体 39.6%，比 EgoRAG-Text 高 6.7；when 问题 43.1% vs 30.6（+12.5）；why 子集从 33.3 到 40.0；828 clips 只压成 134 个文档、0.58 MB JSON。
+
+它的证据边界很硬：单被试、离线回溯、非在线更新；错误来自漏事件、轨迹碎片/重复、锚点杂乱与检索失败；不是人类核验的感知基准。它给 Clover 的启发是：**长时记忆的最小单位应是“持久物体 + 地点 + 状态转移”**，而不是 caption 或帧；但“记忆结构好”仍可能被检索失败和单被试偏差掩盖。
+
+### Ledger：记住“没被碰过的东西”，但场景切换会击穿记忆
+
+Ledger 建持久 3D 物体记忆：每个物体有位置、历史与上下文描述；按静止位置聚类，只有重复证据才记一次移动，避免把定位噪声当移动；并且记住从未被触碰的物体。HD-EPIC 2,400 题 42.6%，blind 29.7、ReMEmbR 29.8、DirectMe 30.7；VQ3D 中位 L2 0.99 m（SAM3），51% 预测 <1 m；UCS-Bench 记忆-only 38.5%，帧+记忆 46.3%。
+
+它揭示三个反直觉点：**(1) 相机参考系误差比物体坐标误差更伤回答**——方向问题依赖相机朝向，位姿误差可损失 11 点；**(2) 重复证据比提高距离阈值更能区分“移动”与“定位噪声”**——0.8 m 阈值只有 57.3% 计数正确，0.3 m + 连续三次位移证据升到 67.4%；**(3) 场景切换会同时破坏检索与构建**——回到 blind 水平，按场景重建只能恢复约一半。它还明确：计数/连续静止区间未解决，HD-EPIC 用标定位姿，UCS 多数记忆缺度量尺度，构建离线。对 Clover，这意味着“持久物体记忆”必须带**坐标系、场景边界、写入证据次数**，否则会把噪声写成历史。
+
+### EgoProbe：长程与“精确”是两种能力，模型在两者上都失败
+
+EgoProbe 把流式第一人称记忆拆成两个维度：**长程保留**（能记多久）与**事件特异回忆**（在相似事件干扰下能否记住“哪次是哪次”）。19 个模型中最好的 GPT-5.6-Sol 也只有 55.32% Base / 43.69% 两轮；SimpleStream 两轮仅 6.75%，说明“最近帧窗口”在长程记忆上几乎无效；ultra-long（≥12 h）所有模型只有 28–40%；相关事件≥3 时，事件链接错误率显著上升——模型常选到“另一个相似事件”的正确答案。VST 粗问 95.28%，但两轮只有 33.93%，说明“知道大概”不等于“记得细节”。
+
+它的限制是数据覆盖 EgoLife、无音频、以 MLLM 读出为主。但它给 Clover 的验收提供了一条硬标准：**长时记忆必须同时测“多远”和“多准”，并用相似事件做干扰**；只测“能否回答”会把“选对相似事件”误判为记忆成功。
+
+### EgoMonth、ProactEgoMem、MemLife、MERIT、LongEgoRefer：基准与系统的边界
+
+EgoMonth 把时间尺度拉到 20–120 天、300+ 小时、1,443 道人工题，14 项任务分三层认知，直接测试跨天/跨周一致记忆；ProactEgoMem 则要求系统在用户不提问时主动决定“记什么、何时维护”，分信息捕获、状态跟踪、位置跟踪三类任务；MemLife 用实体锚定的第一人称文本 episode + 时间索引 reader，报告比 training-free 基线高 4.6–12.0%；MERIT 用多键 episodic memory + 推理时时间扩展，优先高召回检索；LongEgoRefer 把长时第一人称指代表达做成基准，目标稀疏出现、活动切换复杂。
+
+这些工作共同把“记忆”从单段视频扩展到天/月尺度，但也暴露共同依赖：**文本化/实体化记忆、MLLM reader、语言查询**。它们能证明“结构化记忆有用”，不能证明“纯视觉持久状态”已经成立；文本 episode 会丢视觉细节，实体锚定会受转写/检测错误影响，语言查询会把语义捷径带入评分。
+
+### VideoLoop 与 PREM：工作记忆要“重写”，不是“追加”
+
+VideoLoop 给出一个结构性诊断：append-only 工作记忆会“语义 thrashing”——上下文越长，关键证据的注意力越塌缩；它用外层推理 + 内层 orchestrator 重写有界工作记忆，并从文件系统按需检索。VideoMME long +5.1、VideoMMMU +4.1、LongVideoBench +5.9（Gemini 3 Flash），Q4 难度 +9.3，token 只增 0.5%。PREM 走另一条路：冻结 VLM，用 256 KiB 多槽关联状态做 query-agnostic 写入，问题条件 readout 以 K/V 调制注入；只训 27.5M 参数，流式 Avg +1.43，LVBench ≥60 min +5.61%；状态 0.063 MiB，ingest 7.81 s，无额外 prompt token。
+
+两者的共同结论是：**长时记忆的关键操作是“压缩/重写/检索”，不是把更多帧塞进上下文**。但两者都是语言模型读出，记忆单位是文本/特征/状态，不是可检验的 3D 物体身份；它们能提升 QA，却不能证明“世界状态被持久保留”。对 Clover，正确的借鉴是记忆管理机制（有界工作记忆、写入门控、查询条件读出），而不是把 QA 分数当成世界理解。
+
+**本节结论：** 长视频/第一人称记忆的证据可以归为三类：**结构化空间记忆**（R4DSG、Ledger）、**长程/精确回忆基准**（EgoProbe、EgoMonth、ProactEgoMem、LongEgoRefer）、**工作记忆管理**（VideoLoop、PREM、MERIT、MemLife）。它们共同证明：记忆结构、写入策略与读出方式比“上下文长度”更重要；也共同暴露三个缺口：**(1) 纯视觉记忆薄**——多数系统依赖文本 episode、MLLM reader 或语言查询；**(2) 精确性未解**——相似事件干扰下事件链接错误率仍高；**(3) 场景/时间边界脆弱**——场景切换、跨月、在线更新都会击穿离线构建的记忆。Clover 若声称“通过视觉理解真实世界”，长时记忆必须至少报告：存了什么（物体/地点/状态转移）、写入证据与来源、读出时的坐标系/场景边界、长程与精确两维指标、以及相似事件干扰下的错误类型；单段视频 QA 分数不能替代这些证据。
+<!-- END long-video-memory -->
+
 
 <!-- BEGIN broad-vision-primary-evidence -->
 <a id="broad-vision-primary-evidence"></a>
@@ -209,6 +315,8 @@ This is the canonical topic document. Update it in place; source-level dates and
 
 ## Contents
 
+- [World-Model Frontier: Generation, Prediction and Usable State](#world-model-frontier)
+- [Long Video and Egocentric Memory](#long-video-memory-2026)
 - [Minimum Sufficient World State](#topic-research-research_sufficient_state)
 - [State Aliasing and Representation Failure](#topic-research-research_state_aliasing)
 - [Adaptive Abstraction, State Granularity and Multi-Timescale Structure](#topic-research-research_adaptive_abstraction)
