@@ -1,0 +1,56 @@
+# registry/benchmarks.yaml
+# B1-B15 = Clover Understanding Battery capability families.
+# U1-U20 = concrete benchmark slots. The family->slot mapping below is a
+# registry-level thematic mapping defined 2026-11-02 (sequence 3.1); it is
+# not claimed to pre-exist in the source documents.
+# Anti-shortcut controls are the battery-wide set from
+# 01-research/evaluation-and-benchmarks.md section 3.
+anti_shortcut_controls: &anti_shortcut
+  - minimal_pairs
+  - background_only_probe
+  - static_frame_probe
+  - temporal_shuffle
+  - crop_scene_id_leakage_audit
+  - near_duplicate_audit
+  - language_only_baseline
+
+families:
+  B1:  {name: "Existence and observability", slots: [U9, U10]}
+  B2:  {name: "Identity and permanence", slots: [U5, U6, U9, U20]}
+  B3:  {name: "Spatial structure", slots: [U8]}
+  B4:  {name: "Temporal structure and dynamics", slots: [U4]}
+  B5:  {name: "Intuitive physics", slots: [U1, U2, U7]}
+  B6:  {name: "Causality and counterfactuals", slots: [U3, U12]}
+  B7:  {name: "Memory and revision", slots: [U5, U6, U11]}
+  B8:  {name: "Generalization", slots: [U14, U17]}
+  B9:  {name: "Active perception", slots: [U13]}
+  B10: {name: "Decision usefulness", slots: [U15, U16, U19]}
+  B11: {name: "Core visual capability vector", slots: [U4], note: "scored per-capability via the broad visual joint acceptance map; no single slot owns it"}
+  B12: {name: "Pure-vision provenance gate", slots: [], note: "protocol overlay applied to every slot: V0-V3 x L0-L4 accounting required"}
+  B13: {name: "Native ultrafast acceptance", slots: [U18], note: "protocol overlay: complete-path latency under multi-capability workload"}
+  B14: {name: "Same-protocol unified-model test", slots: [], note: "one checkpoint / one forward / shared interface; plus representation partition audit (sequence 2.3)"}
+  B15: {name: "Real-camera hidden-state identifiability", slots: [], note: "custom battery; generator planned at src/clover/benchmarks/hidden_state.py (sequence 4.5). Historical texts calling this 'U15 (family)' mean B15; slot U15 is a different object."}
+
+slots:
+  U1:  {instrument: "IntPhys 2", measures: "intuitive physics", dataset: {name: "IntPhys 2", local_path: null, status: NOT_LOCAL}}
+  U2:  {instrument: "MVP / Minimal Video Pairs", measures: "anti-shortcut physical reasoning", dataset: {name: "MVPBench", local_path: null, status: NOT_LOCAL}}
+  U3:  {instrument: "CausalVQA", measures: "causal/counterfactual video reasoning", dataset: {name: "CausalVQA", local_path: null, status: NOT_LOCAL}}
+  U4:  {instrument: "Perception Test", measures: "general visual/video diagnostics", dataset: {name: "Perception Test", local_path: null, status: NOT_LOCAL}}
+  U5:  {instrument: "PersistBench", measures: "persistent world memory / object permanence outside FOV", dataset: {name: "PersistBench", local_path: null, status: NOT_LOCAL}}
+  U6:  {instrument: "S-EMBER", measures: "streaming episodic memory", dataset: {name: "S-EMBER", local_path: null, status: NOT_LOCAL}}
+  U7:  {instrument: "Principia", measures: "relational / calibration-independent physics", dataset: {name: "Principia", local_path: null, status: NOT_LOCAL}}
+  U8:  {instrument: "RoboPhys-3D", measures: "3D/state/action-grounded world-model evaluation", dataset: {name: "RoboPhys-3D", local_path: null, status: NOT_LOCAL}}
+  U9:  {instrument: "custom occlusion/reappearance battery", measures: "object permanence / occlusion", dataset: {name: "custom (EpistemicOcclusionBattery)", local_path: null, status: "GENERATOR_PLANNED src/clover/benchmarks/epistemic_occlusion.py"}}
+  U10: {instrument: "custom unknown vs unobserved", measures: "epistemic correctness", dataset: {name: "custom (EpistemicOcclusionBattery)", local_path: null, status: "GENERATOR_PLANNED src/clover/benchmarks/epistemic_occlusion.py"}}
+  U11: {instrument: "custom world change / belief revision", measures: "stale detection / belief revision", dataset: {name: "custom (EpistemicOcclusionBattery)", local_path: null, status: "GENERATOR_PLANNED src/clover/benchmarks/epistemic_occlusion.py"}}
+  U12: {instrument: "custom intervention twins", measures: "intervention sensitivity", dataset: {name: "custom intervention twins", local_path: null, status: NOT_IMPLEMENTED}}
+  U13: {instrument: "custom active perception", measures: "information-seeking vision", dataset: {name: "custom", local_path: null, status: NOT_IMPLEMENTED}}
+  U14: {instrument: "custom novel object dynamics", measures: "open-world physical transfer", dataset: {name: "custom", local_path: null, status: NOT_IMPLEMENTED}}
+  U15: {instrument: "long-horizon household task", measures: "action usefulness / recovery", dataset: {name: "long-horizon embodied task (suite TBD)", local_path: null, status: NOT_IMPLEMENTED}, note: "slot U15 != family B15 (hidden-state identifiability)"}
+  U16: {instrument: "WorldOracle", measures: "predicted-vs-real action-conditioned futures", dataset: {name: "WorldOracle", local_path: null, status: NOT_LOCAL}}
+  U17: {instrument: "LIBERO-RIG", measures: "hardware/setup robustness", dataset: {name: "LIBERO-RIG", local_path: null, status: NOT_LOCAL}}
+  U18: {instrument: "LADDER", measures: "horizon scaling / compounding execution", dataset: {name: "LADDER", local_path: null, status: NOT_LOCAL}}
+  U19: {instrument: "RoboFQE", measures: "rollout-free offline policy evaluation", dataset: {name: "RoboFQE", local_path: null, status: NOT_LOCAL}}
+  U20: {instrument: "Grid or Nodes? diagnostic", measures: "memory efficiency / inductive bias under partial observability", dataset: {name: "Grid-or-Nodes diagnostic", local_path: null, status: NOT_LOCAL}}
+
+controls_default: *anti_shortcut

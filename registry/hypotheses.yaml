@@ -1,0 +1,127 @@
+# registry/hypotheses.yaml
+# H1-H15 from 04-innovation/README.md (falsifier texts quoted/paraphrased from
+# the source). Numeric kill_thresholds are NOT set in the source documents;
+# per sequence 2.7 they must be locked at preregistration time -- recorded
+# here as UNSET_AT_PREREGISTRATION rather than invented.
+# status for all: OPEN_UNMEASURED (EV0-EV8 measured evidence is zero; see STATUS.md).
+
+hypotheses:
+  - id: H1
+    name: "Evidence Replay / Dual Memory"
+    falsifier: "learned recurrent/contextual state matches or exceeds long-occlusion continuity, belief revision and memory cost without replay"
+    falsifier_metric: "long-occlusion continuity + belief-revision accuracy at equal byte budget"
+    kill_threshold: UNSET_AT_PREREGISTRATION
+    target_experiment_script: "src/clover/innovation/dual_memory_replay.py"
+    status: OPEN_UNMEASURED
+  - id: H2
+    name: "Visual World Compiler"
+    falsifier: "a unified learned world model handles revision, queries and provenance more simply/robustly"
+    falsifier_metric: "revision/query/provenance task suite vs unified learned baseline"
+    kill_threshold: UNSET_AT_PREREGISTRATION
+    target_experiment_script: "src/clover/innovation/sparse_event_ir.py"
+    status: OPEN_UNMEASURED
+  - id: H3
+    name: "Query-Sufficient Representation"
+    falsifier: "representations failing the sufficiency diagnostics nevertheless generalize and act better in full embodied evaluation"
+    falsifier_metric: "ReversibilityProbe recovery of undeclared query features"
+    kill_threshold: UNSET_AT_PREREGISTRATION
+    target_experiment_script: "src/clover/probes/diagnostics.py"
+    status: OPEN_UNMEASURED
+  - id: H4
+    name: "Query-Conditioned Temporal Persistence"
+    falsifier: "adaptive persistence gives no capability/memory advantage at matched compute"
+    falsifier_metric: "capability per byte across timescales at matched compute"
+    kill_threshold: UNSET_AT_PREREGISTRATION
+    target_experiment_script: "src/clover/innovation/dual_memory_replay.py"
+    status: OPEN_UNMEASURED
+  - id: H5
+    name: "Separate Epistemic State from Verification State"
+    falsifier: "simpler unified probabilistic state provides equal correctness, revision, refusal and planning without semantic confusion"
+    falsifier_metric: "correctness/revision/refusal/planning parity vs unified probabilistic state"
+    kill_threshold: UNSET_AT_PREREGISTRATION
+    target_experiment_script: "src/clover/innovation/dual_memory_replay.py"
+    status: OPEN_UNMEASURED
+  - id: H6
+    name: "Proof-Carrying / Auditable Assertions"
+    falsifier: "explicit provenance adds latency/complexity without improving recovery, safety, debugging or long-horizon correctness"
+    falsifier_metric: "recovery/debugging/long-horizon correctness delta vs provenance cost"
+    kill_threshold: UNSET_AT_PREREGISTRATION
+    target_experiment_script: "src/clover/core/protocol.py"
+    status: OPEN_UNMEASURED
+  - id: H7
+    name: "Counter-Witness-First Causality"
+    falsifier: "no intervention-prediction gain over ordinary learned dynamics"
+    falsifier_metric: "intervention prediction accuracy vs learned-dynamics baseline"
+    kill_threshold: UNSET_AT_PREREGISTRATION
+    target_experiment_script: "src/clover/innovation/counter_witness_causality.py"
+    status: OPEN_UNMEASURED
+  - id: H8
+    name: "Epistemic Compute Scheduling"
+    falsifier: "negligible end-to-end savings or unstable semantics"
+    falsifier_metric: "end-to-end latency/energy at equal accuracy under the anytime contract"
+    kill_threshold: UNSET_AT_PREREGISTRATION
+    target_experiment_script: "src/clover/innovation/anytime_compute_scheduler.py"
+    status: OPEN_UNMEASURED
+  - id: H9
+    name: "Sparse Visual Event IR"
+    falsifier: "loses world/query information or worsens total latency"
+    falsifier_metric: "query information retention + total latency vs dense baseline"
+    kill_threshold: UNSET_AT_PREREGISTRATION
+    target_experiment_script: "src/clover/innovation/sparse_event_ir.py"
+    status: OPEN_UNMEASURED
+  - id: H10
+    name: "Geometry as Proposal / Heuristic"
+    falsifier: "no planning/generalization benefit at matched correctness"
+    falsifier_metric: "planning cost / generalization at matched correctness"
+    kill_threshold: UNSET_AT_PREREGISTRATION
+    target_experiment_script: null
+    status: OPEN_UNMEASURED
+  - id: H11
+    name: "Static / Dynamic Verification Compilation"
+    falsifier: "verification is not core or precompilation gives no meaningful benefit"
+    falsifier_metric: "verification latency/benefit of precompiled invariants"
+    kill_threshold: UNSET_AT_PREREGISTRATION
+    target_experiment_script: null
+    status: OPEN_UNMEASURED
+  - id: H12
+    name: "State-Transition Affordance"
+    falsifier: "direct learned policy transfers better to novel objects/tasks at equal data/compute with no explicit transformation benefit"
+    falsifier_metric: "novel object/task transfer at equal data/compute"
+    kill_threshold: UNSET_AT_PREREGISTRATION
+    target_experiment_script: "src/clover/innovation/transition_affordance.py"
+    status: OPEN_UNMEASURED
+  - id: H13
+    name: "Type as Transformation Equivalence"
+    falsifier: "semantic categories or distributed features transfer better to unseen objects/actions"
+    falsifier_metric: "unseen object/action transfer vs category/feature baselines"
+    kill_threshold: UNSET_AT_PREREGISTRATION
+    target_experiment_script: "src/clover/innovation/transition_affordance.py"
+    status: OPEN_UNMEASURED
+  - id: H14
+    name: "Active Perception as Unknown->Action Bridge"
+    falsifier: "passive context/memory reaches equal reliability/task success"
+    falsifier_metric: "reliability/task success at equal cost vs passive baseline"
+    kill_threshold: UNSET_AT_PREREGISTRATION
+    target_experiment_script: "src/clover/innovation/transition_affordance.py"
+    status: OPEN_UNMEASURED
+  - id: H15
+    name: "Worldview Value Must Be Proven Through Action"
+    falsifier: "matched strong policy without the explicit worldview equals it on unseen-scene transfer, sample efficiency, planning/search, world-change recovery, unjustified-action rate, long-horizon success, diagnosis/revision"
+    falsifier_metric: "the seven action-value axes above, matched policy +/- worldview"
+    kill_threshold: UNSET_AT_PREREGISTRATION
+    target_experiment_script: "experiments/exp5_h15_r7_boundary.py"
+    status: OPEN_UNMEASURED
+
+legacy_hypotheses:
+  - name: "Explicit vs Distributed Latent World State"
+    status: SUPERSEDED_BY H3/H15 framing (kept as the explicit-vs-latent comparison design)
+  - name: "Field Crystallization"
+    status: LEGACY_CANDIDATE (pre-reset; no falsifier run)
+  - name: "Epistemic Licences"
+    status: LEGACY_CANDIDATE (absorbed into H5/H6 semantics; licence mechanism itself unvalidated)
+  - name: "Machine-Native World Primitives"
+    status: LEGACY_CANDIDATE
+  - name: "Spacetime World Representation"
+    status: RESEARCH_PROTOTYPE (per source document)
+  - name: "World Growth"
+    status: OPEN_LEGACY (per source document)

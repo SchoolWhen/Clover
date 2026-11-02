@@ -178,3 +178,18 @@ These remain research targets.
 - `02-analysis/` through `07-reflection/`: stage-owned templates/current records. Existing candidate ideas live in Stage 4 without being adopted; directory creation is not stage completion.
 - Update the existing stage/direction file in place. Keep earlier states in Git rather than dated progress files, old-path shells or an archive tree.
 - This layout supersedes the previous all-root topic layout. No research claim, source-reading depth, experiment result or active-stage decision changes through the move.
+
+## 审计统计（scripts/audit_repo.py 自动生成，勿手改）
+
+<!-- AUDIT-STATS:BEGIN -->
+```json
+{
+ "papers_total": 719,
+ "full_text_audited": 4,
+ "selected_sections": 157,
+ "abstract_and_biblio": 187,
+ "hypothesis_target_scripts_existing": "0/9",
+ "status_ev_mentions": 6
+}
+```
+<!-- AUDIT-STATS:END -->

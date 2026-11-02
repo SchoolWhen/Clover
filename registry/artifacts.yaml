@@ -1,0 +1,143 @@
+# registry/artifacts.yaml
+# 12 official open model families registered in this repository.
+# Source of record: STATUS.md visual-artifact comparability ledger (2026-10-26)
+# and 01-research/foundation-models-and-systems.md current artifact audit (2026-10-25).
+# Fields not given by official cards/configs/docs are 'unknown' -- never inferred.
+# local_measured: no artifact has been loaded or measured by Clover yet (all null/false).
+
+families:
+  - id: YOLO26
+    kind: model_family
+    group: detection (directly comparable within group)
+    weights_source: "https://docs.ultralytics.com/models/yolo26/"
+    huggingface_id: null
+    representative_checkpoints: [yolo26n.pt, yolo26s.pt, yolo26m.pt, yolo26l.pt, yolo26x.pt]
+    code_revision_verified: "ultralytics@aa1f778a75a610f7dd2aa4762df1c25f6a3063d7"
+    license: "AGPL-3.0 or Enterprise"
+    params: "2.4/9.5/20.4/24.8/55.7M (n/s/m/l/x)"
+    default_input_resolution: 640
+    vendor_claimed_latency: "T4/TensorRT10 batch=1 NMS-free model-side 1.7/2.5/4.7/6.2/11.8 ms (n..x)"
+    local_measured: null
+  - id: SAM3_SAM3D
+    kind: model_family
+    group: promptable segmentation / 3D (mechanism reference only)
+    weights_source: "https://huggingface.co/facebook/sam3"
+    huggingface_id: "facebook/sam3 ; facebook/sam-3d-objects"
+    representative_checkpoints: ["sam3@3c879f39826c281e95690f02c7821c4de09afae7", "sam-3d-objects@2e73555018d2741ccd486e56c24fac41155a1dc6"]
+    license: "SAM License (custom, not Apache)"
+    params: "SAM 3 ~850M (paper) / 859.9M (safetensors count); SAM 3D unknown (gated)"
+    default_input_resolution: "image/video; paper image 1008, text context 32"
+    vendor_claimed_latency: "paper: ~30 FPS multi-object on multiple H200 (not edge E2E)"
+    local_measured: null
+  - id: DA3
+    kind: model_family
+    group: monocular geometry / 3D reconstruction (mechanism reference)
+    weights_source: "https://huggingface.co/depth-anything/DA3-GIANT"
+    huggingface_id: "depth-anything/DA3-GIANT ; depth-anything/DA3-SMALL (resource-friendly candidate)"
+    representative_checkpoints: ["DA3-GIANT@7cd62ae9315b9dff094d2d300e4ad012640607dd", "DA3-SMALL"]
+    license: "CC BY-NC 4.0 (GIANT; non-commercial)"
+    params: "GIANT card 1.15B (safetensors count differs, unexplained); SMALL 34.3M (official page)"
+    default_input_resolution: "official API/CLI default process_res=504; single/multi-view"
+    vendor_claimed_latency: unknown
+    local_measured: null
+  - id: RF-DETR
+    kind: model_family
+    group: detection (directly comparable within group)
+    weights_source: "https://github.com/roboflow/rf-detr"
+    huggingface_id: null
+    representative_checkpoints: [RF-DETR-Nano, RF-DETR-Small, RF-DETR-Medium, RF-DETR-Large]
+    code_revision_verified: "roboflow/rf-detr@5b22dfc0940697ce1abdfa681a5f7392b3eddbfb"
+    license: "Apache-2.0 (open base) / PML 1.0 (Plus)"
+    params: "30.5/32.1/33.7/33.9M (N/S/M/L)"
+    default_input_resolution: "384/512/576/704 (N/S/M/L)"
+    vendor_claimed_latency: "T4 TensorRT FP16 batch=1 2.3/3.5/4.4/6.8 ms (N/S/M/L)"
+    local_measured: null
+  - id: PaddleOCR-VL
+    kind: model_family
+    group: document parsing (directly comparable within group)
+    weights_source: "https://huggingface.co/PaddlePaddle/PaddleOCR-VL-1.6"
+    huggingface_id: "PaddlePaddle/PaddleOCR-VL-1.6"
+    representative_checkpoints: ["PaddleOCR-VL-1.6@c5630abae1d940eafe0697512a0325494b02ab42"]
+    license: "Apache-2.0"
+    params: "~0.9B / 958.6M"
+    default_input_resolution: "vision image 384, patch 14; max_position_embeddings=131072; BF16"
+    vendor_claimed_latency: unknown
+    local_measured: null
+  - id: dots.ocr
+    kind: model_family
+    group: document parsing (directly comparable within group, conditional)
+    weights_source: "https://huggingface.co/dots-studio/dots.ocr"
+    huggingface_id: "dots-studio/dots.ocr"
+    representative_checkpoints: ["dots.ocr@c0111ce6bc07803dbc267932ffef0ae3a51dc951"]
+    license: "MIT"
+    params: "3.039B"
+    default_input_resolution: "max_position 131072; patch 14; BF16"
+    vendor_claimed_latency: unknown
+    local_measured: null
+  - id: MinerU2.5
+    kind: model_family
+    group: document parsing (directly comparable within group)
+    weights_source: "https://huggingface.co/opendatalab/MinerU2.5-Pro-2605-1.2B"
+    huggingface_id: "opendatalab/MinerU2.5-Pro-2605-1.2B"
+    representative_checkpoints: ["MinerU2.5-Pro-2605-1.2B@08aaea840498d49ce16247b6263196cf02814885"]
+    license: "Apache-2.0"
+    params: "1.156B (nominal 1.2B)"
+    default_input_resolution: "max_position 32768 (text side 8192); patch 14; BF16"
+    vendor_claimed_latency: unknown
+    local_measured: null
+  - id: olmOCR2
+    kind: model_family
+    group: document parsing (directly comparable within group, conditional)
+    weights_source: "https://huggingface.co/allenai/olmOCR-2-7B-1025-FP8"
+    huggingface_id: "allenai/olmOCR-2-7B-1025-FP8"
+    representative_checkpoints: ["olmOCR-2-7B-1025-FP8@40bd7202494b8264ee17ada08b401b5aab7a9ce1"]
+    license: "Apache-2.0"
+    params: "nominal 7B; HF FP8 tensor count ~8.292B"
+    default_input_resolution: "max_position 128000; official longest page edge 1288 px; FP8 checkpoint"
+    vendor_claimed_latency: unknown
+    local_measured: null
+  - id: DINOv3_PE
+    kind: model_family
+    group: representation (mechanism reference; frozen-backbone probe control only)
+    weights_source: "https://github.com/facebookresearch/dinov3 ; https://github.com/facebookresearch/perception_models"
+    huggingface_id: null
+    representative_checkpoints: ["DINOv3 ViT-S/16 .. ViT-7B/16, ConvNeXt variants", "PE-Core T/S/B/L/G"]
+    license: unknown
+    params: "DINOv3 21M..6.716B; PE varies by core"
+    default_input_resolution: "PE official examples 224/336/384/448"
+    vendor_claimed_latency: unknown
+    local_measured: null
+  - id: Trackers
+    kind: model_family_group
+    group: point/object tracking (insufficient evidence as one lane; split VOS/MOT/point-tracking sub-protocols before use)
+    members: [CoTracker3, TAPNext, SAMURAI]
+    weights_source: "per-member official repos; SAMURAI: https://github.com/yangchris11/samurai"
+    huggingface_id: null
+    license: unknown
+    params: unknown
+    default_input_resolution: unknown
+    vendor_claimed_latency: unknown
+    local_measured: null
+    note: "Registry follows the task-defined grouping (CoTracker3/TAPNext/SAMURAI). STATUS ledger's tracker category additionally lists MOTIP/OmniTrack/Cutie; revisions/preprocessing/ID semantics not yet unified."
+  - id: ViTPose_Sapiens_MoGe2
+    kind: model_family_group
+    group: human perception / monocular geometry (insufficient evidence as one lane; split sub-ledgers)
+    members: [ViTPose, Sapiens, MoGe-2]
+    weights_source: "https://github.com/ViTAE-Transformer/ViTPose ; https://github.com/facebookresearch/sapiens ; https://github.com/microsoft/MoGe"
+    huggingface_id: null
+    license: unknown
+    params: "Sapiens 0.3B/0.6B/1B/2B; ViTPose/MoGe-2 per-checkpoint unknown in repo records"
+    default_input_resolution: "ViTPose commonly 256x192 (G up to 576x432)"
+    vendor_claimed_latency: unknown
+    local_measured: null
+  - id: OmniDocBench
+    kind: benchmark_not_a_model
+    group: document parsing protocol anchor
+    weights_source: "https://github.com/opendatalab/OmniDocBench"
+    huggingface_id: null
+    license: unknown
+    params: "N/A (benchmark)"
+    default_input_resolution: "real documents, multi-type, multi-language; E2E/layout/table/formula/OCR tracks"
+    vendor_claimed_latency: "N/A"
+    local_measured: null
+    note: "Version discipline: many public results report v1.6_full; repo has since moved to v1.7 -- versions must not be mixed."
