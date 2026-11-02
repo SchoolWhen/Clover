@@ -1360,3 +1360,45 @@ one benchmark → “understanding solved”
 - **OmniDocBench（arXiv:2412.07626）** → 本文档 B11（核心视觉能力向量）中 OCR/文档解析槽位的协议锚点（此前正文提及但无 arXiv 锚点）。条件：仅作协议锚点，不作被测模型；文档解析组的组内比较（PaddleOCR-VL / dots.ocr / MinerU2.5 / olmOCR）以其协议为准，版本须冻结。
 - **RBench / RoVid-X（arXiv:2601.15282）** → 机器人视频评测锚点。条件：来源索引仅记录其为机器人视频基准条目，分项构成与协议细节待核；引用时只作「候选评测仪器」登记，不预设其能测世界状态充分性。
 - **RobotWorld（arXiv:2610.10409）** → 系统级物理智能体能力评测锚点。条件：按来源索引记录，用于研究任务组合、保留的任务/世界状态、恢复与完成验证；ERQA 类精度不得解读为持久世界理解，语言/世界知识先验是主要混淆项（与来源索引对同组条目的限定一致）。
+
+## 判别实验统计学方法论与证伪判定准则（Statistical Methodology & Falsification Protocol，2026-11-02，序列二.7）
+
+适用于全部 T1–T6 判别实验与 H1–H15 证伪测试。本节是强制规范：不满足的实验结果只能记为探索性观察（exploratory），不得进入证伪/证实账。
+
+### 1. 统计功效与样本量
+
+- 每个实验在运行前由目标效应量反推样本量：要求最小统计功效 `1 − β ≥ 0.80`（双侧 `α = 0.05`，多重校正后口径见 §3）；样本量 `n`、目标效应量与其依据（先行数据或最小有意义效应）写进预注册，禁止跑完再补功效分析；
+- 效应量必须以标准化形式报告：连续指标用 Cohen's `d` 或配对差值，比例指标报告差值与配对 Bootstrap 95% 置信区间（至少 10,000 次重采样）；只报 p 值或只报均值差不合格；
+- 机器人/视频实验的独立样本单位是 episode/场景/物体实例，不是帧；按帧计 n 视为伪重复，结果降级。
+
+### 2. 证伪判定（二元 Kill 的统计形态）
+
+- 每个假设的 Kill 条件预注册为数值阈值 + 方向（见 `registry/hypotheses.yaml` 的 `kill_threshold`)；判定只用主指标与其置信区间：CI 整体越过 Kill 线才记 Kill，CI 跨线记为「未决（underpowered）」并注明所需追加样本量，不得以点估计裁决；
+- 「无差异」结论必须用等价检验（如 TOST）或报告 CI 宽度证明已排除有意义效应，禁止把不显著当作等价。
+
+### 3. 多重比较校正
+
+- 同一实验内跨 20 类能力、多基准、多假设的并行检验必须校正：证伪型判定用 **Holm-Bonferroni**（控制 FWER）；探索型扫描用 **Benjamini-Hochberg FDR**（`q ≤ 0.05`）并与未校正结果并列报告，标注哪些结论依赖哪种口径；
+- 未校正的多重比较结果不得用于 Kill/保留任何假设。
+
+### 4. 实验预注册配置模板（Preregistration Schema）
+
+运行代码前锁定以下字段并存入 `registry/` 与实验目录（模板由 `scripts/audit_repo.py` 校验字段完整性）：
+
+```yaml
+experiment_id: T?- / H?-<slug>
+hypothesis: <一句话，可证伪形式>
+predicted_direction: <主指标预期方向与最小有意义效应量>
+primary_metric: <唯一主指标 + 计算口径>
+controls: {equal_byte: <上限或 n/a>, equal_latency_ms: <上限或 n/a>, equal_joule_per_frame: <上限或 n/a>}
+sample_size: {n: <由功效分析得出>, unit: episode|scene|object-instance, power: 0.80, alpha: 0.05}
+multiple_comparison: holm-bonferroni | benjamini-hochberg
+kill_threshold: <数值 + 方向>
+pass_threshold: <数值 + 方向>
+seeds: [<固定种子列表>]
+stopping_rule: <固定 n | 序贯检验方法（须注明）>
+exclusions: <预先声明的剔除规则>
+```
+
+预注册后修改主指标、阈值或剔除规则的，该实验整体降级为探索性，并在报告中显式披露修改记录——事后改指标（p-hacking）在本仓库的口径下不是违规待查，而是自动降级。
+

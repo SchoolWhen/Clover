@@ -92,6 +92,24 @@ Text visible inside an image is visual observation. Transcription labels, langua
 
 <a id="topic-principles"></a>
 
+## 评测探针容量上界与 `V0/L0` 归因协议（Probe Capacity Bound & Attribution Protocol）
+
+**归因死锁**：`V0/L0`（纯视觉部署 + 无标签自监督学习）训出的表征，其能力主张通常靠下游带标签探针（`L1–L4`）测得。若探针本身容量不受限，探针完全可以在微调中把任务「学出来」，分数便无法归因于预训练表征——「能力源于 `V0/L0`」与「能力源于探针监督」在实验上不可分辨。本节即为打破这一死锁的硬规则。
+
+**评测 `V0/L0` 表征时，只允许以下两类 Readout：**
+
+1. **零样本最近邻（Zero-shot k-NN）**：余弦或欧氏距离，`k` 与距离度量预注册冻结；不训练任何参数（类原型若由支持集均值构成，须报告支持集规模与来源，其标签计入探针监督记账）。
+2. **受限容量冻结主干线性探针（Frozen-Backbone Linear Probe）**：主干全程冻结、只训练单个线性层；最大有效自由度 ≤ `min(特征维度 × 类别数, 预注册 DOF 上限）`；训练步数、学习率与早停规则预注册封顶；禁止隐藏层、禁止提示微调、禁止主干任何参数更新（含 BN 统计量更新）。
+
+**禁止项**：用多层非线性解码器（MLP / Transformer decoder）对冻结或未冻结表征微调后，宣称能力源于 `V0/L0` 预训练。超出上述容量的 readout 不是不许用，而是一旦使用，该结果的归因等级自动降级为「探针习得（probe-learned）」，必须写作 `V0/L0 表征 + Lx 探针监督` 并单列报告，不得进入纯视觉能力账。
+
+**配套强制项**：
+
+- 每个探针结果同时报告探针容量（参数量 / 有效自由度 / 训练步数 / 支持集规模），分数与容量成对出现；
+- 阴性对照：同一探针协议作用于随机初始化主干（或随机投影特征），两者之差才是可归因于预训练的增益；
+- 容量扫描：至少报告两个容量点（如 k-NN 与线性探针），若分数随容量陡升，优先解释为探针学习而非表征充分性；
+- 本协议是 `01-research/learning-and-data.md` 中探针库（`FrozenLinearProbe` / `ZeroShotKNNProbe`）与序列四代码实现的规范来源，两处口径不一致时以本节为准。
+
 ## Research principles
 
 1. **Protect the question, not an old answer.** CPU-first, field crystallization, visual charge, CSP/SEP, licence envelopes, LCPS/GCPS, Visual World Compiler, Evidence Replay, explicit/latent/object-centric state, geometry, fields, Transformers and vendor backbones are candidate answers or resources.

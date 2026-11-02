@@ -3494,6 +3494,8 @@ Evidence: `PRIMARY_PAPER`
 
 The paper explicitly formulates single-image mass estimation as an ill-posed problem. Its solution combines learned monocular geometry with material semantics to constrain volume and density.
 
+> **量纲审计批注（2026-11-02，序列二.2）**：本方法的「物理引导」实质是 `L1/L2` 材质语义查表先验（类别/材质 → 密度表）+ 学习式几何先验。按本文末节的量纲不可识别定理，单目 RGB 不含质量量纲 `[M]`，其质量估计的可识别部分只有体积（在尺度规范未定时还差一个全局标度），绝对质量来自查表先验而非视觉证据。引用其精度时必须写作 `V0 + L1/L2 先验`。
+
 Stage-1 distinction:
 
 ```text
@@ -3516,6 +3518,8 @@ Primary paper: https://arxiv.org/abs/2603.16958
 Evidence: `PRIMARY_PAPER`
 
 VisPhysQuant provides multi-view RGB-D observations with measured object masses. It is useful for physical-quantity reasoning, but RGB-D is not a strict `V0/V1` observation protocol.
+
+> **量纲审计批注（2026-11-02，序列二.2）**：多视角 RGB-D + 实测质量是考官侧真值与深度锚点，不在 `V0/V1` 协议内；其质量数字依赖深度给出的度量尺度（消除了单目尺度规范自由度）与材质先验，属 `L1/L2 + V-深度` 条件下的结果，不得外推为纯视觉质量可识别。
 
 #### 2.3 Inertial parameters are a long-standing interaction problem
 
@@ -3558,6 +3562,8 @@ Primary paper: https://arxiv.org/abs/2604.24188
 Evidence: `PRIMARY_PAPER`
 
 The method models friction through interactions between material pairs and measured proxy-material contacts instead of treating friction as a simple single-object image attribute.
+
+> **量纲审计批注（2026-11-02，序列二.2）**：摩擦系数本身无量纲，但其视觉估计依赖材质对语义查表与代理接触实测（`L1/L2 + 特权交互`）；纯外观与摩擦之间不存在量纲层面的确定映射（同外观异表面处理即反例，见 B15 的 decorrelation 协议）。引用时写作「材质先验 + 代理交互标定」，不得记为视觉直接测量。
 
 #### 3.3 Behavior-grounded friction/contact in a world model
 
@@ -4949,3 +4955,32 @@ Robots may need metric geometry, topological place structure, object-relative re
 - **PlasticineLab（arXiv:2104.03311）** → 本文档形变/软体章节的对照锚点。条件：状态是特权粒子 landmark（`L4`），可微 MLS-MPM 仿真内做梯度规划，不含感知评测；它界定的是「有特权状态时形变规划能走多远」，不能证明 RGB 下形变状态可识别（与轴 E 的 RGB-alone 负结果并读）。
 - **DROID-SLAM（arXiv:2108.10869）** → 本文档几何/SLAM 章节的基线锚点。条件：学习式对应 + 可微 DBA，训练为合成 TartanAir + 真值位姿/深度监督（`L4`)；输出只有位姿与稠密深度，无物体/物理状态。作为几何基线引用时必须带此限定，不得用作纯视觉学习证据。
 - **TAO-Amodal（arXiv:2312.12433）** → 本文档遮挡/追踪章节的诊断锚点。条件：amodal/occlusion 诊断用途；引用时保持来源索引的区分纪律：visible tracking ≠ amodal completion ≠ re-identification ≠ object permanence，四者不得互相顶替报分。
+
+## 物理与经典视觉基石补齐（2026-11-02，序列二.2）
+
+### A. 纯视觉的量纲不可识别定理与规范自由度（Buckingham Π & Gauge Freedom）
+
+**量纲清单**。图像形成过程（针孔/薄透镜成像 + 表面反射）中，像素值由场景几何（长度 `[L]`）、时间采样（`[T]`）、材料光学属性（反射率/光谱，无量纲或辐射量纲）与光源决定；**质量 `[M]` 不进入成像方程**。运动学轨迹 `x(t)` 至多给出加速度 `a = d²x/dt²`（量纲 `[L][T]⁻²`），动力学量则全部含 `[M]`：力 `F = ma` 为 `[M][L][T]⁻²`，刚度 `k`（`F = kx`）为 `[M][T]⁻²`，动量、能量、接触冲量同理。
+
+**标度规范自由度**。对任意 `α > 0`，变换 `(m, F, k) → (αm, αF, αk)` 保持全部运动学轨迹逐点不变（`αF = (αm)a`）。因此任何只观测轨迹（及其图像）的系统，对 `(m, F, k)` 至多识别到这个一参数等价类，**绝对质量、绝对接触力、绝对刚度在无锚点时数学上不可识别**——这不是数据量或模型容量问题，是 Buckingham Π 定理层面的结论：可观测量只能组成无量纲 Π 群，而含 `[M]` 的量无法由不含 `[M]` 的观测量纲唯一确定。单目视觉另有独立的尺度规范：场景整体放大 `β` 倍并同步调整相机外参，图像不变，故连长度的绝对尺度也需锚点。
+
+**什么构成合法锚点（即承认引入了先验）**：① 已知质量/已知尺寸的参照物出现在同一动力学链中；② 已知重力 `g` 下的抛体/自由落体先验（`g` 给出 `[L][T]⁻²` 的绝对标定，但仍须度量尺度锚点配合）；③ 非弹性碰撞中动量守恒 + 至少一方的已知质量；④ 材质语义查表（类别 → 密度/摩擦表）——这是 `L1/L2` 先验，不是视觉证据。凡使用 ①–④ 任一者，记账必须显式标注，结论写作「在 X 锚点下可识别」。
+
+**对库内工作的审计结论**：`2601.20303`（单图质量估计）、`2603.16958`（PhysQuantAgent/VisPhysQuant）、`2604.24188`（摩擦估计）的可识别部分均来自材质语义查表先验、深度/多视角锚点或代理接触实测（批注已分别加在各条目下）。它们的正确读法是「先验 + 视觉的工程估计」，不是对本定理的反例；B15 协议中「同外观异密度/异表面」的 decorrelation 对照正是为此而设。机器人自身动作（受控推动、抬举）之所以是本仓库反复出现的唯一候选辅助结构，正因为它能把锚点带进观测链——但那已是 `V3/L4` 协议，必须如实记账。
+
+### B. 采样前光学与光子信息极限（Pre-Sampling Optical & Photon Limits）
+
+以下损失发生在传感器采样的一刻，任何后续算法不可恢复，构成轴 D（恶劣条件与成像物理）的信息论前端：
+
+- **散粒噪声与 Cramér–Rao 下界**：光子计数服从 Poisson 分布，信噪比 `SNR ≈ √N`（`N` 为像素光子数）。任何无偏估计量方差满足 `Var(θ̂) ≥ 1/I(θ)`，Fisher 信息 `I(θ) ∝ N`；低照度下位置、深度、材质参数的可估计精度有硬下界，`<0.1 lux` 级场景（见 SID 条目）的失败首先是光子账，不是模型账。
+- **卷帘快门时空混叠**：逐行曝光使第 `y` 行的采样时刻偏移 `t(y) = y · t_row`，运动物体产生与速度成正比的几何倾斜 `Δx ≈ v · T_readout · (y/H)`；同一帧内不同行不属于同一时刻，「帧 = 同步快照」的假设在高速运动下系统性失效，事件级状态更新必须带行级时间戳或显式建模此混叠。
+- **衍射极限（Airy Disk）**：点扩散斑半径 `r ≈ 1.22 λ f / D`，角分辨率 `θ ≈ 1.22 λ / D`；远距小物体与小字 OCR 的笔画宽度低于此限时，高频信息在光学上就不存在，超分只能补先验、不能补证据——评测 OCR/小物体时必须报告其物理尺寸是否越过该截断。
+- **HDR 截断的零梯度区**：过曝饱和像素对场景辐射的导数为零，欠曝低于读出噪声同理；被截断区域的信息是**不可逆销毁**而非「待去噪」。世界状态在此类区域的合法标签是 `UNOBSERVED`，任何补全都必须记为生成补全（`ASSUMED/INFERRED`），不得升级为观测。
+
+### C. 经典计算视觉理论地基
+
+- **Marr 视觉三级框架**：计算理论（算什么、为什么）、表征与算法（用什么表征、怎样算）、硬件实现（物理载体）三层不可互相顶替；其 primal sketch → 2.5D sketch → 3D model 的表征链是「中间表征必须显式」的原始论证。本仓库的证据分级与「表示先于分数」纪律与此同源：只报末端分数、不交代表征层发生了什么，在 Marr 框架下是不完整的科学陈述。
+- **Koenderink 表面局部微分几何与视觉规范坐标（Gauge Coordinates）**：局部表面结构（深度梯度、曲率）只能在规范自由度下被确定——观察者选定一个规范（如以图像平面为参考）后量才有定义，换规范则量协变变换。这与本节 A 的规范自由度是同一数学结构在几何侧的版本：**「测得的量」永远相对于一个被选定的规范**，报告几何量必须同时报告规范。
+- **Ullman 视觉例程（Visual Routines）**：视觉不是一团前馈映射，而是由基本算子（shift of processing focus、indexing、bounded activation、marking、boundary tracing 等）按任务组装成的**例程/程序**在基底表征上执行。这是 `H2`（视觉世界编译器）的直接理论源头：把「理解」实现为可组装、可检查、可复用的算子程序，而非单一前向网络——程序合成路线在本仓库不是时尚选择，是 Ullman 以来的经典立场。
+- **Olshausen & Field 自然图像稀疏编码（1996）**：以过完备基对自然图像做稀疏编码，学得的基函数与 V1 简单细胞感受野定性一致，证明「稀疏」是自然图像统计的结构性质而非工程偏好。这是 `L0` 视觉自监督（以稀疏/预测残差为目标）的数学基石，也是 `H9`（稀疏视觉事件 IR）的依据：事件应该是稀疏码的翻转，而不是原始像素洪流——表示先稀疏，后面的记忆、路由与许可证才有可操作的对象。
+
