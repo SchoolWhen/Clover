@@ -188,7 +188,7 @@ These remain research targets.
  "full_text_audited": 4,
  "selected_sections": 157,
  "abstract_and_biblio": 187,
- "hypothesis_target_scripts_existing": "0/9",
+ "hypothesis_target_scripts_existing": "7/9",
  "status_ev_mentions": 6
 }
 ```

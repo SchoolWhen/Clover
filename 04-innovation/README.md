@@ -523,3 +523,58 @@ visual evidence
 5. **Provenance is not confidence** — evidence lineage and uncertainty have different semantics.
 
 The exact licence mechanism and the authority design both remain hypotheses. A later proposal must name the failure addressed, compare competing state/interface designs and specify a falsifier; provenance and uncertainty alone do not establish one required module topology.
+
+
+---
+
+## 假设审计与可执行实验规约（2026-11-02 序列五.3 填充）
+
+### 1. 全量审计与合并裁决（H1–H15 + 6 个旧假设）
+
+审计口径：陈述是否可证伪、falsifier 是否已记录（registry/hypotheses.yaml)、与其它假设是否重叠、最小实验是否已规约。历史条目不删除（AGENTS §15 出处与反驳史保留），合并只发生在**实验层**。
+
+| 条目 | 可证伪性 | 与其它条目重叠 | 裁决 |
+|---|---|---|---|
+| H1 Evidence Replay / Dual Memory | 有 falsifier | 与 H5（验证态分离）共享写回通道；与旧「World Growth」重叠 | 保留；与 H5 共用实验 3（分开记账：H1 记召回，H5 记污染） |
+| H2 Visual World Compiler | 有 falsifier | 与 H9（事件 IR 是其输入层）、旧「Machine-Native Primitives」重叠 | 保留；编译层实验待 IR 稳定后置，本轮只测 H9 输入层 |
+| H3 Query-Sufficient Representation | 有 falsifier | 与旧「Explicit vs Latent」的 latent 侧部分重叠 | 保留；探针实现已落地（ReversibilityProbe)，本轮 EV0 诊断见实验 2 附带读数 |
+| H4 Query-Conditioned Temporal Persistence | 有 falsifier | 与 H1 共享记忆底座；与旧「Spacetime」的时间侧重叠 | 保留；与 H1 共用实验 3 的长遮挡臂 |
+| H5 Separate Epistemic/Verification State | 有 falsifier | 与 H1、旧「World Growth」重叠 | 保留；实验 3 的污染率臂即其判决 |
+| H6 Proof-Carrying Assertions | 有 falsifier | 旧「Epistemic Licences」是其治理形态 | **实验层合并**：Licences 不再单独设实验，其许可语义由 H6 的 depends_on 审计链 + 非对称门控实现（DualMemoryReplay 已含）；假设条目保留待独立证据 |
+| H7 Counter-Witness-First Causality | 有 falsifier | 与 H14（取证行动选择其见证集）衔接 | 保留；本轮 EV0 单元级验证（定位精度，合成图）见 06-evaluation 附带读数 |
+| H8 Epistemic Compute Scheduling | 有 falsifier | 与二.6 硬实时契约是同一主张的规约/假设两侧 | 保留；实验 4 判决 |
+| H9 Sparse Visual Event IR | 有 falsifier | 旧「Field Crystallization」的事件侧直觉在此操作化；与 H2 输入层重叠 | 保留；实验 4 的事件臂 + 稀疏率读数判决 |
+| H10 Geometry as Proposal | 有 falsifier | 与 R2 的关系是「降格使用」而非竞争 | 保留；本轮 PLANNED（需几何工件本地可跑，Tier-0 候选 DA3-SMALL 待权重） |
+| H11 Static/Dynamic Verification Compilation | 有 falsifier | 与 H6 的审计链衔接（编译期验证 vs 运行期证明） | 保留；本轮 PLANNED |
+| H12 State-Transition Affordance | 有 falsifier | 与 H13（类型=变换等价）相邻：H13 给 H12 的兼容性提供类型判据 | 保留；本轮 EV0 单元读数（compatibility/delta_w 合成例）见 06-evaluation |
+| H13 Type as Transformation Equivalence | 有 falsifier | 与 H12 相邻（见上） | 保留；本轮 PLANNED（与 H12 接触实验合并设计） |
+| H14 Active Perception as Unknown→Action Bridge | 有 falsifier | 消费 H7 见证集与 G2 不可识别输出 | 保留；本轮 EV0 单元读数（select_evidence_action 拒绝不可逆探针）+ 实验 5 的取证臂 |
+| H15 Worldview Value Through Action | 有 falsifier | 旧「Explicit vs Latent」是其母问题形态 | **实验层合并**：Explicit vs Latent 不再单独设实验，其裁决 = T6/实验 5 的崩溃曲线；条目保留为出处 |
+| 旧 Field Crystallization | 有 falsifier（原文） | 与 H9/H2 重叠（见上） | 保留为历史假设；其事件侧主张由 H9 实验承接，场结晶本体主张维持 OPEN 不冻结 |
+| 旧 Machine-Native Primitives | 有 falsifier | 与 H2/H9/H13 三向重叠 | 保留；由 H9（事件原语）+ H13（变换类型）分拆承接，不再单独设实验 |
+| 旧 Spacetime | 有 falsifier | 与 H4（时间）+ H9（事件）重叠 | 保留；由 H4 实验承接时间侧 |
+| 旧 World Growth | 有 falsifier | 与 H1/H5 重叠 | 保留；由实验 3 承接 |
+
+净化结果：21 个条目 → 15 个独立实验面（H1+H5 共面、H6+Licences 共面、H15+Explicit/Latent 共面、H9 承接 Field/Machine-Native 事件侧、H4 承接 Spacetime)，无条目被删除或静默降格。
+
+### 2. 最小可执行实验规约（每假设一条；预算口径见二.1/二.7）
+
+统一纪律：主要指标与 Kill 阈值先于运行登记（configs/preregistration_template.yaml)；证伪族 Holm-Bonferroni；n 按功效 ≥0.80 反推；episode 级独立。本轮实际执行 5 组（实验 1–5，见 06-evaluation)，覆盖 H1/H4/H5/H6（实验 3)、H8/H9（实验 4)、H15（实验 5)、B15 探针（实验 2 关联 H3）与压缩损伤（实验 1，AGENTS §24)。未执行者标 PLANNED 并给脚本路径占位。
+
+| 假设 | 最小实验 | 对照组 | 预算 | n / 阈值 | 二元 Kill 条件 | 状态 |
+|---|---|---|---|---|---|---|
+| H1 | 实验 3：Equal-Byte 下长遮挡召回（合成） | 长上下文缓冲基线 vs 显式节点+重放 | Equal-Byte 双方同字节 | n=200 episodes/臂；α=0.05 Holm | 重放臂召回不优于基线（CI 含 0）→ Kill | 本轮执行（EV0) |
+| H4 | 实验 3 长遮挡臂的查询条件子集 | 无条件全量保持基线 | 同上 | 同上 | 查询条件保持在长遮挡下无增益 → Kill | 本轮执行（EV0) |
+| H5 | 实验 3：暗中篡改后 FP 写回污染率 | 无门控写回 vs 非对称门控 | 同上 | 同上 | 门控臂污染率不低于无门控（CI 含 0）→ Kill | 本轮执行（EV0) |
+| H6 | 实验 3 附带：反证级联回滚完整性 | 无 depends_on 的平坦存储 | —（确定性检查） | 全部合成反证例 | 任一依赖断言未被降级 → 该实现 Kill（假设本身降级待修） | 本轮执行（EV0) |
+| H8 | 实验 4：调度器 vs 固定管线（合成闭环） | 固定全量管线 | Equal-Latency 33.3ms | n=300 帧序列×5 seeds | P99 jitter 与成功率不优于固定管线 → Kill | 本轮执行（EV0) |
+| H9 | 实验 4 事件臂：事件率-成功率曲线 | 稠密帧基线 | Equal-Byte | 同上 | 事件 IR 在同等成功率下字节不降 → Kill | 本轮执行（EV0) |
+| H15 | 实验 5 / T6：反应式 vs 显式状态崩溃曲线 | 匹配参数/窗口的反应式基线 | Equal-Latency | 遮挡时长 5 档×n=100 | 全域无崩溃差异 → 反向 Kill（显式状态无独立增益） | 本轮执行（EV0 合成形态） |
+| H3 | 实验 2 附带：未声明查询特征的线性可恢复率 | 声明内特征 | 探针容量协议内 | 合成特征 n=1000 | 两者 R² 无差异 → 「查询充分」主张 Kill | 本轮执行（EV0 诊断） |
+| H2 | PLANNED：IR→可审计世界状态编译往返 | 直接潜状态基线 | Equal-Byte | 待登记 | — | PLANNED（scripts 占位：src/clover/innovation/sparse_event_ir.py 为输入层） |
+| H7 | 本轮 EV0 单元读数 + PLANNED 图规模扩展 | 随机定位基线 | — | 合成图 n=50 | 定位精度不优于随机 → Kill | EV0 读数本轮 |
+| H10 | PLANNED（待 DA3-SMALL 本地权重） | 几何作硬约束基线 | Tier-0 | 待登记 | — | PLANNED |
+| H11 | PLANNED | 运行期检查基线 | — | 待登记 | — | PLANNED |
+| H12 | 本轮 EV0 单元读数 + PLANNED 接触实验 | 语义可供性标签基线 | — | 待登记 | — | EV0 读数本轮 |
+| H13 | PLANNED（与 H12 合并设计） | — | — | 待登记 | — | PLANNED |
+| H14 | 本轮 EV0 单元读数 + 实验 5 取证臂 | 固定观察基线 | Equal-Latency | 并入实验 5 | 取证行动不降低不可识别误报 → Kill | EV0 读数本轮 |

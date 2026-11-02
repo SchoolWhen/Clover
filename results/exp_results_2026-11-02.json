@@ -1,0 +1,126 @@
+{
+ "EXP1 phase-a compression damage": {
+  "experiment": "EXP1 phase-a compression damage",
+  "adapter_fail_closed_audit": {
+   "YOLO26n": "FAIL_CLOSED_OK",
+   "RF-DETR-Nano": "FAIL_CLOSED_OK",
+   "SAM 3": "FAIL_CLOSED_OK",
+   "CoTracker3": "FAIL_CLOSED_OK",
+   "TAPNext": "FAIL_CLOSED_OK",
+   "Depth Anything 3 (DA3-SMALL)": "FAIL_CLOSED_OK",
+   "VGGT": "FAIL_CLOSED_OK",
+   "PaddleOCR-VL-1.6": "FAIL_CLOSED_OK",
+   "DINOv3": "FAIL_CLOSED_OK",
+   "V-JEPA 2": "FAIL_CLOSED_OK"
+  },
+  "input_pipeline_proxy_linear_probe_accuracy": {
+   "tokens_4096": 0.7,
+   "tokens_1024": 0.6611,
+   "tokens_256": 0.6556,
+   "tokens_64": 0.7278,
+   "tokens_16": 0.7
+  },
+  "proxy_scope": "EV0: information loss of downsampling measured with a capped linear probe on synthetic attributes; NOT a model accuracy result",
+  "model_side_curves": "NOT_MEASURED: no GPU and no official weights on this machine; adapters fail closed by design (see audit)"
+ },
+ "EXP2 B15 physical identifiability (repository minimal pairs)": {
+  "experiment": "EXP2 B15 physical identifiability (repository minimal pairs)",
+  "n_pairs": 120,
+  "chance": 0.5,
+  "pre_contact_features": {
+   "linear": 0.4,
+   "knn": 0.425
+  },
+  "post_contact_features": {
+   "linear": 1.0,
+   "knn": 0.425
+  },
+  "appearance_control": {
+   "linear": 0.4,
+   "knn": 0.5
+  },
+  "reading": "pre-contact at chance = identifiability boundary respected by construction; post-contact decodable = evidence exists after contact; appearance at chance = decorrelation control passed",
+  "real_backbones": "NOT_MEASURED: DINOv3/V-JEPA 2 (V0/L0) and SigLIP 2/Qwen3-VL (L2) weights not present and no GPU on this machine; harness + probe code paths are ready (src/clover/models, src/clover/probes)"
+ },
+ "EXP3 H1/H4/H5 memory under long occlusion + secret swap": {
+  "experiment": "EXP3 H1/H4/H5 memory under long occlusion + secret swap",
+  "n_episodes_per_arm": 200,
+  "results": {
+   "arm_A": {
+    "recall": 0.04,
+    "fp_contamination_rate": 0.96
+   },
+   "arm_B": {
+    "recall": 0.04,
+    "fp_contamination_rate": 0.96
+   },
+   "arm_C": {
+    "recall": 1.0,
+    "fp_contamination_rate": 0.0
+   },
+   "note": "EV0 synthetic. Arms A/B embed a constant-velocity completion prior (+0.3/step) which is wrong exactly when a swap happens; arm C never writes predictions and revises on re-observation. Equal-Byte: all arms capped at 64 stored floats (A truncates, B stores 1, C stores assertions within the same budget class)."
+  }
+ },
+ "EXP4 H8/H9 hard-real-time synthetic tracking": {
+  "experiment": "EXP4 H8/H9 hard-real-time synthetic tracking",
+  "dense": {
+   "latency": {
+    "n": 120,
+    "p50_ms": 0.07365550004578836,
+    "p95_ms": 0.0840210001797459,
+    "p99_ms": 0.09637021014441417,
+    "max_ms": 0.15480199999728939,
+    "mean_ms": 0.0760157833459137,
+    "jitter_p99_minus_p50_ms": 0.022714710098625815,
+    "jitter_max_minus_p50_ms": 0.08114649995150103
+   },
+   "mean_centroid_error_px": 0.0
+  },
+  "event_ir": {
+   "latency": {
+    "n": 120,
+    "p50_ms": 0.07435149996126711,
+    "p95_ms": 0.08450899988474703,
+    "p99_ms": 0.10072665995721766,
+    "max_ms": 0.11118600014015101,
+    "mean_ms": 0.07631634165742678,
+    "jitter_p99_minus_p50_ms": 0.026375159995950553,
+    "jitter_max_minus_p50_ms": 0.0368345001788839
+   },
+   "mean_centroid_error_px": 0.0,
+   "event_stats": {
+    "n_events": 239,
+    "dense_pixel_frames": 276480,
+    "sparsity_ratio": 0.0008644386574074074
+   }
+  },
+  "reading": "EV0: real wall-clock on this CPU for both arms; event arm trades small tracking lag for proportional compute/event counts"
+ },
+ "EXP5 H15/T6 state deprivation (synthetic return task)": {
+  "experiment": "EXP5 H15/T6 state deprivation (synthetic return task)",
+  "n_per_tau": 100,
+  "results": {
+   "tau_1": {
+    "reactive_success": 1.0,
+    "explicit_success": 1.0
+   },
+   "tau_4": {
+    "reactive_success": 0.16,
+    "explicit_success": 1.0
+   },
+   "tau_8": {
+    "reactive_success": 0.06,
+    "explicit_success": 1.0
+   },
+   "tau_16": {
+    "reactive_success": 0.02,
+    "explicit_success": 1.0
+   },
+   "tau_32": {
+    "reactive_success": 0.01,
+    "explicit_success": 1.0
+   }
+  },
+  "reading": "EV0 operationalisation: reactive arm's goal estimate is its oldest retained frame position; once occlusion exceeds the memory window the goal is structurally lost, while the explicit arm's written-while-observed cell persists"
+ }
+}
