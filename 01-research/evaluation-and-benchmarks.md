@@ -419,7 +419,9 @@ A future scientific result should combine controlled diagnostics, open-world vis
 
 ### 2. Capability families
 
-#### U1 — Existence and observability
+> **命名空间约定（2026-11-02 治理修复）**：本 Battery 的 15 个评测族编号为 **B1–B15**（Battery）；**U1–U20** 专用于下方「First Understanding Battery candidate」中的 20 个具体基准槽位（Benchmark Slots），两套编号不得混用。历史文本中的评测族「U15 — 真实相机隐藏态可识别性」即现在的 **B15**；基准槽位 U15 是另一个对象（long-horizon household task）。序列四/五文档与代码中的「U15 隐藏态」一律按 **B15** 理解。
+
+#### B1 — Existence and observability
 
 Questions:
 
@@ -430,7 +432,7 @@ Questions:
 
 Failure to distinguish these states is a fundamental worldview error.
 
-#### U2 — Identity and permanence
+#### B2 — Identity and permanence
 
 Questions:
 
@@ -441,7 +443,7 @@ Questions:
 
 Potential instruments: EgoTracks, SAM 2-style tracking baselines, custom occlusion/reappearance sequences.
 
-#### U3 — Spatial structure
+#### B3 — Spatial structure
 
 Questions:
 
@@ -452,7 +454,7 @@ Questions:
 
 Potential instruments: geometry/reconstruction benchmarks, controlled multi-view tasks.
 
-#### U4 — Temporal structure and dynamics
+#### B4 — Temporal structure and dynamics
 
 Questions:
 
@@ -463,7 +465,7 @@ Questions:
 
 Potential instruments: Perception Test, Something-Something V2, controlled trajectory tasks.
 
-#### U5 — Intuitive physics
+#### B5 — Intuitive physics
 
 Questions:
 
@@ -474,7 +476,7 @@ Questions:
 
 Potential instrument: IntPhys 2.
 
-#### U6 — Causality and counterfactuals
+#### B6 — Causality and counterfactuals
 
 Questions:
 
@@ -484,7 +486,7 @@ Questions:
 
 Potential instruments: CausalVQA plus future intervention twins in simulation/robotics.
 
-#### U7 — Memory and revision
+#### B7 — Memory and revision
 
 Questions:
 
@@ -494,7 +496,7 @@ Questions:
 
 Potential instruments: Ego4D long-history subsets + custom long-duration visual tasks.
 
-#### U8 — Generalization
+#### B8 — Generalization
 
 Hold out:
 
@@ -507,7 +509,7 @@ Hold out:
 
 The key is not only OOD accuracy but whether the system knows when the new case invalidates an existing assumption.
 
-#### U9 — Active perception
+#### B9 — Active perception
 
 Task form:
 
@@ -515,7 +517,7 @@ Two or more world hypotheses remain indistinguishable from the current view. The
 
 This directly tests whether uncertainty can drive information-seeking behavior.
 
-#### U10 — Decision usefulness
+#### B10 — Decision usefulness
 
 Compare downstream agents with and without the candidate worldview while controlling the rest of the stack as much as possible.
 
@@ -528,7 +530,7 @@ Measure:
 - search/compute cost;
 - unsafe/unjustified commitments.
 
-#### U11 — Core visual capability vector
+#### B11 — Core visual capability vector
 
 The battery must score capabilities separately, not collapse them into one “recognition” number.
 
@@ -547,7 +549,7 @@ The battery must score capabilities separately, not collapse them into one “re
 | 3D relation/affordance | Subject + relation/instruction → target/part | Novel relations/tools; contact feasibility | Relation/part accuracy + contact success | Memorized relation phrases or human-defined labels only |
 | Memory/permanence | Object leaves FOV/occluded → query later | Equal-byte memory baselines; 360° reference | Reappearance identity + hidden position + belief revision | Short-term consistency only; confuses absence with unobserved |
 
-#### U12 — Pure-vision provenance gate
+#### B12 — Pure-vision provenance gate
 
 Every capability claim must carry:
 
@@ -565,7 +567,7 @@ Pass conditions:
 - RGB-only deployment does **not** imply RGB-only upstream training.
 - If any L1–L4 source is present, the claim must be phrased as “V0 + Lx”, not “pure vision”.
 
-#### U13 — Native ultrafast acceptance
+#### B13 — Native ultrafast acceptance
 
 Measure the **complete** path:
 
@@ -586,7 +588,7 @@ Required report:
 
 Pass condition: a pre-registered per-capability latency/quality budget is met **simultaneously** for the multi-capability workload. A single detector FPS is not a pass.
 
-#### U14 — Same-protocol unified-model test
+#### B14 — Same-protocol unified-model test
 
 To claim “one model” rather than “a family/router”:
 
@@ -599,7 +601,7 @@ To claim “one model” rather than “a family/router”:
 
 If any condition fails, report the system as “shared backbone + separate heads/checkpoints” or “routed experts”, not as a unified model.
 
-#### U15 — Real-camera hidden-state identifiability
+#### B15 — Real-camera hidden-state identifiability
 
 Purpose: test whether mass, friction, stiffness, object permanence and contact state are identifiable from **real RGB video**, not from synthetic video or language priors. Ground truth may use non-visual sensors for scoring, but the model path must be V0/V1 only.
 
@@ -862,6 +864,20 @@ During the present research-mapping phase:
 
 <a id="topic-research-survey-benchmarks_tasks"></a>
 
+
+> **合入说明（2026-11-02，清单 K）**：以下条目自 news Staging Inbox 路由合入。此前仅存在于 `news_*.md` 日报，主题文档无正文锚点。内容以日报信号卡与 arXiv 摘要级信息为限，`reading_depth = ABSTRACT_AND_BIBLIO`（未全文精读），数字均为作者报告口径，升级为证据前须全文核验。
+
+### K 合入 — 3D Generation for Embodied AI 综述：从像不像到能不能交互（arXiv:2604.26509）
+
+综述判断：领域正从视觉真实感转向交互就绪（interaction readiness），瓶颈在物理标注不足、几何质量与物理有效性脱节、评测碎片化与持续 sim-to-real 鸿沟。**记账**：综述/方法学条目，无新实验。意义：资产若只有外观、没有质量/摩擦/碰撞属性，就进不了可信的训练与评测——这是仿真资产库的需求清单。
+
+### K 合入 — PiL-World：世界模型陪 VLA 闭环跑的评测误差口径（arXiv:2606.05773）
+
+按动作块分段生成与 VLA 输出一致的多视角未来观测，交替推理与预测，实现无真机执行的闭环评测；三项真实双臂任务上把世界模型估计成功率与真机成功率的误差从 63.2% 压到 12.0%（作者报告）。**记账**：评测方法学条目。意义：仿真评测可信度第一次有了可量化的误差口径——Terrarium 记分应强制并报「闭环评测误差」一列。
+
+### K 合入 — Do World Models Make Better Robots?：160 基准的评测审计（arXiv:2609.29669）
+
+盘点 2017–2026 年 160 个经核验的基准：138 个与模型无关，仅 11 个（7%）做了显式 VLA 对世界模型的对比，反事实能力几乎无人测量，只有 4 个把预测转成已执行动作。**记账**：评测综述条目。意义：现有评测大多没问对问题——没有「预测优势隔离实验」，分数争论是空转；本仓库的判别实验设计应以此为反面清单。
 ## Benchmarks and Tasks
 
 Source record updated: 2026-10-15
@@ -1336,3 +1352,11 @@ not:
 ```text
 one benchmark → “understanding solved”
 ```
+
+
+## J 组主题锚点补齐 — 文档、视频与系统级评测（2026-11-02）
+> **J 组补齐说明（2026-11-02，序列一.4）**：以下条目此前仅在 `sources-and-resources.md` 来源索引挂名、无主题文档映射。本节为其建立正文引用锚点与条件说明；内容以来源索引已有记录为限，未记录的细节一律标「待核」，不外推。
+
+- **OmniDocBench（arXiv:2412.07626）** → 本文档 B11（核心视觉能力向量）中 OCR/文档解析槽位的协议锚点（此前正文提及但无 arXiv 锚点）。条件：仅作协议锚点，不作被测模型；文档解析组的组内比较（PaddleOCR-VL / dots.ocr / MinerU2.5 / olmOCR）以其协议为准，版本须冻结。
+- **RBench / RoVid-X（arXiv:2601.15282）** → 机器人视频评测锚点。条件：来源索引仅记录其为机器人视频基准条目，分项构成与协议细节待核；引用时只作「候选评测仪器」登记，不预设其能测世界状态充分性。
+- **RobotWorld（arXiv:2610.10409）** → 系统级物理智能体能力评测锚点。条件：按来源索引记录，用于研究任务组合、保留的任务/世界状态、恢复与完成验证；ERQA 类精度不得解读为持久世界理解，语言/世界知识先验是主要混淆项（与来源索引对同组条目的限定一致）。

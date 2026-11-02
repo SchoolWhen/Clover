@@ -237,6 +237,28 @@ ActiveScale 把主动感知扩展到 VLA：历史视频 + 相机位姿监督 + p
 <!-- BEGIN causal-identifiability-2026 -->
 <a id="causal-identifiability-2026"></a>
 
+
+> **合入说明（2026-11-02，清单 K）**：以下条目自 news Staging Inbox 路由合入。此前仅存在于 `news_*.md` 日报，主题文档无正文锚点。内容以日报信号卡与 arXiv 摘要级信息为限，`reading_depth = ABSTRACT_AND_BIBLIO`（未全文精读），数字均为作者报告口径，升级为证据前须全文核验。
+
+### K 合入 — Perceive with Confidence（PwC）：共形校准的感知不确定性（arXiv:2403.08185）
+
+用共形预测校准预训练感知（检测与场景补全）的不确定性，并证明与任意安全规划器联用时对状态分布偏移仍有鲁棒性；作者报告仿真漏检较未校准基线降 70%、全程安全且成功率 +46%，硬件四足漏检降 93.3%。**记账**：方法学条目（校准层），底层感知模型的监督来源混合、逐项待核。意义：许可证式输出的统计学范式——不确定性必须是带覆盖保证的校准量，而不是模型自报置信度。
+
+### K 合入 — Evaluating Uncertainty and Quality of VLA Trajectories（arXiv:2507.17049）
+
+针对 3 个 SOTA VLA、4 项操作任务、908 次成功执行，提出 8 项不确定性指标与 5 项质量指标并以专家标注验证相关性，可在无测试预言时区分高/中/低质量执行。**记账**：评测方法学条目。意义：只报成功率会把「勉强成功」与「稳健成功」混为一谈——不确定性与质量应进入 Terrarium/Battery 的双维记分（与 B6/B12 的口径一致）。
+
+### K 合入 — SEVO：主动照明干预改变观测分布（arXiv:2605.11114）
+
+体固相机覆盖完整操作空间、主动红光谱照明归一化物体外观、实时分割叠加提供背景不变语义线索，配合系统性变化光照/背景/干扰物的采集协议；作者报告 ACT 训练环境 95%、新环境 85%，不用 SEVO 时新环境仅 30%–35%。**记账**：策略监督为示教 `L1`；照明是 V3 式主动干预。意义：泛化瓶颈可能在观测设计而非模型——主动照明是「干预观测条件」的合法手段，但评测须注明照明协议，否则分数不可比。
+
+### K 合入 — Trustworthy Autonomous Robots / TRACE：四层可审计决策结构（arXiv:2609.02861）
+
+TRACE 把决策拆为语义感知（证据锚定实体识别）、信念推理（带因果图的概率状态估计）、动作合成（带反事实文档的约束感知规划）、执行验证（合规监测）；作者报告仓库导航仿真 500 个决策循环中证据可追溯率 98.6%、时间连续性 99.0%、决策可重构率 98.1%。**记账**：架构/审计方法学条目，数字为仿真自报。意义：它解决的不是「准不准」而是「出事后能否复盘」——与持证世界状态的审计链要求同向。
+
+### K 合入 — ACT3D / Learning to Think and Explore in 3D：主动取证式 3D 推理（arXiv:2610.21783）
+
+一次看一张单视角图，交替推理与移动视角、按证据缺口补齐被遮挡证据后再作答；六项基准平均 53.2%，较基底 Qwen +22 点、较 Gemini 3.6 Flash（52.2%）+1 点，且比现有开源 3D 方法少用 50–70% 帧（作者报告）。**记账**：底座 VLM 为 `L2`；视角选择为 V3 主动感知。意义：查询应是搜索式取证——缺口本身应进入许可证，而不是把所有视角都算一遍。
 ## 因果世界模型与可识别对应：2026 正式证据
 
 检索/核验：**2026-10-25**。严格因果识别不能只靠“预测下一帧”；下列工作把**对象级掩码、token 对应、公理世界模型**作为可识别性的结构约束。它们是机制参照，不是 Clover 已实现的因果状态。
@@ -3070,3 +3092,10 @@ Language, object detections, web data and robot actions are part of the training
 ### Fair future comparison
 
 Clover should eventually compare against strong VLA systems on **shared embodied tasks**, not merely on internal representation quality. The key test is whether explicit world understanding yields measurable capability or efficiency advantages.
+
+
+## J 组主题锚点补齐 — 主动证据选择（2026-11-02）
+> **J 组补齐说明（2026-11-02，序列一.4）**：以下条目此前仅在 `sources-and-resources.md` 来源索引挂名、无主题文档映射。本节为其建立正文引用锚点与条件说明；内容以来源索引已有记录为限，未记录的细节一律标「待核」，不外推。
+
+- **SpatialCORE（arXiv:2609.38716，含官方代码仓）** → 本文档主动证据/空间推理章节锚点。条件：来源索引将其归入 Active evidence / spatial reasoning 组；具体机制与评测构成以来源索引记录为限、细节待核。引用纪律：证据获取更好 ≠ 内部世界表征更好（与下一条共用来源索引的告诫）。
+- **Mobility-budget-constrained semantic exploration（arXiv:2610.17562）** → 移动预算约束下的语义探索锚点。条件：用于与显式不确定性/信息增益规划对照「学得的/智能体式证据选择」；不得把更好的证据获取混同为更好的世界表征（来源索引原告诫）。

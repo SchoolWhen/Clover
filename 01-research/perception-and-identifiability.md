@@ -490,6 +490,12 @@ This is the canonical topic document. Update it in place; source-level dates and
 
 <a id="object-pose-tracking-2026"></a>
 
+
+> **合入说明（2026-11-02，清单 K）**：以下条目自 news Staging Inbox 路由合入。此前仅存在于 `news_*.md` 日报，主题文档无正文锚点。内容以日报信号卡与 arXiv 摘要级信息为限，`reading_depth = ABSTRACT_AND_BIBLIO`（未全文精读），数字均为作者报告口径，升级为证据前须全文核验。
+
+### K 合入 — VPM：多视角未来视频 + 持久点 3D 轨迹预测（arXiv:2610.28594）
+
+VPM 不只预测多视角未来视频，还同时预测场景中持久点的 3D 轨迹：每条轨迹跨视角追踪同一物理点，点运动监督把各视角外观变化锚定到同一份 3D 运动描述；配套 VPM-Data 与 VP-WorldBench，机器人动作作为 token 模态与视频联合去噪。作者称点监督同时提升视频保真与 3D 运动精度及实机操纵成功率（摘要未给分任务增量）。**记账**：点轨迹监督的来源构成（自动追踪伪标签 vs 特权真值）待全文核验，暂记 `L1/L4 待核`。意义：与本节纪律同向——第一性的是「同一点、同一轨迹、跨视角同一身份」，不是像素。
 ### 物体级 6-DoF 状态：位姿跟踪、遮挡恢复与关节物体
 
 点追踪回答“像素去哪了”，物体级 6-DoF 追踪回答“**哪一个物体、以什么姿态、是否还在视野里、失败后能否恢复**”。这一步必须引入对象假设：实例 CAD、类别形状先验、生成式补全，或手-物交互线索。下表把 2026 年可核查的工作分成三类：**实例模型跟踪**（RoPT、Robust Recovery）、**无人工 CAD 的新物体跟踪**（GRC-Pose、ComPose、Event6D、Event Fusion）、**类别级/关节物体状态估计**（ASM-6D、LEGAU、DICArt、OCH3R）。第三类多为单帧估计，不是时序跟踪；把它放进同一张表，是为了区分“物体状态估计”与“物体状态跟踪”。
@@ -3287,6 +3293,12 @@ Their Stage-1 role is diagnostic:
 
 ---
 
+
+> **合入说明（2026-11-02，清单 K）**：以下条目自 news Staging Inbox 路由合入。此前仅存在于 `news_*.md` 日报，主题文档无正文锚点。内容以日报信号卡与 arXiv 摘要级信息为限，`reading_depth = ABSTRACT_AND_BIBLIO`（未全文精读），数字均为作者报告口径，升级为证据前须全文核验。
+
+### K 合入 — ERA-Det：RGB—事件融合的逐位置可靠性路由（arXiv:2610.26090）
+
+针对高速下事件窗口稀疏、事件与帧可靠性随场景/时间变化，用双单模态分类器损失监督逐位置融合权重，非对称分辨率让帧在事件失效处兜底；DSEC-Det 上 20Hz→180Hz 精度损失由 6.3 压到 3.1 mAP、达 63.2 mAP（作者报告）。**记账**：事件相机为非 RGB 对照模态；监督为检测标注 `L1`。对本仓库的意义在路由原则：可靠性是空间变化量，融合权重与不确定性读出都应逐区域/逐断言给出，不能整图一个数。
 ### 10. Observation failure and world uncertainty should not be conflated
 
 Suppose a robot cannot determine whether an object is present.
@@ -3623,6 +3635,28 @@ Tactile-world-model results are useful **counterexamples** when defining a visio
 
 ---
 
+
+> **合入说明（2026-11-02，清单 K）**：以下条目自 news Staging Inbox 路由合入。此前仅存在于 `news_*.md` 日报，主题文档无正文锚点。内容以日报信号卡与 arXiv 摘要级信息为限，`reading_depth = ABSTRACT_AND_BIBLIO`（未全文精读），数字均为作者报告口径，升级为证据前须全文核验。
+
+### K 合入 — FingerEye：接触前到接触后全程连续的视觉—触觉传感（arXiv:2604.20689）
+
+紧凑低成本双目 RGB 传感器提供近距离视觉与隐式立体深度，视觉—触觉模仿策略以有限真机数据学会硬币立起、芯片拾取、取信、注射器操作等任务，并以数字孪生/仿真增强观测。**记账**：部署含触觉通道（非 V0）；监督含真机示教与仿真增强，属 `L4` 触觉/特权物理监督对照反例——它证明的是「接触通道有用」，不能证明纯视觉可识别同样的接触状态。`cannot_prove`：V0 下接触 initiation 与滑移的可识别性。
+
+### K 合入 — Dex-X：仿真作为触觉补全器（arXiv:2609.07747）
+
+在仿真中重建人手—物体交互，用接触动力学补出人类视频缺失的触觉监督，再蒸馏为基于点云与触觉的可部署策略；教师策略仿真六类任务平均 65.9%，蒸馏策略真机方块抓取 93%、擦桌 53%（作者报告）。**记账**：`L4`——触觉监督由仿真特权状态生成，是「特权信息补全」的正例，同时是纯视觉归因的反例：收益来自被补出的接触信息，不是视频本身。
+
+### K 合入 — 触觉引导机器人学习综述（arXiv:2610.20134）
+
+按触觉在管线中的功能角色（表示学习、策略条件、预测与自适应控制）与跨物体/任务/传感器/本体/sim-to-real 泛化组织文献的综述。**记账**：综述条目，无新实验；定位为本节 L4 对照组的地图——触觉正从反馈信号升级为预训练信号与物理推理载体，这恰好标定了纯视觉路线必须正面回答的缺口（抓稳/滑移/接触成败在 V0 下的可识别边界）。
+
+### K 合入 — Spark-0：触觉预训练作为监督信号（arXiv:2610.22342）
+
+视觉-触觉-语言-动作模型：预训练时以触觉手套的图像空间接触图与冻结 3D 几何教师监督视觉 token，推理时可去掉触觉目标；配合 1000 小时 HumanTouch 数据集，作者报告仅保留触觉监督时视觉-only 成功率由 52.5% 升至 71.7%。**记账**：训练 `L4`（触觉+几何教师）、部署可为视觉-only——这是「V0 部署 ≠ V0 学习」的标准样本，任何引用其视觉-only 数字处必须写作 `V0 + L4`，不得记为纯视觉学习证据。
+
+### K 合入 — TouchBridge：人类演示的接触重定向（arXiv:2610.40349）
+
+可穿戴演示界面与机器人端对应界面建立视觉与指尖触觉对应，Tac-Retarget 以实测接触对齐指尖接触片（不需物体网格/位姿/仿真）；四项真实接触任务上转换后人类演示微调策略平均 72.5%，接近同量遥操作演示 77.5%，采集快 7 倍（作者报告）。**记账**：`L4` 接触实测监督；对 Clover 的意义是数据侧的——人类演示迁移必须同时对齐运动与力分布，只对齐姿态会在接触任务上系统性丢信息。
 ### 5. Temperature is a clean example of a hidden state outside visible RGB
 
 #### HEARTH
@@ -4907,3 +4941,11 @@ Robots may need metric geometry, topological place structure, object-relative re
 3. What is the minimum persistent spatial state required beyond a learned geometry encoder?
 4. How should active camera motion update uncertainty and visibility?
 5. Can explicit geometry reduce planning sample complexity compared with latent-only policies?
+
+
+## J 组主题锚点补齐 — 形变、几何基线与遮挡诊断（2026-11-02）
+> **J 组补齐说明（2026-11-02，序列一.4）**：以下条目此前仅在 `sources-and-resources.md` 来源索引挂名、无主题文档映射。本节为其建立正文引用锚点与条件说明；内容以来源索引已有记录为限，未记录的细节一律标「待核」，不外推。
+
+- **PlasticineLab（arXiv:2104.03311）** → 本文档形变/软体章节的对照锚点。条件：状态是特权粒子 landmark（`L4`），可微 MLS-MPM 仿真内做梯度规划，不含感知评测；它界定的是「有特权状态时形变规划能走多远」，不能证明 RGB 下形变状态可识别（与轴 E 的 RGB-alone 负结果并读）。
+- **DROID-SLAM（arXiv:2108.10869）** → 本文档几何/SLAM 章节的基线锚点。条件：学习式对应 + 可微 DBA，训练为合成 TartanAir + 真值位姿/深度监督（`L4`)；输出只有位姿与稠密深度，无物体/物理状态。作为几何基线引用时必须带此限定，不得用作纯视觉学习证据。
+- **TAO-Amodal（arXiv:2312.12433）** → 本文档遮挡/追踪章节的诊断锚点。条件：amodal/occlusion 诊断用途；引用时保持来源索引的区分纪律：visible tracking ≠ amodal completion ≠ re-identification ≠ object permanence，四者不得互相顶替报分。

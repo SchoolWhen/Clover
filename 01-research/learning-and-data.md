@@ -1111,6 +1111,20 @@ Do not attribute the result to architecture alone.
 
 <a id="topic-research-training-readme"></a>
 
+
+> **合入说明（2026-11-02，清单 K）**：以下条目自 news Staging Inbox 路由合入。此前仅存在于 `news_*.md` 日报，主题文档无正文锚点。内容以日报信号卡与 arXiv 摘要级信息为限，`reading_depth = ABSTRACT_AND_BIBLIO`（未全文精读），数字均为作者报告口径，升级为证据前须全文核验。
+
+### K 合入 — EVA：逆动力学奖励对齐视频生成与可执行动作（arXiv:2603.17808）
+
+用逆动力学奖励把视频模型与可执行机器人动作对齐；经 EVA 微调的视频模型生成的视频—动作对能更有效地训练下游 VLA（作者报告）。**记账**：逆动力学奖励依赖动作标注/可执行性代理，属后训练对齐信号（`L1/L4 待核`）。边界：奖励本身是学习到的代理，代理与真实物理的偏差须独立审计，否则「对齐」只是换一种自证。
+
+### K 合入 — AffordanceVLA：结构化可供性作为语义与动作的中间层（arXiv:2606.06155）
+
+用结构化 affordance 学习把预训练 VLM 语义接到具身控制：多源视觉语言监督先建立「可操作性理解」，再生成动作；作者报告在 ID/OOD 仿真及真实实验中优于强 VLA 基线。**记账**：`L2` 多源视觉语言监督。意义：语义与动作之间需要一层显式、可检验的中间表示（可供性），而不是让动作头直接猜语义——与 H12 状态转移可供性的记账口径一致。
+
+### K 合入 — Embodied-R1.5：Planner-Grounder-Corrector 闭环（arXiv:2606.11324）
+
+把具身认知、任务规划、纠错与指代整合进单一架构，以超 15B token 数据系统与多任务均衡 RL 配方缓解异质任务冲突，PGC 闭环让单模型自主执行长程任务并自我纠错；仅 8B 参数，作者报告在 24 个具身 VLM 基准中 16 个 SOTA，权重/数据/训练代码/EmbodiedEvalKit 已开源。**记账**：`L1/L2` 大规模数据 + RL 后训练。意义：「小模型 + 闭环纠错」是与堆参数相对的路线样本；其纠错依赖内部自评，外部可验证性待核。
 ## Training / Post-Training — Supporting Stage-1 Matrix
 
 Source record updated: **2026-10-15**
@@ -2304,3 +2318,10 @@ These operations are research requirements, not claims that the current public r
 4. Can a model grow its ontology without human category labels?
 5. How do we prevent self-training errors from becoming authoritative world facts?
 6. What does a 24-hour or 7-day persistent robot worldview look like computationally?
+
+
+## J 组主题锚点补齐 — 部署时适应与状态增量监督（2026-11-02）
+> **J 组补齐说明（2026-11-02，序列一.4）**：以下条目此前仅在 `sources-and-resources.md` 来源索引挂名、无主题文档映射。本节为其建立正文引用锚点与条件说明；内容以来源索引已有记录为限，未记录的细节一律标「待核」，不外推。
+
+- **AdaJEPA（arXiv:2606.32026）** → 本文档持续适应/TTA 章节锚点。条件：在 MPC 环内用已执行 transition 对潜世界模型做部署时在线适应，打破「部署即冻结」默认；其风险面（在线适应是否安全/单调、是否保校准与记忆）未决——引用其收益时必须并列这一未决项（与来源索引记录一致），且潜状态适应不等于显式世界状态的持证修订。
+- **VLA-Δ（arXiv:2610.21306，含开源代码）** → 训练目标章节锚点。条件：以当前帧到未来帧的物理状态变化量（Δ）为监督而非直接模仿动作，来源索引记其为 physical-state-delta 路线；Δ 是监督目标，不等于充分世界状态——引用时须区分「学状态变化」与「持有可查询状态」。
