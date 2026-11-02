@@ -1,0 +1,9 @@
+# Self-built batteries (sequence 4.5)
+b15_hidden_state:
+  kinds: [friction_boundary, restitution_cavity, mass_eccentricity]
+  seeds: [0, 1, 2, 3, 4]
+epistemic_occlusion:   # slots U9-U12
+  traps: [long_occlusion, swap_during_occlusion, unknown_vs_unobserved]
+  fp_writeback_confidence_threshold: 0.8
+anti_shortcut:
+  probes: [static_frame, time_shuffle, background_only, language_only]

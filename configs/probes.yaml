@@ -1,0 +1,11 @@
+# Attribution-probe protocol defaults (SSOT sequence 2.1; hard caps in code)
+frozen_linear_probe:
+  max_effective_dof: 100000
+  max_steps: 2000
+  attribution_mode: true
+  l2: 0.001
+zero_shot_knn:
+  metric: cosine
+non_markovianity:
+  eps_bits: 0.05
+  histogram_bins: 4

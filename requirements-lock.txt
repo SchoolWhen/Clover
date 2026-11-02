@@ -1,0 +1,6 @@
+# Environment lock (this machine, 2026-11-02): Python 3.12.3, numpy 1.26.4, PyYAML 6.0.1.
+# Heavy model backends (torch/transformers/ultralytics) are OPTIONAL extras
+# (pyproject [models]) and are NOT part of the core lock: no GPU on the dev
+# machine, weights are never vendored. Adapters fail closed without them.
+numpy==1.26.4
+PyYAML==6.0.1

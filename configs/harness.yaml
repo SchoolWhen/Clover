@@ -1,0 +1,10 @@
+# Default harness configuration (sequence 4.1/4.2)
+profiler:
+  segments: [decode, preprocess, tokenize, forward, postprocess, output]
+  report_percentiles: [50, 95, 99]
+budget:
+  equal_byte_max_state_bytes: 16777216   # 16 MiB per-frame state+history cap
+  equal_latency_deadline_ms: 33.3        # 30 FPS hard-real-time target
+  strict: false                          # anytime mode: fallback instead of raising
+energy:
+  sampler: auto                          # NVML or powermetrics; UNAVAILABLE if none

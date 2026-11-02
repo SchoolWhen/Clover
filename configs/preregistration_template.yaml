@@ -1,0 +1,16 @@
+# Copy per experiment BEFORE running (sequence 2.7 methodology). Any
+# post-hoc metric change demotes the run to exploratory.
+experiment_id: EXP-YYYY-NNN
+hypothesis: Hx
+falsifier: "<what result would kill it>"
+primary_metric: "<name>"
+budget:
+  equal_byte: null
+  equal_latency_ms: null
+  equal_joule_per_frame: null
+kill_threshold: null
+pass_threshold: null
+seeds: [0, 1, 2]
+sample_size_power_basis: "power >= 0.80 at pre-stated effect size"
+stopping_rule: "<fixed-n | sequential boundary>"
+multiple_comparison_control: holm-bonferroni   # falsification family
