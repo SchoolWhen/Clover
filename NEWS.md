@@ -18,19 +18,12 @@ news_yymmddhhmm.md
 
 ## Evidence discipline
 
-This archive is a **discovery / signal archive** (`SURVEY_SIGNAL` in the labels of `AGENTS.md` §4.5). It is not SSOT and it is not scientific evidence. An item becomes usable evidence only after it is upgraded to a primary paper, official project page or official reported result and recorded in `research/RESEARCH_FRONTIER.md`, `research/survey/FRONTIER_SIGNALS.md` or `research/survey/SOURCE_MAP.md`.
+This archive is a **discovery / signal archive** (`SURVEY_SIGNAL` in the labels of `AGENTS.md` §4.5) and, per `AGENTS.md` §2, a **staging inbox**: it is not SSOT, it is not scientific evidence, and no signal may terminate here. An item becomes usable evidence only after it is upgraded to a primary paper, official project page or official reported result and recorded in the owning direction document under `01-research/`, its source entry in `01-research/sources-and-resources.md`, and the structured record in `registry/papers.jsonl`.
 
 ## Editions
 
 | File | Created | Coverage |
 |---|---|---|
-| `news_2610192217.md` | 2026-10-19 22:17 CST | Morning + evening digests 2026-10-16 → 2026-10-19; frontier design-tracking weekly 2026-10-12 ~ 2026-10-18 |
-| `news_2610192237.md` | 2026-10-19 22:37 CST | **Backfill, completed 2026-10-19**: morning digests 2026-10-03 → 2026-10-15 (complete; 10-05 and 10-14 recovered from original drafts); evening digests 2026-10-04 → 2026-10-15; frontier tracking weekly 2026-10-05 ~ 2026-10-11 + 2026-10-07 instant report |
-| `news_2610202124.md` | 2026-10-20 21:24 CST | Morning + evening digests 2026-10-20; frontier design-tracking: no new reports since weekly 2026-10-12 ~ 2026-10-18 |
-| `news_2610212124.md` | 2026-10-21 21:24 CST | Morning + evening digests 2026-10-21; frontier design-tracking: no new reports since weekly 2026-10-12 ~ 2026-10-18 |
-| `news_2610222123.md` | 2026-10-22 21:23 CST | Morning + evening digests 2026-10-22; frontier design-tracking: no new reports since weekly 2026-10-12 ~ 2026-10-18 |
-| `news_2610232132.md` | 2026-10-23 21:32 CST | Morning + evening digests 2026-10-23; frontier design-tracking: no new reports since weekly 2026-10-12 ~ 2026-10-18 |
-| `news_2610242124.md` | 2026-10-24 21:24 CST | Morning + evening digests 2026-10-24; frontier design-tracking: no new reports since weekly 2026-10-12 ~ 2026-10-18 |
 | `news_2610252122.md` | 2026-10-25 21:22 CST | Morning + evening digests 2026-10-25; frontier design-tracking: no new reports since weekly 2026-10-12 ~ 2026-10-18 |
 | `news_2610262131.md` | 2026-10-26 21:31 CST | Morning + evening digests 2026-10-26; frontier design-tracking weekly 2026-10-19 ~ 2026-10-25 |
 | `news_2610272123.md` | 2026-10-27 21:23 CST | Morning + evening digests 2026-10-27; frontier design-tracking: no new reports since weekly 2026-10-19 ~ 2026-10-25 |
@@ -40,3 +33,5 @@ This archive is a **discovery / signal archive** (`SURVEY_SIGNAL` in the labels 
 | `news_2610312125.md` | 2026-10-31 21:25 CST | Morning + evening digests 2026-10-31; frontier design-tracking: no new reports since weekly 2026-10-19 ~ 2026-10-25 |
 | `news_2611012124.md` | 2026-11-01 21:24 CST | Morning + evening digests 2026-11-01; frontier design-tracking weekly 2026-10-26 ~ 2026-11-01 |
 | `news_2611022056.md` | 2026-11-02 20:56 CST | Morning + evening digests 2026-11-02; frontier design-tracking: no new reports since weekly 2026-10-26 ~ 2026-11-01 |
+
+_Retired editions: the seven editions from `news_2610192217.md` to `news_2610242124.md` (2026-10-19 → 2026-10-24) were removed from this repository in the 2026-10-25 reorganization and are no longer indexed here; their content survives in git history before that reorganization._
